@@ -1,5 +1,8 @@
-# Open a youtube video and walk through the subtitle widget
-
+# Litmus Subgroup 65 - Login / Logout Tests
+# 1. 378 Site Login
+# 2. 379 Twitter Account
+# 3. 380 Open ID
+# 4. 381 Gmail
 
 from selenium import selenium
 import unittest, time, re, sys
@@ -8,7 +11,7 @@ import mslib, website, widget, testvars
 # ----------------------------------------------------------------------
 
 
-class tc_youtube_video(unittest.TestCase):
+class tc_378(unittest.TestCase):
     
 # Open the desired browser and set up the test
     def setUp(self):
@@ -17,28 +20,12 @@ class tc_youtube_video(unittest.TestCase):
         self.selenium.start()
 
 # The user actions executed in the test scenario
-    def test_transcribe(self):
+    def tc_378_site_login(self):
         sel = self.selenium
-
         #login
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
-        # Submit Video
-        website.start_new_video_sub(self,sel,"http://www.youtube.com/watch?v=cgPqmRNjoTE")
-
-        # Transcribe
-        widget.transcribe_video(self,sel,testvars.MSTestVariables["DataDirectory"]+"OctopusGarden.txt")
-
-        # Sync
-
-        widget.sync_video(self,sel,testvars.MSTestVariables["DataDirectory"]+"OctopusGarden.txt",8)
-
-        # Review
-        widget.review_time_shift_sync_hold(self,sel,testvars.MSTestVariables["DataDirectory"]+"OctopusGarden.txt")
-        widget.review_edit_text(self,sel,testvars.MSTestVariables["DataDirectory"]+"OctopusGarden.txt")
-        
-        
-        sel.click(testvars.WidgetUI["Next_step"])
-        
+        # verify
+        website.verifyLogIn(self,sel,testvars.siteuser) 
 # Close the browser, log errors, perform cleanup 
     def tearDown(self):
         self.selenium.stop()

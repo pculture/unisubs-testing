@@ -1,7 +1,7 @@
 preE=" --- ERROR: "
 
 MSTestVariables = {"Browser":"*chrome", \
-                   "Site":"http://mirosubsdev.8planes.com/", \
+                   "Site":"http://universalsubtitles.org/", \
                    "ResultOutputDirectory":r"Results/", \
                    "DataDirectory":r"TestInput/", \
                    "TimeOut":"60000", \
@@ -33,5 +33,9 @@ WidgetUI = {"Transcribe_current_sub":"css=.mirosubs-captionDiv", \
 
 # TestData
 
-testuser = "sub_writer"
-testpass = "sub.writer"
+siteuser = "sub_writer"
+gmailuser = "pcf.subwriter"
+openiduser = "http://pcf-sub-writer.myopenid.com"
+twitteruser = "pcfsubwriter"
+gmailpass = "sub.writer"
+passw = "sub.writer"
