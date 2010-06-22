@@ -29,8 +29,16 @@ def Login(self,sel,auth_type):
     sel.open(testvars.MSTestVariables["Site"]+"auth/login/")
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     sel.window_maximize()
+    mslib.wait_for_element_present(self,sel,"css=."+auth_type)
     sel.click("css=." +auth_type)
-    sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"]) 
+
+def start_sub_widget(self,sel):
+    # Click Subtitle Me -> Add Subtitles
+    sel.select_window("null")
+    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["SubtitleMe_menu"])
+    sel.click_at(testvars.WidgetUI["SubtitleMe_menu"], "")
+    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["AddSubtitles_menuitem"])
+    sel.click_at(testvars.WidgetUI["AddSubtitles_menuitem"], "")
 
 def start_new_video_sub(self,sel,url):
     sel.open(testvars.MSTestVariables["Site"]+"videos/create/")
@@ -43,8 +51,6 @@ def start_new_video_sub(self,sel,url):
         sel.click("link=Restart this Step")
         self.failUnless(re.search(r"^Are you sure you want to start over[\s\S] All subtitles will be deleted\.$", sel.get_confirmation()))
     else:
-        # Click Subtitle Me -> Add Subtitles
-        sel.click_at(testvars.WidgetUI["SubtitleMe_menu"], "")
-        sel.click_at(testvars.WidgetUI["AddSubtitles_menuitem"], "")
+        start_sub_widget(self,sel)
     sel.select_frame("relative=top")
 

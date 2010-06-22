@@ -32,6 +32,7 @@ class tc_378(unittest.TestCase):
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         # verify
         sel.open(testvars.MSTestVariables["Site"] + "demo/")
+        website.start_sub_widget(self,sel)
         widget.verifyLogIn(self,sel,testvars.siteuser) 
 # Close the browser, log errors, perform cleanup 
     def tearDown(self):
@@ -57,6 +58,7 @@ class tc_379(unittest.TestCase):
         offsite.TwitterAuth(self,sel,testvars.twitteruser, testvars.passw)
         # verify
         sel.open(testvars.MSTestVariables["Site"] + "demo/")
+        website.start_sub_widget(self,sel)
         widget.verifyLogIn(self,sel,testvars.twitteruser) 
 # Close the browser, log errors, perform cleanup 
     def tearDown(self):
@@ -80,6 +82,7 @@ class tc_380(unittest.TestCase):
         offsite.OpenIdAuth(self,sel,testvars.openiduser,testvars.passw)
         # verify
         sel.open(testvars.MSTestVariables["Site"] + "demo/")
+        website.start_sub_widget(self,sel)
         widget.verifyLogIn(self,sel,testvars.openiduser) 
 # Close the browser, log errors, perform cleanup 
     def tearDown(self):
@@ -104,6 +107,7 @@ class tc_381(unittest.TestCase):
         offsite.GmailAuth(self,sel,testvars.gmailuser,testvars.passw)
         # verify
         sel.open(testvars.MSTestVariables["Site"] + "demo/")
+        website.start_sub_widget(self,sel)
         widget.verifyLogIn(self,sel,testvars.gmailuser) 
 # Close the browser, log errors, perform cleanup 
     def tearDown(self):
@@ -127,6 +131,7 @@ class tc_382(unittest.TestCase):
         widget.Login(self,sel,"gmail")
         offsite.GmailAuth(self,sel,testvars.gmailuser,testvars.passw)
         # verify
+        website.start_sub_widget(self,sel)
         widget.verifyLogIn(self,sel,testvars.gmailuser) 
 # Close the browser, log errors, perform cleanup 
     def tearDown(self):
@@ -150,6 +155,7 @@ class tc_383(unittest.TestCase):
         widget.Login(self,sel,"twitter")
         offsite.GmailAuth(self,sel,testvars.twitteruser,testvars.passw)
         # verify
+        website.start_sub_widget(self,sel)
         widget.verifyLogIn(self,sel,testvars.twitteruser) 
 # Close the browser, log errors, perform cleanup 
     def tearDown(self):
@@ -172,11 +178,10 @@ class tc_384(unittest.TestCase):
         #login
         sel.open(testvars.MSTestVariables["Site"] + "demo/")
         widget.Login(self,sel,"log")
-        sel.type("id_username", user)
-        sel.type("id_password", passw)
+        sel.type("id_username", testvars.siteuser)
+        sel.type("id_password", testvars.passw)
         sel.click("//button[@value='login']")
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        website.GmailAuth(self,sel,testvars.siteuser,testvars.passw)
         # verify
         widget.verifyLogIn(self,sel,testvars.gmailuser) 
 # Close the browser, log errors, perform cleanup 
@@ -201,6 +206,7 @@ class tc_385(unittest.TestCase):
         widget.Login(self,sel,"openid")
         offsite.OpenIdAuth(self,sel,testvars.openiduser,testvars.passw)
         # verify
+        website.start_sub_widget(self,sel)
         widget.verifyLogIn(self,sel,testvars.openiduser) 
 # Close the browser, log errors, perform cleanup 
     def tearDown(self):

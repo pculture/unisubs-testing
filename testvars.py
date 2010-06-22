@@ -1,7 +1,7 @@
 preE=" --- ERROR: "
 
 MSTestVariables = {"Browser":"*chrome", \
-                   "Site":"http://universalsubtitles.org/", \
+                   "Site":"http://dev.universalsubtitles.org/", \
                    "ResultOutputDirectory":r"Results/", \
                    "DataDirectory":r"TestInput/", \
                    "TimeOut":"60000", \

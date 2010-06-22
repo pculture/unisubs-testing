@@ -14,8 +14,10 @@ def Login(self,sel,auth_type):
     sel.click_at(testvars.WidgetUI["SubtitleMe_menu"], "")
     sel.click_at(testvars.WidgetUI["Login_menuitem"], "")
     sel.select_frame("relative=top")
+    mslib.wait_for_element_present(self,sel,"css=.mirosubs-"+auth_type)
     sel.click("css=.mirosubs-"+auth_type)
-    sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+    sel.wait_for_pop_up("loginWindow", "30000")
+    
 
 def verifyLogIn(self,sel,user):
     sel.select_frame("relative=top")
