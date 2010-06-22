@@ -5,12 +5,12 @@ import unittest, time, re
 import StringIO
 import sys
 import HTMLTestRunner
-# import MS Test Suite modules
-import website, widget, testvars, mslib
-import widget_youtube
+# import MC Test Suite modules
+import testvars
+import sg_65_login, sg_64_subwidget
 
 # ------------------------------------------------------------------------
-# This is the main test 
+# This is the main test
 
 class Test_HTMLTestRunner(unittest.TestCase):
 
@@ -25,21 +25,30 @@ class Test_HTMLTestRunner(unittest.TestCase):
         self.assert_('</html>' in buf.getvalue())
 
     def test_main(self):
-        # Run HTMLTestRunner. 
+        # Run HTMLTestRunner.
 
         # suite of TestCases
         self.suite = unittest.TestSuite()
         self.suite.addTests([
-            unittest.defaultTestLoader.loadTestsFromTestCase(widget_youtube.tc_youtube_video),
-        
+            unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.tc_378),
+            unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.tc_379),
+            unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.tc_380),
+            unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.tc_381),
+            unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.tc_382),
+            unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.tc_383),
+            unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.tc_384),
+            unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.tc_385),
+            unittest.defaultTestLoader.loadTestsFromTestCase(sg_64_subwidget.tc_369),
+            unittest.defaultTestLoader.loadTestsFromTestCase(sg_64_subwidget.tc_370),
+            
             ])
 
         # Invoke TestRunner
         buf = StringIO.StringIO()
-        #runner = unittest.TextTestRunner(buf)       #DEBUG: this is the unittest baseline
+        #runner = unittest.TextTestRunner(buf) #DEBUG: this is the unittest baseline
         runner = HTMLTestRunner.HTMLTestRunner(
                     stream=buf,
-                    title='Miro Subtitles Test Suite',
+                    title='Miro Community Test Suite',
                     description='Results of test run'
                     )
         runner.run(self.suite)
@@ -47,7 +56,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
         # check out the output
         byte_output = buf.getvalue()
         # output the main test results
-        filename=testvars.MCTestVariables["ResultOutputDirectory"]+'MS_test_results_'+time.strftime("%Y%m%d_%H%M", time.gmtime())+'html'
+        filename=testvars.MSTestVariables["ResultOutputDirectory"]+'MS_test_results_'+time.strftime("%d-%m-%Y_%H-%M", time.gmtime())+'_GMT.html'
         f = open(filename, 'w')
         f.write(byte_output)
         f.close()
@@ -65,4 +74,3 @@ if __name__ == "__main__":
     theme=1
     unittest.main(argv=argv)
     #HTMLTestRunner.main(argv=argv)
-

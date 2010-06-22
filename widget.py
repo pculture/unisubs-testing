@@ -8,6 +8,24 @@ import mslib, testvars
 
 # transcribe video contents, takes input from a text file
 
+def Login(self,sel,auth_type):
+    #auth_type can be "log" (for site), "twitter","openid","gmail"
+    print "logging in using "+auth_type+ " account"
+    sel.click_at(testvars.WidgetUI["SubtitleMe_menu"], "")
+    sel.click_at(testvars.WidgetUI["Login_menuitem"], "")
+    sel.select_frame("relative=top")
+    sel.click("css=.mirosubs-"+auth_type)
+    sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+
+def verifyLogIn(self,sel,user):
+    sel.select_frame("relative=top")
+    if sel.get_text("css=.mirosubs-loggedIn") != "You are logged in as "+user:
+        mslib.AppendErrorMessage(self,sel,"not logged in")
+        print sel.get_text("css=.mirosubs-loggedIn")
+    else:
+        print "logged in as: " +user
+
+
 def transcribe_video(self,sel,sub_file):
     print "starting to transcribe video"
     sel.select_frame("relative=top")

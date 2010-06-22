@@ -18,6 +18,7 @@ WebsiteUI = {"Home":"css=a:contains('Miro Subs Alpha')", \
              "Video_Submit_Button":"//button[@value='Begin']"
              
              
+             
           }
 
 WidgetUI = {"Transcribe_current_sub":"css=.mirosubs-captionDiv", \
@@ -28,14 +29,18 @@ WidgetUI = {"Transcribe_current_sub":"css=.mirosubs-captionDiv", \
             "Skip_back":"css=.mirosubs-control",\
             "Active_subtime":"css=li.active span.mirosubs-timestamp-time",\
             "Active_subtext":"css=li.active span.mirosubs-title",\
+            "SubtitleMe_menu":"css=.mirosubs-tabText",\
+            "AddSubtitles_menuitem":"css=.mirosubs-langmenuitem-content:contains(\"Add Subtitles\")",\
+            "Login_menuitem":"css=.mirosubs-langmenuitem-content:contains(\"Login\")",\
+            
+
 
         }
 
 # TestData
 
 siteuser = "sub_writer"
-gmailuser = "pcf.subwriter"
-openiduser = "http://pcf-sub-writer.myopenid.com"
 twitteruser = "pcfsubwriter"
-gmailpass = "sub.writer"
+openiduser = "http://pcf-sub-writer.myopenid.com"
+gmailuser = "pcf.subwriter"
 passw = "sub.writer"
