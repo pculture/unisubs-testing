@@ -20,9 +20,12 @@ def Login(self,sel,auth_type):
     
 
 def verifyLogIn(self,sel,user):
-    sel.select_frame("relative=top")
+    mslib.wait_for_element_present(self,sel,"css=.mirosubs-modal-widget")
+    mslib.wait_for_element_present(self,sel,"css=.mirosubs-steps")
+    try: self.failIf(sel.is_element_present("css=.mirosubs-needLogin"))
+    except AssertionError, e: self.verificationErrors.append(str(e))
     if sel.get_text("css=.mirosubs-loggedIn") != "You are logged in as "+user:
-        mslib.AppendErrorMessage(self,sel,"not logged in")
+        mslib.AppendErrorMessage(self,sel,"incorrect login name")
         print sel.get_text("css=.mirosubs-loggedIn")
     else:
         print "logged in as: " +user

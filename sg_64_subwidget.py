@@ -21,6 +21,7 @@ class tc_369(unittest.TestCase):
         sel = self.selenium
 
         #login
+        sel.open(testvars.MSTestVariables["Site"])
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         # Submit Video
         website.start_new_video_sub(self,sel,"http://www.youtube.com/watch?v=cgPqmRNjoTE")
@@ -59,6 +60,7 @@ class tc_370(unittest.TestCase):
         sel = self.selenium
 
         #login
+        sel.open(testvars.MSTestVariables["Site"])
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         # Submit Video
         website.start_new_video_sub(self,sel,"http://pculture.org/mirosubs_tests/octopus_garden.ogg")
