@@ -28,6 +28,7 @@ class tc_378(unittest.TestCase):
 # The user actions executed in the test scenario
     def test_site_login(self):
         sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
         sel.open(testvars.MSTestVariables["Site"])
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
@@ -51,9 +52,10 @@ class tc_379(unittest.TestCase):
         self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
         self.selenium.start()
 
-# The user actions executed in the test scenario
+        # The user actions executed in the test scenario
     def test_twitter_login(self):
         sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
         sel.open(testvars.MSTestVariables["Site"])
         website.Login(self,sel,"twitter")
@@ -75,11 +77,11 @@ class tc_380(unittest.TestCase):
         self.verificationErrors = []
         self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
         self.selenium.start()
-
 # The user actions executed in the test scenario
     def test_openid_login(self):
         sel = self.selenium
-        #login
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        #login        
         sel.open(testvars.MSTestVariables["Site"])
         website.Login(self,sel,"open-id")
         offsite.OpenIdAuth(self,sel,testvars.openiduser,testvars.passw)
@@ -106,6 +108,7 @@ class tc_381(unittest.TestCase):
 # The user actions executed in the test scenario
     def test_gmail_login(self):
         sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
         sel.open(testvars.MSTestVariables["Site"])
         website.Login(self,sel,"google")
@@ -120,30 +123,31 @@ class tc_381(unittest.TestCase):
 # the command on the previous line should close the browser
         self.assertEqual([], self.verificationErrors)
 
-##class tc_382(unittest.TestCase):
-##    
-### Open the desired browser and set up the test
-##    def setUp(self):
-##        self.verificationErrors = []
-##        self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
-##        self.selenium.start()
-##
-### The user actions executed in the test scenario
-##    def test_gmail_widget_login(self):
-##        sel = self.selenium
-##        #login
-##        sel.open(testvars.MSTestVariables["Site"])
-##        website.start_demo(self,sel)
-##        widget.Login(self,sel,"gmail")
-##        offsite.GmailAuth(self,sel,testvars.gmailuser,testvars.passw)
-##        # verify
-##        website.start_sub_widget(self,sel)
-##        widget.verifyLogIn(self,sel,testvars.gmailuser) 
-### Close the browser, log errors, perform cleanup 
-##    def tearDown(self):
-##        self.selenium.stop()
-### the command on the previous line should close the browser
-##        self.assertEqual([], self.verificationErrors)
+class tc_382(unittest.TestCase):
+    
+# Open the desired browser and set up the test
+    def setUp(self):
+        self.verificationErrors = []
+        self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
+        self.selenium.start()
+
+# The user actions executed in the test scenario
+    def test_gmail_widget_login(self):
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        #login
+        sel.open(testvars.MSTestVariables["Site"])
+        website.start_demo(self,sel)
+        widget.Login(self,sel,"google")
+        offsite.GmailAuth(self,sel,testvars.gmailuser,testvars.passw)
+        # verify
+        website.start_sub_widget(self,sel)
+        widget.verifyLogIn(self,sel,testvars.gmailuser) 
+# Close the browser, log errors, perform cleanup 
+    def tearDown(self):
+        self.selenium.stop()
+# the command on the previous line should close the browser
+        self.assertEqual([], self.verificationErrors)
 
 class tc_383(unittest.TestCase):
     
@@ -152,16 +156,19 @@ class tc_383(unittest.TestCase):
         self.verificationErrors = []
         self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
         self.selenium.start()
+        
 
 # The user actions executed in the test scenario
     def test_twitter_widget_login(self):
         sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
         sel.open(testvars.MSTestVariables["Site"])
         website.start_demo(self,sel)
         widget.Login(self,sel,"twitter")
-        offsite.GmailAuth(self,sel,testvars.twitteruser,testvars.passw)
+        offsite.TwitterAuth(self,sel,testvars.twitteruser,testvars.passw)
         # verify
+        sel.select_window("null")
         website.start_sub_widget(self,sel)
         widget.verifyLogIn(self,sel,testvars.twitteruser) 
 # Close the browser, log errors, perform cleanup 
@@ -170,33 +177,35 @@ class tc_383(unittest.TestCase):
 # the command on the previous line should close the browser
         self.assertEqual([], self.verificationErrors)
 
-
-class tc_384(unittest.TestCase):
-    
-# Open the desired browser and set up the test
-    def setUp(self):
-        self.verificationErrors = []
-        self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
-        self.selenium.start()
-
-# The user actions executed in the test scenario
-    def test_site_widget_login(self):
-        sel = self.selenium
-        #login
-        sel.open(testvars.MSTestVariables["Site"])
-        website.start_demo(self,sel)
-        widget.Login(self,sel,"log")
-        sel.type("id_username", testvars.siteuser)
-        sel.type("id_password", testvars.passw)
-        sel.click("//button[@value='login']")
-        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        # verify
-        widget.verifyLogIn(self,sel,testvars.gmailuser) 
-# Close the browser, log errors, perform cleanup 
-    def tearDown(self):
-        self.selenium.stop()
-# the command on the previous line should close the browser
-        self.assertEqual([], self.verificationErrors)
+##
+##class tc_384(unittest.TestCase):
+##    
+### Open the desired browser and set up the test
+##    def setUp(self):
+##        self.verificationErrors = []
+##        self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
+##        self.selenium.start()
+##        
+##
+### The user actions executed in the test scenario
+##    def test_site_widget_login(self):
+##        sel = self.selenium
+##        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+##        #login
+##        sel.open(testvars.MSTestVariables["Site"])
+##        website.start_demo(self,sel)
+##        widget.Login(self,sel,"log")
+##        sel.type("id_username", testvars.siteuser)
+##        sel.type("id_password", testvars.passw)
+##        sel.click("//button[@value='login']")
+##        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+##        # verify
+##        widget.verifyLogIn(self,sel,testvars.gmailuser) 
+### Close the browser, log errors, perform cleanup 
+##    def tearDown(self):
+##        self.selenium.stop()
+### the command on the previous line should close the browser
+##        self.assertEqual([], self.verificationErrors)
 
 class tc_385(unittest.TestCase):
     
@@ -205,10 +214,11 @@ class tc_385(unittest.TestCase):
         self.verificationErrors = []
         self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
         self.selenium.start()
-
+        
 # The user actions executed in the test scenario
     def test_openid_widget_login(self):
         sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
         sel.open(testvars.MSTestVariables["Site"])
         website.start_demo(self,sel)

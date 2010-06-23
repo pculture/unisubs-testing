@@ -24,7 +24,7 @@ class tc_369(unittest.TestCase):
         sel.open(testvars.MSTestVariables["Site"])
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         # Submit Video
-        website.start_new_video_sub(self,sel,"http://www.youtube.com/watch?v=cgPqmRNjoTE")
+        website.start_new_video_sub(self,sel,"http://www.youtube.com/watch?v=CUFcfXgW_dQ")
 
         # Transcribe
         widget.transcribe_video(self,sel,testvars.MSTestVariables["DataDirectory"]+"OctopusGarden.txt")

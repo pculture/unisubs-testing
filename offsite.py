@@ -10,6 +10,7 @@ import mslib, testvars
 
 def TwitterAuth(self,sel,user,passw):
     print "twitter auth: "+ user+":"
+    sel.select_pop_up("null")
     mslib.wait_for_element_present(self,sel,"username_or_email")
     sel.type("username_or_email", user)
     sel.type("session[password]", passw)
@@ -21,6 +22,7 @@ def TwitterAuth(self,sel,user,passw):
 
 def OpenIdAuth(self,sel,user,passw):
     print "open id auth: "+ user
+    sel.select_pop_up("null")
     mslib.wait_for_element_present(self,sel,"openid_url")
     sel.type("css=.openid", testvars.openiduser)
     sel.click("css=.open-id")
@@ -31,7 +33,7 @@ def OpenIdAuth(self,sel,user,passw):
 
 def GmailAuth(self,sel,user,passw):
     sel.select_pop_up("null")
-    print "open id auth: "+ user
+    print "gmail auth: "+ user
     mslib.wait_for_element_present(self,sel,"signIn")
     sel.type("Email", user)
     sel.type("Passwd", passw)

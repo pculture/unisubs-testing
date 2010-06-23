@@ -5,7 +5,7 @@ import unittest, time, re
 import StringIO
 import sys
 import HTMLTestRunner
-# import MC Test Suite modules
+# import MS Test Suite modules
 import testvars
 import sg_65_login, sg_64_subwidget
 
@@ -36,7 +36,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
             unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.tc_381),
             unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.tc_382),
             unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.tc_383),
-            unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.tc_384),
+       #     unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.tc_384),
             unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.tc_385),
             unittest.defaultTestLoader.loadTestsFromTestCase(sg_64_subwidget.tc_369),
             unittest.defaultTestLoader.loadTestsFromTestCase(sg_64_subwidget.tc_370),
@@ -48,8 +48,8 @@ class Test_HTMLTestRunner(unittest.TestCase):
         #runner = unittest.TextTestRunner(buf) #DEBUG: this is the unittest baseline
         runner = HTMLTestRunner.HTMLTestRunner(
                     stream=buf,
-                    title='Miro Community Test Suite',
-                    description='Results of test run'
+                    title='Univeral Subtitles Testing',
+                    description='Results'
                     )
         runner.run(self.suite)
 
