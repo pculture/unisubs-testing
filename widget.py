@@ -1,4 +1,4 @@
-# website.py
+# widget.py
 
 from selenium import selenium
 
@@ -16,7 +16,8 @@ def Login(self,sel,auth_type):
     sel.select_frame("relative=top")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-"+auth_type)
     sel.click("css=.mirosubs-"+auth_type)
-    sel.wait_for_pop_up("loginWindow", "30000")
+  
+
     
 
 def verifyLogIn(self,sel,user):
@@ -30,16 +31,21 @@ def verifyLogIn(self,sel,user):
         print sel.get_text("css=.mirosubs-loggedIn")
     else:
         print "logged in as: " +user
-
+        
+def close_howto_video(self,sel):
+    mslib.wait_for_element_present(self,sel,"css=.mirosubs-modal-widget-content")
+    if sel.is_element_present("css=.mirosubs-howtopanel"):
+        mslib.wait_for_element_present(self,sel,"css=.mirosubs-done:contains('Continue')")
+        mslib.wait_for_element_present(self,sel,"css=.goog-checkbox-unchecked")
+        sel.click("css=.goog-checkbox-unchecked")
+        sel.click("css=.mirosubs-done:contains('Continue')")
 
 def transcribe_video(self,sel,sub_file):
     print "starting to transcribe video"
-    sel.select_frame("relative=top")
     # giving the video a chance to load.
     time.sleep(20)
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Transcribe_play_pause"])
-    if sel.get_text("css=.mirosubs-timeElapsed") == "null":
-        sel.click(testvars.WidgetUI["Transcribe_play_pause"])
+    sel.click(testvars.WidgetUI["Transcribe_play_pause"])
     for line in open(sub_file):
         sel.click("//div/input")
         sel.type("//div/input", line)
@@ -55,26 +61,23 @@ def transcribe_video(self,sel,sub_file):
     sel.click(testvars.WidgetUI["Next_step"])
 
 
-def sync_video(self, sel, sub_file,start_time):
+def sync_video(self,sel,sub_file,start_delay,sub_int):
     print "starting video / sub syncing"
     sel.select_frame("relative=top")
+    #give video a chance to load
+    time.sleep(5)
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Sync_Review_play_pause"])
-    sel.key_press_native("40")
-    #Using down key to start playback for now
-#    sel.focus(testvars.WidgetUI["Sync_sub"])
- #   sel.click(testvars.WidgetUI["Sync_sub"])
-     #use key press to start playback, 32 is for spacebar.
- #   sel.key_down_native("32")
- #   sel.key_up_native("32")
-     
-
-    time.sleep(start_time)
+    print "clicking video play button to start playback"
+    sel.click(testvars.WidgetUI["Video_playPause"])
+       
+    time.sleep(start_delay)
+    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Sync_sub"])
     for line in open(sub_file):
-        # 40 is the native key code for down arrow
-        sel.key_press_native("40")
-        time.sleep(5)
+        sel.focus(testvars.WidgetUI["Sync_sub"])
+        sel.click_at(testvars.WidgetUI["Sync_sub"],"")
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Active_subtime"])
         print sel.get_text(testvars.WidgetUI["Active_subtime"]) +": "+ sel.get_text(testvars.WidgetUI["Active_subtext"])
-        
+        time.sleep(sub_int)
     sel.click(testvars.WidgetUI["Next_step"])
                   
 def review_edit_text(self,sel,sub_file):
@@ -83,9 +86,6 @@ def review_edit_text(self,sel,sub_file):
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Sync_Review_play_pause"])
     li = 1
     #sel.click(testvars.WidgetUI["Sync_Review_play_pause"])
-    # use key_press_native 32 for spacebar
-    sel.key_press_native("32")
-    time.sleep(5)
     for line in open(sub_file):
         text_el = "//li[" +str(li) + "]/span[2]"
         time_stamp_el = "//li["+str(li)+"]/span[1]/span/span[1]"
@@ -132,13 +132,12 @@ def review_time_shift_arrows(self,sel,sub_file):
     # 7. Click text-arrow right and verify time jump
 
     
-def review_time_shift_sync_hold(self,sel,sub_file):
-    print "spacebar time shift"
+def review_time_shift_sync_hold(self,sel,sub_file,delay_time, sync_time):
+    print "down key time shift"
     sel.select_frame("relative=top")
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Sync_Review_play_pause"])
-    sel.focus(testvars.WidgetUI["Sync_Review_play_pause"])
-    sel.click(testvars.WidgetUI["Sync_Review_play_pause"])
-    time.sleep(8)
+    sel.click(testvars.WidgetUI["Video_playPause"])
+    time.sleep(delay_time)
     li = 1
     time_stamp_el = "//li["+str(li)+"]/span[1]/span/span[1]"
     for line in open(sub_file):
@@ -146,13 +145,13 @@ def review_time_shift_sync_hold(self,sel,sub_file):
         sel.click(testvars.WidgetUI["Skip_back"])
         # 40 is the native key code for down arrow key
         sel.key_down_native("40")
-        time.sleep(4)
+        time.sleep(sync_time)
         sel.key_up_native("40")
         new_time = sel.get_text(time_stamp_el)
-        time.sleep(6)
         print old_time + " ==> " + new_time
         if old_time == new_time:
             mslib.AppendErrorMessage(self,sel,"time's not shifted")
+        time.sleep(delay_time)
         li = li + 1        
 
     
@@ -167,6 +166,9 @@ def drag_bubble(self,sel,sub_text,side,move_pixels):
         if "right" in side:
                 sel.drag_and_drop("css=.mirosubs-subtext:contains(" + sub_text + ") +span + span", move_pixels+",0")
 
-
-
-
+def verify_login_message(self,sel):
+    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Must_Login"])
+    if sel.get_text(testvars.WidgetUI["Must_Login"]!= testvars.WidgetUI["Must_Login_Message"]):
+        mslib.AppendErrorMessage(self,sel,"login text mismatch")
+        print "--- found: "+sel.get_text(testvars.WidgetUI["Must_Login"]) + "expected: " + testvars.WidgetUI["Must_Login_Message"]
+                                     

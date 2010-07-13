@@ -34,12 +34,13 @@ class Test_HTMLTestRunner(unittest.TestCase):
             unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.tc_379),
             unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.tc_380),
             unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.tc_381),
-            unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.tc_382),
+       #     unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.tc_382),
             unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.tc_383),
-       #     unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.tc_384),
+            unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.tc_384),
             unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.tc_385),
             unittest.defaultTestLoader.loadTestsFromTestCase(sg_64_subwidget.tc_369),
             unittest.defaultTestLoader.loadTestsFromTestCase(sg_64_subwidget.tc_370),
+            unittest.defaultTestLoader.loadTestsFromTestCase(sg_64_subwidget.tc_376),
             
             ])
 

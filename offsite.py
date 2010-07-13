@@ -15,10 +15,8 @@ def TwitterAuth(self,sel,user,passw):
     sel.type("username_or_email", user)
     sel.type("session[password]", passw)
     sel.click("allow")
-    sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
 
-    
-   
+
 
 def OpenIdAuth(self,sel,user,passw):
     print "open id auth: "+ user
