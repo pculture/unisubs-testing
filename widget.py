@@ -2,7 +2,7 @@
 
 from selenium import selenium
 
-import unittest, time, re
+import unittest, time, re, codecs
 import mslib, testvars
 
 
@@ -11,13 +11,12 @@ import mslib, testvars
 def Login(self,sel,auth_type):
     #auth_type can be "log" (for site), "twitter","openid","gmail"
     print "logging in using "+auth_type+ " account"
-    sel.click_at(testvars.WidgetUI["SubtitleMe_menu"], "")
+    mslib.wait_for_element_present(self,sel, testvars.WebsiteUI["SubtitleMe_menu"])
+    sel.click_at(testvars.WebsiteUI["SubtitleMe_menu"], "")
     sel.click_at(testvars.WidgetUI["Login_menuitem"], "")
     sel.select_frame("relative=top")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-"+auth_type)
     sel.click("css=.mirosubs-"+auth_type)
-  
-
     
 
 def verifyLogIn(self,sel,user):
@@ -32,25 +31,29 @@ def verifyLogIn(self,sel,user):
     else:
         print "logged in as: " +user
         
-def close_howto_video(self,sel):
+def close_howto_video(self,sel,skip=True):
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-modal-widget-content")
     if sel.is_element_present("css=.mirosubs-howtopanel"):
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-done:contains('Continue')")
         mslib.wait_for_element_present(self,sel,"css=.goog-checkbox-unchecked")
-        sel.click("css=.goog-checkbox-unchecked")
+        if skip==True:
+            sel.click("css=.goog-checkbox-unchecked")
         sel.click("css=.mirosubs-done:contains('Continue')")
 
-def transcribe_video(self,sel,sub_file):
+def transcribe_video(self,sel,sub_file,mode="Expert"):
     print "starting to transcribe video"
     # giving the video a chance to load.
     time.sleep(20)
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Transcribe_play_pause"])
-    sel.click(testvars.WidgetUI["Transcribe_play_pause"])
-    for line in open(sub_file):
+    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
+    mode_label = sel.get_text("css=.mirosubs-speedmode option:contains("+mode+")")
+    sel.select("//select", "label=" +mode_label)
+    sel.click(testvars.WidgetUI["Play_pause"])
+
+    for line in codecs.open(sub_file,encoding='utf-8'):
         sel.click("//div/input")
         sel.type("//div/input", line)
         sel.type_keys("//div/input"," ")
-        time.sleep(2)
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Transcribe_current_sub"])
         current_sub = sel.get_text(testvars.WidgetUI["Transcribe_current_sub"])
         if line.rstrip() != current_sub.rstrip():
             mslib.AppendErrorMessage(self,sel,"sub text mismatch")
@@ -61,12 +64,24 @@ def transcribe_video(self,sel,sub_file):
     sel.click(testvars.WidgetUI["Next_step"])
 
 
-def sync_video(self,sel,sub_file,start_delay,sub_int):
+def restart_typing(self,sel):
+    if sel.is_element_present("css=.mirosubs-restart"):
+    # If it loads the widget automatically
+        sel.click("css=.mirosubs-restart")
+        self.failUnless(re.search(r"^Are you sure you want to start over[\s\S] All subtitles will be deleted\.$", sel.get_confirmation()))
+
+def back_step(self,sel):
+    while sel.is_text_present("Back to") or sel.is_text_present("Return to"):
+        sel.click("css=.mirosubs-backTo")
+        time.sleep(3)
+        mslib.wait_for_element_present(self,sel,"css=.mirosubs-steps")
+
+def sync_video(self,sel,sub_file,start_delay=5,sub_int=4):
     print "starting video / sub syncing"
     sel.select_frame("relative=top")
     #give video a chance to load
     time.sleep(5)
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Sync_Review_play_pause"])
+    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     print "clicking video play button to start playback"
     sel.click(testvars.WidgetUI["Video_playPause"])
        
@@ -83,7 +98,7 @@ def sync_video(self,sel,sub_file,start_delay,sub_int):
 def review_edit_text(self,sel,sub_file):
     print "editing text"
     sel.select_frame("relative=top")
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Sync_Review_play_pause"])
+    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     li = 1
     #sel.click(testvars.WidgetUI["Sync_Review_play_pause"])
     for line in open(sub_file):
@@ -135,7 +150,7 @@ def review_time_shift_arrows(self,sel,sub_file):
 def review_time_shift_sync_hold(self,sel,sub_file,delay_time, sync_time):
     print "down key time shift"
     sel.select_frame("relative=top")
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Sync_Review_play_pause"])
+    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     sel.click(testvars.WidgetUI["Video_playPause"])
     time.sleep(delay_time)
     li = 1

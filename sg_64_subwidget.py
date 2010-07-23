@@ -3,7 +3,7 @@
 
 from selenium import selenium
 import unittest, time, re, sys
-import mslib, website, widget, testvars
+import mslib, website, widget, offsite, testvars
 
 # ----------------------------------------------------------------------
 
@@ -21,15 +21,7 @@ class tc_369(unittest.TestCase):
         sel = self.selenium
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"OctopusGarden.txt"
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        
-        sel.open("http://pculture.org/mirosubs_tests/multi-widget-null.html")
-        #left column is the youtube video
-        mslib.wait_for_element_present(self,sel,"css=.left_column span.mirosubs-tabText")
-        sel.click_at("css=.left_column span.mirosubs-tabText","")
-        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["AddSubtitles_menuitem"])
-        sel.click_at(testvars.WidgetUI["AddSubtitles_menuitem"], "")
-        widget.close_howto_video(self,sel)
-
+        offsite.start_youtube_widget_null(self,sel)
         # Transcribe
         widget.transcribe_video(self,sel,subtextfile)
 
@@ -58,18 +50,11 @@ class tc_370(unittest.TestCase):
         self.selenium.start()
 
 # The user actions executed in the test scenario
-    def test_youtube_offsite_subtitle(self):
+    def test_ogg_offsite_subtitle(self):
         sel = self.selenium
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"OctopusGarden.txt"
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        
-        sel.open("http://pculture.org/mirosubs_tests/multi-widget-null.html")
-        #right column is the .ogg video
-        mslib.wait_for_element_present(self,sel,"css=.right_column span.mirosubs-tabText")
-        sel.click_at("css=.right_column span.mirosubs-tabText","")
-        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["AddSubtitles_menuitem"])
-        sel.click_at(testvars.WidgetUI["AddSubtitles_menuitem"], "")
-        widget.close_howto_video(self,sel)
+        offsite.start_ogg_widget_null(self,sel)
 
         # Transcribe
         widget.transcribe_video(self,sel,subtextfile)
@@ -102,8 +87,8 @@ class tc_376(unittest.TestCase):
         sel = self.selenium
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"OctopusGarden.txt"
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        sel.open(testvars.MSTestVariables["Site"] +"/logout")
-        sel.open(testvars.MSTestVariables["Site"] +"/demo")
+        sel.open(testvars.MSTestVariables["Site"] +"logout")
+        sel.open(testvars.MSTestVariables["Site"] +"demo")
         website.start_demo(self,sel)
         
         # Check message in transcribe step
@@ -131,7 +116,7 @@ class tc_376(unittest.TestCase):
             mslib.wait_for_element_present(self,sel,"css=.mirosubs.captionDiv:contains(subtext)")
 
         #Finish up by logging out
-        sel.open(testvars.MSTestVariables["Site"] +"/logout")        
+        sel.open(testvars.MSTestVariables["Site"] +"logout")        
       
         
 # Close the browser, log errors, perform cleanup 

@@ -33,8 +33,7 @@ class tc_378(unittest.TestCase):
         sel.open(testvars.MSTestVariables["Site"])
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         # verify
-        website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
+        offsite.start_youtube_widget_null(self,sel)
         widget.verifyLogIn(self,sel,testvars.siteuser)
         # logout
         sel.open(testvars.MSTestVariables["Site"] +"logout/")
