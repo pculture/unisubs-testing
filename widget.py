@@ -18,18 +18,6 @@ def Login(self,sel,auth_type):
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-"+auth_type)
     sel.click("css=.mirosubs-"+auth_type)
     
-
-def verifyLogIn(self,sel,user):
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-modal-widget")
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-steps")
-    try: self.failIf(sel.is_element_present("css=.mirosubs-needLogin"))
-    except AssertionError, e: self.verificationErrors.append(str(e))
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-loggedIn")
-    if sel.get_text("css=.mirosubs-loggedIn") != "You are logged in as "+user:
-        mslib.AppendErrorMessage(self,sel,"incorrect login name")
-        print sel.get_text("css=.mirosubs-loggedIn")
-    else:
-        print "logged in as: " +user
         
 def close_howto_video(self,sel,skip=True):
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-modal-widget-content")

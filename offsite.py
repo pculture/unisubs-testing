@@ -42,8 +42,8 @@ def start_youtube_widget_null(self,sel):
         #left column is the youtube video
         mslib.wait_for_element_present(self,sel,"css=.left_column span.mirosubs-tabText")
         sel.click_at("css=.left_column span.mirosubs-tabText","")
-        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["AddSubtitles_menuitem"])
-        sel.click_at(testvars.WidgetUI["AddSubtitles_menuitem"], "")
+        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["AddSubtitles_menuitem"])
+        sel.click_at(testvars.WebsiteUI["AddSubtitles_menuitem"], "")
         widget.close_howto_video(self,sel)
         
 def start_ogg_widget_null(self,sel):
@@ -51,8 +51,8 @@ def start_ogg_widget_null(self,sel):
     #right column is the .ogg video
     mslib.wait_for_element_present(self,sel,"css=.right_column span.mirosubs-tabText")
     sel.click_at("css=.right_column span.mirosubs-tabText","")
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["AddSubtitles_menuitem"])
-    sel.click_at(testvars.WidgetUI["AddSubtitles_menuitem"], "")
+    mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["AddSubtitles_menuitem"])
+    sel.click_at(testvars.WebsiteUI["AddSubtitles_menuitem"], "")
     widget.close_howto_video(self,sel)
         
     

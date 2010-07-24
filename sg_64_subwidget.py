@@ -88,9 +88,8 @@ class tc_376(unittest.TestCase):
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"OctopusGarden.txt"
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         sel.open(testvars.MSTestVariables["Site"] +"logout")
-        sel.open(testvars.MSTestVariables["Site"] +"demo")
         website.start_demo(self,sel)
-        
+        website.start_sub_widget(self,sel)        
         # Check message in transcribe step
         widget.verify_login_message(self,sel)
         widget.transcribe_video(self,sel,subtextfile)

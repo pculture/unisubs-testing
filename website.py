@@ -60,3 +60,12 @@ def start_sub_widget(self,sel,skip=True):
     widget.close_howto_video(self,sel,skip)
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-steps")
     sel.select_frame("relative=top")
+
+def verify_login(self,sel):
+    sel.open(testvars.MSTestVariables["Site"])
+    mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Logout_Button"])
+    start_demo(self,sel)
+    mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+    sel.click_at(testvars.WebsiteUI["SubtitleMe_menu"], "")
+    self.failUnless(sel.is_element_present(testvars.WebsiteUI["Logout_menuitem"]))
+    

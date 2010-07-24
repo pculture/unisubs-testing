@@ -22,6 +22,7 @@ WebsiteUI = {"Home":"css=a:contains('Miro Subs Alpha')", \
              "SubMe_menuitems":"css=.mirosubs-langmenuitem-content", \
              "AddSubtitles_menuitem":"css=.mirosubs-langmenuitem-content:contains('Add Subtitles')" ,\
              "Login_menuitem":"css=.mirosubs-langmenuitem-content:contains('Login')" ,\
+             "Logout_menuitem":"css=.mirosubs-langmenuitem-content:contains('Logout')" , \
              "ChooseLanguage_menu":"css=.mirosubs-tabText:contains('Choose language')" , \
              
           }

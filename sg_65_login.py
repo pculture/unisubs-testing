@@ -33,8 +33,7 @@ class tc_378(unittest.TestCase):
         sel.open(testvars.MSTestVariables["Site"])
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         # verify
-        offsite.start_youtube_widget_null(self,sel)
-        widget.verifyLogIn(self,sel,testvars.siteuser)
+        website.verify_login(self,sel)
         # logout
         sel.open(testvars.MSTestVariables["Site"] +"logout/")
 # Close the browser, log errors, perform cleanup 
@@ -62,9 +61,7 @@ class tc_379(unittest.TestCase):
         website.Login(self,sel,"twitter")
         offsite.TwitterAuth(self,sel,testvars.twitteruser, testvars.passw)
         # verify
-        website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
-        widget.verifyLogIn(self,sel,testvars.twitteruser)
+        website.verify_login(self,sel)
         # logout
         sel.open(testvars.MSTestVariables["Site"] +"logout/")
 # Close the browser, log errors, perform cleanup 
@@ -89,10 +86,7 @@ class tc_380(unittest.TestCase):
         website.Login(self,sel,"open-id")
         offsite.OpenIdAuth(self,sel,testvars.openiduser,testvars.passw)
         # verify
-     
-        website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
-        widget.verifyLogIn(self,sel,testvars.openiduser)
+        website.verify_login(self,sel)
         # logout
         sel.open(testvars.MSTestVariables["Site"] +"logout/")
 # Close the browser, log errors, perform cleanup 
@@ -119,9 +113,7 @@ class tc_381(unittest.TestCase):
         website.Login(self,sel,"google")
         offsite.GmailAuth(self,sel,testvars.gmailuser,testvars.passw)
         # verify
-        website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
-        widget.verifyLogIn(self,sel,testvars.gmailuser)
+        website.verify_login(self,sel)
         # logout
         sel.open(testvars.MSTestVariables["Site"] +"logout/")
 # Close the browser, log errors, perform cleanup 
@@ -148,8 +140,7 @@ class tc_382(unittest.TestCase):
         widget.Login(self,sel,"google")
         offsite.GmailAuth(self,sel,testvars.gmailuser,testvars.passw)
         # verify
-        website.start_sub_widget(self,sel)
-        widget.verifyLogIn(self,sel,testvars.gmailuser)
+        website.verify_login(self,sel)
         # logout
         sel.open(testvars.MSTestVariables["Site"] +"logout/")
 # Close the browser, log errors, perform cleanup 
@@ -177,9 +168,7 @@ class tc_383(unittest.TestCase):
         widget.Login(self,sel,"twitter")
         offsite.TwitterAuth(self,sel,testvars.twitteruser,testvars.passw)
         # verify
-        sel.select_window("null")
-        website.start_sub_widget(self,sel)
-        widget.verifyLogIn(self,sel,testvars.twitteruser)
+        website.verify_login(self,sel)
         # logout
         sel.open(testvars.MSTestVariables["Site"] +"logout/")
 # Close the browser, log errors, perform cleanup 
@@ -212,8 +201,7 @@ class tc_384(unittest.TestCase):
         sel.type("id_password", testvars.passw)
         sel.click("//button[@value='login']")
         # verify
-        website.start_sub_widget(self,sel)
-        widget.verifyLogIn(self,sel,testvars.siteuser)
+        website.verify_login(self,sel)
         # logout
         sel.open(testvars.MSTestVariables["Site"] +"logout/")
 # Close the browser, log errors, perform cleanup 
@@ -240,8 +228,7 @@ class tc_385(unittest.TestCase):
         widget.Login(self,sel,"openid")
         offsite.OpenIdAuth(self,sel,testvars.openiduser,testvars.passw)
         # verify
-        website.start_sub_widget(self,sel)
-        widget.verifyLogIn(self,sel,testvars.openiduser)
+        website.verify_login(self,sel)
         # logout
         sel.open(testvars.MSTestVariables["Site"] +"logout/")
 # Close the browser, log errors, perform cleanup 
