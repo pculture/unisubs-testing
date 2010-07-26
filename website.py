@@ -38,7 +38,7 @@ def Login(self,sel,auth_type):
 
 def start_demo(self,sel):
     mslib.wait_for_element_present(self,sel,"css=.try_link")
-    sel.click("css=.try_link span:contains('Try the Demo')")
+    sel.click("css=.try_link span:contains('Demo')")
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     #widget.close_howto_video
 

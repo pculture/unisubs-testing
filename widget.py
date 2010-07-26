@@ -28,13 +28,15 @@ def close_howto_video(self,sel,skip=True):
             sel.click("css=.goog-checkbox-unchecked")
         sel.click("css=.mirosubs-done:contains('Continue')")
 
-def transcribe_video(self,sel,sub_file,mode="Expert"):
+
+def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue"):
     print "starting to transcribe video"
     # giving the video a chance to load.
-    time.sleep(20)
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     mode_label = sel.get_text("css=.mirosubs-speedmode option:contains("+mode+")")
     sel.select("//select", "label=" +mode_label)
+    mslib.wait_for_video_to_buffer(self,sel)
+        
     sel.click(testvars.WidgetUI["Play_pause"])
 
     for line in codecs.open(sub_file,encoding='utf-8'):
@@ -48,8 +50,9 @@ def transcribe_video(self,sel,sub_file,mode="Expert"):
             print "found: " + current_sub.rstrip()
             print "expected: " +line
         sel.key_press("//div/input", "\\13")
-        time.sleep(3)
-    sel.click(testvars.WidgetUI["Next_step"])
+        time.sleep(2)
+    if step == "Continue":
+        sel.click(testvars.WidgetUI["Next_step"])
 
 
 def restart_typing(self,sel):

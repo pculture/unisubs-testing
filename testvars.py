@@ -28,6 +28,9 @@ WebsiteUI = {"Home":"css=a:contains('Miro Subs Alpha')", \
           }
 
 WidgetUI = {"Video_playPause":"css=.mirosubs-playPause", \
+            "Video_play_button":"css=.mirosubs-videoControls .play", \
+            "Video_pause_button":"css=.mirosubs-videoControls .pause", \
+            "Video_elapsed_time":"css=.mirosubs-timeElapsed", \
             "Transcribe_current_sub":"css=.mirosubs-captionDiv", \
             "Next_step":"css=.mirosubs-done", \
             "Play_pause":"css=.mirosubs-tab:contains('tab')",\

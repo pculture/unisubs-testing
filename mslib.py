@@ -28,3 +28,14 @@ def wait_for_element_present(self,sel,input_field):
     else:
         self.fail("time out waiting for element " +input_field)
 
+def wait_for_video_to_buffer(self,sel):
+    wait_for_element_present(self,sel,"css=.mirosubs-buffered")
+    print " - waiting for video to buffer"
+    for i in range(300):
+        try:
+            if int(sel.get_element_width("css=.mirosubs-buffered")) >= 200: break
+        except: pass
+        time.sleep(1)
+   
+
+
