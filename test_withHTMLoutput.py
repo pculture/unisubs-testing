@@ -7,10 +7,9 @@ import sys
 import HTMLTestRunner
 # import MS Test Suite modules
 import testvars
-import sg_65_login, sg_64_subwidget
-
-# ------------------------------------------------------------------------
-# This is the main test
+import sg_65_login
+import sg_64_subwidget
+import sg_69_demoUI
 
 class Test_HTMLTestRunner(unittest.TestCase):
 

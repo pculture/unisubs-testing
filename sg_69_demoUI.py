@@ -20,7 +20,7 @@ from selenium import selenium
 import unittest, time, re, sys, codecs
 import mslib, website, widget, offsite, testvars
 
- ----------------------------------------------------------------------
+# ----------------------------------------------------------------------
 
 
 class tc_389(unittest.TestCase):
