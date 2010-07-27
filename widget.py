@@ -13,7 +13,7 @@ def Login(self,sel,auth_type):
     print "logging in using "+auth_type+ " account"
     mslib.wait_for_element_present(self,sel, testvars.WebsiteUI["SubtitleMe_menu"])
     sel.click_at(testvars.WebsiteUI["SubtitleMe_menu"], "")
-    sel.click_at(testvars.WidgetUI["Login_menuitem"], "")
+    sel.click_at(testvars.WebsiteUI["Login_menuitem"], "")
     sel.select_frame("relative=top")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-"+auth_type)
     sel.click("css=.mirosubs-"+auth_type)
@@ -174,7 +174,7 @@ def drag_bubble(self,sel,sub_text,side,move_pixels):
 
 def verify_login_message(self,sel):
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Must_Login"])
-    if sel.get_text(testvars.WidgetUI["Must_Login"]!= testvars.WidgetUI["Must_Login_Message"]):
-        mslib.AppendErrorMessage(self,sel,"login text mismatch")
-        print "--- found: "+sel.get_text(testvars.WidgetUI["Must_Login"]) + "expected: " + testvars.WidgetUI["Must_Login_Message"]
+    self.failUnless(sel.get_text(testvars.WidgetUI['Must_Login'] +":contains('To save your subtitling work')")
+    
+
                                      

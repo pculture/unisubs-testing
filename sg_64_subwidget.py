@@ -30,7 +30,7 @@ class tc_369(unittest.TestCase):
         widget.sync_video(self,sel,subtextfile,6,8)
 
         # Review
-        widget.review_time_shift_sync_hold(self,sel,subtextfile,7,5)
+ #       widget.review_time_shift_sync_hold(self,sel,subtextfile,7,5)
         widget.review_edit_text(self,sel,subtextfile)
       
         
@@ -64,7 +64,7 @@ class tc_370(unittest.TestCase):
         widget.sync_video(self,sel,subtextfile,5,5)
 
         # Review
-        widget.review_time_shift_sync_hold(self,sel,subtextfile,8,4)
+ #       widget.review_time_shift_sync_hold(self,sel,subtextfile,8,4)
         widget.review_edit_text(self,sel,subtextfile)
       
         

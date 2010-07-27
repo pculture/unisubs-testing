@@ -367,7 +367,7 @@ class tc_406(unittest.TestCase):
         website.start_sub_widget(self,sel)
         widget.transcribe_video(self, sel, subtextfile, step="Stop")
         widget.restart_typing(self,sel)
-        self.failIf(sel.is_element_present("css=.mirosubs-titlesList li"))
+        self.failIf(sel.is_element_present("css=.mirosubs-title-notime"))
                 
 # Close the browser, log errors, perform cleanup 
     def tearDown(self):

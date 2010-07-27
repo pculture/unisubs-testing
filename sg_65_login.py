@@ -14,7 +14,7 @@ from selenium import selenium
 import unittest, time, re, sys
 import mslib, website, widget, offsite, testvars
 
-## ----------------------------------------------------------------------
+ ----------------------------------------------------------------------
 
 
 class tc_378(unittest.TestCase):
@@ -30,7 +30,7 @@ class tc_378(unittest.TestCase):
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
-        sel.open(testvars.MSTestVariables["Site"])
+        sel.open(testvars.MSTestVariables["Site"]+"logout/")
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         # verify
         website.verify_login(self,sel)
@@ -57,7 +57,7 @@ class tc_379(unittest.TestCase):
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
-        sel.open(testvars.MSTestVariables["Site"])
+        sel.open(testvars.MSTestVariables["Site"]+"logout/")
         website.Login(self,sel,"twitter")
         offsite.TwitterAuth(self,sel,testvars.twitteruser, testvars.passw)
         # verify
@@ -82,7 +82,7 @@ class tc_380(unittest.TestCase):
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login        
-        sel.open(testvars.MSTestVariables["Site"])
+        sel.open(testvars.MSTestVariables["Site"]+"logout/")
         website.Login(self,sel,"open-id")
         offsite.OpenIdAuth(self,sel,testvars.openiduser,testvars.passw)
         # verify
@@ -109,7 +109,7 @@ class tc_381(unittest.TestCase):
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
-        sel.open(testvars.MSTestVariables["Site"])
+        sel.open(testvars.MSTestVariables["Site"]+"logout/")
         website.Login(self,sel,"google")
         offsite.GmailAuth(self,sel,testvars.gmailuser,testvars.passw)
         # verify
@@ -135,11 +135,14 @@ class tc_382(unittest.TestCase):
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
-        sel.open(testvars.MSTestVariables["Site"])
+        sel.open(testvars.MSTestVariables["Site"]+"logout/")
         website.start_demo(self,sel)
         widget.Login(self,sel,"google")
         offsite.GmailAuth(self,sel,testvars.gmailuser,testvars.passw)
         # verify
+        time.sleep(10)
+        sel.select_window("null")
+        sel.refresh()
         website.verify_login(self,sel)
         # logout
         sel.open(testvars.MSTestVariables["Site"] +"logout/")
@@ -163,11 +166,14 @@ class tc_383(unittest.TestCase):
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
-        sel.open(testvars.MSTestVariables["Site"])
+        sel.open(testvars.MSTestVariables["Site"]+"logout/")
         website.start_demo(self,sel)
         widget.Login(self,sel,"twitter")
         offsite.TwitterAuth(self,sel,testvars.twitteruser,testvars.passw)
         # verify
+        time.sleep(10)
+        sel.select_window("null")
+        sel.refresh()
         website.verify_login(self,sel)
         # logout
         sel.open(testvars.MSTestVariables["Site"] +"logout/")
@@ -192,7 +198,7 @@ class tc_384(unittest.TestCase):
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
-        sel.open(testvars.MSTestVariables["Site"])
+        sel.open(testvars.MSTestVariables["Site"]+"logout/")
         website.start_demo(self,sel)
         widget.Login(self,sel,"log")
         sel.select_pop_up("null")
@@ -201,6 +207,9 @@ class tc_384(unittest.TestCase):
         sel.type("id_password", testvars.passw)
         sel.click("//button[@value='login']")
         # verify
+        time.sleep(10)
+        sel.select_window("null")
+        sel.refresh()
         website.verify_login(self,sel)
         # logout
         sel.open(testvars.MSTestVariables["Site"] +"logout/")
@@ -223,11 +232,14 @@ class tc_385(unittest.TestCase):
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
-        sel.open(testvars.MSTestVariables["Site"])
+        sel.open(testvars.MSTestVariables["Site"]+"logout/")
         website.start_demo(self,sel)
         widget.Login(self,sel,"openid")
         offsite.OpenIdAuth(self,sel,testvars.openiduser,testvars.passw)
         # verify
+        time.sleep(10)
+        sel.select_window("null")
+        sel.refresh()
         website.verify_login(self,sel)
         # logout
         sel.open(testvars.MSTestVariables["Site"] +"logout/")
