@@ -174,7 +174,4 @@ def drag_bubble(self,sel,sub_text,side,move_pixels):
 
 def verify_login_message(self,sel):
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Must_Login"])
-    self.failUnless(sel.get_text(testvars.WidgetUI['Must_Login'] +":contains('To save your subtitling work')")
-    
-
-                                     
+    self.failUnless(sel.get_text(testvars.WidgetUI['Must_Login'] +":contains('To save your subtitling work')"))
