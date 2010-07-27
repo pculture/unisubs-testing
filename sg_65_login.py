@@ -14,8 +14,6 @@ from selenium import selenium
 import unittest, time, re, sys
 import mslib, website, widget, offsite, testvars
 
- ----------------------------------------------------------------------
-
 
 class tc_378(unittest.TestCase):
     
