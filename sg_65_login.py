@@ -20,7 +20,7 @@ class tc_378(unittest.TestCase):
 # Open the desired browser and set up the test
     def setUp(self):
         self.verificationErrors = []
-        self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
         self.selenium.start()
 
 # The user actions executed in the test scenario
@@ -47,7 +47,7 @@ class tc_379(unittest.TestCase):
 # Open the desired browser and set up the test
     def setUp(self):
         self.verificationErrors = []
-        self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
         self.selenium.start()
 
         # The user actions executed in the test scenario
@@ -73,7 +73,7 @@ class tc_380(unittest.TestCase):
 # Open the desired browser and set up the test
     def setUp(self):
         self.verificationErrors = []
-        self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
         self.selenium.start()
 # The user actions executed in the test scenario
     def test_openid_login(self):
@@ -99,7 +99,7 @@ class tc_381(unittest.TestCase):
 # Open the desired browser and set up the test
     def setUp(self):
         self.verificationErrors = []
-        self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
         self.selenium.start()
 
 # The user actions executed in the test scenario
@@ -125,7 +125,7 @@ class tc_382(unittest.TestCase):
 # Open the desired browser and set up the test
     def setUp(self):
         self.verificationErrors = []
-        self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
         self.selenium.start()
 
 # The user actions executed in the test scenario
@@ -155,7 +155,7 @@ class tc_383(unittest.TestCase):
 # Open the desired browser and set up the test
     def setUp(self):
         self.verificationErrors = []
-        self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
         self.selenium.start()
         
 
@@ -187,7 +187,7 @@ class tc_384(unittest.TestCase):
 # Open the desired browser and set up the test
     def setUp(self):
         self.verificationErrors = []
-        self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
         self.selenium.start()
         
 
@@ -222,7 +222,7 @@ class tc_385(unittest.TestCase):
 # Open the desired browser and set up the test
     def setUp(self):
         self.verificationErrors = []
-        self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
         self.selenium.start()
         
 # The user actions executed in the test scenario

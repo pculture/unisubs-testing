@@ -6,14 +6,23 @@
 #470 Step 1 Advanced mode
 #398 Step 1 Expert mode
 #399 Step 1 Play-Pause tab + button
+#403 Step 2 Play-Pause tab + button
+#404 Step 3 Play-Pause tab + button
 #400 Step 1 Skip back (button only)
+#409 Step 2 Skip back (button only)
+#410 Step 3 Skip back (button only)
 #406 Step 1 Restart typing
 #401 Step 1 Login
-#
-#
-#
-#
-#
+#405 Step 2 Login
+#416 Step 3 Login
+#411 Step 2 Sync
+#388 Step 2 Edit sub text (caps,smalls, non-ascii)
+#415 Step 3 Edit sub text (caps, smalls, non-ascii)
+#408 Step 2 back to typing
+#402 Step 3 Down to Sync
+#413 Step 3 Drag sub bubbles
+#414 Step 3 Text time arrows
+#412 Step 3 Hold down to delay sub start
 
 
 from selenium import selenium
@@ -28,7 +37,7 @@ class tc_389(unittest.TestCase):
 # Open the desired browser and set up the test
     def setUp(self):
         self.verificationErrors = []
-        self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
         self.selenium.start()
 
 # The user actions executed in the test scenario
@@ -59,7 +68,7 @@ class tc_395(unittest.TestCase):
 # Open the desired browser and set up the test
     def setUp(self):
         self.verificationErrors = []
-        self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
         self.selenium.start()
 
 # The user actions executed in the test scenario
@@ -92,7 +101,7 @@ class tc_373(unittest.TestCase):
 # Open the desired browser and set up the test
     def setUp(self):
         self.verificationErrors = []
-        self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
         self.selenium.start()
 
 # The user actions executed in the test scenario
@@ -119,7 +128,7 @@ class tc_397(unittest.TestCase):
 # Open the desired browser and set up the test
     def setUp(self):
         self.verificationErrors = []
-        self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
         self.selenium.start()
 
 # The user actions executed in the test scenario
@@ -141,13 +150,14 @@ class tc_397(unittest.TestCase):
             mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_play_button"])
             stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
             diff_time = int(stop_time) - int(start_time)
-            if diff_time != 8:
+            if not  7 < diff_time < 9:
                 mslib.AppendErrorMessage(self,sel,"didn't stop after 8 seconds")
                 print "started at: " +start_time+ "stopped at: " +stop_time
                 print diff_time
         
         
-        # verify subs present on next screen                    
+        # verify subs present on next screen
+        widget.verify_sub_text(self,sel,subtextfile)
         
 # Close the browser, log errors, perform cleanup 
     def tearDown(self):
@@ -162,7 +172,7 @@ class tc_470(unittest.TestCase):
 # Open the desired browser and set up the test
     def setUp(self):
         self.verificationErrors = []
-        self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
         self.selenium.start()
 
 # The user actions executed in the test scenario
@@ -192,10 +202,10 @@ class tc_470(unittest.TestCase):
             sel.key_press("//div/input", "\\13")
             mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
             print "playback resumed at: "+sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
-            time.sleep(.5)
-            
+            time.sleep(.5)    
         
-        # verify subs present on next screen                    
+        # verify subs present on next screen
+        widget.verify_sub_text(self,sel,subtextfile)
         
 # Close the browser, log errors, perform cleanup 
     def tearDown(self):
@@ -209,7 +219,7 @@ class tc_398(unittest.TestCase):
 # Open the desired browser and set up the test
     def setUp(self):
         self.verificationErrors = []
-        self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
         self.selenium.start()
 
 # The user actions executed in the test scenario
@@ -240,7 +250,7 @@ class tc_399(unittest.TestCase):
 # Open the desired browser and set up the test
     def setUp(self):
         self.verificationErrors = []
-        self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
         self.selenium.start()
 
 # The user actions executed in the test scenario
@@ -288,12 +298,117 @@ class tc_399(unittest.TestCase):
         self.assertEqual([], self.verificationErrors)
 
 
+class tc_403(unittest.TestCase):
+    
+# Open the desired browser and set up the test
+    def setUp(self):
+        self.verificationErrors = []
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
+        self.selenium.start()
+
+# The user actions executed in the test scenario
+    def test_step2_tab_playpause(self):
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        # be sure logged out
+        website.SiteLogout(self,sel)
+        website.start_demo(self,sel)
+        website.start_sub_widget(self,sel)
+        widget.transcribe_video(self, sel, subtextfile)
+
+        #on Step 2 test play-pause button
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_play_button"])
+        #play-pause with screen button
+        print "play-pause with screen button"
+        sel.click(testvars.WidgetUI["Play_pause"])
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
+        time.sleep(3)
+        sel.click(testvars.WidgetUI["Play_pause"])
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_play_button"])
+        time.sleep(3)
+        #play-pause with unicode tab char
+        print "play-pause with keyboard"
+        sel.type_keys("css=.mirosubs-play",u'\u0009')
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
+        time.sleep(3)
+        sel.type_keys("css=.mirosubs-play",u'\u0009')
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_play_button"])
+        time.sleep(3)
+        #play-pause with Video play-pause button
+        print "play-pause with on-video button"
+        sel.click(testvars.WidgetUI["Video_play_button"])
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
+        time.sleep(3)
+        sel.click(testvars.WidgetUI["Video_pause_button"])
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_play_button"])
+        
+# Close the browser, log errors, perform cleanup 
+    def tearDown(self):
+        self.selenium.stop()
+# the command on the previous line should close the browser
+        self.assertEqual([], self.verificationErrors)
+
+class tc_404(unittest.TestCase):
+    
+# Open the desired browser and set up the test
+    def setUp(self):
+        self.verificationErrors = []
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
+        self.selenium.start()
+
+# The user actions executed in the test scenario
+    def test_step3_tab_playpause(self):
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        # be sure logged out
+        website.SiteLogout(self,sel)
+        website.start_demo(self,sel)
+        website.start_sub_widget(self,sel)
+        widget.transcribe_video(self, sel, subtextfile)
+        widget.sync_video(self,sel,subtextfile)
+
+        #on Step 3 test play-pause button
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_play_button"])
+        #play-pause with screen button
+        print "play-pause with screen button"
+        sel.click(testvars.WidgetUI["Play_pause"])
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
+        time.sleep(3)
+        sel.click(testvars.WidgetUI["Play_pause"])
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_play_button"])
+        time.sleep(3)
+        #play-pause with unicode tab char
+        print "play-pause with keyboard"
+        sel.type_keys("css=.mirosubs-play",u'\u0009')
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
+        time.sleep(3)
+        sel.type_keys("css=.mirosubs-play",u'\u0009')
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_play_button"])
+        time.sleep(3)
+        #play-pause with Video play-pause button
+        print "play-pause with on-video button"
+        sel.click(testvars.WidgetUI["Video_play_button"])
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
+        time.sleep(3)
+        sel.click(testvars.WidgetUI["Video_pause_button"])
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_play_button"])        
+                         
+        
+# Close the browser, log errors, perform cleanup 
+    def tearDown(self):
+        self.selenium.stop()
+# the command on the previous line should close the browser
+        self.assertEqual([], self.verificationErrors)
+
+
 class tc_400(unittest.TestCase):
     
 # Open the desired browser and set up the test
     def setUp(self):
         self.verificationErrors = []
-        self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
         self.selenium.start()
 
 # The user actions executed in the test scenario
@@ -347,13 +462,103 @@ class tc_400(unittest.TestCase):
 # the command on the previous line should close the browser
         self.assertEqual([], self.verificationErrors)
 
+class tc_409(unittest.TestCase):
+    
+# Open the desired browser and set up the test
+    def setUp(self):
+        self.verificationErrors = []
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
+        self.selenium.start()
+
+# The user actions executed in the test scenario
+    def test_step2_skip_back(self):
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        # be sure logged out
+        website.SiteLogout(self,sel)
+        website.start_demo(self,sel)
+        website.start_sub_widget(self,sel)
+        #step 1 type the subs
+        widget.transcribe_video(self, sel, subtextfile)
+        # on step 2 test skip back
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
+        sel.click(testvars.WidgetUI["Play_pause"])
+        # wait for play to advance and test with screen button
+        time.sleep(7)
+        for x in range(0,3):  
+            # get the time, skip back and get the time again
+            start_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
+            sel.click_at(testvars.WidgetUI["Skip_back"],"")
+            time.sleep(.20)
+            stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
+            diff_time = int(start_time) - int(stop_time)
+            if diff_time < 7:
+                mslib.AppendErrorMessage(self,sel,"didn't jump back quickly")
+                print "started at: " +start_time+ "stopped at: " +stop_time
+                print diff_time
+            time.sleep(10)
+# Close the browser, log errors, perform cleanup 
+    def tearDown(self):
+        self.selenium.stop()
+# the command on the previous line should close the browser
+        self.assertEqual([], self.verificationErrors)
+
+
+class tc_410(unittest.TestCase):
+    
+# Open the desired browser and set up the test
+    def setUp(self):
+        self.verificationErrors = []
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
+        self.selenium.start()
+
+# The user actions executed in the test scenario
+    def test_step3_skip_back(self):
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        # be sure logged out
+        website.SiteLogout(self,sel)
+        website.start_demo(self,sel)
+        #start sub widget
+        website.start_sub_widget(self,sel)
+        #complete step 1 typing
+        widget.transcribe_video(self, sel, subtextfile)
+        #complete step 2 syncing
+        widget.sync_video(self,sel,subtextfile,step="Stop")
+        #on step 3 test ctrl to skip back        
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
+        sel.click(testvars.WidgetUI["Play_pause"])
+        # wait for play to advance and test with screen button
+        time.sleep(7)
+        for x in range(0,3):  
+            # get the time, skip back and get the time again
+            start_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
+            sel.click_at(testvars.WidgetUI["Skip_back"],"")
+            time.sleep(.20)
+            stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
+            diff_time = int(start_time) - int(stop_time)
+            if diff_time < 7:
+                mslib.AppendErrorMessage(self,sel,"didn't jump back quickly")
+                print "started at: " +start_time+ "stopped at: " +stop_time
+                print diff_time
+            time.sleep(10)
+# Close the browser, log errors, perform cleanup 
+    def tearDown(self):
+        self.selenium.stop()
+# the command on the previous line should close the browser
+        self.assertEqual([], self.verificationErrors)
+
+
+
 
 class tc_406(unittest.TestCase):
     
 # Open the desired browser and set up the test
     def setUp(self):
         self.verificationErrors = []
-        self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
         self.selenium.start()
 
 # The user actions executed in the test scenario
@@ -381,10 +586,12 @@ class tc_401(unittest.TestCase):
 # Open the desired browser and set up the test
     def setUp(self):
         self.verificationErrors = []
-        self.selenium = selenium("localhost", 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
         self.selenium.start()
 
 # The user actions executed in the test scenario
+
+       
     def test_step1_login(self):
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
@@ -394,35 +601,107 @@ class tc_401(unittest.TestCase):
         website.start_demo(self,sel)
         website.start_sub_widget(self,sel)
         widget.transcribe_video(self, sel, subtextfile, step="Stop")
-        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Must_Login"])
-                
-        print "loggin in from widget"
-        sel.click("link=LOGIN")
-        sel.select_frame("relative=top")
-        auth_type = "log"
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-"+auth_type)
-        sel.click("css=.mirosubs-"+auth_type)
-        sel.select_pop_up("null")
-        mslib.wait_for_element_present(self,sel,"id_username")
-        sel.type("id_username", testvars.siteuser)
-        sel.type("id_password", testvars.passw)
-        sel.click("//button[@value='login']")
-        #wait for the login to complete
-        time.sleep(10)
-
-        
+        widget.site_login_from_widget_link(self,sel)
         #verify subs still present
         print "verifying subtitles are still present"
         sel.select_window("null")
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
-        sub_index=1
-        for line in open(subtextfile):
-            current_sub = sel.get_text("css=.mirosubs-titlesList li:nth-child("+str(sub_index)+")")
-            if line.rstrip() != current_sub.rstrip():
-                mslib.AppendErrorMessage(self,sel,"sub text mismatch")
-                print "found: " + current_sub.rstrip()
-                print "expected: " +line
-            sub_index = sub_index + 1
+        widget.verify_sub_text(self,sel,subtextfile)
+
+# Close the browser, log errors, perform cleanup 
+    def tearDown(self):
+        self.selenium.stop()
+# the command on the previous line should close the browser
+        self.assertEqual([], self.verificationErrors)
+
+
+
+
+class tc_405(unittest.TestCase):
+    
+# Open the desired browser and set up the test
+    def setUp(self):
+        self.verificationErrors = []
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
+        self.selenium.start()
+
+# The user actions executed in the test scenario
+    def test_step2_login(self):
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        # be sure logged out
+        website.SiteLogout(self,sel)
+        website.start_demo(self,sel)
+        website.start_sub_widget(self,sel)
+        widget.transcribe_video(self, sel, subtextfile)
+        widget.sync_video(self, sel, subtextfile, step="Stop")
+        widget.site_login_from_widget_link(self,sel)
+        #verify subs still present
+        print "verifying subtitles are still present"
+        sel.select_window("null")
+        mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
+        widget.verify_sub_text(self,sel,subtextfile)
+
+# Close the browser, log errors, perform cleanup 
+    def tearDown(self):
+        self.selenium.stop()
+# the command on the previous line should close the browser
+        self.assertEqual([], self.verificationErrors)
+
+
+class tc_416(unittest.TestCase):
+    
+# Open the desired browser and set up the test
+    def setUp(self):
+        self.verificationErrors = []
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
+        self.selenium.start()
+
+# The user actions executed in the test scenario
+    def test_step3_login(self):
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        # be sure logged out
+        website.SiteLogout(self,sel)
+        website.start_demo(self,sel)
+        website.start_sub_widget(self,sel)
+        widget.transcribe_video(self, sel, subtextfile)
+        widget.sync_video(self, sel, subtextfile)
+        widget.site_login_from_widget_link(self,sel)
+        #verify subs still present
+        print "verifying subtitles are still present"
+        sel.select_window("null")
+        mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
+        widget.verify_sub_text(self,sel,subtextfile)
+
+# Close the browser, log errors, perform cleanup 
+    def tearDown(self):
+        self.selenium.stop()
+# the command on the previous line should close the browser
+        self.assertEqual([], self.verificationErrors)
+
+class tc_411(unittest.TestCase):
+    
+# Open the desired browser and set up the test
+ # Open the desired browser and set up the test
+    def setUp(self):
+        self.verificationErrors = []
+        self.selenium = selenium(testvars.vlocalhost,4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
+        self.selenium.start()
+
+# The user actions executed in the test scenario
+    def test_step2_sync(self):
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        # be sure logged out
+        website.SiteLogout(self,sel)
+        website.start_demo(self,sel)
+        website.start_sub_widget(self,sel)
+        widget.transcribe_video(self, sel, subtextfile)
+        widget.sync_video(self,sel,subtextfile,step="Stop")                
             
                 
 # Close the browser, log errors, perform cleanup 
@@ -430,7 +709,246 @@ class tc_401(unittest.TestCase):
         self.selenium.stop()
 # the command on the previous line should close the browser
         self.assertEqual([], self.verificationErrors)
+            
+                
+class tc_388(unittest.TestCase):
+    
+# Open the desired browser and set up the test
+ # Open the desired browser and set up the test
+    def setUp(self):
+        self.verificationErrors = []
+        self.selenium = selenium(testvars.vlocalhost,4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
+        self.selenium.start()
+
+# The user actions executed in the test scenario
+    def test_step2_edit_subs(self):
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        # be sure logged out
+        website.SiteLogout(self,sel)
+        website.start_demo(self,sel)
+        website.start_sub_widget(self,sel)
+        widget.transcribe_video(self, sel, subtextfile)
+        widget.sync_video(self,sel,subtextfile,step="Stop")
+                       
+        #edit subtitles
+        print "verifying subtitles are still present"
+        widget.edit_text(self,sel,subtextfile)
+        # make it french
+        widget.edit_text(self,sel,subtextfile,new_text=testvars.eels_fr)
+        sel.capture_screenshot(testvars.MSTestVariables["ResultOutputDirectory"]+"tc_388_eels_fr.png")
+        #make it japanese
+        widget.edit_text(self,sel,subtextfile,new_text=testvars.eels_jp)
+        sel.capture_screenshot(testvars.MSTestVariables["ResultOutputDirectory"]+"tc_388_eels_jp.png")
+# Close the browser, log errors, perform cleanup 
+    def tearDown(self):
+        self.selenium.stop()
+# the command on the previous line should close the browser
+        self.assertEqual([], self.verificationErrors)
+
+
+
+class tc_415(unittest.TestCase):
+    
+# Open the desired browser and set up the test
+ # Open the desired browser and set up the test
+    def setUp(self):
+        self.verificationErrors = []
+        self.selenium = selenium(testvars.vlocalhost,4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
+        self.selenium.start()
+
+# The user actions executed in the test scenario
+    def test_step3_edit_subs(self):
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        # be sure logged out
+        website.SiteLogout(self,sel)
+        website.start_demo(self,sel)
+        website.start_sub_widget(self,sel)
+        widget.transcribe_video(self, sel, subtextfile)
+        widget.sync_video(self,sel,subtextfile)
+                       
+        #edit subtitles
+        print "editing subtitles"
+        widget.edit_text(self,sel,subtextfile)
+        # make it french
+        print "french"
+        widget.edit_text(self,sel,subtextfile,new_text=testvars.eels_fr)
+        sel.capture_screenshot(testvars.MSTestVariables["ResultOutputDirectory"]+"tc_415_eels_fr.png")
+        #make it japanese
+        print "japanese"
+        widget.edit_text(self,sel,subtextfile,new_text=testvars.eels_jp)
+        sel.capture_screenshot(testvars.MSTestVariables["ResultOutputDirectory"]+"tc_415_eels_jp.png")
+# Close the browser, log errors, perform cleanup 
+    def tearDown(self):
+        self.selenium.stop()
+# the command on the previous line should close the browser
+        self.assertEqual([], self.verificationErrors)
+
+
+
+class tc_408(unittest.TestCase):
+    
+# Open the desired browser and set up the test
+ # Open the desired browser and set up the test
+    def setUp(self):
+        self.verificationErrors = []
+        self.selenium = selenium(testvars.vlocalhost,4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
+        self.selenium.start()
+
+# The user actions executed in the test scenario
+    def test_step2_back_to_typing(self):
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        # be sure logged out
+        website.SiteLogout(self,sel)
+        # start demo and proceed to step 2 and sync subs
+        website.start_demo(self,sel)
+        website.start_sub_widget(self,sel)
+        widget.transcribe_video(self, sel, subtextfile)
+        widget.sync_video(self,sel,subtextfile,step="Stop")
+        # go back to typing step
+        widget.back_step(self,sel)
+        # verify step 1 display and subs
+        widget.steps_display(self,sel,1)
+        widget.verify_sub_text(self,sel,subtextfile)     
+
+# Close the browser, log errors, perform cleanup 
+    def tearDown(self):
+        self.selenium.stop()
+# the command on the previous line should close the browser
+        self.assertEqual([], self.verificationErrors)
+
+
         
+
+class tc_402(unittest.TestCase):
+    
+# Open the desired browser and set up the test
+    def setUp(self):
+        self.verificationErrors = []
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
+        self.selenium.start()
+
+# The user actions executed in the test scenario
+    def test_step3_down_resync(self):
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        # be sure logged out
+        website.SiteLogout(self,sel)
+        website.start_demo(self,sel)
+        website.start_sub_widget(self,sel)
+        widget.transcribe_video(self, sel, subtextfile)
+        widget.sync_video(self,sel,subtextfile)
+
+        #on Step 3 resync video times
+        widget.resync_video(self,sel,subtextfile)       
+                         
+        
+# Close the browser, log errors, perform cleanup 
+    def tearDown(self):
+        self.selenium.stop()
+# the command on the previous line should close the browser
+        self.assertEqual([], self.verificationErrors)      
+
+
+
+class tc_413(unittest.TestCase):
+    
+# Open the desired browser and set up the test
+    def setUp(self):
+        self.verificationErrors = []
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
+        self.selenium.start()
+
+# The user actions executed in the test scenario
+    def test_step3_drag_time_bubbles(self):
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        # be sure logged out
+        website.SiteLogout(self,sel)
+        website.start_demo(self,sel)
+        website.start_sub_widget(self,sel)
+        widget.transcribe_video(self, sel, subtextfile)
+        widget.sync_video(self,sel,subtextfile)
+
+        #on Step 3 resync video times
+        widget.drag_time_bubbles(self,sel,subtextfile)       
+                         
+        
+# Close the browser, log errors, perform cleanup 
+    def tearDown(self):
+        self.selenium.stop()
+# the command on the previous line should close the browser
+        self.assertEqual([], self.verificationErrors)
+
+
+
+
+class tc_414(unittest.TestCase):
+    
+# Open the desired browser and set up the test
+    def setUp(self):
+        self.verificationErrors = []
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
+        self.selenium.start()
+
+# The user actions executed in the test scenario
+    def test_step3_text_time_arrows(self):
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        # be sure logged out
+        website.SiteLogout(self,sel)
+        website.start_demo(self,sel)
+        website.start_sub_widget(self,sel)
+        widget.transcribe_video(self, sel, subtextfile)
+        widget.sync_video(self,sel,subtextfile)
+
+        #on Step 3 resync video times
+        widget.click_time_shift_arrows(self,sel,subtextfile)       
+                         
+        
+# Close the browser, log errors, perform cleanup 
+    def tearDown(self):
+        self.selenium.stop()
+# the command on the previous line should close the browser
+        self.assertEqual([], self.verificationErrors)
+
+class tc_412(unittest.TestCase):
+    
+# Open the desired browser and set up the test
+    def setUp(self):
+        self.verificationErrors = []
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
+        self.selenium.start()
+
+# The user actions executed in the test scenario
+    def test_step3_hold_down_delay_start(self):
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        # be sure logged out
+        website.SiteLogout(self,sel)
+        website.start_demo(self,sel)
+        website.start_sub_widget(self,sel)
+        widget.transcribe_video(self, sel, subtextfile)
+        widget.sync_video(self,sel,subtextfile, start_delay=8, sub_int=4)
+
+        #on Step 3 resync video times
+        widget.hold_down_delay_sub(self,sel,subtextfile)       
+                         
+        
+# Close the browser, log errors, perform cleanup 
+    def tearDown(self):
+        self.selenium.stop()
+# the command on the previous line should close the browser
+        self.assertEqual([], self.verificationErrors) 
 
 
 if __name__ == "__main__":

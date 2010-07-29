@@ -30,12 +30,13 @@ def wait_for_element_present(self,sel,input_field):
 
 def wait_for_video_to_buffer(self,sel):
     wait_for_element_present(self,sel,"css=.mirosubs-buffered")
-    print " - waiting for video to buffer"
+    print " - waiting for video to buffer " +time.strftime("%M:%S", time.gmtime())
     for i in range(300):
         try:
-            if int(sel.get_element_width("css=.mirosubs-buffered")) >= 200: break
+            if int(sel.get_element_width("css=.mirosubs-buffered")) >= 125: break
         except: pass
         time.sleep(1)
+    print " - video buffered to 50% " +time.strftime("%M:%S", time.gmtime())
    
 
 
