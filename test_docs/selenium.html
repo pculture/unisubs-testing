@@ -1,0 +1,1241 @@
+
+<!DOCTYPE html PUBLIC "-/W3C/DTD HTML 4.0 Transitional/EN">
+<html><head><title>Python: module selenium</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>selenium</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:../selenium.py">../selenium.py</a></font></td></tr></table>
+    <p><tt>Copyright&nbsp;2006&nbsp;ThoughtWorks,&nbsp;Inc.<br>
+&nbsp;<br>
+Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;"License");<br>
+you&nbsp;may&nbsp;not&nbsp;use&nbsp;this&nbsp;file&nbsp;except&nbsp;in&nbsp;compliance&nbsp;with&nbsp;the&nbsp;License.<br>
+You&nbsp;may&nbsp;obtain&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;License&nbsp;at<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="http:/www.apache.org/licenses/LICENSE-2.0">http:/www.apache.org/licenses/LICENSE-2.0</a><br>
+&nbsp;<br>
+Unless&nbsp;required&nbsp;by&nbsp;applicable&nbsp;law&nbsp;or&nbsp;agreed&nbsp;to&nbsp;in&nbsp;writing,&nbsp;software<br>
+distributed&nbsp;under&nbsp;the&nbsp;License&nbsp;is&nbsp;distributed&nbsp;on&nbsp;an&nbsp;"AS&nbsp;IS"&nbsp;BASIS,<br>
+WITHOUT&nbsp;WARRANTIES&nbsp;OR&nbsp;CONDITIONS&nbsp;OF&nbsp;ANY&nbsp;KIND,&nbsp;either&nbsp;express&nbsp;or&nbsp;implied.<br>
+See&nbsp;the&nbsp;License&nbsp;for&nbsp;the&nbsp;specific&nbsp;language&nbsp;governing&nbsp;permissions&nbsp;and<br>
+limitations&nbsp;under&nbsp;the&nbsp;License.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="httplib.html">httplib</a><br>
+</td><td width="25%" valign=top><a href="re.html">re</a><br>
+</td><td width="25%" valign=top><a href="urllib.html">urllib</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="selenium.html#selenium">selenium</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="selenium">class <strong>selenium</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Defines&nbsp;an&nbsp;object&nbsp;that&nbsp;runs&nbsp;Selenium&nbsp;commands.<br>
+&nbsp;<br>
+Element&nbsp;Locators<br>
+~~~~~~~~~~~~~~~~<br>
+&nbsp;<br>
+Element&nbsp;Locators&nbsp;tell&nbsp;Selenium&nbsp;which&nbsp;HTML&nbsp;element&nbsp;a&nbsp;command&nbsp;refers&nbsp;to.<br>
+The&nbsp;format&nbsp;of&nbsp;a&nbsp;locator&nbsp;is:<br>
+&nbsp;<br>
+\&nbsp;*locatorType*\&nbsp;**=**\&nbsp;\&nbsp;*argument*<br>
+&nbsp;<br>
+&nbsp;<br>
+We&nbsp;support&nbsp;the&nbsp;following&nbsp;strategies&nbsp;for&nbsp;locating&nbsp;elements:<br>
+&nbsp;<br>
+&nbsp;<br>
+*&nbsp;&nbsp;&nbsp;\&nbsp;**identifier**\&nbsp;=\&nbsp;*id*:&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Select&nbsp;the&nbsp;element&nbsp;with&nbsp;the&nbsp;specified&nbsp;@id&nbsp;attribute.&nbsp;If&nbsp;no&nbsp;match&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;found,&nbsp;select&nbsp;the&nbsp;first&nbsp;element&nbsp;whose&nbsp;@name&nbsp;attribute&nbsp;is&nbsp;\&nbsp;*id*.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(This&nbsp;is&nbsp;normally&nbsp;the&nbsp;default;&nbsp;see&nbsp;below.)<br>
+*&nbsp;&nbsp;&nbsp;\&nbsp;**id**\&nbsp;=\&nbsp;*id*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Select&nbsp;the&nbsp;element&nbsp;with&nbsp;the&nbsp;specified&nbsp;@id&nbsp;attribute.<br>
+*&nbsp;&nbsp;&nbsp;\&nbsp;**name**\&nbsp;=\&nbsp;*name*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Select&nbsp;the&nbsp;first&nbsp;element&nbsp;with&nbsp;the&nbsp;specified&nbsp;@name&nbsp;attribute.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;username<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;name=username<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;name&nbsp;may&nbsp;optionally&nbsp;be&nbsp;followed&nbsp;by&nbsp;one&nbsp;or&nbsp;more&nbsp;\&nbsp;*element-filters*,&nbsp;separated&nbsp;from&nbsp;the&nbsp;name&nbsp;by&nbsp;whitespace.&nbsp;&nbsp;If&nbsp;the&nbsp;\&nbsp;*filterType*&nbsp;is&nbsp;not&nbsp;specified,&nbsp;\&nbsp;**value**\&nbsp;&nbsp;is&nbsp;assumed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;name=flavour&nbsp;value=chocolate<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+*&nbsp;&nbsp;&nbsp;\&nbsp;**dom**\&nbsp;=\&nbsp;*javascriptExpression*:&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Find&nbsp;an&nbsp;element&nbsp;by&nbsp;evaluating&nbsp;the&nbsp;specified&nbsp;string.&nbsp;&nbsp;This&nbsp;allows&nbsp;you&nbsp;to&nbsp;traverse&nbsp;the&nbsp;HTML&nbsp;Document&nbsp;Object<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Model&nbsp;using&nbsp;JavaScript.&nbsp;&nbsp;Note&nbsp;that&nbsp;you&nbsp;must&nbsp;not&nbsp;return&nbsp;a&nbsp;value&nbsp;in&nbsp;this&nbsp;string;&nbsp;simply&nbsp;make&nbsp;it&nbsp;the&nbsp;last&nbsp;expression&nbsp;in&nbsp;the&nbsp;block.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;dom=document.forms['myForm'].myDropdown<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;dom=document.images[56]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;dom=function&nbsp;foo()&nbsp;{&nbsp;return&nbsp;document.links[1];&nbsp;};&nbsp;foo();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+*&nbsp;&nbsp;&nbsp;\&nbsp;**xpath**\&nbsp;=\&nbsp;*xpathExpression*:&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Locate&nbsp;an&nbsp;element&nbsp;using&nbsp;an&nbsp;XPath&nbsp;expression.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;xpath=/img[@alt='The&nbsp;image&nbsp;alt&nbsp;text']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;xpath=/table[@id='table1']/tr[4]/td[2]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;xpath=/a[contains(@href,'#id1')]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;xpath=/a[contains(@href,'#id1')]/@class<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;xpath=(/table[@class='stylee'])/th[text()='theHeaderText']/../td<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;xpath=/input[@name='name2'&nbsp;and&nbsp;@value='yes']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;xpath=/\*[text()="right"]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+*&nbsp;&nbsp;&nbsp;\&nbsp;**link**\&nbsp;=\&nbsp;*textPattern*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Select&nbsp;the&nbsp;link&nbsp;(anchor)&nbsp;element&nbsp;which&nbsp;contains&nbsp;text&nbsp;matching&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;specified&nbsp;\&nbsp;*pattern*.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;link=The&nbsp;link&nbsp;text<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+*&nbsp;&nbsp;&nbsp;\&nbsp;**css**\&nbsp;=\&nbsp;*cssSelectorSyntax*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Select&nbsp;the&nbsp;element&nbsp;using&nbsp;css&nbsp;selectors.&nbsp;Please&nbsp;refer&nbsp;to&nbsp;CSS2&nbsp;selectors,&nbsp;CSS3&nbsp;selectors&nbsp;for&nbsp;more&nbsp;information.&nbsp;You&nbsp;can&nbsp;also&nbsp;check&nbsp;the&nbsp;TestCssLocators&nbsp;test&nbsp;in&nbsp;the&nbsp;<a href="#selenium">selenium</a>&nbsp;test&nbsp;suite&nbsp;for&nbsp;an&nbsp;example&nbsp;of&nbsp;usage,&nbsp;which&nbsp;is&nbsp;included&nbsp;in&nbsp;the&nbsp;downloaded&nbsp;<a href="#selenium">selenium</a>&nbsp;core&nbsp;package.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;css=a[href="#id3"]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;css=span#firstChild&nbsp;+&nbsp;span<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Currently&nbsp;the&nbsp;css&nbsp;selector&nbsp;locator&nbsp;supports&nbsp;all&nbsp;css1,&nbsp;css2&nbsp;and&nbsp;css3&nbsp;selectors&nbsp;except&nbsp;namespace&nbsp;in&nbsp;css3,&nbsp;some&nbsp;pseudo&nbsp;classes(:nth-of-type,&nbsp;:nth-last-of-type,&nbsp;:first-of-type,&nbsp;:last-of-type,&nbsp;:only-of-type,&nbsp;:visited,&nbsp;:hover,&nbsp;:active,&nbsp;:focus,&nbsp;:indeterminate)&nbsp;and&nbsp;pseudo&nbsp;elements(::first-line,&nbsp;::first-letter,&nbsp;::selection,&nbsp;::before,&nbsp;::after).&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+*&nbsp;&nbsp;&nbsp;\&nbsp;**ui**\&nbsp;=\&nbsp;*uiSpecifierString*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Locate&nbsp;an&nbsp;element&nbsp;by&nbsp;resolving&nbsp;the&nbsp;UI&nbsp;specifier&nbsp;string&nbsp;to&nbsp;another&nbsp;locator,&nbsp;and&nbsp;evaluating&nbsp;it.&nbsp;See&nbsp;the&nbsp;Selenium&nbsp;UI-Element&nbsp;Reference&nbsp;for&nbsp;more&nbsp;details.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;ui=loginPages::loginButton()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;ui=settingsPages::toggle(label=Hide&nbsp;Email)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;ui=forumPages::postBody(index=2)/a[2]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+Without&nbsp;an&nbsp;explicit&nbsp;locator&nbsp;prefix,&nbsp;Selenium&nbsp;uses&nbsp;the&nbsp;following&nbsp;default<br>
+strategies:<br>
+&nbsp;<br>
+&nbsp;<br>
+*&nbsp;&nbsp;&nbsp;\&nbsp;**dom**\&nbsp;,&nbsp;for&nbsp;locators&nbsp;starting&nbsp;with&nbsp;"document."<br>
+*&nbsp;&nbsp;&nbsp;\&nbsp;**xpath**\&nbsp;,&nbsp;for&nbsp;locators&nbsp;starting&nbsp;with&nbsp;"/"<br>
+*&nbsp;&nbsp;&nbsp;\&nbsp;**identifier**\&nbsp;,&nbsp;otherwise<br>
+&nbsp;<br>
+Element&nbsp;Filters<br>
+~~~~~~~~~~~~~~~<br>
+&nbsp;<br>
+Element&nbsp;filters&nbsp;can&nbsp;be&nbsp;used&nbsp;with&nbsp;a&nbsp;locator&nbsp;to&nbsp;refine&nbsp;a&nbsp;list&nbsp;of&nbsp;candidate&nbsp;elements.&nbsp;&nbsp;They&nbsp;are&nbsp;currently&nbsp;used&nbsp;only&nbsp;in&nbsp;the&nbsp;'name'&nbsp;element-locator.<br>
+&nbsp;<br>
+Filters&nbsp;look&nbsp;much&nbsp;like&nbsp;locators,&nbsp;ie.<br>
+&nbsp;<br>
+\&nbsp;*filterType*\&nbsp;**=**\&nbsp;\&nbsp;*argument*<br>
+&nbsp;<br>
+Supported&nbsp;element-filters&nbsp;are:<br>
+&nbsp;<br>
+\&nbsp;**value=**\&nbsp;\&nbsp;*valuePattern*<br>
+&nbsp;<br>
+&nbsp;<br>
+Matches&nbsp;elements&nbsp;based&nbsp;on&nbsp;their&nbsp;values.&nbsp;&nbsp;This&nbsp;is&nbsp;particularly&nbsp;useful&nbsp;for&nbsp;refining&nbsp;a&nbsp;list&nbsp;of&nbsp;similarly-named&nbsp;toggle-buttons.<br>
+&nbsp;<br>
+\&nbsp;**index=**\&nbsp;\&nbsp;*index*<br>
+&nbsp;<br>
+&nbsp;<br>
+Selects&nbsp;a&nbsp;single&nbsp;element&nbsp;based&nbsp;on&nbsp;its&nbsp;position&nbsp;in&nbsp;the&nbsp;list&nbsp;(offset&nbsp;from&nbsp;zero).<br>
+&nbsp;<br>
+String-match&nbsp;Patterns<br>
+~~~~~~~~~~~~~~~~~~~~~<br>
+&nbsp;<br>
+Various&nbsp;Pattern&nbsp;syntaxes&nbsp;are&nbsp;available&nbsp;for&nbsp;matching&nbsp;string&nbsp;values:<br>
+&nbsp;<br>
+&nbsp;<br>
+*&nbsp;&nbsp;&nbsp;\&nbsp;**glob:**\&nbsp;\&nbsp;*pattern*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Match&nbsp;a&nbsp;string&nbsp;against&nbsp;a&nbsp;"glob"&nbsp;(aka&nbsp;"wildmat")&nbsp;pattern.&nbsp;"Glob"&nbsp;is&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;kind&nbsp;of&nbsp;limited&nbsp;regular-expression&nbsp;syntax&nbsp;typically&nbsp;used&nbsp;in&nbsp;command-line<br>
+&nbsp;&nbsp;&nbsp;&nbsp;shells.&nbsp;In&nbsp;a&nbsp;glob&nbsp;pattern,&nbsp;"\*"&nbsp;represents&nbsp;any&nbsp;sequence&nbsp;of&nbsp;characters,&nbsp;and&nbsp;"?"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;represents&nbsp;any&nbsp;single&nbsp;character.&nbsp;Glob&nbsp;patterns&nbsp;match&nbsp;against&nbsp;the&nbsp;entire<br>
+&nbsp;&nbsp;&nbsp;&nbsp;string.<br>
+*&nbsp;&nbsp;&nbsp;\&nbsp;**regexp:**\&nbsp;\&nbsp;*regexp*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Match&nbsp;a&nbsp;string&nbsp;using&nbsp;a&nbsp;regular-expression.&nbsp;The&nbsp;full&nbsp;power&nbsp;of&nbsp;JavaScript<br>
+&nbsp;&nbsp;&nbsp;&nbsp;regular-expressions&nbsp;is&nbsp;available.<br>
+*&nbsp;&nbsp;&nbsp;\&nbsp;**regexpi:**\&nbsp;\&nbsp;*regexpi*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Match&nbsp;a&nbsp;string&nbsp;using&nbsp;a&nbsp;case-insensitive&nbsp;regular-expression.<br>
+*&nbsp;&nbsp;&nbsp;\&nbsp;**exact:**\&nbsp;\&nbsp;*string*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Match&nbsp;a&nbsp;string&nbsp;exactly,&nbsp;verbatim,&nbsp;without&nbsp;any&nbsp;of&nbsp;that&nbsp;fancy&nbsp;wildcard<br>
+&nbsp;&nbsp;&nbsp;&nbsp;stuff.<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+If&nbsp;no&nbsp;pattern&nbsp;prefix&nbsp;is&nbsp;specified,&nbsp;Selenium&nbsp;assumes&nbsp;that&nbsp;it's&nbsp;a&nbsp;"glob"<br>
+pattern.<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+For&nbsp;commands&nbsp;that&nbsp;return&nbsp;multiple&nbsp;values&nbsp;(such&nbsp;as&nbsp;verifySelectOptions),<br>
+the&nbsp;string&nbsp;being&nbsp;matched&nbsp;is&nbsp;a&nbsp;comma-separated&nbsp;list&nbsp;of&nbsp;the&nbsp;return&nbsp;values,<br>
+where&nbsp;both&nbsp;commas&nbsp;and&nbsp;backslashes&nbsp;in&nbsp;the&nbsp;values&nbsp;are&nbsp;backslash-escaped.<br>
+When&nbsp;providing&nbsp;a&nbsp;pattern,&nbsp;the&nbsp;optional&nbsp;matching&nbsp;syntax&nbsp;(i.e.&nbsp;glob,<br>
+regexp,&nbsp;etc.)&nbsp;is&nbsp;specified&nbsp;once,&nbsp;as&nbsp;usual,&nbsp;at&nbsp;the&nbsp;beginning&nbsp;of&nbsp;the<br>
+pattern.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="selenium-__init__"><strong>__init__</strong></a>(self, host, port, browserStartCommand, browserURL)</dt></dl>
+
+<dl><dt><a name="selenium-addCustomRequestHeader"><strong>addCustomRequestHeader</strong></a>(self, key, value)</dt><dd><tt>Tells&nbsp;the&nbsp;Selenium&nbsp;server&nbsp;to&nbsp;add&nbsp;the&nbsp;specificed&nbsp;key&nbsp;and&nbsp;value&nbsp;as&nbsp;a&nbsp;custom&nbsp;outgoing&nbsp;request&nbsp;header.&nbsp;This&nbsp;only&nbsp;works&nbsp;if&nbsp;the&nbsp;browser&nbsp;is&nbsp;configured&nbsp;to&nbsp;use&nbsp;the&nbsp;built&nbsp;in&nbsp;Selenium&nbsp;proxy.<br>
+&nbsp;<br>
+'key'&nbsp;the&nbsp;header&nbsp;name.<br>
+'value'&nbsp;the&nbsp;header&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="selenium-add_location_strategy"><strong>add_location_strategy</strong></a>(self, strategyName, functionDefinition)</dt><dd><tt>Defines&nbsp;a&nbsp;new&nbsp;function&nbsp;for&nbsp;Selenium&nbsp;to&nbsp;locate&nbsp;elements&nbsp;on&nbsp;the&nbsp;page.<br>
+For&nbsp;example,<br>
+if&nbsp;you&nbsp;define&nbsp;the&nbsp;strategy&nbsp;"foo",&nbsp;and&nbsp;someone&nbsp;runs&nbsp;<a href="#selenium-click">click</a>("foo=blah"),&nbsp;we'll<br>
+run&nbsp;your&nbsp;function,&nbsp;passing&nbsp;you&nbsp;the&nbsp;string&nbsp;"blah",&nbsp;and&nbsp;click&nbsp;on&nbsp;the&nbsp;element&nbsp;<br>
+that&nbsp;your&nbsp;function<br>
+returns,&nbsp;or&nbsp;throw&nbsp;an&nbsp;"Element&nbsp;not&nbsp;found"&nbsp;error&nbsp;if&nbsp;your&nbsp;function&nbsp;returns&nbsp;null.<br>
+&nbsp;<br>
+We'll&nbsp;pass&nbsp;three&nbsp;arguments&nbsp;to&nbsp;your&nbsp;function:<br>
+&nbsp;<br>
+*&nbsp;&nbsp;&nbsp;locator:&nbsp;the&nbsp;string&nbsp;the&nbsp;user&nbsp;passed&nbsp;in<br>
+*&nbsp;&nbsp;&nbsp;inWindow:&nbsp;the&nbsp;currently&nbsp;selected&nbsp;window<br>
+*&nbsp;&nbsp;&nbsp;inDocument:&nbsp;the&nbsp;currently&nbsp;selected&nbsp;document<br>
+&nbsp;<br>
+&nbsp;<br>
+The&nbsp;function&nbsp;must&nbsp;return&nbsp;null&nbsp;if&nbsp;the&nbsp;element&nbsp;can't&nbsp;be&nbsp;found.<br>
+&nbsp;<br>
+'strategyName'&nbsp;is&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;strategy&nbsp;to&nbsp;define;&nbsp;this&nbsp;should&nbsp;use&nbsp;only&nbsp;&nbsp;&nbsp;letters&nbsp;[a-zA-Z]&nbsp;with&nbsp;no&nbsp;spaces&nbsp;or&nbsp;other&nbsp;punctuation.<br>
+'functionDefinition'&nbsp;is&nbsp;a&nbsp;string&nbsp;defining&nbsp;the&nbsp;body&nbsp;of&nbsp;a&nbsp;function&nbsp;in&nbsp;JavaScript.&nbsp;&nbsp;&nbsp;For&nbsp;example:&nbsp;``return&nbsp;inDocument.getElementById(locator);``</tt></dd></dl>
+
+<dl><dt><a name="selenium-add_script"><strong>add_script</strong></a>(self, scriptContent, scriptTagId)</dt><dd><tt>Loads&nbsp;script&nbsp;content&nbsp;into&nbsp;a&nbsp;new&nbsp;script&nbsp;tag&nbsp;in&nbsp;the&nbsp;Selenium&nbsp;document.&nbsp;This<br>
+differs&nbsp;from&nbsp;the&nbsp;runScript&nbsp;command&nbsp;in&nbsp;that&nbsp;runScript&nbsp;adds&nbsp;the&nbsp;script&nbsp;tag<br>
+to&nbsp;the&nbsp;document&nbsp;of&nbsp;the&nbsp;AUT,&nbsp;not&nbsp;the&nbsp;Selenium&nbsp;document.&nbsp;The&nbsp;following<br>
+entities&nbsp;in&nbsp;the&nbsp;script&nbsp;content&nbsp;are&nbsp;replaced&nbsp;by&nbsp;the&nbsp;characters&nbsp;they<br>
+represent:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&amp;lt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&amp;gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&amp;amp;<br>
+&nbsp;<br>
+The&nbsp;corresponding&nbsp;remove&nbsp;command&nbsp;is&nbsp;removeScript.<br>
+&nbsp;<br>
+'scriptContent'&nbsp;is&nbsp;the&nbsp;Javascript&nbsp;content&nbsp;of&nbsp;the&nbsp;script&nbsp;to&nbsp;add<br>
+'scriptTagId'&nbsp;is&nbsp;(optional)&nbsp;the&nbsp;id&nbsp;of&nbsp;the&nbsp;new&nbsp;script&nbsp;tag.&nbsp;If&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specified,&nbsp;and&nbsp;an&nbsp;element&nbsp;with&nbsp;this&nbsp;id&nbsp;already&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exists,&nbsp;this&nbsp;operation&nbsp;will&nbsp;fail.</tt></dd></dl>
+
+<dl><dt><a name="selenium-add_selection"><strong>add_selection</strong></a>(self, locator, optionLocator)</dt><dd><tt>Add&nbsp;a&nbsp;selection&nbsp;to&nbsp;the&nbsp;set&nbsp;of&nbsp;selected&nbsp;options&nbsp;in&nbsp;a&nbsp;multi-select&nbsp;element&nbsp;using&nbsp;an&nbsp;option&nbsp;locator.<br>
+&nbsp;<br>
+@see&nbsp;#doSelect&nbsp;for&nbsp;details&nbsp;of&nbsp;option&nbsp;locators<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;identifying&nbsp;a&nbsp;multi-select&nbsp;box<br>
+'optionLocator'&nbsp;is&nbsp;an&nbsp;option&nbsp;locator&nbsp;(a&nbsp;label&nbsp;by&nbsp;default)</tt></dd></dl>
+
+<dl><dt><a name="selenium-allow_native_xpath"><strong>allow_native_xpath</strong></a>(self, allow)</dt><dd><tt>Specifies&nbsp;whether&nbsp;Selenium&nbsp;should&nbsp;use&nbsp;the&nbsp;native&nbsp;in-browser&nbsp;implementation<br>
+of&nbsp;XPath&nbsp;(if&nbsp;any&nbsp;native&nbsp;version&nbsp;is&nbsp;available);&nbsp;if&nbsp;you&nbsp;pass&nbsp;"false"&nbsp;to<br>
+this&nbsp;function,&nbsp;we&nbsp;will&nbsp;always&nbsp;use&nbsp;our&nbsp;pure-JavaScript&nbsp;xpath&nbsp;library.<br>
+Using&nbsp;the&nbsp;pure-JS&nbsp;xpath&nbsp;library&nbsp;can&nbsp;improve&nbsp;the&nbsp;consistency&nbsp;of&nbsp;xpath<br>
+element&nbsp;locators&nbsp;between&nbsp;different&nbsp;browser&nbsp;vendors,&nbsp;but&nbsp;the&nbsp;pure-JS<br>
+version&nbsp;is&nbsp;much&nbsp;slower&nbsp;than&nbsp;the&nbsp;native&nbsp;implementations.<br>
+&nbsp;<br>
+'allow'&nbsp;is&nbsp;boolean,&nbsp;true&nbsp;means&nbsp;we'll&nbsp;prefer&nbsp;to&nbsp;use&nbsp;native&nbsp;XPath;&nbsp;false&nbsp;means&nbsp;we'll&nbsp;only&nbsp;use&nbsp;JS&nbsp;XPath</tt></dd></dl>
+
+<dl><dt><a name="selenium-alt_key_down"><strong>alt_key_down</strong></a>(self)</dt><dd><tt>Press&nbsp;the&nbsp;alt&nbsp;key&nbsp;and&nbsp;hold&nbsp;it&nbsp;down&nbsp;until&nbsp;doAltUp()&nbsp;is&nbsp;called&nbsp;or&nbsp;a&nbsp;new&nbsp;page&nbsp;is&nbsp;loaded.</tt></dd></dl>
+
+<dl><dt><a name="selenium-alt_key_up"><strong>alt_key_up</strong></a>(self)</dt><dd><tt>Release&nbsp;the&nbsp;alt&nbsp;key.</tt></dd></dl>
+
+<dl><dt><a name="selenium-answer_on_next_prompt"><strong>answer_on_next_prompt</strong></a>(self, answer)</dt><dd><tt>Instructs&nbsp;Selenium&nbsp;to&nbsp;return&nbsp;the&nbsp;specified&nbsp;answer&nbsp;string&nbsp;in&nbsp;response&nbsp;to<br>
+the&nbsp;next&nbsp;JavaScript&nbsp;prompt&nbsp;[window.prompt()].<br>
+&nbsp;<br>
+'answer'&nbsp;is&nbsp;the&nbsp;answer&nbsp;to&nbsp;give&nbsp;in&nbsp;response&nbsp;to&nbsp;the&nbsp;prompt&nbsp;pop-up</tt></dd></dl>
+
+<dl><dt><a name="selenium-assign_id"><strong>assign_id</strong></a>(self, locator, identifier)</dt><dd><tt>Temporarily&nbsp;sets&nbsp;the&nbsp;"id"&nbsp;attribute&nbsp;of&nbsp;the&nbsp;specified&nbsp;element,&nbsp;so&nbsp;you&nbsp;can&nbsp;locate&nbsp;it&nbsp;in&nbsp;the&nbsp;future<br>
+using&nbsp;its&nbsp;ID&nbsp;rather&nbsp;than&nbsp;a&nbsp;slow/complicated&nbsp;XPath.&nbsp;&nbsp;This&nbsp;ID&nbsp;will&nbsp;disappear&nbsp;once&nbsp;the&nbsp;page&nbsp;is<br>
+reloaded.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;pointing&nbsp;to&nbsp;an&nbsp;element<br>
+'identifier'&nbsp;is&nbsp;a&nbsp;string&nbsp;to&nbsp;be&nbsp;used&nbsp;as&nbsp;the&nbsp;ID&nbsp;of&nbsp;the&nbsp;specified&nbsp;element</tt></dd></dl>
+
+<dl><dt><a name="selenium-attach_file"><strong>attach_file</strong></a>(self, fieldLocator, fileLocator)</dt><dd><tt>Sets&nbsp;a&nbsp;file&nbsp;input&nbsp;(upload)&nbsp;field&nbsp;to&nbsp;the&nbsp;file&nbsp;listed&nbsp;in&nbsp;fileLocator<br>
+&nbsp;<br>
+'fieldLocator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator<br>
+'fileLocator'&nbsp;is&nbsp;a&nbsp;URL&nbsp;pointing&nbsp;to&nbsp;the&nbsp;specified&nbsp;file.&nbsp;Before&nbsp;the&nbsp;file&nbsp;&nbsp;can&nbsp;be&nbsp;set&nbsp;in&nbsp;the&nbsp;input&nbsp;field&nbsp;(fieldLocator),&nbsp;Selenium&nbsp;RC&nbsp;may&nbsp;need&nbsp;to&nbsp;transfer&nbsp;the&nbsp;file&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;the&nbsp;local&nbsp;machine&nbsp;before&nbsp;attaching&nbsp;the&nbsp;file&nbsp;in&nbsp;a&nbsp;web&nbsp;page&nbsp;form.&nbsp;This&nbsp;is&nbsp;common&nbsp;in&nbsp;<a href="#selenium">selenium</a>&nbsp;&nbsp;grid&nbsp;configurations&nbsp;where&nbsp;the&nbsp;RC&nbsp;server&nbsp;driving&nbsp;the&nbsp;browser&nbsp;is&nbsp;not&nbsp;the&nbsp;same&nbsp;&nbsp;machine&nbsp;that&nbsp;started&nbsp;the&nbsp;test.&nbsp;&nbsp;&nbsp;Supported&nbsp;Browsers:&nbsp;Firefox&nbsp;("\*chrome")&nbsp;only.</tt></dd></dl>
+
+<dl><dt><a name="selenium-captureNetworkTraffic"><strong>captureNetworkTraffic</strong></a>(self, type)</dt><dd><tt>Returns&nbsp;the&nbsp;network&nbsp;traffic&nbsp;seen&nbsp;by&nbsp;the&nbsp;browser,&nbsp;including&nbsp;headers,&nbsp;AJAX&nbsp;requests,&nbsp;status&nbsp;codes,&nbsp;and&nbsp;timings.&nbsp;When&nbsp;this&nbsp;function&nbsp;is&nbsp;called,&nbsp;the&nbsp;traffic&nbsp;log&nbsp;is&nbsp;cleared,&nbsp;so&nbsp;the&nbsp;returned&nbsp;content&nbsp;is&nbsp;only&nbsp;the&nbsp;traffic&nbsp;seen&nbsp;since&nbsp;the&nbsp;last&nbsp;call.<br>
+&nbsp;<br>
+'type'&nbsp;is&nbsp;The&nbsp;type&nbsp;of&nbsp;data&nbsp;to&nbsp;return&nbsp;the&nbsp;network&nbsp;traffic&nbsp;as.&nbsp;Valid&nbsp;values&nbsp;are:&nbsp;json,&nbsp;xml,&nbsp;or&nbsp;plain.</tt></dd></dl>
+
+<dl><dt><a name="selenium-capture_entire_page_screenshot"><strong>capture_entire_page_screenshot</strong></a>(self, filename, kwargs)</dt><dd><tt>Saves&nbsp;the&nbsp;entire&nbsp;contents&nbsp;of&nbsp;the&nbsp;current&nbsp;window&nbsp;canvas&nbsp;to&nbsp;a&nbsp;PNG&nbsp;file.<br>
+Contrast&nbsp;this&nbsp;with&nbsp;the&nbsp;captureScreenshot&nbsp;command,&nbsp;which&nbsp;captures&nbsp;the<br>
+contents&nbsp;of&nbsp;the&nbsp;OS&nbsp;viewport&nbsp;(i.e.&nbsp;whatever&nbsp;is&nbsp;currently&nbsp;being&nbsp;displayed<br>
+on&nbsp;the&nbsp;monitor),&nbsp;and&nbsp;is&nbsp;implemented&nbsp;in&nbsp;the&nbsp;RC&nbsp;only.&nbsp;Currently&nbsp;this&nbsp;only<br>
+works&nbsp;in&nbsp;Firefox&nbsp;when&nbsp;running&nbsp;in&nbsp;chrome&nbsp;mode,&nbsp;and&nbsp;in&nbsp;IE&nbsp;non-HTA&nbsp;using<br>
+the&nbsp;EXPERIMENTAL&nbsp;"Snapsie"&nbsp;utility.&nbsp;The&nbsp;Firefox&nbsp;implementation&nbsp;is&nbsp;mostly<br>
+borrowed&nbsp;from&nbsp;the&nbsp;Screengrab!&nbsp;Firefox&nbsp;extension.&nbsp;Please&nbsp;see<br>
+<a href="http:/www.screengrab.org">http:/www.screengrab.org</a>&nbsp;and&nbsp;<a href="http:/snapsie.sourceforge.net/">http:/snapsie.sourceforge.net/</a>&nbsp;for<br>
+details.<br>
+&nbsp;<br>
+'filename'&nbsp;is&nbsp;the&nbsp;path&nbsp;to&nbsp;the&nbsp;file&nbsp;to&nbsp;persist&nbsp;the&nbsp;screenshot&nbsp;as.&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filename&nbsp;extension&nbsp;will&nbsp;be&nbsp;appended&nbsp;by&nbsp;default.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Directories&nbsp;will&nbsp;not&nbsp;be&nbsp;created&nbsp;if&nbsp;they&nbsp;do&nbsp;not&nbsp;exist,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;an&nbsp;exception&nbsp;will&nbsp;be&nbsp;thrown,&nbsp;possibly&nbsp;by&nbsp;native&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;code.<br>
+'kwargs'&nbsp;is&nbsp;a&nbsp;kwargs&nbsp;string&nbsp;that&nbsp;modifies&nbsp;the&nbsp;way&nbsp;the&nbsp;screenshot&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;captured.&nbsp;Example:&nbsp;"background=#CCFFDD"&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Currently&nbsp;valid&nbsp;options:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+*&nbsp;&nbsp;&nbsp;&nbsp;background<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;background&nbsp;CSS&nbsp;for&nbsp;the&nbsp;HTML&nbsp;document.&nbsp;This&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;may&nbsp;be&nbsp;useful&nbsp;to&nbsp;set&nbsp;for&nbsp;capturing&nbsp;screenshots&nbsp;of&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;less-than-ideal&nbsp;layouts,&nbsp;for&nbsp;example&nbsp;where&nbsp;absolute&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;positioning&nbsp;causes&nbsp;the&nbsp;calculation&nbsp;of&nbsp;the&nbsp;canvas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dimension&nbsp;to&nbsp;fail&nbsp;and&nbsp;a&nbsp;black&nbsp;background&nbsp;is&nbsp;exposed&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(possibly&nbsp;obscuring&nbsp;black&nbsp;text).</tt></dd></dl>
+
+<dl><dt><a name="selenium-capture_entire_page_screenshot_to_string"><strong>capture_entire_page_screenshot_to_string</strong></a>(self, kwargs)</dt><dd><tt>Downloads&nbsp;a&nbsp;screenshot&nbsp;of&nbsp;the&nbsp;browser&nbsp;current&nbsp;window&nbsp;canvas&nbsp;to&nbsp;a&nbsp;<br>
+based&nbsp;64&nbsp;encoded&nbsp;PNG&nbsp;file.&nbsp;The&nbsp;\&nbsp;*entire*&nbsp;windows&nbsp;canvas&nbsp;is&nbsp;captured,<br>
+including&nbsp;parts&nbsp;rendered&nbsp;outside&nbsp;of&nbsp;the&nbsp;current&nbsp;view&nbsp;port.<br>
+&nbsp;<br>
+Currently&nbsp;this&nbsp;only&nbsp;works&nbsp;in&nbsp;Mozilla&nbsp;and&nbsp;when&nbsp;running&nbsp;in&nbsp;chrome&nbsp;mode.<br>
+&nbsp;<br>
+'kwargs'&nbsp;is&nbsp;A&nbsp;kwargs&nbsp;string&nbsp;that&nbsp;modifies&nbsp;the&nbsp;way&nbsp;the&nbsp;screenshot&nbsp;is&nbsp;captured.&nbsp;Example:&nbsp;"background=#CCFFDD".&nbsp;This&nbsp;may&nbsp;be&nbsp;useful&nbsp;to&nbsp;set&nbsp;for&nbsp;capturing&nbsp;screenshots&nbsp;of&nbsp;less-than-ideal&nbsp;layouts,&nbsp;for&nbsp;example&nbsp;where&nbsp;absolute&nbsp;positioning&nbsp;causes&nbsp;the&nbsp;calculation&nbsp;of&nbsp;the&nbsp;canvas&nbsp;dimension&nbsp;to&nbsp;fail&nbsp;and&nbsp;a&nbsp;black&nbsp;background&nbsp;is&nbsp;exposed&nbsp;&nbsp;(possibly&nbsp;obscuring&nbsp;black&nbsp;text).</tt></dd></dl>
+
+<dl><dt><a name="selenium-capture_screenshot"><strong>capture_screenshot</strong></a>(self, filename)</dt><dd><tt>Captures&nbsp;a&nbsp;PNG&nbsp;screenshot&nbsp;to&nbsp;the&nbsp;specified&nbsp;file.<br>
+&nbsp;<br>
+'filename'&nbsp;is&nbsp;the&nbsp;absolute&nbsp;path&nbsp;to&nbsp;the&nbsp;file&nbsp;to&nbsp;be&nbsp;written,&nbsp;e.g.&nbsp;"c:lah\screenshot.png"</tt></dd></dl>
+
+<dl><dt><a name="selenium-capture_screenshot_to_string"><strong>capture_screenshot_to_string</strong></a>(self)</dt><dd><tt>Capture&nbsp;a&nbsp;PNG&nbsp;screenshot.&nbsp;&nbsp;It&nbsp;then&nbsp;returns&nbsp;the&nbsp;file&nbsp;as&nbsp;a&nbsp;base&nbsp;64&nbsp;encoded&nbsp;string.</tt></dd></dl>
+
+<dl><dt><a name="selenium-check"><strong>check</strong></a>(self, locator)</dt><dd><tt>Check&nbsp;a&nbsp;toggle-button&nbsp;(checkbox/radio)<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator</tt></dd></dl>
+
+<dl><dt><a name="selenium-choose_cancel_on_next_confirmation"><strong>choose_cancel_on_next_confirmation</strong></a>(self)</dt><dd><tt>By&nbsp;default,&nbsp;Selenium's&nbsp;overridden&nbsp;window.confirm()&nbsp;function&nbsp;will<br>
+return&nbsp;true,&nbsp;as&nbsp;if&nbsp;the&nbsp;user&nbsp;had&nbsp;manually&nbsp;clicked&nbsp;OK;&nbsp;after&nbsp;running<br>
+this&nbsp;command,&nbsp;the&nbsp;next&nbsp;call&nbsp;to&nbsp;confirm()&nbsp;will&nbsp;return&nbsp;false,&nbsp;as&nbsp;if<br>
+the&nbsp;user&nbsp;had&nbsp;clicked&nbsp;Cancel.&nbsp;&nbsp;Selenium&nbsp;will&nbsp;then&nbsp;resume&nbsp;using&nbsp;the<br>
+default&nbsp;behavior&nbsp;for&nbsp;future&nbsp;confirmations,&nbsp;automatically&nbsp;returning&nbsp;<br>
+true&nbsp;(OK)&nbsp;unless/until&nbsp;you&nbsp;explicitly&nbsp;call&nbsp;this&nbsp;command&nbsp;for&nbsp;each<br>
+confirmation.<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+Take&nbsp;note&nbsp;-&nbsp;every&nbsp;time&nbsp;a&nbsp;confirmation&nbsp;comes&nbsp;up,&nbsp;you&nbsp;must<br>
+consume&nbsp;it&nbsp;with&nbsp;a&nbsp;corresponding&nbsp;getConfirmation,&nbsp;or&nbsp;else<br>
+the&nbsp;next&nbsp;<a href="#selenium">selenium</a>&nbsp;operation&nbsp;will&nbsp;fail.</tt></dd></dl>
+
+<dl><dt><a name="selenium-choose_ok_on_next_confirmation"><strong>choose_ok_on_next_confirmation</strong></a>(self)</dt><dd><tt>Undo&nbsp;the&nbsp;effect&nbsp;of&nbsp;calling&nbsp;chooseCancelOnNextConfirmation.&nbsp;&nbsp;Note<br>
+that&nbsp;Selenium's&nbsp;overridden&nbsp;window.confirm()&nbsp;function&nbsp;will&nbsp;normally&nbsp;automatically<br>
+return&nbsp;true,&nbsp;as&nbsp;if&nbsp;the&nbsp;user&nbsp;had&nbsp;manually&nbsp;clicked&nbsp;OK,&nbsp;so&nbsp;you&nbsp;shouldn't<br>
+need&nbsp;to&nbsp;use&nbsp;this&nbsp;command&nbsp;unless&nbsp;for&nbsp;some&nbsp;reason&nbsp;you&nbsp;need&nbsp;to&nbsp;change<br>
+your&nbsp;mind&nbsp;prior&nbsp;to&nbsp;the&nbsp;next&nbsp;confirmation.&nbsp;&nbsp;After&nbsp;any&nbsp;confirmation,&nbsp;Selenium&nbsp;will&nbsp;resume&nbsp;using&nbsp;the<br>
+default&nbsp;behavior&nbsp;for&nbsp;future&nbsp;confirmations,&nbsp;automatically&nbsp;returning&nbsp;<br>
+true&nbsp;(OK)&nbsp;unless/until&nbsp;you&nbsp;explicitly&nbsp;call&nbsp;chooseCancelOnNextConfirmation&nbsp;for&nbsp;each<br>
+confirmation.<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+Take&nbsp;note&nbsp;-&nbsp;every&nbsp;time&nbsp;a&nbsp;confirmation&nbsp;comes&nbsp;up,&nbsp;you&nbsp;must<br>
+consume&nbsp;it&nbsp;with&nbsp;a&nbsp;corresponding&nbsp;getConfirmation,&nbsp;or&nbsp;else<br>
+the&nbsp;next&nbsp;<a href="#selenium">selenium</a>&nbsp;operation&nbsp;will&nbsp;fail.</tt></dd></dl>
+
+<dl><dt><a name="selenium-click"><strong>click</strong></a>(self, locator)</dt><dd><tt>Clicks&nbsp;on&nbsp;a&nbsp;link,&nbsp;button,&nbsp;checkbox&nbsp;or&nbsp;radio&nbsp;button.&nbsp;If&nbsp;the&nbsp;click&nbsp;action<br>
+causes&nbsp;a&nbsp;new&nbsp;page&nbsp;to&nbsp;load&nbsp;(like&nbsp;a&nbsp;link&nbsp;usually&nbsp;does),&nbsp;call<br>
+waitForPageToLoad.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator</tt></dd></dl>
+
+<dl><dt><a name="selenium-click_at"><strong>click_at</strong></a>(self, locator, coordString)</dt><dd><tt>Clicks&nbsp;on&nbsp;a&nbsp;link,&nbsp;button,&nbsp;checkbox&nbsp;or&nbsp;radio&nbsp;button.&nbsp;If&nbsp;the&nbsp;click&nbsp;action<br>
+causes&nbsp;a&nbsp;new&nbsp;page&nbsp;to&nbsp;load&nbsp;(like&nbsp;a&nbsp;link&nbsp;usually&nbsp;does),&nbsp;call<br>
+waitForPageToLoad.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator<br>
+'coordString'&nbsp;is&nbsp;specifies&nbsp;the&nbsp;x,y&nbsp;position&nbsp;(i.e.&nbsp;-&nbsp;10,20)&nbsp;of&nbsp;the&nbsp;mouse&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;event&nbsp;relative&nbsp;to&nbsp;the&nbsp;element&nbsp;returned&nbsp;by&nbsp;the&nbsp;locator.</tt></dd></dl>
+
+<dl><dt><a name="selenium-close"><strong>close</strong></a>(self)</dt><dd><tt>Simulates&nbsp;the&nbsp;user&nbsp;clicking&nbsp;the&nbsp;"close"&nbsp;button&nbsp;in&nbsp;the&nbsp;titlebar&nbsp;of&nbsp;a&nbsp;popup<br>
+window&nbsp;or&nbsp;tab.</tt></dd></dl>
+
+<dl><dt><a name="selenium-context_menu"><strong>context_menu</strong></a>(self, locator)</dt><dd><tt>Simulates&nbsp;opening&nbsp;the&nbsp;context&nbsp;menu&nbsp;for&nbsp;the&nbsp;specified&nbsp;element&nbsp;(as&nbsp;might&nbsp;happen&nbsp;if&nbsp;the&nbsp;user&nbsp;"right-clicked"&nbsp;on&nbsp;the&nbsp;element).<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator</tt></dd></dl>
+
+<dl><dt><a name="selenium-context_menu_at"><strong>context_menu_at</strong></a>(self, locator, coordString)</dt><dd><tt>Simulates&nbsp;opening&nbsp;the&nbsp;context&nbsp;menu&nbsp;for&nbsp;the&nbsp;specified&nbsp;element&nbsp;(as&nbsp;might&nbsp;happen&nbsp;if&nbsp;the&nbsp;user&nbsp;"right-clicked"&nbsp;on&nbsp;the&nbsp;element).<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator<br>
+'coordString'&nbsp;is&nbsp;specifies&nbsp;the&nbsp;x,y&nbsp;position&nbsp;(i.e.&nbsp;-&nbsp;10,20)&nbsp;of&nbsp;the&nbsp;mouse&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;event&nbsp;relative&nbsp;to&nbsp;the&nbsp;element&nbsp;returned&nbsp;by&nbsp;the&nbsp;locator.</tt></dd></dl>
+
+<dl><dt><a name="selenium-control_key_down"><strong>control_key_down</strong></a>(self)</dt><dd><tt>Press&nbsp;the&nbsp;control&nbsp;key&nbsp;and&nbsp;hold&nbsp;it&nbsp;down&nbsp;until&nbsp;doControlUp()&nbsp;is&nbsp;called&nbsp;or&nbsp;a&nbsp;new&nbsp;page&nbsp;is&nbsp;loaded.</tt></dd></dl>
+
+<dl><dt><a name="selenium-control_key_up"><strong>control_key_up</strong></a>(self)</dt><dd><tt>Release&nbsp;the&nbsp;control&nbsp;key.</tt></dd></dl>
+
+<dl><dt><a name="selenium-create_cookie"><strong>create_cookie</strong></a>(self, nameValuePair, optionsString)</dt><dd><tt>Create&nbsp;a&nbsp;new&nbsp;cookie&nbsp;whose&nbsp;path&nbsp;and&nbsp;domain&nbsp;are&nbsp;same&nbsp;with&nbsp;those&nbsp;of&nbsp;current&nbsp;page<br>
+under&nbsp;test,&nbsp;unless&nbsp;you&nbsp;specified&nbsp;a&nbsp;path&nbsp;for&nbsp;this&nbsp;cookie&nbsp;explicitly.<br>
+&nbsp;<br>
+'nameValuePair'&nbsp;is&nbsp;name&nbsp;and&nbsp;value&nbsp;of&nbsp;the&nbsp;cookie&nbsp;in&nbsp;a&nbsp;format&nbsp;"name=value"<br>
+'optionsString'&nbsp;is&nbsp;options&nbsp;for&nbsp;the&nbsp;cookie.&nbsp;Currently&nbsp;supported&nbsp;options&nbsp;include&nbsp;'path',&nbsp;'max_age'&nbsp;and&nbsp;'domain'.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;optionsString's&nbsp;format&nbsp;is&nbsp;"path=/path/,&nbsp;max_age=60,&nbsp;domain=.foo.com".&nbsp;The&nbsp;order&nbsp;of&nbsp;options&nbsp;are&nbsp;irrelevant,&nbsp;the&nbsp;unit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;the&nbsp;value&nbsp;of&nbsp;'max_age'&nbsp;is&nbsp;second.&nbsp;&nbsp;Note&nbsp;that&nbsp;specifying&nbsp;a&nbsp;domain&nbsp;that&nbsp;isn't&nbsp;a&nbsp;subset&nbsp;of&nbsp;the&nbsp;current&nbsp;domain&nbsp;will&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;usually&nbsp;fail.</tt></dd></dl>
+
+<dl><dt><a name="selenium-delete_all_visible_cookies"><strong>delete_all_visible_cookies</strong></a>(self)</dt><dd><tt>Calls&nbsp;deleteCookie&nbsp;with&nbsp;recurse=true&nbsp;on&nbsp;all&nbsp;cookies&nbsp;visible&nbsp;to&nbsp;the&nbsp;current&nbsp;page.<br>
+As&nbsp;noted&nbsp;on&nbsp;the&nbsp;documentation&nbsp;for&nbsp;deleteCookie,&nbsp;recurse=true&nbsp;can&nbsp;be&nbsp;much&nbsp;slower<br>
+than&nbsp;simply&nbsp;deleting&nbsp;the&nbsp;cookies&nbsp;using&nbsp;a&nbsp;known&nbsp;domain/path.</tt></dd></dl>
+
+<dl><dt><a name="selenium-delete_cookie"><strong>delete_cookie</strong></a>(self, name, optionsString)</dt><dd><tt>Delete&nbsp;a&nbsp;named&nbsp;cookie&nbsp;with&nbsp;specified&nbsp;path&nbsp;and&nbsp;domain.&nbsp;&nbsp;Be&nbsp;careful;&nbsp;to&nbsp;delete&nbsp;a&nbsp;cookie,&nbsp;you<br>
+need&nbsp;to&nbsp;delete&nbsp;it&nbsp;using&nbsp;the&nbsp;exact&nbsp;same&nbsp;path&nbsp;and&nbsp;domain&nbsp;that&nbsp;were&nbsp;used&nbsp;to&nbsp;create&nbsp;the&nbsp;cookie.<br>
+If&nbsp;the&nbsp;path&nbsp;is&nbsp;wrong,&nbsp;or&nbsp;the&nbsp;domain&nbsp;is&nbsp;wrong,&nbsp;the&nbsp;cookie&nbsp;simply&nbsp;won't&nbsp;be&nbsp;deleted.&nbsp;&nbsp;Also<br>
+note&nbsp;that&nbsp;specifying&nbsp;a&nbsp;domain&nbsp;that&nbsp;isn't&nbsp;a&nbsp;subset&nbsp;of&nbsp;the&nbsp;current&nbsp;domain&nbsp;will&nbsp;usually&nbsp;fail.<br>
+&nbsp;<br>
+Since&nbsp;there's&nbsp;no&nbsp;way&nbsp;to&nbsp;discover&nbsp;at&nbsp;runtime&nbsp;the&nbsp;original&nbsp;path&nbsp;and&nbsp;domain&nbsp;of&nbsp;a&nbsp;given&nbsp;cookie,<br>
+we've&nbsp;added&nbsp;an&nbsp;option&nbsp;called&nbsp;'recurse'&nbsp;to&nbsp;try&nbsp;all&nbsp;sub-domains&nbsp;of&nbsp;the&nbsp;current&nbsp;domain&nbsp;with<br>
+all&nbsp;paths&nbsp;that&nbsp;are&nbsp;a&nbsp;subset&nbsp;of&nbsp;the&nbsp;current&nbsp;path.&nbsp;&nbsp;Beware;&nbsp;this&nbsp;option&nbsp;can&nbsp;be&nbsp;slow.&nbsp;&nbsp;In<br>
+big-O&nbsp;notation,&nbsp;it&nbsp;operates&nbsp;in&nbsp;O(n\*m)&nbsp;time,&nbsp;where&nbsp;n&nbsp;is&nbsp;the&nbsp;number&nbsp;of&nbsp;dots&nbsp;in&nbsp;the&nbsp;domain<br>
+name&nbsp;and&nbsp;m&nbsp;is&nbsp;the&nbsp;number&nbsp;of&nbsp;slashes&nbsp;in&nbsp;the&nbsp;path.<br>
+&nbsp;<br>
+'name'&nbsp;is&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;cookie&nbsp;to&nbsp;be&nbsp;deleted<br>
+'optionsString'&nbsp;is&nbsp;options&nbsp;for&nbsp;the&nbsp;cookie.&nbsp;Currently&nbsp;supported&nbsp;options&nbsp;include&nbsp;'path',&nbsp;'domain'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;'recurse.'&nbsp;The&nbsp;optionsString's&nbsp;format&nbsp;is&nbsp;"path=/path/,&nbsp;domain=.foo.com,&nbsp;recurse=true".&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;order&nbsp;of&nbsp;options&nbsp;are&nbsp;irrelevant.&nbsp;Note&nbsp;that&nbsp;specifying&nbsp;a&nbsp;domain&nbsp;that&nbsp;isn't&nbsp;a&nbsp;subset&nbsp;of&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;current&nbsp;domain&nbsp;will&nbsp;usually&nbsp;fail.</tt></dd></dl>
+
+<dl><dt><a name="selenium-deselect_pop_up"><strong>deselect_pop_up</strong></a>(self)</dt><dd><tt>Selects&nbsp;the&nbsp;main&nbsp;window.&nbsp;Functionally&nbsp;equivalent&nbsp;to&nbsp;using<br>
+``selectWindow()``&nbsp;and&nbsp;specifying&nbsp;no&nbsp;value&nbsp;for<br>
+``windowID``.</tt></dd></dl>
+
+<dl><dt><a name="selenium-do_command"><strong>do_command</strong></a>(self, verb, args)</dt></dl>
+
+<dl><dt><a name="selenium-double_click"><strong>double_click</strong></a>(self, locator)</dt><dd><tt>Double&nbsp;clicks&nbsp;on&nbsp;a&nbsp;link,&nbsp;button,&nbsp;checkbox&nbsp;or&nbsp;radio&nbsp;button.&nbsp;If&nbsp;the&nbsp;double&nbsp;click&nbsp;action<br>
+causes&nbsp;a&nbsp;new&nbsp;page&nbsp;to&nbsp;load&nbsp;(like&nbsp;a&nbsp;link&nbsp;usually&nbsp;does),&nbsp;call<br>
+waitForPageToLoad.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator</tt></dd></dl>
+
+<dl><dt><a name="selenium-double_click_at"><strong>double_click_at</strong></a>(self, locator, coordString)</dt><dd><tt>Doubleclicks&nbsp;on&nbsp;a&nbsp;link,&nbsp;button,&nbsp;checkbox&nbsp;or&nbsp;radio&nbsp;button.&nbsp;If&nbsp;the&nbsp;action<br>
+causes&nbsp;a&nbsp;new&nbsp;page&nbsp;to&nbsp;load&nbsp;(like&nbsp;a&nbsp;link&nbsp;usually&nbsp;does),&nbsp;call<br>
+waitForPageToLoad.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator<br>
+'coordString'&nbsp;is&nbsp;specifies&nbsp;the&nbsp;x,y&nbsp;position&nbsp;(i.e.&nbsp;-&nbsp;10,20)&nbsp;of&nbsp;the&nbsp;mouse&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;event&nbsp;relative&nbsp;to&nbsp;the&nbsp;element&nbsp;returned&nbsp;by&nbsp;the&nbsp;locator.</tt></dd></dl>
+
+<dl><dt><a name="selenium-drag_and_drop"><strong>drag_and_drop</strong></a>(self, locator, movementsString)</dt><dd><tt>Drags&nbsp;an&nbsp;element&nbsp;a&nbsp;certain&nbsp;distance&nbsp;and&nbsp;then&nbsp;drops&nbsp;it<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator<br>
+'movementsString'&nbsp;is&nbsp;offset&nbsp;in&nbsp;pixels&nbsp;from&nbsp;the&nbsp;current&nbsp;location&nbsp;to&nbsp;which&nbsp;the&nbsp;element&nbsp;should&nbsp;be&nbsp;moved,&nbsp;e.g.,&nbsp;"+70,-300"</tt></dd></dl>
+
+<dl><dt><a name="selenium-drag_and_drop_to_object"><strong>drag_and_drop_to_object</strong></a>(self, locatorOfObjectToBeDragged, locatorOfDragDestinationObject)</dt><dd><tt>Drags&nbsp;an&nbsp;element&nbsp;and&nbsp;drops&nbsp;it&nbsp;on&nbsp;another&nbsp;element<br>
+&nbsp;<br>
+'locatorOfObjectToBeDragged'&nbsp;is&nbsp;an&nbsp;element&nbsp;to&nbsp;be&nbsp;dragged<br>
+'locatorOfDragDestinationObject'&nbsp;is&nbsp;an&nbsp;element&nbsp;whose&nbsp;location&nbsp;(i.e.,&nbsp;whose&nbsp;center-most&nbsp;pixel)&nbsp;will&nbsp;be&nbsp;the&nbsp;point&nbsp;where&nbsp;locatorOfObjectToBeDragged&nbsp;&nbsp;is&nbsp;dropped</tt></dd></dl>
+
+<dl><dt><a name="selenium-dragdrop"><strong>dragdrop</strong></a>(self, locator, movementsString)</dt><dd><tt>deprecated&nbsp;-&nbsp;use&nbsp;dragAndDrop&nbsp;instead<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator<br>
+'movementsString'&nbsp;is&nbsp;offset&nbsp;in&nbsp;pixels&nbsp;from&nbsp;the&nbsp;current&nbsp;location&nbsp;to&nbsp;which&nbsp;the&nbsp;element&nbsp;should&nbsp;be&nbsp;moved,&nbsp;e.g.,&nbsp;"+70,-300"</tt></dd></dl>
+
+<dl><dt><a name="selenium-fire_event"><strong>fire_event</strong></a>(self, locator, eventName)</dt><dd><tt>Explicitly&nbsp;simulate&nbsp;an&nbsp;event,&nbsp;to&nbsp;trigger&nbsp;the&nbsp;corresponding&nbsp;"on\&nbsp;*event*"<br>
+handler.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator<br>
+'eventName'&nbsp;is&nbsp;the&nbsp;event&nbsp;name,&nbsp;e.g.&nbsp;"focus"&nbsp;or&nbsp;"blur"</tt></dd></dl>
+
+<dl><dt><a name="selenium-focus"><strong>focus</strong></a>(self, locator)</dt><dd><tt>Move&nbsp;the&nbsp;focus&nbsp;to&nbsp;the&nbsp;specified&nbsp;element;&nbsp;for&nbsp;example,&nbsp;if&nbsp;the&nbsp;element&nbsp;is&nbsp;an&nbsp;input&nbsp;field,&nbsp;move&nbsp;the&nbsp;cursor&nbsp;to&nbsp;that&nbsp;field.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_alert"><strong>get_alert</strong></a>(self)</dt><dd><tt>Retrieves&nbsp;the&nbsp;message&nbsp;of&nbsp;a&nbsp;JavaScript&nbsp;alert&nbsp;generated&nbsp;during&nbsp;the&nbsp;previous&nbsp;action,&nbsp;or&nbsp;fail&nbsp;if&nbsp;there&nbsp;were&nbsp;no&nbsp;alerts.<br>
+&nbsp;<br>
+&nbsp;<br>
+Getting&nbsp;an&nbsp;alert&nbsp;has&nbsp;the&nbsp;same&nbsp;effect&nbsp;as&nbsp;manually&nbsp;clicking&nbsp;OK.&nbsp;If&nbsp;an<br>
+alert&nbsp;is&nbsp;generated&nbsp;but&nbsp;you&nbsp;do&nbsp;not&nbsp;consume&nbsp;it&nbsp;with&nbsp;getAlert,&nbsp;the&nbsp;next&nbsp;Selenium&nbsp;action<br>
+will&nbsp;fail.<br>
+&nbsp;<br>
+Under&nbsp;Selenium,&nbsp;JavaScript&nbsp;alerts&nbsp;will&nbsp;NOT&nbsp;pop&nbsp;up&nbsp;a&nbsp;visible&nbsp;alert<br>
+dialog.<br>
+&nbsp;<br>
+Selenium&nbsp;does&nbsp;NOT&nbsp;support&nbsp;JavaScript&nbsp;alerts&nbsp;that&nbsp;are&nbsp;generated&nbsp;in&nbsp;a<br>
+page's&nbsp;onload()&nbsp;event&nbsp;handler.&nbsp;In&nbsp;this&nbsp;case&nbsp;a&nbsp;visible&nbsp;dialog&nbsp;WILL&nbsp;be<br>
+generated&nbsp;and&nbsp;Selenium&nbsp;will&nbsp;hang&nbsp;until&nbsp;someone&nbsp;manually&nbsp;clicks&nbsp;OK.</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_all_buttons"><strong>get_all_buttons</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;IDs&nbsp;of&nbsp;all&nbsp;buttons&nbsp;on&nbsp;the&nbsp;page.<br>
+&nbsp;<br>
+&nbsp;<br>
+If&nbsp;a&nbsp;given&nbsp;button&nbsp;has&nbsp;no&nbsp;ID,&nbsp;it&nbsp;will&nbsp;appear&nbsp;as&nbsp;""&nbsp;in&nbsp;this&nbsp;array.</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_all_fields"><strong>get_all_fields</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;IDs&nbsp;of&nbsp;all&nbsp;input&nbsp;fields&nbsp;on&nbsp;the&nbsp;page.<br>
+&nbsp;<br>
+&nbsp;<br>
+If&nbsp;a&nbsp;given&nbsp;field&nbsp;has&nbsp;no&nbsp;ID,&nbsp;it&nbsp;will&nbsp;appear&nbsp;as&nbsp;""&nbsp;in&nbsp;this&nbsp;array.</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_all_links"><strong>get_all_links</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;IDs&nbsp;of&nbsp;all&nbsp;links&nbsp;on&nbsp;the&nbsp;page.<br>
+&nbsp;<br>
+&nbsp;<br>
+If&nbsp;a&nbsp;given&nbsp;link&nbsp;has&nbsp;no&nbsp;ID,&nbsp;it&nbsp;will&nbsp;appear&nbsp;as&nbsp;""&nbsp;in&nbsp;this&nbsp;array.</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_all_window_ids"><strong>get_all_window_ids</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;IDs&nbsp;of&nbsp;all&nbsp;windows&nbsp;that&nbsp;the&nbsp;browser&nbsp;knows&nbsp;about.</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_all_window_names"><strong>get_all_window_names</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;names&nbsp;of&nbsp;all&nbsp;windows&nbsp;that&nbsp;the&nbsp;browser&nbsp;knows&nbsp;about.</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_all_window_titles"><strong>get_all_window_titles</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;titles&nbsp;of&nbsp;all&nbsp;windows&nbsp;that&nbsp;the&nbsp;browser&nbsp;knows&nbsp;about.</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_attribute"><strong>get_attribute</strong></a>(self, attributeLocator)</dt><dd><tt>Gets&nbsp;the&nbsp;value&nbsp;of&nbsp;an&nbsp;element&nbsp;attribute.&nbsp;The&nbsp;value&nbsp;of&nbsp;the&nbsp;attribute&nbsp;may<br>
+differ&nbsp;across&nbsp;browsers&nbsp;(this&nbsp;is&nbsp;the&nbsp;case&nbsp;for&nbsp;the&nbsp;"style"&nbsp;attribute,&nbsp;for<br>
+example).<br>
+&nbsp;<br>
+'attributeLocator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;followed&nbsp;by&nbsp;an&nbsp;@&nbsp;sign&nbsp;and&nbsp;then&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;attribute,&nbsp;e.g.&nbsp;"foo@bar"</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_attribute_from_all_windows"><strong>get_attribute_from_all_windows</strong></a>(self, attributeName)</dt><dd><tt>Returns&nbsp;every&nbsp;instance&nbsp;of&nbsp;some&nbsp;attribute&nbsp;from&nbsp;all&nbsp;known&nbsp;windows.<br>
+&nbsp;<br>
+'attributeName'&nbsp;is&nbsp;name&nbsp;of&nbsp;an&nbsp;attribute&nbsp;on&nbsp;the&nbsp;windows</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_body_text"><strong>get_body_text</strong></a>(self)</dt><dd><tt>Gets&nbsp;the&nbsp;entire&nbsp;text&nbsp;of&nbsp;the&nbsp;page.</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_boolean"><strong>get_boolean</strong></a>(self, verb, args)</dt></dl>
+
+<dl><dt><a name="selenium-get_boolean_array"><strong>get_boolean_array</strong></a>(self, verb, args)</dt></dl>
+
+<dl><dt><a name="selenium-get_confirmation"><strong>get_confirmation</strong></a>(self)</dt><dd><tt>Retrieves&nbsp;the&nbsp;message&nbsp;of&nbsp;a&nbsp;JavaScript&nbsp;confirmation&nbsp;dialog&nbsp;generated&nbsp;during<br>
+the&nbsp;previous&nbsp;action.<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+By&nbsp;default,&nbsp;the&nbsp;confirm&nbsp;function&nbsp;will&nbsp;return&nbsp;true,&nbsp;having&nbsp;the&nbsp;same&nbsp;effect<br>
+as&nbsp;manually&nbsp;clicking&nbsp;OK.&nbsp;This&nbsp;can&nbsp;be&nbsp;changed&nbsp;by&nbsp;prior&nbsp;execution&nbsp;of&nbsp;the<br>
+chooseCancelOnNextConfirmation&nbsp;command.&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+If&nbsp;an&nbsp;confirmation&nbsp;is&nbsp;generated&nbsp;but&nbsp;you&nbsp;do&nbsp;not&nbsp;consume&nbsp;it&nbsp;with&nbsp;getConfirmation,<br>
+the&nbsp;next&nbsp;Selenium&nbsp;action&nbsp;will&nbsp;fail.<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+NOTE:&nbsp;under&nbsp;Selenium,&nbsp;JavaScript&nbsp;confirmations&nbsp;will&nbsp;NOT&nbsp;pop&nbsp;up&nbsp;a&nbsp;visible<br>
+dialog.<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+NOTE:&nbsp;Selenium&nbsp;does&nbsp;NOT&nbsp;support&nbsp;JavaScript&nbsp;confirmations&nbsp;that&nbsp;are<br>
+generated&nbsp;in&nbsp;a&nbsp;page's&nbsp;onload()&nbsp;event&nbsp;handler.&nbsp;In&nbsp;this&nbsp;case&nbsp;a&nbsp;visible<br>
+dialog&nbsp;WILL&nbsp;be&nbsp;generated&nbsp;and&nbsp;Selenium&nbsp;will&nbsp;hang&nbsp;until&nbsp;you&nbsp;manually&nbsp;click<br>
+OK.</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_cookie"><strong>get_cookie</strong></a>(self)</dt><dd><tt>Return&nbsp;all&nbsp;cookies&nbsp;of&nbsp;the&nbsp;current&nbsp;page&nbsp;under&nbsp;test.</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_cookie_by_name"><strong>get_cookie_by_name</strong></a>(self, name)</dt><dd><tt>Returns&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;cookie&nbsp;with&nbsp;the&nbsp;specified&nbsp;name,&nbsp;or&nbsp;throws&nbsp;an&nbsp;error&nbsp;if&nbsp;the&nbsp;cookie&nbsp;is&nbsp;not&nbsp;present.<br>
+&nbsp;<br>
+'name'&nbsp;is&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;cookie</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_cursor_position"><strong>get_cursor_position</strong></a>(self, locator)</dt><dd><tt>Retrieves&nbsp;the&nbsp;text&nbsp;cursor&nbsp;position&nbsp;in&nbsp;the&nbsp;given&nbsp;input&nbsp;element&nbsp;or&nbsp;textarea;&nbsp;beware,&nbsp;this&nbsp;may&nbsp;not&nbsp;work&nbsp;perfectly&nbsp;on&nbsp;all&nbsp;browsers.<br>
+&nbsp;<br>
+&nbsp;<br>
+Specifically,&nbsp;if&nbsp;the&nbsp;cursor/selection&nbsp;has&nbsp;been&nbsp;cleared&nbsp;by&nbsp;JavaScript,&nbsp;this&nbsp;command&nbsp;will&nbsp;tend&nbsp;to<br>
+return&nbsp;the&nbsp;position&nbsp;of&nbsp;the&nbsp;last&nbsp;location&nbsp;of&nbsp;the&nbsp;cursor,&nbsp;even&nbsp;though&nbsp;the&nbsp;cursor&nbsp;is&nbsp;now&nbsp;gone&nbsp;from&nbsp;the&nbsp;page.&nbsp;&nbsp;This&nbsp;is&nbsp;filed&nbsp;as&nbsp;SEL-243.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;will&nbsp;fail&nbsp;if&nbsp;the&nbsp;specified&nbsp;element&nbsp;isn't&nbsp;an&nbsp;input&nbsp;element&nbsp;or&nbsp;textarea,&nbsp;or&nbsp;there&nbsp;is&nbsp;no&nbsp;cursor&nbsp;in&nbsp;the&nbsp;element.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;pointing&nbsp;to&nbsp;an&nbsp;input&nbsp;element&nbsp;or&nbsp;textarea</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_element_height"><strong>get_element_height</strong></a>(self, locator)</dt><dd><tt>Retrieves&nbsp;the&nbsp;height&nbsp;of&nbsp;an&nbsp;element<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;pointing&nbsp;to&nbsp;an&nbsp;element</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_element_index"><strong>get_element_index</strong></a>(self, locator)</dt><dd><tt>Get&nbsp;the&nbsp;relative&nbsp;index&nbsp;of&nbsp;an&nbsp;element&nbsp;to&nbsp;its&nbsp;parent&nbsp;(starting&nbsp;from&nbsp;0).&nbsp;The&nbsp;comment&nbsp;node&nbsp;and&nbsp;empty&nbsp;text&nbsp;node<br>
+will&nbsp;be&nbsp;ignored.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;pointing&nbsp;to&nbsp;an&nbsp;element</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_element_position_left"><strong>get_element_position_left</strong></a>(self, locator)</dt><dd><tt>Retrieves&nbsp;the&nbsp;horizontal&nbsp;position&nbsp;of&nbsp;an&nbsp;element<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;pointing&nbsp;to&nbsp;an&nbsp;element&nbsp;OR&nbsp;an&nbsp;element&nbsp;itself</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_element_position_top"><strong>get_element_position_top</strong></a>(self, locator)</dt><dd><tt>Retrieves&nbsp;the&nbsp;vertical&nbsp;position&nbsp;of&nbsp;an&nbsp;element<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;pointing&nbsp;to&nbsp;an&nbsp;element&nbsp;OR&nbsp;an&nbsp;element&nbsp;itself</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_element_width"><strong>get_element_width</strong></a>(self, locator)</dt><dd><tt>Retrieves&nbsp;the&nbsp;width&nbsp;of&nbsp;an&nbsp;element<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;pointing&nbsp;to&nbsp;an&nbsp;element</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_eval"><strong>get_eval</strong></a>(self, script)</dt><dd><tt>Gets&nbsp;the&nbsp;result&nbsp;of&nbsp;evaluating&nbsp;the&nbsp;specified&nbsp;JavaScript&nbsp;snippet.&nbsp;&nbsp;The&nbsp;snippet&nbsp;may<br>
+have&nbsp;multiple&nbsp;lines,&nbsp;but&nbsp;only&nbsp;the&nbsp;result&nbsp;of&nbsp;the&nbsp;last&nbsp;line&nbsp;will&nbsp;be&nbsp;returned.<br>
+&nbsp;<br>
+&nbsp;<br>
+Note&nbsp;that,&nbsp;by&nbsp;default,&nbsp;the&nbsp;snippet&nbsp;will&nbsp;run&nbsp;in&nbsp;the&nbsp;context&nbsp;of&nbsp;the&nbsp;"<a href="#selenium">selenium</a>"<br>
+object&nbsp;itself,&nbsp;so&nbsp;``this``&nbsp;will&nbsp;refer&nbsp;to&nbsp;the&nbsp;Selenium&nbsp;object.&nbsp;&nbsp;Use&nbsp;``window``&nbsp;to<br>
+refer&nbsp;to&nbsp;the&nbsp;window&nbsp;of&nbsp;your&nbsp;application,&nbsp;e.g.&nbsp;``window.document.getElementById('foo')``<br>
+&nbsp;<br>
+If&nbsp;you&nbsp;need&nbsp;to&nbsp;use<br>
+a&nbsp;locator&nbsp;to&nbsp;refer&nbsp;to&nbsp;a&nbsp;single&nbsp;element&nbsp;in&nbsp;your&nbsp;application&nbsp;page,&nbsp;you&nbsp;can<br>
+use&nbsp;``this.browserbot.findElement("id=foo")``&nbsp;where&nbsp;"id=foo"&nbsp;is&nbsp;your&nbsp;locator.<br>
+&nbsp;<br>
+&nbsp;<br>
+'script'&nbsp;is&nbsp;the&nbsp;JavaScript&nbsp;snippet&nbsp;to&nbsp;run</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_expression"><strong>get_expression</strong></a>(self, expression)</dt><dd><tt>Returns&nbsp;the&nbsp;specified&nbsp;expression.<br>
+&nbsp;<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;useful&nbsp;because&nbsp;of&nbsp;JavaScript&nbsp;preprocessing.<br>
+It&nbsp;is&nbsp;used&nbsp;to&nbsp;generate&nbsp;commands&nbsp;like&nbsp;assertExpression&nbsp;and&nbsp;waitForExpression.<br>
+&nbsp;<br>
+&nbsp;<br>
+'expression'&nbsp;is&nbsp;the&nbsp;value&nbsp;to&nbsp;return</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_html_source"><strong>get_html_source</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;entire&nbsp;HTML&nbsp;source&nbsp;between&nbsp;the&nbsp;opening&nbsp;and<br>
+closing&nbsp;"html"&nbsp;tags.</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_location"><strong>get_location</strong></a>(self)</dt><dd><tt>Gets&nbsp;the&nbsp;absolute&nbsp;URL&nbsp;of&nbsp;the&nbsp;current&nbsp;page.</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_mouse_speed"><strong>get_mouse_speed</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;number&nbsp;of&nbsp;pixels&nbsp;between&nbsp;"mousemove"&nbsp;events&nbsp;during&nbsp;dragAndDrop&nbsp;commands&nbsp;(default=10).</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_number"><strong>get_number</strong></a>(self, verb, args)</dt></dl>
+
+<dl><dt><a name="selenium-get_number_array"><strong>get_number_array</strong></a>(self, verb, args)</dt></dl>
+
+<dl><dt><a name="selenium-get_prompt"><strong>get_prompt</strong></a>(self)</dt><dd><tt>Retrieves&nbsp;the&nbsp;message&nbsp;of&nbsp;a&nbsp;JavaScript&nbsp;question&nbsp;prompt&nbsp;dialog&nbsp;generated&nbsp;during<br>
+the&nbsp;previous&nbsp;action.<br>
+&nbsp;<br>
+&nbsp;<br>
+Successful&nbsp;handling&nbsp;of&nbsp;the&nbsp;prompt&nbsp;requires&nbsp;prior&nbsp;execution&nbsp;of&nbsp;the<br>
+answerOnNextPrompt&nbsp;command.&nbsp;If&nbsp;a&nbsp;prompt&nbsp;is&nbsp;generated&nbsp;but&nbsp;you<br>
+do&nbsp;not&nbsp;get/verify&nbsp;it,&nbsp;the&nbsp;next&nbsp;Selenium&nbsp;action&nbsp;will&nbsp;fail.<br>
+&nbsp;<br>
+NOTE:&nbsp;under&nbsp;Selenium,&nbsp;JavaScript&nbsp;prompts&nbsp;will&nbsp;NOT&nbsp;pop&nbsp;up&nbsp;a&nbsp;visible<br>
+dialog.<br>
+&nbsp;<br>
+NOTE:&nbsp;Selenium&nbsp;does&nbsp;NOT&nbsp;support&nbsp;JavaScript&nbsp;prompts&nbsp;that&nbsp;are&nbsp;generated&nbsp;in&nbsp;a<br>
+page's&nbsp;onload()&nbsp;event&nbsp;handler.&nbsp;In&nbsp;this&nbsp;case&nbsp;a&nbsp;visible&nbsp;dialog&nbsp;WILL&nbsp;be<br>
+generated&nbsp;and&nbsp;Selenium&nbsp;will&nbsp;hang&nbsp;until&nbsp;someone&nbsp;manually&nbsp;clicks&nbsp;OK.</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_select_options"><strong>get_select_options</strong></a>(self, selectLocator)</dt><dd><tt>Gets&nbsp;all&nbsp;option&nbsp;labels&nbsp;in&nbsp;the&nbsp;specified&nbsp;select&nbsp;drop-down.<br>
+&nbsp;<br>
+'selectLocator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;identifying&nbsp;a&nbsp;drop-down&nbsp;menu</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_selected_id"><strong>get_selected_id</strong></a>(self, selectLocator)</dt><dd><tt>Gets&nbsp;option&nbsp;element&nbsp;ID&nbsp;for&nbsp;selected&nbsp;option&nbsp;in&nbsp;the&nbsp;specified&nbsp;select&nbsp;element.<br>
+&nbsp;<br>
+'selectLocator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;identifying&nbsp;a&nbsp;drop-down&nbsp;menu</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_selected_ids"><strong>get_selected_ids</strong></a>(self, selectLocator)</dt><dd><tt>Gets&nbsp;all&nbsp;option&nbsp;element&nbsp;IDs&nbsp;for&nbsp;selected&nbsp;options&nbsp;in&nbsp;the&nbsp;specified&nbsp;select&nbsp;or&nbsp;multi-select&nbsp;element.<br>
+&nbsp;<br>
+'selectLocator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;identifying&nbsp;a&nbsp;drop-down&nbsp;menu</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_selected_index"><strong>get_selected_index</strong></a>(self, selectLocator)</dt><dd><tt>Gets&nbsp;option&nbsp;index&nbsp;(option&nbsp;number,&nbsp;starting&nbsp;at&nbsp;0)&nbsp;for&nbsp;selected&nbsp;option&nbsp;in&nbsp;the&nbsp;specified&nbsp;select&nbsp;element.<br>
+&nbsp;<br>
+'selectLocator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;identifying&nbsp;a&nbsp;drop-down&nbsp;menu</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_selected_indexes"><strong>get_selected_indexes</strong></a>(self, selectLocator)</dt><dd><tt>Gets&nbsp;all&nbsp;option&nbsp;indexes&nbsp;(option&nbsp;number,&nbsp;starting&nbsp;at&nbsp;0)&nbsp;for&nbsp;selected&nbsp;options&nbsp;in&nbsp;the&nbsp;specified&nbsp;select&nbsp;or&nbsp;multi-select&nbsp;element.<br>
+&nbsp;<br>
+'selectLocator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;identifying&nbsp;a&nbsp;drop-down&nbsp;menu</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_selected_label"><strong>get_selected_label</strong></a>(self, selectLocator)</dt><dd><tt>Gets&nbsp;option&nbsp;label&nbsp;(visible&nbsp;text)&nbsp;for&nbsp;selected&nbsp;option&nbsp;in&nbsp;the&nbsp;specified&nbsp;select&nbsp;element.<br>
+&nbsp;<br>
+'selectLocator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;identifying&nbsp;a&nbsp;drop-down&nbsp;menu</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_selected_labels"><strong>get_selected_labels</strong></a>(self, selectLocator)</dt><dd><tt>Gets&nbsp;all&nbsp;option&nbsp;labels&nbsp;(visible&nbsp;text)&nbsp;for&nbsp;selected&nbsp;options&nbsp;in&nbsp;the&nbsp;specified&nbsp;select&nbsp;or&nbsp;multi-select&nbsp;element.<br>
+&nbsp;<br>
+'selectLocator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;identifying&nbsp;a&nbsp;drop-down&nbsp;menu</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_selected_value"><strong>get_selected_value</strong></a>(self, selectLocator)</dt><dd><tt>Gets&nbsp;option&nbsp;value&nbsp;(value&nbsp;attribute)&nbsp;for&nbsp;selected&nbsp;option&nbsp;in&nbsp;the&nbsp;specified&nbsp;select&nbsp;element.<br>
+&nbsp;<br>
+'selectLocator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;identifying&nbsp;a&nbsp;drop-down&nbsp;menu</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_selected_values"><strong>get_selected_values</strong></a>(self, selectLocator)</dt><dd><tt>Gets&nbsp;all&nbsp;option&nbsp;values&nbsp;(value&nbsp;attributes)&nbsp;for&nbsp;selected&nbsp;options&nbsp;in&nbsp;the&nbsp;specified&nbsp;select&nbsp;or&nbsp;multi-select&nbsp;element.<br>
+&nbsp;<br>
+'selectLocator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;identifying&nbsp;a&nbsp;drop-down&nbsp;menu</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_speed"><strong>get_speed</strong></a>(self)</dt><dd><tt>Get&nbsp;execution&nbsp;speed&nbsp;(i.e.,&nbsp;get&nbsp;the&nbsp;millisecond&nbsp;length&nbsp;of&nbsp;the&nbsp;delay&nbsp;following&nbsp;each&nbsp;<a href="#selenium">selenium</a>&nbsp;operation).&nbsp;&nbsp;By&nbsp;default,&nbsp;there&nbsp;is&nbsp;no&nbsp;such&nbsp;delay,&nbsp;i.e.,<br>
+the&nbsp;delay&nbsp;is&nbsp;0&nbsp;milliseconds.<br>
+&nbsp;<br>
+See&nbsp;also&nbsp;setSpeed.</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_string"><strong>get_string</strong></a>(self, verb, args)</dt></dl>
+
+<dl><dt><a name="selenium-get_string_array"><strong>get_string_array</strong></a>(self, verb, args)</dt></dl>
+
+<dl><dt><a name="selenium-get_table"><strong>get_table</strong></a>(self, tableCellAddress)</dt><dd><tt>Gets&nbsp;the&nbsp;text&nbsp;from&nbsp;a&nbsp;cell&nbsp;of&nbsp;a&nbsp;table.&nbsp;The&nbsp;cellAddress&nbsp;syntax<br>
+tableLocator.row.column,&nbsp;where&nbsp;row&nbsp;and&nbsp;column&nbsp;start&nbsp;at&nbsp;0.<br>
+&nbsp;<br>
+'tableCellAddress'&nbsp;is&nbsp;a&nbsp;cell&nbsp;address,&nbsp;e.g.&nbsp;"foo.1.4"</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_text"><strong>get_text</strong></a>(self, locator)</dt><dd><tt>Gets&nbsp;the&nbsp;text&nbsp;of&nbsp;an&nbsp;element.&nbsp;This&nbsp;works&nbsp;for&nbsp;any&nbsp;element&nbsp;that&nbsp;contains<br>
+text.&nbsp;This&nbsp;command&nbsp;uses&nbsp;either&nbsp;the&nbsp;textContent&nbsp;(Mozilla-like&nbsp;browsers)&nbsp;or<br>
+the&nbsp;innerText&nbsp;(IE-like&nbsp;browsers)&nbsp;of&nbsp;the&nbsp;element,&nbsp;which&nbsp;is&nbsp;the&nbsp;rendered<br>
+text&nbsp;shown&nbsp;to&nbsp;the&nbsp;user.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_title"><strong>get_title</strong></a>(self)</dt><dd><tt>Gets&nbsp;the&nbsp;title&nbsp;of&nbsp;the&nbsp;current&nbsp;page.</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_value"><strong>get_value</strong></a>(self, locator)</dt><dd><tt>Gets&nbsp;the&nbsp;(whitespace-trimmed)&nbsp;value&nbsp;of&nbsp;an&nbsp;input&nbsp;field&nbsp;(or&nbsp;anything&nbsp;else&nbsp;with&nbsp;a&nbsp;value&nbsp;parameter).<br>
+For&nbsp;checkbox/radio&nbsp;elements,&nbsp;the&nbsp;value&nbsp;will&nbsp;be&nbsp;"on"&nbsp;or&nbsp;"off"&nbsp;depending&nbsp;on<br>
+whether&nbsp;the&nbsp;element&nbsp;is&nbsp;checked&nbsp;or&nbsp;not.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_whether_this_frame_match_frame_expression"><strong>get_whether_this_frame_match_frame_expression</strong></a>(self, currentFrameString, target)</dt><dd><tt>Determine&nbsp;whether&nbsp;current/locator&nbsp;identify&nbsp;the&nbsp;frame&nbsp;containing&nbsp;this&nbsp;running&nbsp;code.<br>
+&nbsp;<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;useful&nbsp;in&nbsp;proxy&nbsp;injection&nbsp;mode,&nbsp;where&nbsp;this&nbsp;code&nbsp;runs&nbsp;in&nbsp;every<br>
+browser&nbsp;frame&nbsp;and&nbsp;window,&nbsp;and&nbsp;sometimes&nbsp;the&nbsp;<a href="#selenium">selenium</a>&nbsp;server&nbsp;needs&nbsp;to&nbsp;identify<br>
+the&nbsp;"current"&nbsp;frame.&nbsp;&nbsp;In&nbsp;this&nbsp;case,&nbsp;when&nbsp;the&nbsp;test&nbsp;calls&nbsp;selectFrame,&nbsp;this<br>
+routine&nbsp;is&nbsp;called&nbsp;for&nbsp;each&nbsp;frame&nbsp;to&nbsp;figure&nbsp;out&nbsp;which&nbsp;one&nbsp;has&nbsp;been&nbsp;selected.<br>
+The&nbsp;selected&nbsp;frame&nbsp;will&nbsp;return&nbsp;true,&nbsp;while&nbsp;all&nbsp;others&nbsp;will&nbsp;return&nbsp;false.<br>
+&nbsp;<br>
+&nbsp;<br>
+'currentFrameString'&nbsp;is&nbsp;starting&nbsp;frame<br>
+'target'&nbsp;is&nbsp;new&nbsp;frame&nbsp;(which&nbsp;might&nbsp;be&nbsp;relative&nbsp;to&nbsp;the&nbsp;current&nbsp;one)</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_whether_this_window_match_window_expression"><strong>get_whether_this_window_match_window_expression</strong></a>(self, currentWindowString, target)</dt><dd><tt>Determine&nbsp;whether&nbsp;currentWindowString&nbsp;plus&nbsp;target&nbsp;identify&nbsp;the&nbsp;window&nbsp;containing&nbsp;this&nbsp;running&nbsp;code.<br>
+&nbsp;<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;useful&nbsp;in&nbsp;proxy&nbsp;injection&nbsp;mode,&nbsp;where&nbsp;this&nbsp;code&nbsp;runs&nbsp;in&nbsp;every<br>
+browser&nbsp;frame&nbsp;and&nbsp;window,&nbsp;and&nbsp;sometimes&nbsp;the&nbsp;<a href="#selenium">selenium</a>&nbsp;server&nbsp;needs&nbsp;to&nbsp;identify<br>
+the&nbsp;"current"&nbsp;window.&nbsp;&nbsp;In&nbsp;this&nbsp;case,&nbsp;when&nbsp;the&nbsp;test&nbsp;calls&nbsp;selectWindow,&nbsp;this<br>
+routine&nbsp;is&nbsp;called&nbsp;for&nbsp;each&nbsp;window&nbsp;to&nbsp;figure&nbsp;out&nbsp;which&nbsp;one&nbsp;has&nbsp;been&nbsp;selected.<br>
+The&nbsp;selected&nbsp;window&nbsp;will&nbsp;return&nbsp;true,&nbsp;while&nbsp;all&nbsp;others&nbsp;will&nbsp;return&nbsp;false.<br>
+&nbsp;<br>
+&nbsp;<br>
+'currentWindowString'&nbsp;is&nbsp;starting&nbsp;window<br>
+'target'&nbsp;is&nbsp;new&nbsp;window&nbsp;(which&nbsp;might&nbsp;be&nbsp;relative&nbsp;to&nbsp;the&nbsp;current&nbsp;one,&nbsp;e.g.,&nbsp;"_parent")</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_xpath_count"><strong>get_xpath_count</strong></a>(self, xpath)</dt><dd><tt>Returns&nbsp;the&nbsp;number&nbsp;of&nbsp;nodes&nbsp;that&nbsp;match&nbsp;the&nbsp;specified&nbsp;xpath,&nbsp;eg.&nbsp;"/table"&nbsp;would&nbsp;give<br>
+the&nbsp;number&nbsp;of&nbsp;tables.<br>
+&nbsp;<br>
+'xpath'&nbsp;is&nbsp;the&nbsp;xpath&nbsp;expression&nbsp;to&nbsp;evaluate.&nbsp;do&nbsp;NOT&nbsp;wrap&nbsp;this&nbsp;expression&nbsp;in&nbsp;a&nbsp;'count()'&nbsp;function;&nbsp;we&nbsp;will&nbsp;do&nbsp;that&nbsp;for&nbsp;you.</tt></dd></dl>
+
+<dl><dt><a name="selenium-go_back"><strong>go_back</strong></a>(self)</dt><dd><tt>Simulates&nbsp;the&nbsp;user&nbsp;clicking&nbsp;the&nbsp;"back"&nbsp;button&nbsp;on&nbsp;their&nbsp;browser.</tt></dd></dl>
+
+<dl><dt><a name="selenium-highlight"><strong>highlight</strong></a>(self, locator)</dt><dd><tt>Briefly&nbsp;changes&nbsp;the&nbsp;backgroundColor&nbsp;of&nbsp;the&nbsp;specified&nbsp;element&nbsp;yellow.&nbsp;&nbsp;Useful&nbsp;for&nbsp;debugging.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator</tt></dd></dl>
+
+<dl><dt><a name="selenium-ignore_attributes_without_value"><strong>ignore_attributes_without_value</strong></a>(self, ignore)</dt><dd><tt>Specifies&nbsp;whether&nbsp;Selenium&nbsp;will&nbsp;ignore&nbsp;xpath&nbsp;attributes&nbsp;that&nbsp;have&nbsp;no<br>
+value,&nbsp;i.e.&nbsp;are&nbsp;the&nbsp;empty&nbsp;string,&nbsp;when&nbsp;using&nbsp;the&nbsp;non-native&nbsp;xpath<br>
+evaluation&nbsp;engine.&nbsp;You'd&nbsp;want&nbsp;to&nbsp;do&nbsp;this&nbsp;for&nbsp;performance&nbsp;reasons&nbsp;in&nbsp;IE.<br>
+However,&nbsp;this&nbsp;could&nbsp;break&nbsp;certain&nbsp;xpaths,&nbsp;for&nbsp;example&nbsp;an&nbsp;xpath&nbsp;that&nbsp;looks<br>
+for&nbsp;an&nbsp;attribute&nbsp;whose&nbsp;value&nbsp;is&nbsp;NOT&nbsp;the&nbsp;empty&nbsp;string.<br>
+&nbsp;<br>
+The&nbsp;hope&nbsp;is&nbsp;that&nbsp;such&nbsp;xpaths&nbsp;are&nbsp;relatively&nbsp;rare,&nbsp;but&nbsp;the&nbsp;user&nbsp;should<br>
+have&nbsp;the&nbsp;option&nbsp;of&nbsp;using&nbsp;them.&nbsp;Note&nbsp;that&nbsp;this&nbsp;only&nbsp;influences&nbsp;xpath<br>
+evaluation&nbsp;when&nbsp;using&nbsp;the&nbsp;ajaxslt&nbsp;engine&nbsp;(i.e.&nbsp;not&nbsp;"javascript-xpath").<br>
+&nbsp;<br>
+'ignore'&nbsp;is&nbsp;boolean,&nbsp;true&nbsp;means&nbsp;we'll&nbsp;ignore&nbsp;attributes&nbsp;without&nbsp;value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;at&nbsp;the&nbsp;expense&nbsp;of&nbsp;xpath&nbsp;"correctness";&nbsp;false&nbsp;means&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;we'll&nbsp;sacrifice&nbsp;speed&nbsp;for&nbsp;correctness.</tt></dd></dl>
+
+<dl><dt><a name="selenium-is_alert_present"><strong>is_alert_present</strong></a>(self)</dt><dd><tt>Has&nbsp;an&nbsp;alert&nbsp;occurred?<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;never&nbsp;throws&nbsp;an&nbsp;exception</tt></dd></dl>
+
+<dl><dt><a name="selenium-is_checked"><strong>is_checked</strong></a>(self, locator)</dt><dd><tt>Gets&nbsp;whether&nbsp;a&nbsp;toggle-button&nbsp;(checkbox/radio)&nbsp;is&nbsp;checked.&nbsp;&nbsp;Fails&nbsp;if&nbsp;the&nbsp;specified&nbsp;element&nbsp;doesn't&nbsp;exist&nbsp;or&nbsp;isn't&nbsp;a&nbsp;toggle-button.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;pointing&nbsp;to&nbsp;a&nbsp;checkbox&nbsp;or&nbsp;radio&nbsp;button</tt></dd></dl>
+
+<dl><dt><a name="selenium-is_confirmation_present"><strong>is_confirmation_present</strong></a>(self)</dt><dd><tt>Has&nbsp;confirm()&nbsp;been&nbsp;called?<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;never&nbsp;throws&nbsp;an&nbsp;exception</tt></dd></dl>
+
+<dl><dt><a name="selenium-is_cookie_present"><strong>is_cookie_present</strong></a>(self, name)</dt><dd><tt>Returns&nbsp;true&nbsp;if&nbsp;a&nbsp;cookie&nbsp;with&nbsp;the&nbsp;specified&nbsp;name&nbsp;is&nbsp;present,&nbsp;or&nbsp;false&nbsp;otherwise.<br>
+&nbsp;<br>
+'name'&nbsp;is&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;cookie</tt></dd></dl>
+
+<dl><dt><a name="selenium-is_editable"><strong>is_editable</strong></a>(self, locator)</dt><dd><tt>Determines&nbsp;whether&nbsp;the&nbsp;specified&nbsp;input&nbsp;element&nbsp;is&nbsp;editable,&nbsp;ie&nbsp;hasn't&nbsp;been&nbsp;disabled.<br>
+This&nbsp;method&nbsp;will&nbsp;fail&nbsp;if&nbsp;the&nbsp;specified&nbsp;element&nbsp;isn't&nbsp;an&nbsp;input&nbsp;element.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator</tt></dd></dl>
+
+<dl><dt><a name="selenium-is_element_present"><strong>is_element_present</strong></a>(self, locator)</dt><dd><tt>Verifies&nbsp;that&nbsp;the&nbsp;specified&nbsp;element&nbsp;is&nbsp;somewhere&nbsp;on&nbsp;the&nbsp;page.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator</tt></dd></dl>
+
+<dl><dt><a name="selenium-is_ordered"><strong>is_ordered</strong></a>(self, locator1, locator2)</dt><dd><tt>Check&nbsp;if&nbsp;these&nbsp;two&nbsp;elements&nbsp;have&nbsp;same&nbsp;parent&nbsp;and&nbsp;are&nbsp;ordered&nbsp;siblings&nbsp;in&nbsp;the&nbsp;DOM.&nbsp;Two&nbsp;same&nbsp;elements&nbsp;will<br>
+not&nbsp;be&nbsp;considered&nbsp;ordered.<br>
+&nbsp;<br>
+'locator1'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;pointing&nbsp;to&nbsp;the&nbsp;first&nbsp;element<br>
+'locator2'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;pointing&nbsp;to&nbsp;the&nbsp;second&nbsp;element</tt></dd></dl>
+
+<dl><dt><a name="selenium-is_prompt_present"><strong>is_prompt_present</strong></a>(self)</dt><dd><tt>Has&nbsp;a&nbsp;prompt&nbsp;occurred?<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;never&nbsp;throws&nbsp;an&nbsp;exception</tt></dd></dl>
+
+<dl><dt><a name="selenium-is_something_selected"><strong>is_something_selected</strong></a>(self, selectLocator)</dt><dd><tt>Determines&nbsp;whether&nbsp;some&nbsp;option&nbsp;in&nbsp;a&nbsp;drop-down&nbsp;menu&nbsp;is&nbsp;selected.<br>
+&nbsp;<br>
+'selectLocator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;identifying&nbsp;a&nbsp;drop-down&nbsp;menu</tt></dd></dl>
+
+<dl><dt><a name="selenium-is_text_present"><strong>is_text_present</strong></a>(self, pattern)</dt><dd><tt>Verifies&nbsp;that&nbsp;the&nbsp;specified&nbsp;text&nbsp;pattern&nbsp;appears&nbsp;somewhere&nbsp;on&nbsp;the&nbsp;rendered&nbsp;page&nbsp;shown&nbsp;to&nbsp;the&nbsp;user.<br>
+&nbsp;<br>
+'pattern'&nbsp;is&nbsp;a&nbsp;pattern&nbsp;to&nbsp;match&nbsp;with&nbsp;the&nbsp;text&nbsp;of&nbsp;the&nbsp;page</tt></dd></dl>
+
+<dl><dt><a name="selenium-is_visible"><strong>is_visible</strong></a>(self, locator)</dt><dd><tt>Determines&nbsp;if&nbsp;the&nbsp;specified&nbsp;element&nbsp;is&nbsp;visible.&nbsp;An<br>
+element&nbsp;can&nbsp;be&nbsp;rendered&nbsp;invisible&nbsp;by&nbsp;setting&nbsp;the&nbsp;CSS&nbsp;"visibility"<br>
+property&nbsp;to&nbsp;"hidden",&nbsp;or&nbsp;the&nbsp;"display"&nbsp;property&nbsp;to&nbsp;"none",&nbsp;either&nbsp;for&nbsp;the<br>
+element&nbsp;itself&nbsp;or&nbsp;one&nbsp;if&nbsp;its&nbsp;ancestors.&nbsp;&nbsp;This&nbsp;method&nbsp;will&nbsp;fail&nbsp;if<br>
+the&nbsp;element&nbsp;is&nbsp;not&nbsp;present.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator</tt></dd></dl>
+
+<dl><dt><a name="selenium-key_down"><strong>key_down</strong></a>(self, locator, keySequence)</dt><dd><tt>Simulates&nbsp;a&nbsp;user&nbsp;pressing&nbsp;a&nbsp;key&nbsp;(without&nbsp;releasing&nbsp;it&nbsp;yet).<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator<br>
+'keySequence'&nbsp;is&nbsp;Either&nbsp;be&nbsp;a&nbsp;string(""&nbsp;followed&nbsp;by&nbsp;the&nbsp;numeric&nbsp;keycode&nbsp;&nbsp;of&nbsp;the&nbsp;key&nbsp;to&nbsp;be&nbsp;pressed,&nbsp;normally&nbsp;the&nbsp;ASCII&nbsp;value&nbsp;of&nbsp;that&nbsp;key),&nbsp;or&nbsp;a&nbsp;single&nbsp;&nbsp;character.&nbsp;For&nbsp;example:&nbsp;"w",&nbsp;"&nbsp;&nbsp;&nbsp;&nbsp;9".</tt></dd></dl>
+
+<dl><dt><a name="selenium-key_down_native"><strong>key_down_native</strong></a>(self, keycode)</dt><dd><tt>Simulates&nbsp;a&nbsp;user&nbsp;pressing&nbsp;a&nbsp;key&nbsp;(without&nbsp;releasing&nbsp;it&nbsp;yet)&nbsp;by&nbsp;sending&nbsp;a&nbsp;native&nbsp;operating&nbsp;system&nbsp;keystroke.<br>
+This&nbsp;function&nbsp;uses&nbsp;the&nbsp;java.awt.Robot&nbsp;class&nbsp;to&nbsp;send&nbsp;a&nbsp;keystroke;&nbsp;this&nbsp;more&nbsp;accurately&nbsp;simulates&nbsp;typing<br>
+a&nbsp;key&nbsp;on&nbsp;the&nbsp;keyboard.&nbsp;&nbsp;It&nbsp;does&nbsp;not&nbsp;honor&nbsp;settings&nbsp;from&nbsp;the&nbsp;shiftKeyDown,&nbsp;controlKeyDown,&nbsp;altKeyDown&nbsp;and<br>
+metaKeyDown&nbsp;commands,&nbsp;and&nbsp;does&nbsp;not&nbsp;target&nbsp;any&nbsp;particular&nbsp;HTML&nbsp;element.&nbsp;&nbsp;To&nbsp;send&nbsp;a&nbsp;keystroke&nbsp;to&nbsp;a&nbsp;particular<br>
+element,&nbsp;focus&nbsp;on&nbsp;the&nbsp;element&nbsp;first&nbsp;before&nbsp;running&nbsp;this&nbsp;command.<br>
+&nbsp;<br>
+'keycode'&nbsp;is&nbsp;an&nbsp;integer&nbsp;keycode&nbsp;number&nbsp;corresponding&nbsp;to&nbsp;a&nbsp;java.awt.event.KeyEvent;&nbsp;note&nbsp;that&nbsp;Java&nbsp;keycodes&nbsp;are&nbsp;NOT&nbsp;the&nbsp;same&nbsp;thing&nbsp;as&nbsp;JavaScript&nbsp;keycodes!</tt></dd></dl>
+
+<dl><dt><a name="selenium-key_press"><strong>key_press</strong></a>(self, locator, keySequence)</dt><dd><tt>Simulates&nbsp;a&nbsp;user&nbsp;pressing&nbsp;and&nbsp;releasing&nbsp;a&nbsp;key.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator<br>
+'keySequence'&nbsp;is&nbsp;Either&nbsp;be&nbsp;a&nbsp;string(""&nbsp;followed&nbsp;by&nbsp;the&nbsp;numeric&nbsp;keycode&nbsp;&nbsp;of&nbsp;the&nbsp;key&nbsp;to&nbsp;be&nbsp;pressed,&nbsp;normally&nbsp;the&nbsp;ASCII&nbsp;value&nbsp;of&nbsp;that&nbsp;key),&nbsp;or&nbsp;a&nbsp;single&nbsp;&nbsp;character.&nbsp;For&nbsp;example:&nbsp;"w",&nbsp;"&nbsp;&nbsp;&nbsp;&nbsp;9".</tt></dd></dl>
+
+<dl><dt><a name="selenium-key_press_native"><strong>key_press_native</strong></a>(self, keycode)</dt><dd><tt>Simulates&nbsp;a&nbsp;user&nbsp;pressing&nbsp;and&nbsp;releasing&nbsp;a&nbsp;key&nbsp;by&nbsp;sending&nbsp;a&nbsp;native&nbsp;operating&nbsp;system&nbsp;keystroke.<br>
+This&nbsp;function&nbsp;uses&nbsp;the&nbsp;java.awt.Robot&nbsp;class&nbsp;to&nbsp;send&nbsp;a&nbsp;keystroke;&nbsp;this&nbsp;more&nbsp;accurately&nbsp;simulates&nbsp;typing<br>
+a&nbsp;key&nbsp;on&nbsp;the&nbsp;keyboard.&nbsp;&nbsp;It&nbsp;does&nbsp;not&nbsp;honor&nbsp;settings&nbsp;from&nbsp;the&nbsp;shiftKeyDown,&nbsp;controlKeyDown,&nbsp;altKeyDown&nbsp;and<br>
+metaKeyDown&nbsp;commands,&nbsp;and&nbsp;does&nbsp;not&nbsp;target&nbsp;any&nbsp;particular&nbsp;HTML&nbsp;element.&nbsp;&nbsp;To&nbsp;send&nbsp;a&nbsp;keystroke&nbsp;to&nbsp;a&nbsp;particular<br>
+element,&nbsp;focus&nbsp;on&nbsp;the&nbsp;element&nbsp;first&nbsp;before&nbsp;running&nbsp;this&nbsp;command.<br>
+&nbsp;<br>
+'keycode'&nbsp;is&nbsp;an&nbsp;integer&nbsp;keycode&nbsp;number&nbsp;corresponding&nbsp;to&nbsp;a&nbsp;java.awt.event.KeyEvent;&nbsp;note&nbsp;that&nbsp;Java&nbsp;keycodes&nbsp;are&nbsp;NOT&nbsp;the&nbsp;same&nbsp;thing&nbsp;as&nbsp;JavaScript&nbsp;keycodes!</tt></dd></dl>
+
+<dl><dt><a name="selenium-key_up"><strong>key_up</strong></a>(self, locator, keySequence)</dt><dd><tt>Simulates&nbsp;a&nbsp;user&nbsp;releasing&nbsp;a&nbsp;key.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator<br>
+'keySequence'&nbsp;is&nbsp;Either&nbsp;be&nbsp;a&nbsp;string(""&nbsp;followed&nbsp;by&nbsp;the&nbsp;numeric&nbsp;keycode&nbsp;&nbsp;of&nbsp;the&nbsp;key&nbsp;to&nbsp;be&nbsp;pressed,&nbsp;normally&nbsp;the&nbsp;ASCII&nbsp;value&nbsp;of&nbsp;that&nbsp;key),&nbsp;or&nbsp;a&nbsp;single&nbsp;&nbsp;character.&nbsp;For&nbsp;example:&nbsp;"w",&nbsp;"&nbsp;&nbsp;&nbsp;&nbsp;9".</tt></dd></dl>
+
+<dl><dt><a name="selenium-key_up_native"><strong>key_up_native</strong></a>(self, keycode)</dt><dd><tt>Simulates&nbsp;a&nbsp;user&nbsp;releasing&nbsp;a&nbsp;key&nbsp;by&nbsp;sending&nbsp;a&nbsp;native&nbsp;operating&nbsp;system&nbsp;keystroke.<br>
+This&nbsp;function&nbsp;uses&nbsp;the&nbsp;java.awt.Robot&nbsp;class&nbsp;to&nbsp;send&nbsp;a&nbsp;keystroke;&nbsp;this&nbsp;more&nbsp;accurately&nbsp;simulates&nbsp;typing<br>
+a&nbsp;key&nbsp;on&nbsp;the&nbsp;keyboard.&nbsp;&nbsp;It&nbsp;does&nbsp;not&nbsp;honor&nbsp;settings&nbsp;from&nbsp;the&nbsp;shiftKeyDown,&nbsp;controlKeyDown,&nbsp;altKeyDown&nbsp;and<br>
+metaKeyDown&nbsp;commands,&nbsp;and&nbsp;does&nbsp;not&nbsp;target&nbsp;any&nbsp;particular&nbsp;HTML&nbsp;element.&nbsp;&nbsp;To&nbsp;send&nbsp;a&nbsp;keystroke&nbsp;to&nbsp;a&nbsp;particular<br>
+element,&nbsp;focus&nbsp;on&nbsp;the&nbsp;element&nbsp;first&nbsp;before&nbsp;running&nbsp;this&nbsp;command.<br>
+&nbsp;<br>
+'keycode'&nbsp;is&nbsp;an&nbsp;integer&nbsp;keycode&nbsp;number&nbsp;corresponding&nbsp;to&nbsp;a&nbsp;java.awt.event.KeyEvent;&nbsp;note&nbsp;that&nbsp;Java&nbsp;keycodes&nbsp;are&nbsp;NOT&nbsp;the&nbsp;same&nbsp;thing&nbsp;as&nbsp;JavaScript&nbsp;keycodes!</tt></dd></dl>
+
+<dl><dt><a name="selenium-meta_key_down"><strong>meta_key_down</strong></a>(self)</dt><dd><tt>Press&nbsp;the&nbsp;meta&nbsp;key&nbsp;and&nbsp;hold&nbsp;it&nbsp;down&nbsp;until&nbsp;doMetaUp()&nbsp;is&nbsp;called&nbsp;or&nbsp;a&nbsp;new&nbsp;page&nbsp;is&nbsp;loaded.</tt></dd></dl>
+
+<dl><dt><a name="selenium-meta_key_up"><strong>meta_key_up</strong></a>(self)</dt><dd><tt>Release&nbsp;the&nbsp;meta&nbsp;key.</tt></dd></dl>
+
+<dl><dt><a name="selenium-mouse_down"><strong>mouse_down</strong></a>(self, locator)</dt><dd><tt>Simulates&nbsp;a&nbsp;user&nbsp;pressing&nbsp;the&nbsp;left&nbsp;mouse&nbsp;button&nbsp;(without&nbsp;releasing&nbsp;it&nbsp;yet)&nbsp;on<br>
+the&nbsp;specified&nbsp;element.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator</tt></dd></dl>
+
+<dl><dt><a name="selenium-mouse_down_at"><strong>mouse_down_at</strong></a>(self, locator, coordString)</dt><dd><tt>Simulates&nbsp;a&nbsp;user&nbsp;pressing&nbsp;the&nbsp;left&nbsp;mouse&nbsp;button&nbsp;(without&nbsp;releasing&nbsp;it&nbsp;yet)&nbsp;at<br>
+the&nbsp;specified&nbsp;location.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator<br>
+'coordString'&nbsp;is&nbsp;specifies&nbsp;the&nbsp;x,y&nbsp;position&nbsp;(i.e.&nbsp;-&nbsp;10,20)&nbsp;of&nbsp;the&nbsp;mouse&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;event&nbsp;relative&nbsp;to&nbsp;the&nbsp;element&nbsp;returned&nbsp;by&nbsp;the&nbsp;locator.</tt></dd></dl>
+
+<dl><dt><a name="selenium-mouse_down_right"><strong>mouse_down_right</strong></a>(self, locator)</dt><dd><tt>Simulates&nbsp;a&nbsp;user&nbsp;pressing&nbsp;the&nbsp;right&nbsp;mouse&nbsp;button&nbsp;(without&nbsp;releasing&nbsp;it&nbsp;yet)&nbsp;on<br>
+the&nbsp;specified&nbsp;element.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator</tt></dd></dl>
+
+<dl><dt><a name="selenium-mouse_down_right_at"><strong>mouse_down_right_at</strong></a>(self, locator, coordString)</dt><dd><tt>Simulates&nbsp;a&nbsp;user&nbsp;pressing&nbsp;the&nbsp;right&nbsp;mouse&nbsp;button&nbsp;(without&nbsp;releasing&nbsp;it&nbsp;yet)&nbsp;at<br>
+the&nbsp;specified&nbsp;location.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator<br>
+'coordString'&nbsp;is&nbsp;specifies&nbsp;the&nbsp;x,y&nbsp;position&nbsp;(i.e.&nbsp;-&nbsp;10,20)&nbsp;of&nbsp;the&nbsp;mouse&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;event&nbsp;relative&nbsp;to&nbsp;the&nbsp;element&nbsp;returned&nbsp;by&nbsp;the&nbsp;locator.</tt></dd></dl>
+
+<dl><dt><a name="selenium-mouse_move"><strong>mouse_move</strong></a>(self, locator)</dt><dd><tt>Simulates&nbsp;a&nbsp;user&nbsp;pressing&nbsp;the&nbsp;mouse&nbsp;button&nbsp;(without&nbsp;releasing&nbsp;it&nbsp;yet)&nbsp;on<br>
+the&nbsp;specified&nbsp;element.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator</tt></dd></dl>
+
+<dl><dt><a name="selenium-mouse_move_at"><strong>mouse_move_at</strong></a>(self, locator, coordString)</dt><dd><tt>Simulates&nbsp;a&nbsp;user&nbsp;pressing&nbsp;the&nbsp;mouse&nbsp;button&nbsp;(without&nbsp;releasing&nbsp;it&nbsp;yet)&nbsp;on<br>
+the&nbsp;specified&nbsp;element.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator<br>
+'coordString'&nbsp;is&nbsp;specifies&nbsp;the&nbsp;x,y&nbsp;position&nbsp;(i.e.&nbsp;-&nbsp;10,20)&nbsp;of&nbsp;the&nbsp;mouse&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;event&nbsp;relative&nbsp;to&nbsp;the&nbsp;element&nbsp;returned&nbsp;by&nbsp;the&nbsp;locator.</tt></dd></dl>
+
+<dl><dt><a name="selenium-mouse_out"><strong>mouse_out</strong></a>(self, locator)</dt><dd><tt>Simulates&nbsp;a&nbsp;user&nbsp;moving&nbsp;the&nbsp;mouse&nbsp;pointer&nbsp;away&nbsp;from&nbsp;the&nbsp;specified&nbsp;element.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator</tt></dd></dl>
+
+<dl><dt><a name="selenium-mouse_over"><strong>mouse_over</strong></a>(self, locator)</dt><dd><tt>Simulates&nbsp;a&nbsp;user&nbsp;hovering&nbsp;a&nbsp;mouse&nbsp;over&nbsp;the&nbsp;specified&nbsp;element.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator</tt></dd></dl>
+
+<dl><dt><a name="selenium-mouse_up"><strong>mouse_up</strong></a>(self, locator)</dt><dd><tt>Simulates&nbsp;the&nbsp;event&nbsp;that&nbsp;occurs&nbsp;when&nbsp;the&nbsp;user&nbsp;releases&nbsp;the&nbsp;mouse&nbsp;button&nbsp;(i.e.,&nbsp;stops<br>
+holding&nbsp;the&nbsp;button&nbsp;down)&nbsp;on&nbsp;the&nbsp;specified&nbsp;element.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator</tt></dd></dl>
+
+<dl><dt><a name="selenium-mouse_up_at"><strong>mouse_up_at</strong></a>(self, locator, coordString)</dt><dd><tt>Simulates&nbsp;the&nbsp;event&nbsp;that&nbsp;occurs&nbsp;when&nbsp;the&nbsp;user&nbsp;releases&nbsp;the&nbsp;mouse&nbsp;button&nbsp;(i.e.,&nbsp;stops<br>
+holding&nbsp;the&nbsp;button&nbsp;down)&nbsp;at&nbsp;the&nbsp;specified&nbsp;location.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator<br>
+'coordString'&nbsp;is&nbsp;specifies&nbsp;the&nbsp;x,y&nbsp;position&nbsp;(i.e.&nbsp;-&nbsp;10,20)&nbsp;of&nbsp;the&nbsp;mouse&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;event&nbsp;relative&nbsp;to&nbsp;the&nbsp;element&nbsp;returned&nbsp;by&nbsp;the&nbsp;locator.</tt></dd></dl>
+
+<dl><dt><a name="selenium-mouse_up_right"><strong>mouse_up_right</strong></a>(self, locator)</dt><dd><tt>Simulates&nbsp;the&nbsp;event&nbsp;that&nbsp;occurs&nbsp;when&nbsp;the&nbsp;user&nbsp;releases&nbsp;the&nbsp;right&nbsp;mouse&nbsp;button&nbsp;(i.e.,&nbsp;stops<br>
+holding&nbsp;the&nbsp;button&nbsp;down)&nbsp;on&nbsp;the&nbsp;specified&nbsp;element.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator</tt></dd></dl>
+
+<dl><dt><a name="selenium-mouse_up_right_at"><strong>mouse_up_right_at</strong></a>(self, locator, coordString)</dt><dd><tt>Simulates&nbsp;the&nbsp;event&nbsp;that&nbsp;occurs&nbsp;when&nbsp;the&nbsp;user&nbsp;releases&nbsp;the&nbsp;right&nbsp;mouse&nbsp;button&nbsp;(i.e.,&nbsp;stops<br>
+holding&nbsp;the&nbsp;button&nbsp;down)&nbsp;at&nbsp;the&nbsp;specified&nbsp;location.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator<br>
+'coordString'&nbsp;is&nbsp;specifies&nbsp;the&nbsp;x,y&nbsp;position&nbsp;(i.e.&nbsp;-&nbsp;10,20)&nbsp;of&nbsp;the&nbsp;mouse&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;event&nbsp;relative&nbsp;to&nbsp;the&nbsp;element&nbsp;returned&nbsp;by&nbsp;the&nbsp;locator.</tt></dd></dl>
+
+<dl><dt><a name="selenium-open"><strong>open</strong></a>(self, url)</dt><dd><tt>Opens&nbsp;an&nbsp;URL&nbsp;in&nbsp;the&nbsp;test&nbsp;frame.&nbsp;This&nbsp;accepts&nbsp;both&nbsp;relative&nbsp;and&nbsp;absolute<br>
+URLs.<br>
+&nbsp;<br>
+The&nbsp;"open"&nbsp;command&nbsp;waits&nbsp;for&nbsp;the&nbsp;page&nbsp;to&nbsp;load&nbsp;before&nbsp;proceeding,<br>
+ie.&nbsp;the&nbsp;"AndWait"&nbsp;suffix&nbsp;is&nbsp;implicit.<br>
+&nbsp;<br>
+\&nbsp;*Note*:&nbsp;The&nbsp;URL&nbsp;must&nbsp;be&nbsp;on&nbsp;the&nbsp;same&nbsp;domain&nbsp;as&nbsp;the&nbsp;runner&nbsp;HTML<br>
+due&nbsp;to&nbsp;security&nbsp;restrictions&nbsp;in&nbsp;the&nbsp;browser&nbsp;(Same&nbsp;Origin&nbsp;Policy).&nbsp;If&nbsp;you<br>
+need&nbsp;to&nbsp;open&nbsp;an&nbsp;URL&nbsp;on&nbsp;another&nbsp;domain,&nbsp;use&nbsp;the&nbsp;Selenium&nbsp;Server&nbsp;to&nbsp;start&nbsp;a<br>
+new&nbsp;browser&nbsp;session&nbsp;on&nbsp;that&nbsp;domain.<br>
+&nbsp;<br>
+'url'&nbsp;is&nbsp;the&nbsp;URL&nbsp;to&nbsp;open;&nbsp;may&nbsp;be&nbsp;relative&nbsp;or&nbsp;absolute</tt></dd></dl>
+
+<dl><dt><a name="selenium-open_window"><strong>open_window</strong></a>(self, url, windowID)</dt><dd><tt>Opens&nbsp;a&nbsp;popup&nbsp;window&nbsp;(if&nbsp;a&nbsp;window&nbsp;with&nbsp;that&nbsp;ID&nbsp;isn't&nbsp;already&nbsp;open).<br>
+After&nbsp;opening&nbsp;the&nbsp;window,&nbsp;you'll&nbsp;need&nbsp;to&nbsp;select&nbsp;it&nbsp;using&nbsp;the&nbsp;selectWindow<br>
+command.<br>
+&nbsp;<br>
+&nbsp;<br>
+This&nbsp;command&nbsp;can&nbsp;also&nbsp;be&nbsp;a&nbsp;useful&nbsp;workaround&nbsp;for&nbsp;bug&nbsp;SEL-339.&nbsp;&nbsp;In&nbsp;some&nbsp;cases,&nbsp;Selenium&nbsp;will&nbsp;be&nbsp;unable&nbsp;to&nbsp;intercept&nbsp;a&nbsp;call&nbsp;to&nbsp;window.open&nbsp;(if&nbsp;the&nbsp;call&nbsp;occurs&nbsp;during&nbsp;or&nbsp;before&nbsp;the&nbsp;"onLoad"&nbsp;event,&nbsp;for&nbsp;example).<br>
+In&nbsp;those&nbsp;cases,&nbsp;you&nbsp;can&nbsp;force&nbsp;Selenium&nbsp;to&nbsp;notice&nbsp;the&nbsp;open&nbsp;window's&nbsp;name&nbsp;by&nbsp;using&nbsp;the&nbsp;Selenium&nbsp;openWindow&nbsp;command,&nbsp;using<br>
+an&nbsp;empty&nbsp;(blank)&nbsp;url,&nbsp;like&nbsp;this:&nbsp;openWindow("",&nbsp;"myFunnyWindow").<br>
+&nbsp;<br>
+&nbsp;<br>
+'url'&nbsp;is&nbsp;the&nbsp;URL&nbsp;to&nbsp;open,&nbsp;which&nbsp;can&nbsp;be&nbsp;blank<br>
+'windowID'&nbsp;is&nbsp;the&nbsp;JavaScript&nbsp;window&nbsp;ID&nbsp;of&nbsp;the&nbsp;window&nbsp;to&nbsp;select</tt></dd></dl>
+
+<dl><dt><a name="selenium-refresh"><strong>refresh</strong></a>(self)</dt><dd><tt>Simulates&nbsp;the&nbsp;user&nbsp;clicking&nbsp;the&nbsp;"Refresh"&nbsp;button&nbsp;on&nbsp;their&nbsp;browser.</tt></dd></dl>
+
+<dl><dt><a name="selenium-remove_all_selections"><strong>remove_all_selections</strong></a>(self, locator)</dt><dd><tt>Unselects&nbsp;all&nbsp;of&nbsp;the&nbsp;selected&nbsp;options&nbsp;in&nbsp;a&nbsp;multi-select&nbsp;element.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;identifying&nbsp;a&nbsp;multi-select&nbsp;box</tt></dd></dl>
+
+<dl><dt><a name="selenium-remove_script"><strong>remove_script</strong></a>(self, scriptTagId)</dt><dd><tt>Removes&nbsp;a&nbsp;script&nbsp;tag&nbsp;from&nbsp;the&nbsp;Selenium&nbsp;document&nbsp;identified&nbsp;by&nbsp;the&nbsp;given<br>
+id.&nbsp;Does&nbsp;nothing&nbsp;if&nbsp;the&nbsp;referenced&nbsp;tag&nbsp;doesn't&nbsp;exist.<br>
+&nbsp;<br>
+'scriptTagId'&nbsp;is&nbsp;the&nbsp;id&nbsp;of&nbsp;the&nbsp;script&nbsp;element&nbsp;to&nbsp;remove.</tt></dd></dl>
+
+<dl><dt><a name="selenium-remove_selection"><strong>remove_selection</strong></a>(self, locator, optionLocator)</dt><dd><tt>Remove&nbsp;a&nbsp;selection&nbsp;from&nbsp;the&nbsp;set&nbsp;of&nbsp;selected&nbsp;options&nbsp;in&nbsp;a&nbsp;multi-select&nbsp;element&nbsp;using&nbsp;an&nbsp;option&nbsp;locator.<br>
+&nbsp;<br>
+@see&nbsp;#doSelect&nbsp;for&nbsp;details&nbsp;of&nbsp;option&nbsp;locators<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;identifying&nbsp;a&nbsp;multi-select&nbsp;box<br>
+'optionLocator'&nbsp;is&nbsp;an&nbsp;option&nbsp;locator&nbsp;(a&nbsp;label&nbsp;by&nbsp;default)</tt></dd></dl>
+
+<dl><dt><a name="selenium-retrieve_last_remote_control_logs"><strong>retrieve_last_remote_control_logs</strong></a>(self)</dt><dd><tt>Retrieve&nbsp;the&nbsp;last&nbsp;messages&nbsp;logged&nbsp;on&nbsp;a&nbsp;specific&nbsp;remote&nbsp;control.&nbsp;Useful&nbsp;for&nbsp;error&nbsp;reports,&nbsp;especially<br>
+when&nbsp;running&nbsp;multiple&nbsp;remote&nbsp;controls&nbsp;in&nbsp;a&nbsp;distributed&nbsp;environment.&nbsp;The&nbsp;maximum&nbsp;number&nbsp;of&nbsp;log&nbsp;messages<br>
+that&nbsp;can&nbsp;be&nbsp;retrieve&nbsp;is&nbsp;configured&nbsp;on&nbsp;remote&nbsp;control&nbsp;startup.</tt></dd></dl>
+
+<dl><dt><a name="selenium-rollup"><strong>rollup</strong></a>(self, rollupName, kwargs)</dt><dd><tt>Executes&nbsp;a&nbsp;command&nbsp;rollup,&nbsp;which&nbsp;is&nbsp;a&nbsp;series&nbsp;of&nbsp;commands&nbsp;with&nbsp;a&nbsp;unique<br>
+name,&nbsp;and&nbsp;optionally&nbsp;arguments&nbsp;that&nbsp;control&nbsp;the&nbsp;generation&nbsp;of&nbsp;the&nbsp;set&nbsp;of<br>
+commands.&nbsp;If&nbsp;any&nbsp;one&nbsp;of&nbsp;the&nbsp;rolled-up&nbsp;commands&nbsp;fails,&nbsp;the&nbsp;rollup&nbsp;is<br>
+considered&nbsp;to&nbsp;have&nbsp;failed.&nbsp;Rollups&nbsp;may&nbsp;also&nbsp;contain&nbsp;nested&nbsp;rollups.<br>
+&nbsp;<br>
+'rollupName'&nbsp;is&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;rollup&nbsp;command<br>
+'kwargs'&nbsp;is&nbsp;keyword&nbsp;arguments&nbsp;string&nbsp;that&nbsp;influences&nbsp;how&nbsp;the&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rollup&nbsp;expands&nbsp;into&nbsp;commands</tt></dd></dl>
+
+<dl><dt><a name="selenium-run_script"><strong>run_script</strong></a>(self, script)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;"script"&nbsp;tag&nbsp;in&nbsp;the&nbsp;body&nbsp;of&nbsp;the&nbsp;current&nbsp;test&nbsp;window,&nbsp;and&nbsp;<br>
+adds&nbsp;the&nbsp;specified&nbsp;text&nbsp;into&nbsp;the&nbsp;body&nbsp;of&nbsp;the&nbsp;command.&nbsp;&nbsp;Scripts&nbsp;run&nbsp;in<br>
+this&nbsp;way&nbsp;can&nbsp;often&nbsp;be&nbsp;debugged&nbsp;more&nbsp;easily&nbsp;than&nbsp;scripts&nbsp;executed&nbsp;using<br>
+Selenium's&nbsp;"getEval"&nbsp;command.&nbsp;&nbsp;Beware&nbsp;that&nbsp;JS&nbsp;exceptions&nbsp;thrown&nbsp;in&nbsp;these&nbsp;script<br>
+tags&nbsp;aren't&nbsp;managed&nbsp;by&nbsp;Selenium,&nbsp;so&nbsp;you&nbsp;should&nbsp;probably&nbsp;wrap&nbsp;your&nbsp;script<br>
+in&nbsp;try/catch&nbsp;blocks&nbsp;if&nbsp;there&nbsp;is&nbsp;any&nbsp;chance&nbsp;that&nbsp;the&nbsp;script&nbsp;will&nbsp;throw<br>
+an&nbsp;exception.<br>
+&nbsp;<br>
+'script'&nbsp;is&nbsp;the&nbsp;JavaScript&nbsp;snippet&nbsp;to&nbsp;run</tt></dd></dl>
+
+<dl><dt><a name="selenium-select"><strong>select</strong></a>(self, selectLocator, optionLocator)</dt><dd><tt>Select&nbsp;an&nbsp;option&nbsp;from&nbsp;a&nbsp;drop-down&nbsp;using&nbsp;an&nbsp;option&nbsp;locator.<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+Option&nbsp;locators&nbsp;provide&nbsp;different&nbsp;ways&nbsp;of&nbsp;specifying&nbsp;options&nbsp;of&nbsp;an&nbsp;HTML<br>
+Select&nbsp;element&nbsp;(e.g.&nbsp;for&nbsp;selecting&nbsp;a&nbsp;specific&nbsp;option,&nbsp;or&nbsp;for&nbsp;asserting<br>
+that&nbsp;the&nbsp;selected&nbsp;option&nbsp;satisfies&nbsp;a&nbsp;specification).&nbsp;There&nbsp;are&nbsp;several<br>
+forms&nbsp;of&nbsp;Select&nbsp;Option&nbsp;Locator.<br>
+&nbsp;<br>
+&nbsp;<br>
+*&nbsp;&nbsp;&nbsp;\&nbsp;**label**\&nbsp;=\&nbsp;*labelPattern*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;matches&nbsp;options&nbsp;based&nbsp;on&nbsp;their&nbsp;labels,&nbsp;i.e.&nbsp;the&nbsp;visible&nbsp;text.&nbsp;(This<br>
+&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;the&nbsp;default.)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;label=regexp:^[Oo]ther<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+*&nbsp;&nbsp;&nbsp;\&nbsp;**value**\&nbsp;=\&nbsp;*valuePattern*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;matches&nbsp;options&nbsp;based&nbsp;on&nbsp;their&nbsp;values.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;value=other<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+*&nbsp;&nbsp;&nbsp;\&nbsp;**id**\&nbsp;=\&nbsp;*id*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;matches&nbsp;options&nbsp;based&nbsp;on&nbsp;their&nbsp;ids.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;id=option1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+*&nbsp;&nbsp;&nbsp;\&nbsp;**index**\&nbsp;=\&nbsp;*index*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;matches&nbsp;an&nbsp;option&nbsp;based&nbsp;on&nbsp;its&nbsp;index&nbsp;(offset&nbsp;from&nbsp;zero).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;index=2<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+If&nbsp;no&nbsp;option&nbsp;locator&nbsp;prefix&nbsp;is&nbsp;provided,&nbsp;the&nbsp;default&nbsp;behaviour&nbsp;is&nbsp;to&nbsp;match&nbsp;on&nbsp;\&nbsp;**label**\&nbsp;.<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+'selectLocator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;identifying&nbsp;a&nbsp;drop-down&nbsp;menu<br>
+'optionLocator'&nbsp;is&nbsp;an&nbsp;option&nbsp;locator&nbsp;(a&nbsp;label&nbsp;by&nbsp;default)</tt></dd></dl>
+
+<dl><dt><a name="selenium-select_frame"><strong>select_frame</strong></a>(self, locator)</dt><dd><tt>Selects&nbsp;a&nbsp;frame&nbsp;within&nbsp;the&nbsp;current&nbsp;window.&nbsp;&nbsp;(You&nbsp;may&nbsp;invoke&nbsp;this&nbsp;command<br>
+multiple&nbsp;times&nbsp;to&nbsp;select&nbsp;nested&nbsp;frames.)&nbsp;&nbsp;To&nbsp;select&nbsp;the&nbsp;parent&nbsp;frame,&nbsp;use<br>
+"relative=parent"&nbsp;as&nbsp;a&nbsp;locator;&nbsp;to&nbsp;select&nbsp;the&nbsp;top&nbsp;frame,&nbsp;use&nbsp;"relative=top".<br>
+You&nbsp;can&nbsp;also&nbsp;select&nbsp;a&nbsp;frame&nbsp;by&nbsp;its&nbsp;0-based&nbsp;index&nbsp;number;&nbsp;select&nbsp;the&nbsp;first&nbsp;frame&nbsp;with<br>
+"index=0",&nbsp;or&nbsp;the&nbsp;third&nbsp;frame&nbsp;with&nbsp;"index=2".<br>
+&nbsp;<br>
+&nbsp;<br>
+You&nbsp;may&nbsp;also&nbsp;use&nbsp;a&nbsp;DOM&nbsp;expression&nbsp;to&nbsp;identify&nbsp;the&nbsp;frame&nbsp;you&nbsp;want&nbsp;directly,<br>
+like&nbsp;this:&nbsp;``dom=frames["main"].frames["subframe"]``<br>
+&nbsp;<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;identifying&nbsp;a&nbsp;frame&nbsp;or&nbsp;iframe</tt></dd></dl>
+
+<dl><dt><a name="selenium-select_pop_up"><strong>select_pop_up</strong></a>(self, windowID)</dt><dd><tt>Simplifies&nbsp;the&nbsp;process&nbsp;of&nbsp;selecting&nbsp;a&nbsp;popup&nbsp;window&nbsp;(and&nbsp;does&nbsp;not&nbsp;offer<br>
+functionality&nbsp;beyond&nbsp;what&nbsp;``selectWindow()``&nbsp;already&nbsp;provides).<br>
+&nbsp;<br>
+*&nbsp;&nbsp;&nbsp;If&nbsp;``windowID``&nbsp;is&nbsp;either&nbsp;not&nbsp;specified,&nbsp;or&nbsp;specified&nbsp;as<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"null",&nbsp;the&nbsp;first&nbsp;non-top&nbsp;window&nbsp;is&nbsp;selected.&nbsp;The&nbsp;top&nbsp;window&nbsp;is&nbsp;the&nbsp;one<br>
+&nbsp;&nbsp;&nbsp;&nbsp;that&nbsp;would&nbsp;be&nbsp;selected&nbsp;by&nbsp;``selectWindow()``&nbsp;without&nbsp;providing&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;``windowID``&nbsp;.&nbsp;This&nbsp;should&nbsp;not&nbsp;be&nbsp;used&nbsp;when&nbsp;more&nbsp;than&nbsp;one&nbsp;popup<br>
+&nbsp;&nbsp;&nbsp;&nbsp;window&nbsp;is&nbsp;in&nbsp;play.<br>
+*&nbsp;&nbsp;&nbsp;Otherwise,&nbsp;the&nbsp;window&nbsp;will&nbsp;be&nbsp;looked&nbsp;up&nbsp;considering<br>
+&nbsp;&nbsp;&nbsp;&nbsp;``windowID``&nbsp;as&nbsp;the&nbsp;following&nbsp;in&nbsp;order:&nbsp;1)&nbsp;the&nbsp;"name"&nbsp;of&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;window,&nbsp;as&nbsp;specified&nbsp;to&nbsp;``window.<a href="#selenium-open">open</a>()``;&nbsp;2)&nbsp;a&nbsp;javascript<br>
+&nbsp;&nbsp;&nbsp;&nbsp;variable&nbsp;which&nbsp;is&nbsp;a&nbsp;reference&nbsp;to&nbsp;a&nbsp;window;&nbsp;and&nbsp;3)&nbsp;the&nbsp;title&nbsp;of&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;window.&nbsp;This&nbsp;is&nbsp;the&nbsp;same&nbsp;ordered&nbsp;lookup&nbsp;performed&nbsp;by<br>
+&nbsp;&nbsp;&nbsp;&nbsp;``selectWindow``&nbsp;.<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+'windowID'&nbsp;is&nbsp;an&nbsp;identifier&nbsp;for&nbsp;the&nbsp;popup&nbsp;window,&nbsp;which&nbsp;can&nbsp;take&nbsp;on&nbsp;a&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number&nbsp;of&nbsp;different&nbsp;meanings</tt></dd></dl>
+
+<dl><dt><a name="selenium-select_window"><strong>select_window</strong></a>(self, windowID)</dt><dd><tt>Selects&nbsp;a&nbsp;popup&nbsp;window&nbsp;using&nbsp;a&nbsp;window&nbsp;locator;&nbsp;once&nbsp;a&nbsp;popup&nbsp;window&nbsp;has&nbsp;been&nbsp;selected,&nbsp;all<br>
+commands&nbsp;go&nbsp;to&nbsp;that&nbsp;window.&nbsp;To&nbsp;select&nbsp;the&nbsp;main&nbsp;window&nbsp;again,&nbsp;use&nbsp;null<br>
+as&nbsp;the&nbsp;target.<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+Window&nbsp;locators&nbsp;provide&nbsp;different&nbsp;ways&nbsp;of&nbsp;specifying&nbsp;the&nbsp;window&nbsp;object:<br>
+by&nbsp;title,&nbsp;by&nbsp;internal&nbsp;JavaScript&nbsp;"name,"&nbsp;or&nbsp;by&nbsp;JavaScript&nbsp;variable.<br>
+&nbsp;<br>
+&nbsp;<br>
+*&nbsp;&nbsp;&nbsp;\&nbsp;**title**\&nbsp;=\&nbsp;*My&nbsp;Special&nbsp;Window*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Finds&nbsp;the&nbsp;window&nbsp;using&nbsp;the&nbsp;text&nbsp;that&nbsp;appears&nbsp;in&nbsp;the&nbsp;title&nbsp;bar.&nbsp;&nbsp;Be&nbsp;careful;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;two&nbsp;windows&nbsp;can&nbsp;share&nbsp;the&nbsp;same&nbsp;title.&nbsp;&nbsp;If&nbsp;that&nbsp;happens,&nbsp;this&nbsp;locator&nbsp;will<br>
+&nbsp;&nbsp;&nbsp;&nbsp;just&nbsp;pick&nbsp;one.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+*&nbsp;&nbsp;&nbsp;\&nbsp;**name**\&nbsp;=\&nbsp;*myWindow*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Finds&nbsp;the&nbsp;window&nbsp;using&nbsp;its&nbsp;internal&nbsp;JavaScript&nbsp;"name"&nbsp;property.&nbsp;&nbsp;This&nbsp;is&nbsp;the&nbsp;second&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;parameter&nbsp;"windowName"&nbsp;passed&nbsp;to&nbsp;the&nbsp;JavaScript&nbsp;method&nbsp;window.<a href="#selenium-open">open</a>(url,&nbsp;windowName,&nbsp;windowFeatures,&nbsp;replaceFlag)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(which&nbsp;Selenium&nbsp;intercepts).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+*&nbsp;&nbsp;&nbsp;\&nbsp;**var**\&nbsp;=\&nbsp;*variableName*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Some&nbsp;pop-up&nbsp;windows&nbsp;are&nbsp;unnamed&nbsp;(anonymous),&nbsp;but&nbsp;are&nbsp;associated&nbsp;with&nbsp;a&nbsp;JavaScript&nbsp;variable&nbsp;name&nbsp;in&nbsp;the&nbsp;current<br>
+&nbsp;&nbsp;&nbsp;&nbsp;application&nbsp;window,&nbsp;e.g.&nbsp;"window.foo&nbsp;=&nbsp;window.<a href="#selenium-open">open</a>(url);".&nbsp;&nbsp;In&nbsp;those&nbsp;cases,&nbsp;you&nbsp;can&nbsp;open&nbsp;the&nbsp;window&nbsp;using<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"var=foo".<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+If&nbsp;no&nbsp;window&nbsp;locator&nbsp;prefix&nbsp;is&nbsp;provided,&nbsp;we'll&nbsp;try&nbsp;to&nbsp;guess&nbsp;what&nbsp;you&nbsp;mean&nbsp;like&nbsp;this:<br>
+&nbsp;<br>
+1.)&nbsp;if&nbsp;windowID&nbsp;is&nbsp;null,&nbsp;(or&nbsp;the&nbsp;string&nbsp;"null")&nbsp;then&nbsp;it&nbsp;is&nbsp;assumed&nbsp;the&nbsp;user&nbsp;is&nbsp;referring&nbsp;to&nbsp;the&nbsp;original&nbsp;window&nbsp;instantiated&nbsp;by&nbsp;the&nbsp;browser).<br>
+&nbsp;<br>
+2.)&nbsp;if&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;"windowID"&nbsp;parameter&nbsp;is&nbsp;a&nbsp;JavaScript&nbsp;variable&nbsp;name&nbsp;in&nbsp;the&nbsp;current&nbsp;application&nbsp;window,&nbsp;then&nbsp;it&nbsp;is&nbsp;assumed<br>
+that&nbsp;this&nbsp;variable&nbsp;contains&nbsp;the&nbsp;return&nbsp;value&nbsp;from&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;JavaScript&nbsp;window.<a href="#selenium-open">open</a>()&nbsp;method.<br>
+&nbsp;<br>
+3.)&nbsp;Otherwise,&nbsp;<a href="#selenium">selenium</a>&nbsp;looks&nbsp;in&nbsp;a&nbsp;hash&nbsp;it&nbsp;maintains&nbsp;that&nbsp;maps&nbsp;string&nbsp;names&nbsp;to&nbsp;window&nbsp;"names".<br>
+&nbsp;<br>
+4.)&nbsp;If&nbsp;\&nbsp;*that*&nbsp;fails,&nbsp;we'll&nbsp;try&nbsp;looping&nbsp;over&nbsp;all&nbsp;of&nbsp;the&nbsp;known&nbsp;windows&nbsp;to&nbsp;try&nbsp;to&nbsp;find&nbsp;the&nbsp;appropriate&nbsp;"title".<br>
+Since&nbsp;"title"&nbsp;is&nbsp;not&nbsp;necessarily&nbsp;unique,&nbsp;this&nbsp;may&nbsp;have&nbsp;unexpected&nbsp;behavior.<br>
+&nbsp;<br>
+If&nbsp;you're&nbsp;having&nbsp;trouble&nbsp;figuring&nbsp;out&nbsp;the&nbsp;name&nbsp;of&nbsp;a&nbsp;window&nbsp;that&nbsp;you&nbsp;want&nbsp;to&nbsp;manipulate,&nbsp;look&nbsp;at&nbsp;the&nbsp;Selenium&nbsp;log&nbsp;messages<br>
+which&nbsp;identify&nbsp;the&nbsp;names&nbsp;of&nbsp;windows&nbsp;created&nbsp;via&nbsp;window.open&nbsp;(and&nbsp;therefore&nbsp;intercepted&nbsp;by&nbsp;Selenium).&nbsp;&nbsp;You&nbsp;will&nbsp;see&nbsp;messages<br>
+like&nbsp;the&nbsp;following&nbsp;for&nbsp;each&nbsp;window&nbsp;as&nbsp;it&nbsp;is&nbsp;opened:<br>
+&nbsp;<br>
+``debug:&nbsp;window.open&nbsp;call&nbsp;intercepted;&nbsp;window&nbsp;ID&nbsp;(which&nbsp;you&nbsp;can&nbsp;use&nbsp;with&nbsp;selectWindow())&nbsp;is&nbsp;"myNewWindow"``<br>
+&nbsp;<br>
+In&nbsp;some&nbsp;cases,&nbsp;Selenium&nbsp;will&nbsp;be&nbsp;unable&nbsp;to&nbsp;intercept&nbsp;a&nbsp;call&nbsp;to&nbsp;window.open&nbsp;(if&nbsp;the&nbsp;call&nbsp;occurs&nbsp;during&nbsp;or&nbsp;before&nbsp;the&nbsp;"onLoad"&nbsp;event,&nbsp;for&nbsp;example).<br>
+(This&nbsp;is&nbsp;bug&nbsp;SEL-339.)&nbsp;&nbsp;In&nbsp;those&nbsp;cases,&nbsp;you&nbsp;can&nbsp;force&nbsp;Selenium&nbsp;to&nbsp;notice&nbsp;the&nbsp;open&nbsp;window's&nbsp;name&nbsp;by&nbsp;using&nbsp;the&nbsp;Selenium&nbsp;openWindow&nbsp;command,&nbsp;using<br>
+an&nbsp;empty&nbsp;(blank)&nbsp;url,&nbsp;like&nbsp;this:&nbsp;openWindow("",&nbsp;"myFunnyWindow").<br>
+&nbsp;<br>
+&nbsp;<br>
+'windowID'&nbsp;is&nbsp;the&nbsp;JavaScript&nbsp;window&nbsp;ID&nbsp;of&nbsp;the&nbsp;window&nbsp;to&nbsp;select</tt></dd></dl>
+
+<dl><dt><a name="selenium-setExtensionJs"><strong>setExtensionJs</strong></a>(self, extensionJs)</dt></dl>
+
+<dl><dt><a name="selenium-set_browser_log_level"><strong>set_browser_log_level</strong></a>(self, logLevel)</dt><dd><tt>Sets&nbsp;the&nbsp;threshold&nbsp;for&nbsp;browser-side&nbsp;logging&nbsp;messages;&nbsp;log&nbsp;messages&nbsp;beneath&nbsp;this&nbsp;threshold&nbsp;will&nbsp;be&nbsp;discarded.<br>
+Valid&nbsp;logLevel&nbsp;strings&nbsp;are:&nbsp;"debug",&nbsp;"info",&nbsp;"warn",&nbsp;"error"&nbsp;or&nbsp;"off".<br>
+To&nbsp;see&nbsp;the&nbsp;browser&nbsp;logs,&nbsp;you&nbsp;need&nbsp;to<br>
+either&nbsp;show&nbsp;the&nbsp;log&nbsp;window&nbsp;in&nbsp;GUI&nbsp;mode,&nbsp;or&nbsp;enable&nbsp;browser-side&nbsp;logging&nbsp;in&nbsp;Selenium&nbsp;RC.<br>
+&nbsp;<br>
+'logLevel'&nbsp;is&nbsp;one&nbsp;of&nbsp;the&nbsp;following:&nbsp;"debug",&nbsp;"info",&nbsp;"warn",&nbsp;"error"&nbsp;or&nbsp;"off"</tt></dd></dl>
+
+<dl><dt><a name="selenium-set_context"><strong>set_context</strong></a>(self, context)</dt><dd><tt>Writes&nbsp;a&nbsp;message&nbsp;to&nbsp;the&nbsp;status&nbsp;bar&nbsp;and&nbsp;adds&nbsp;a&nbsp;note&nbsp;to&nbsp;the&nbsp;browser-side<br>
+log.<br>
+&nbsp;<br>
+'context'&nbsp;is&nbsp;the&nbsp;message&nbsp;to&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;browser</tt></dd></dl>
+
+<dl><dt><a name="selenium-set_cursor_position"><strong>set_cursor_position</strong></a>(self, locator, position)</dt><dd><tt>Moves&nbsp;the&nbsp;text&nbsp;cursor&nbsp;to&nbsp;the&nbsp;specified&nbsp;position&nbsp;in&nbsp;the&nbsp;given&nbsp;input&nbsp;element&nbsp;or&nbsp;textarea.<br>
+This&nbsp;method&nbsp;will&nbsp;fail&nbsp;if&nbsp;the&nbsp;specified&nbsp;element&nbsp;isn't&nbsp;an&nbsp;input&nbsp;element&nbsp;or&nbsp;textarea.<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;pointing&nbsp;to&nbsp;an&nbsp;input&nbsp;element&nbsp;or&nbsp;textarea<br>
+'position'&nbsp;is&nbsp;the&nbsp;numerical&nbsp;position&nbsp;of&nbsp;the&nbsp;cursor&nbsp;in&nbsp;the&nbsp;field;&nbsp;position&nbsp;should&nbsp;be&nbsp;0&nbsp;to&nbsp;move&nbsp;the&nbsp;position&nbsp;to&nbsp;the&nbsp;beginning&nbsp;of&nbsp;the&nbsp;field.&nbsp;&nbsp;You&nbsp;can&nbsp;also&nbsp;set&nbsp;the&nbsp;cursor&nbsp;to&nbsp;-1&nbsp;to&nbsp;move&nbsp;it&nbsp;to&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;field.</tt></dd></dl>
+
+<dl><dt><a name="selenium-set_mouse_speed"><strong>set_mouse_speed</strong></a>(self, pixels)</dt><dd><tt>Configure&nbsp;the&nbsp;number&nbsp;of&nbsp;pixels&nbsp;between&nbsp;"mousemove"&nbsp;events&nbsp;during&nbsp;dragAndDrop&nbsp;commands&nbsp;(default=10).<br>
+&nbsp;<br>
+Setting&nbsp;this&nbsp;value&nbsp;to&nbsp;0&nbsp;means&nbsp;that&nbsp;we'll&nbsp;send&nbsp;a&nbsp;"mousemove"&nbsp;event&nbsp;to&nbsp;every&nbsp;single&nbsp;pixel<br>
+in&nbsp;between&nbsp;the&nbsp;start&nbsp;location&nbsp;and&nbsp;the&nbsp;end&nbsp;location;&nbsp;that&nbsp;can&nbsp;be&nbsp;very&nbsp;slow,&nbsp;and&nbsp;may<br>
+cause&nbsp;some&nbsp;browsers&nbsp;to&nbsp;force&nbsp;the&nbsp;JavaScript&nbsp;to&nbsp;timeout.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;mouse&nbsp;speed&nbsp;is&nbsp;greater&nbsp;than&nbsp;the&nbsp;distance&nbsp;between&nbsp;the&nbsp;two&nbsp;dragged&nbsp;objects,&nbsp;we'll<br>
+just&nbsp;send&nbsp;one&nbsp;"mousemove"&nbsp;at&nbsp;the&nbsp;start&nbsp;location&nbsp;and&nbsp;then&nbsp;one&nbsp;final&nbsp;one&nbsp;at&nbsp;the&nbsp;end&nbsp;location.<br>
+&nbsp;<br>
+&nbsp;<br>
+'pixels'&nbsp;is&nbsp;the&nbsp;number&nbsp;of&nbsp;pixels&nbsp;between&nbsp;"mousemove"&nbsp;events</tt></dd></dl>
+
+<dl><dt><a name="selenium-set_speed"><strong>set_speed</strong></a>(self, value)</dt><dd><tt>Set&nbsp;execution&nbsp;speed&nbsp;(i.e.,&nbsp;set&nbsp;the&nbsp;millisecond&nbsp;length&nbsp;of&nbsp;a&nbsp;delay&nbsp;which&nbsp;will&nbsp;follow&nbsp;each&nbsp;<a href="#selenium">selenium</a>&nbsp;operation).&nbsp;&nbsp;By&nbsp;default,&nbsp;there&nbsp;is&nbsp;no&nbsp;such&nbsp;delay,&nbsp;i.e.,<br>
+the&nbsp;delay&nbsp;is&nbsp;0&nbsp;milliseconds.<br>
+&nbsp;<br>
+'value'&nbsp;is&nbsp;the&nbsp;number&nbsp;of&nbsp;milliseconds&nbsp;to&nbsp;pause&nbsp;after&nbsp;operation</tt></dd></dl>
+
+<dl><dt><a name="selenium-set_timeout"><strong>set_timeout</strong></a>(self, timeout)</dt><dd><tt>Specifies&nbsp;the&nbsp;amount&nbsp;of&nbsp;time&nbsp;that&nbsp;Selenium&nbsp;will&nbsp;wait&nbsp;for&nbsp;actions&nbsp;to&nbsp;complete.<br>
+&nbsp;<br>
+&nbsp;<br>
+Actions&nbsp;that&nbsp;require&nbsp;waiting&nbsp;include&nbsp;"open"&nbsp;and&nbsp;the&nbsp;"waitFor\*"&nbsp;actions.<br>
+&nbsp;<br>
+The&nbsp;default&nbsp;timeout&nbsp;is&nbsp;30&nbsp;seconds.<br>
+&nbsp;<br>
+'timeout'&nbsp;is&nbsp;a&nbsp;timeout&nbsp;in&nbsp;milliseconds,&nbsp;after&nbsp;which&nbsp;the&nbsp;action&nbsp;will&nbsp;return&nbsp;with&nbsp;an&nbsp;error</tt></dd></dl>
+
+<dl><dt><a name="selenium-shift_key_down"><strong>shift_key_down</strong></a>(self)</dt><dd><tt>Press&nbsp;the&nbsp;shift&nbsp;key&nbsp;and&nbsp;hold&nbsp;it&nbsp;down&nbsp;until&nbsp;doShiftUp()&nbsp;is&nbsp;called&nbsp;or&nbsp;a&nbsp;new&nbsp;page&nbsp;is&nbsp;loaded.</tt></dd></dl>
+
+<dl><dt><a name="selenium-shift_key_up"><strong>shift_key_up</strong></a>(self)</dt><dd><tt>Release&nbsp;the&nbsp;shift&nbsp;key.</tt></dd></dl>
+
+<dl><dt><a name="selenium-shut_down_selenium_server"><strong>shut_down_selenium_server</strong></a>(self)</dt><dd><tt>Kills&nbsp;the&nbsp;running&nbsp;Selenium&nbsp;Server&nbsp;and&nbsp;all&nbsp;browser&nbsp;sessions.&nbsp;&nbsp;After&nbsp;you&nbsp;run&nbsp;this&nbsp;command,&nbsp;you&nbsp;will&nbsp;no&nbsp;longer&nbsp;be&nbsp;able&nbsp;to&nbsp;send<br>
+commands&nbsp;to&nbsp;the&nbsp;server;&nbsp;you&nbsp;can't&nbsp;remotely&nbsp;start&nbsp;the&nbsp;server&nbsp;once&nbsp;it&nbsp;has&nbsp;been&nbsp;stopped.&nbsp;&nbsp;Normally<br>
+you&nbsp;should&nbsp;prefer&nbsp;to&nbsp;run&nbsp;the&nbsp;"stop"&nbsp;command,&nbsp;which&nbsp;terminates&nbsp;the&nbsp;current&nbsp;browser&nbsp;session,&nbsp;rather&nbsp;than&nbsp;<br>
+shutting&nbsp;down&nbsp;the&nbsp;entire&nbsp;server.</tt></dd></dl>
+
+<dl><dt><a name="selenium-start"><strong>start</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="selenium-stop"><strong>stop</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="selenium-submit"><strong>submit</strong></a>(self, formLocator)</dt><dd><tt>Submit&nbsp;the&nbsp;specified&nbsp;form.&nbsp;This&nbsp;is&nbsp;particularly&nbsp;useful&nbsp;for&nbsp;forms&nbsp;without<br>
+submit&nbsp;buttons,&nbsp;e.g.&nbsp;single-input&nbsp;"Search"&nbsp;forms.<br>
+&nbsp;<br>
+'formLocator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator&nbsp;for&nbsp;the&nbsp;form&nbsp;you&nbsp;want&nbsp;to&nbsp;submit</tt></dd></dl>
+
+<dl><dt><a name="selenium-type"><strong>type</strong></a>(self, locator, value)</dt><dd><tt>Sets&nbsp;the&nbsp;value&nbsp;of&nbsp;an&nbsp;input&nbsp;field,&nbsp;as&nbsp;though&nbsp;you&nbsp;typed&nbsp;it&nbsp;in.<br>
+&nbsp;<br>
+&nbsp;<br>
+Can&nbsp;also&nbsp;be&nbsp;used&nbsp;to&nbsp;set&nbsp;the&nbsp;value&nbsp;of&nbsp;combo&nbsp;boxes,&nbsp;check&nbsp;boxes,&nbsp;etc.&nbsp;In&nbsp;these&nbsp;cases,<br>
+value&nbsp;should&nbsp;be&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;option&nbsp;selected,&nbsp;not&nbsp;the&nbsp;visible&nbsp;text.<br>
+&nbsp;<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator<br>
+'value'&nbsp;is&nbsp;the&nbsp;value&nbsp;to&nbsp;type</tt></dd></dl>
+
+<dl><dt><a name="selenium-type_keys"><strong>type_keys</strong></a>(self, locator, value)</dt><dd><tt>Simulates&nbsp;keystroke&nbsp;events&nbsp;on&nbsp;the&nbsp;specified&nbsp;element,&nbsp;as&nbsp;though&nbsp;you&nbsp;typed&nbsp;the&nbsp;value&nbsp;key-by-key.<br>
+&nbsp;<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;a&nbsp;convenience&nbsp;method&nbsp;for&nbsp;calling&nbsp;keyDown,&nbsp;keyUp,&nbsp;keyPress&nbsp;for&nbsp;every&nbsp;character&nbsp;in&nbsp;the&nbsp;specified&nbsp;string;<br>
+this&nbsp;is&nbsp;useful&nbsp;for&nbsp;dynamic&nbsp;UI&nbsp;widgets&nbsp;(like&nbsp;auto-completing&nbsp;combo&nbsp;boxes)&nbsp;that&nbsp;require&nbsp;explicit&nbsp;key&nbsp;events.<br>
+&nbsp;<br>
+Unlike&nbsp;the&nbsp;simple&nbsp;"type"&nbsp;command,&nbsp;which&nbsp;forces&nbsp;the&nbsp;specified&nbsp;value&nbsp;into&nbsp;the&nbsp;page&nbsp;directly,&nbsp;this&nbsp;command<br>
+may&nbsp;or&nbsp;may&nbsp;not&nbsp;have&nbsp;any&nbsp;visible&nbsp;effect,&nbsp;even&nbsp;in&nbsp;cases&nbsp;where&nbsp;typing&nbsp;keys&nbsp;would&nbsp;normally&nbsp;have&nbsp;a&nbsp;visible&nbsp;effect.<br>
+For&nbsp;example,&nbsp;if&nbsp;you&nbsp;use&nbsp;"typeKeys"&nbsp;on&nbsp;a&nbsp;form&nbsp;element,&nbsp;you&nbsp;may&nbsp;or&nbsp;may&nbsp;not&nbsp;see&nbsp;the&nbsp;results&nbsp;of&nbsp;what&nbsp;you&nbsp;typed&nbsp;in<br>
+the&nbsp;field.<br>
+&nbsp;<br>
+In&nbsp;some&nbsp;cases,&nbsp;you&nbsp;may&nbsp;need&nbsp;to&nbsp;use&nbsp;the&nbsp;simple&nbsp;"type"&nbsp;command&nbsp;to&nbsp;set&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;field&nbsp;and&nbsp;then&nbsp;the&nbsp;"typeKeys"&nbsp;command&nbsp;to<br>
+send&nbsp;the&nbsp;keystroke&nbsp;events&nbsp;corresponding&nbsp;to&nbsp;what&nbsp;you&nbsp;just&nbsp;typed.<br>
+&nbsp;<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator<br>
+'value'&nbsp;is&nbsp;the&nbsp;value&nbsp;to&nbsp;type</tt></dd></dl>
+
+<dl><dt><a name="selenium-uncheck"><strong>uncheck</strong></a>(self, locator)</dt><dd><tt>Uncheck&nbsp;a&nbsp;toggle-button&nbsp;(checkbox/radio)<br>
+&nbsp;<br>
+'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator</tt></dd></dl>
+
+<dl><dt><a name="selenium-use_xpath_library"><strong>use_xpath_library</strong></a>(self, libraryName)</dt><dd><tt>Allows&nbsp;choice&nbsp;of&nbsp;one&nbsp;of&nbsp;the&nbsp;available&nbsp;libraries.<br>
+&nbsp;<br>
+'libraryName'&nbsp;is&nbsp;name&nbsp;of&nbsp;the&nbsp;desired&nbsp;library&nbsp;Only&nbsp;the&nbsp;following&nbsp;three&nbsp;can&nbsp;be&nbsp;chosen:&nbsp;<br>
+*&nbsp;&nbsp;&nbsp;"ajaxslt"&nbsp;-&nbsp;Google's&nbsp;library<br>
+*&nbsp;&nbsp;&nbsp;"javascript-xpath"&nbsp;-&nbsp;Cybozu&nbsp;Labs'&nbsp;faster&nbsp;library<br>
+*&nbsp;&nbsp;&nbsp;"default"&nbsp;-&nbsp;The&nbsp;default&nbsp;library.&nbsp;&nbsp;Currently&nbsp;the&nbsp;default&nbsp;library&nbsp;is&nbsp;"ajaxslt"&nbsp;.<br>
+&nbsp;<br>
+&nbsp;If&nbsp;libraryName&nbsp;isn't&nbsp;one&nbsp;of&nbsp;these&nbsp;three,&nbsp;then&nbsp;&nbsp;no&nbsp;change&nbsp;will&nbsp;be&nbsp;made.</tt></dd></dl>
+
+<dl><dt><a name="selenium-wait_for_condition"><strong>wait_for_condition</strong></a>(self, script, timeout)</dt><dd><tt>Runs&nbsp;the&nbsp;specified&nbsp;JavaScript&nbsp;snippet&nbsp;repeatedly&nbsp;until&nbsp;it&nbsp;evaluates&nbsp;to&nbsp;"true".<br>
+The&nbsp;snippet&nbsp;may&nbsp;have&nbsp;multiple&nbsp;lines,&nbsp;but&nbsp;only&nbsp;the&nbsp;result&nbsp;of&nbsp;the&nbsp;last&nbsp;line<br>
+will&nbsp;be&nbsp;considered.<br>
+&nbsp;<br>
+&nbsp;<br>
+Note&nbsp;that,&nbsp;by&nbsp;default,&nbsp;the&nbsp;snippet&nbsp;will&nbsp;be&nbsp;run&nbsp;in&nbsp;the&nbsp;runner's&nbsp;test&nbsp;window,&nbsp;not&nbsp;in&nbsp;the&nbsp;window<br>
+of&nbsp;your&nbsp;application.&nbsp;&nbsp;To&nbsp;get&nbsp;the&nbsp;window&nbsp;of&nbsp;your&nbsp;application,&nbsp;you&nbsp;can&nbsp;use<br>
+the&nbsp;JavaScript&nbsp;snippet&nbsp;``<a href="#selenium">selenium</a>.browserbot.getCurrentWindow()``,&nbsp;and&nbsp;then<br>
+run&nbsp;your&nbsp;JavaScript&nbsp;in&nbsp;there<br>
+&nbsp;<br>
+&nbsp;<br>
+'script'&nbsp;is&nbsp;the&nbsp;JavaScript&nbsp;snippet&nbsp;to&nbsp;run<br>
+'timeout'&nbsp;is&nbsp;a&nbsp;timeout&nbsp;in&nbsp;milliseconds,&nbsp;after&nbsp;which&nbsp;this&nbsp;command&nbsp;will&nbsp;return&nbsp;with&nbsp;an&nbsp;error</tt></dd></dl>
+
+<dl><dt><a name="selenium-wait_for_frame_to_load"><strong>wait_for_frame_to_load</strong></a>(self, frameAddress, timeout)</dt><dd><tt>Waits&nbsp;for&nbsp;a&nbsp;new&nbsp;frame&nbsp;to&nbsp;load.<br>
+&nbsp;<br>
+&nbsp;<br>
+Selenium&nbsp;constantly&nbsp;keeps&nbsp;track&nbsp;of&nbsp;new&nbsp;pages&nbsp;and&nbsp;frames&nbsp;loading,&nbsp;<br>
+and&nbsp;sets&nbsp;a&nbsp;"newPageLoaded"&nbsp;flag&nbsp;when&nbsp;it&nbsp;first&nbsp;notices&nbsp;a&nbsp;page&nbsp;load.<br>
+&nbsp;<br>
+&nbsp;<br>
+See&nbsp;waitForPageToLoad&nbsp;for&nbsp;more&nbsp;information.<br>
+&nbsp;<br>
+'frameAddress'&nbsp;is&nbsp;FrameAddress&nbsp;from&nbsp;the&nbsp;server&nbsp;side<br>
+'timeout'&nbsp;is&nbsp;a&nbsp;timeout&nbsp;in&nbsp;milliseconds,&nbsp;after&nbsp;which&nbsp;this&nbsp;command&nbsp;will&nbsp;return&nbsp;with&nbsp;an&nbsp;error</tt></dd></dl>
+
+<dl><dt><a name="selenium-wait_for_page_to_load"><strong>wait_for_page_to_load</strong></a>(self, timeout)</dt><dd><tt>Waits&nbsp;for&nbsp;a&nbsp;new&nbsp;page&nbsp;to&nbsp;load.<br>
+&nbsp;<br>
+&nbsp;<br>
+You&nbsp;can&nbsp;use&nbsp;this&nbsp;command&nbsp;instead&nbsp;of&nbsp;the&nbsp;"AndWait"&nbsp;suffixes,&nbsp;"clickAndWait",&nbsp;"selectAndWait",&nbsp;"typeAndWait"&nbsp;etc.<br>
+(which&nbsp;are&nbsp;only&nbsp;available&nbsp;in&nbsp;the&nbsp;JS&nbsp;API).<br>
+&nbsp;<br>
+Selenium&nbsp;constantly&nbsp;keeps&nbsp;track&nbsp;of&nbsp;new&nbsp;pages&nbsp;loading,&nbsp;and&nbsp;sets&nbsp;a&nbsp;"newPageLoaded"<br>
+flag&nbsp;when&nbsp;it&nbsp;first&nbsp;notices&nbsp;a&nbsp;page&nbsp;load.&nbsp;&nbsp;Running&nbsp;any&nbsp;other&nbsp;Selenium&nbsp;command&nbsp;after<br>
+turns&nbsp;the&nbsp;flag&nbsp;to&nbsp;false.&nbsp;&nbsp;Hence,&nbsp;if&nbsp;you&nbsp;want&nbsp;to&nbsp;wait&nbsp;for&nbsp;a&nbsp;page&nbsp;to&nbsp;load,&nbsp;you&nbsp;must<br>
+wait&nbsp;immediately&nbsp;after&nbsp;a&nbsp;Selenium&nbsp;command&nbsp;that&nbsp;caused&nbsp;a&nbsp;page-load.<br>
+&nbsp;<br>
+&nbsp;<br>
+'timeout'&nbsp;is&nbsp;a&nbsp;timeout&nbsp;in&nbsp;milliseconds,&nbsp;after&nbsp;which&nbsp;this&nbsp;command&nbsp;will&nbsp;return&nbsp;with&nbsp;an&nbsp;error</tt></dd></dl>
+
+<dl><dt><a name="selenium-wait_for_pop_up"><strong>wait_for_pop_up</strong></a>(self, windowID, timeout)</dt><dd><tt>Waits&nbsp;for&nbsp;a&nbsp;popup&nbsp;window&nbsp;to&nbsp;appear&nbsp;and&nbsp;load&nbsp;up.<br>
+&nbsp;<br>
+'windowID'&nbsp;is&nbsp;the&nbsp;JavaScript&nbsp;window&nbsp;"name"&nbsp;of&nbsp;the&nbsp;window&nbsp;that&nbsp;will&nbsp;appear&nbsp;(not&nbsp;the&nbsp;text&nbsp;of&nbsp;the&nbsp;title&nbsp;bar)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;unspecified,&nbsp;or&nbsp;specified&nbsp;as&nbsp;"null",&nbsp;this&nbsp;command&nbsp;will&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wait&nbsp;for&nbsp;the&nbsp;first&nbsp;non-top&nbsp;window&nbsp;to&nbsp;appear&nbsp;(don't&nbsp;rely&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;on&nbsp;this&nbsp;if&nbsp;you&nbsp;are&nbsp;working&nbsp;with&nbsp;multiple&nbsp;popups&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;simultaneously).<br>
+'timeout'&nbsp;is&nbsp;a&nbsp;timeout&nbsp;in&nbsp;milliseconds,&nbsp;after&nbsp;which&nbsp;the&nbsp;action&nbsp;will&nbsp;return&nbsp;with&nbsp;an&nbsp;error.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;this&nbsp;value&nbsp;is&nbsp;not&nbsp;specified,&nbsp;the&nbsp;default&nbsp;Selenium&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;timeout&nbsp;will&nbsp;be&nbsp;used.&nbsp;See&nbsp;the&nbsp;setTimeout()&nbsp;command.</tt></dd></dl>
+
+<dl><dt><a name="selenium-window_focus"><strong>window_focus</strong></a>(self)</dt><dd><tt>Gives&nbsp;focus&nbsp;to&nbsp;the&nbsp;currently&nbsp;selected&nbsp;window</tt></dd></dl>
+
+<dl><dt><a name="selenium-window_maximize"><strong>window_maximize</strong></a>(self)</dt><dd><tt>Resize&nbsp;currently&nbsp;selected&nbsp;window&nbsp;to&nbsp;take&nbsp;up&nbsp;the&nbsp;entire&nbsp;screen</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__docformat__</strong> = 'restructuredtext en'</td></tr></table>
+</body></html>

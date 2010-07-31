@@ -1,0 +1,82 @@
+
+<!DOCTYPE html PUBLIC "-/W3C/DTD HTML 4.0 Transitional/EN">
+<html><head><title>Python: module website</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>website</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:../website.py">../website.py</a></font></td></tr></table>
+    <p><tt>#&nbsp;website.py<br>
+#&nbsp;SiteLogIn<br>
+#&nbsp;SiteLogout<br>
+#&nbsp;Login&nbsp;(for&nbsp;offsite&nbsp;login)<br>
+#&nbsp;start_demo<br>
+#&nbsp;submit_video<br>
+#&nbsp;start_sub_widget</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="mslib.html">mslib</a><br>
+<a href="re.html">re</a><br>
+</td><td width="25%" valign=top><a href="testvars.html">testvars</a><br>
+<a href="time.html">time</a><br>
+</td><td width="25%" valign=top><a href="unittest.html">unittest</a><br>
+<a href="widget.html">widget</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-Login"><strong>Login</strong></a>(self, sel, auth_type)</dt><dd><tt>Description:&nbsp;Log&nbsp;on&nbsp;using&nbsp;website&nbsp;button&nbsp;and&nbsp;select&nbsp;an&nbsp;external&nbsp;login&nbsp;option.<br>
+auth_type&nbsp;can&nbsp;be&nbsp;either&nbsp;'.twitter',&nbsp;'.open-id',&nbsp;or&nbsp;'.google'<br>
+&nbsp;<br>
+Requires:&nbsp;valid&nbsp;account&nbsp;for&nbsp;selected&nbsp;login.&nbsp;&nbsp;See&nbsp;testvars&nbsp;for&nbsp;existing&nbsp;accounts.<br>
+&nbsp;<br>
+Pre-condition:&nbsp;user&nbsp;is&nbsp;on&nbsp;the&nbsp;site&nbsp;page<br>
+&nbsp;<br>
+Post-condition:&nbsp;offsite&nbsp;login&nbsp;form&nbsp;displayed,&nbsp;see&nbsp;offsite</tt></dd></dl>
+ <dl><dt><a name="-SiteLogIn"><strong>SiteLogIn</strong></a>(self, sel, user, passw)</dt><dd><tt>Description:&nbsp;Login&nbsp;to&nbsp;site&nbsp;using&nbsp;the&nbsp;website&nbsp;login&nbsp;button&nbsp;and&nbsp;a&nbsp;site&nbsp;account<br>
+&nbsp;<br>
+Requires:&nbsp;valid&nbsp;site&nbsp;user&nbsp;name&nbsp;and&nbsp;password.<br>
+&nbsp;<br>
+Pre-condition:&nbsp;user&nbsp;is&nbsp;on&nbsp;the&nbsp;site&nbsp;page.<br>
+&nbsp;<br>
+Post-condition:&nbsp;user&nbsp;is&nbsp;still&nbsp;on&nbsp;the&nbsp;site&nbsp;page</tt></dd></dl>
+ <dl><dt><a name="-SiteLogout"><strong>SiteLogout</strong></a>(self, sel)</dt><dd><tt>Description:&nbsp;Logout&nbsp;of&nbsp;site&nbsp;using&nbsp;site&nbsp;Logout&nbsp;button.</tt></dd></dl>
+ <dl><dt><a name="-start_demo"><strong>start_demo</strong></a>(self, sel)</dt><dd><tt>Description:&nbsp;Starts&nbsp;the&nbsp;demo&nbsp;widget&nbsp;from&nbsp;the&nbsp;site<br>
+&nbsp;<br>
+Pre-condition:&nbsp;site&nbsp;page&nbsp;is&nbsp;opened<br>
+&nbsp;<br>
+Post-condition:&nbsp;/demo&nbsp;page&nbsp;is&nbsp;opened,&nbsp;usually&nbsp;next&nbsp;step&nbsp;is&nbsp;start_sub_widget</tt></dd></dl>
+ <dl><dt><a name="-start_sub_widget"><strong>start_sub_widget</strong></a>(self, sel, skip<font color="#909090">='True'</font>)</dt><dd><tt>Description:&nbsp;Start&nbsp;the&nbsp;Subtitle&nbsp;Widget&nbsp;using&nbsp;the&nbsp;Subtitle&nbsp;Me&nbsp;menu.<br>
+skip&nbsp;is&nbsp;set&nbsp;to&nbsp;true&nbsp;by&nbsp;default&nbsp;and&nbsp;gets&nbsp;passed&nbsp;to&nbsp;widget.close_howto_video<br>
+to&nbsp;prevent&nbsp;further&nbsp;how-to&nbsp;video&nbsp;displays.<br>
+&nbsp;<br>
+Pre-condition:&nbsp;On&nbsp;a&nbsp;page&nbsp;where&nbsp;Subtitle&nbsp;Me&nbsp;menu&nbsp;is&nbsp;present.<br>
+Test&nbsp;will&nbsp;fail&nbsp;if&nbsp;Choose&nbsp;Language&nbsp;menu&nbsp;is&nbsp;present.<br>
+&nbsp;<br>
+Post-condition:&nbsp;the&nbsp;widget&nbsp;is&nbsp;launched&nbsp;and&nbsp;you&nbsp;will&nbsp;be&nbsp;on&nbsp;step&nbsp;1&nbsp;or&nbsp;Edit&nbsp;step</tt></dd></dl>
+ <dl><dt><a name="-submit_video"><strong>submit_video</strong></a>(self, sel, url)</dt><dd><tt>Description:&nbsp;Submit&nbsp;a&nbsp;video&nbsp;using&nbsp;the&nbsp;site&nbsp;button<br>
+&nbsp;<br>
+Pre-condition:&nbsp;site&nbsp;page&nbsp;is&nbsp;opened<br>
+&nbsp;<br>
+Post-condition:&nbsp;the&nbsp;widget&nbsp;is&nbsp;launched&nbsp;immediately.<br>
+You'll&nbsp;need&nbsp;to&nbsp;deal&nbsp;with&nbsp;the&nbsp;help&nbsp;video,&nbsp;see&nbsp;widget.close_howto_video</tt></dd></dl>
+ <dl><dt><a name="-verify_login"><strong>verify_login</strong></a>(self, sel)</dt><dd><tt>Description:&nbsp;Verifies&nbsp;user&nbsp;is&nbsp;logged&nbsp;in&nbsp;by&nbsp;finding&nbsp;the&nbsp;logout&nbsp;button&nbsp;on&nbsp;the<br>
+website&nbsp;and&nbsp;then&nbsp;starting&nbsp;the&nbsp;demo&nbsp;and&nbsp;looking&nbsp;for&nbsp;logout&nbsp;menu&nbsp;item&nbsp;on&nbsp;the<br>
+Subtitle&nbsp;Me&nbsp;button.<br>
+&nbsp;<br>
+Pre-Condition:&nbsp;must&nbsp;be&nbsp;logged&nbsp;into&nbsp;site.<br>
+&nbsp;<br>
+Post-Condition:&nbsp;will&nbsp;be&nbsp;on&nbsp;the&nbsp;/demo&nbsp;page</tt></dd></dl>
+</td></tr></table>
+</body></html>
