@@ -1,17 +1,7 @@
 preE=" --- ERROR: "
 
-##vlocalhost = "saucelabs.com"
 vlocalhost = "localhost"
 vbrowser = "*chrome"
-##vbrowser = """{\
-##                    "username": "xxx-test",\
-##                    "access-key": "52dd20dd-b5bd-4732-a94a-23a5b8a6fbb1",\
-##                    "os": "Windows 2003",\
-##                    "browser": "iexplore",\
-##                    "browser-version": "8.",\
-##                    "record-video": true ,\
-##                    "job-name": "Universal Subtitles Testing"\
-##                }"""
 
 MSTestVariables = {"Site":"http://staging.universalsubtitles.org/", \
                    "ResultOutputDirectory":r"Results/", \
@@ -24,7 +14,7 @@ MSTestVariables = {"Site":"http://staging.universalsubtitles.org/", \
 WebsiteUI = {"Home":"css=a:contains('Miro Subs Alpha')", \
              "Login_Button":"css=.login_link span:contains('Login')", \
              "Logout_Button":"css=.login_link span:contains('Logout')", \
-             "Subtitle_Button":"css=a:contains('Subtitle Video')", \
+             "Subtitle_Button":"css=a:contains('Subtitle a Video')", \
              "All_Videos_Button":"css=a:contains('All Videos')", \
              "About_Button":"css=a:contains('About')", \
              "FAQ_Button":"css=a:contains('FAQ')", \
@@ -64,4 +54,5 @@ passw = "sub.writer"
 
 eels_fr = u'Mon a\u00E9roglisseur est plein d\'anguilles'
 eels_jp = u'\u79C1\u306E\u30DB\u30D0\u30FC\u30AF\u30E9\u30D5\u30C8\u306F\u9C3B\u3067'
+
 

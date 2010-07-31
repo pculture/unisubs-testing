@@ -13,7 +13,7 @@ class tc_999(unittest.TestCase):
 # Open the desired browser and set up the test
     def setUp(self):
         self.verificationErrors = []
-        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.MSTestVariables["Browser"], testvars.MSTestVariables["Site"])
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
         self.selenium.start()
 
 # The user actions executed in the test scenario
@@ -29,17 +29,17 @@ class tc_999(unittest.TestCase):
 
         # Sync
 
-        widget.sync_video(self,sel,subtextfile)
+ #       widget.sync_video(self,sel,subtextfile)
 
         # Review
         
       
         
-# Close the browser, log errors, perform cleanup 
-    def tearDown(self):
-#        self.selenium.stop()
-# the command on the previous line should close the browser
-        self.assertEqual([], self.verificationErrors)
+### Close the browser, log errors, perform cleanup 
+##    def tearDown(self):
+###        self.selenium.stop()
+### the command on the previous line should close the browser
+##        self.assertEqual([], self.verificationErrors)
 
 
 

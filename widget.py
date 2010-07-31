@@ -1,15 +1,30 @@
-# widget.py
+"""
+widget.py
+Description: handles actions that are performed within the widget.
+"""
 
 from selenium import selenium
 
-import unittest, time, re, codecs
-import mslib, testvars
+import unittest
+import time
+import codecs
+import mslib
+import testvars
 
-
-# transcribe video contents, takes input from a text file
 
 def Login(self,sel,auth_type):
-    #auth_type can be "log" (for site), "twitter","openid","gmail"
+    """
+    Description: Initiates login sequence using the Subtitle Me menu that's attached to
+    an embedded vidoe, either onsite or offsite.
+
+    auth_type can be 'log' (for site), 'twitter','openid','gmail'
+    Requires valid accounts for chosen login type
+
+    Pre-condition: Subtitle me widget menu should be present on page.
+
+    Post-condition: either site or external login authorization pages are opened.
+    For offsite login options see <a href="offsite.html">offsite</a>
+    """
     print "logging in using "+auth_type+ " account"
     mslib.wait_for_element_present(self,sel, testvars.WebsiteUI["SubtitleMe_menu"])
     sel.click_at(testvars.WebsiteUI["SubtitleMe_menu"], "")
@@ -19,6 +34,13 @@ def Login(self,sel,auth_type):
     sel.click("css=.mirosubs-"+auth_type)
 
 def site_login_from_widget_link(self,sel):
+    """
+    Description: performs a site login from the Login link on the widget steps.
+
+    Pre-condition: widget is opened and user is not logged in.
+
+    Post-condition: user is returned to starting widget page.
+    """
 
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Must_Login"])        
     print "loggin in from widget"
@@ -26,8 +48,14 @@ def site_login_from_widget_link(self,sel):
     site_login_auth(self,sel)
 
 def site_login_auth(self,sel):
+    """
+    Description: specifically logs in as the site user defined in <a href="testvars.html">testvars</a>
+
+    Pre-condition: Login link was clicked from widget
+
+    Post-condition: user logged in and returned to widget page.
+    """
     auth_type = "log"
-    #auth_type can be "log" (for site), "twitter","openid","gmail"
     sel.select_frame("relative=top")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-"+auth_type)
     sel.click("css=.mirosubs-"+auth_type)
@@ -40,17 +68,35 @@ def site_login_auth(self,sel):
     time.sleep(10)
     
         
-def close_howto_video(self,sel,skip=True):
+def close_howto_video(self,sel,skip="True"):
+    """
+    Description: closes the how-to interstitial help video
+    Default is set to "True", to skip the video on proceeding steps.
+
+    Pre-condition: widget has been launched.
+    
+    Post-condition: help video is closed and returned to previous widget page.
+    """
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-modal-widget-content")
     if sel.is_element_present("css=.mirosubs-howtopanel"):
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-done:contains('Continue')")
         mslib.wait_for_element_present(self,sel,"css=.goog-checkbox-unchecked")
-        if skip==True:
+        if skip=="True":
             sel.click("css=.goog-checkbox-unchecked")
         sel.click("css=.mirosubs-done:contains('Continue')")
 
 
 def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="yes"):
+    """
+    Description: On widget Step 1, reads in lines of subtitle text and types it.
+
+    Options:
+        sub_file - the full path to the text to enter
+        mode - sets typing mode {'Beginner' | 'Recommended' | 'Expert (default)'}
+        step - {'Stop' | 'Continue' (default)} Continue on to next step.
+        buffer {'yes' (default) | 'no'} will buffer the video to 75% before
+        proceeding. see wait_for_video_to_buffer
+    """
     print "starting to transcribe video"
     # giving the video a chance to load.
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
@@ -79,18 +125,36 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="ye
 
 
 def restart_typing(self,sel):
+    """
+    Description: Clicks the 'Restart Typing' link, and handle the confirmation dialog.
+    """
     if sel.is_element_present("css=.mirosubs-restart"):
     # If it loads the widget automatically
         sel.click("css=.mirosubs-restart")
         self.failUnless(re.search(r"^Are you sure you want to start over[\s\S] All subtitles will be deleted\.$", sel.get_confirmation()))
 
 def back_step(self,sel):
+    """
+    Description: Clicks the 'Back to' link to go back 1 step.
+    """
     while sel.is_text_present("Back to") or sel.is_text_present("Return to"):
         sel.click("css=.mirosubs-backTo")
         time.sleep(3)
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-steps")
 
 def sync_video(self,sel,sub_file,start_delay=2,sub_int=2,step="Continue"):
+    """
+    Description: Use the defined sync button to sync the subtitles.  Waits for
+    text present on the video and prints the subtime.
+
+    Options:
+        sub_file - path to file or text lines to enter
+        start_delay - time to wait before 1st sync (default = 2 secs)
+        sub_int - time to wait before next sub (default = 2 secs
+        step - {'Continue' (default) | 'Stop} move on to next step when done.
+
+    Pre-condition - can use this to sync on Step 2, Step 3 or Edit.
+    """
     print "starting video / sub syncing"
     sel.select_frame("relative=top")
     #give video a chance to load
@@ -113,34 +177,18 @@ def sync_video(self,sel,sub_file,start_delay=2,sub_int=2,step="Continue"):
         sel.click(testvars.WidgetUI["Next_step"])
     
                   
-def review_edit_text(self,sel,sub_file):
-    print "editing text"
-    sel.select_frame("relative=top")
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
-    li = 1
 
-    for line in open(sub_file):
-        text_el = "//li[" +str(li) + "]/span[2]"
-        time_stamp_el = "//li["+str(li)+"]/span[1]/span/span[1]"
-        
-        # 1. edit the text contents to be all upper case.
-        sel.click(text_el)
-        sel.type("css=.mirosubs-title textarea", line.upper())
-        sel.click(time_stamp_el)
-        mslib.wait_for_element_present(self,sel,text_el)
-        if line.rstrip().upper() != sel.get_text(text_el).rstrip():
-            mslib.AppendErrorMessage(self,sel,"sub text mismatch")
-            print "found: " + sel.get_text(text_el).rstrip()
-            print "expected: " +line.rstrip().upper()
-        # Put it back
-        sel.click(text_el)
-        sel.type("css=.mirosubs-title textarea", line)
-        sel.click(time_stamp_el)
-        mslib.wait_for_element_present(self,sel,text_el)
-        time.sleep(3)
-        li = li+1
 
 def edit_text(self,sel,subtextfile,new_text="my hovercraft is full of eels"):
+    """
+    Description: Input the same text used in transcribe_video and for each line,
+    edit the text with new_text.  Verifies text has been updated.
+
+    Options:
+        new_text - text string
+
+    Pre-condition - can use this to sync on Step 2, Step 3 or Edit.
+    """
     sel.select_window("null")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
     sub_li=1
@@ -157,11 +205,21 @@ def edit_text(self,sel,subtextfile,new_text="my hovercraft is full of eels"):
         sub_li = sub_li + 1
         
 def drag_time_bubbles(self,sel,subtextfile):
+    """
+    Description: For each line, initially used in transcribe_video, grab
+    the left and right sides of the timeline bubbles and edit the time.
+    Verifies the time stamp has been modified.
+    
+    Options:
+        new_text - text string
+
+    Pre-condition - use must be on Step 3 or Review with known text data.
+    """
 
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Sync_sub"])
     sub_li = 1
     for line in open(subtextfile):
-        #Fix Me - find correct xpath or css for the sub bubble elements and start time
+        
         sub_cell_start_time = "//li["+str(sub_li)+"]/span[1]/span/span[1]"
         
         sub_cell_end_time = "//span["+str(sub_li)+"]/span/span[2]"
@@ -196,15 +254,32 @@ def drag_time_bubbles(self,sel,subtextfile):
 
   
 def drag_it(self,sel,sub_text,side,move_pixels):
-        if "left" in side:
-            sel.drag_and_drop("css=.mirosubs-subtext:contains(" + sub_text + ") + span", move_pixels+",0")
-        if "right" in side:
-                sel.drag_and_drop("css=.mirosubs-subtext:contains(" + sub_text + ") +span + span", move_pixels+",0")
+    """
+    Description: actually grabs the timeline bubbles and moves them
+
+    Options:
+        sub_text - text used to locate correct bubble
+        side - {'left' | 'right'}
+        move_pixels - number of pixels to move bubble { + | - }
+    """
+    if "left" in side:
+        sel.drag_and_drop("css=.mirosubs-subtext:contains(" + sub_text + ") + span", move_pixels+",0")
+    if "right" in side:
+        sel.drag_and_drop("css=.mirosubs-subtext:contains(" + sub_text + ") +span + span", move_pixels+",0")
 
 
                 
 
 def click_time_shift_arrows(self,sel,subtextfile):
+    """
+    Description: clicks the left and right arrows on subtitle text box.
+    Verifies that the time has been changed by .05 seconds.
+
+    Options:
+        subtextfile - text used in transcribe step.
+        
+    """
+    
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Sync_sub"])
     sub_li = 1
     for line in open(subtextfile):
@@ -229,6 +304,20 @@ def click_time_shift_arrows(self,sel,subtextfile):
 
     
 def hold_down_delay_sub(self,sel,sub_file,delay_time=4,hold_time=2, sync_time=2):
+    """
+    Description: tests the time shift of subs when holding then releasing the down key.
+    Verifies that the time has been shifted.
+
+    Options:
+        delay_time - amount of time to wait before jumping back with ctrl key (default=4)
+        hold_time - amount of time to hold down the key (default=2) 
+        sync_time - amount of time wait before starting next subtitle (default=2)
+
+    Pre-conditions: must coordinate this with the times used in sync_video or the time shift
+    comparision may fail.
+
+    Post-condition - still on same step in widget, with new times.
+    """
     print "down key time shift"
     sel.select_frame("relative=top")
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
@@ -250,7 +339,19 @@ def hold_down_delay_sub(self,sel,sub_file,delay_time=4,hold_time=2, sync_time=2)
         time.sleep(sync_time)
         sub_li = sub_li + 1
 
-def resync_video (self,sel,subtextfile,start_delay=1,sub_int=.5, step="Stop"):
+def resync_video (self,sel,subtextfile,start_delay=1,sub_int=1, step="Stop"):
+    """
+    Description: tests the time shift of subs when using down key to resyncronize.
+    Verifies time stamp has changed.
+
+    Options:
+        start_delay - amount of time to wait before jumping back with ctrl key (default=4)
+        sub_int - amount of before next sub sync
+        step - {'Stop' (default) | 'Continue'}
+
+    Pre-conditions: must coordinate this with the times used in sync_video or the time shift
+    comparision may fail.
+    """
     print "starting sub resync"
     sel.select_frame("relative=top")
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
@@ -276,10 +377,16 @@ def resync_video (self,sel,subtextfile,start_delay=1,sub_int=.5, step="Stop"):
 
 
 def verify_login_message(self,sel):
+    """
+    Description: verifies must login message is displayed.
+    """
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Must_Login"])
     self.failUnless(sel.get_text(testvars.WidgetUI['Must_Login'] +":contains('To save your subtitling work')"))
 
 def steps_display(self,sel,step_num):
+    """
+    Description: verifies text contents of Steps.  
+    """
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
     self.failUnless("Typing" == sel.get_text("css=h2"))
     self.failUnless(str(step_num) == sel.get_text("css=.mirosubs-activestep"))
@@ -290,6 +397,12 @@ def steps_display(self,sel,step_num):
     self.assertEqual("Speed Mode", sel.get_text("css=.mirosubs-speedmode h4"))
 
 def verify_sub_text(self,sel,subtextfile):
+    """
+    Description: Compares the current text in the text box with the text in the input subtextfile.
+
+    Pre-condition: User in widget, steps 1,2,3 or Edit.
+
+    """
     print "verifying sub text"
     sel.select_window("null")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")

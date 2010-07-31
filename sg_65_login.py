@@ -1,30 +1,34 @@
-# Litmus Subgroup 65 - Login / Logout Tests
-# 1. 378 Website Site Login
-# 2. 379 Website Twitter Account
-# 3. 380 Website Open ID
-# 4. 381 Website Gmail
-# 5. 382 Widget Gmail
-# 6. 383 Widget Twitter Account
-# 7. 384 Widget Site Login
-# 8. 385 Widget Open ID
-
-
-
 from selenium import selenium
-import unittest, time, re, sys
-import mslib, website, widget, offsite, testvars
+import unittest
+import time
+import mslib
+import website
+import widget
+import offsite
+import testvars
 
 
-class tc_378(unittest.TestCase):
+class subgroup_65(unittest.TestCase):
+    """
+    Litmus Subgroup 65 - Login / Logout Tests
+    Tests designed to test the various login / logout options and requirements.
+    """
     
-# Open the desired browser and set up the test
+    # Open the desired browser and set up the test
     def setUp(self):
+        """
+        Sets up run envirnment for selenium server
+        """
         self.verificationErrors = []
         self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
         self.selenium.start()
-
-# The user actions executed in the test scenario
-    def test_site_login(self):
+        
+    # The tests in the subgroup
+    def test_378(self):
+        """
+        Site_login
+        http://litmus.pculture.org/show_test.cgi?id=378
+        """
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
@@ -34,24 +38,13 @@ class tc_378(unittest.TestCase):
         website.verify_login(self,sel)
         # logout
         sel.open(testvars.MSTestVariables["Site"] +"logout/")
-# Close the browser, log errors, perform cleanup 
-    def tearDown(self):
-        self.selenium.stop()
-# the command on the previous line should close the browser
-        self.assertEqual([], self.verificationErrors)
 
 
-
-class tc_379(unittest.TestCase):
-    
-# Open the desired browser and set up the test
-    def setUp(self):
-        self.verificationErrors = []
-        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
-        self.selenium.start()
-
-        # The user actions executed in the test scenario
-    def test_twitter_login(self):
+    def test_379(self):
+        """
+        Twitter login from site
+        http://litmus.pculture.org/show_test.cgi?id=379
+        """
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
@@ -62,21 +55,14 @@ class tc_379(unittest.TestCase):
         website.verify_login(self,sel)
         # logout
         sel.open(testvars.MSTestVariables["Site"] +"logout/")
-# Close the browser, log errors, perform cleanup 
-    def tearDown(self):
-        self.selenium.stop()
-# the command on the previous line should close the browser
-        self.assertEqual([], self.verificationErrors)
 
-class tc_380(unittest.TestCase):
     
-# Open the desired browser and set up the test
-    def setUp(self):
-        self.verificationErrors = []
-        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
-        self.selenium.start()
-# The user actions executed in the test scenario
-    def test_openid_login(self):
+
+    def test_380(self):
+        """
+        Open id login from site
+        http://litmus.pculture.org/show_test.cgi?id=380
+        """
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login        
@@ -87,23 +73,14 @@ class tc_380(unittest.TestCase):
         website.verify_login(self,sel)
         # logout
         sel.open(testvars.MSTestVariables["Site"] +"logout/")
-# Close the browser, log errors, perform cleanup 
-    def tearDown(self):
-        self.selenium.stop()
-# the command on the previous line should close the browser
-        self.assertEqual([], self.verificationErrors)
 
 
-class tc_381(unittest.TestCase):
-    
-# Open the desired browser and set up the test
-    def setUp(self):
-        self.verificationErrors = []
-        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
-        self.selenium.start()
 
-# The user actions executed in the test scenario
-    def test_gmail_login(self):
+    def test_381(self):
+        """
+        Gmail login from site
+        http://litmus.pculture.org/show_test.cgi?id=381
+        """
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
@@ -114,22 +91,14 @@ class tc_381(unittest.TestCase):
         website.verify_login(self,sel)
         # logout
         sel.open(testvars.MSTestVariables["Site"] +"logout/")
-# Close the browser, log errors, perform cleanup 
-    def tearDown(self):
-        self.selenium.stop()
-# the command on the previous line should close the browser
-        self.assertEqual([], self.verificationErrors)
 
-class tc_382(unittest.TestCase):
-    
-# Open the desired browser and set up the test
-    def setUp(self):
-        self.verificationErrors = []
-        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
-        self.selenium.start()
 
-# The user actions executed in the test scenario
-    def test_gmail_widget_login(self):
+
+    def test_382(self):
+        """
+        Gmail login from widget
+        http://litmus.pculture.org/show_test.cgi?id=382
+        """
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
@@ -144,23 +113,13 @@ class tc_382(unittest.TestCase):
         website.verify_login(self,sel)
         # logout
         sel.open(testvars.MSTestVariables["Site"] +"logout/")
-# Close the browser, log errors, perform cleanup 
-    def tearDown(self):
-        self.selenium.stop()
-# the command on the previous line should close the browser
-        self.assertEqual([], self.verificationErrors)
 
-class tc_383(unittest.TestCase):
-    
-# Open the desired browser and set up the test
-    def setUp(self):
-        self.verificationErrors = []
-        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
-        self.selenium.start()
-        
 
-# The user actions executed in the test scenario
-    def test_twitter_widget_login(self):
+    def test_383(self):
+        """
+        Twitter login from widget
+        http://litmus.pculture.org/show_test.cgi?id=383
+        """
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
@@ -175,24 +134,13 @@ class tc_383(unittest.TestCase):
         website.verify_login(self,sel)
         # logout
         sel.open(testvars.MSTestVariables["Site"] +"logout/")
-# Close the browser, log errors, perform cleanup 
-    def tearDown(self):
-        self.selenium.stop()
-# the command on the previous line should close the browser
-        self.assertEqual([], self.verificationErrors)
 
 
-class tc_384(unittest.TestCase):
-    
-# Open the desired browser and set up the test
-    def setUp(self):
-        self.verificationErrors = []
-        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
-        self.selenium.start()
-        
-
-# The user actions executed in the test scenario
-    def test_site_widget_login(self):
+    def test_384(self):
+        """
+        Site login from site
+        http://litmus.pculture.org/show_test.cgi?id=384
+        """
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
@@ -211,22 +159,14 @@ class tc_384(unittest.TestCase):
         website.verify_login(self,sel)
         # logout
         sel.open(testvars.MSTestVariables["Site"] +"logout/")
-# Close the browser, log errors, perform cleanup 
-    def tearDown(self):
-        self.selenium.stop()
-# the command on the previous line should close the browser
-        self.assertEqual([], self.verificationErrors)
 
-class tc_385(unittest.TestCase):
-    
-# Open the desired browser and set up the test
-    def setUp(self):
-        self.verificationErrors = []
-        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
-        self.selenium.start()
-        
-# The user actions executed in the test scenario
-    def test_openid_widget_login(self):
+
+
+    def test_385(self):
+        """
+        Open id login from widget
+        http://litmus.pculture.org/show_test.cgi?id=385
+        """
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
@@ -241,12 +181,17 @@ class tc_385(unittest.TestCase):
         website.verify_login(self,sel)
         # logout
         sel.open(testvars.MSTestVariables["Site"] +"logout/")
-# Close the browser, log errors, perform cleanup 
-    def tearDown(self):
-        self.selenium.stop()
-# the command on the previous line should close the browser
-        self.assertEqual([], self.verificationErrors)
 
+        
+# Close the browser, log errors, perform cleanup
+    def tearDown(self):
+        """
+        Clean up log erros and close the browser
+        """
+        #Close the browser
+        self.selenium.stop()
+        # log and errors
+        self.assertEqual([], self.verificationErrors)
 
 if __name__ == "__main__":
     unittest.main()

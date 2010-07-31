@@ -1,121 +1,116 @@
-# Open a youtube video and walk through the subtitle widget
-
-
 from selenium import selenium
-import unittest, time, re, sys
-import mslib, website, widget, offsite, testvars
+import unittest
+import time
+import sys
+import mslib
+import website
+import widget
+import offsite
+import testvars
 
-# ----------------------------------------------------------------------
 
-
-class tc_369(unittest.TestCase):
+class subgroup_64(unittest.TestCase):
+    """
+    Litmus Subgroup 64 - offsite subwidget:
+        Tests designed to exercise the subtitle widget embedded
+        in sites external to universalsubtitles.org (live, dev or staging)  
+    """
     
 # Open the desired browser and set up the test
     def setUp(self):
+        """
+        Sets up run envirnment for selenium server
+        """
         self.verificationErrors = []
         self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
         self.selenium.start()
 
-# The user actions executed in the test scenario
-    def test_youtube_offsite_subtitle(self):
+# The test cases of the subgroup.
+
+
+    def test_369(self):
+        """
+        Tests YouTube video embedded in offsite widget
+        http://litmus.pculture.org/show_test.cgi?id=389
+        """
         sel = self.selenium
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"OctopusGarden.txt"
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         offsite.start_youtube_widget_null(self,sel)
         # Transcribe
         widget.transcribe_video(self,sel,subtextfile)
-
         # Sync
-
         widget.sync_video(self,sel,subtextfile,6,8)
-
         # Review
-        widget.review_edit_text(self,sel,subtextfile)
+        widget.edit_text(self,sel,subtextfile)
+
       
+
+    def test_370(self):
+        """
+        Tests ogg video embedded in offsite widget
+        http://litmus.pculture.org/show_test.cgi?id=370
+        """
         
+        sel = self.selenium
+        subtextfile = testvars.MSTestVariables["DataDirectory"]+"OctopusGarden.txt"
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        offsite.start_ogg_widget_null(self,sel)
+
+        # Transcribe
+        widget.transcribe_video(self,sel,subtextfile)
+        # Sync
+        widget.sync_video(self,sel,subtextfile,5,5)
+        # Review
+        widget.edit_text(self,sel,subtextfile)
+
+
+      
+    def test_376(self):
+        """Test demo widget not logged in
+        http://litmus.pculture.org/show_test.cgi?id=376
+        """
+
+        #FIX ME - this test probably belongs in subgroup 69, demo UI
+        
+        sel = self.selenium
+        subtextfile = testvars.MSTestVariables["DataDirectory"]+"OctopusGarden.txt"
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        sel.open(testvars.MSTestVariables["Site"] +"logout")
+        website.start_demo(self,sel)
+        website.start_sub_widget(self,sel)        
+        # Check message in transcribe step
+        widget.verify_login_message(self,sel)
+        widget.transcribe_video(self,sel,subtextfile)
+        
+        # Check message in sync step
+        widget.verify_login_message(self,sel)
+        widget.sync_video(self,sel,subtextfile,2,2)
+
+        # Check message in review step and click done
+        widget.verify_login_message(self,sel)
+        sel.click(testvars.WidgetUI["Next_step"])
+        self.assertEqual("In order to finish and save your work, you need to log in.", sel.get_alert())
+        #Login
+        widget.site_login_auth(self,sel)
+        sel.select_window("null")
+        sel.click(testvars.WidgetUI["Video_playPause"])
+        for line in open(subtextfile):
+            mslib.wait_for_element_present(self,sel,"css=.mirosubs.captionDiv:contains(subtext)")
+
+        #Finish up by logging out
+        sel.open(testvars.MSTestVariables["Site"] +"logout")
+
 # Close the browser, log errors, perform cleanup 
     def tearDown(self):
+        """
+        Closes the browser test window and logs errors
+        """
+        #Close the browser
         self.selenium.stop()
-# the command on the previous line should close the browser
+        #Log any errors
         self.assertEqual([], self.verificationErrors)
-
-
-##class tc_370(unittest.TestCase):
-##    
-### Open the desired browser and set up the test
-##    def setUp(self):
-##        self.verificationErrors = []
-##        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
-##        self.selenium.start()
-##
-### The user actions executed in the test scenario
-##    def test_ogg_offsite_subtitle(self):
-##        sel = self.selenium
-##        subtextfile = testvars.MSTestVariables["DataDirectory"]+"OctopusGarden.txt"
-##        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-##        offsite.start_ogg_widget_null(self,sel)
-##
-##        # Transcribe
-##        widget.transcribe_video(self,sel,subtextfile)
-##
-##        # Sync
-##
-##        widget.sync_video(self,sel,subtextfile,5,5)
-##
-##        # Review
-##        widget.review_edit_text(self,sel,subtextfile)
-##      
-##        
-### Close the browser, log errors, perform cleanup 
-##    def tearDown(self):
-##        self.selenium.stop()
-### the command on the previous line should close the browser
-##        self.assertEqual([], self.verificationErrors)
-##
-##class tc_376(unittest.TestCase):
-##
-### Open the desired browser and set up the test
-##    def setUp(self):
-##        self.verificationErrors = []
-##        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
-##        self.selenium.start()
-##
-### The user actions executed in the test scenario
-##    def test_demo_not_logged_in(self):
-##        sel = self.selenium
-##        subtextfile = testvars.MSTestVariables["DataDirectory"]+"OctopusGarden.txt"
-##        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-##        sel.open(testvars.MSTestVariables["Site"] +"logout")
-##        website.start_demo(self,sel)
-##        website.start_sub_widget(self,sel)        
-##        # Check message in transcribe step
-##        widget.verify_login_message(self,sel)
-##        widget.transcribe_video(self,sel,subtextfile)
-##        
-##        # Check message in sync step
-##        widget.verify_login_message(self,sel)
-##        widget.sync_video(self,sel,subtextfile,2,2)
-##
-##        # Check message in review step and click done
-##        widget.verify_login_message(self,sel)
-##        sel.click(testvars.WidgetUI["Next_step"])
-##        self.assertEqual("In order to finish and save your work, you need to log in.", sel.get_alert())
-##        #Login
-##        widget.site_login_auth(self,sel)
-##        sel.select_window("null")
-##        sel.click(testvars.WidgetUI["Video_playPause"])
-##        for line in open(subtextfile):
-##            mslib.wait_for_element_present(self,sel,"css=.mirosubs.captionDiv:contains(subtext)")
-##
-##        #Finish up by logging out
-##        sel.open(testvars.MSTestVariables["Site"] +"logout")        
-##      
-##        
-### Close the browser, log errors, perform cleanup 
-##    def tearDown(self):
-##        self.selenium.stop()
-### the command on the previous line should close the browser
-##        self.assertEqual([], self.verificationErrors)
+      
 
 
 if __name__ == "__main__":

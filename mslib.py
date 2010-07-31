@@ -1,25 +1,32 @@
-# Module APLIB.PY
-# includes:
-#   * function remove_html_tags(data) - strips Python string of HTML tags
-#   * subroutine AppendErrorMessage(self,sel,msg) - inserts <msg> error message
-#                into verificationErrors list and into output log
+"""
+mslib.py
+Help Modules specific to universal subtitles project
+"""
 
 import re, time, testvars
 
 def remove_html_tags(data):
+    """
+    removes html tags from test data
+    """
     p = re.compile(r'<.*?>')
     return p.sub('', data)
 
 
 def AppendErrorMessage(self,sel,msg):
+    """
+    Formats an error message to append to output log.
+    """
     self.verificationErrors.append(msg)
     print "**** Error ****   "+msg
 
-def AppendInfoMessage(self,sel,msg):
-    self.verificationErrors.append(msg)
-    print "---- Info----   "+msg
 
 def wait_for_element_present(self,sel,input_field):
+    """
+    Description: Waits 60 seconds for element to present itself.
+    Requires: valid element identifier, can be css, xpath
+    """
+    
     for i in range(60):
         try:
             if sel.is_element_present(input_field): break
@@ -29,6 +36,10 @@ def wait_for_element_present(self,sel,input_field):
         self.fail("time out waiting for element " +input_field)
 
 def wait_for_video_to_buffer(self,sel):
+    """
+    Description: Waits for the video in the frame to buffer to 75%.
+                 This is always called by widget.transcribe_video
+    """
     wait_for_element_present(self,sel,"css=.mirosubs-buffered")
     print " - waiting for video to buffer " +time.strftime("%M:%S", time.gmtime())
     for i in range(300):

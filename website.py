@@ -15,6 +15,15 @@ import mslib, testvars, widget
 #Login as a user
 
 def SiteLogIn(self,sel,user,passw):
+    """
+    Description: Login to site using the website login button and a site account
+    
+    Requires: valid site user name and password.
+    
+    Pre-condition: user is on the site page.
+    
+    Post-condition: user is still on the site page
+    """
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_Button"])
     sel.click(testvars.WebsiteUI["Login_Button"])
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
@@ -25,11 +34,27 @@ def SiteLogIn(self,sel,user,passw):
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Logout_Button"])
 
 def SiteLogout(self,sel):
+    """
+    Description: Logout of site using site Logout button.
+
+    """
     sel.open(testvars.MSTestVariables["Site"] +"logout/")
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_Button"])
     
 
 def Login(self,sel,auth_type):
+    """
+    Description: Log on using website button and select an external login option.
+    auth_type can be either '.twitter', '.open-id', or '.google'
+
+    Requires: valid account for selected login.  See testvars for existing accounts.
+
+    Pre-condition: user is on the site page
+    
+    Post-condition: offsite login form displayed, see offsite
+    
+    
+    """
     # auth_type can be either ".twitter", ".open-id", "google"
     sel.click(testvars.WebsiteUI["Login_Button"])
     mslib.wait_for_element_present(self,sel,"css=."+auth_type)
@@ -37,20 +62,45 @@ def Login(self,sel,auth_type):
     #After login, use offsite to do auth
 
 def start_demo(self,sel):
+    """
+    Description: Starts the demo widget from the site
+
+    Pre-condition: site page is opened
+
+    Post-condition: /demo page is opened, usually next step is start_sub_widget
+    """
     mslib.wait_for_element_present(self,sel,"css=.try_link")
     sel.click("css=.try_link span:contains('Demo')")
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     #widget.close_howto_video
 
 def submit_video(self,sel,url):
-    sel.open(testvars.MSTestVariables["Site"]+"videos/create/")
+    """
+    Description: Submit a video using the site button
+
+    Pre-condition: site page is opened
+
+    Post-condition: the widget is launched immediately.
+    You'll need to deal with the help video, see widget.close_howto_video
+    """
+    sel.click(testvars.WebsiteUI["Subtitle_Button"])
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     sel.type("video_url", url)
     sel.click(testvars.WebsiteUI["Video_Submit_Button"])
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
 
-def start_sub_widget(self,sel,skip=True):
+def start_sub_widget(self,sel,skip="True"):
+    """
+    Description: Start the Subtitle Widget using the Subtitle Me menu.
+    skip is set to true by default and gets passed to widget.close_howto_video
+    to prevent further how-to video displays.
+
+    Pre-condition: On a page where Subtitle Me menu is present.
+    Test will fail if Choose Language menu is present.
+
+    Post-condition: the widget is launched and you will be on step 1 or Edit step
+    """
     # Click Subtitle Me (Continue Subtitling -> Add Subtitles)
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
     self.failIf(sel.is_element_present(testvars.WebsiteUI["ChooseLanguage_menu"]))
@@ -62,6 +112,15 @@ def start_sub_widget(self,sel,skip=True):
     sel.select_frame("relative=top")
 
 def verify_login(self,sel):
+    """
+    Description: Verifies user is logged in by finding the logout button on the
+    website and then starting the demo and looking for logout menu item on the
+    Subtitle Me button.
+
+    Pre-Condition: must be logged into site.
+
+    Post-Condition: will be on the /demo page
+    """
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Logout_Button"])
     start_demo(self,sel)
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
