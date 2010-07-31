@@ -141,7 +141,7 @@ class tc_397(unittest.TestCase):
         website.start_demo(self,sel)
         website.start_sub_widget(self,sel)
         #Type sub-text in the video, then wait stay on Step-1 screen
-        widget.transcribe_video(self,sel,subtextfile,mode="Beginner", step="Stop")
+        widget.transcribe_video(self,sel,subtextfile,mode="Beginner", step="Stop", buffer="yes")
         # wait for play button to indicate playback was paused, then start playback and see if it auto-stops
         for x in range(0,2):
             mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_play_button"])
@@ -204,9 +204,6 @@ class tc_470(unittest.TestCase):
             print "playback resumed at: "+sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
             time.sleep(.5)    
         
-        # verify subs present on next screen
-        widget.verify_sub_text(self,sel,subtextfile)
-        
 # Close the browser, log errors, perform cleanup 
     def tearDown(self):
         self.selenium.stop()
@@ -232,7 +229,7 @@ class tc_398(unittest.TestCase):
         website.start_demo(self,sel)
         website.start_sub_widget(self,sel)
         #Type sub-text in the video, then wait stay on Step-1 screen
-        widget.transcribe_video(self, sel, subtextfile, step="Stop")
+        widget.transcribe_video(self, sel, subtextfile, step="Stop",buffer="yes")
         #verify that playback continues to the end
         while int(sel.get_element_width("css=.mirosubs-played")) != 250:
             self.failIf(sel.is_element_present(testvars.WidgetUI["Video_play_button"]))
@@ -480,12 +477,12 @@ class tc_409(unittest.TestCase):
         website.start_demo(self,sel)
         website.start_sub_widget(self,sel)
         #step 1 type the subs
-        widget.transcribe_video(self, sel, subtextfile)
+        widget.transcribe_video(self, sel, subtextfile,buffer="yes")
         # on step 2 test skip back
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
         sel.click(testvars.WidgetUI["Play_pause"])
         # wait for play to advance and test with screen button
-        time.sleep(7)
+        time.sleep(9)
         for x in range(0,3):  
             # get the time, skip back and get the time again
             start_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
@@ -524,7 +521,7 @@ class tc_410(unittest.TestCase):
         #start sub widget
         website.start_sub_widget(self,sel)
         #complete step 1 typing
-        widget.transcribe_video(self, sel, subtextfile)
+        widget.transcribe_video(self, sel, subtextfile, buffer="yes")
         #complete step 2 syncing
         widget.sync_video(self,sel,subtextfile,step="Stop")
         #on step 3 test ctrl to skip back        
@@ -937,9 +934,8 @@ class tc_412(unittest.TestCase):
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
         website.start_sub_widget(self,sel)
-        widget.transcribe_video(self, sel, subtextfile)
-        widget.sync_video(self,sel,subtextfile, start_delay=8, sub_int=4)
-
+        widget.transcribe_video(self, sel, subtextfile,buffer="yes")
+        widget.sync_video(self,sel,subtextfile,start_delay=6, sub_int=3)
         #on Step 3 resync video times
         widget.hold_down_delay_sub(self,sel,subtextfile)       
                          

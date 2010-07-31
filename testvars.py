@@ -13,10 +13,10 @@ vbrowser = "*chrome"
 ##                    "job-name": "Universal Subtitles Testing"\
 ##                }"""
 
-MSTestVariables = {"Site":"http://dev.universalsubtitles.org/", \
+MSTestVariables = {"Site":"http://staging.universalsubtitles.org/", \
                    "ResultOutputDirectory":r"Results/", \
                    "DataDirectory":r"TestInput/", \
-                   "TimeOut":"60000", \
+                   "TimeOut":"90000", \
                   }
 
 # Mapping to the MiroSubs website UI navigations buttons and links

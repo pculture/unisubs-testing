@@ -38,7 +38,7 @@ def GmailAuth(self,sel,user,passw):
     sel.click("signIn")
 
 def start_youtube_widget_null(self,sel):
-        sel.open("http://pculture.org/mirosubs_tests/dev-widget-null.html")
+        sel.open("http://pculture.org/mirosubs_tests/staging-widget-null.html")
         #left column is the youtube video
         mslib.wait_for_element_present(self,sel,"css=.left_column span.mirosubs-tabText")
         sel.click_at("css=.left_column span.mirosubs-tabText","")
@@ -47,12 +47,26 @@ def start_youtube_widget_null(self,sel):
         widget.close_howto_video(self,sel)
         
 def start_ogg_widget_null(self,sel):
-    sel.open("http://pculture.org/mirosubs_tests/dev-widget-null.html")
+    sel.open("http://pculture.org/mirosubs_tests/staging-widget-null.html")
     #right column is the .ogg video
     mslib.wait_for_element_present(self,sel,"css=.right_column span.mirosubs-tabText")
     sel.click_at("css=.right_column span.mirosubs-tabText","")
+    handle_warning_popup(self,sel)
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["AddSubtitles_menuitem"])
     sel.click_at(testvars.WebsiteUI["AddSubtitles_menuitem"], "")
     widget.close_howto_video(self,sel)
+
+def handle_warning_popup(self,sel):
+    sel.select_pop_up("null")
+    if sel.is_element_present("css=.mirosubs-warning"):
+        sel.click("link=Continue")
+        for i in range(60):
+            try:
+                if not sel.is_element_present("css=.mirosubs-warning"): break
+            except: pass
+            time.sleep(1)
+        else: self.fail("time out")
+    sel.select_window("null")
+
         
     

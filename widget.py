@@ -19,11 +19,15 @@ def Login(self,sel,auth_type):
     sel.click("css=.mirosubs-"+auth_type)
 
 def site_login_from_widget_link(self,sel):
-    auth_type = "log"
-    #auth_type can be "log" (for site), "twitter","openid","gmail"
+
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Must_Login"])        
     print "loggin in from widget"
     sel.click("link=LOGIN")
+    site_login_auth(self,sel)
+
+def site_login_auth(self,sel):
+    auth_type = "log"
+    #auth_type can be "log" (for site), "twitter","openid","gmail"
     sel.select_frame("relative=top")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-"+auth_type)
     sel.click("css=.mirosubs-"+auth_type)
@@ -46,13 +50,15 @@ def close_howto_video(self,sel,skip=True):
         sel.click("css=.mirosubs-done:contains('Continue')")
 
 
-def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue"):
+def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="yes"):
     print "starting to transcribe video"
     # giving the video a chance to load.
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     mode_label = sel.get_text("css=.mirosubs-speedmode option:contains("+mode+")")
     sel.select("//select", "label=" +mode_label)
-    mslib.wait_for_video_to_buffer(self,sel)
+    if buffer != "no":
+        mslib.wait_for_video_to_buffer(self,sel)
+    else: time.sleep(10)
         
     sel.click(testvars.WidgetUI["Play_pause"])
 
@@ -150,40 +156,41 @@ def edit_text(self,sel,subtextfile,new_text="my hovercraft is full of eels"):
             print "expected: " +new_text+ "found: "+ sub_cell_text.rstrip
         sub_li = sub_li + 1
         
-def drag_time_bubbles(self,sel,sub_file):
+def drag_time_bubbles(self,sel,subtextfile):
 
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Sync_sub"])
     sub_li = 1
     for line in open(subtextfile):
         #Fix Me - find correct xpath or css for the sub bubble elements and start time
-        sub_cell_start_time = "//span["+str(li)+"]/span/span[1]"
-        sub_cell_end_time = "//span["+str(li)+"]/span/span[2]"
+        sub_cell_start_time = "//li["+str(sub_li)+"]/span[1]/span/span[1]"
+        
+        sub_cell_end_time = "//span["+str(sub_li)+"]/span/span[2]"
     
         # drag start time to the left and verify time change
         start_time = sel.get_text(sub_cell_start_time)
         print start_time
-        drag_it(self,sel,line.upper(),"left","-60")
+        drag_it(self,sel,line.rstrip(),"left","-60")
         new_start_time = sel.get_text(sub_cell_start_time)
         self.failUnless(int(start_time) > int(new_start_time))
 
         # drag start time to the right and verify time change
         start_time = sel.get_text(sub_cell_start_time)
         print start_time
-        drag_it(self,sel,line.upper(),"left","+60")
+        drag_it(self,sel,line.rstrip(),"left","+60")
         new_start_time = sel.get_text(sub_cell_start_time)
         self.failUnless(int(start_time) < int(new_start_time))
            
         # drag end time to the left and verify time change
         end_time = sel.get_text(sub_cell_end_time)
         print end_time
-        drag_it(self,sel,line.upper(),"right","-60")
+        drag_it(self,sel,line.rstrip(),"right","-60")
         new_end_time = sel.get_text(sub_cell_end_time)
         self.failUnless(int(end_time) > int(new_end_time))
 
         # drag end time to the right and verify time change
         end_time = sel.get_text(sub_cell_end_time)
         print end_time
-        drag_it(self,sel,line.upper(),"right","+60")
+        drag_it(self,sel,line.rstrip(),"right","+60")
         new_end_time = sel.get_text(sub_cell_end_time)
         self.failUnless(int(end_time) < int(new_end_time))
 
@@ -201,27 +208,23 @@ def click_time_shift_arrows(self,sel,subtextfile):
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Sync_sub"])
     sub_li = 1
     for line in open(subtextfile):
-        sub_cell_start_time = "//span["+str(li)+"]/span/span[1]"
-        sub_cell_end_time = "//span["+str(li)+"]/span/span[2]"
-        
-    #Fix Me - find correct xpath or css for the sub bubble elements and start time
-        left_arrow = "//li["+str(li)+"]/span[1]/span/span[2]/a[2]"
-        right_arrow = "//li["+str(li)+"]/span[1]/span/span[2]/a[1]"
+        sub_cell_start_time = "//li["+str(sub_li)+"]/span[1]/span/span[1]"
+        up_arrow = "//li["+str(sub_li)+"]/span[1]/span/span[2]/a[1]"
+        down_arrow = "//li["+str(sub_li)+"]/span[1]/span/span[2]/a[2]"
         for x in range(0,5):  
-            #Click text-arrow left and verify time jump of .02 seconds
+            #Click up (right) and verify time jump of .05 seconds
             start_time = sel.get_text(sub_cell_start_time)
-            print start_time
-            sel.click(left_arrow)
+            sel.focus(up_arrow)
+            sel.click_at(up_arrow,"")
             new_start_time = sel.get_text(sub_cell_start_time)
-            self.failUnless(int(start_time) - int(new_start_time)) == .02
+            self.failUnless(float(new_start_time) - float(start_time)) == .05
             #maybe verify the pixel change on the timeline
         for x in range(0,5):
             #Click text-arrow right and verify time jump
-            end_time = sel.get_text(sub_cell_start_time)
-            print start_time
-            sel.click(right_arrow)
-            new_end_time = sel.get_text(sub_cell_end_time)
-            self.failUnless(int(new_end_time) - int(end_time)) == .02
+            start_time = sel.get_text(sub_cell_start_time)
+            sel.click_at(down_arrow,"")
+            new_start_time = sel.get_text(sub_cell_start_time)
+            self.failUnless(float(start_time) - float(new_start_time)) == .05
             #maybe verify the pixel change on the timeline
 
     
@@ -232,22 +235,22 @@ def hold_down_delay_sub(self,sel,sub_file,delay_time=4,hold_time=2, sync_time=2)
     sel.click(testvars.WidgetUI["Video_playPause"])
     time.sleep(delay_time)
     sel.click(testvars.WidgetUI["Skip_back"])
-    li = 1
-    sub_cell_start_time = "//li["+str(li)+"]/span[1]/span/span[1]"
+    sub_li = 1
     for line in open(sub_file):
+        sub_cell_start_time = "//li["+str(sub_li)+"]/span[1]/span/span[1]"
         old_time = sel.get_text(sub_cell_start_time)
         # 40 is the native key code for down arrow key
         sel.key_down_native("40")
         time.sleep(hold_time)
         sel.key_up_native("40")
-        new_time = sel.get_text(time_stamp_el)
+        new_time = sel.get_text(sub_cell_start_time)
         print old_time + " ==> " + new_time
         if old_time == new_time:
             mslib.AppendErrorMessage(self,sel,"time's not shifted")
         time.sleep(sync_time)
-        li = li + 1
+        sub_li = sub_li + 1
 
-def resync_videos (self,sel,subtextfile,start_delay=1,sub_int=.5, step="Stop"):
+def resync_video (self,sel,subtextfile,start_delay=1,sub_int=.5, step="Stop"):
     print "starting sub resync"
     sel.select_frame("relative=top")
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
@@ -258,13 +261,13 @@ def resync_videos (self,sel,subtextfile,start_delay=1,sub_int=.5, step="Stop"):
     sub_li = 1
     for line in open(subtextfile):
         #Fix Me - find correct xpath for the sub start time in a cell
-        sub_cell_start_time = "//span["+str(li)+"]/span/span[1]"
+        sub_cell_start_time = "//span["+str(sub_li)+"]/span/span[1]"
         start_time=sel.get_text(sub_cell_start_time)
         sel.focus(testvars.WidgetUI["Sync_sub"])
         sel.click_at(testvars.WidgetUI["Sync_sub"],"")
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Active_subtime"])
         new_start_time = sel.get_text(testvars.WidgetUI["Active_subtime"])
-        self.failUnless(int(start_time) < int(new_start_time))
+        self.failUnless(float(start_time) < float(new_start_time))
         time.sleep(sub_int)
     sel.focus(testvars.WidgetUI["Sync_sub"])
     sel.click_at(testvars.WidgetUI["Sync_sub"],"")
@@ -293,7 +296,6 @@ def verify_sub_text(self,sel,subtextfile):
     sub_li=1
     for line in codecs.open(subtextfile,encoding='utf-8'):
         sub_cell_text = "//li["+str(sub_li)+"]/span[2]"
-        print sel.get_text(sub_cell_text)
         self.assertEqual(line.rstrip(), sel.get_text(sub_cell_text).rstrip())
         sub_li = sub_li + 1
         

@@ -33,10 +33,10 @@ def wait_for_video_to_buffer(self,sel):
     print " - waiting for video to buffer " +time.strftime("%M:%S", time.gmtime())
     for i in range(300):
         try:
-            if int(sel.get_element_width("css=.mirosubs-buffered")) >= 125: break
+            if int(sel.get_element_width("css=.mirosubs-buffered")) >= 187: break
         except: pass
         time.sleep(1)
-    print " - video buffered to 50% " +time.strftime("%M:%S", time.gmtime())
+    print " - video buffered to 75% " +time.strftime("%M:%S", time.gmtime())
    
 
 
