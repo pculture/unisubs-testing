@@ -5,23 +5,26 @@ See http://saucelabs.com/products/docs/sauce-ondemand/browsers for correct Brows
 """
 
 from selenium import selenium
-import unittest, time, re, sys
-import mslib, website, widget, offsite, testvars
+import json
+import unittest
+import sauce_auth
+import testvars
 import sg_69_demoUI
 import sg_64_subwidget
 
 #----------------------------------------------------------------------
 sauce_localhost = "saucelabs.com"
-sauce_browser = """{\
-                    "username": "xxx-test",\
-                    "access-key": "52dd20dd-b5bd-4732-a94a-23a5b8a6fbb1",\
+sauce_data = {\
+                    "username": sauce_auth.sauce_user,\
+                    "access-key": sauce_auth.sauce_key,\
                     "os": "Windows 2003",\
-                    "browser": "iexplore",\
-                    "browser-version": "8.",\
-                    "record-video": true ,\
-                    "job-name": "Universal Subtitles Testing"\
-                }"""
+                    "browser": "opera",\
+                    "browser-version": "10.",\
+                    "record-video": False ,\
+                    "job-name": "UniSubs x-browser ie8"\
+                }
 
+sauce_browser = json.dumps(sauce_data)
 
 
 class demo_UI_suite(sg_69_demoUI.subgroup_69):

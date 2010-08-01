@@ -2,6 +2,8 @@
 *.pyc
 # ignore the html files
 *.html
+# ignore sauce_auth.py - don't want key public
+sauce_auth.py
 # ignore results
 Results/*.html
 
