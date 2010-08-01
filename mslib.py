@@ -3,7 +3,9 @@ mslib.py
 Help Modules specific to universal subtitles project
 """
 
-import re, time, testvars
+import re
+import time
+import testvars
 
 def remove_html_tags(data):
     """
@@ -40,6 +42,11 @@ def wait_for_video_to_buffer(self,sel):
     Description: Waits for the video in the frame to buffer to 75%.
                  This is always called by widget.transcribe_video
     """
+    # on some browsers, need to start playback for browser to start to buffer
+    #start play, wait 1 sec and pause to wait for buffer
+    sel.click(testvars.WidgetUI["Play_pause"])
+    wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
+    sel.click(testvars.WidgetUI["Play_pause"])
     wait_for_element_present(self,sel,"css=.mirosubs-buffered")
     print " - waiting for video to buffer " +time.strftime("%M:%S", time.gmtime())
     for i in range(300):

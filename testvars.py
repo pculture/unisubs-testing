@@ -1,7 +1,7 @@
 preE=" --- ERROR: "
 
 vlocalhost = "localhost"
-vbrowser = "*chrome"
+vbrowser = "*safari"
 
 MSTestVariables = {"Site":"http://staging.universalsubtitles.org/", \
                    "ResultOutputDirectory":r"Results/", \

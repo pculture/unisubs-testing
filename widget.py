@@ -109,16 +109,16 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="ye
     sel.click(testvars.WidgetUI["Play_pause"])
 
     for line in codecs.open(sub_file,encoding='utf-8'):
-        sel.click("//div/input")
-        sel.type("//div/input", line)
-        sel.type_keys("//div/input"," ")
+        sel.click("css=.trans")
+        sel.type("css=.trans", line)
+        sel.type_keys("css=.trans"," ")
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Transcribe_current_sub"])
         current_sub = sel.get_text(testvars.WidgetUI["Transcribe_current_sub"])
         if line.rstrip() != current_sub.rstrip():
             mslib.AppendErrorMessage(self,sel,"sub text mismatch")
             print "found: " + current_sub.rstrip()
             print "expected: " +line
-        sel.key_press("//div/input", "\\13")
+        sel.key_press("css=.trans", "\\13")
         time.sleep(2)
     if step == "Continue":
         sel.click(testvars.WidgetUI["Next_step"])
@@ -387,11 +387,14 @@ def steps_display(self,sel,step_num):
     """
     Description: verifies text contents of Steps.  
     """
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
+    mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep:contains('"+step_num+")")
     self.failUnless("Typing" == sel.get_text("css=h2"))
     self.failUnless(str(step_num) == sel.get_text("css=.mirosubs-activestep"))
     self.failUnless("tab" == sel.get_text("css=.mirosubs-tab"))
-    self.assertEqual("Play next 8 seconds", sel.get_text("css=.mirosubs-tab + span"))
+    if step == "1":
+        self.assertEqual("Play next 8 seconds", sel.get_text("css=.mirosubs-tab + span"))
+    else:
+        self.assertEqual("Play/Pause", sel.get_text("css=.mirosubs-tab + span"))
     self.assertEqual("ctrl", sel.get_text("css=.mirosubs-control"))
     self.assertEqual("Re-play last 8 seconds", sel.get_text("css=.mirosubs-control + span"))
     self.assertEqual("Speed Mode", sel.get_text("css=.mirosubs-speedmode h4"))
