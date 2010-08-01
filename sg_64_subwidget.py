@@ -96,7 +96,7 @@ class subgroup_64(unittest.TestCase):
         sel.select_window("null")
         sel.click(testvars.WidgetUI["Video_playPause"])
         for line in open(subtextfile):
-            mslib.wait_for_element_present(self,sel,"css=.mirosubs.captionDiv:contains(subtext)")
+            mslib.wait_for_element_present(self,sel,"css=.mirosubs.captionDiv:contains('"+line+"')")
 
         #Finish up by logging out
         sel.open(testvars.MSTestVariables["Site"] +"logout")

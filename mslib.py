@@ -46,8 +46,10 @@ def wait_for_video_to_buffer(self,sel):
     #start play, wait 1 sec and pause to wait for buffer
     sel.click(testvars.WidgetUI["Play_pause"])
     wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
-    sel.click(testvars.WidgetUI["Play_pause"])
+    sel.click(testvars.WidgetUI["Video_pause_button"])
+    wait_for_element_present(self,sel,testvars.WidgetUI["Video_play_button"])
     wait_for_element_present(self,sel,"css=.mirosubs-buffered")
+    
     print " - waiting for video to buffer " +time.strftime("%M:%S", time.gmtime())
     for i in range(300):
         try:

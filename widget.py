@@ -7,6 +7,7 @@ from selenium import selenium
 
 import unittest
 import time
+import re
 import codecs
 import mslib
 import testvars
@@ -387,7 +388,7 @@ def steps_display(self,sel,step_num):
     """
     Description: verifies text contents of Steps.  
     """
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep:contains('"+step_num+")")
+    mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep:contains('"+str(step_num)+")")
     self.failUnless("Typing" == sel.get_text("css=h2"))
     self.failUnless(str(step_num) == sel.get_text("css=.mirosubs-activestep"))
     self.failUnless("tab" == sel.get_text("css=.mirosubs-tab"))

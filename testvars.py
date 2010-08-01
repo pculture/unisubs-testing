@@ -1,12 +1,12 @@
 preE=" --- ERROR: "
 
 vlocalhost = "localhost"
-vbrowser = "*safari"
+vbrowser = "*firefox"
 
 MSTestVariables = {"Site":"http://staging.universalsubtitles.org/", \
                    "ResultOutputDirectory":r"Results/", \
                    "DataDirectory":r"TestInput/", \
-                   "TimeOut":"90000", \
+                   "TimeOut":"45000", \
                   }
 
 # Mapping to the MiroSubs website UI navigations buttons and links
