@@ -2,6 +2,7 @@ preE=" --- ERROR: "
 
 vlocalhost = "localhost"
 vbrowser = "*chrome"
+down_arrow_key = u'\u2193'
 
 MSTestVariables = {"Site":"http://staging.universalsubtitles.org/", \
                    "ResultOutputDirectory":r"Results/", \

@@ -49,6 +49,7 @@ class subgroup_69(unittest.TestCase):
         Tests How to video display and Continue
         http://litmus.pculture.org/show_test.cgi?id=389
         """
+        print "starting testcase 389"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         # be sure logged out
@@ -69,6 +70,7 @@ class subgroup_69(unittest.TestCase):
         Tests How to video display and skip setting
         http://litmus.pculture.org/show_test.cgi?id=395
         """
+        print "starting testcase 395"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         # be sure logged out
@@ -90,7 +92,8 @@ class subgroup_69(unittest.TestCase):
         """
         Tests Step 1 typing the subtitles
         http://litmus.pculture.org/show_test.cgi?id=373
-        """    
+        """
+        print "starting testcase 373"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
@@ -108,6 +111,7 @@ class subgroup_69(unittest.TestCase):
         Tests Beginner mode setting in Step 1 Typing.
         http://litmus.pculture.org/show_test.cgi?id=397
         """
+        print "starting testcase 397"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
@@ -139,6 +143,7 @@ class subgroup_69(unittest.TestCase):
         Tests Advanced (Recommended) setting Step 1 Typing
         http://litmus.pculture.org/show_test.cgi?id=470
         """
+        print "starting testcase 470"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
@@ -173,6 +178,7 @@ class subgroup_69(unittest.TestCase):
         Tests Expert setting in Step 1 Typing
         http://litmus.pculture.org/show_test.cgi?id=398
         """
+        print "starting testcase 398"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
@@ -194,6 +200,7 @@ class subgroup_69(unittest.TestCase):
         Tests Play - Pause functionality in Step 1 Typing
         http://litmus.pculture.org/show_test.cgi?id=399
         """
+        print "starting testcase 399"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
@@ -236,6 +243,7 @@ class subgroup_69(unittest.TestCase):
         Tests Play - Pause functionality in Step 2 Syncing
         http://litmus.pculture.org/show_test.cgi?id=403
         """
+        print "starting testcase 403"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
@@ -273,11 +281,12 @@ class subgroup_69(unittest.TestCase):
         
 
 
-    def test_step3_tab_playpause(self):
+    def test_404(self):
         """
         Tests Play - Pause functionality in Step 3 Review
         http://litmus.pculture.org/show_test.cgi?id=404
         """
+        print "starting testcase 404"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
@@ -316,11 +325,12 @@ class subgroup_69(unittest.TestCase):
                          
         
 
-    def test_step1_skip_back(self):
+    def test_400(self):
         """
         Tests Skip Back (ctrl) functionality in Step 1 Typing
         http://litmus.pculture.org/show_test.cgi?id=400
         """
+        print "starting testcase 400"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
@@ -374,7 +384,7 @@ class subgroup_69(unittest.TestCase):
         Tests Skip Back (ctrl) functionality in Step 2 Sync
         http://litmus.pculture.org/show_test.cgi?id=409
         """
-        
+        print "starting testcase 409"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
@@ -410,6 +420,7 @@ class subgroup_69(unittest.TestCase):
         Tests Skip Back (ctrl) functionality in Step 3 Review
         http://litmus.pculture.org/show_test.cgi?id=410
         """
+        print "starting testcase 410"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
@@ -447,6 +458,7 @@ class subgroup_69(unittest.TestCase):
         Tests Restart Typing link in Step 1 Typing
         http://litmus.pculture.org/show_test.cgi?id=406
         """
+        print "starting testcase 406"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
@@ -465,6 +477,7 @@ class subgroup_69(unittest.TestCase):
         Tests Login link functionality in Step 1 Typing
         http://litmus.pculture.org/show_test.cgi?id=400
         """
+        print "starting testcase 401"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
@@ -487,6 +500,7 @@ class subgroup_69(unittest.TestCase):
         Tests Login Link functionality in Step 2 Sync
         http://litmus.pculture.org/show_test.cgi?id=405
         """
+        print "starting testcase 405"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
@@ -510,6 +524,7 @@ class subgroup_69(unittest.TestCase):
         Tests Login Link functionality in Step 3 Sync
         http://litmus.pculture.org/show_test.cgi?id=416
         """
+        print "starting testcase 416"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
@@ -532,6 +547,7 @@ class subgroup_69(unittest.TestCase):
         Tests Subtitle Syncing in Step 2 Sync
         http://litmus.pculture.org/show_test.cgi?id=411
         """
+        print "starting testcase 411"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
@@ -550,6 +566,7 @@ class subgroup_69(unittest.TestCase):
         Tests smalls, caps, spaces, and non-ascii chars
         http://litmus.pculture.org/show_test.cgi?id=388
         """
+        print "starting testcase 388"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
@@ -565,18 +582,17 @@ class subgroup_69(unittest.TestCase):
         widget.edit_text(self,sel,subtextfile)
         # make it french
         widget.edit_text(self,sel,subtextfile,new_text=testvars.eels_fr)
-        sel.capture_screenshot(testvars.MSTestVariables["ResultOutputDirectory"]+"tc_388_eels_fr.png")
         #make it japanese
         widget.edit_text(self,sel,subtextfile,new_text=testvars.eels_jp)
-        sel.capture_screenshot(testvars.MSTestVariables["ResultOutputDirectory"]+"tc_388_eels_jp.png")
 
 
 
-    def test_411(self):
+    def test_415(self):
         """
         Tests Edit Subtitles in Step 3 Review
-        http://litmus.pculture.org/show_test.cgi?id=411
+        http://litmus.pculture.org/show_test.cgi?id=415
         """
+        print "starting testcase 415"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
@@ -585,19 +601,16 @@ class subgroup_69(unittest.TestCase):
         website.start_demo(self,sel)
         website.start_sub_widget(self,sel)
         widget.transcribe_video(self, sel, subtextfile)
-        widget.sync_video(self,sel,subtextfile)
-                       
+        widget.sync_video(self,sel,subtextfile)                
         #edit subtitles
         print "editing subtitles"
         widget.edit_text(self,sel,subtextfile)
         # make it french
         print "french"
         widget.edit_text(self,sel,subtextfile,new_text=testvars.eels_fr)
-        sel.capture_screenshot(testvars.MSTestVariables["ResultOutputDirectory"]+"tc_415_eels_fr.png")
         #make it japanese
         print "japanese"
         widget.edit_text(self,sel,subtextfile,new_text=testvars.eels_jp)
-        sel.capture_screenshot(testvars.MSTestVariables["ResultOutputDirectory"]+"tc_415_eels_jp.png")
 
 
 
@@ -606,6 +619,7 @@ class subgroup_69(unittest.TestCase):
         Tests Back To Typing link in Step 2 Sync
         http://litmus.pculture.org/show_test.cgi?id=408
         """
+        print "starting testcase 408"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
@@ -629,6 +643,7 @@ class subgroup_69(unittest.TestCase):
         Tests Down Arrow to  resync in Step 3 Review
         http://litmus.pculture.org/show_test.cgi?id=402
         """
+        print "starting testcase 402"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
@@ -648,6 +663,7 @@ class subgroup_69(unittest.TestCase):
         Tests modifying times by dragging the timeline bubbles
         http://litmus.pculture.org/show_test.cgi?id=413
         """
+        print "starting testcase 413"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
@@ -656,18 +672,19 @@ class subgroup_69(unittest.TestCase):
         website.start_demo(self,sel)
         website.start_sub_widget(self,sel)
         widget.transcribe_video(self, sel, subtextfile)
-        widget.sync_video(self,sel,subtextfile)
+        widget.sync_video(self,sel,subtextfile,start_delay=1, sub_int=1)
         #on Step 3 resync video times
         widget.drag_time_bubbles(self,sel,subtextfile)       
                          
         
 
-    def test_step3_text_time_arrows(self):
+    def test_414(self):
         """
         Tests modifying times by click the arrows that appear on
         mouseover on Step 3 Review
         http://litmus.pculture.org/show_test.cgi?id=414
         """
+        print "starting testcase 414"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
@@ -688,6 +705,7 @@ class subgroup_69(unittest.TestCase):
         on Step 3 Review
         http://litmus.pculture.org/show_test.cgi?id=412
         """
+        print "starting testcase 412"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
@@ -696,7 +714,7 @@ class subgroup_69(unittest.TestCase):
         website.start_demo(self,sel)
         website.start_sub_widget(self,sel)
         widget.transcribe_video(self, sel, subtextfile,buffer="yes")
-        widget.sync_video(self,sel,subtextfile,start_delay=6, sub_int=3)
+        widget.sync_video(self,sel,subtextfile,start_delay=5, sub_int=2)
         #on Step 3 resync video times
         widget.hold_down_delay_sub(self,sel,subtextfile)       
                          

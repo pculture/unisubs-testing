@@ -69,8 +69,9 @@ def start_demo(self,sel):
 
     Post-condition: /demo page is opened, usually next step is start_sub_widget
     """
-    mslib.wait_for_element_present(self,sel,"css=.try_link")
-    sel.click("css=.try_link span:contains('Demo')")
+    sel.open(testvars.MSTestVariables["Site"]+"demo/")
+#    mslib.wait_for_element_present(self,sel,"css=.try_link")
+#    sel.click("css=.try_link span:contains('Demo')")
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     time.sleep(3) #safari is too fast
 

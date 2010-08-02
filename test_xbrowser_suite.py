@@ -7,8 +7,9 @@ import sys
 import HTMLTestRunner
 # import MS Test Suite modules
 import testvars
-import sauce_suite
-
+import sg_65_login
+import sg_64_subwidget
+import sg_69_demoUI
 
 class Test_HTMLTestRunner(unittest.TestCase):
 
@@ -21,7 +22,6 @@ class Test_HTMLTestRunner(unittest.TestCase):
         runner.run(self.suite)
         # didn't blow up? ok.
         self.assert_('</html>' in buf.getvalue())
-        
 
     def test_main(self):
         # Run HTMLTestRunner.
@@ -29,8 +29,8 @@ class Test_HTMLTestRunner(unittest.TestCase):
         # suite of TestCases
         self.suite = unittest.TestSuite()
         self.suite.addTests([
-            unittest.defaultTestLoader.loadTestsFromTestCase(sauce_suite.offsite_widget_suite),
-            unittest.defaultTestLoader.loadTestsFromTestCase(sauce_suite.demo_UI_suite)
+            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_412'),
+            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_413')
             
             ])
 
@@ -47,7 +47,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
         # check out the output
         byte_output = buf.getvalue()
         # output the main test results
-        filename=testvars.MSTestVariables["ResultOutputDirectory"]+'MS_test_results_'+time.strftime("%d-%m-%Y_%H-%M", time.gmtime())+'_GMT.html'
+        filename=testvars.MSTestVariables["ResultOutputDirectory"]+'MS_full_regression_'+time.strftime("%d-%m-%Y_%H-%M", time.gmtime())+'_GMT.html'
         f = open(filename, 'w')
         f.write(byte_output)
         f.close()
