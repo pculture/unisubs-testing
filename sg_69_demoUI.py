@@ -129,7 +129,7 @@ class subgroup_69(unittest.TestCase):
             mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_play_button"])
             stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
             diff_time = int(stop_time) - int(start_time)
-            if not  7 < diff_time < 9:
+            if not  7 < diff_time < 10:
                 mslib.AppendErrorMessage(self,sel,"didn't stop after 8 seconds")
                 print "started at: " +start_time+ "stopped at: " +stop_time
                 print diff_time       

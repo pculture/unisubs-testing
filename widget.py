@@ -419,7 +419,7 @@ def steps_display(self,sel,step_num):
     else:
         self.assertEqual("Play/Pause", sel.get_text("css=.mirosubs-tab + span"))
     self.assertEqual("ctrl", sel.get_text("css=.mirosubs-control"))
-    self.assertEqual("Re-play last 8 seconds", sel.get_text("css=.mirosubs-control + span"))
+    self.assertEqual("Skip Back 8 seconds", sel.get_text("css=.mirosubs-control + span"))
     self.assertEqual("Speed Mode", sel.get_text("css=.mirosubs-speedmode h4"))
 
 def verify_sub_text(self,sel,subtextfile):
