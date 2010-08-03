@@ -325,12 +325,12 @@ h1 {
     padding: 2px;
 }
 #total_row  { font-weight: bold; }
-.passClass  { background-color: #6c6; }
-.failClass  { background-color: #c60; }
-.errorClass { background-color: #c00; }
-.passCase   { color: #6c6; }
-.failCase   { color: #c60; font-weight: bold; }
-.errorCase  { color: #c00; font-weight: bold; }
+.passCase  { background-color: #6c6; }
+.failCase  { background-color: #c60; }
+.errorCase { background-color: #c00; }
+.passClass   { color: #6c6; }
+.failClass   { color: #c60; font-weight: bold; }
+.errorClass  { color: #c00; font-weight: bold; }
 .hiddenRow  { display: none; }
 .testcase   { margin-left: 2em; }
 
