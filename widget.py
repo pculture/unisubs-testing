@@ -216,51 +216,56 @@ def drag_time_bubbles(self,sel,subtextfile):
 
     Pre-condition - use must be on Step 3 or Review with known text data.
     """
-
+    sel.select_window("null")
+    mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep:contains('3')")
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Sync_sub"])
     sub_li = 1
     for line in open(subtextfile):
         
         sub_cell_start_time = "//li["+str(sub_li)+"]/span[1]/span/span[1]"
-        
         sub_cell_end_time = "//span["+str(sub_li)+"]/span/span[2]"
 
         #start playback - wait for sub to appear on screen then pause playback
+        sub_line = line.split(',')
+        first_phrase = sub_line[0]
+        print first_phrase
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
-        print "clicking video play button to start playback"
         sel.click(testvars.WidgetUI["Video_playPause"])
-        sub_line = line.split()
-        first_word = sub_line[0]
-        print first_word
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-subtext:contains('" + first_word + "')")
-        sel.click(testvars.WidgetUI["Video_playPause"])    
+        mslib.wait_for_element_present(self,sel,"css=.mirosubs-captionDiv:contains('" + first_phrase + "')")
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
+        sel.click(testvars.WidgetUI["Video_playPause"])
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_play_button"])
         # drag start time to the left and verify time change
         start_time = sel.get_text(sub_cell_start_time)
         print start_time
-        drag_it(self,sel,first_word,"left","-60")
-        new_start_time = sel.get_text(sub_cell_start_time)
-        self.failUnless(int(start_time) > int(new_start_time))
-
+##        drag_it(self,sel,first_phrase,"left","-60")
+##        new_start_time = sel.get_text(sub_cell_start_time)
+##        self.failUnless(int(start_time) > int(new_start_time))
+##
         # drag start time to the right and verify time change
         start_time = sel.get_text(sub_cell_start_time)
-        print start_time
-        drag_it(self,sel,first_word,"left","+60")
+        print " - sub time: " '%.2f' % float(start_time)
+        widget.drag_it(self,sel,first_word,"left","+60")
+        time.sleep(10)
         new_start_time = sel.get_text(sub_cell_start_time)
-        self.failUnless(int(start_time) < int(new_start_time))
-           
-        # drag end time to the left and verify time change
-        end_time = sel.get_text(sub_cell_end_time)
-        print end_time
-        drag_it(self,sel,first_word,"right","-60")
-        new_end_time = sel.get_text(sub_cell_end_time)
-        self.failUnless(int(end_time) > int(new_end_time))
-
+        print " - new sub time: " '%.2f' % float(new_start_time)
+        self.failUnless(float(start_time) < float(new_start_time))
+##           
+##        # drag end time to the left and verify time change
+##        end_time = sel.get_text(sub_cell_end_time)
+##        print end_time
+##        drag_it(self,sel,first_word,"right","-60")
+##        new_end_time = sel.get_text(sub_cell_end_time)
+##        self.failUnless(int(end_time) > int(new_end_time))
+##
         # drag end time to the right and verify time change
         end_time = sel.get_text(sub_cell_end_time)
-        print end_time
-        drag_it(self,sel,first_word,"right","+60")
+        print " - sub end time: " '%.2f' % float(end_time)
+        widget.drag_it(self,sel,first_word,"right","+60")
+        time.sleep(10)
         new_end_time = sel.get_text(sub_cell_end_time)
-        self.failUnless(int(end_time) < int(new_end_time))
+        print " - sub end time: " '%.2f' % float(new_end_time)
+        self.failUnless(float(end_time) < float(new_end_time))
 
   
 def drag_it(self,sel,sub_text,side,move_pixels):
@@ -272,14 +277,13 @@ def drag_it(self,sel,sub_text,side,move_pixels):
         side - {'left' | 'right'}
         move_pixels - number of pixels to move bubble { + | - }
     """
-    if "left" in side:
-        sel.drag_and_drop("css=.mirosubs-subtext:contains('" + sub_text + "') + span", "'"+str(move_pixels)+",0'")
+    if side == "left":
+        sel.focus("css=.mirosubs-leftGrabber")
+        sel.drag_and_drop("css=.mirosubs-leftGrabber", "'"+move_pixels+",0'")
 
-    if "right" in side:
-        sel.drag_and_drop("css=.mirosubs-subtext:contains('" + sub_text + "') + span + span", "'"+str(move_pixels)+",0'")
-
-
-                
+    if side == "right":
+        sel.focus("css=.mirosubs-rightGrabber")
+        sel.drag_and_drop("css=.mirosubs-rightGrabber", "'"+move_pixels+",0'")                
 
 def click_time_shift_arrows(self,sel,subtextfile):
     """
@@ -290,7 +294,8 @@ def click_time_shift_arrows(self,sel,subtextfile):
         subtextfile - text used in transcribe step.
         
     """
-    
+    sel.select_window("null")
+    mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep:contains('3')")
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Sync_sub"])
     sub_li = 1
     for line in open(subtextfile):
@@ -329,6 +334,8 @@ def hold_down_delay_sub(self,sel,sub_file,delay_time=2,hold_time=.75, sync_time=
 
     Post-condition - still on same step in widget, with new times.
     """
+    sel.select_window("null")
+    mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep:contains('3')")
     print "hold down key time shift"
     sel.select_frame("relative=top")
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
@@ -347,8 +354,7 @@ def hold_down_delay_sub(self,sel,sub_file,delay_time=2,hold_time=.75, sync_time=
         sel.key_up("css=.mirosubs-down","\\40")
         new_time = sel.get_text(sub_cell_start_time)
         print " - new sub time: " '%.2f' % float(new_time)
-        if float(old_time) == float(new_time):
-            mslib.AppendErrorMessage(self,sel,"time's not shifted")
+        self.failUnless(float(new_time) != float(old_time))
         time.sleep(sync_time)
         sub_li = sub_li + 1
 
@@ -383,7 +389,7 @@ def resync_video (self,sel,subtextfile,start_delay=1,sub_int=1, step="Stop"):
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Active_subtime"])
         new_start_time = sel.get_text(testvars.WidgetUI["Active_subtime"])
         print " - new sub time: " '%.2f' % float(new_start_time)
-        self.failUnless(float(start_time) > float(new_start_time))
+        self.failUnless(float(start_time) != float(new_start_time))
         time.sleep(sub_int)
         sub_li = sub_li + 1
         
