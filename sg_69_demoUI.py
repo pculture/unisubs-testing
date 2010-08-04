@@ -221,10 +221,10 @@ class subgroup_69(unittest.TestCase):
         time.sleep(3)
         #play-pause with unicode tab char
         print "play-pause with keyboard"
-        sel.type_keys("//div/input",u'\u0009')
+        sel.type_keys("//div/input",'\t')
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
         time.sleep(3)
-        sel.type_keys("//div/input",u'\u0009')
+        sel.type_keys("//div/input",'\t')
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_play_button"])
         time.sleep(3)
         #play-pause with Video play-pause button
@@ -351,10 +351,10 @@ class subgroup_69(unittest.TestCase):
             # get the time, skip back and get the time again
             start_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
             sel.click_at(testvars.WidgetUI["Skip_back"],"")
-            time.sleep(.20)
+            time.sleep(.50)
             stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
             diff_time = int(start_time) - int(stop_time)
-            if diff_time < 7:
+            if diff_time < 6:
                 mslib.AppendErrorMessage(self,sel,"didn't jump back quickly")
                 print "started at: " +start_time+ "stopped at: " +stop_time
                 print diff_time
@@ -403,10 +403,10 @@ class subgroup_69(unittest.TestCase):
             # get the time, skip back and get the time again
             start_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
             sel.click_at(testvars.WidgetUI["Skip_back"],"")
-            time.sleep(.20)
+            time.sleep(.50)
             stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
             diff_time = int(start_time) - int(stop_time)
-            if diff_time < 7:
+            if diff_time < 6:
                 mslib.AppendErrorMessage(self,sel,"didn't jump back quickly")
                 print "started at: " +start_time+ "stopped at: " +stop_time
                 print diff_time
@@ -442,10 +442,10 @@ class subgroup_69(unittest.TestCase):
             # get the time, skip back and get the time again
             start_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
             sel.click_at(testvars.WidgetUI["Skip_back"],"")
-            time.sleep(.20)
+            time.sleep(.50)
             stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
             diff_time = int(start_time) - int(stop_time)
-            if diff_time < 7:
+            if diff_time < 6:
                 mslib.AppendErrorMessage(self,sel,"didn't jump back quickly")
                 print "started at: " +start_time+ "stopped at: " +stop_time
                 print diff_time

@@ -245,7 +245,7 @@ def drag_time_bubbles(self,sel,subtextfile):
         # drag start time to the right and verify time change
         start_time = sel.get_text(sub_cell_start_time)
         print " - sub time: " '%.2f' % float(start_time)
-        widget.drag_it(self,sel,first_word,"left","+60")
+        drag_it(self,sel,first_word,"left","+60")
         time.sleep(10)
         new_start_time = sel.get_text(sub_cell_start_time)
         print " - new sub time: " '%.2f' % float(new_start_time)
@@ -261,7 +261,7 @@ def drag_time_bubbles(self,sel,subtextfile):
         # drag end time to the right and verify time change
         end_time = sel.get_text(sub_cell_end_time)
         print " - sub end time: " '%.2f' % float(end_time)
-        widget.drag_it(self,sel,first_word,"right","+60")
+        drag_it(self,sel,first_word,"right","+60")
         time.sleep(10)
         new_end_time = sel.get_text(sub_cell_end_time)
         print " - sub end time: " '%.2f' % float(new_end_time)
@@ -419,7 +419,7 @@ def steps_display(self,sel,step_num):
     else:
         self.assertEqual("Play/Pause", sel.get_text("css=.mirosubs-tab + span"))
     self.assertEqual("ctrl", sel.get_text("css=.mirosubs-control"))
-    self.assertEqual("Skip Back 8 seconds", sel.get_text("css=.mirosubs-control + span"))
+    self.assertEqual("Skip Back 8 Seconds", sel.get_text("css=.mirosubs-control + span"))
     self.assertEqual("Speed Mode", sel.get_text("css=.mirosubs-speedmode h4"))
 
 def verify_sub_text(self,sel,subtextfile):
