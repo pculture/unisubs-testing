@@ -245,7 +245,7 @@ def drag_time_bubbles(self,sel,subtextfile):
         # drag start time to the right and verify time change
         start_time = sel.get_text(sub_cell_start_time)
         print " - sub time: " '%.2f' % float(start_time)
-        drag_it(self,sel,first_word,"left","+60")
+        drag_it(self,sel,first_phrase,"left","+60")
         time.sleep(10)
         new_start_time = sel.get_text(sub_cell_start_time)
         print " - new sub time: " '%.2f' % float(new_start_time)
@@ -261,7 +261,7 @@ def drag_time_bubbles(self,sel,subtextfile):
         # drag end time to the right and verify time change
         end_time = sel.get_text(sub_cell_end_time)
         print " - sub end time: " '%.2f' % float(end_time)
-        drag_it(self,sel,first_word,"right","+60")
+        drag_it(self,sel,first_phrase,"right","+60")
         time.sleep(10)
         new_end_time = sel.get_text(sub_cell_end_time)
         print " - sub end time: " '%.2f' % float(new_end_time)

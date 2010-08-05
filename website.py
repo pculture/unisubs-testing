@@ -21,6 +21,8 @@ def SiteLogIn(self,sel,user,passw):
     Requires: valid site user name and password.
     
     Pre-condition: user is on the site page.
+
+
     
     Post-condition: user is still on the site page
     """
