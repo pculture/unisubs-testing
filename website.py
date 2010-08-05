@@ -38,7 +38,7 @@ def SiteLogout(self,sel):
     Description: Logout of site using site Logout button.
 
     """
-    sel.open(testvars.MSTestVariables["Site"] +"logout/")
+    sel.open(testvars.WebsiteUI["SiteLogoutUrl"])
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_Button"])
     
 

@@ -15,6 +15,7 @@ MSTestVariables = {"Site":"http://staging.universalsubtitles.org/", \
 WebsiteUI = {"Home":"css=a:contains('Miro Subs Alpha')", \
              "Login_Button":"css=.login_link", \
              "Logout_Button":"css=.login_link span:contains('Logout')", \
+             "SiteLogoutUrl": MSTestVariables["Site"]+"""logout/?next=/""",\
              "Subtitle_Button":"css=a:contains('Subtitle a Video')", \
              "All_Videos_Button":"css=a:contains('All Videos')", \
              "About_Button":"css=a:contains('About')", \
