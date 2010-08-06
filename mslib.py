@@ -42,7 +42,7 @@ def wait_for_video_to_buffer(self,sel):
                  This is always called by widget.transcribe_video
     """
     # on some browsers, need to start playback for browser to start to buffer
-    #start play, wait 1 sec and pause to wait for buffer
+    #start play, then pause to wait for buffer
     sel.click(testvars.WidgetUI["Play_pause"])
     wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
     sel.click(testvars.WidgetUI["Video_pause_button"])
@@ -50,7 +50,7 @@ def wait_for_video_to_buffer(self,sel):
     wait_for_element_present(self,sel,"css=.mirosubs-buffered")
     
     print " - waiting for video to buffer " +time.strftime("%M:%S", time.gmtime())
-    for i in range(300):
+    for i in range(60):
         try:
             if int(sel.get_element_width("css=.mirosubs-buffered")) >= 187: break
         except: pass

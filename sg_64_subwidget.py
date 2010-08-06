@@ -93,13 +93,11 @@ class subgroup_64(unittest.TestCase):
         self.assertEqual("In order to finish and save your work, you need to log in.", sel.get_alert())
         #Login
         widget.site_login_auth(self,sel)
-        sel.select_window("null")
-        sel.click(testvars.WidgetUI["Video_playPause"])
-        for line in open(subtextfile):
-            mslib.wait_for_element_present(self,sel,"css=.mirosubs.captionDiv:contains('"+line+"')")
+        widget.verify_sub_text(self,sel,subtextfile)
 
         #Finish up by logging out
-        sel.open(testvars.MSTestVariables["Site"] +"logout")
+        print "logging out from site"
+        website.SiteLogout(self,sel)
 
 # Close the browser, log errors, perform cleanup 
     def tearDown(self):
