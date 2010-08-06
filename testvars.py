@@ -7,7 +7,7 @@ down_arrow_key = u'\u2193'
 MSTestVariables = {"Site":"http://staging.universalsubtitles.org/", \
                    "ResultOutputDirectory":r"Results/", \
                    "DataDirectory":r"TestInput/", \
-                   "TimeOut":"45000", \
+                   "TimeOut":"90000", \
                   }
 
 # Mapping to the MiroSubs website UI navigations buttons and links
@@ -37,6 +37,7 @@ WidgetUI = {"Video_playPause":"css=.mirosubs-playPause", \
             "Video_elapsed_time":"css=.mirosubs-timeElapsed", \
             "Transcribe_current_sub":"css=.mirosubs-captionDiv", \
             "Next_step":"css=.mirosubs-done", \
+            "Translate_now_button":"css=.mirosubs-done:contains(\"Add a Translation Now\")", \
             "Play_pause":"css=.mirosubs-tab:contains('tab')",\
             "Sync_sub":"css=.mirosubs-down:contains('down')",\
             "Skip_back":"css=.mirosubs-control:contains('ctrl')",\

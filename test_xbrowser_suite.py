@@ -29,27 +29,24 @@ class Test_HTMLTestRunner(unittest.TestCase):
         # suite of TestCases
         self.suite = unittest.TestSuite()
         self.suite.addTests([
-            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_373'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_389'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_398'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_401'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_403'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_404'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_405'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_406'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_410'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_411'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_412'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_414'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_415'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_416'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_470'),
+##            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_373'),
+##            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_389'),
+##            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_398'),
+##            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_401'),
+##            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_403'),
+##            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_404'),
+##            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_405'),
+##            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_406'),
+##            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_410'),
+##            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_411'),
+##            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_412'),
+##            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_414'),
+##            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_415'),
+##            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_416'),
+##            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_470'),
             unittest.defaultTestLoader.loadTestsFromName('sg_64_subwidget.subgroup_64.test_369'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_64_subwidget.subgroup_64.test_370'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_64_subwidget.subgroup_64.test_376'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_378'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_378'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_378')
+##            unittest.defaultTestLoader.loadTestsFromName('sg_64_subwidget.subgroup_64.test_370'),
+            unittest.defaultTestLoader.loadTestsFromName('sg_64_subwidget.subgroup_64.test_376')
             
             ])
 
