@@ -87,7 +87,7 @@ def close_howto_video(self,sel,skip="True"):
         sel.click("css=.mirosubs-done:contains('Continue')")
 
 
-def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="yes"):
+def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no"):
     """
     Description: On widget Step 1, reads in lines of subtitle text and types it.
 
@@ -95,7 +95,7 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="ye
         sub_file - the full path to the text to enter
         mode - sets typing mode {'Beginner' | 'Recommended' | 'Expert (default)'}
         step - {'Stop' | 'Continue' (default)} Continue on to next step.
-        buffer {'yes' (default) | 'no'} will buffer the video to 75% before
+        buffer {'yes' | 'no' (default) } will buffer the video to 75% before
         proceeding. see wait_for_video_to_buffer
     """
     print "starting to transcribe video"
@@ -431,7 +431,7 @@ def verify_sub_text(self,sel,subtextfile):
 
     """
     print "verifying sub text"
-    sel.select_frame("relative=top")
+    sel.select_window("null")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
     sub_li=1
     for line in codecs.open(subtextfile,encoding='utf-8'):
