@@ -94,6 +94,7 @@ class subgroup_64(unittest.TestCase):
         self.assertEqual("In order to finish and save your work, you need to log in.", sel.get_alert())
         #Login
         widget.site_login_auth(self,sel)
+        sel.select_window("null")
         self.failUnless(sel.is_element_present(testvars.WidgetUI["Translate_now_button"]))
         
         #Finish up by logging out

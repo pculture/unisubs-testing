@@ -13,7 +13,7 @@ MSTestVariables = {"Site":"http://staging.universalsubtitles.org/", \
 # Mapping to the MiroSubs website UI navigations buttons and links
 
 WebsiteUI = {"Home":"css=a:contains('Miro Subs Alpha')", \
-             "Login_Button":"css=.login_link", \
+             "Login_Button":"css=.login_link span:contains(\"Login\")", \
              "Logout_Button":"css=.login_link span:contains('Logout')", \
              "SiteLogoutUrl": MSTestVariables["Site"]+"""logout/?next=/""",\
              "Subtitle_Button":"css=a:contains('Subtitle a Video')", \
