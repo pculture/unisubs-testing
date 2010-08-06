@@ -26,6 +26,7 @@ def SiteLogIn(self,sel,user,passw):
     
     Post-condition: user is still on the site page
     """
+    sel.select_window("null")
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_Button"])
     sel.click(testvars.WebsiteUI["Login_Button"])
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
@@ -58,6 +59,8 @@ def Login(self,sel,auth_type):
     
     """
     # auth_type can be either ".twitter", ".open-id", "google"
+    sel.select_window("null")
+    mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_Button"])
     sel.click(testvars.WebsiteUI["Login_Button"])
     mslib.wait_for_element_present(self,sel,"css=."+auth_type)
     sel.click("css=." +auth_type)
