@@ -100,6 +100,7 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="ye
     """
     print "starting to transcribe video"
     # giving the video a chance to load.
+    sel.select_window("null")
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     mode_label = sel.get_text("css=.mirosubs-speedmode option:contains("+mode+")")
     sel.select("//select", "label=" +mode_label)
@@ -430,7 +431,7 @@ def verify_sub_text(self,sel,subtextfile):
 
     """
     print "verifying sub text"
-    sel.select_window("null")
+    sel.select_frame("relative=top")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
     sub_li=1
     for line in codecs.open(subtextfile,encoding='utf-8'):

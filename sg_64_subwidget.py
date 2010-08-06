@@ -33,6 +33,7 @@ class subgroup_64(unittest.TestCase):
         Tests YouTube video embedded in offsite widget
         http://litmus.pculture.org/show_test.cgi?id=389
         """
+        print "369 starting youtube widget test"
         sel = self.selenium
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"OctopusGarden.txt"
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
@@ -51,7 +52,7 @@ class subgroup_64(unittest.TestCase):
         Tests ogg video embedded in offsite widget
         http://litmus.pculture.org/show_test.cgi?id=370
         """
-        
+        print "starting 370 - ogg widget test"
         sel = self.selenium
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"OctopusGarden.txt"
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
@@ -70,7 +71,7 @@ class subgroup_64(unittest.TestCase):
         """Test demo widget not logged in
         http://litmus.pculture.org/show_test.cgi?id=376
         """
-
+        print "starting 376 demo forced login"
         #FIX ME - this test probably belongs in subgroup 69, demo UI
         
         sel = self.selenium
