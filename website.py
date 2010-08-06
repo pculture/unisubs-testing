@@ -26,7 +26,6 @@ def SiteLogIn(self,sel,user,passw):
     
     Post-condition: user is still on the site page
     """
-    sel.select_window("null")
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_Button"])
     sel.click(testvars.WebsiteUI["Login_Button"])
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])

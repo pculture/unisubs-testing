@@ -32,7 +32,7 @@ class subgroup_65(unittest.TestCase):
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
-        sel.open(testvars.MSTestVariables["Site"]+"logout/")
+        website.SiteLogout(self,sel)
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         # verify
         website.verify_login(self,sel)
@@ -48,13 +48,13 @@ class subgroup_65(unittest.TestCase):
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
-        sel.open(testvars.MSTestVariables["Site"]+"logout/")
+        website.SiteLogout(self,sel)
         website.Login(self,sel,"twitter")
         offsite.TwitterAuth(self,sel,testvars.twitteruser, testvars.passw)
         # verify
         website.verify_login(self,sel)
         # logout
-        sel.open(testvars.MSTestVariables["Site"] +"logout/")
+        website.SiteLogout(self,sel)
 
     
 
@@ -66,13 +66,13 @@ class subgroup_65(unittest.TestCase):
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login        
-        sel.open(testvars.MSTestVariables["Site"]+"logout/")
+        website.SiteLogout(self,sel)
         website.Login(self,sel,"open-id")
         offsite.OpenIdAuth(self,sel,testvars.openiduser,testvars.passw)
         # verify
         website.verify_login(self,sel)
         # logout
-        sel.open(testvars.MSTestVariables["Site"] +"logout/")
+        website.SiteLogout(self,sel)
 
 
 
@@ -84,13 +84,13 @@ class subgroup_65(unittest.TestCase):
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
-        sel.open(testvars.MSTestVariables["Site"]+"logout/")
+        website.SiteLogout(self,sel)
         website.Login(self,sel,"google")
         offsite.GmailAuth(self,sel,testvars.gmailuser,testvars.passw)
         # verify
         website.verify_login(self,sel)
         # logout
-        sel.open(testvars.MSTestVariables["Site"] +"logout/")
+        website.SiteLogout(self,sel)
 
 
 
@@ -102,7 +102,7 @@ class subgroup_65(unittest.TestCase):
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
-        sel.open(testvars.MSTestVariables["Site"]+"logout/")
+        website.SiteLogout(self,sel)
         website.start_demo(self,sel)
         widget.Login(self,sel,"google")
         offsite.GmailAuth(self,sel,testvars.gmailuser,testvars.passw)
@@ -112,7 +112,7 @@ class subgroup_65(unittest.TestCase):
         sel.refresh()
         website.verify_login(self,sel)
         # logout
-        sel.open(testvars.MSTestVariables["Site"] +"logout/")
+        website.SiteLogout(self,sel)
 
 
     def test_383(self):
@@ -123,7 +123,7 @@ class subgroup_65(unittest.TestCase):
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
-        sel.open(testvars.MSTestVariables["Site"]+"logout/")
+        website.SiteLogout(self,sel)
         website.start_demo(self,sel)
         widget.Login(self,sel,"twitter")
         offsite.TwitterAuth(self,sel,testvars.twitteruser,testvars.passw)
@@ -133,7 +133,7 @@ class subgroup_65(unittest.TestCase):
         sel.refresh()
         website.verify_login(self,sel)
         # logout
-        sel.open(testvars.MSTestVariables["Site"] +"logout/")
+        website.SiteLogout(self,sel)
 
 
     def test_384(self):
@@ -144,7 +144,7 @@ class subgroup_65(unittest.TestCase):
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
-        sel.open(testvars.MSTestVariables["Site"]+"logout/")
+        website.SiteLogout(self,sel)
         website.start_demo(self,sel)
         widget.Login(self,sel,"log")
         sel.select_pop_up("null")
@@ -158,7 +158,7 @@ class subgroup_65(unittest.TestCase):
         sel.refresh()
         website.verify_login(self,sel)
         # logout
-        sel.open(testvars.MSTestVariables["Site"] +"logout/")
+        website.SiteLogout(self,sel)
 
 
 
@@ -170,7 +170,7 @@ class subgroup_65(unittest.TestCase):
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
-        sel.open(testvars.MSTestVariables["Site"]+"logout/")
+        website.SiteLogout(self,sel)
         website.start_demo(self,sel)
         widget.Login(self,sel,"openid")
         offsite.OpenIdAuth(self,sel,testvars.openiduser,testvars.passw)
@@ -180,7 +180,7 @@ class subgroup_65(unittest.TestCase):
         sel.refresh()
         website.verify_login(self,sel)
         # logout
-        sel.open(testvars.MSTestVariables["Site"] +"logout/")
+        website.SiteLogout(self,sel)
 
         
 # Close the browser, log errors, perform cleanup
