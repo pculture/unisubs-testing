@@ -68,7 +68,7 @@ def start_youtube_widget_null(self,sel):
                  code documentation.
             
     """
-    sel.open("http://pculture.org/mirosubs_tests/staging-widget-null.html")
+    sel.open("http://pculture.org/mirosubs_tests/dev-widget-null.html")
     #left column is the youtube video
     mslib.wait_for_element_present(self,sel,"css=.left_column span.mirosubs-tabText")
     sel.click_at("css=.left_column span.mirosubs-tabText","")
@@ -89,7 +89,7 @@ def start_ogg_widget_null(self,sel):
                  See http://s3.staging.universalsubtitles.org/embed00081.js for embed
                  code documentation.
     """
-    sel.open("http://pculture.org/mirosubs_tests/staging-widget-null.html")
+    sel.open("http://pculture.org/mirosubs_tests/dev-widget-null.html")
     #right column is the .ogg video
     mslib.wait_for_element_present(self,sel,"css=.right_column span.mirosubs-tabText")
     sel.click_at("css=.right_column span.mirosubs-tabText","")

@@ -4,7 +4,7 @@ vlocalhost = "localhost"
 vbrowser = "*chrome"
 down_arrow_key = u'\u2193'
 
-MSTestVariables = {"Site":"http://staging.universalsubtitles.org/", \
+MSTestVariables = {"Site":"http://dev.universalsubtitles.org/", \
                    "ResultOutputDirectory":r"Results/", \
                    "DataDirectory":r"TestInput/", \
                    "TimeOut":"90000", \
