@@ -359,22 +359,19 @@ class subgroup_69(unittest.TestCase):
                 print "started at: " +start_time+ "stopped at: " +stop_time
                 print diff_time
             time.sleep(10)
-            
-        ## FIX ME
-        ## Commented out keyboard control b/c ctrl key not working in selenium
-        ##        # wait for play to advance and test with keyboard key
-        ##        time.sleep(14)
-        ##        # get the time, skip back and get the time again
-        ##        start_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
-        ##        sel.control_key_down()
-        ##        sel.control_key_up()
-        ##        time.sleep(.20)
-        ##        stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
-        ##        diff_time = int(start_time) - int(stop_time)
-        ##        if diff_time < 7:
-        ##            mslib.AppendErrorMessage(self,sel,"didn't jump back quickly")
-        ##            print "started at: " +start_time+ "stopped at: " +stop_time
-        ##            print diff_time
+        # wait for play to advance and test with keyboard key
+        # get the time, skip back and get the time again
+        start_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
+        sel.shift_key_down()
+        sel.type_keys("//div/input",'\t')
+        sel.shift_key_up()
+        time.sleep(.20)
+        stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
+        diff_time = int(start_time) - int(stop_time)
+        if diff_time < 6:
+                mslib.AppendErrorMessage(self,sel,"didn't jump back quickly")
+                print "started at: " +start_time+ "stopped at: " +stop_time
+                print diff_time
         
 
 
@@ -411,7 +408,19 @@ class subgroup_69(unittest.TestCase):
                 print "started at: " +start_time+ "stopped at: " +stop_time
                 print diff_time
             time.sleep(10)
-
+        # wait for play to advance and test with keyboard key
+        # get the time, skip back and get the time again
+        start_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
+        sel.shift_key_down()
+        sel.type_keys("//div/input",'\t')
+        sel.shift_key_up()
+        time.sleep(.20)
+        stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
+        diff_time = int(start_time) - int(stop_time)
+        if diff_time < 6:
+                mslib.AppendErrorMessage(self,sel,"didn't jump back quickly")
+                print "started at: " +start_time+ "stopped at: " +stop_time
+                print diff_time
 
 
 
@@ -450,7 +459,19 @@ class subgroup_69(unittest.TestCase):
                 print "started at: " +start_time+ "stopped at: " +stop_time
                 print diff_time
             time.sleep(10)
-
+        # wait for play to advance and test with keyboard key
+        # get the time, skip back and get the time again
+        start_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
+        sel.shift_key_down()
+        sel.type_keys("//div/input",'\t')
+        sel.shift_key_up()
+        time.sleep(.20)
+        stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
+        diff_time = int(start_time) - int(stop_time)
+        if diff_time < 6:
+                mslib.AppendErrorMessage(self,sel,"didn't jump back quickly")
+                print "started at: " +start_time+ "stopped at: " +stop_time
+                print diff_time
 
 
     def test_406(self):
