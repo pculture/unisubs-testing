@@ -34,9 +34,9 @@ class Test_HTMLTestRunner(unittest.TestCase):
         # suite of TestCases
         self.suite = unittest.TestSuite()
         self.suite.addTests([
-          #  unittest.defaultTestLoader.loadTestsFromTestCase(sg_69_demoUI.subgroup_69),
+            unittest.defaultTestLoader.loadTestsFromTestCase(sg_69_demoUI.subgroup_69),
             unittest.defaultTestLoader.loadTestsFromTestCase(sg_64_subwidget.subgroup_64),
-          #  unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.subgroup_65)
+            unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.subgroup_65)
             
             ])
 
@@ -59,9 +59,8 @@ class Test_HTMLTestRunner(unittest.TestCase):
         f.write(byte_output)
         f.close()
         #if running on pcf-mcdev, copy the results to the public directory
-        pub_results_dir = "/home/jed/public/Results/universalsubtitles/"
-        if os.path.exists(pub_results_dir):
-            shutil.copyfile(filename,pub_results_dir)
+        lastrun = testvars.MSTestVariables["ResultOutputDirectory"] + 'last_run.html'
+        shutil.copyfile(filename,lastrun)
 
 ##############################################################################
 # Executing this module from the command line
