@@ -1,12 +1,17 @@
+
+
 # -*- coding: utf-8 -*-
 from selenium import selenium
 #import system modules
 import unittest, time, re
+import shutil
+import os
 import StringIO
 import sys
 import HTMLTestRunner
 # import MS Test Suite modules
 import testvars
+import mslib
 import sg_65_login
 import sg_64_subwidget
 import sg_69_demoUI
@@ -29,9 +34,9 @@ class Test_HTMLTestRunner(unittest.TestCase):
         # suite of TestCases
         self.suite = unittest.TestSuite()
         self.suite.addTests([
-            unittest.defaultTestLoader.loadTestsFromTestCase(sg_69_demoUI.subgroup_69),
+          #  unittest.defaultTestLoader.loadTestsFromTestCase(sg_69_demoUI.subgroup_69),
             unittest.defaultTestLoader.loadTestsFromTestCase(sg_64_subwidget.subgroup_64),
-            unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.subgroup_65)
+          #  unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.subgroup_65)
             
             ])
 
@@ -48,10 +53,15 @@ class Test_HTMLTestRunner(unittest.TestCase):
         # check out the output
         byte_output = buf.getvalue()
         # output the main test results
-        filename=testvars.MSTestVariables["ResultOutputDirectory"]+'MS_full_regression_'+time.strftime("%d-%m-%Y_%H-%M", time.gmtime())+'_GMT.html'
+        
+        filename = testvars.MSTestVariables["ResultOutputDirectory"] + 'unisubs_' + testvars.vbrowser +'_'+time.strftime("%Y%m%d_%H%M", time.gmtime())+'_GMT.html'
         f = open(filename, 'w')
         f.write(byte_output)
         f.close()
+        #if running on pcf-mcdev, copy the results to the public directory
+        pub_results_dir = "/home/jed/public/Results/universalsubtitles/"
+        if os.path.exists(pub_results_dir):
+            shutil.copyfile(filename,pub_results_dir)
 
 ##############################################################################
 # Executing this module from the command line

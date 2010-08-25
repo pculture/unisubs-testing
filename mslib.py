@@ -56,6 +56,3 @@ def wait_for_video_to_buffer(self,sel):
         except: pass
         time.sleep(1)
     print " - video buffered to 75% " +time.strftime("%M:%S", time.gmtime())
-   
-
-
