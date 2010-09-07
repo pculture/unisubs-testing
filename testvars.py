@@ -1,4 +1,5 @@
 import os
+import platform
 
 preE=" --- ERROR: "
 
@@ -7,8 +8,8 @@ vbrowser = "*chrome"
 down_arrow_key = u'\u2193'
 
 MSTestVariables = {"Site":"http://dev.universalsubtitles.org/", \
-                   "ResultOutputDirectory":os.getcwd()+ r"/Results/", \
-                   "DataDirectory": os.getcwd()+ r"/TestInput/", \
+                   "ResultOutputDirectory":os.path.join(os.getcwd(), "Results"), \
+                   "DataDirectory": os.path.join(os.getcwd(), "TestInput"), \
                    "TimeOut":"90000", \
                   }
 
@@ -24,10 +25,10 @@ WebsiteUI = {"Home":"css=a:contains('Miro Subs Alpha')", \
              "FAQ_Button":"css=a:contains('FAQ')", \
              "Search_Button":"css=a:contains('Search')", \
              "Video_Submit_Button":"//button[@value='Begin']", \
-             "SubtitleMe_menu":"css=.mirosubs-tabText", \
+             "SubtitleMe_menu":"css=.mirosubs-tabTextchoose", \
              "SubMe_menuitems":"css=.mirosubs-langmenuitem-content", \
-             "AddSubtitles_menuitem":"css=.mirosubs-langmenuitem-content:contains('Add Subtitles')" ,\
-             "Login_menuitem":"css=.mirosubs-langmenuitem-content:contains('Login')" ,\
+             "AddSubtitles_menuitem":"css=.mirosubs-improveSubtitles" ,\
+             "Login_menuitem":"css=.mirosubs-createAccount" ,\
              "Logout_menuitem":"css=.mirosubs-langmenuitem-content:contains('Logout')" , \
              "ChooseLanguage_menu":"css=.mirosubs-tabText:contains('Choose language')" , \
              

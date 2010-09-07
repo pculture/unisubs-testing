@@ -40,10 +40,11 @@ def SiteLogout(self,sel):
     Description: Logout of site using site Logout button.
 
     """
+    sel.open(testvars.MSTestVariables["Site"])
     mslib.wait_for_element_present(self,sel,"css=.login_link")
     if sel.is_element_present(testvars.WebsiteUI["Logout_Button"]):
         sel.click(testvars.WebsiteUI["Logout_Button"])
-    mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_Button"])
+        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_Button"])
     
 
 def Login(self,sel,auth_type):
@@ -111,9 +112,9 @@ def start_sub_widget(self,sel,skip="True"):
     # Click Subtitle Me (Continue Subtitling -> Add Subtitles)
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
     self.failIf(sel.is_element_present(testvars.WebsiteUI["ChooseLanguage_menu"]))
-    sel.click_at(testvars.WebsiteUI["SubtitleMe_menu"], "")
+    sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["AddSubtitles_menuitem"])
-    sel.click_at(testvars.WebsiteUI["AddSubtitles_menuitem"], "")
+    sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])
     widget.close_howto_video(self,sel,skip)
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-steps")
     sel.select_frame("relative=top")

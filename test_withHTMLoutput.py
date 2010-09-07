@@ -1,5 +1,4 @@
 
-
 # -*- coding: utf-8 -*-
 from selenium import selenium
 #import system modules
@@ -34,9 +33,10 @@ class Test_HTMLTestRunner(unittest.TestCase):
         # suite of TestCases
         self.suite = unittest.TestSuite()
         self.suite.addTests([
-#            unittest.defaultTestLoader.loadTestsFromTestCase(sg_69_demoUI.subgroup_69),
+            
+            unittest.defaultTestLoader.loadTestsFromTestCase(sg_69_demoUI.subgroup_69),
             unittest.defaultTestLoader.loadTestsFromTestCase(sg_64_subwidget.subgroup_64),
-#            unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.subgroup_65)
+            unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.subgroup_65)
             
             ])
 
@@ -54,7 +54,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
         byte_output = buf.getvalue()
         # output the main test results
         
-        filename = testvars.MSTestVariables["ResultOutputDirectory"] + 'unisubs_' + testvars.vbrowser +'_'+time.strftime("%Y%m%d_%H%M", time.gmtime())+'_GMT.html'
+        filename = os.path.join(testvars.MSTestVariables["ResultOutputDirectory"], 'unisubs_' + testvars.vbrowser +'_'+time.strftime("%Y%m%d_%H%M", time.gmtime())+'_GMT.html')
         f = open(filename, 'w')
         f.write(byte_output)
         f.close()

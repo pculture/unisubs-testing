@@ -70,10 +70,10 @@ def start_youtube_widget_null(self,sel):
     """
     sel.open("http://pculture.org/mirosubs_tests/dev-widget-null.html")
     #left column is the youtube video
-    mslib.wait_for_element_present(self,sel,"css=.left_column span.mirosubs-tabText")
-    sel.click_at("css=.left_column span.mirosubs-tabText","")
+    mslib.wait_for_element_present(self,sel,"css=.left_column span.mirosubs-tabTextchoose")
+    sel.click("css=.left_column span.mirosubs-tabTextchoose")
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["AddSubtitles_menuitem"])
-    sel.click_at(testvars.WebsiteUI["AddSubtitles_menuitem"], "")
+    sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])
     widget.close_howto_video(self,sel)
         
 def start_ogg_widget_null(self,sel):
@@ -91,11 +91,10 @@ def start_ogg_widget_null(self,sel):
     """
     sel.open("http://pculture.org/mirosubs_tests/dev-widget-null.html")
     #right column is the .ogg video
-    mslib.wait_for_element_present(self,sel,"css=.right_column span.mirosubs-tabText")
-    sel.click_at("css=.right_column span.mirosubs-tabText","")
-    handle_warning_popup(self,sel)
+    mslib.wait_for_element_present(self,sel,"css=.right_column span.mirosubs-tabTextchoose")
+    sel.click("css=.right_column span.mirosubs-tabTextchoose")
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["AddSubtitles_menuitem"])
-    sel.click_at(testvars.WebsiteUI["AddSubtitles_menuitem"], "")
+    sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])
     widget.close_howto_video(self,sel)
 
 def handle_warning_popup(self,sel):
