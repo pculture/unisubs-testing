@@ -77,7 +77,8 @@ class subgroup_64(unittest.TestCase):
         sel = self.selenium
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"OctopusGarden.txt"
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        sel.open(testvars.MSTestVariables["Site"] +"logout")
+        sel.open(testvars.MSTestVariables["Site"])
+        website.SiteLogout(self,sel)
         website.start_demo(self,sel)
         website.start_sub_widget(self,sel)        
         # Check message in transcribe step
@@ -95,7 +96,14 @@ class subgroup_64(unittest.TestCase):
         #Login
         widget.site_login_auth(self,sel)
         sel.select_window("null")
+        self.failUnless(sel.is_element_present(testvars.WidgetUI["Next_step"]))
+        sel.click(testvars.WidgetUI["Next_step"])
+        mslib.wait_for_element_present(self,sel,"css=.mirosubs-translating")
         self.failUnless(sel.is_element_present(testvars.WidgetUI["Translate_now_button"]))
+        sel.click(testvars.MSTestVariables["Close_widget"])
+
+
+
         
         #Finish up by logging out
         print "logging out from site"

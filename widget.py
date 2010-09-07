@@ -104,7 +104,8 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     mode_label = sel.get_text("css=.mirosubs-speedmode option:contains("+mode+")")
     sel.select("//select", "label=" +mode_label)
-    if buffer != "no":
+    # for html5 video, wait for the video to buffer
+    if sel.is_element_present("css=.mirosubs-videoDiv video") or buffer != "no":
         mslib.wait_for_video_to_buffer(self,sel)
     else: time.sleep(10)
         
@@ -114,14 +115,14 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
         sel.click("css=.trans")
         sel.type("css=.trans", line)
         sel.type_keys("css=.trans"," ")
-        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Transcribe_current_sub"])
-        current_sub = sel.get_text(testvars.WidgetUI["Transcribe_current_sub"])
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
+        current_sub = sel.get_text(testvars.WidgetUI["Current_playing_sub"])
         if line.rstrip() != current_sub.rstrip():
             mslib.AppendErrorMessage(self,sel,"sub text mismatch")
             print "found: " + current_sub.rstrip()
             print "expected: " +line
         sel.key_press("css=.trans", "\\13")
-        time.sleep(2)
+        time.sleep(3)
     if step == "Continue":
         sel.click(testvars.WidgetUI["Next_step"])
 
@@ -160,19 +161,25 @@ def sync_video(self,sel,sub_file,start_delay=2,sub_int=2,step="Continue"):
     print "starting video / sub syncing"
     sel.select_frame("relative=top")
     #give video a chance to load
-    time.sleep(5)
+    time.sleep(10)
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     print "clicking video play button to start playback"
     sel.click(testvars.WidgetUI["Video_playPause"])
+    
        
     time.sleep(start_delay)
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Sync_sub"])
+    sub_li=1
     for line in open(sub_file):
         sel.focus(testvars.WidgetUI["Sync_sub"])
         sel.click_at(testvars.WidgetUI["Sync_sub"],"")
-        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Active_subtime"])
-        print sel.get_text(testvars.WidgetUI["Active_subtime"]) +": "+ sel.get_text(testvars.WidgetUI["Active_subtext"])
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
+        sub_cell_start_time = "//li["+str(sub_li)+"]/span[1]/span/span[1]"
+        start_time=sel.get_text(sub_cell_start_time)
+        print " - sub time: " '%.2f' % float(start_time) + "sub text: "+ sel.get_text(testvars.WidgetUI["Current_playing_sub"])
+#        print sel.get_text(testvars.WidgetUI["Active_subtime"]) +": "+ sel.get_text(testvars.WidgetUI["Active_subtext"])
         time.sleep(sub_int)
+        sub_li = sub_li + 1
     sel.focus(testvars.WidgetUI["Sync_sub"])
     sel.click_at(testvars.WidgetUI["Sync_sub"],"")
     if step == "Continue":

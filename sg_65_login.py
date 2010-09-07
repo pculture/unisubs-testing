@@ -35,7 +35,7 @@ class subgroup_65(unittest.TestCase):
         website.SiteLogout(self,sel)
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         # verify
-        website.verify_login(self,sel)
+        website.verify_login(self,sel,testvars.siteuser)
         # logout
         sel.open(testvars.MSTestVariables["Site"] +"logout/")
 
@@ -52,7 +52,7 @@ class subgroup_65(unittest.TestCase):
         website.Login(self,sel,"twitter")
         offsite.TwitterAuth(self,sel,testvars.twitteruser, testvars.passw)
         # verify
-        website.verify_login(self,sel)
+        website.verify_login(self,sel,username="PCF Sub-writer")
         # logout
         website.SiteLogout(self,sel)
 
@@ -63,6 +63,7 @@ class subgroup_65(unittest.TestCase):
         Open id login from site
         http://litmus.pculture.org/show_test.cgi?id=380
         """
+        print "this test will likely fail until bug #13688 (http://bugzilla.pculture.org/show_bug.cgi?id=13688) gets fixed"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login        
@@ -70,7 +71,7 @@ class subgroup_65(unittest.TestCase):
         website.Login(self,sel,"open-id")
         offsite.OpenIdAuth(self,sel,testvars.openiduser,testvars.passw)
         # verify
-        website.verify_login(self,sel)
+        website.verify_login(self,sel,testvars.openiduser)
         # logout
         website.SiteLogout(self,sel)
 
@@ -88,7 +89,7 @@ class subgroup_65(unittest.TestCase):
         website.Login(self,sel,"google")
         offsite.GmailAuth(self,sel,testvars.gmailuser,testvars.passw)
         # verify
-        website.verify_login(self,sel)
+        website.verify_login(self,sel,testvars.gmailuser)
         # logout
         website.SiteLogout(self,sel)
 
@@ -110,7 +111,7 @@ class subgroup_65(unittest.TestCase):
         time.sleep(10)
         sel.select_window("null")
         sel.refresh()
-        website.verify_login(self,sel)
+        website.verify_login(self,sel,testvars.gmailuser)
         # logout
         website.SiteLogout(self,sel)
 
@@ -131,7 +132,7 @@ class subgroup_65(unittest.TestCase):
         time.sleep(10)
         sel.select_window("null")
         sel.refresh()
-        website.verify_login(self,sel)
+        website.verify_login(self,sel,username="PCF Sub-writer")
         # logout
         website.SiteLogout(self,sel)
 
@@ -156,7 +157,7 @@ class subgroup_65(unittest.TestCase):
         time.sleep(10)
         sel.select_window("null")
         sel.refresh()
-        website.verify_login(self,sel)
+        website.verify_login(self,sel,testvars.siteuser)
         # logout
         website.SiteLogout(self,sel)
 
@@ -167,6 +168,7 @@ class subgroup_65(unittest.TestCase):
         Open id login from widget
         http://litmus.pculture.org/show_test.cgi?id=385
         """
+        print "this test will likely fail until bug #13688 (http://bugzilla.pculture.org/show_bug.cgi?id=13688) gets fixed"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
@@ -175,10 +177,11 @@ class subgroup_65(unittest.TestCase):
         widget.Login(self,sel,"openid")
         offsite.OpenIdAuth(self,sel,testvars.openiduser,testvars.passw)
         # verify
+        
         time.sleep(10)
         sel.select_window("null")
         sel.refresh()
-        website.verify_login(self,sel)
+        website.verify_login(self,sel,testvars.openiduser)
         # logout
         website.SiteLogout(self,sel)
 

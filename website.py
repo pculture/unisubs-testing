@@ -40,7 +40,9 @@ def SiteLogout(self,sel):
     Description: Logout of site using site Logout button.
 
     """
-    sel.open(testvars.WebsiteUI["SiteLogoutUrl"])
+    mslib.wait_for_element_present(self,sel,"css=.login_link")
+    if sel.is_element_present(testvars.WebsiteUI["Logout_Button"]):
+        sel.click(testvars.WebsiteUI["Logout_Button"])
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_Button"])
     
 
@@ -116,7 +118,7 @@ def start_sub_widget(self,sel,skip="True"):
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-steps")
     sel.select_frame("relative=top")
 
-def verify_login(self,sel):
+def verify_login(self,sel,username="sub_writer"):
     """
     Description: Verifies user is logged in by finding the logout button on the
     website and then starting the demo and looking for logout menu item on the
@@ -127,8 +129,12 @@ def verify_login(self,sel):
     Post-Condition: will be on the /demo page
     """
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Logout_Button"])
-    start_demo(self,sel)
-    mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
-    sel.click_at(testvars.WebsiteUI["SubtitleMe_menu"], "")
-    self.failUnless(sel.is_element_present(testvars.WebsiteUI["Logout_menuitem"]))
+    self.failUnless(sel.is_element_present("css=.user_panel"))
+    print "logged in as: " + sel.get_text("css=.user_panel")
+    self.failUnless(sel.is_element_present("css=.user_panel:contains("+username+")"))
+    #not starting demo to check logged in status anymore
+##    start_demo(self,sel)
+##    mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+##    sel.click_at(testvars.WebsiteUI["SubtitleMe_menu"], "")
+##    self.failUnless(sel.is_element_present(testvars.WebsiteUI["Logout_menuitem"]))
     

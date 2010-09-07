@@ -28,11 +28,12 @@ class tc_999(unittest.TestCase):
         widget.transcribe_video(self,sel,subtextfile)
 
         # Sync
+        widget.sync_video(self,sel,subtextfile,2,2)
 
  #       widget.sync_video(self,sel,subtextfile)
 
         # Review
-        
+        sel.click(testvars.WidgetUI["Next_step"])
       
         
 ### Close the browser, log errors, perform cleanup 

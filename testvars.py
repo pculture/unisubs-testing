@@ -1,3 +1,5 @@
+import os
+
 preE=" --- ERROR: "
 
 vlocalhost = "localhost"
@@ -5,8 +7,8 @@ vbrowser = "*chrome"
 down_arrow_key = u'\u2193'
 
 MSTestVariables = {"Site":"http://dev.universalsubtitles.org/", \
-                   "ResultOutputDirectory":r"Results/", \
-                   "DataDirectory":r"TestInput/", \
+                   "ResultOutputDirectory":os.getcwd()+ r"/Results/", \
+                   "DataDirectory": os.getcwd()+ r"/TestInput/", \
                    "TimeOut":"90000", \
                   }
 
@@ -35,7 +37,7 @@ WidgetUI = {"Video_playPause":"css=.mirosubs-playPause", \
             "Video_play_button":"css=.mirosubs-videoControls .play", \
             "Video_pause_button":"css=.mirosubs-videoControls .pause", \
             "Video_elapsed_time":"css=.mirosubs-timeElapsed", \
-            "Transcribe_current_sub":"css=.mirosubs-captionDiv", \
+            "Current_playing_sub":"css=.mirosubs-captionDiv", \
             "Next_step":"css=.mirosubs-done", \
             "Translate_now_button":"css=.mirosubs-done:contains(\"Add a Translation Now\")", \
             "Play_pause":"css=.mirosubs-tab:contains('tab')",\
@@ -44,6 +46,7 @@ WidgetUI = {"Video_playPause":"css=.mirosubs-playPause", \
             "Active_subtime":"css=li.active span.mirosubs-timestamp-time",\
             "Active_subtext":"css=li.active span.mirosubs-title",\
             "Must_Login":"css=.mirosubs-needLogin", \
+            "Close_widget":"css=.mirosubs-modal-widget-title-close", \
     
         }
 
