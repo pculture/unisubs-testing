@@ -33,7 +33,7 @@ class subgroup_64(unittest.TestCase):
         Tests YouTube video embedded in offsite widget
         http://litmus.pculture.org/show_test.cgi?id=389
         """
-        print "369 starting youtube widget test"
+        print "starting 369 youtube widget test"
         sel = self.selenium
         subtextfile = testvars.MSTestVariables["DataDirectory"]+"OctopusGarden.txt"
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
@@ -91,7 +91,7 @@ class subgroup_64(unittest.TestCase):
         # Check message in review step and click done
         widget.verify_login_message(self,sel)
         sel.click(testvars.WidgetUI["Next_step"])
-        self.assertEqual("In order to finish and save your work, you need to log in.", sel.get_alert())
+        self.failUnless(sel.is_element_present("css=.mirosubs-modal-login"))
         #Login
         widget.site_login_auth(self,sel)
         sel.select_window("null")
