@@ -185,6 +185,45 @@ class subgroup_65(unittest.TestCase):
         # logout
         website.SiteLogout(self,sel)
 
+      
+    def test_376(self):
+        """Test demo widget not logged in
+        http://litmus.pculture.org/show_test.cgi?id=376
+        """
+        print "starting 376 demo forced login"
+        #FIX ME - this test probably belongs in subgroup 69, demo UI
+        
+        sel = self.selenium
+        subtextfile = testvars.MSTestVariables["DataDirectory"]+"OctopusGarden.txt"
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        sel.open(testvars.MSTestVariables["Site"])
+        website.SiteLogout(self,sel)
+        website.start_demo(self,sel)
+        website.start_sub_widget(self,sel)        
+        # Check message in transcribe step
+        widget.verify_login_message(self,sel)
+        widget.transcribe_video(self,sel,subtextfile)
+        
+        # Check message in sync step
+        widget.verify_login_message(self,sel)
+        widget.sync_video(self,sel,subtextfile,2,2)
+
+        # Check message in review step and click done
+        widget.verify_login_message(self,sel)
+        sel.click(testvars.WidgetUI["Next_step"])
+        self.failUnless(sel.is_element_present("css=.mirosubs-modal-login"))
+        #Login
+        widget.site_login_auth(self,sel)
+        sel.select_window("null")
+        self.failUnless(sel.is_element_present(testvars.WidgetUI["Next_step"]))
+        sel.click(testvars.WidgetUI["Next_step"])
+        mslib.wait_for_element_present(self,sel,"css=.mirosubs-translating")
+        self.failUnless(sel.is_element_present(testvars.WidgetUI["Translate_now_button"]))
+        sel.click(testvars.MSTestVariables["Close_widget"])
+        #Finish up by logging out
+        print "logging out from site"
+        website.SiteLogout(self,sel)
+
         
 # Close the browser, log errors, perform cleanup
     def tearDown(self):
