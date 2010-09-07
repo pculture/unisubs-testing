@@ -121,7 +121,8 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
             mslib.AppendErrorMessage(self,sel,"sub text mismatch")
             print "found: " + current_sub.rstrip()
             print "expected: " +line
-        sel.key_press("css=.trans", "\\13")
+        sel.key_down("css=.trans", "\\13")
+        sel.key_up("css=.trans", "\\13")
         time.sleep(3)
     if step == "Continue":
         sel.click(testvars.WidgetUI["Next_step"])
