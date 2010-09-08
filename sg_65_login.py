@@ -1,6 +1,7 @@
 from selenium import selenium
 import unittest
 import time
+import os
 import mslib
 import website
 import widget
@@ -204,7 +205,7 @@ class subgroup_65(unittest.TestCase):
         
         sel = self.selenium
         sel.open(testvars.MSTestVariables["Site"])
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"OctopusGarden.txt"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt"
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         sel.open(testvars.MSTestVariables["Site"])
         website.SiteLogout(self,sel)
