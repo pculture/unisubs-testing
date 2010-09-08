@@ -1,5 +1,10 @@
 from selenium import selenium
-import unittest, time, re, sys, codecs
+import unittest
+import os
+import time
+import re
+import sys
+import codecs
 import mslib, website, widget, offsite, testvars
 
 # ----------------------------------------------------------------------
@@ -96,7 +101,7 @@ class subgroup_69(unittest.TestCase):
         print "starting testcase 373"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
@@ -114,7 +119,7 @@ class subgroup_69(unittest.TestCase):
         print "starting testcase 397"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
@@ -146,7 +151,7 @@ class subgroup_69(unittest.TestCase):
         print "starting testcase 470"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
@@ -181,7 +186,7 @@ class subgroup_69(unittest.TestCase):
         print "starting testcase 398"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
@@ -203,7 +208,7 @@ class subgroup_69(unittest.TestCase):
         print "starting testcase 399"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
@@ -246,7 +251,7 @@ class subgroup_69(unittest.TestCase):
         print "starting testcase 403"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
@@ -289,7 +294,7 @@ class subgroup_69(unittest.TestCase):
         print "starting testcase 404"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
@@ -333,7 +338,7 @@ class subgroup_69(unittest.TestCase):
         print "starting testcase 400"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
@@ -384,7 +389,7 @@ class subgroup_69(unittest.TestCase):
         print "starting testcase 409"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
@@ -432,7 +437,7 @@ class subgroup_69(unittest.TestCase):
         print "starting testcase 410"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
@@ -482,7 +487,7 @@ class subgroup_69(unittest.TestCase):
         print "starting testcase 406"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
@@ -501,7 +506,7 @@ class subgroup_69(unittest.TestCase):
         print "starting testcase 401"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
@@ -524,7 +529,7 @@ class subgroup_69(unittest.TestCase):
         print "starting testcase 405"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
@@ -548,7 +553,7 @@ class subgroup_69(unittest.TestCase):
         print "starting testcase 416"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
@@ -571,7 +576,7 @@ class subgroup_69(unittest.TestCase):
         print "starting testcase 411"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
@@ -590,7 +595,7 @@ class subgroup_69(unittest.TestCase):
         print "starting testcase 388"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
@@ -616,7 +621,7 @@ class subgroup_69(unittest.TestCase):
         print "starting testcase 415"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
@@ -643,7 +648,7 @@ class subgroup_69(unittest.TestCase):
         print "starting testcase 408"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
         # be sure logged out
         website.SiteLogout(self,sel)
         # start demo and proceed to step 2 and sync subs
@@ -667,7 +672,7 @@ class subgroup_69(unittest.TestCase):
         print "starting testcase 402"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
@@ -688,7 +693,7 @@ class subgroup_69(unittest.TestCase):
 ##        print "starting testcase 413"
 ##        sel = self.selenium
 ##        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-##        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+##        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
 ##        # be sure logged out
 ##        website.SiteLogout(self,sel)
 ##        website.start_demo(self,sel)
@@ -709,7 +714,7 @@ class subgroup_69(unittest.TestCase):
         print "starting testcase 414"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
@@ -730,7 +735,7 @@ class subgroup_69(unittest.TestCase):
         print "starting testcase 412"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"switch-to-firefox.txt"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
