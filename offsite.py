@@ -5,6 +5,7 @@ offsite.py
 from selenium import selenium
 import unittest
 import time
+import urllib
 import mslib
 import testvars
 import widget
@@ -112,6 +113,25 @@ def handle_warning_popup(self,sel):
             time.sleep(1)
         else: self.fail("time out")
     sel.select_window("null")
+
+def get_blip_video_url(self,file_type="flv"):
+    try:
+        self.selenium = (selenium(testvars.vlocalhost, 4444, testvars.vbrowser, "http://blip.tv/"))
+        self.selenium.start()
+        bsel= self.selenium
+        bsel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        random_url = "posts?sort=random&file_type="+file_type+"&page=1&view=list"
+        bsel.open(random_url)
+        print "opening: "+random_url
+        mslib.wait_for_element_present(self,bsel,"css=.EpisodeListThumb img")
+        bsel.click("css=.EpisodeListThumb img")
+        bsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+        blipURL = bsel.get_eval("window.location")
+    finally:
+        bsel.close()
+        bsel.stop()
+    return blipURL
+
 
         
     

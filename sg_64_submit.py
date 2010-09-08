@@ -2,6 +2,7 @@ from selenium import selenium
 import unittest
 import time
 import sys
+import os
 import mslib
 import website
 import widget
@@ -22,48 +23,38 @@ class subgroup_64(unittest.TestCase):
         Sets up run envirnment for selenium server
         """
         self.verificationErrors = []
-        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, "http://pculture.org/mirosubs_tests/")
+        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"] )
         self.selenium.start()
 
 # The test cases of the subgroup.
 
 
-    def test_369(self):
+    def test_469(self):
         """
-        Tests YouTube video embedded in offsite widget
-        http://litmus.pculture.org/show_test.cgi?id=389
+        Tests submission of blip.tv video subtitle and translation.
+        http://litmus.pculture.org/show_test.cgi?id=469
         """
-        print "starting 369 youtube widget test"
+        print "starting 469 blip.tv submit video"
         sel = self.selenium
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"OctopusGarden.txt"
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        offsite.start_youtube_widget_null(self,sel)
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
+        vid_url = offsite.get_blip_video_url(self,file_type="flv")
+        print vid_url
+        # Submit Video
+        website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
+        website.submit_video(self,sel,vid_url)
+        # Verify embed and player
+        website.verify_submitted_video(self,sel,vid_url,embed_type="flow")
+        # Start sub widget
+        website.start_sub_widget(self,sel)
         # Transcribe
         widget.transcribe_video(self,sel,subtextfile)
         # Sync
         widget.sync_video(self,sel,subtextfile,6,8)
         # Review
         widget.edit_text(self,sel,subtextfile)
-
+        sel.click(testvars.WidgetUI["Next_step"])
       
-
-    def test_370(self):
-        """
-        Tests ogg video embedded in offsite widget
-        http://litmus.pculture.org/show_test.cgi?id=370
-        """
-        print "starting 370 - ogg widget test"
-        sel = self.selenium
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"OctopusGarden.txt"
-        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        offsite.start_ogg_widget_null(self,sel)
-
-        # Transcribe
-        widget.transcribe_video(self,sel,subtextfile)
-        # Sync
-        widget.sync_video(self,sel,subtextfile,5,5)
-        # Review
-        widget.edit_text(self,sel,subtextfile)
 
 
 
