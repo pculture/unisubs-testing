@@ -35,8 +35,8 @@ class Test_HTMLTestRunner(unittest.TestCase):
         self.suite.addTests([
             
             unittest.defaultTestLoader.loadTestsFromTestCase(sg_69_demoUI.subgroup_69),
-            unittest.defaultTestLoader.loadTestsFromTestCase(sg_64_subwidget.subgroup_64),
-            unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.subgroup_65)
+ #           unittest.defaultTestLoader.loadTestsFromTestCase(sg_64_subwidget.subgroup_64),
+ #           unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.subgroup_65)
             
             ])
 
@@ -58,8 +58,8 @@ class Test_HTMLTestRunner(unittest.TestCase):
         f = open(filename, 'w')
         f.write(byte_output)
         f.close()
-        #if running on pcf-mcdev, copy the results to the public directory
-        lastrun = testvars.MSTestVariables["ResultOutputDirectory"] + 'last_run.html'
+        #copy the results to a file called last_run.html
+        lastrun = os.path.join(testvars.MSTestVariables["ResultOutputDirectory"], 'last_run.html')
         shutil.copyfile(filename,lastrun)
 
 ##############################################################################
