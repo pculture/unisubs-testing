@@ -37,23 +37,29 @@ class subgroup_64(unittest.TestCase):
         print "starting 469 blip.tv submit video"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        sel.open("")
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
-        vid_url = offsite.get_blip_video_url(self,file_type="flv")
-        print vid_url
-        # Submit Video
-        website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
-        website.submit_video(self,sel,vid_url)
-        # Verify embed and player
-        website.verify_submitted_video(self,sel,vid_url,embed_type="flow")
-        # Start sub widget
-        website.start_sub_widget(self,sel)
-        # Transcribe
-        widget.transcribe_video(self,sel,subtextfile)
-        # Sync
-        widget.sync_video(self,sel,subtextfile,6,8)
-        # Review
-        widget.edit_text(self,sel,subtextfile)
-        sel.click(testvars.WidgetUI["Next_step"])
+        ext_list = ("mpeg4","flv", "mov", "ogg", "wmv")
+        for x in ext_list:
+            vid_url = offsite.get_blip_video_url(self,file_type=x)
+            print vid_url
+            # Submit Video
+            sel.open("")
+            website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
+            website.submit_video(self,sel,vid_url)
+            # Verify embed and player
+            website.verify_submitted_video(self,sel,vid_url,embed_type="flow")
+            # Start sub widget
+            website.start_sub_widget(self,sel)
+            # Transcribe
+            widget.transcribe_video(self,sel,subtextfile)
+            # Sync
+            widget.sync_video(self,sel,subtextfile,6,8)
+            # Review
+            widget.edit_text(self,sel,subtextfile)
+            sel.click(testvars.WidgetUI["Next_step"])
+            mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Close_widget"])
+            sel.click(testvars.WidgetUI["Close_widget"])
       
 
 

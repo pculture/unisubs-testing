@@ -104,7 +104,7 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     mode_label = sel.get_text("css=.mirosubs-speedmode option:contains("+mode+")")
     sel.select("//select", "label=" +mode_label)
-    # for html5 video, wait for the video to buffer
+    # FIX THIS! for html5 video, wait for the video to buffer
     if sel.is_element_present("css=.mirosubs-videoDiv video") or buffer != "no":
         mslib.wait_for_video_to_buffer(self,sel)
     else: time.sleep(10)
