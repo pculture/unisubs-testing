@@ -9,7 +9,7 @@ import offsite
 import testvars
 
 
-class subgroup_64(unittest.TestCase):
+class subgroup_78(unittest.TestCase):
     """
     Litmus Subgroup 64 - offsite subwidget:
         Tests designed to exercise the subtitle widget embedded

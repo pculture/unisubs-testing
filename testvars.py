@@ -10,7 +10,7 @@ down_arrow_key = u'\u2193'
 MSTestVariables = {"Site":"http://dev.universalsubtitles.org/", \
                    "ResultOutputDirectory":os.path.join(os.getcwd(), "Results"), \
                    "DataDirectory": os.path.join(os.getcwd(), "TestInput"), \
-                   "TimeOut":"90000", \
+                   "TimeOut":"190000", \
                   }
 
 # Mapping to the MiroSubs website UI navigations buttons and links
@@ -61,5 +61,7 @@ passw = "sub.writer"
 
 eels_fr = u'Mon a\u00E9roglisseur est plein d\'anguilles'
 eels_jp = u'\u79C1\u306E\u30DB\u30D0\u30FC\u30AF\u30E9\u30D5\u30C8\u306F\u9C3B\u3067'
+
+
 
 

@@ -11,9 +11,10 @@ import HTMLTestRunner
 # import MS Test Suite modules
 import testvars
 import mslib
+import sg_64_submit
 import sg_65_login
-import sg_64_subwidget
 import sg_69_demoUI
+import sg_78_widget_offsite
 
 class Test_HTMLTestRunner(unittest.TestCase):
 
@@ -35,9 +36,10 @@ class Test_HTMLTestRunner(unittest.TestCase):
         self.suite.addTests([
             
             unittest.defaultTestLoader.loadTestsFromTestCase(sg_69_demoUI.subgroup_69),
- #           unittest.defaultTestLoader.loadTestsFromTestCase(sg_64_subwidget.subgroup_64),
- #           unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.subgroup_65)
-            
+            unittest.defaultTestLoader.loadTestsFromTestCase(sg_64_submit.subgroup_64),
+            unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.subgroup_65),
+            unittest.defaultTestLoader.loadTestsFromTestCase(sg_78_widget_offsite.subgroup_78)
+                        
             ])
 
         # Invoke TestRunner

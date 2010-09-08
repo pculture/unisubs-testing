@@ -91,12 +91,13 @@ def submit_video(self,sel,url):
     Post-condition: the widget is launched immediately.
     You'll need to deal with the help video, see widget.close_howto_video
     """
+    sel.open("/")
     sel.click(testvars.WebsiteUI["Subtitle_Button"])
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     sel.type("video_url", url)
     sel.click(testvars.WebsiteUI["Video_Submit_Button"])
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-    mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+    
 
 def start_sub_widget(self,sel,skip="True"):
     """
@@ -138,4 +139,27 @@ def verify_login(self,sel,username="sub_writer"):
 ##    mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
 ##    sel.click_at(testvars.WebsiteUI["SubtitleMe_menu"], "")
 ##    self.failUnless(sel.is_element_present(testvars.WebsiteUI["Logout_menuitem"]))
-    
+
+
+def verify_submitted_video(self,sel,vid_url,embed_type="html5"):
+    """
+    Description: Verifies the contents of the main video page of a submitted video.
+    Require's the original url and expected type of embed.  Assumes html5 video if not specified.
+
+    embed_type one of 'youtube', 'flow' 'html5' (default)
+
+    Returns: url of the video on the universalsubtitles site.
+    """
+    if embed_type == "flow":
+        print "verifying video embedded with flowplayer"
+        self.failUnless(sel.is_element_present("css=.mirosubs-videoDiv object[data*=\"flowplayer\"]"))
+    elif embed_type == "youtube":
+        print "verifying video embedded with youtube"
+        self.failUnless(sel.is_element_present("css=.mirosubs-videoDiv object[data*=\"youtube.com\"]"))
+    else:
+        print "verifying video is html5"                        
+        self.failUnless(sel.is_element_present("css=.mirosubs-videoDiv video"))
+    print "verifying embedded video url is same as original"    
+    self.failUnless(sel.is_element_present("css=.mirosubs-embed:contains("+vid_url+")"))
+    unisubs_link = sel.get_text("css=.mirosubs-permalink[href]")
+    return unisubs_link
