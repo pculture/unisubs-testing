@@ -35,7 +35,7 @@ class subgroup_78(unittest.TestCase):
         """
         print "starting 369 youtube widget test"
         sel = self.selenium
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"OctopusGarden.txt"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         offsite.start_youtube_widget_null(self,sel)
         # Transcribe
@@ -54,7 +54,7 @@ class subgroup_78(unittest.TestCase):
         """
         print "starting 370 - ogg widget test"
         sel = self.selenium
-        subtextfile = testvars.MSTestVariables["DataDirectory"]+"OctopusGarden.txt"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         offsite.start_ogg_widget_null(self,sel)
 
