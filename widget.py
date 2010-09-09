@@ -28,11 +28,17 @@ def Login(self,sel,auth_type):
     """
     print "logging in using "+auth_type+ " account"
     mslib.wait_for_element_present(self,sel, testvars.WebsiteUI["SubtitleMe_menu"])
-    sel.click_at(testvars.WebsiteUI["SubtitleMe_menu"], "")
-    sel.click_at(testvars.WebsiteUI["Login_menuitem"], "")
-    sel.select_frame("relative=top")
+    sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
+    if sel.is_element_present("css=.mirosubs-dropdown"):
+        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_menuitem"])
+        sel.click(testvars.WebsiteUI["Login_menuitem"])
+        sel.select_frame("relative=top")
+    else:  # the widget opened directly like with the demo or vids with no subtitles
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Must_Login"])
+        sel.click(testvars.WidgetUI["Must_Login"])
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-"+auth_type)
     sel.click("css=.mirosubs-"+auth_type)
+        
 
 def site_login_from_widget_link(self,sel):
     """
@@ -115,7 +121,6 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
         sel.focus("//input[@type='text']")
         sel.type("//input[@type='text']",line)
         sel.focus("//input[@type='text']")
-        sel.key_press_native("32")
         sel.key_press_native("32")
         
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
