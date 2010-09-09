@@ -37,14 +37,12 @@ class subgroup_64(unittest.TestCase):
         print "starting 469 blip.tv submit video"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        sel.open("")
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
-        ext_list = ("mpeg4","flv", "mov", "ogg", "wmv")
+        ext_list = ("flv","mpeg4", "mov", "ogg", "wmv")
         for x in ext_list:
             vid_url = offsite.get_blip_video_url(self,file_type=x)
-            print vid_url
             # Submit Video
-            sel.open("")
+            sel.open("/logout/?next=/")
             website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
             website.submit_video(self,sel,vid_url)
             # Verify embed and player
@@ -60,6 +58,9 @@ class subgroup_64(unittest.TestCase):
             sel.click(testvars.WidgetUI["Next_step"])
             mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Close_widget"])
             sel.click(testvars.WidgetUI["Close_widget"])
+            mslib.wait_for_element_present(self,sel,"css=.mirosubs-link")
+            sel.click("css=.mirosubs-link:contains(\"Submit subtitles\")")
+
       
 
 
