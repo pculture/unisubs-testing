@@ -114,7 +114,7 @@ def start_sub_widget(self,sel,skip="True"):
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
     self.failIf(sel.is_element_present(testvars.WebsiteUI["ChooseLanguage_menu"]))
     sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
-    if sel.is_element_present(testvars.WebsiteUI["css=.mirosubs-dropdown"]):
+    if sel.is_element_present("css=.mirosubs-dropdown"):
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["AddSubtitles_menuitem"])
         sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])
     widget.close_howto_video(self,sel,skip)
