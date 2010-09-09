@@ -1,5 +1,5 @@
 
-<!DOCTYPE html PUBLIC "-/W3C/DTD HTML 4.0 Transitional/EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html><head><title>Python: module offsite</title>
 </head><body bgcolor="#f0f0f8">
 
@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>offsite</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:../offsite.py">../offsite.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/janetPCF/RC-testing/universal-subtitles/offsite.py">/Users/janetPCF/RC-testing/universal-subtitles/offsite.py</a></font></td></tr></table>
     <p><tt>offsite.py<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Defines&nbsp;actions&nbsp;that&nbsp;don't&nbsp;take&nbsp;place&nbsp;directly&nbsp;on&nbsp;the&nbsp;universalsubtitles&nbsp;website&nbsp;or&nbsp;widget</tt></p>
 <p>
@@ -22,7 +22,8 @@
 <a href="testvars.html">testvars</a><br>
 </td><td width="25%" valign=top><a href="time.html">time</a><br>
 <a href="unittest.html">unittest</a><br>
-</td><td width="25%" valign=top><a href="widget.html">widget</a><br>
+</td><td width="25%" valign=top><a href="urllib.html">urllib</a><br>
+<a href="widget.html">widget</a><br>
 </td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#eeaa77">
@@ -33,32 +34,33 @@
 <td width="100%"><dl><dt><a name="-GmailAuth"><strong>GmailAuth</strong></a>(self, sel, user, passw)</dt><dd><tt>Description:&nbsp;Perform&nbsp;gmail&nbsp;account&nbsp;sign-in&nbsp;once&nbsp;window<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;has&nbsp;been&nbsp;launced&nbsp;via&nbsp;website&nbsp;or&nbsp;widget.<br>
 Requires:&nbsp;valid&nbsp;username&nbsp;and&nbsp;password</tt></dd></dl>
- <dl><dt><a name="-OpenIdAuth"><strong>OpenIdAuth</strong></a>(self, sel, user, passw)</dt><dd><tt>Description:&nbsp;Perform&nbsp;open&nbsp;id&nbsp;[from&nbsp;<a href="http:/myopenid.com">http:/myopenid.com</a>&nbsp;]account&nbsp;sign-in&nbsp;once&nbsp;window<br>
+ <dl><dt><a name="-OpenIdAuth"><strong>OpenIdAuth</strong></a>(self, sel, user, passw)</dt><dd><tt>Description:&nbsp;Perform&nbsp;open&nbsp;id&nbsp;[from&nbsp;<a href="http://myopenid.com">http://myopenid.com</a>&nbsp;]account&nbsp;sign-in&nbsp;once&nbsp;window<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;has&nbsp;been&nbsp;launced&nbsp;via&nbsp;website&nbsp;or&nbsp;widget.<br>
 Requires:&nbsp;valid&nbsp;username&nbsp;and&nbsp;password</tt></dd></dl>
  <dl><dt><a name="-TwitterAuth"><strong>TwitterAuth</strong></a>(self, sel, user, passw)</dt><dd><tt>Description:&nbsp;Perform&nbsp;twitter&nbsp;account&nbsp;sign-in&nbsp;once&nbsp;window<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;has&nbsp;been&nbsp;launced&nbsp;via&nbsp;website&nbsp;or&nbsp;widget.<br>
 Requires:&nbsp;valid&nbsp;username&nbsp;and&nbsp;password</tt></dd></dl>
+ <dl><dt><a name="-get_blip_video_url"><strong>get_blip_video_url</strong></a>(self, file_type<font color="#909090">='flv'</font>)</dt></dl>
  <dl><dt><a name="-handle_warning_popup"><strong>handle_warning_popup</strong></a>(self, sel)</dt><dd><tt>Description:&nbsp;Closes&nbsp;the&nbsp;warning&nbsp;pop-up&nbsp;for&nbsp;offsite&nbsp;widgets</tt></dd></dl>
  <dl><dt><a name="-start_ogg_widget_null"><strong>start_ogg_widget_null</strong></a>(self, sel)</dt><dd><tt>Description:&nbsp;Opens&nbsp;the&nbsp;widet&nbsp;for&nbsp;subtitling&nbsp;an&nbsp;ogg&nbsp;video&nbsp;against<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dev.universalsubtitles.org&nbsp;in&nbsp;the&nbsp;null&nbsp;sandbox.<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test&nbsp;site&nbsp;<a href="http:/pculture.org/mirosubs_tests/dev-widget-null.html">http:/pculture.org/mirosubs_tests/dev-widget-null.html</a>,&nbsp;has<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test&nbsp;site&nbsp;<a href="http://pculture.org/mirosubs_tests/dev-widget-null.html">http://pculture.org/mirosubs_tests/dev-widget-null.html</a>,&nbsp;has<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;multiple&nbsp;embedded&nbsp;widgets.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;After&nbsp;running&nbsp;this,&nbsp;user&nbsp;should&nbsp;be&nbsp;in&nbsp;step&nbsp;1&nbsp;or&nbsp;edit&nbsp;dialog&nbsp;of&nbsp;widget.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See&nbsp;<a href="http:/s3.staging.universalsubtitles.org/embed00081.js">http:/s3.staging.universalsubtitles.org/embed00081.js</a>&nbsp;for&nbsp;embed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See&nbsp;<a href="http://s3.staging.universalsubtitles.org/embed00081.js">http://s3.staging.universalsubtitles.org/embed00081.js</a>&nbsp;for&nbsp;embed<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;code&nbsp;documentation.</tt></dd></dl>
  <dl><dt><a name="-start_youtube_widget_null"><strong>start_youtube_widget_null</strong></a>(self, sel)</dt><dd><tt>Description:&nbsp;Opens&nbsp;the&nbsp;widet&nbsp;for&nbsp;subtitling&nbsp;a&nbsp;YouTube&nbsp;video&nbsp;against<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dev.universalsubtitles.org&nbsp;in&nbsp;the&nbsp;null&nbsp;sandbox.<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test&nbsp;site&nbsp;<a href="http:/pculture.org/mirosubs_tests/dev-widget-null.html">http:/pculture.org/mirosubs_tests/dev-widget-null.html</a>,&nbsp;has<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test&nbsp;site&nbsp;<a href="http://pculture.org/mirosubs_tests/dev-widget-null.html">http://pculture.org/mirosubs_tests/dev-widget-null.html</a>,&nbsp;has<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;multiple&nbsp;embedded&nbsp;widgets.<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;After&nbsp;running&nbsp;this,&nbsp;user&nbsp;should&nbsp;be&nbsp;in&nbsp;step&nbsp;1&nbsp;or&nbsp;edit&nbsp;dialog&nbsp;of&nbsp;widget.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See&nbsp;<a href="http:/s3.staging.universalsubtitles.org/embed00081.js">http:/s3.staging.universalsubtitles.org/embed00081.js</a>&nbsp;for&nbsp;embed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See&nbsp;<a href="http://s3.staging.universalsubtitles.org/embed00081.js">http://s3.staging.universalsubtitles.org/embed00081.js</a>&nbsp;for&nbsp;embed<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;code&nbsp;documentation.</tt></dd></dl>
 </td></tr></table>
 </body></html>
