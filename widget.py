@@ -112,18 +112,21 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
     sel.click(testvars.WidgetUI["Play_pause"])
 
     for line in codecs.open(sub_file,encoding='utf-8'):
-        sel.click("css=.trans")
-        sel.type("css=.trans", line)
-        sel.type_keys("css=.trans"," ")
+        sel.focus("//input[@type='text']")
+        sel.type("//input[@type='text']",line)
+        sel.focus("//input[@type='text']")
+        sel.key_press_native("32")
+        sel.key_press_native("32")
+        
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
         current_sub = sel.get_text(testvars.WidgetUI["Current_playing_sub"])
+        print "comparing input text"
         if line.rstrip() != current_sub.rstrip():
             mslib.AppendErrorMessage(self,sel,"sub text mismatch")
             print "found: " + current_sub.rstrip()
             print "expected: " +line
-        sel.key_press("css=.trans", "\\13")
- #       sel.key_down("css=.trans", "\\13")
- #       sel.key_up("css=.trans", "\\13")
+        print "entering text"
+        sel.key_press_native("10")
         time.sleep(3)
     if step == "Continue":
         sel.click(testvars.WidgetUI["Next_step"])

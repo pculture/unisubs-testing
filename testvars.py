@@ -4,7 +4,7 @@ import platform
 preE=" --- ERROR: "
 
 vlocalhost = "localhost"
-vbrowser = "*chrome"
+vbrowser = "*firefox"
 down_arrow_key = u'\u2193'
 
 MSTestVariables = {"Site":"http://dev.universalsubtitles.org/", \
