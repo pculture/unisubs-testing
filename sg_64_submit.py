@@ -29,16 +29,16 @@ class subgroup_64(unittest.TestCase):
 # The test cases of the subgroup.
 
 
-    def test_469(self):
+    def test_469_embed(self):
         """
-        Tests submission of blip.tv video subtitle and translation.
+        Tests submission of blip.tv video non-html5 subtitle and translation.
         http://litmus.pculture.org/show_test.cgi?id=469
         """
         print "starting 469 blip.tv submit video"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
-        ext_list = ("flv","mpeg4", "mov", "ogg", "wmv")
+        ext_list = ("flv","mpeg4", "mov", "wmv")
         for x in ext_list:
             vid_url = offsite.get_blip_video_url(self,file_type=x)
             # Submit Video
@@ -51,7 +51,7 @@ class subgroup_64(unittest.TestCase):
             # Transcribe
             widget.transcribe_video(self,sel,subtextfile)
             # Sync
-            widget.sync_video(self,sel,subtextfile,6,8)
+            widget.sync_video(self,sel,subtextfile,3,4)
             # Review
             widget.edit_text(self,sel,subtextfile)
             sel.click(testvars.WidgetUI["Next_step"])
@@ -60,7 +60,36 @@ class subgroup_64(unittest.TestCase):
             mslib.wait_for_element_present(self,sel,"css=.mirosubs-link")
             sel.click("css=.mirosubs-link:contains(\"Submit subtitles\")")
 
-      
+    def test_469_html5(self):
+        """
+        Tests submission of blip.tv html5 video subtitle and translation.
+        http://litmus.pculture.org/show_test.cgi?id=469
+        """
+        print "starting 469 blip.tv submit video"
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
+        ext_list = ("ogg")
+        for x in ext_list:
+            vid_url = offsite.get_blip_video_url(self,file_type=x)
+            # Submit Video
+            website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
+            website.submit_video(self,sel,vid_url)
+            # Verify embed and player
+            website.verify_submitted_video(self,sel,vid_url,embed_type="flow")
+            # Start sub widget
+            website.start_sub_widget(self,sel)
+            # Transcribe
+            widget.transcribe_video(self,sel,subtextfile)
+            # Sync
+            widget.sync_video(self,sel,subtextfile,3,4)
+            # Review
+            widget.edit_text(self,sel,subtextfile)
+            sel.click(testvars.WidgetUI["Next_step"])
+            mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Close_widget"])
+            sel.click(testvars.WidgetUI["Close_widget"])
+            mslib.wait_for_element_present(self,sel,"css=.mirosubs-link")
+            sel.click("css=.mirosubs-link:contains(\"Submit subtitles\")")
 
 
 

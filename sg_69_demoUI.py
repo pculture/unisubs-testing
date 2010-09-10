@@ -493,7 +493,7 @@ class subgroup_69(unittest.TestCase):
         website.start_demo(self,sel)
         website.start_sub_widget(self,sel)
         widget.transcribe_video(self, sel, subtextfile, step="Stop")
-        widget.restart_typing(self,sel)
+        widget.restart_step(self,sel)
         self.failIf(sel.is_element_present("css=.mirosubs-title-notime"))
                 
 
@@ -521,9 +521,7 @@ class subgroup_69(unittest.TestCase):
 
 
 
-    def test_405(self):
-        """
-        Tests Login Link functionality in Step 2 Sync
+
         http://litmus.pculture.org/show_test.cgi?id=405
         """
         print "starting testcase 405"
@@ -533,8 +531,7 @@ class subgroup_69(unittest.TestCase):
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
-        widget.transcribe_video(self, sel, subtextfile)
+
         widget.sync_video(self, sel, subtextfile, step="Stop")
         widget.site_login_from_widget_link(self,sel)
         #verify subs still present

@@ -178,7 +178,6 @@ class subgroup_65(unittest.TestCase):
         """
         print "this test will likely fail until bug #13688 (http://bugzilla.pculture.org/show_bug.cgi?id=13688) gets fixed"
         sel = self.selenium
-        sel.open(testvars.MSTestVariables["Site"])
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
         website.SiteLogout(self,sel)

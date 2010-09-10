@@ -46,7 +46,7 @@ WidgetUI = {"Video_playPause":"css=.mirosubs-playPause", \
             "Skip_back":"css=.mirosubs-control:contains('shift')",\
             "Active_subtime":"css=li.active span.mirosubs-timestamp-time",\
             "Active_subtext":"css=li.active span.mirosubs-title",\
-            "Must_Login":"css=.mirosubs-needLogin", \
+            "Must_Login":"css=.mirosubs-needLogin:contains('LOGIN')", \
             "Close_widget":"css=.mirosubs-modal-widget-title-close", \
     
         }
