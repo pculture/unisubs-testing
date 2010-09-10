@@ -97,7 +97,7 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
     """
     Description: On widget Step 1, reads in lines of subtitle text and types it.
 
-    Options:
+    Options: 
         sub_file - the full path to the text to enter
         mode - sets typing mode {'Beginner' | 'Recommended' | 'Expert (default)'}
         step - {'Stop' | 'Continue' (default)} Continue on to next step.
@@ -120,21 +120,12 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
 
     line_count = 0
     for line in codecs.open(sub_file,encoding='utf-8'):
-        if line_count == 0:
-            sel.focus("css=.mirosubs-label-input-label")
-            sel.type("css=.mirosubs-label-input-label",line)
-            time.sleep(1)
-            sel.type_keys("css=.trans", ' ')
-            time.sleep(1)
-            if not (sel.is_element_present(testvars.WidgetUI["Current_playing_sub"])):
-                sel.focus("//input[@type='text']")
-                sel.key_press_native("32")
-        else:
-            sel.focus("css=.trans")
-            sel.type("css=.trans",line)
-            time.sleep(1)
-            sel.type_keys("css=.trans", ' ')
-        line_count = line_count+1
+        print "testing non-ff browser"
+        sel.focus("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]")
+        sel.type("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]",line)
+        sel.type_keys("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]", ' ')
+#        sel.key_press_native("32")          
+        
             
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
         current_sub = sel.get_text(testvars.WidgetUI["Current_playing_sub"])
@@ -144,8 +135,14 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
             print "found: " + current_sub.rstrip()
             print "expected: " +line
         print "entering text"
-        sel.key_press_native("10")
-        time.sleep(3)
+        if testvars.vbrowser == "*chrome":
+            sel.key_press("css=.trans", "13")
+        else:
+            print "entering text for non-ff browser"
+            sel.key_down("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]", "13")
+            sel.key_up("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]", "13")
+        time.sleep(2)
+        line_count = line_count+1
     if step == "Continue":
         sel.click(testvars.WidgetUI["Next_step"])
     return line_count
