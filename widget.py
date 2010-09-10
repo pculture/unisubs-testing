@@ -468,3 +468,8 @@ def verify_sub_text(self,sel,subtextfile):
         self.assertEqual(line.rstrip(), sel.get_text(sub_cell_text).rstrip())
         sub_li = sub_li + 1
         
+def close_widget(self,sel,submit="Discard"):
+    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Close_widget"])
+    sel.click(testvars.WidgetUI["Close_widget"])
+    if sel.is_element_present("css=.mirosubs-link"):
+        sel.click("css=.mirosubs-link:contains("+submit+")")

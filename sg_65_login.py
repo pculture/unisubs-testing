@@ -32,7 +32,6 @@ class subgroup_65(unittest.TestCase):
         http://litmus.pculture.org/show_test.cgi?id=378
         """
         sel = self.selenium
-        sel.open(testvars.MSTestVariables["Site"])
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
         website.SiteLogout(self,sel)
@@ -49,7 +48,6 @@ class subgroup_65(unittest.TestCase):
         http://litmus.pculture.org/show_test.cgi?id=379
         """
         sel = self.selenium
-        sel.open(testvars.MSTestVariables["Site"])
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
         website.SiteLogout(self,sel)
@@ -69,7 +67,6 @@ class subgroup_65(unittest.TestCase):
         """
         print "this test will likely fail until bug #13688 (http://bugzilla.pculture.org/show_bug.cgi?id=13688) gets fixed"
         sel = self.selenium
-        sel.open(testvars.MSTestVariables["Site"])
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login        
         website.SiteLogout(self,sel)
@@ -88,7 +85,6 @@ class subgroup_65(unittest.TestCase):
         http://litmus.pculture.org/show_test.cgi?id=381
         """
         sel = self.selenium
-        sel.open(testvars.MSTestVariables["Site"])
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
         website.SiteLogout(self,sel)
@@ -107,7 +103,6 @@ class subgroup_65(unittest.TestCase):
         http://litmus.pculture.org/show_test.cgi?id=382
         """
         sel = self.selenium
-        sel.open(testvars.MSTestVariables["Site"])
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
         website.SiteLogout(self,sel)
@@ -118,6 +113,7 @@ class subgroup_65(unittest.TestCase):
         time.sleep(10)
         sel.select_window("null")
         sel.refresh()
+        widget.close_widget(self,sel)
         website.verify_login(self,sel,testvars.gmailuser)
         # logout
         website.SiteLogout(self,sel)
@@ -139,6 +135,7 @@ class subgroup_65(unittest.TestCase):
         time.sleep(10)
         sel.select_window("null")
         sel.refresh()
+        widget.close_widget(self,sel)
         website.verify_login(self,sel,username="PCF Sub-writer")
         # logout
         website.SiteLogout(self,sel)
@@ -150,7 +147,6 @@ class subgroup_65(unittest.TestCase):
         http://litmus.pculture.org/show_test.cgi?id=384
         """
         sel = self.selenium
-        sel.open(testvars.MSTestVariables["Site"])
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
         website.SiteLogout(self,sel)
@@ -165,6 +161,7 @@ class subgroup_65(unittest.TestCase):
         time.sleep(10)
         sel.select_window("null")
         sel.refresh()
+        widget.close_widget(self,sel)
         website.verify_login(self,sel,testvars.siteuser)
         # logout
         website.SiteLogout(self,sel)
@@ -185,10 +182,10 @@ class subgroup_65(unittest.TestCase):
         widget.Login(self,sel,"openid")
         offsite.OpenIdAuth(self,sel,testvars.openiduser,testvars.passw)
         # verify
-        
         time.sleep(10)
         sel.select_window("null")
         sel.refresh()
+        widget.close_widget(self,sel)
         website.verify_login(self,sel,testvars.openiduser)
         # logout
         website.SiteLogout(self,sel)
@@ -202,10 +199,8 @@ class subgroup_65(unittest.TestCase):
         #FIX ME - this test probably belongs in subgroup 69, demo UI
         
         sel = self.selenium
-        sel.open(testvars.MSTestVariables["Site"])
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        sel.open(testvars.MSTestVariables["Site"])
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
         website.start_sub_widget(self,sel)        
