@@ -103,6 +103,8 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
         step - {'Stop' | 'Continue' (default)} Continue on to next step.
         buffer {'yes' | 'no' (default) } will buffer the video to 75% before
         proceeding. see wait_for_video_to_buffer
+
+        returns line_count - the number of text lines input for the translation
     """
     print "starting to transcribe video"
     # giving the video a chance to load.
@@ -115,18 +117,25 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
         mslib.wait_for_video_to_buffer(self,sel)
     else: time.sleep(10)        
     sel.click(testvars.WidgetUI["Play_pause"])
-    
-    for line in codecs.open(sub_file,encoding='utf-8'):
-        sel.focus("//input[@type='text']")
-        sel.type("//input[@type='text']",line)
-        time.sleep(1)
-        sel.focus("//input[@type='text']")
-        sel.type_keys("//input[@type='text']", ' ')
-        time.sleep(1)
 
-        if not (sel.is_element_present(testvars.WidgetUI["Current_playing_sub"])):
-            sel.focus("//input[@type='text']")
-            sel.key_press_native("32")
+    line_count = 0
+    for line in codecs.open(sub_file,encoding='utf-8'):
+        if line_count == 0:
+            sel.focus("css=.mirosubs-label-input-label")
+            sel.type("css=.mirosubs-label-input-label",line)
+            time.sleep(1)
+            sel.type_keys("css=.trans", ' ')
+            time.sleep(1)
+            if not (sel.is_element_present(testvars.WidgetUI["Current_playing_sub"])):
+                sel.focus("//input[@type='text']")
+                sel.key_press_native("32")
+        else:
+            sel.focus("css=.trans")
+            sel.type("css=.trans",line)
+            time.sleep(1)
+            sel.type_keys("css=.trans", ' ')
+        line_count = line_count+1
+            
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
         current_sub = sel.get_text(testvars.WidgetUI["Current_playing_sub"])
         print "comparing input text"
@@ -139,6 +148,8 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
         time.sleep(3)
     if step == "Continue":
         sel.click(testvars.WidgetUI["Next_step"])
+    return line_count
+
 
 
 def restart_typing(self,sel):
