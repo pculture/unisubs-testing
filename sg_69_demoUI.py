@@ -520,8 +520,9 @@ class subgroup_69(unittest.TestCase):
         widget.verify_sub_text(self,sel,subtextfile)
 
 
-
-
+    def test_405(self):
+        """ 
+	Tests Login Link functionality in Step 2 Sync 
         http://litmus.pculture.org/show_test.cgi?id=405
         """
         print "starting testcase 405"
