@@ -29,7 +29,7 @@ def Login(self,sel,auth_type):
     print "logging in using "+auth_type+ " account"
     mslib.wait_for_element_present(self,sel, testvars.WebsiteUI["SubtitleMe_menu"])
     sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
-    widget.close_howto_video(self,sel)
+    close_howto_video(self,sel)
     if sel.is_element_present("css=.mirosubs-dropdown"):
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_menuitem"])
         sel.click(testvars.WebsiteUI["Login_menuitem"])
@@ -165,7 +165,7 @@ def back_step(self,sel):
     """
     while sel.is_text_present("Back to Typing"):
         sel.click("link=Back to Typing")
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-steps")
+        mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
 
 def sync_video(self,sel,sub_file,start_delay=2,sub_int=2,step="Continue"):
     """

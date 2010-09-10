@@ -532,7 +532,7 @@ class subgroup_69(unittest.TestCase):
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
-
+        widget.transcribe_video(self, sel, subtextfile)
         widget.sync_video(self, sel, subtextfile, step="Stop")
         widget.site_login_from_widget_link(self,sel)
         #verify subs still present

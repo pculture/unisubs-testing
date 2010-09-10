@@ -18,7 +18,7 @@ MSTestVariables = {"Site":"http://dev.universalsubtitles.org/", \
 WebsiteUI = {"Home":"css=a:contains('Miro Subs Alpha')", \
              "Login_Button":"css=.login_link span:contains(\"Login\")", \
              "Logout_Button":"css=.login_link span:contains('Logout')", \
-             "SiteLogoutUrl": MSTestVariables["Site"]+"""logout/?next=/""",\
+             "SiteLogoutUrl": "/logout/?next=/",\
              "Subtitle_Button":"css=a:contains('Subtitle a Video')", \
              "All_Videos_Button":"css=a:contains('All Videos')", \
              "About_Button":"css=a:contains('About')", \
@@ -35,8 +35,8 @@ WebsiteUI = {"Home":"css=a:contains('Miro Subs Alpha')", \
           }
 
 WidgetUI = {"Video_playPause":"css=.mirosubs-playPause", \
-            "Video_play_button":"css=.mirosubs-videoControls .play", \
-            "Video_pause_button":"css=.mirosubs-videoControls .pause", \
+            "Video_play_button":"css=.mirosubs-playPause.play", \
+            "Video_pause_button":"css=.mirosubs-playPause.pause", \
             "Video_elapsed_time":"css=.mirosubs-timeElapsed", \
             "Current_playing_sub":"css=.mirosubs-captionDiv", \
             "Next_step":"css=.mirosubs-done", \

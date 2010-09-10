@@ -119,7 +119,7 @@ def start_sub_widget(self,sel,skip="True"):
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["AddSubtitles_menuitem"])
         sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])
     widget.close_howto_video(self,sel,skip)
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-steps")
+    mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
     sel.select_frame("relative=top")
 
 def verify_login(self,sel,username="sub_writer"):

@@ -69,7 +69,7 @@ class subgroup_64(unittest.TestCase):
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
-        ext_list = ("ogg")
+        ext_list = ("ogg","ogv")
         for x in ext_list:
             vid_url = offsite.get_blip_video_url(self,file_type=x)
             # Submit Video
