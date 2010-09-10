@@ -110,19 +110,23 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     mode_label = sel.get_text("css=.mirosubs-speedmode option:contains("+mode+")")
     sel.select("//select", "label=" +mode_label)
-    # FIX THIS! for html5 video, wait for the video to buffer
+    # For html5 video, wait for the video to buffer
     if sel.is_element_present("css=.mirosubs-videoDiv video") or buffer != "no":
         mslib.wait_for_video_to_buffer(self,sel)
-    else: time.sleep(10)
-        
+    else: time.sleep(10)        
     sel.click(testvars.WidgetUI["Play_pause"])
-
+    
     for line in codecs.open(sub_file,encoding='utf-8'):
         sel.focus("//input[@type='text']")
         sel.type("//input[@type='text']",line)
+        time.sleep(1)
         sel.focus("//input[@type='text']")
-        sel.key_press_native("32")
-        
+        sel.type_keys("//input[@type='text']", ' ')
+        time.sleep(1)
+
+        if not (sel.is_element_present(testvars.WidgetUI["Current_playing_sub"])):
+            sel.focus("//input[@type='text']")
+            sel.key_press_native("32")
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
         current_sub = sel.get_text(testvars.WidgetUI["Current_playing_sub"])
         print "comparing input text"

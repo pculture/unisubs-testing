@@ -129,7 +129,6 @@ class subgroup_65(unittest.TestCase):
         http://litmus.pculture.org/show_test.cgi?id=383
         """
         sel = self.selenium
-        sel.open(testvars.MSTestVariables["Site"])
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
         website.SiteLogout(self,sel)
