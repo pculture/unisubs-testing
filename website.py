@@ -26,6 +26,7 @@ def SiteLogIn(self,sel,user,passw):
     
     Post-condition: user is still on the site page
     """
+    sel.open("/logout/?next=/")
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_Button"])
     sel.click(testvars.WebsiteUI["Login_Button"])
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
@@ -40,7 +41,7 @@ def SiteLogout(self,sel):
     Description: Logout of site using site Logout button.
 
     """
-    sel.open(testvars.MSTestVariables["Site"])
+    sel.open("/logout/?next=/")
     mslib.wait_for_element_present(self,sel,"css=.login_link")
     if sel.is_element_present(testvars.WebsiteUI["Logout_Button"]):
         sel.click(testvars.WebsiteUI["Logout_Button"])

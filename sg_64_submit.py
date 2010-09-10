@@ -42,7 +42,6 @@ class subgroup_64(unittest.TestCase):
         for x in ext_list:
             vid_url = offsite.get_blip_video_url(self,file_type=x)
             # Submit Video
-            sel.open("/logout/?next=/")
             website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
             website.submit_video(self,sel,vid_url)
             # Verify embed and player
