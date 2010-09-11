@@ -116,8 +116,9 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
     # For html5 video, wait for the video to buffer
     if sel.is_element_present("css=.mirosubs-videoDiv video") or buffer != "no":
         mslib.wait_for_video_to_buffer(self,sel)
-    else: time.sleep(10)        
-    sel.click(testvars.WidgetUI["Play_pause"])
+    else: time.sleep(10)
+    if sel.is_element_present(testvars.WidgetUI["Video_play_button"]):
+        sel.click(testvars.WidgetUI["Video_play_button"])
 
     line_count = 0
     for line in codecs.open(sub_file,encoding='utf-8'):
