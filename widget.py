@@ -18,7 +18,7 @@ def Login(self,sel,auth_type):
     Description: Initiates login sequence using the Subtitle Me menu that's attached to
     an embedded video, either onsite or offsite.
 
-    auth_type can be 'log' (for site), 'twitter','openid','gmail'
+    auth_type can be 'log' (for site), 'twitter','openid','google'
     Requires valid accounts for chosen login type
 
     Pre-condition: Subtitle me widget menu should be present on page.
@@ -40,8 +40,8 @@ def Login(self,sel,auth_type):
         sel.click(testvars.WebsiteUI["Login_menuitem"])
 
     sel.select_frame("relative=top")
-    mslib.wait_for_element_present(self,sel,"css=."+auth_type)
-    sel.click("css=." +auth_type)
+    mslib.wait_for_element_present(self,sel,"css=.mirosubs-modal-login")
+    sel.click("css=.mirosubs-" +auth_type)
     
         
 
