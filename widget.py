@@ -37,17 +37,10 @@ def Login(self,sel,auth_type):
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Must_Login"])
         sel.click(testvars.WidgetUI["Must_Login"])
         
-    else sel.is_element_present("css=.mirosubs-uniLogo"):
+    elif sel.is_element_present("css=.mirosubs-uniLogo"):
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_menuitem"])
         sel.click(testvars.WebsiteUI["Login_menuitem"])
         sel.select_frame("relative=top")
-
-    
-    if sel.is_element_present("css=.mirosubs-dropdown"):
-        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_menuitem"])
-        sel.click(testvars.WebsiteUI["Login_menuitem"])
-        
-    else:  # the widget opened directly like with the demo or vids with no subtitles
         
 
 def site_login_from_widget_link(self,sel):
