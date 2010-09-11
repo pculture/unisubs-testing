@@ -77,11 +77,10 @@ def start_demo(self,sel):
 
     Post-condition: /demo page is opened, usually next step is start_sub_widget
     """
-    sel.open(testvars.MSTestVariables["Site"]+"demo/")
+    sel.open("/demo/")
 #    mslib.wait_for_element_present(self,sel,"css=.try_link")
 #    sel.click("css=.try_link span:contains('Demo')")
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-    time.sleep(3) #safari is too fast
 
 def submit_video(self,sel,url):
     """
@@ -107,13 +106,11 @@ def start_sub_widget(self,sel,skip="True"):
     to prevent further how-to video displays.
 
     Pre-condition: On a page where Subtitle Me menu is present.
-    Test will fail if Choose Language menu is present.
 
     Post-condition: the widget is launched and you will be on step 1 or Edit step
     """
     # Click Subtitle Me (Continue Subtitling -> Add Subtitles)
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
-    self.failIf(sel.is_element_present(testvars.WebsiteUI["ChooseLanguage_menu"]))
     sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
     if sel.is_element_present("css=.mirosubs-dropdown"):
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["AddSubtitles_menuitem"])

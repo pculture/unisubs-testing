@@ -76,7 +76,7 @@ class subgroup_64(unittest.TestCase):
             website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
             website.submit_video(self,sel,vid_url)
             # Verify embed and player
-            website.verify_submitted_video(self,sel,vid_url,embed_type="flow")
+            website.verify_submitted_video(self,sel,vid_url,embed_type="html5")
             # Start sub widget
             website.start_sub_widget(self,sel)
             # Transcribe

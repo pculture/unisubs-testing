@@ -10,7 +10,7 @@ down_arrow_key = u'\u2193'
 MSTestVariables = {"Site":"http://dev.universalsubtitles.org/", \
                    "ResultOutputDirectory":os.path.join(os.getcwd(), "Results"), \
                    "DataDirectory": os.path.join(os.getcwd(), "TestInput"), \
-                   "TimeOut":"190000", \
+                   "TimeOut":"90000", \
                   }
 
 # Mapping to the MiroSubs website UI navigations buttons and links

@@ -469,6 +469,16 @@ def verify_sub_text(self,sel,subtextfile):
         sub_li = sub_li + 1
         
 def close_widget(self,sel,submit="Discard"):
+    """
+    Description: uses the red close x to close out the widget.
+
+    Options: "Submit" or "Discard" {default} subtitles.
+
+    Pre-Condition: Widget is opened on page.
+    
+    Post Conditions: Returned to originating site.
+    """
+    self.failUnless(sel.is_element_present("css=.mirosubs-modal-widget"))
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Close_widget"])
     sel.click(testvars.WidgetUI["Close_widget"])
     if sel.is_element_present("css=.mirosubs-link"):
