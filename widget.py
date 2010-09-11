@@ -121,12 +121,9 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
 
     line_count = 0
     for line in codecs.open(sub_file,encoding='utf-8'):
-        print "testing non-ff browser"
         sel.focus("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]")
         sel.type("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]",line)
-        sel.type_keys("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]", ' ')
-#        sel.key_press_native("32")          
-        
+        sel.type_keys("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]", ' ')        
             
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
         current_sub = sel.get_text(testvars.WidgetUI["Current_playing_sub"])

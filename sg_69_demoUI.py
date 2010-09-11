@@ -196,6 +196,7 @@ class subgroup_69(unittest.TestCase):
         #verify that playback continues to the end
         while int(sel.get_element_width("css=.mirosubs-played")) != 250:
             self.failIf(sel.is_element_present(testvars.WidgetUI["Video_play_button"]))
+            time.sleep(2)
 
 
 

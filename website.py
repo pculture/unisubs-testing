@@ -112,9 +112,14 @@ def start_sub_widget(self,sel,skip="True"):
     # Click Subtitle Me (Continue Subtitling -> Add Subtitles)
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
     sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
-    if sel.is_element_present("css=.mirosubs-dropdown"):
+    time.sleep(5)
+    if sel.is_element_present("css=.mirosubs-modal-widget"):
+        print "widget opened directly - no menu displayed."
+    elif sel.is_element_present("css=.mirosubs-uniLogo"):
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["AddSubtitles_menuitem"])
         sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])
+    else:
+        print "not sure what's going on here, no widget, not menu"
     widget.close_howto_video(self,sel,skip)
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
     sel.select_frame("relative=top")

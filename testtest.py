@@ -24,27 +24,24 @@ class testtest(unittest.TestCase):
 
 # The test cases of the subgroup
 
-    def test_408(self):
+    def test_398(self):
         """
-        Tests Back To Typing link in Step 2 Sync
-        http://litmus.pculture.org/show_test.cgi?id=408
+        Tests Expert setting in Step 1 Typing
+        http://litmus.pculture.org/show_test.cgi?id=398
         """
-        print "starting testcase 408"
+        print "starting testcase 398"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
         # be sure logged out
         website.SiteLogout(self,sel)
-        # start demo and proceed to step 2 and sync subs
         website.start_demo(self,sel)
         website.start_sub_widget(self,sel)
-        widget.transcribe_video(self, sel, subtextfile)
-        widget.sync_video(self,sel,subtextfile,step="Stop")
-        # go back to typing step
-        widget.back_step(self,sel)
-        # verify step 1 display and subs
-        widget.steps_display(self,sel,1)
-        widget.verify_sub_text(self,sel,subtextfile)     
+        #Type sub-text in the video, then wait stay on Step-1 screen
+        widget.transcribe_video(self, sel, subtextfile, step="Stop")
+        #verify that playback continues to the end
+        while int(sel.get_element_width("css=.mirosubs-played")) != 250:
+            self.failIf(sel.is_element_present(testvars.WidgetUI["Video_play_button"]))   
 
                          
         
