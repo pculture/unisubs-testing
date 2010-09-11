@@ -133,12 +133,13 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
             print "found: " + current_sub.rstrip()
             print "expected: " +line
         print "entering text"
-        if testvars.vbrowser == "*chrome":
+        if testvars.vbrowser == "*chrome" or testvars.vbrowser == "*firefox":
             sel.key_press("css=.trans", "13")
         else:
             print "entering text for non-ff browser"
-            sel.key_down("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]", "13")
-            sel.key_up("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]", "13")
+            sel.key_press_native('10')
+ #           sel.key_down("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]", "13")
+ #           sel.key_up("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]", "13")
         time.sleep(2)
         line_count = line_count+1
     if step == "Continue":
