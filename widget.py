@@ -39,7 +39,7 @@ def Login(self,sel,auth_type):
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_menuitem"])
         sel.click(testvars.WebsiteUI["Login_menuitem"])
 
-    sel.select_frame("relative=top")
+ #   sel.select_frame("relative=top")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-modal-login")
     sel.click("css=.mirosubs-" +auth_type)
     
