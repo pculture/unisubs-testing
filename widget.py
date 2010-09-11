@@ -29,15 +29,18 @@ def Login(self,sel,auth_type):
     print "logging in using "+auth_type+ " account"
     mslib.wait_for_element_present(self,sel, testvars.WebsiteUI["SubtitleMe_menu"])
     sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
+    time.sleep(3)  # give the widget a chance to open directly if it's going to.
     if sel.is_element_present("css=.mirosubs-modal-widget"):
         print "widget opened directly - no menu displayed."
-        close_howto_video
+        close_howto_video(self,sel)
+        time.sleep(3)
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Must_Login"])
         sel.click(testvars.WidgetUI["Must_Login"])
         
-    elif sel.is_element_present("css=.mirosubs-uniLogo"):
-        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_menuitem"])
-        sel.click(testvars.WebsiteUI["Login_menuitem"])
+    else:
+        if sel.is_element_present("css=.mirosubs-uniLogo"):
+            mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_menuitem"])
+            sel.click(testvars.WebsiteUI["Login_menuitem"])
 
  #   sel.select_frame("relative=top")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-modal-login")
@@ -467,6 +470,21 @@ def verify_sub_text(self,sel,subtextfile):
         self.assertEqual(line.rstrip(), sel.get_text(sub_cell_text).rstrip())
         sub_li = sub_li + 1
         
+def wait_for_offsite_login(self,sel):
+    
+    for i in range(60):
+        try:
+            sel.select_window("null")
+            if sel.is_element_present("css=.mirosubs-widget"):
+                print "looking for spinner"
+                if not sel.is_element_present("css=.big_spinner"):break
+                
+        except: pass
+        time.sleep(1)
+
+
+
+
 def close_widget(self,sel,submit="Discard"):
     """
     Description: uses the red close x to close out the widget.
@@ -477,8 +495,12 @@ def close_widget(self,sel,submit="Discard"):
     
     Post Conditions: Returned to originating site.
     """
+    sel.select_frame("relative=top")
     self.failUnless(sel.is_element_present("css=.mirosubs-modal-widget"))
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Close_widget"])
-    sel.click(testvars.WidgetUI["Close_widget"])
+    time.sleep(3)
+    sel.click("//div[@id=':4']/span[2]")  #Stupid css won't work
+
+#    sel.click(testvars.WidgetUI["Close_widget"])
     if sel.is_element_present("css=.mirosubs-link"):
         sel.click("css=.mirosubs-link:contains("+submit+")")

@@ -110,9 +110,7 @@ class subgroup_65(unittest.TestCase):
         widget.Login(self,sel,"google")
         offsite.GmailAuth(self,sel,testvars.gmailuser,testvars.passw)
         # verify
-        time.sleep(10)
-        sel.select_window("null")
-        sel.refresh()
+        widget.wait_for_offsite_login(self,sel)
         widget.close_widget(self,sel)
         website.verify_login(self,sel,testvars.gmailuser)
         # logout
@@ -133,9 +131,7 @@ class subgroup_65(unittest.TestCase):
         widget.Login(self,sel,"twitter")
         offsite.TwitterAuth(self,sel,testvars.twitteruser,testvars.passw)
         # verify
-        time.sleep(10)
-        sel.select_window("null")
-        sel.refresh()
+        widget.wait_for_offsite_login(self,sel)
         widget.close_widget(self,sel)
         website.verify_login(self,sel,username="PCF Sub-writer")
         # logout
@@ -155,10 +151,6 @@ class subgroup_65(unittest.TestCase):
         widget.Login(self,sel,"log")
         widget.site_login_auth(self,sel)
         # verify
-        time.sleep(10)
-        sel.select_window("null")
-        sel.refresh()
-        widget.close_widget(self,sel)
         website.verify_login(self,sel,testvars.siteuser)
         # logout
         website.SiteLogout(self,sel)
@@ -179,9 +171,7 @@ class subgroup_65(unittest.TestCase):
         widget.Login(self,sel,"openid")
         offsite.OpenIdAuth(self,sel,testvars.openiduser,testvars.passw)
         # verify
-        time.sleep(10)
-        sel.select_window("null")
-        sel.refresh()
+        widget.wait_for_offsite_login(self,sel)
         widget.close_widget(self,sel)
         website.verify_login(self,sel,testvars.openiduser)
         # logout

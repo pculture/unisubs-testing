@@ -23,27 +23,27 @@ class testtest(unittest.TestCase):
         self.selenium.start()
 
 # The test cases of the subgroup
+    def test_382(self):
+         """
+         Gmail login from widget
+         http://litmus.pculture.org/show_test.cgi?id=382
+         """
+         sel = self.selenium
+         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+         #login
+         website.SiteLogout(self,sel)
+         website.start_demo(self,sel)
+         widget.Login(self,sel,"google")
+         offsite.GmailAuth(self,sel,testvars.gmailuser,testvars.passw)
+         # verify
 
-    def test_398(self):
-        """
-        Tests Expert setting in Step 1 Typing
-        http://litmus.pculture.org/show_test.cgi?id=398
-        """
-        print "starting testcase 398"
-        sel = self.selenium
-        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
-        # be sure logged out
-        website.SiteLogout(self,sel)
-        website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
-        #Type sub-text in the video, then wait stay on Step-1 screen
-        widget.transcribe_video(self, sel, subtextfile, step="Stop")
-        #verify that playback continues to the end
-        while int(sel.get_element_width("css=.mirosubs-played")) != 250:
-            self.failIf(sel.is_element_present(testvars.WidgetUI["Video_play_button"]))   
-
-                         
+         widget.wait_for_offsite_login(self,sel)
+         widget.close_widget(self,sel)
+##         sel.select_window("null")
+##         sel.refresh() 
+         website.verify_login(self,sel,testvars.gmailuser)
+         # logout
+         website.SiteLogout(self,sel)             
         
 # Close the browser, log errors, perform cleanup 
     def tearDown(self):
@@ -51,7 +51,7 @@ class testtest(unittest.TestCase):
         Closes the browser test window and logs errors
         """
         #Close the browser
-        self.selenium.stop()
+  #      self.selenium.stop()
         #Log any errors
         self.assertEqual([], self.verificationErrors) 
 
