@@ -153,7 +153,7 @@ class subgroup_65(unittest.TestCase):
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
         widget.Login(self,sel,"log")
-        site_login_auth(self,sel)
+        widget.site_login_auth(self,sel)
         # verify
         time.sleep(10)
         sel.select_window("null")
@@ -193,7 +193,6 @@ class subgroup_65(unittest.TestCase):
         http://litmus.pculture.org/show_test.cgi?id=376
         """
         print "starting 376 demo forced login"
-        #FIX ME - this test probably belongs in subgroup 69, demo UI
         
         sel = self.selenium
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")

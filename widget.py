@@ -29,8 +29,6 @@ def Login(self,sel,auth_type):
     print "logging in using "+auth_type+ " account"
     mslib.wait_for_element_present(self,sel, testvars.WebsiteUI["SubtitleMe_menu"])
     sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
-
-
     if sel.is_element_present("css=.mirosubs-modal-widget"):
         print "widget opened directly - no menu displayed."
         close_howto_video
@@ -40,7 +38,11 @@ def Login(self,sel,auth_type):
     elif sel.is_element_present("css=.mirosubs-uniLogo"):
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_menuitem"])
         sel.click(testvars.WebsiteUI["Login_menuitem"])
-        sel.select_frame("relative=top")
+
+    sel.select_frame("relative=top")
+    mslib.wait_for_element_present(self,sel,"css=."+auth_type)
+    sel.click("css=." +auth_type)
+    
         
 
 def site_login_from_widget_link(self,sel):
@@ -61,14 +63,10 @@ def site_login_auth(self,sel):
     """
     Description: specifically logs in as the site user defined in <a href="testvars.html">testvars</a>
 
-    Pre-condition: Login link was clicked from widget
+    Pre-condition: Login was clicked from widget
 
     Post-condition: user logged in and returned to widget page.
     """
-    auth_type = "log"
-    sel.select_frame("relative=top")
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-"+auth_type)
-    sel.click("css=.mirosubs-"+auth_type)
     sel.select_pop_up("null")
     mslib.wait_for_element_present(self,sel,"id_username")
     sel.type("id_username", testvars.siteuser)

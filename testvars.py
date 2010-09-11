@@ -40,7 +40,8 @@ WidgetUI = {"Video_playPause":"css=.mirosubs-playPause", \
             "Video_elapsed_time":"css=.mirosubs-timeElapsed", \
             "Current_playing_sub":"css=.mirosubs-captionDiv", \
             "Next_step":"css=.mirosubs-done", \
-            "Translate_now_button":"css=.mirosubs-done:contains(\"Add a Translation Now\")", \
+            "Translate_now_button":"css=a#add_translation"
+, \
             "Play_pause":"css=.mirosubs-tab:contains('tab')",\
             "Sync_sub":"css=.mirosubs-down:contains('down')",\
             "Skip_back":"css=.mirosubs-control:contains('shift')",\
