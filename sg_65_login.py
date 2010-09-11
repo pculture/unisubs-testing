@@ -128,6 +128,7 @@ class subgroup_65(unittest.TestCase):
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
         website.SiteLogout(self,sel)
+        
         website.start_demo(self,sel)
         widget.Login(self,sel,"twitter")
         offsite.TwitterAuth(self,sel,testvars.twitteruser,testvars.passw)
@@ -152,11 +153,7 @@ class subgroup_65(unittest.TestCase):
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
         widget.Login(self,sel,"log")
-        sel.select_pop_up("null")
-        mslib.wait_for_element_present(self,sel,"id_username")
-        sel.type("id_username", testvars.siteuser)
-        sel.type("id_password", testvars.passw)
-        sel.click("//button[@value='login']")
+        site_login_auth(self,sel)
         # verify
         time.sleep(10)
         sel.select_window("null")

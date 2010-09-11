@@ -16,7 +16,7 @@ import testvars
 def Login(self,sel,auth_type):
     """
     Description: Initiates login sequence using the Subtitle Me menu that's attached to
-    an embedded vidoe, either onsite or offsite.
+    an embedded video, either onsite or offsite.
 
     auth_type can be 'log' (for site), 'twitter','openid','gmail'
     Requires valid accounts for chosen login type
@@ -29,16 +29,25 @@ def Login(self,sel,auth_type):
     print "logging in using "+auth_type+ " account"
     mslib.wait_for_element_present(self,sel, testvars.WebsiteUI["SubtitleMe_menu"])
     sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
-    close_howto_video(self,sel)
-    if sel.is_element_present("css=.mirosubs-dropdown"):
+
+
+    if sel.is_element_present("css=.mirosubs-modal-widget"):
+        print "widget opened directly - no menu displayed."
+        close_howto_video
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Must_Login"])
+        sel.click(testvars.WidgetUI["Must_Login"])
+        
+    else sel.is_element_present("css=.mirosubs-uniLogo"):
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_menuitem"])
         sel.click(testvars.WebsiteUI["Login_menuitem"])
         sel.select_frame("relative=top")
+
+    
+    if sel.is_element_present("css=.mirosubs-dropdown"):
+        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_menuitem"])
+        sel.click(testvars.WebsiteUI["Login_menuitem"])
+        
     else:  # the widget opened directly like with the demo or vids with no subtitles
-        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Must_Login"])
-        sel.click(testvars.WidgetUI["Must_Login"])
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-"+auth_type)
-    sel.click("css=.mirosubs-"+auth_type)
         
 
 def site_login_from_widget_link(self,sel):
