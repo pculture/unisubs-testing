@@ -10,6 +10,8 @@ import offsite
 import testvars
 
 
+
+
 class subgroup_78(unittest.TestCase):
     """
     Litmus Subgroup 64 - offsite subwidget:
@@ -83,9 +85,5 @@ class subgroup_78(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
-
-
-
 
  

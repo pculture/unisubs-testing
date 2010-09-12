@@ -16,6 +16,14 @@ import sg_65_login
 import sg_69_demoUI
 import sg_78_widget_offsite
 
+from optparse import OptionParser
+parser = OptionParser()
+parser.add_option("-b", "--browser", action="store", type="string", dest="browser",
+                  help="specify the browser to use")
+(options, args) = parser.parse_args()
+testbrowser = options.browser
+
+
 class Test_HTMLTestRunner(unittest.TestCase):
 
 # Open the desired browser and set up the test
@@ -69,10 +77,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
 
 import unittest
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        argv = sys.argv
-    else:
-        argv=['test_HTMLTestRunner.py', 'Test_HTMLTestRunner']
+    argv=['test_HTMLTestRunner.py', 'Test_HTMLTestRunner']
     theme=1
     unittest.main(argv=argv)
     #HTMLTestRunner.main(argv=argv)

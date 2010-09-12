@@ -1,10 +1,11 @@
 import os
 import platform
+import browser_setup
 
 preE=" --- ERROR: "
 
 vlocalhost = "localhost"
-vbrowser = "*chrome"
+vbrowser = browser_setup.mybrowser
 down_arrow_key = u'\u2193'
 
 MSTestVariables = {"Site":"http://dev.universalsubtitles.org/", \
