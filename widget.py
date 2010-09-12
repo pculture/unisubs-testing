@@ -138,15 +138,21 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
             mslib.AppendErrorMessage(self,sel,"sub text mismatch")
             print "found: " + current_sub.rstrip()
             print "expected: " +line
-        print "entering text"
-        if testvars.vbrowser == "*chrome" or testvars.vbrowser == "*firefox":
-            sel.key_press("css=.trans", "13")
-        else:
-            print "entering text for non-ff browser"
+        print "entering text" + line
+        if testvars.vbrowser == "*iexplore":
+            print "entering text for ie browser"
             sel.key_press_native('10')
- #           sel.key_down("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]", "13")
- #           sel.key_up("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]", "13")
-        time.sleep(2)
+        elif testvars.vbrowser == "*safari":
+            print "browser safari"
+            sel.focus("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]")
+            time.sleep(1)
+            sel.key_press_native('10')
+#           sel.key_down("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]", "13")
+#           sel.key_up("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]", "13")
+        else:
+            print "ff browser"
+            sel.key_press("css=.trans", "13")
+        time.sleep(1)
         line_count = line_count+1
     if step == "Continue":
         sel.click(testvars.WidgetUI["Next_step"])
@@ -171,7 +177,7 @@ def back_step(self,sel):
         sel.click("link=Back to Typing")
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
 
-def sync_video(self,sel,sub_file,start_delay=2,sub_int=2,step="Continue"):
+def sync_video(self,sel,sub_file,start_delay=5,sub_int=4,step="Continue"):
     """
     Description: Use the defined sync button to sync the subtitles.  Waits for
     text present on the video and prints the subtime.
@@ -190,8 +196,9 @@ def sync_video(self,sel,sub_file,start_delay=2,sub_int=2,step="Continue"):
     time.sleep(10)
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     print "clicking video play button to start playback"
-    sel.click(testvars.WidgetUI["Video_playPause"])
-    
+#    sel.click(testvars.WidgetUI["Video_playPause"])
+    sel.focus(testvars.WidgetUI["Sync_sub"])
+    sel.click_at(testvars.WidgetUI["Sync_sub"],"")   
        
     time.sleep(start_delay)
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Sync_sub"])
@@ -202,12 +209,11 @@ def sync_video(self,sel,sub_file,start_delay=2,sub_int=2,step="Continue"):
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
         sub_cell_start_time = "//li["+str(sub_li)+"]/span[1]/span/span[1]"
         start_time=sel.get_text(sub_cell_start_time)
-        print " - sub time: " '%.2f' % float(start_time) + "sub text: "+ sel.get_text(testvars.WidgetUI["Current_playing_sub"])
-#        print sel.get_text(testvars.WidgetUI["Active_subtime"]) +": "+ sel.get_text(testvars.WidgetUI["Active_subtext"])
+        print " - sub time: " '%.2f' % float(start_time) + " - sub text: "+ sel.get_text(testvars.WidgetUI["Current_playing_sub"])
         time.sleep(sub_int)
+#        sel.focus(testvars.WidgetUI["Sync_sub"])
+#        sel.click_at(testvars.WidgetUI["Sync_sub"],"")
         sub_li = sub_li + 1
-    sel.focus(testvars.WidgetUI["Sync_sub"])
-    sel.click_at(testvars.WidgetUI["Sync_sub"],"")
     if step == "Continue":
         sel.click(testvars.WidgetUI["Next_step"])
     
