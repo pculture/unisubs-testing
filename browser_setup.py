@@ -1,12 +1,9 @@
 # set up the runtine setting
 
-import test_cmdargs
+import test_withHTMLoutput as controller
 
-print test_cmdargs.testbrowser
-
-
-if test_cmdargs.testbrowser:
-    mybrowser = "*"+test_cmdargs.testbrowser
+if controller.testbrowser:
+    mybrowser = "*"+controller.testbrowser
     print "browser setup is using browser: " + mybrowser        
 else:
     mybrowser = "*firefox"
