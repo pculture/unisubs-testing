@@ -22,28 +22,41 @@ class testtest(unittest.TestCase):
         self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
         self.selenium.start()
 
-# The test cases of the subgroup
-    def test_382(self):
-         """
-         Gmail login from widget
-         http://litmus.pculture.org/show_test.cgi?id=382
-         """
-         sel = self.selenium
-         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-         #login
-         website.SiteLogout(self,sel)
-         website.start_demo(self,sel)
-         widget.Login(self,sel,"google")
-         offsite.GmailAuth(self,sel,testvars.gmailuser,testvars.passw)
-         # verify
+    def test_376(self):
+        """Test demo widget not logged in
+        http://litmus.pculture.org/show_test.cgi?id=376
+        """
+        print "starting 376 demo forced login"
+        
+        sel = self.selenium
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        website.SiteLogout(self,sel)
+        website.start_demo(self,sel)
+        website.start_sub_widget(self,sel)        
+        # Check message in transcribe step
+        widget.verify_login_message(self,sel)
+        widget.transcribe_video(self,sel,subtextfile)
+        
+        # Check message in sync step
+        widget.verify_login_message(self,sel)
+        widget.sync_video(self,sel,subtextfile,2,2)
 
-         widget.wait_for_offsite_login(self,sel)
-         widget.close_widget(self,sel)
-##         sel.select_window("null")
-##         sel.refresh() 
-         website.verify_login(self,sel,testvars.gmailuser)
-         # logout
-         website.SiteLogout(self,sel)             
+        # Check message in review step and click done
+        widget.verify_login_message(self,sel)
+        sel.click(testvars.WidgetUI["Next_step"])
+        self.failUnless(sel.is_element_present("css=.mirosubs-modal-login"))
+        #Login
+        widget.site_login_auth(self,sel)
+        sel.select_window("null")
+        self.failUnless(sel.is_element_present(testvars.WidgetUI["Next_step"]))
+        sel.click(testvars.WidgetUI["Next_step"])
+        mslib.wait_for_element_present(self,sel,"css=.mirosubs-translating")
+        self.failUnless(sel.is_element_present(testvars.WidgetUI["Translate_now_button"]))
+        sel.click(testvars.MSTestVariables["Close_widget"])
+        #Finish up by logging out
+        print "logging out from site"
+        website.SiteLogout(self,sel)          
         
 # Close the browser, log errors, perform cleanup 
     def tearDown(self):

@@ -60,6 +60,8 @@ def site_login_from_widget_link(self,sel):
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Must_Login"])        
     print "loggin in from widget"
     sel.click("link=LOGIN")
+    mslib.wait_for_element_present(self,sel,"css=.mirosubs-modal-login")
+    sel.click("css=.mirosubs-log")
     site_login_auth(self,sel)
 
 def site_login_auth(self,sel):
@@ -433,10 +435,10 @@ def resync_video (self,sel,subtextfile,start_delay=1,sub_int=1, step="Stop"):
 
 def verify_login_message(self,sel):
     """
-    Description: verifies must login message is displayed.
+    Description: verifies the widget must login message is displayed when a user is not logged in.
     """
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Must_Login"])
-    self.failUnless(sel.get_text(testvars.WidgetUI['Must_Login'] +":contains('To save your subtitling work')"))
+    self.failUnless(sel.get_text(testvars.WidgetUI['Must_Login'] +":contains('LOGIN')"))
 
 def steps_display(self,sel,step_num):
     """

@@ -336,7 +336,8 @@ class subgroup_69(unittest.TestCase):
         Tests Skip Back (ctrl) functionality in Step 1 Typing
         http://litmus.pculture.org/show_test.cgi?id=400
         """
-        print "starting testcase 400"
+        print "starting testcase 400 - shift-tab to skip back on step 1"
+        print "known bug: http://bugzilla.pculture.org/show_bug.cgi?id=14292"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
@@ -387,7 +388,8 @@ class subgroup_69(unittest.TestCase):
         Tests Skip Back (ctrl) functionality in Step 2 Sync
         http://litmus.pculture.org/show_test.cgi?id=409
         """
-        print "starting testcase 409"
+        print "starting testcase 409 shift-tab to sktip back step 2"
+        print "known bug: http://bugzilla.pculture.org/show_bug.cgi?id=14292"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
@@ -533,6 +535,7 @@ class subgroup_69(unittest.TestCase):
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
+        website.start_sub_widget(self,sel)
         widget.transcribe_video(self, sel, subtextfile)
         widget.sync_video(self, sel, subtextfile, step="Stop")
         widget.site_login_from_widget_link(self,sel)
