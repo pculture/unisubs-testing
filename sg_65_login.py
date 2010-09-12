@@ -146,10 +146,7 @@ class subgroup_65(unittest.TestCase):
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
-        website.SiteLogout(self,sel)
-        website.start_demo(self,sel)
-        widget.Login(self,sel,"log")
-        widget.site_login_auth(self,sel)
+        website.SiteLogIn(self,sel,testvars.siteuser, testvars.passw)
         # verify
         website.verify_login(self,sel,testvars.siteuser)
         # logout
@@ -202,14 +199,16 @@ class subgroup_65(unittest.TestCase):
         widget.verify_login_message(self,sel)
         sel.click(testvars.WidgetUI["Next_step"])
         self.failUnless(sel.is_element_present("css=.mirosubs-modal-login"))
+        sel.click("css=.mirosubs-log")
         #Login
         widget.site_login_auth(self,sel)
         sel.select_window("null")
         self.failUnless(sel.is_element_present(testvars.WidgetUI["Next_step"]))
         sel.click(testvars.WidgetUI["Next_step"])
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-translating")
-        self.failUnless(sel.is_element_present(testvars.WidgetUI["Translate_now_button"]))
-        sel.click(testvars.MSTestVariables["Close_widget"])
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+        self.failUnless(sel.is_text_present("Subtitles saved!"))
+        self.failUnless(sel.is_element_present("css=div#languages-tab"))
         #Finish up by logging out
         print "logging out from site"
         website.SiteLogout(self,sel)
