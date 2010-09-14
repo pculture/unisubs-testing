@@ -51,9 +51,9 @@ class Test_HTMLTestRunner(unittest.TestCase):
         self.suite = unittest.TestSuite()
         self.suite.addTests([
             unittest.defaultTestLoader.loadTestsFromTestCase(sg_64_submit.subgroup_64),
-#            unittest.defaultTestLoader.loadTestsFromTestCase(sg_78_widget_offsite.subgroup_78),
-#            unittest.defaultTestLoader.loadTestsFromTestCase(sg_69_demoUI.subgroup_69),
-#            unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.subgroup_65)        
+            unittest.defaultTestLoader.loadTestsFromTestCase(sg_78_widget_offsite.subgroup_78),
+            unittest.defaultTestLoader.loadTestsFromTestCase(sg_69_demoUI.subgroup_69),
+            unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.subgroup_65)        
                         
             ])
 
