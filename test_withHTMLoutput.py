@@ -9,19 +9,27 @@ import StringIO
 import sys
 import HTMLTestRunner
 # import MS Test Suite modules
-import testvars
+
+
+
+from optparse import OptionParser
+parser = OptionParser()
+parser.add_option("-s", "--sauce", action="store_true", dest="sauce")
+parser.add_option("-b", "--browser", action="store", type="string", dest="browser", default="firefox")
+parser.add_option("-p", "--port", action="store", type="int", dest="port")
+parser.add_option("-u", "--siteurl", action="store", type="string", dest="site")
+
+(options, args) = parser.parse_args()
+testbrowser = options.browser
+testport = options.port
+testsauce = options.sauce
+testsite = options.site
+
 import mslib
 import sg_64_submit
 import sg_65_login
 import sg_69_demoUI
-import sg_78_widget_offsite
-
-from optparse import OptionParser
-parser = OptionParser()
-parser.add_option("-b", "--browser", action="store", type="string", dest="browser",
-                  help="specify the browser to use")
-(options, args) = parser.parse_args()
-testbrowser = options.browser
+import sg_78_widget_offsite               
 
 
 class Test_HTMLTestRunner(unittest.TestCase):
@@ -43,9 +51,9 @@ class Test_HTMLTestRunner(unittest.TestCase):
         self.suite = unittest.TestSuite()
         self.suite.addTests([
             unittest.defaultTestLoader.loadTestsFromTestCase(sg_64_submit.subgroup_64),
-            unittest.defaultTestLoader.loadTestsFromTestCase(sg_78_widget_offsite.subgroup_78),
-            unittest.defaultTestLoader.loadTestsFromTestCase(sg_69_demoUI.subgroup_69),
-            unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.subgroup_65)        
+#            unittest.defaultTestLoader.loadTestsFromTestCase(sg_78_widget_offsite.subgroup_78),
+#            unittest.defaultTestLoader.loadTestsFromTestCase(sg_69_demoUI.subgroup_69),
+#            unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.subgroup_65)        
                         
             ])
 
@@ -62,13 +70,13 @@ class Test_HTMLTestRunner(unittest.TestCase):
         # check out the output
         byte_output = buf.getvalue()
         # output the main test results
-        
-        filename = os.path.join(testvars.MSTestVariables["ResultOutputDirectory"], 'unisubs_' + testvars.vbrowser +'_'+time.strftime("%Y%m%d_%H%M", time.gmtime())+'_GMT.html')
+        results_path = os.path.join(os.getcwd(), "Results")
+        filename = os.path.join(results_path, 'unisubs_' + str(testbrowser) +'_'+time.strftime("%Y%m%d_%H%M", time.gmtime())+'_GMT.html')
         f = open(filename, 'w')
         f.write(byte_output)
         f.close()
         #copy the results to a file called last_run.html
-        lastrun = os.path.join(testvars.MSTestVariables["ResultOutputDirectory"], 'last_run.html')
+        lastrun = os.path.join(results_path, 'last_run.html')
         shutil.copyfile(filename,lastrun)
 
 ##############################################################################

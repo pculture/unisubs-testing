@@ -9,6 +9,7 @@ import urllib
 import mslib
 import testvars
 import widget
+import selvars
 
 
 def TwitterAuth(self,sel,user,passw):
@@ -116,7 +117,7 @@ def handle_warning_popup(self,sel):
 
 def get_blip_video_url(self,file_type="flv"):
     try:
-        self.selenium = (selenium(testvars.vlocalhost, 4444, testvars.vbrowser, "http://blip.tv/"))
+        self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(), "http://blip.tv/"))
         self.selenium.start()
         bsel= self.selenium
         bsel.set_timeout(testvars.MSTestVariables["TimeOut"])
@@ -130,10 +131,36 @@ def get_blip_video_url(self,file_type="flv"):
     finally:
         bsel.close()
         bsel.stop()
+    print blipURL
     return blipURL
 
 
+def get_vimeo_video_url(self):
+    try:
+        self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(), "http://vimeo.com/"))
+        self.selenium.start()
+        vsel= self.selenium
+        vsel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        vsel.open("groups/all/sort:recent")
+        vsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+        vsel.click("css=.detail_format a.thumbnail")
+        mslib.wait_for_element_present(self,vsel,"css=div.tabmain a:contains('Videos')")
+        vsel.click("css=div.tabmain a:contains('Videos')")
+        mslib.wait_for_element_present(self,vsel,"css=div#vimeo_dropdown_2")
+        vsel.click_at("css=div#vimeo_dropdown_2", "")
+        vsel.click_at("css=li#detail", "")
+        mslib.wait_for_element_present(self,vsel,"css=.thumbnail_box a.thumbnail")
+        vsel.click("css=.thumbnail_box a.thumbnail")
+        mslib.wait_for_element_present(self, vsel,"css=input#clip_id")
+        urlid = vsel.get_value("css=input#clip_id")
+        vimeoURL = "http://vimeo.com/"+urlid
+        print vimeoURL
+        return vimeoURL
 
+    finally:
+        vsel.close()
+        vsel.stop()
+    return vimeoURL
 
         
     

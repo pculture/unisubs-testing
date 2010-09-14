@@ -42,7 +42,7 @@ class subgroup_69(unittest.TestCase):
 # Open the desired browser and set up the test
     def setUp(self):
         self.verificationErrors = []
-        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
+        self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(), selvars.set_site() )
         self.selenium.start()
 
 # The test cases of the subgroup
@@ -727,7 +727,7 @@ class subgroup_69(unittest.TestCase):
         widget.click_time_shift_arrows(self,sel,subtextfile)       
 
 
-##
+##    
 ##    def test_412(self):
 ##        """
 ##        Tests modifying times by holding down then releasing down arrow
@@ -746,7 +746,7 @@ class subgroup_69(unittest.TestCase):
 ##        widget.sync_video(self,sel,subtextfile,start_delay=5, sub_int=2)
 ##        #on Step 3 resync video times
 ##        widget.hold_down_delay_sub(self,sel,subtextfile)       
-##                         
+                         
         
 # Close the browser, log errors, perform cleanup 
     def tearDown(self):

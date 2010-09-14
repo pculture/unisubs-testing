@@ -1,15 +1,11 @@
 import os
 import platform
-import browser_setup
+
 
 preE=" --- ERROR: "
 
-vlocalhost = "localhost"
-vbrowser = browser_setup.mybrowser
-down_arrow_key = u'\u2193'
 
 MSTestVariables = {"Site":"http://dev.universalsubtitles.org/", \
-                   "ResultOutputDirectory":os.path.join(os.getcwd(), "Results"), \
                    "DataDirectory": os.path.join(os.getcwd(), "TestInput"), \
                    "TimeOut":"90000", \
                   }

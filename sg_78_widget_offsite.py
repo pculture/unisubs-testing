@@ -25,7 +25,7 @@ class subgroup_78(unittest.TestCase):
         Sets up run envirnment for selenium server
         """
         self.verificationErrors = []
-        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, "http://pculture.org/mirosubs_tests/")
+        self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(), "http://pculture.org/mirosubs_tests" )
         self.selenium.start()
 
 # The test cases of the subgroup.

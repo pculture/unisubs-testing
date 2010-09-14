@@ -21,7 +21,7 @@ class subgroup_65(unittest.TestCase):
         Sets up run envirnment for selenium server
         """
         self.verificationErrors = []
-        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
+        self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(), selvars.set_site())
         self.selenium.start()
         
         

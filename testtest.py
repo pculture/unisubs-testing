@@ -19,7 +19,7 @@ class testtest(unittest.TestCase):
 # Open the desired browser and set up the test
     def setUp(self):
         self.verificationErrors = []
-        self.selenium = selenium(testvars.vlocalhost, 4444, testvars.vbrowser, testvars.MSTestVariables["Site"])
+        self.selenium = selenium(testvars.vlocalhost, 4444, selvars.vbrowser, testvars.MSTestVariables["Site"])
         self.selenium.start()
 
     def test_376(self):

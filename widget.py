@@ -139,10 +139,10 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
             print "found: " + current_sub.rstrip()
             print "expected: " +line
         print "entering text" + line
-        if testvars.vbrowser == "*iexplore":
+        if selvars.vbrowser == "*iexplore":
             print "entering text for ie browser"
             sel.key_press_native('10')
-        elif testvars.vbrowser == "*safari":
+        elif selvars.vbrowser == "*safari":
             print "browser safari"
             sel.focus("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]")
             time.sleep(1)

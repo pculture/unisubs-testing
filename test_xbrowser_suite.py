@@ -63,7 +63,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
         # check out the output
         byte_output = buf.getvalue()
         # output the main test results
-        filename=testvars.MSTestVariables["ResultOutputDirectory"]+ "MS_xbrowser_"+ testvars.vbrowser+"_"+time.strftime("%d-%m-%Y_%H-%M", time.gmtime())+'_GMT.html'
+        filename=testvars.MSTestVariables["ResultOutputDirectory"]+ "MS_xbrowser_"+ selvars.vbrowser+"_"+time.strftime("%d-%m-%Y_%H-%M", time.gmtime())+'_GMT.html'
         f = open(filename, 'w')
         f.write(byte_output)
         f.close()
