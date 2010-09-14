@@ -11,6 +11,7 @@ import re
 import codecs
 import mslib
 import testvars
+import selvars
 
 
 def Login(self,sel,auth_type):
