@@ -7,6 +7,7 @@ import website
 import widget
 import offsite
 import testvars
+import selvars
 
 
 class subgroup_65(unittest.TestCase):

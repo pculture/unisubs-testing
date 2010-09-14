@@ -5,6 +5,7 @@ import time
 import re
 import sys
 import codecs
+import selvars
 import mslib, website, widget, offsite, testvars
 
 # ----------------------------------------------------------------------
