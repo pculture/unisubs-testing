@@ -45,9 +45,9 @@ def set_site():
     return site
 
 if controller.testbrowser:
-    vbrowser = "*"+controller.test_browser
+    vbrowser = "*"+controller.testbrowser
 else:
-    vbrowser = "*chrome"
+    vbrowser = "*firefox"
 
 
 def set_browser():
