@@ -21,18 +21,16 @@ class subgroup_65(unittest.TestCase):
         """
         Sets up run envirnment for selenium server
         """
-        testid = self.id()
-        testlink =  self.shortDescription()
         self.verificationErrors = []
-        self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(testlink), selvars.set_site())
+        self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.shortDescription()), selvars.set_site())
         self.selenium.start()
         
         
     # The tests in the subgroup
     def test_378(self):
-        """Testcase: http://litmus.pculture.org/show_test.cgi?id=378.
+        """378: Site login using site account.
 
-        Site_login        
+        http://litmus.pculture.org/show_test.cgi?id=378.      
         """
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
@@ -46,8 +44,8 @@ class subgroup_65(unittest.TestCase):
 
 
     def test_379(self):
-        """
-        Twitter login from site
+        """379: Site login using twitter account.
+
         http://litmus.pculture.org/show_test.cgi?id=379
         """
         sel = self.selenium
@@ -64,8 +62,8 @@ class subgroup_65(unittest.TestCase):
     
 
     def test_380(self):
-        """
-        Open id login from site
+        """380: Site login from open id account.
+        
         http://litmus.pculture.org/show_test.cgi?id=380
         """
         print "this test will likely fail until bug #13688 (http://bugzilla.pculture.org/show_bug.cgi?id=13688) gets fixed"
@@ -83,8 +81,8 @@ class subgroup_65(unittest.TestCase):
 
 
     def test_381(self):
-        """
-        Gmail login from site
+        """381: Site login using gmail account.
+
         http://litmus.pculture.org/show_test.cgi?id=381
         """
         sel = self.selenium
@@ -101,7 +99,7 @@ class subgroup_65(unittest.TestCase):
 
 
     def test_382(self):
-        """test_382: Gmail login from widget.
+        """382: Login from widget using gmail account.
 
         http://litmus.pculture.org/show_test.cgi?id=382
         """
@@ -121,7 +119,7 @@ class subgroup_65(unittest.TestCase):
 
 
     def test_383(self):
-        """test_383: Tests the Twitter login from the widget.
+        """383: Login from widget using twitter account
 
         http://litmus.pculture.org/show_test.cgi?id=383
         """
@@ -142,8 +140,8 @@ class subgroup_65(unittest.TestCase):
 
 
     def test_384(self):
-        """
-        Site login from site
+        """384: Login from widget using site account.
+        
         http://litmus.pculture.org/show_test.cgi?id=384
         """
         sel = self.selenium
@@ -158,8 +156,8 @@ class subgroup_65(unittest.TestCase):
 
 
     def test_385(self):
-        """
-        Open id login from widget
+        """385: Login from widget using openid account.
+        
         http://litmus.pculture.org/show_test.cgi?id=385
         """
         print "this test will likely fail until bug #13688 (http://bugzilla.pculture.org/show_bug.cgi?id=13688) gets fixed"
@@ -179,12 +177,13 @@ class subgroup_65(unittest.TestCase):
 
       
     def test_376(self):
-        """http://litmus.pculture.org/show_test.cgi?id=376 .
+        """376: Widget requires login to submit subtitles.
 
-        Test demo widget not logged in
-        
+        http://litmus.pculture.org/show_test.cgi?id=376 .
+
+               
         """
-        print "starting 376 demo forced login"
+        print "starting" +self.shortDescription()
         
         sel = self.selenium
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")

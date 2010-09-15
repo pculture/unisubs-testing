@@ -1,4 +1,5 @@
 from selenium import selenium
+
 import unittest
 import os
 import time
@@ -12,7 +13,8 @@ import mslib, website, widget, offsite, testvars
 
 
 class subgroup_69(unittest.TestCase):
-    """
+    """Subgroup 69: Widget functionality tests using the site demo.
+
     Litmus Subgroup 69 - Demo Wiget UI tests
     389 How-to video continue
     395 How-to video skip
@@ -52,9 +54,9 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_389(self):
-        """ test_389 How-to Display and Continue
-    
-        Tests How to video display and Continue
+        """389: How-to video display, and continue button.
+
+        http://litmus.pculture.org/show_test.cgi?id=395
         """
         print "starting testcase 389"
         sel = self.selenium
@@ -73,8 +75,8 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_395(self):
-        """
-        Tests How to video display and skip setting
+        """395: How-to video display and skip setting.
+        
         http://litmus.pculture.org/show_test.cgi?id=395
         """
         print "starting testcase 395"
@@ -96,8 +98,8 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_373(self):
-        """
-        Tests Step 1 typing the subtitles
+        """373: Widget Step 1, typing the subtitles.
+        
         http://litmus.pculture.org/show_test.cgi?id=373
         """
         print "starting testcase 373"
@@ -114,8 +116,8 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_397(self):
-        """
-        Tests Beginner mode setting in Step 1 Typing.
+        """397: Widget Step 1, beginner mode setting.
+        
         http://litmus.pculture.org/show_test.cgi?id=397
         """
         print "starting testcase 397"
@@ -146,8 +148,8 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_470(self):
-        """
-        Tests Advanced (Recommended) setting Step 1 Typing
+        """470: Widget Step 1, advanced (recommended) mode setting.
+        
         http://litmus.pculture.org/show_test.cgi?id=470
         """
         print "starting testcase 470"
@@ -181,8 +183,8 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_398(self):
-        """
-        Tests Expert setting in Step 1 Typing
+        """389: Widget Step 1, expert mode setting.
+        
         http://litmus.pculture.org/show_test.cgi?id=398
         """
         print "starting testcase 398"
@@ -204,8 +206,8 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_399(self):
-        """
-        Tests Play - Pause functionality in Step 1 Typing
+        """399: Widget Step 1, play-pause functionality.
+        
         http://litmus.pculture.org/show_test.cgi?id=399
         """
         print "starting testcase 399"
@@ -247,8 +249,8 @@ class subgroup_69(unittest.TestCase):
         
 
     def test_403(self):
-        """
-        Tests Play - Pause functionality in Step 2 Syncing
+        """403: Widget Step 2, play-pause functionality.
+        
         http://litmus.pculture.org/show_test.cgi?id=403
         """
         print "starting testcase 403"
@@ -290,8 +292,8 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_404(self):
-        """
-        Tests Play - Pause functionality in Step 3 Review
+        """404: Widget Step 3, play-pause functionality.
+        
         http://litmus.pculture.org/show_test.cgi?id=404
         """
         print "starting testcase 404"
@@ -334,8 +336,8 @@ class subgroup_69(unittest.TestCase):
         
 
     def test_400(self):
-        """
-        Tests Skip Back (ctrl) functionality in Step 1 Typing
+        """400: Widget Step 1, Skip-back functionality
+        
         http://litmus.pculture.org/show_test.cgi?id=400
         """
         print "starting testcase 400 - shift-tab to skip back on step 1"
@@ -386,8 +388,8 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_409(self):
-        """
-        Tests Skip Back (ctrl) functionality in Step 2 Sync
+        """409: Widget Step 2, skip-back functionality.
+        
         http://litmus.pculture.org/show_test.cgi?id=409
         """
         print "starting testcase 409 shift-tab to sktip back step 2"
@@ -435,7 +437,7 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_410(self):
-        """test_410: Skip Back (shift-tab) functionality in Step 3 Review.
+        """410: Widget Step 3, skip-back functionality.
 
         http://litmus.pculture.org/show_test.cgi?id=410
         """
@@ -485,8 +487,8 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_406(self):
-        """
-        Tests Restart Typing link in Step 1 Typing
+        """406 Widget Step 1, restart typing link.
+        
         http://litmus.pculture.org/show_test.cgi?id=406
         """
         print "starting testcase 406"
@@ -504,9 +506,9 @@ class subgroup_69(unittest.TestCase):
 
        
     def test_401(self):
-        """
-        Tests Login link functionality in Step 1 Typing
-        http://litmus.pculture.org/show_test.cgi?id=400
+        """401 Widget Step 1, login link functionality.
+        
+        http://litmus.pculture.org/show_test.cgi?id=401
         """
         print "starting testcase 401"
         sel = self.selenium
@@ -526,8 +528,8 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_405(self):
-        """ 
-	Tests Login Link functionality in Step 2 Sync 
+        """405: Widget Step 2, login link functionality.
+	
         http://litmus.pculture.org/show_test.cgi?id=405
         """
         print "starting testcase 405"
@@ -550,8 +552,8 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_416(self):
-        """
-        Tests Login Link functionality in Step 3 Sync
+        """416: Widget Step 3, login link functionality.
+        
         http://litmus.pculture.org/show_test.cgi?id=416
         """
         print "starting testcase 416"
@@ -573,8 +575,8 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_411(self):
-        """
-        Tests Subtitle Syncing in Step 2 Sync
+        """411: Widget Step 2, subtitle syncing.
+        
         http://litmus.pculture.org/show_test.cgi?id=411
         """
         print "starting testcase 411"
@@ -591,8 +593,8 @@ class subgroup_69(unittest.TestCase):
                 
 
     def test_388(self):
-        """
-        Tests Edit Subtitles text in Step 2 Sync
+        """388: Widget Step 2, edit subtitle text from step 1.
+        
         Tests smalls, caps, spaces, and non-ascii chars
         http://litmus.pculture.org/show_test.cgi?id=388
         """
@@ -618,8 +620,9 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_415(self):
-        """
-        Tests Edit Subtitles in Step 3 Review
+        """415: Widget Step 3, edit subtitle text.
+
+        Tests smalls, caps, spaces, and non-ascii chars
         http://litmus.pculture.org/show_test.cgi?id=415
         """
         print "starting testcase 415"
@@ -645,8 +648,8 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_408(self):
-        """
-        Tests Back To Typing link in Step 2 Sync
+        """408: Widget Step 2, back to typing link.
+        
         http://litmus.pculture.org/show_test.cgi?id=408
         """
         print "starting testcase 408"
@@ -669,8 +672,8 @@ class subgroup_69(unittest.TestCase):
 
         
     def test_402(self):
-        """
-        Tests Down Arrow to  resync in Step 3 Review
+        """402: Widget Step 3, resync subtitles.
+        
         http://litmus.pculture.org/show_test.cgi?id=402
         """
         print "starting testcase 402"
@@ -687,32 +690,30 @@ class subgroup_69(unittest.TestCase):
         widget.resync_video(self,sel,subtextfile)       
 
 
-##    FIX ME - issues w/ the drag n drop part, commenting out for now.
         
-##    def test_413(self):
-##        """
-##        Tests modifying times by dragging the timeline bubbles
-##        http://litmus.pculture.org/show_test.cgi?id=413
-##        """
-##        print "starting testcase 413"
-##        sel = self.selenium
-##        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-##        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
-##        # be sure logged out
-##        website.SiteLogout(self,sel)
-##        website.start_demo(self,sel)
-##        website.start_sub_widget(self,sel)
-##        widget.transcribe_video(self, sel, subtextfile)
-##        widget.sync_video(self,sel,subtextfile,start_delay=1, sub_int=1)
-##        #on Step 3 resync video times
-##        widget.drag_time_bubbles(self,sel,subtextfile)       
+    def test_413(self):
+        """413 Widget Step 3, drag time bubbles.
+        
+        http://litmus.pculture.org/show_test.cgi?id=413
+        """
+        print "starting testcase 413"
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
+        # be sure logged out
+        website.SiteLogout(self,sel)
+        website.start_demo(self,sel)
+        website.start_sub_widget(self,sel)
+        widget.transcribe_video(self, sel, subtextfile)
+        widget.sync_video(self,sel,subtextfile,start_delay=1, sub_int=1)
+        #on Step 3 resync video times
+        widget.drag_time_bubbles(self,sel,subtextfile)       
                          
         
 
     def test_414(self):
-        """
-        Tests modifying times by click the arrows that appear on
-        mouseover on Step 3 Review
+        """414: Widget Step 3, click time arrows to modify time.
+        
         http://litmus.pculture.org/show_test.cgi?id=414
         """
         print "starting testcase 414"
@@ -729,25 +730,23 @@ class subgroup_69(unittest.TestCase):
         widget.click_time_shift_arrows(self,sel,subtextfile)       
 
 
-##    
-##    def test_412(self):
-##        """
-##        Tests modifying times by holding down then releasing down arrow
-##        on Step 3 Review
-##        http://litmus.pculture.org/show_test.cgi?id=412
-##        """
-##        print "starting testcase 412"
-##        sel = self.selenium
-##        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-##        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
-##        # be sure logged out
-##        website.SiteLogout(self,sel)
-##        website.start_demo(self,sel)
-##        website.start_sub_widget(self,sel)
-##        widget.transcribe_video(self, sel, subtextfile,buffer="yes")
-##        widget.sync_video(self,sel,subtextfile,start_delay=5, sub_int=2)
-##        #on Step 3 resync video times
-##        widget.hold_down_delay_sub(self,sel,subtextfile)       
+    
+    def test_412(self):
+        """412: Widget Step 3, press and hold down arrow time-shift.
+           http://litmus.pculture.org/show_test.cgi?id=412
+        """
+        print "starting testcase 412"
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
+        # be sure logged out
+        website.SiteLogout(self,sel)
+        website.start_demo(self,sel)
+        website.start_sub_widget(self,sel)
+        widget.transcribe_video(self, sel, subtextfile,buffer="yes")
+        widget.sync_video(self,sel,subtextfile,start_delay=5, sub_int=2)
+        #on Step 3 resync video times
+        widget.hold_down_delay_sub(self,sel,subtextfile)       
                          
         
 # Close the browser, log errors, perform cleanup 

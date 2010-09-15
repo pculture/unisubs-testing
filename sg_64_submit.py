@@ -27,14 +27,15 @@ class subgroup_64(unittest.TestCase):
         """      
         
         self.verificationErrors = []
-        self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(), selvars.set_site() )
+        self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.shortDescription()), selvars.set_site() )
         self.selenium.start()
 
 ## The test cases of the subgroup.
 
 
     def test_469_blip_submit(self):
-        """
+        """469: Submit videos from blip.tv.
+
         Tests submission of blip.tv video non-html5 subtitle and translation.
         http://litmus.pculture.org/show_test.cgi?id=469
         """
@@ -67,11 +68,11 @@ class subgroup_64(unittest.TestCase):
 
 
     def test_vimeo_submit(self):
-        """
-        Tests submission of blip.tv video non-html5 subtitle and translation.
+        """999: Submit and subtitle vimeo videos.
+
         http://litmus.pculture.org/show_test.cgi?id=469
         """
-        print "starting xxx vimeo.com submit video"
+        print "starting 999 vimeo.com submit video"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
