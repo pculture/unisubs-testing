@@ -10,7 +10,10 @@ import sys
 import HTMLTestRunner
 # import MS Test Suite modules
 import mslib
-
+import sg_64_submit
+import sg_65_login 
+import sg_69_demoUI 
+import sg_78_widget_offsite 
 
 
 from optparse import OptionParser
@@ -41,11 +44,7 @@ testsite = options.site
 
 class Test_HTMLTestRunner(unittest.TestCase):
 
-    
-    import sg_64_submit
-    import sg_65_login 
-    import sg_69_demoUI 
-    import sg_78_widget_offsite 
+
 
 # Open the desired browser and set up the test
 
