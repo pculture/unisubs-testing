@@ -21,16 +21,18 @@ class subgroup_65(unittest.TestCase):
         """
         Sets up run envirnment for selenium server
         """
+        testid = self.id()
+        testlink =  self.shortDescription()
         self.verificationErrors = []
-        self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(), selvars.set_site())
+        self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(testlink), selvars.set_site())
         self.selenium.start()
         
         
     # The tests in the subgroup
     def test_378(self):
-        """
-        Site_login
-        http://litmus.pculture.org/show_test.cgi?id=378
+        """Testcase: http://litmus.pculture.org/show_test.cgi?id=378.
+
+        Site_login        
         """
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
@@ -99,8 +101,8 @@ class subgroup_65(unittest.TestCase):
 
 
     def test_382(self):
-        """
-        Gmail login from widget
+        """test_382: Gmail login from widget.
+
         http://litmus.pculture.org/show_test.cgi?id=382
         """
         sel = self.selenium
@@ -119,8 +121,8 @@ class subgroup_65(unittest.TestCase):
 
 
     def test_383(self):
-        """
-        Twitter login from widget
+        """test_383: Tests the Twitter login from the widget.
+
         http://litmus.pculture.org/show_test.cgi?id=383
         """
         sel = self.selenium
@@ -177,8 +179,10 @@ class subgroup_65(unittest.TestCase):
 
       
     def test_376(self):
-        """Test demo widget not logged in
-        http://litmus.pculture.org/show_test.cgi?id=376
+        """http://litmus.pculture.org/show_test.cgi?id=376 .
+
+        Test demo widget not logged in
+        
         """
         print "starting 376 demo forced login"
         

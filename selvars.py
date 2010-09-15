@@ -50,7 +50,7 @@ else:
     vbrowser = "*firefox"
 
 
-def set_browser():
+def set_browser(testlink):
     """ Sets up the browser to either the *browser name or the correct
     json string if the tests are to be run with sauce
     """
@@ -65,16 +65,18 @@ def set_browser():
                         "access-key": sauce_auth.sauce_key,\
                         "os": "Windows 2003",\
                         "browser": "googlechrome",\
-                        "browser-version": "" \
+                        "browser-version": "", \
+                        "job-name": testlink \
                     }
                                
-        elif controller.testbrowser == ("ie" or "iexplore"):
+        elif controller.testbrowser == "iexplore":
             sbrowser = {\
                         "username": sauce_auth.sauce_user,\
                         "access-key": sauce_auth.sauce_key,\
                         "os": "Windows 2003",\
                         "browser": "iexplore",\
-                        "browser-version": "8" \
+                        "browser-version": "8" , \
+                        "job-name": testlink \
                     }
         elif controller.testbrowser == ("opera"):
             sbrowser = {\
@@ -82,15 +84,17 @@ def set_browser():
                         "access-key": sauce_auth.sauce_key,\
                         "os": "Windows 2003",\
                         "browser": "opera",\
-                        "browser-version": "10" \
+                        "browser-version": "10" , \
+                        "job-name": testlink \
                     }
         elif controller.testbrowser == ("safari"):
             sbrowser = {\
                         "username": sauce_auth.sauce_user,\
                         "access-key": sauce_auth.sauce_key,\
                         "os": "Windows 2003",\
-                        "browser": "safariproxy",\
-                        "browser-version": "5" \
+                        "browser": "safari",\
+                        "browser-version": "4", \
+                        "job-name": testlink \
                     }
         else:
             sbrowser= { \
@@ -98,7 +102,8 @@ def set_browser():
                         "access-key": sauce_auth.sauce_key,\
                         "os": "Windows 2003",\
                         "browser": "firefox",\
-                        "browser-version": "3.6" \
+                        "browser-version": "3.6", \
+                        "job-name": testlink \
                     }
         browser = json.dumps(sbrowser, indent=4)
     else:

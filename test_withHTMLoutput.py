@@ -9,15 +9,26 @@ import StringIO
 import sys
 import HTMLTestRunner
 # import MS Test Suite modules
+import mslib
 
 
 
 from optparse import OptionParser
 parser = OptionParser()
-parser.add_option("-s", "--sauce", action="store_true", dest="sauce")
-parser.add_option("-b", "--browser", action="store", type="string", dest="browser", default="firefox")
+parser.add_option("-s", "--sauce", action="store_true", dest="sauce",
+                  help='Runs the test on saucelabs.com using specified browser')
+parser.add_option("-b", "--browser", action="store",
+                  choices=('firefox','chrome','opera', 'safari', 'iexplore', 'googlechrome'),type="choice",
+                  dest="browser", default="firefox",
+                  help='Possible browser choices: firefox,chrome,opera, safari, iexplore, googlechrome'
+                  )
+
 parser.add_option("-p", "--port", action="store", type="int", dest="port")
-parser.add_option("-u", "--siteurl", action="store", type="string", dest="site")
+parser.add_option("-u", "--siteurl", action="store",
+                  choices=('dev', 'staging'),type="choice",
+                  dest="site", default='dev',
+                  help="""dev for: http://dev.universalsubtitles.org,
+                        staging for: http://staging.universalsubtitles.org""")
 
 (options, args) = parser.parse_args()
 testbrowser = options.browser
@@ -25,14 +36,16 @@ testport = options.port
 testsauce = options.sauce
 testsite = options.site
 
-import mslib
-import sg_64_submit
-import sg_65_login
-import sg_69_demoUI
-import sg_78_widget_offsite               
+          
 
 
 class Test_HTMLTestRunner(unittest.TestCase):
+
+    
+    import sg_64_submit
+    import sg_65_login 
+    import sg_69_demoUI 
+    import sg_78_widget_offsite 
 
 # Open the desired browser and set up the test
 
@@ -49,13 +62,27 @@ class Test_HTMLTestRunner(unittest.TestCase):
 
         # suite of TestCases
         self.suite = unittest.TestSuite()
-        self.suite.addTests([
-            unittest.defaultTestLoader.loadTestsFromTestCase(sg_64_submit.subgroup_64),
-            unittest.defaultTestLoader.loadTestsFromTestCase(sg_78_widget_offsite.subgroup_78),
-            unittest.defaultTestLoader.loadTestsFromTestCase(sg_69_demoUI.subgroup_69),
-            unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.subgroup_65)        
-                        
+
+        ## Run a smaller group of tests when using sauce
+        if testsauce == True:
+                    self.suite.addTests([
+##            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_410'),
+##            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_416'),
+##            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_470'),
+##            unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78.test_369'),
+##            unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78.test_370'),
+            unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_383')
+            
             ])
+        ## Running on pcf server or local, run all the tests
+        else:
+            self.suite.addTests([
+                unittest.defaultTestLoader.loadTestsFromTestCase(sg_64.subgroup_64),
+                unittest.defaultTestLoader.loadTestsFromTestCase(sg_78.subgroup_78),
+                unittest.defaultTestLoader.loadTestsFromTestCase(sg_69.subgroup_69),
+                unittest.defaultTestLoader.loadTestsFromTestCase(sg_65.subgroup_65)        
+                            
+                ])
 
         # Invoke TestRunner
         buf = StringIO.StringIO()

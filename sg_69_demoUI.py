@@ -43,7 +43,8 @@ class subgroup_69(unittest.TestCase):
 # Open the desired browser and set up the test
     def setUp(self):
         self.verificationErrors = []
-        self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(), selvars.set_site() )
+        testid = self.id()
+        self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.shortDescription()), selvars.set_site() )
         self.selenium.start()
 
 # The test cases of the subgroup
@@ -51,9 +52,9 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_389(self):
-        """
+        """ test_389 How-to Display and Continue
+    
         Tests How to video display and Continue
-        http://litmus.pculture.org/show_test.cgi?id=389
         """
         print "starting testcase 389"
         sel = self.selenium
@@ -434,8 +435,8 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_410(self):
-        """
-        Tests Skip Back (ctrl) functionality in Step 3 Review
+        """test_410: Skip Back (shift-tab) functionality in Step 3 Review.
+
         http://litmus.pculture.org/show_test.cgi?id=410
         """
         print "starting testcase 410"
