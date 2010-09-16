@@ -27,14 +27,14 @@ class subgroup_78(unittest.TestCase):
         Sets up run envirnment for selenium server
         """
         self.verificationErrors = []
-        self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.shortDescription()), "http://pculture.org/mirosubs_tests" )
+        self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), "http://pculture.org/mirosubs_tests" )
         self.selenium.start()
 
 # The test cases of the subgroup.
 
 
     def test_369(self):
-        """369: Subtitle Youtube video in offsite embed.
+        """Subtitle Youtube video in offsite embed.
         
         http://litmus.pculture.org/show_test.cgi?id=369
         """
@@ -53,7 +53,7 @@ class subgroup_78(unittest.TestCase):
       
 
     def test_370(self):
-        """370: Subtitle ogg video in offsite embed.
+        """Subtitle ogg video in offsite embed.
        
         http://litmus.pculture.org/show_test.cgi?id=370
         """

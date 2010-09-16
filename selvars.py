@@ -50,7 +50,7 @@ else:
     vbrowser = "*firefox"
 
 
-def set_browser(testlink):
+def set_browser(testid,testdesc):
     """ Sets up the browser to either the *browser name or the correct
     json string if the tests are to be run with sauce
     """
@@ -66,7 +66,7 @@ def set_browser(testlink):
                         "os": "Windows 2003",\
                         "browser": "googlechrome",\
                         "browser-version": "", \
-                        "job-name": testlink \
+                        "job-name": testid +': '+ testlink \
                     }
                                
         elif controller.testbrowser == "iexplore":
@@ -76,7 +76,7 @@ def set_browser(testlink):
                         "os": "Windows 2003",\
                         "browser": "iexplore",\
                         "browser-version": "8" , \
-                        "job-name": testlink \
+                        "job-name": testid +': '+ testlink \
                     }
         elif controller.testbrowser == ("opera"):
             sbrowser = {\
@@ -85,7 +85,7 @@ def set_browser(testlink):
                         "os": "Windows 2003",\
                         "browser": "opera",\
                         "browser-version": "10" , \
-                        "job-name": testlink \
+                        "job-name": testid +': '+ testlink \
                     }
         elif controller.testbrowser == ("safari"):
             sbrowser = {\
@@ -94,7 +94,7 @@ def set_browser(testlink):
                         "os": "Windows 2003",\
                         "browser": "safari",\
                         "browser-version": "4", \
-                        "job-name": testlink \
+                        "job-name": testid +': '+ testlink \
                     }
         else:
             sbrowser= { \
@@ -103,7 +103,7 @@ def set_browser(testlink):
                         "os": "Windows 2003",\
                         "browser": "firefox",\
                         "browser-version": "3.6", \
-                        "job-name": testlink \
+                        "job-name": testid +': '+ testlink \
                     }
         browser = json.dumps(sbrowser, indent=4)
     else:

@@ -46,7 +46,7 @@ class subgroup_69(unittest.TestCase):
     def setUp(self):
         self.verificationErrors = []
         testid = self.id()
-        self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.shortDescription()), selvars.set_site() )
+        self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), selvars.set_site() )
         self.selenium.start()
 
 # The test cases of the subgroup
@@ -54,7 +54,7 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_389(self):
-        """389: How-to video display, and continue button.
+        """How-to video display, and continue button.
 
         http://litmus.pculture.org/show_test.cgi?id=395
         """
@@ -75,7 +75,7 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_395(self):
-        """395: How-to video display and skip setting.
+        """How-to video display and skip setting.
         
         http://litmus.pculture.org/show_test.cgi?id=395
         """
@@ -98,7 +98,7 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_373(self):
-        """373: Widget Step 1, typing the subtitles.
+        """Widget Step 1, typing the subtitles.
         
         http://litmus.pculture.org/show_test.cgi?id=373
         """
@@ -116,7 +116,7 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_397(self):
-        """397: Widget Step 1, beginner mode setting.
+        """Widget Step 1, beginner mode setting.
         
         http://litmus.pculture.org/show_test.cgi?id=397
         """
@@ -148,7 +148,7 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_470(self):
-        """470: Widget Step 1, advanced (recommended) mode setting.
+        """Widget Step 1, advanced (recommended) mode setting.
         
         http://litmus.pculture.org/show_test.cgi?id=470
         """
@@ -183,7 +183,7 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_398(self):
-        """389: Widget Step 1, expert mode setting.
+        """Widget Step 1, expert mode setting.
         
         http://litmus.pculture.org/show_test.cgi?id=398
         """
@@ -206,7 +206,7 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_399(self):
-        """399: Widget Step 1, play-pause functionality.
+        """Widget Step 1, play-pause functionality.
         
         http://litmus.pculture.org/show_test.cgi?id=399
         """
@@ -249,7 +249,7 @@ class subgroup_69(unittest.TestCase):
         
 
     def test_403(self):
-        """403: Widget Step 2, play-pause functionality.
+        """Widget Step 2, play-pause functionality.
         
         http://litmus.pculture.org/show_test.cgi?id=403
         """
@@ -292,7 +292,7 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_404(self):
-        """404: Widget Step 3, play-pause functionality.
+        """Widget Step 3, play-pause functionality.
         
         http://litmus.pculture.org/show_test.cgi?id=404
         """
@@ -336,7 +336,7 @@ class subgroup_69(unittest.TestCase):
         
 
     def test_400(self):
-        """400: Widget Step 1, Skip-back functionality
+        """Widget Step 1, Skip-back functionality
         
         http://litmus.pculture.org/show_test.cgi?id=400
         """
@@ -388,7 +388,7 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_409(self):
-        """409: Widget Step 2, skip-back functionality.
+        """Widget Step 2, skip-back functionality.
         
         http://litmus.pculture.org/show_test.cgi?id=409
         """
@@ -437,7 +437,7 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_410(self):
-        """410: Widget Step 3, skip-back functionality.
+        """Widget Step 3, skip-back functionality.
 
         http://litmus.pculture.org/show_test.cgi?id=410
         """
@@ -487,7 +487,7 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_406(self):
-        """406 Widget Step 1, restart typing link.
+        """Widget Step 1, restart typing link.
         
         http://litmus.pculture.org/show_test.cgi?id=406
         """
@@ -506,7 +506,7 @@ class subgroup_69(unittest.TestCase):
 
        
     def test_401(self):
-        """401 Widget Step 1, login link functionality.
+        """Widget Step 1, login link functionality.
         
         http://litmus.pculture.org/show_test.cgi?id=401
         """
@@ -528,7 +528,7 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_405(self):
-        """405: Widget Step 2, login link functionality.
+        """Widget Step 2, login link functionality.
 	
         http://litmus.pculture.org/show_test.cgi?id=405
         """
@@ -552,7 +552,7 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_416(self):
-        """416: Widget Step 3, login link functionality.
+        """Widget Step 3, login link functionality.
         
         http://litmus.pculture.org/show_test.cgi?id=416
         """
@@ -575,7 +575,7 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_411(self):
-        """411: Widget Step 2, subtitle syncing.
+        """Widget Step 2, subtitle syncing.
         
         http://litmus.pculture.org/show_test.cgi?id=411
         """
@@ -593,7 +593,7 @@ class subgroup_69(unittest.TestCase):
                 
 
     def test_388(self):
-        """388: Widget Step 2, edit subtitle text from step 1.
+        """Widget Step 2, edit subtitle text from step 1.
         
         Tests smalls, caps, spaces, and non-ascii chars
         http://litmus.pculture.org/show_test.cgi?id=388
@@ -620,7 +620,7 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_415(self):
-        """415: Widget Step 3, edit subtitle text.
+        """Widget Step 3, edit subtitle text.
 
         Tests smalls, caps, spaces, and non-ascii chars
         http://litmus.pculture.org/show_test.cgi?id=415
@@ -648,7 +648,7 @@ class subgroup_69(unittest.TestCase):
 
 
     def test_408(self):
-        """408: Widget Step 2, back to typing link.
+        """Widget Step 2, back to typing link.
         
         http://litmus.pculture.org/show_test.cgi?id=408
         """
@@ -672,7 +672,7 @@ class subgroup_69(unittest.TestCase):
 
         
     def test_402(self):
-        """402: Widget Step 3, resync subtitles.
+        """Widget Step 3, resync subtitles.
         
         http://litmus.pculture.org/show_test.cgi?id=402
         """
@@ -692,7 +692,7 @@ class subgroup_69(unittest.TestCase):
 
         
     def test_413(self):
-        """413 Widget Step 3, drag time bubbles.
+        """Widget Step 3, drag time bubbles.
         
         http://litmus.pculture.org/show_test.cgi?id=413
         """
@@ -712,7 +712,7 @@ class subgroup_69(unittest.TestCase):
         
 
     def test_414(self):
-        """414: Widget Step 3, click time arrows to modify time.
+        """Widget Step 3, click time arrows to modify time.
         
         http://litmus.pculture.org/show_test.cgi?id=414
         """
@@ -732,7 +732,7 @@ class subgroup_69(unittest.TestCase):
 
     
     def test_412(self):
-        """412: Widget Step 3, press and hold down arrow time-shift.
+        """Widget Step 3, press and hold down arrow time-shift.
            http://litmus.pculture.org/show_test.cgi?id=412
         """
         print "starting testcase 412"

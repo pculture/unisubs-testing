@@ -22,13 +22,13 @@ class subgroup_65(unittest.TestCase):
         Sets up run envirnment for selenium server
         """
         self.verificationErrors = []
-        self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.shortDescription()), selvars.set_site())
+        self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), selvars.set_site())
         self.selenium.start()
         
         
     # The tests in the subgroup
     def test_378(self):
-        """378: Site login using site account.
+        """Site login using site account.
 
         http://litmus.pculture.org/show_test.cgi?id=378.      
         """
@@ -44,7 +44,7 @@ class subgroup_65(unittest.TestCase):
 
 
     def test_379(self):
-        """379: Site login using twitter account.
+        """Site login using twitter account.
 
         http://litmus.pculture.org/show_test.cgi?id=379
         """
@@ -62,7 +62,7 @@ class subgroup_65(unittest.TestCase):
     
 
     def test_380(self):
-        """380: Site login from open id account.
+        """Site login from open id account.
         
         http://litmus.pculture.org/show_test.cgi?id=380
         """
@@ -81,7 +81,7 @@ class subgroup_65(unittest.TestCase):
 
 
     def test_381(self):
-        """381: Site login using gmail account.
+        """Site login using gmail account.
 
         http://litmus.pculture.org/show_test.cgi?id=381
         """
@@ -99,7 +99,7 @@ class subgroup_65(unittest.TestCase):
 
 
     def test_382(self):
-        """382: Login from widget using gmail account.
+        """Login from widget using gmail account.
 
         http://litmus.pculture.org/show_test.cgi?id=382
         """
@@ -119,7 +119,7 @@ class subgroup_65(unittest.TestCase):
 
 
     def test_383(self):
-        """383: Login from widget using twitter account
+        """Login from widget using twitter account
 
         http://litmus.pculture.org/show_test.cgi?id=383
         """
@@ -140,7 +140,7 @@ class subgroup_65(unittest.TestCase):
 
 
     def test_384(self):
-        """384: Login from widget using site account.
+        """Login from widget using site account.
         
         http://litmus.pculture.org/show_test.cgi?id=384
         """
@@ -156,7 +156,7 @@ class subgroup_65(unittest.TestCase):
 
 
     def test_385(self):
-        """385: Login from widget using openid account.
+        """Login from widget using openid account.
         
         http://litmus.pculture.org/show_test.cgi?id=385
         """
@@ -177,7 +177,7 @@ class subgroup_65(unittest.TestCase):
 
       
     def test_376(self):
-        """376: Widget requires login to submit subtitles.
+        """Widget requires login to submit subtitles.
 
         http://litmus.pculture.org/show_test.cgi?id=376 .
 
