@@ -286,7 +286,7 @@ def drag_time_bubbles(self,sel,subtextfile):
         # drag start time to the right and verify time change
         start_time = sel.get_text(sub_cell_start_time)
         print " - sub time: " '%.2f' % float(start_time)
-        drag_it(self,sel,first_phrase,"left","+60")
+        drag_it(self,sel,"left","+60")
         time.sleep(10)
         new_start_time = sel.get_text(sub_cell_start_time)
         print " - new sub time: " '%.2f' % float(new_start_time)
@@ -302,14 +302,14 @@ def drag_time_bubbles(self,sel,subtextfile):
         # drag end time to the right and verify time change
         end_time = sel.get_text(sub_cell_end_time)
         print " - sub end time: " '%.2f' % float(end_time)
-        drag_it(self,sel,first_phrase,"right","+60")
+        drag_it(self,sel,"right","+60")
         time.sleep(10)
         new_end_time = sel.get_text(sub_cell_end_time)
         print " - sub end time: " '%.2f' % float(new_end_time)
         self.failUnless(float(end_time) < float(new_end_time))
 
   
-def drag_it(self,sel,sub_text,side,move_pixels):
+def drag_it(self,sel,side,move_pixels):
     """
     Description: actually grabs the timeline bubbles and moves them
 
@@ -319,12 +319,12 @@ def drag_it(self,sel,sub_text,side,move_pixels):
         move_pixels - number of pixels to move bubble { + | - }
     """
     if side == "left":
-        sel.focus("css=.mirosubs-leftGrabber")
-        sel.drag_and_drop("css=.mirosubs-leftGrabber", "'"+move_pixels+",0'")
+        sel.focus("css=.mirosubs-grabber.mirosubs-leftGrabber")
+        sel.drag_and_drop("css=.mirosubs-grabber.mirosubs-leftGrabber", "'"+move_pixels+",0'")
 
     if side == "right":
-        sel.focus("css=.mirosubs-rightGrabber")
-        sel.drag_and_drop("css=.mirosubs-rightGrabber", "'"+move_pixels+",0'")                
+        sel.focus("css=.mirosubs-grabber.mirosubs-rightGrabber")
+        sel.drag_and_drop("css=.mirosubs-grabber.mirosubs-rightGrabber", "'"+move_pixels+",0'")                
 
 def click_time_shift_arrows(self,sel,subtextfile):
     """
