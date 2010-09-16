@@ -136,8 +136,8 @@ def verify_login(self,sel,username="sub_writer"):
     """
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Logout_Button"])
     self.failUnless(sel.is_element_present("css=.user_panel"))
-    print "logged in as: " + sel.get_text("css=.user_panel")
-    self.failUnless(sel.is_element_present("css=.user_panel:contains("+username+")"))
+    print "logged in as: " + sel.get_text("css=.user_panel a")
+    self.failUnless(sel.is_element_present("css=.user_panel a:contains("+username+")"))
     #not starting demo to check logged in status anymore
 ##    start_demo(self,sel)
 ##    mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
