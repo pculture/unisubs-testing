@@ -50,7 +50,7 @@ else:
     vbrowser = "*firefox"
 
 
-def set_browser(testid,testdesc):
+def set_browser(testid="none",testdesc="none"):
     """ Sets up the browser to either the *browser name or the correct
     json string if the tests are to be run with sauce
     """

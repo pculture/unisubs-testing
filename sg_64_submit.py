@@ -33,20 +33,20 @@ class subgroup_64(unittest.TestCase):
 ## The test cases of the subgroup.
 
 
-    def test_469_blip_submit(self):
+    def test_469_blip_submit_embedded(self):
         """Submit videos from blip.tv.
 
         Tests submission of blip.tv video non-html5 subtitle and translation.
         http://litmus.pculture.org/show_test.cgi?id=469
         """
-        print "starting 469 blip.tv submit video"
+        print "starting 469 blip.tv submit embedded video"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
-        ext_list = ("flv",)#"mpeg4", "mov", "ogg", "ogv")
+        ext_list = ("flv", "mpeg4", "mov")
         for x in ext_list:
             try:
-                print "submitting a blip video, format: "+ x
+                print "submitting an embedded blip video, format: "+ x
                 vid_url = offsite.get_blip_video_url(self,file_type=x)
                 # Submit Video
                 website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
@@ -64,7 +64,38 @@ class subgroup_64(unittest.TestCase):
                 sel.click(testvars.WidgetUI["Next_step"])
             except:
                 print "error testing submit video format: " + x
-##                
+                
+    def test_469_blip_submit_html5(self):
+        """Submit videos from blip.tv.
+
+        Tests submission of blip.tv video non-html5 subtitle and translation.
+        http://litmus.pculture.org/show_test.cgi?id=469
+        """
+        print "starting 469 blip.tv submit html5 video"
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
+        ext_list = ("ogg", "ogv")
+        for x in ext_list:
+            try:
+                print "submitting a blip video, format: "+ x
+                vid_url = offsite.get_blip_video_url(self,file_type=x)
+                # Submit Video
+                website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
+                website.submit_video(self,sel,vid_url)
+                # Verify embed and player
+                website.verify_submitted_video(self,sel,vid_url,embed_type="html5")
+                # Start sub widget
+                website.start_sub_widget(self,sel)
+                # Transcribe
+                widget.transcribe_video(self,sel,subtextfile)
+                # Sync
+                widget.sync_video(self,sel,subtextfile,3,4)
+                # Review
+                widget.edit_text(self,sel,subtextfile)
+                sel.click(testvars.WidgetUI["Next_step"])
+            except:
+                print "error testing submit video format: " + x
 
 
     def test_vimeo_submit(self):
