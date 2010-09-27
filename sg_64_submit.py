@@ -33,8 +33,8 @@ class subgroup_64(unittest.TestCase):
 ## The test cases of the subgroup.
 
 
-    def test_469_blip_submit_embedded(self):
-        """Submit videos from blip.tv.
+    def test_469(self):
+        """Submit flowplayer embedded videos from blip.tv.
 
         Tests submission of blip.tv video non-html5 subtitle and translation.
         http://litmus.pculture.org/show_test.cgi?id=469
@@ -71,11 +71,11 @@ class subgroup_64(unittest.TestCase):
             except:
                 mslib.AppendErrorMessage(self,sel, "failure submitted video, format: " + x)
                 
-    def test_469_blip_submit_html5(self):
-        """Submit videos from blip.tv.
+    def test_532(self):
+        """Submit html5 videos from blip.tv.
 
         Tests submission of blip.tv video non-html5 subtitle and translation.
-        http://litmus.pculture.org/show_test.cgi?id=469
+        http://litmus.pculture.org/show_test.cgi?id=532
         """
         print "starting 469 blip.tv submit html5 video"
         sel = self.selenium
@@ -109,12 +109,12 @@ class subgroup_64(unittest.TestCase):
                 mslib.AppendErrorMessage(self,sel, "failure submitted video, format: " + x)
 
 
-    def test_vimeo_submit(self):
+    def test_533(self):
         """Submit and subtitle vimeo videos.
 
-        http://litmus.pculture.org/show_test.cgi?id=469
+        http://litmus.pculture.org/show_test.cgi?id=533
         """
-        print "starting 999 vimeo.com submit video"
+        print "starting 533 vimeo.com submit video"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
@@ -141,7 +141,37 @@ class subgroup_64(unittest.TestCase):
  #       widget.edit_text(self,sel,subtextfile, "vimeo video text edit")
         sel.click(testvars.WidgetUI["Next_step"])
            
+    def test_534(self):
+        """Submit and subtitle youtube videos.
 
+        http://litmus.pculture.org/show_test.cgi?id=534
+        """
+        print "starting 534 youtube.com submit video"
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
+        print "submitting a vimeo video, format: "
+        vid_url = offsite.get_youtube_video_url(self)
+        # Submit Video
+        print "logging in and submitting video"
+        website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
+        website.submit_video(self,sel,vid_url)
+        # Verify embed and player
+        print "verifying embed"
+        website.verify_submitted_video(self,sel,vid_url,embed_type="youtube")
+        # Start sub widget
+        print "starting sub widget"
+        website.start_sub_widget(self,sel)
+        # Transcribe
+        print "transcribing video"
+        widget.transcribe_video(self,sel,subtextfile)
+        # Sync
+        print "syncing video"
+        widget.sync_video(self,sel,subtextfile,3,4)
+        # Review
+        print "review step - just submitting video"
+ #       widget.edit_text(self,sel,subtextfile, "vimeo video text edit")
+        sel.click(testvars.WidgetUI["Next_step"])
 
 
 

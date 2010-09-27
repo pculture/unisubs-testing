@@ -143,7 +143,7 @@ def get_vimeo_video_url(self):
         urlid = vsel.get_value("css=input#clip_id")
         vimeoURL = "http://vimeo.com/"+urlid
         print vimeoURL
-        return vimeoURL
+       
 
     finally:
         vsel.close()
@@ -151,4 +151,23 @@ def get_vimeo_video_url(self):
     return vimeoURL
 
         
-    
+def get_youtube_video_url(self,vid_format="embed"):
+    try:
+        self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("vimeo",": get video url"), "http://youtube.com/"))
+        self.selenium.start()
+        vsel= self.selenium
+        vsel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        if vid_format == "webm":
+            vsel.open("results?uploaded=w&search_query=crazy&search_duration=short&webm=1&search_type=videos&uni=3&search_sort=video_date_uploaded")
+        else:
+            vsel.open("results?uploaded=w&search_query=crazy&search_duration=short&search_type=videos&uni=3&search_sort=video_date_uploaded")
+        vsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+        vsel.click("css=.video-long-title a")
+        vsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+        youtubeURL = vsel.get_eval("window.location")
+        print youtubeURL      
+
+    finally:
+        vsel.close()
+        vsel.stop()
+    return youtubeURL
