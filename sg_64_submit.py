@@ -66,7 +66,7 @@ class subgroup_64(unittest.TestCase):
                 widget.sync_video(self,sel,subtextfile,3,4)
                 # Review
                 print "starting review"
-                widget.edit_text(self,sel,subtextfile)
+  #              widget.edit_text(self,sel,subtextfile)
                 sel.click(testvars.WidgetUI["Next_step"])
             except:
                 mslib.AppendErrorMessage(self,sel, "failure submitted video, format: " + x)
@@ -103,7 +103,7 @@ class subgroup_64(unittest.TestCase):
                 widget.sync_video(self,sel,subtextfile,3,4)
                 # Review
                 print "starting review"
-                widget.edit_text(self,sel,subtextfile)
+    #            widget.edit_text(self,sel,subtextfile)
                 sel.click(testvars.WidgetUI["Next_step"])
             except:
                 mslib.AppendErrorMessage(self,sel, "failure submitted video, format: " + x)
