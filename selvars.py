@@ -76,7 +76,7 @@ def set_browser(testid="none",testdesc="none"):
                         "os": "Windows 2003",\
                         "browser": "googlechrome",\
                         "browser-version": "", \
-                        "job-name": testid +': '+ testlink \
+                        "job-name": testid +': '+ testdesc \
                     }
                                
         elif controller.testbrowser == "iexplore":
@@ -86,7 +86,7 @@ def set_browser(testid="none",testdesc="none"):
                         "os": "Windows 2003",\
                         "browser": "iexplore",\
                         "browser-version": "8" , \
-                        "job-name": testid +': '+ testlink \
+                        "job-name": testid +': '+ testdesc \
                     }
         elif controller.testbrowser == ("opera"):
             sbrowser = {\
@@ -95,7 +95,7 @@ def set_browser(testid="none",testdesc="none"):
                         "os": "Windows 2003",\
                         "browser": "opera",\
                         "browser-version": "10" , \
-                        "job-name": testid +': '+ testlink \
+                        "job-name": testid +': '+ testdesc \
                     }
         elif controller.testbrowser == ("safari"):
             sbrowser = {\
@@ -104,7 +104,7 @@ def set_browser(testid="none",testdesc="none"):
                         "os": "Windows 2003",\
                         "browser": "safari",\
                         "browser-version": "4", \
-                        "job-name": testid +': '+ testlink \
+                        "job-name": testid +': '+ testdesc \
                     }
         else:
             sbrowser= { \
@@ -113,7 +113,7 @@ def set_browser(testid="none",testdesc="none"):
                         "os": "Windows 2003",\
                         "browser": "firefox",\
                         "browser-version": "3.6", \
-                        "job-name": testid +': '+ testlink \
+                        "job-name": testid +': '+ testdesc \
                     }
         browser = json.dumps(sbrowser, indent=4)
     else:

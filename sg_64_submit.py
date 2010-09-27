@@ -46,24 +46,30 @@ class subgroup_64(unittest.TestCase):
         ext_list = ("flv", "mpeg4", "mov")
         for x in ext_list:
             try:
-                print "submitting an embedded blip video, format: "+ x
+                print "getting a video url from blip, format: "+ x
                 vid_url = offsite.get_blip_video_url(self,file_type=x)
                 # Submit Video
+                print "submitting the video"
                 website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
                 website.submit_video(self,sel,vid_url)
                 # Verify embed and player
+                print "verifying embed and video player"
                 website.verify_submitted_video(self,sel,vid_url,embed_type="flow")
                 # Start sub widget
+                print "starting sub widget"
                 website.start_sub_widget(self,sel)
                 # Transcribe
+                print "starting transcribe"
                 widget.transcribe_video(self,sel,subtextfile)
                 # Sync
+                print "starting sync"
                 widget.sync_video(self,sel,subtextfile,3,4)
                 # Review
+                print "starting review"
                 widget.edit_text(self,sel,subtextfile)
                 sel.click(testvars.WidgetUI["Next_step"])
             except:
-                print "error testing submit video format: " + x
+                mslib.AppendErrorMessage(self,sel, "failure submitted video, format: " + x)
                 
     def test_469_blip_submit_html5(self):
         """Submit videos from blip.tv.
@@ -84,18 +90,23 @@ class subgroup_64(unittest.TestCase):
                 website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
                 website.submit_video(self,sel,vid_url)
                 # Verify embed and player
+                print "verifying embed and video player"
                 website.verify_submitted_video(self,sel,vid_url,embed_type="html5")
                 # Start sub widget
+                print "starting sub widget"
                 website.start_sub_widget(self,sel)
                 # Transcribe
+                print "starting transcribe"
                 widget.transcribe_video(self,sel,subtextfile)
                 # Sync
+                print "starting sync"
                 widget.sync_video(self,sel,subtextfile,3,4)
                 # Review
+                print "starting review"
                 widget.edit_text(self,sel,subtextfile)
                 sel.click(testvars.WidgetUI["Next_step"])
             except:
-                print "error testing submit video format: " + x
+                mslib.AppendErrorMessage(self,sel, "failure submitted video, format: " + x)
 
 
     def test_vimeo_submit(self):
@@ -110,17 +121,23 @@ class subgroup_64(unittest.TestCase):
         print "submitting a vimeo video, format: "
         vid_url = offsite.get_vimeo_video_url(self)
         # Submit Video
+        print "logging in and submitting video"
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         website.submit_video(self,sel,vid_url)
         # Verify embed and player
+        print "verifying embed"
         website.verify_submitted_video(self,sel,vid_url,embed_type="vimeo")
         # Start sub widget
+        print "starting sub widget"
         website.start_sub_widget(self,sel)
         # Transcribe
+        print "transcribing video"
         widget.transcribe_video(self,sel,subtextfile)
         # Sync
+        print "syncing video"
         widget.sync_video(self,sel,subtextfile,3,4)
         # Review
+        print "review step - just submitting video"
  #       widget.edit_text(self,sel,subtextfile, "vimeo video text edit")
         sel.click(testvars.WidgetUI["Next_step"])
            
