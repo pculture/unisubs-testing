@@ -27,9 +27,9 @@ class subgroup_78(unittest.TestCase):
         Sets up run envirnment for selenium server
         """
         self.verificationErrors = []
-        self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), "http://pculture.org/mirosubs_tests" )
+        self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), "http://pculture.org/"))
         self.selenium.start()
-
+   
 # The test cases of the subgroup.
 
 
@@ -42,7 +42,8 @@ class subgroup_78(unittest.TestCase):
         sel = self.selenium
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        offsite.start_youtube_widget_null(self,sel)
+        sel.open(selvars.set_widget_null_page())
+        offsite.start_widget_null(self,sel,"youtube")
         # Transcribe
         widget.transcribe_video(self,sel,subtextfile)
         # Sync
@@ -61,7 +62,8 @@ class subgroup_78(unittest.TestCase):
         sel = self.selenium
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        offsite.start_ogg_widget_null(self,sel)
+        sel.open(selvars.set_widget_null_page())
+        offsite.start_widget_null(self,sel,"ogg")
 
         # Transcribe
         widget.transcribe_video(self,sel,subtextfile)

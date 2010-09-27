@@ -44,6 +44,16 @@ def set_site():
         site = "http://dev.universalsubtitles.org"
     return site
 
+def set_widget_null_page():
+    """
+    sets the value of port if specified at the cmdline
+    """   
+    if controller.testsite:
+        page = "mirosubs_tests/"+controller.testsite+"-widget-null.html"
+    else:
+        page = "mirosubs_tests/dev-widget-null.html"
+    return page
+
 if controller.testbrowser:
     vbrowser = "*"+controller.testbrowser
 else:
