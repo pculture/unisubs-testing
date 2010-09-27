@@ -238,6 +238,7 @@ def edit_text(self,sel,subtextfile,new_text="my hovercraft is full of eels"):
         sub_cell = "//li["+str(sub_li)+"]/span[2]"
         sel.focus(sub_cell)
         sel.click(sub_cell)
+        mslib.wait_for_element_present(self,sel,"css=textarea")
         sel.type("css=textarea", new_text)
         sel.key_press("css=textarea", "\\13")
         sub_cell_text=sel.get_text(sub_cell)
