@@ -73,8 +73,8 @@ class Test_HTMLTestRunner(unittest.TestCase):
             unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_395'),
             unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_388'),
             unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78.test_369'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_379')
-            unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_382')
+            unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_379'),
+            unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_382'),
             unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_378')
             
             ])
