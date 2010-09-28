@@ -105,7 +105,7 @@ def handle_warning_popup(self,sel):
 
 def get_blip_video_url(self,file_type="flv"):
     try:
-        self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("blip",": get video url"), "http://blip.tv/"))
+        self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("blip"," get video url"), "http://blip.tv/"))
         self.selenium.start()
         bsel= self.selenium
         bsel.set_timeout(testvars.MSTestVariables["TimeOut"])
@@ -125,7 +125,7 @@ def get_blip_video_url(self,file_type="flv"):
 
 def get_vimeo_video_url(self):
     try:
-        self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("vimeo",": get video url"), "http://vimeo.com/"))
+        self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("vimeo"," get video url"), "http://vimeo.com/"))
         self.selenium.start()
         vsel= self.selenium
         vsel.set_timeout(testvars.MSTestVariables["TimeOut"])
@@ -153,7 +153,7 @@ def get_vimeo_video_url(self):
         
 def get_youtube_video_url(self,vid_format="embed"):
     try:
-        self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("vimeo",": get video url"), "http://youtube.com/"))
+        self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("youtube"," get video url"), "http://youtube.com/"))
         self.selenium.start()
         vsel= self.selenium
         vsel.set_timeout(testvars.MSTestVariables["TimeOut"])

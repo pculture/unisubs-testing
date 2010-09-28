@@ -162,7 +162,7 @@ def verify_submitted_video(self,sel,vid_url,embed_type="html5"):
         self.failUnless(sel.is_element_present("css=.mirosubs-videoDiv object[data*='flowplayer']"))
     elif embed_type == "youtube":
         print "verifying video embedded with youtube"
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv object")
+        mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv object[data]")
         self.failUnless(sel.is_element_present("css=.mirosubs-videoDiv object[data*='youtube.com']"))
     elif embed_type == 'vimeo':
         print "verifying video embedded with vimeo"
