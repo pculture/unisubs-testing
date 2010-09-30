@@ -35,12 +35,11 @@ class subgroup_65(unittest.TestCase):
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
-        website.SiteLogout(self,sel)
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         # verify
         website.verify_login(self,sel,testvars.siteuser)
         # logout
-        sel.open(testvars.MSTestVariables["Site"] +"logout/")
+        sel.open("logout/")
 
 
     def test_379(self):

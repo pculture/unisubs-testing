@@ -268,8 +268,8 @@ def verify_comment_text(self,sel,comment,result="posted",reply_text=None):
                     'reply' reply post contains original and new comment
     
     """
-    #give it 1 second to post
-    time.sleep(1)
+    #give it 3 seconds to post
+    time.sleep(3)
     if result == "posted":
         posted_text = sel.get_text("css=ul.comments.big_list li:nth-child(1) > div.info p")
         self.assertEqual(posted_text.strip(),comment.strip(),"found: "+posted_text+" expected: "+comment)
