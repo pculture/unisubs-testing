@@ -1,10 +1,7 @@
-# website.py
-# SiteLogIn
-# SiteLogout
-# Login (for offsite login)
-# start_demo
-# submit_video
-# start_sub_widget
+"""Functions to take care of business on the universalsubtitles website
+
+
+"""
 
 from selenium import selenium
 
@@ -177,3 +174,133 @@ def verify_submitted_video(self,sel,vid_url,embed_type="html5"):
     self.failUnless(sel.is_element_present("css=.mirosubs-embed:contains("+vid_url+")"))
     unisubs_link = sel.get_text("css=.mirosubs-permalink[href]")
     return unisubs_link
+
+def get_video_with_translations(self,sel):
+    """Get the url of the video page for a video that has translations.
+
+    Returns: video_url
+    """
+    sel.open("videos/")
+    sort_videos_table(self,sel,"Translations","desc") 
+    row_no = 1
+    local_url = "none"
+    
+    subtitled_cell="css=tr:nth-child("+str(row_no)+") > "+testvars.videos_subtitled_td
+    while sel.is_element_present(subtitled_cell):
+        if sel.get_text(subtitled_cell) == "yes":
+            local_url = sel.get_attribute("css=tr:nth-child("+str(row_no)+ ") > "+testvars.videos_url_td+" > a@href")
+            if int(sel.get_text("css=tr:nth-child("+str(row_no)+ " ) > "+testvars.videos_trans_td)) == 0:
+                print "no translations - have to add one"
+                translate_video(self,sel,local_url)
+        row_no = row_no + 1
+        subtitled_cell=sel.get_text("css=tr:nth-child("+str(row_no)+") > "+testvars.videos_subtitled_td)
+        
+    return local_url
+
+def get_translated_lang(self,sel):
+    """Locate a language (not metadata or original) tab for a video
+
+    Need to exclude Original, Video Info, and Metadata
+    """
+    tab_no = 1
+    tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+")"
+    skip_list = ["Original", "Video Info", "Metadata: Twitter", "Metadata: Geo", "Metadata: Wikipedia"]
+    while sel.is_element_present(tab_li):
+        tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+")"
+        if sel.get_text(tab_li) not in skip_list:
+            test_lang = sel.get_text(tab_li)
+            print test_lang
+            break       
+        tab_no = tab_no + 1
+        tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+")"
+    
+    return test_lang
+
+def translate_video(self,sel,url=None,lang=None):
+    """Given the local url of a video, adds a translation.
+
+        
+    """
+    if url == None:
+        print "adding translation from current page"
+    else:
+        print "opening video page to translate"
+        sel.open(url)
+    self.failUnless(sel.is_element_present("css=a#add_translation"))
+    sel.click(testvars.add_translation_button)
+        
+    
+        
+
+def sort_videos_table(self,sel,column,order):
+    """Sort the videos table by the specified heading in the specified order
+
+    Current column headings are: URL, Pageloads, Subtitles Fetched, Translations, Subtitled?
+    Order can be 'asc' or 'desc'
+
+    """
+
+    if sel.is_element_present("css=a."+order+":contains("+column+")"):
+        sel.click("link="+column)
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+    if order == "asc":
+        self.failUnless(sel.is_element_present("css=a.desc:contains("+column+")"))
+    if order == "desc":
+        self.failUnless(sel.is_element_present("css=a.asc:contains("+column+")"))
+
+
+def enter_comment_text(self,sel,comment):
+    """Enter text in the Comments box and submit
+
+    Assumes user is on the comments tab
+    """
+    self.failUnless(sel.is_element_present("css=li.active span:contains(\"Comments\")"))
+    sel.type("css=textarea#id_comment_form_content", comment)
+    sel.click("css=button:contains('Comment')")
+
+def verify_comment_text(self,sel,comment,result="posted",reply_text=None):
+    """After comment text is entered in enter_comment_text, verify correct post behavior
+
+    Result options: 'posted' comment is posted
+                    'stripped' commented is posted and html stripped
+                    'too long' > 3000 char length warning
+                    'login' user must be logged into post
+                    'reply' reply post contains original and new comment
+    
+    """
+    #give it 1 second to post
+    time.sleep(1)
+    if result == "posted":
+        posted_text = sel.get_text("css=ul.comments.big_list li:nth-child(1) > div.info p")
+        self.assertEqual(posted_text.strip(),comment.strip(),"found: "+posted_text+" expected: "+comment)
+    elif result == "too long":
+        self.failUnless(sel.is_element_present("css=p.error_list:contains('Ensure this value has at most 3000 characters')"))
+    elif result == "login":
+        self.failUnless(sel.is_element_present("css=.login-for-comment:contains('Login to post a comment')"))
+        if sel.is_element_present("css=ul.comments.big_list li:nth-child(1) > div.info p"):
+            self.failIf(sel.get_text("css=ul.comments.big_list li:nth-child(1) > div.info p") == comment)
+
+        
+      
+
+    
+
+    
+
+
+def handle_error_page(self,sel,test_id):
+    if sel.is_element_present("css=form h2:contains('Error')"):
+        print sel.get_attribute("css=h2 + input@value")
+        print sel.get_attribute("css=h2 + input@name")
+        sel.type("feedback_email", testvars.gmail)
+        feedback_math = sel.get_text("css=form#feedback_form p + p label")
+        s = feeback_math[20:25]
+        sel.type("feedback_math_captcha_field", eval(s))
+        sel.type("feedback_message", "test_id: "+test_id+" sel-rc automated test encountered an error")
+        sel.click("css=button[type='submit']")
+        print "submitted error to feedback form"
+    else:
+        print "no site errors encountered"
+
+
+

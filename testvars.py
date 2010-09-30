@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 import platform
 
@@ -5,8 +6,7 @@ import platform
 preE=" --- ERROR: "
 
 
-MSTestVariables = {"Site":"http://dev.universalsubtitles.org/", \
-                   "DataDirectory": os.path.join(os.getcwd(), "TestInput"), \
+MSTestVariables = {"DataDirectory": os.path.join(os.getcwd(), "TestInput"), \
                    "TimeOut":"90000", \
                   }
 
@@ -22,14 +22,25 @@ WebsiteUI = {"Home":"css=a:contains('Miro Subs Alpha')", \
              "FAQ_Button":"css=a:contains('FAQ')", \
              "Search_Button":"css=a:contains('Search')", \
              "Video_Submit_Button":"//button[@value='Begin']", \
+             #widget menu displayed on website
              "SubtitleMe_menu":"css=.mirosubs-tabTextchoose", \
              "SubMe_menuitems":"css=.mirosubs-langmenuitem-content", \
              "AddSubtitles_menuitem":"css=.mirosubs-improveSubtitles" ,\
              "Login_menuitem":"css=.mirosubs-createAccount" ,\
              "Logout_menuitem":"css=.mirosubs-langmenuitem-content:contains('Logout')" , \
-             "ChooseLanguage_menu":"css=.mirosubs-tabText:contains('Choose language')" , \
+             "ChooseLanguage_menu":"css=.mirosubs-tabText:contains('Choose language')" ,
              
           }
+
+# Website Videos page
+videos_url_td = "td:nth-child(1)"
+videos_history_td = "td:nth-child(2)"
+videos_trans_td = "td:nth-child(5)"
+videos_subtitled_td = "td:nth-child(6)"
+video_original = "css=li:contains('Original')"
+video_video_info = "css=li:contains('Video Info')"
+comments_tab = "css=a span:contains('Comments')"
+add_translation_button = "css=a#add_translation"
 
 WidgetUI = {"Video_playPause":"css=.mirosubs-playPause", \
             "Video_play_button":"css=.mirosubs-playPause.play", \
@@ -56,10 +67,33 @@ twitteruser = "pcfsubwriter"
 openiduser = "http://pcf-sub-writer.myopenid.com"
 gmailuser = "pcf.subwriter"
 passw = "sub.writer"
+gmail = "pcf.subwriter@gmail.com"
 
 eels_fr = u'Mon a\u00E9roglisseur est plein d\'anguilles'
 eels_jp = u'\u79C1\u306E\u30DB\u30D0\u30FC\u30AF\u30E9\u30D5\u30C8\u306F\u9C3B\u3067'
 
 
+one_char_comment_text = "d"
+normal_comment_text = """Charles Robert Darwin FRS (12 February 1809 – 19 April 1882)
+                      was an English naturalist[I] who established that all species
+                      of life have descended over time from common ancestors, and proposed
+                      the scientific theory that this branching pattern of evolution
+                      resulted from a process that he called natural selection.
+                      He published his theory with compelling evidence for evolution
+                      in his 1859 book On the Origin of Species"""
+html_comment_text = """<td colspan="2" style="text-align:center; padding-bottom:0.5em;">
+    <a href="/wiki/File:Charles_Darwin_seated_crop.jpg" class="image" title="Charles Robert
+    Darwin, aged 45 in 1854, by then working towards publication of On the Origin of Species.">
+    <img alt="Three quarter length studio photo showing Darwin's characteristic large forehead
+    and bushy eyebrows with deep set eyes, pug nose and mouth set in a determined look. He is
+    bald on top, with dark hair and long side whiskers but no beard or moustache. His jacket is dark,
+    with very wide lapels, and his trousers are a light check pattern. His shirt has an upright wing
+    collar, and his cravat is tucked into his waistcoat which is a light fine checked pattern."
+    src="http://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Charles_Darwin_seated_crop.jpg/250px-Charles_Darwin_seated_crop.jpg" width="250" height="329" />
+    </a><br />
+    <div style="padding-top:0.3em; line-height:1.2em;"><span style="">Charles Robert Darwin, aged 45 in 1854, by then working towards publication of
+    <i><a href="/wiki/On_the_Origin_of_Species" title="On the Origin of Species"><span style="white-space:nowrap;">On the Origin of Species</span></a></i>.
+    </span></div>
+    </td> """
 
 
