@@ -84,10 +84,10 @@ class Test_HTMLTestRunner(unittest.TestCase):
         ## Running on pcf server or local, run all the tests
         else:
             self.suite.addTests([
+                unittest.defaultTestLoader.loadTestsFromTestCase(sg_69_demoUI.subgroup_69),
                 unittest.defaultTestLoader.loadTestsFromTestCase(sg_64_submit.subgroup_64),
-                unittest.defaultTestLoader.loadTestsFromTestCase(sg_78_widget_offsite.subgroup_78),
-##                unittest.defaultTestLoader.loadTestsFromTestCase(sg_69_demoUI.subgroup_69),
-##                unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.subgroup_65),
+                unittest.defaultTestLoader.loadTestsFromTestCase(sg_78_widget_offsite.subgroup_78),                
+                unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.subgroup_65),
                 unittest.defaultTestLoader.loadTestsFromTestCase(sg_80_comments.subgroup_80)
                             
                 ])
