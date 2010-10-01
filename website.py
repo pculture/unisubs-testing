@@ -75,9 +75,7 @@ def start_demo(self,sel):
     Post-condition: /demo page is opened, usually next step is start_sub_widget
     """
     sel.open("/demo/")
-#    mslib.wait_for_element_present(self,sel,"css=.try_link")
-#    sel.click("css=.try_link span:contains('Demo')")
-    sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+#    sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
 
 def submit_video(self,sel,url):
     """
@@ -97,27 +95,29 @@ def submit_video(self,sel,url):
     
 
 def start_sub_widget(self,sel,skip="True",vid_lang="English",sub_lang="English"):
-    """
-    Description: Start the Subtitle Widget using the Subtitle Me menu.
+    """Start the Subtitle Widget using the Subtitle Me menu.
+
+    This will handle the language choice for demo or submitted videos.
     skip is set to true by default and gets passed to widget.close_howto_video
     to prevent further how-to video displays.
 
-    Pre-condition: On a page where Subtitle Me menu is present.
+    Pre-condition: On a page where Subtitle Me menu is present. Video with no subs.
 
     Post-condition: the widget is launched and you will be on step 1 or Edit step
     """
-    # Click Subtitle Me (Continue Subtitling -> Add Subtitles)
+    
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
     sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
-    time.sleep(5)
-    if sel.is_element_present("css=.mirosubs-modal-widget"):
-        print "widget opened directly - no menu displayed."
-    elif sel.is_element_present("css=.mirosubs-uniLogo"):
+    time.sleep(2)
+    if sel.is_element_present("css=h3:contains('Add subtitles')"):
+        print "1st subtitles: select the language"
+        widget.select_video_language(self,sel,vid_lang,sub_lang)
+        print "just clicked continue"   
+    else:
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["AddSubtitles_menuitem"])
         sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])
-    else:
-        print "not sure what's going on here, no widget, not menu"
-    widget.select_video_language(self,sel,vid_lang,sub_lang)
+        
+    time.sleep(2)
     widget.close_howto_video(self,sel,skip)
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
     sel.select_frame("relative=top")
