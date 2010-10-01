@@ -13,7 +13,8 @@ import mslib
 import sg_64_submit
 import sg_65_login 
 import sg_69_demoUI 
-import sg_78_widget_offsite 
+import sg_78_widget_offsite
+import sg_80_comments
 
 
 from optparse import OptionParser
@@ -64,7 +65,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
 
         ## Run a smaller group of tests when using sauce
         if testsauce == True:
-                    self.suite.addTests([
+            self.suite.addTests([
             unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_532'),
             unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_534'),
             unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_404'),
@@ -73,6 +74,8 @@ class Test_HTMLTestRunner(unittest.TestCase):
             unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_395'),
             unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_388'),
             unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78.test_369'),
+            unittest.defaultTestLoader.loadTestsFromName('sg_80_comments.subgroup_80.test_536'),
+            unittest.defaultTestLoader.loadTestsFromName('sg_80_comments.subgroup_80.test_537'),
             unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_379'),
             unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_382'),
             unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_378')
@@ -83,8 +86,9 @@ class Test_HTMLTestRunner(unittest.TestCase):
             self.suite.addTests([
                 unittest.defaultTestLoader.loadTestsFromTestCase(sg_64_submit.subgroup_64),
                 unittest.defaultTestLoader.loadTestsFromTestCase(sg_78_widget_offsite.subgroup_78),
-                unittest.defaultTestLoader.loadTestsFromTestCase(sg_69_demoUI.subgroup_69),
-                unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.subgroup_65)        
+##                unittest.defaultTestLoader.loadTestsFromTestCase(sg_69_demoUI.subgroup_69),
+##                unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.subgroup_65),
+                unittest.defaultTestLoader.loadTestsFromTestCase(sg_80_comments.subgroup_80)
                             
                 ])
 

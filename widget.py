@@ -80,7 +80,14 @@ def site_login_auth(self,sel):
     sel.click("//button[@value='login']")
     #wait for the login to complete
     time.sleep(10)
-    
+
+
+def select_video_language(self,sel,vid_lang="English",sub_lang="English"):
+    if (sel.is_text_present("This video is in")):
+        sel.select("css=p:nth-child(1) > select", "label="+vid_lang)
+    if (sel.is_text_present("I am subtitling in")):
+        sel.select("css=p:nth-child(2) > select", "label="+sub_lang)
+    sel.click("link=Continue")
         
 def close_howto_video(self,sel,skip="True"):
     """
