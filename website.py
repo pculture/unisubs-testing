@@ -133,14 +133,12 @@ def verify_login(self,sel,username="sub_writer"):
     Post-Condition: will be on the /demo page
     """
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Logout_Button"])
-    self.failUnless(sel.is_element_present("css=.user_panel"))
+    self.failUnless(sel.is_element_present("css=.user_panel"),\
+                    "user not logged in, user_panel not displayed")
     print "logged in as: " + sel.get_text("css=.user_panel a")
-    self.failUnless(sel.is_element_present("css=.user_panel a:contains("+username+")"))
-    #not starting demo to check logged in status anymore
-##    start_demo(self,sel)
-##    mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
-##    sel.click_at(testvars.WebsiteUI["SubtitleMe_menu"], "")
-##    self.failUnless(sel.is_element_present(testvars.WebsiteUI["Logout_menuitem"]))
+    self.failUnless(sel.is_element_present("css=.user_panel a:contains("+username+")"),\
+                    "username: "+username+ " not found. Got "+ sel.get_text("css=.user_panel a"))
+
 
 
 def verify_submitted_video(self,sel,vid_url,embed_type="html5"):
@@ -154,26 +152,32 @@ def verify_submitted_video(self,sel,vid_url,embed_type="html5"):
     """
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
    
-##    if embed_type == "flow":
-##        print "verifying video embedded with flowplayer"
-##        mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv object")
-##        self.failUnless(sel.is_element_present("css=.mirosubs-videoDiv object[data*='flowplayer']"))
-##    elif embed_type == "youtube":
-##        print "verifying video embedded with youtube"
-##        mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv object[data]")
-##        self.failUnless(sel.is_element_present("css=.mirosubs-videoDiv object[data*='youtube.com']"))
-##    elif embed_type == 'vimeo':
-##        print "verifying video embedded with vimeo"
-##        mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv object")
-##        self.failUnless(sel.is_element_present("css=.mirosubs-videoDiv object[data*='moogaloop.swf']"))
-##
-##    else:
-##        print "verifying video is html5"
-##        mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv")
-##        self.failUnless(sel.is_element_present("css=.mirosubs-videoDiv video"))
-##    print "verifying embedded video url is same as original"    
-##    self.failUnless(sel.is_element_present("css=.mirosubs-embed:contains("+vid_url+")"))
+    if embed_type == "flow":
+        mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv object")
+        self.assertTrue(sel.is_element_present("css=.mirosubs-videoDiv object[data*='flowplayer']"),\
+                        "can't verify video embedded with flowplayer")
+    elif embed_type == "youtube":
+        mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv object[data]")
+        self.assertTrue(sel.is_element_present("css=.mirosubs-videoDiv object[data*='youtube.com']"),\
+                        "can't verify video embed is youtube native")
+    elif embed_type == 'vimeo':
+        mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv object")
+        self.assertTrue(sel.is_element_present("css=.mirosubs-videoDiv object[data*='moogaloop.swf']"),\
+                        "can't verify video embed is vimeo native")
+    elif embed_type == 'dailymotion':
+        mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv object")
+        self.assertTrue(sel.is_element_present("css=.mirosubs-videoDiv object[id$='_dailymotionplayer']"),\
+                        "can't verify video embed is dailymotion native")
+    else:
+        mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv")
+        self.assertTrue(sel.is_element_present("css=.mirosubs-videoDiv video"),\
+                        "can't verify video embed is html5 native")
+        
+   
+    self.assertTrue(sel.is_element_present("css=.mirosubs-embed"),\
+                    "no embed code present")
     unisubs_link = sel.get_text("css=.mirosubs-permalink[href]")
+    print sel.get_text("css=.mirosubs-embed")
     return unisubs_link
 
 def get_video_with_translations(self,sel):

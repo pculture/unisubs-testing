@@ -163,7 +163,7 @@ def get_youtube_video_url(self,vid_format="embed"):
         else:
             vsel.open("results?uploaded=w&search_query=crazy&search_duration=short&search_type=videos&uni=3&search_sort=video_date_uploaded")
         vsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        vsel.click("css=.video-long-title a")
+        vsel.click("css=h3 a[id^='video-long-title']")
         vsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         youtubeURL = vsel.get_eval("window.location")
         print youtubeURL      
@@ -172,3 +172,22 @@ def get_youtube_video_url(self,vid_format="embed"):
         vsel.close()
         vsel.stop()
     return youtubeURL
+
+def get_dailymotion_video_url(self):
+    try:
+        self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("dailymotion"," get video url"), "http://dailymotion.com/"))
+        self.selenium.start()
+        vsel= self.selenium
+        vsel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        # open most recent cc licensed videos
+        vsel.open("/en/creative/1")
+        vsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+        vsel.sel.click("css=h3 a.dmco_simplelink")
+        vsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+        dailymotionURL = vsel.get_eval("window.location")
+        print dailymotionURL      
+
+    finally:
+        vsel.close()
+        vsel.stop()
+    return dailymotionURL

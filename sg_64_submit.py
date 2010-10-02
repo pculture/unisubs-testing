@@ -69,7 +69,8 @@ class subgroup_64(unittest.TestCase):
   #              widget.edit_text(self,sel,subtextfile)
                 sel.click(testvars.WidgetUI["Next_step"])
             except:
-                mslib.AppendErrorMessage(self,sel, "failure submitted video, format: " + x)
+                mslib.AppendErrorMessage(self,sel, "failure testing, format: " + x)
+                sel.close()
                 
     def test_532(self):
         """Submit html5 videos from blip.tv.
@@ -106,7 +107,8 @@ class subgroup_64(unittest.TestCase):
     #            widget.edit_text(self,sel,subtextfile)
                 sel.click(testvars.WidgetUI["Next_step"])
             except:
-                mslib.AppendErrorMessage(self,sel, "failure submitted video, format: " + x)
+                mslib.AppendErrorMessage(self,sel, "failure testing, format: " + x)
+                sel.close()
 
 
     def test_533(self):
@@ -170,10 +172,37 @@ class subgroup_64(unittest.TestCase):
         widget.sync_video(self,sel,subtextfile,3,4)
         # Review
         print "review step - just submitting video"
- #       widget.edit_text(self,sel,subtextfile, "vimeo video text edit")
         sel.click(testvars.WidgetUI["Next_step"])
 
+    def test_538(self):
+        """Submit and subtitle dailymotion videos.
 
+        http://litmus.pculture.org/show_test.cgi?id=538
+        """
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
+        print "submitting a vimeo video, format: "
+        vid_url = offsite.get_youtube_video_url(self)
+        # Submit Video
+        print "logging in and submitting video"
+        website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
+        website.submit_video(self,sel,vid_url)
+        # Verify embed and player
+        print "verifying embed"
+        website.verify_submitted_video(self,sel,vid_url,embed_type="dailymotion")
+        # Start sub widget
+        print "starting sub widget"
+        website.start_sub_widget(self,sel)
+        # Transcribe
+        print "transcribing video"
+        widget.transcribe_video(self,sel,subtextfile)
+        # Sync
+        print "syncing video"
+        widget.sync_video(self,sel,subtextfile,3,4)
+        # Review
+        print "review step - just submitting video"
+        sel.click(testvars.WidgetUI["Next_step"])
 
 
 # Close the browser, log errors, perform cleanup
