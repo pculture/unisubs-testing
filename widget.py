@@ -142,10 +142,9 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
         current_sub = sel.get_text(testvars.WidgetUI["Current_playing_sub"])
         print "comparing input text"
-        if line.rstrip() != current_sub.rstrip():
-            mslib.AppendErrorMessage(self,sel,"sub text mismatch")
-            print "found: " + current_sub.rstrip()
-            print "expected: " +line
+        self.assertEqual(line.rstrip(),current_sub.rstrip(),\
+                         "sub text mismatch - expected: "+line.rstrip()+" found: "+current_sub.rstrip())
+        
         print "entering text" + line
         if selvars.vbrowser == "*iexplore":
             print "entering text for ie browser"
@@ -155,10 +154,7 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
             sel.focus("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]")
             time.sleep(1)
             sel.key_press_native('10')
-#           sel.key_down("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]", "13")
-#           sel.key_up("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]", "13")
         else:
-            print "ff browser"
             sel.key_press("css=.trans", "13")
         time.sleep(1)
         line_count = line_count+1
