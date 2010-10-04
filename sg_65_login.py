@@ -206,12 +206,11 @@ class subgroup_65(unittest.TestCase):
         #Login
         widget.site_login_auth(self,sel)
         sel.select_window("null")
-        self.failUnless(sel.is_element_present(testvars.WidgetUI["Next_step"]))
+        self.assertTrue(sel.is_element_present(testvars.WidgetUI["Next_step"]),"Done button not found, maybe widget not redisplayed after login")
         sel.click(testvars.WidgetUI["Next_step"])
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
- #       self.failUnless(sel.is_text_present("Subtitles saved!"))
-        self.failUnless(sel.is_element_present("css=div#languages-tab"))
+        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"]) 
+        self.assertTrue(sel.is_element_present(testvars.video_video_info),"Video page not displayed")
         #Finish up by logging out
         print "logging out from site"
         website.SiteLogout(self,sel)

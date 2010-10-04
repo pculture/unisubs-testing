@@ -84,6 +84,7 @@ def start_widget_null(self,sel,video):
         sel.click("css=.right_column span.mirosubs-tabTextchoose")
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["AddSubtitles_menuitem"])
     sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])
+    time.sleep(3)
     widget.select_video_language(self,sel)
     widget.close_howto_video(self,sel)
 

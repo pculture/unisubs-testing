@@ -509,8 +509,8 @@ def close_widget(self,sel,submit="Discard"):
     Post Conditions: Returned to originating site.
     """
     sel.select_frame("relative=top")
-    self.failUnless(sel.is_element_present("css=.mirosubs-modal-widget"))
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Close_widget"])
+    self.assertTrue(sel.is_element_present(testvars.WidgetUI["Close_widget"]),"no close button found")
     time.sleep(3)
     sel.click("//div[@id=':4']/span[2]")  #Stupid css won't work
 
