@@ -20,8 +20,8 @@ def TwitterAuth(self,sel,user,passw):
     """
     print "twitter auth: "+ user+":"
     sel.select_pop_up("null")
-    mslib.wait_for_element_present(self,sel,"username_or_email")
-    sel.type("username_or_email", user)
+    mslib.wait_for_element_present(self,sel,"Username_or_email")
+    sel.type("Username_or_email", user)
     sel.type("session[password]", passw)
     sel.click("allow")
 
