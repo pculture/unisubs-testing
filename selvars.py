@@ -14,6 +14,11 @@ import json
     needs to be the sauce url
 """
 
+if controller.testsauce==True:
+    sauce = True
+else:
+    sauce = False
+        
 
 
 def set_localhost():

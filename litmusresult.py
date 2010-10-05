@@ -6,7 +6,6 @@ import httplib
 import urllib
 import time
 import selvars
-import xml.dom.minidom
 
 
 def set_test_os():
@@ -40,14 +39,21 @@ def set_test_browser():
     else:
         print "no idea what the browser is"
 
-def set_build_id():
-##    if selvars.builid:
-##        return selvars.builid
-##    else:
-    buildid = time.strftime("%Y%m%d", time.gmtime()) + "99"
-    return buildid
 
+def set_test_id(test_id):
     
+    s = str(test_id).strip(">,<,[,]")
+    L = s.split('_')
+    testid = L.pop()
+    return testid
+
+def set_status(stat):
+    print stat
+    if stat == ".":
+        status = "pass"
+    else:
+        status = "fail"
+    return status
 
 
 HEADER = """<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
@@ -70,7 +76,12 @@ STORY = """<result testid="%(testid)s"
         exitstatus="0"
         timestamp="%(timestamp)s"
         >
-       <comment>%(error_msg)s</comment>
+         <comment><![CDATA[
+         %(error_msg)s
+
+         ]]>
+
+         </comment>
        </result>
 """
 
@@ -78,20 +89,22 @@ FOOTER = """</testresults>
 </litmusresults>
 """
 
-def write_log(testid, status="pass", error_info=None):
+def write_log(testid,stat,buildid,error_info=""):
+       
     f = open("log.xml", "w")
-    f.write(HEADER % {"buildid": set_build_id(),
+    f.write(HEADER % {"buildid": buildid,
                       "opsys": set_test_os(),
                       "browser": set_test_browser()})
 
-    f.write(STORY % {"testid": testid,
-                     "status": status,
+    f.write(STORY % {"testid": set_test_id(testid),
+                     "status": set_status(stat),
                      "timestamp": time.strftime("%Y%m%d%H%M%S", time.gmtime()),
-                     "error_msg": error_info
+                     "error_msg": error_info.strip(']]>')
                          })
 
     f.write(FOOTER)
     f.close
+    
     
                  
 
@@ -112,11 +125,13 @@ def send_result():
     conn.request("POST", "/process_test.cgi", params, headers)
     response = conn.getresponse()
     data = response.read()
+    print data
     conn.close()
+    f.close()
 
 
 if __name__ == "__main__":
 
-    write_log("381","fail","this is a test of automatic results submission")
+ #   write_log("381",None)
     send_result()
 

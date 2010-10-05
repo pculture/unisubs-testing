@@ -196,6 +196,8 @@ class subgroup_80(unittest.TestCase):
         website.enter_comment_text(self,sel,comments_text.ru_comment_text)
         website.verify_comment_text(self,sel,comments_text.ru_comment_text)
 
+
+
 # Close the browser, log errors, perform cleanup 
     def tearDown(self):
         # check for Site Error notification and submit
@@ -207,10 +209,14 @@ class subgroup_80(unittest.TestCase):
         self.selenium.stop()
         #Log any errors
         self.assertEqual([], self.verificationErrors)
-      
 
 
 if __name__ == "__main__":
+
     unittest.main()
+  
+
+  
+
 
  

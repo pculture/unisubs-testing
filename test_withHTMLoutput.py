@@ -8,13 +8,15 @@ import os
 import StringIO
 import sys
 import HTMLTestRunner
-# import MS Test Suite modules
+import litmusresult
 import mslib
 import sg_64_submit
 import sg_65_login 
 import sg_69_demoUI 
 import sg_78_widget_offsite
 import sg_80_comments
+import report
+
 
 
 from optparse import OptionParser
@@ -33,12 +35,20 @@ parser.add_option("-u", "--siteurl", action="store",
                   dest="site", default='dev',
                   help="""dev for: http://dev.universalsubtitles.org,
                         staging for: http://staging.universalsubtitles.org""")
+parser.add_option("-l", "--litmus",action="store_true",dest="litmus", default=True,
+                  help='Sends test output directly to litmus.pculture.org')
+parser.add_option("-i", "--buildid", action="store", dest="buildid",
+                  default=time.strftime("%Y%m%d", time.gmtime()) + "99",
+                  help="specify the build id of the litmus testrun results to display there")
 
 (options, args) = parser.parse_args()
 testbrowser = options.browser
 testport = options.port
 testsauce = options.sauce
 testsite = options.site
+testbuildid = options.buildid
+testlitmus = options.litmus
+                  
 
           
 
@@ -83,36 +93,61 @@ class Test_HTMLTestRunner(unittest.TestCase):
             ])
         ## Running on pcf server or local, run all the tests
         else:
-            self.suite.addTests([
-                unittest.defaultTestLoader.loadTestsFromTestCase(sg_69_demoUI.subgroup_69),
-                unittest.defaultTestLoader.loadTestsFromTestCase(sg_64_submit.subgroup_64),
-                unittest.defaultTestLoader.loadTestsFromTestCase(sg_78_widget_offsite.subgroup_78),                
-                unittest.defaultTestLoader.loadTestsFromTestCase(sg_65_login.subgroup_65),
-                unittest.defaultTestLoader.loadTestsFromTestCase(sg_80_comments.subgroup_80)
-                            
-                ])
+            suite_list = [ ['sg_80_comments.subgroup_80',unittest.getTestCaseNames(sg_80_comments.subgroup_80,'test')],  \
+##                           ['sg_65_login.subgroup_65',unittest.getTestCaseNames(sg_65_login.subgroup_65,'test')], \
+##                           ['sg_78_widget_offsite.subgroup_78',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78,'test')], \
+##                           ['sg_64_submit.subgroup_64',unittest.getTestCaseNames(sg_64_submit.subgroup_64,'test')], \
+                           ['sg_69_demoUI.subgroup_69',unittest.getTestCaseNames(sg_69_demoUI.subgroup_69,'test')], \
+                           ]
+
+            for sg in suite_list:
+                for tc in sg[1]:
+                    self.suite.addTests([
+                        unittest.defaultTestLoader.loadTestsFromName(sg[0]+"."+tc)                    
+                    ])
+            
 
         # Invoke TestRunner
-        buf = StringIO.StringIO()
-        #runner = unittest.TextTestRunner(buf) #DEBUG: this is the unittest baseline
-        runner = HTMLTestRunner.HTMLTestRunner(
-                    stream=buf,
-                    title='Univeral Subtitles Testing',
-                    description='Results'
-                    )
-        runner.run(self.suite)
 
-        # check out the output
-        byte_output = buf.getvalue()
-        # output the main test results
-        results_path = os.path.join(os.getcwd(), "Results")
-        filename = os.path.join(results_path, 'unisubs_' + str(testbrowser) +'_'+time.strftime("%Y%m%d_%H%M", time.gmtime())+'_GMT.html')
-        f = open(filename, 'w')
-        f.write(byte_output)
-        f.close()
-        #copy the results to a file called last_run.html
-        lastrun = os.path.join(results_path, 'last_run.html')
-        shutil.copyfile(filename,lastrun)
+        # Post the output directly to Litmus
+        if testlitmus == True:
+            buf = StringIO.StringIO()
+            runner = unittest.TextTestRunner(stream=buf)
+            for x in self.suite:
+                runner.run(x)
+                # check out the output
+                byte_output = buf.getvalue()
+                id_string = str(x)
+                stat = byte_output[0]
+                err_text = byte_output.strip('<,>,=,^,&,?,/",//')
+                try:
+                    litmusresult.write_log(id_string,stat,testbuildid,err_text)
+                    litmusresult.send_result()
+                finally:
+                    buf.truncate(0)
+
+
+
+        else:   # Post results to HTML page
+            buf = StringIO.StringIO()
+            runner = HTMLTestRunner.HTMLTestRunner(
+                        stream=buf,
+                        title='Univeral Subtitles Testing',
+                        description='Results'
+                        )
+            runner.run(self.suite)
+
+            # check out the output
+            byte_output = buf.getvalue()
+            # output the main test results
+            results_path = os.path.join(os.getcwd(), "Results")
+            filename = os.path.join(results_path, 'unisubs_' + str(testbrowser) +'_'+time.strftime("%Y%m%d_%H%M", time.gmtime())+'_GMT.html')
+            f = open(filename, 'w')
+            f.write(byte_output)
+            f.close()
+            #copy the results to a file called last_run.html
+            lastrun = os.path.join(results_path, 'last_run.html')
+            shutil.copyfile(filename,lastrun)
 
 ##############################################################################
 # Executing this module from the command line

@@ -8,6 +8,7 @@ import widget
 import offsite
 import testvars
 import selvars
+import litmusresult
 
 
 class subgroup_65(unittest.TestCase):
@@ -225,6 +226,8 @@ class subgroup_65(unittest.TestCase):
         self.selenium.stop()
         # log and errors
         self.assertEqual([], self.verificationErrors)
+        litmusresult.write_log(self.id,self.verificationErrors)
+        litmusresult.send_result()
 
 if __name__ == "__main__":
     unittest.main()
