@@ -103,7 +103,7 @@ def write_log(testid,stat,buildid,error_info=""):
     f.write(STORY % {"testid": set_test_id(testid),
                      "status": set_status(stat),
                      "timestamp": time.strftime("%Y%m%d%H%M%S", time.gmtime()),
-                     "error_msg": error_info.strip(']]>','.')
+                     "error_msg": error_info.lstrip('.')
                          })
 
     f.write(FOOTER)

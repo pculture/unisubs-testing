@@ -119,7 +119,6 @@ class Test_HTMLTestRunner(unittest.TestCase):
                 byte_output = buf.getvalue()
                 id_string = str(x)
                 stat = byte_output[0]
-                err_text = byte_output.strip('<','>','=','^','&','?','/"','//')
                 try:
                     litmusresult.write_log(id_string,stat,testbuildid,err_text)
                     litmusresult.send_result()
