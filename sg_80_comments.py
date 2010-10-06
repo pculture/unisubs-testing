@@ -58,6 +58,7 @@ class subgroup_80(unittest.TestCase):
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         sel.open(test_video_url)
         sel.click(testvars.video_original)
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         sel.click(testvars.comments_tab)
         #Enter a 1-char comment
         print "2. entering a 1-char comment on original"
@@ -87,6 +88,7 @@ class subgroup_80(unittest.TestCase):
         sel.open(test_video_url)
         #Open the Original tab / then comments tab
         sel.click(testvars.video_video_info)
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         sel.click(testvars.comments_tab)
         #Not logged in, enter a comment
         print "1. trying to enter a comment when not logged in"
@@ -97,6 +99,7 @@ class subgroup_80(unittest.TestCase):
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         sel.open(test_video_url)
         sel.click(testvars.video_video_info)
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         sel.click(testvars.comments_tab)
         #Enter a 1-char comment
         print "2. entering a 1-char comment on Video Info"
@@ -130,6 +133,7 @@ class subgroup_80(unittest.TestCase):
         
         #Open the Language tab / then the comments
         sel.click("link="+language)
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         self.failUnless(sel.is_element_present("css=div#languages-tab h4:contains("+language+")"))
         sel.click(testvars.comments_tab) 
@@ -182,7 +186,7 @@ class subgroup_80(unittest.TestCase):
         sel.open(test_video_url)
         sel.click("link="+language)
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        self.failUnless(sel.is_element_present("css=div#languages-tab h4:contains("+language+")"))
+        self.assertTrue(sel.is_element_present("css=div#languages-tab h4:contains("+language+")"), "language heading not found")
         sel.click(testvars.comments_tab) 
 
         #Enter some non-ascii comments

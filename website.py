@@ -187,13 +187,16 @@ def get_video_with_translations(self,sel):
     """
     sel.open("videos/")
     sort_videos_table(self,sel,"Translations","desc") 
-    row_no = 1
+    row_no = 3
     local_url = "none"
     
     subtitled_cell="css=tr:nth-child("+str(row_no)+") > "+testvars.videos_subtitled_td
     while sel.is_element_present(subtitled_cell):
         if sel.get_text(subtitled_cell) == "yes":
             local_url = sel.get_attribute("css=tr:nth-child("+str(row_no)+ ") > "+testvars.videos_url_td+" > a@href")
+        else:
+            row_no = row_no + 1
+            break
             if int(sel.get_text("css=tr:nth-child("+str(row_no)+ " ) > "+testvars.videos_trans_td)) == 0:
                 print "no translations - have to add one"
                 translate_video(self,sel,local_url)
@@ -208,7 +211,7 @@ def get_translated_lang(self,sel):
     Need to exclude Original, Video Info, and Metadata
     """
     #get the original language
-    original_lang = sel.getText(testvars.video_original)
+    original_lang = sel.get_text(testvars.video_original)
     tab_no = 1
     tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+")"
     skip_list = [original_lang, "Video Info", "Metadata: Twitter", "Metadata: Geo", "Metadata: Wikipedia"]
@@ -216,9 +219,9 @@ def get_translated_lang(self,sel):
         tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+")"
         if sel.get_text(tab_li) not in skip_list:
             test_lang = sel.get_text(tab_li)
-            break       
-        tab_no = tab_no + 1
-        tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+")"
+        else:       
+            tab_no = tab_no + 1
+            tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+")"
     
     return test_lang
 
@@ -232,7 +235,7 @@ def translate_video(self,sel,url=None,lang=None):
     else:
         print "opening video page to translate"
         sel.open(url)
-    self.failUnless(sel.is_element_present("css=a#add_translation"))
+    self.assertTrue(sel.is_element_present("css=a#add_translation"),"add translation button not found")
     sel.click(testvars.add_translation_button)
         
     
@@ -250,9 +253,9 @@ def sort_videos_table(self,sel,column,order):
         sel.click("link="+column)
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     if order == "asc":
-        self.failUnless(sel.is_element_present("css=a.desc:contains("+column+")"))
+        self.assertTrue(sel.is_element_present("css=a.desc:contains("+column+")"),"sort not correct")
     if order == "desc":
-        self.failUnless(sel.is_element_present("css=a.asc:contains("+column+")"))
+        self.assertTrue(sel.is_element_present("css=a.asc:contains("+column+")"),"sorted by desc")
 
 
 def enter_comment_text(self,sel,comment):
@@ -260,7 +263,7 @@ def enter_comment_text(self,sel,comment):
 
     Assumes user is on the comments tab
     """
-    self.failUnless(sel.is_element_present("css=li.active span:contains(\"Comments\")"))
+    self.assertTrue(sel.is_element_present("css=li.active span:contains(\"Comments\")"),"comments tab not found")
     sel.type("css=textarea#id_comment_form_content", comment)
     sel.click("css=button:contains('Comment')")
 
