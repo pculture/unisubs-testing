@@ -211,7 +211,7 @@ class subgroup_80(unittest.TestCase):
         Closes the browser test window and logs errors
         """
         #Close the browser
- #       self.selenium.stop()
+        self.selenium.stop()
         #Log any errors
         self.assertEqual([], self.verificationErrors)
 
