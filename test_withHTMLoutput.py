@@ -94,9 +94,9 @@ class Test_HTMLTestRunner(unittest.TestCase):
         ## Running on pcf server or local, run all the tests
         else:
             suite_list = [ ['sg_80_comments.subgroup_80',unittest.getTestCaseNames(sg_80_comments.subgroup_80,'test')],  \
-##                           ['sg_65_login.subgroup_65',unittest.getTestCaseNames(sg_65_login.subgroup_65,'test')], \
-##                           ['sg_78_widget_offsite.subgroup_78',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78,'test')], \
-##                           ['sg_64_submit.subgroup_64',unittest.getTestCaseNames(sg_64_submit.subgroup_64,'test')], \
+                           ['sg_65_login.subgroup_65',unittest.getTestCaseNames(sg_65_login.subgroup_65,'test')], \
+                           ['sg_78_widget_offsite.subgroup_78',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78,'test')], \
+                           ['sg_64_submit.subgroup_64',unittest.getTestCaseNames(sg_64_submit.subgroup_64,'test')], \
                            ['sg_69_demoUI.subgroup_69',unittest.getTestCaseNames(sg_69_demoUI.subgroup_69,'test')], \
                            ]
 
@@ -119,7 +119,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
                 byte_output = buf.getvalue()
                 id_string = str(x)
                 stat = byte_output[0]
-                err_text = byte_output.strip('<,>,=,^,&,?,/",//')
+                err_text = byte_output.strip('<','>','=','^','&','?','/"','//')
                 try:
                     litmusresult.write_log(id_string,stat,testbuildid,err_text)
                     litmusresult.send_result()

@@ -34,6 +34,10 @@ def set_test_browser():
         return "Safari"
     elif selvars.vbrowser == "*opera":
         return "Opera"
+    elif selvars.vbrowser == "*iexplore":
+        return "IE 8"
+    elif selvars.vbrowser == "*iexploreproxy":
+        return "IE 8"
     elif selvars.vbrowser == "*google-chrome":
         return "Google Chrome"
     else:
@@ -99,7 +103,7 @@ def write_log(testid,stat,buildid,error_info=""):
     f.write(STORY % {"testid": set_test_id(testid),
                      "status": set_status(stat),
                      "timestamp": time.strftime("%Y%m%d%H%M%S", time.gmtime()),
-                     "error_msg": error_info.strip(']]>')
+                     "error_msg": error_info.strip(']]>','.')
                          })
 
     f.write(FOOTER)
