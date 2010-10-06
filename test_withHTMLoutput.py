@@ -120,7 +120,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
                 id_string = str(x)
                 stat = byte_output[0]
                 try:
-                    litmusresult.write_log(id_string,stat,testbuildid,err_text)
+                    litmusresult.write_log(id_string,stat,testbuildid,byte_output)
                     litmusresult.send_result()
                 finally:
                     buf.truncate(0)
