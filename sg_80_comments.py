@@ -48,6 +48,7 @@ class subgroup_80(unittest.TestCase):
         sel.open(test_video_url)
         #Open the Original tab / then comments tab
         sel.click(testvars.video_original)
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         sel.click(testvars.comments_tab)
         #Not logged in, enter a comment
         print "1. trying to enter a comment when not logged in"
@@ -210,7 +211,7 @@ class subgroup_80(unittest.TestCase):
         Closes the browser test window and logs errors
         """
         #Close the browser
-        self.selenium.stop()
+ #       self.selenium.stop()
         #Log any errors
         self.assertEqual([], self.verificationErrors)
 
