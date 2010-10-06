@@ -207,14 +207,15 @@ def get_translated_lang(self,sel):
 
     Need to exclude Original, Video Info, and Metadata
     """
+    #get the original language
+    original_lang = sel.getText(testvars.video_original)
     tab_no = 1
     tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+")"
-    skip_list = ["Original", "Video Info", "Metadata: Twitter", "Metadata: Geo", "Metadata: Wikipedia"]
+    skip_list = [original_lang, "Video Info", "Metadata: Twitter", "Metadata: Geo", "Metadata: Wikipedia"]
     while sel.is_element_present(tab_li):
         tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+")"
         if sel.get_text(tab_li) not in skip_list:
             test_lang = sel.get_text(tab_li)
-            print test_lang
             break       
         tab_no = tab_no + 1
         tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+")"
