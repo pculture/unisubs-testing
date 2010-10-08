@@ -58,7 +58,7 @@ class subgroup_test(unittest.TestCase):
             widget.transcribe_enter_text(self,sel)
             mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
             resume_time = sel.get_text(testvars.WidgetUI['Video_elapsed_time'])
-            self.assertNotAlmostEqual(stop_time,resume_time,"restarted at same position, no jump back")
+            self.assertNotAlmostEqual(float(stop_time),float(resume_time),"restarted at same position, no jump back")
         
 
        
