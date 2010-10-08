@@ -98,8 +98,6 @@ class subgroup_80(unittest.TestCase):
         #Login
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         sel.open(test_video_url)
-        sel.click(testvars.video_video_info)
-        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         sel.click(testvars.comments_tab)
         #Enter a 1-char comment
         print "2. entering a 1-char comment on Video Info"
