@@ -40,7 +40,7 @@ videos_subtitled_td = "td:nth-child(6)"
 video_original = "css=ul.left_nav li a[href:contains('original/')]"
 video_metadata = "css=ul.left_nav li a[href:contains('meta-')]"
 video_video_info = "css=li:contains('Video Info')"
-comments_tab = "css=span.inline_text:contains('Comments')"
+comments_tab = "css=.inline_text:contains('Comments')"
 add_translation_button = "css=a#add_translation"
 
 WidgetUI = {"Video_playPause":"css=.mirosubs-playPause", \

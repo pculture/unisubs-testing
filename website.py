@@ -5,8 +5,12 @@
 
 from selenium import selenium
 
-import unittest, time, re
-import mslib, testvars, widget
+import unittest
+import time
+import re
+import mslib
+import testvars
+import widget
 
 
 #Login as a user
@@ -192,16 +196,16 @@ def get_video_with_translations(self,sel):
     
     subtitled_cell="css=tr:nth-child("+str(row_no)+") > "+testvars.videos_subtitled_td
     while sel.is_element_present(subtitled_cell):
-        if sel.get_text(subtitled_cell) == "yes":
+        subtitled_cell=("css=tr:nth-child("+str(row_no)+") > "+testvars.videos_subtitled_td)
+        if sel.get_text(subtitled_cell) == 'yes':
             local_url = sel.get_attribute("css=tr:nth-child("+str(row_no)+ ") > "+testvars.videos_url_td+" > a@href")
-        else:
-            row_no = row_no + 1
             break
-            if int(sel.get_text("css=tr:nth-child("+str(row_no)+ " ) > "+testvars.videos_trans_td)) == 0:
-                print "no translations - have to add one"
-                translate_video(self,sel,local_url)
         row_no = row_no + 1
-        subtitled_cell=sel.get_text("css=tr:nth-child("+str(row_no)+") > "+testvars.videos_subtitled_td)
+        
+    if int(sel.get_text("css=tr:nth-child("+str(row_no)+ " ) > "+testvars.videos_trans_td)) == 0:
+        print "no translations - have to add one"
+        translate_video(self,sel,local_url)
+       
         
     return local_url
 
@@ -219,15 +223,13 @@ def get_translated_lang(self,sel):
         tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+")"
         if sel.get_text(tab_li) not in skip_list:
             test_lang = sel.get_text(tab_li)
-        else:       
-            tab_no = tab_no + 1
-            tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+")"
-    
+            break
+        tab_no = tab_no + 1
+    print test_lang
     return test_lang
 
 def translate_video(self,sel,url=None,lang=None):
     """Given the local url of a video, adds a translation.
-
         
     """
     if url == None:
@@ -278,23 +280,20 @@ def verify_comment_text(self,sel,comment,result="posted",reply_text=None):
     
     """
     #give it 3 seconds to post
-    time.sleep(3)
+    time.sleep(5)
     if result == "posted":
         posted_text = sel.get_text("css=ul.comments.big_list li:nth-child(1) > div.info p")
-        self.assertEqual(posted_text.strip(),comment.strip(),"found: "+posted_text+" expected: "+comment)
+        self.assertEqual(posted_text.strip(),comment.strip(),"posted text doesn't match expected text")
     elif result == "too long":
-        self.failUnless(sel.is_element_present("css=p.error_list:contains('Ensure this value has at most 3000 characters')"))
+        self.assertTrue(sel.is_element_present("css=p.error_list:contains('Ensure this value has at most 3000 characters')"), \
+                        "too long message not found")
     elif result == "login":
-        self.failUnless(sel.is_element_present("css=.login-for-comment:contains('Login to post a comment')"))
+        self.assertTrue(sel.is_element_present("css=.login-for-comment:contains('Login to post a comment')"), \
+                        "login message not present")
         if sel.is_element_present("css=ul.comments.big_list li:nth-child(1) > div.info p"):
-            self.failIf(sel.get_text("css=ul.comments.big_list li:nth-child(1) > div.info p") == comment)
-
-        
-      
-
-    
-
-    
+            self.assertNotEqual(sel.get_text("css=ul.comments.big_list li:nth-child(1) > div.info p"),"comment", \
+                                "comment posted without login")  
+   
 
 
 def handle_error_page(self,sel,test_id):
@@ -309,7 +308,7 @@ def handle_error_page(self,sel,test_id):
         sel.click("css=button[type='submit']")
         print "submitted error to feedback form"
     else:
-        print "no site errors encountered"
+        pass
 
 
 
