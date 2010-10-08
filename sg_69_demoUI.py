@@ -361,14 +361,15 @@ class subgroup_69(unittest.TestCase):
         for x in range(0,3):  
             # get the time, skip back and get the time again
             start_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
-            sel.click_at(testvars.WidgetUI["Skip_back"],"")
+            sel.click(testvars.WidgetUI["Skip_back"])
+            time.sleep(1)
+            sel.click(testvars.WidgetUI["Play_pause"])
             time.sleep(.50)
             stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
-            diff_time = int(start_time) - int(stop_time)
-            if diff_time < 6:
-                mslib.AppendErrorMessage(self,sel,"didn't jump back quickly")
-                print "started at: " +start_time+ "stopped at: " +stop_time
-                print diff_time
+            diff_time = float(start_time) - float(stop_time)
+            self.assertLess(float(stop_time),float(start_time), \
+                        "screen button skip back"+'%.2f' % float(stop_time) +" !< " '%.2f' % float(start_time))
+            sel.click(testvars.WidgetUI["Play_pause"])
             time.sleep(10)
         # wait for play to advance and test with keyboard key
         # get the time, skip back and get the time again
@@ -376,13 +377,14 @@ class subgroup_69(unittest.TestCase):
         sel.shift_key_down()
         sel.type_keys("//div/input",'\t')
         sel.shift_key_up()
-        time.sleep(.20)
+        sel.click(testvars.WidgetUI["Play_pause"])
+        time.sleep(.50)
         stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
-        diff_time = int(start_time) - int(stop_time)
-        if diff_time < 6:
-                mslib.AppendErrorMessage(self,sel,"didn't jump back quickly")
-                print "started at: " +start_time+ "stopped at: " +stop_time
-                print diff_time
+        diff_time = float(start_time) - float(stop_time)
+        self.assertLess(float(stop_time),float(start_time), \
+                    "screen button skip back"+'%.2f' % float(stop_time) +" !< " '%.2f' % float(start_time))
+        sel.click(testvars.WidgetUI["Play_pause"])
+        time.sleep(10)
         
 
 

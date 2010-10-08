@@ -75,7 +75,7 @@ class subgroup_80(unittest.TestCase):
         website.verify_comment_text(self,sel,comments_text.normal_comment_text, result="too long")
 
     def test_536(self):
-        """Add comments on Video Info
+        """Add comments on Video Info tab
         
         http://litmus.pculture.org/show_test.cgi?id=536
         """
