@@ -145,7 +145,7 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
         self.assertEqual(line.rstrip(),current_sub.rstrip(),\
                          "sub text mismatch - expected: "+line.rstrip()+" found: "+current_sub.rstrip())
         
-        transcribe_enter_text()
+        transcribe_enter_text(self,sel)
         time.sleep(1)
         line_count = line_count+1
     if step == "Continue":
@@ -153,7 +153,7 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
     return line_count
 
 
-def transcribe_enter_text():
+def transcribe_enter_text(self,sel):
     """ Handle the text entry in Step 1 typing for all browsers
 
     """

@@ -168,18 +168,17 @@ class subgroup_69(unittest.TestCase):
         sel.click(testvars.WidgetUI["Play_pause"])
         # keep typing while in playback mode until button changes to play button (indicating paused)
         sel.click("//div/input")
-        for x in range(0,6):
+        for x in range(0,4):
             while sel.is_element_present(testvars.WidgetUI["Video_pause_button"]):
-                time.sleep(.20)
+                time.sleep(.2)
                 sel.type_keys("//div/input","Hi ")
             # stop typing and wait for playback to resume (pause button present)
-            print "playback stopped at: "+sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
+            stop_time = sel.get_text(testvars.WidgetUI['Video_elapsed_time'])
             sel.type_keys("//div/input", "I'm Asa Dotzler")
-            widget_transcribe_enter_text()
+            widget.transcribe_enter_text(self,sel)
             mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
-            print "playback resumed at: "+sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
-
-
+            resume_time = sel.get_text(testvars.WidgetUI['Video_elapsed_time'])
+            self.assertNotAlmostEqual(stop_time,resume_time,"restarted at same position, no jump back")
 
 
     def test_398(self):
