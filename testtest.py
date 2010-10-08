@@ -54,7 +54,7 @@ class subgroup_test(unittest.TestCase):
             time.sleep(.50)
             stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
             diff_time = float(start_time) - float(stop_time)
-            self.failUnless(diff_time > 5,"screen button: jump back not ~8 seconds)
+            self.failUnless(diff_time > 5,"screen button: jump back not ~8 seconds")
             time.sleep(10)
         # wait for play to advance and test with keyboard key
         # get the time, skip back and get the time again
@@ -65,7 +65,7 @@ class subgroup_test(unittest.TestCase):
         time.sleep(.20)
         stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
         diff_time = int(start_time) - int(stop_time)
-        self.failUnless(diff_time > 5,"screen button: jump back not ~8 seconds)
+        self.failUnless(diff_time > 5,"screen button: jump back not ~8 seconds")
         
 
        
