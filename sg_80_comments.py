@@ -87,10 +87,9 @@ class subgroup_80(unittest.TestCase):
         test_video_url = website.get_video_with_translations(self,sel)
         print test_video_url
         sel.open(test_video_url)
-        #Open the Original tab / then comments tab
-        sel.click(testvars.video_video_info)
-        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         sel.click(testvars.comments_tab)
+        #Open the Original tab / then comments tab
+        self.assertTrue(sel.get_text("css=li.active:contains('Video Info')"),"Video Info is not the active tab")
         #Not logged in, enter a comment
         print "1. trying to enter a comment when not logged in"
         ctext = "this comment should never post"
@@ -219,7 +218,6 @@ class subgroup_80(unittest.TestCase):
 if __name__ == "__main__":
 
     unittest.main()
-  
 
   
 
