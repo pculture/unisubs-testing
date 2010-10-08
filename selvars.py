@@ -122,7 +122,7 @@ def set_browser(testid="none",testdesc="none"):
                     }
         browser = json.dumps(sbrowser, indent=4)
     else:
-        print "using *browser, default is ff"
+        #use default browser
         browser = "*"+controller.testbrowser
 
     return browser

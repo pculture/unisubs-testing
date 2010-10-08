@@ -59,7 +59,7 @@ def site_login_from_widget_link(self,sel):
     """
 
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Must_Login"])        
-    print "loggin in from widget"
+    # log in from widget
     sel.click("link=LOGIN")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-modal-login")
     sel.click("css=.mirosubs-log")
@@ -120,7 +120,7 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
 
         returns line_count - the number of text lines input for the translation
     """
-    print "starting to transcribe video"
+    print " * Transcribe video"
     # giving the video a chance to load.
     sel.select_window("null")
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
@@ -141,12 +141,11 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
             
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
         current_sub = sel.get_text(testvars.WidgetUI["Current_playing_sub"])
-        print "comparing input text"
+        # compare input text
         self.assertEqual(line.rstrip(),current_sub.rstrip(),\
                          "sub text mismatch - expected: "+line.rstrip()+" found: "+current_sub.rstrip())
         
-        print "entering text" + line
-        if selvars.vbrowser == "*iexplore":
+        if (selvars.vbrowser == "*iexplore" or selvars.vbrowser == "*iexploreproxy"):
             print "entering text for ie browser"
             sel.key_press_native('10')
         elif selvars.vbrowser == "*safari":
@@ -171,7 +170,8 @@ def restart_step(self,sel):
     if sel.is_element_present("css=.mirosubs-restart"):
         sel.click("link=Restart this Step")
         if sel.is_element_present("css=.mirosubs-activestep:contains('2')"):
-            self.failUnless(re.search(r"^Are you sure you want to start over[\s\S] All timestamps will be deleted\.$", sel.get_confirmation()))
+            self.assertTrue(re.search(r"^Are you sure you want to start over[\s\S] All timestamps will be deleted\.$", sel.get_confirmation()), \
+                            "missing or incorrect confirmation dialog")
 
 def back_step(self,sel):
     """
@@ -194,13 +194,12 @@ def sync_video(self,sel,sub_file,start_delay=5,sub_int=4,step="Continue"):
 
     Pre-condition - can use this to sync on Step 2, Step 3 or Edit.
     """
-    print "starting video / sub syncing"
+    print " * Sub syncing"
     sel.select_frame("relative=top")
     #give video a chance to load
     time.sleep(10)
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
-    print "clicking video play button to start playback"
-#    sel.click(testvars.WidgetUI["Video_playPause"])
+
     sel.focus(testvars.WidgetUI["Sync_sub"])
     sel.click_at(testvars.WidgetUI["Sync_sub"],"")   
        
@@ -215,8 +214,6 @@ def sync_video(self,sel,sub_file,start_delay=5,sub_int=4,step="Continue"):
         start_time=sel.get_text(sub_cell_start_time)
         print " - sub time: " '%.2f' % float(start_time) + " - sub text: "+ sel.get_text(testvars.WidgetUI["Current_playing_sub"])
         time.sleep(sub_int)
-#        sel.focus(testvars.WidgetUI["Sync_sub"])
-#        sel.click_at(testvars.WidgetUI["Sync_sub"],"")
         sub_li = sub_li + 1
     if step == "Continue":
         sel.click(testvars.WidgetUI["Next_step"])
@@ -381,7 +378,7 @@ def hold_down_delay_sub(self,sel,sub_file,delay_time=2,hold_time=.75, sync_time=
     """
     sel.select_window("null")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep:contains('3')")
-    print "hold down key time shift"
+    print " * Resync subs: hold down key"
     sel.select_frame("relative=top")
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     sel.click(testvars.WidgetUI["Video_playPause"])
@@ -391,15 +388,14 @@ def hold_down_delay_sub(self,sel,sub_file,delay_time=2,hold_time=.75, sync_time=
     for line in open(sub_file):
         sub_cell_start_time = "//li["+str(sub_li)+"]/span[1]/span/span[1]"
         old_time = sel.get_text(sub_cell_start_time)
-        print " - start time: " '%.2f' % float(old_time)
         # 40 is the key code for down arrow key
         sel.focus("css=.mirosubs-down")
         sel.key_down("css=.mirosubs-down","\\40")
         time.sleep(hold_time)
         sel.key_up("css=.mirosubs-down","\\40")
         new_time = sel.get_text(sub_cell_start_time)
-        print " - new sub time: " '%.2f' % float(new_time)
-        self.failUnless(float(new_time) != float(old_time))
+        self.assertLess(float(new_time),float(old_time), \
+                        '%.2f' % float(new_time) +" !< " '%.2f' % float(old_time))
         time.sleep(sync_time)
         sub_li = sub_li + 1
 
@@ -416,7 +412,7 @@ def resync_video (self,sel,subtextfile,start_delay=1,sub_int=1, step="Stop"):
     Pre-conditions: must coordinate this with the times used in sync_video or the time shift
     comparision may fail.
     """
-    print "starting sub resync"
+    print " * Resync subs - shorter interval"
     sel.select_frame("relative=top")
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     sel.click(testvars.WidgetUI["Video_playPause"])
@@ -428,13 +424,12 @@ def resync_video (self,sel,subtextfile,start_delay=1,sub_int=1, step="Stop"):
     for line in codecs.open(subtextfile,encoding='utf-8'):
         sub_cell_start_time = "//li["+str(sub_li)+"]/span[1]/span/span[1]"
         start_time=sel.get_text(sub_cell_start_time)
-        print " - sub time: " '%.2f' % float(start_time)
         sel.focus(testvars.WidgetUI["Sync_sub"])
         sel.click_at(testvars.WidgetUI["Sync_sub"],"")
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Active_subtime"])
         new_start_time = sel.get_text(testvars.WidgetUI["Active_subtime"])
-        print " - new sub time: " '%.2f' % float(new_start_time)
-        self.failUnless(float(start_time) != float(new_start_time))
+        self.assertNotEqual(float(new_time),float(old_time), \
+                        '%.2f' % float(new_time) +" = " '%.2f' % float(new_start_time))
         time.sleep(sub_int)
         sub_li = sub_li + 1
         
@@ -449,17 +444,17 @@ def verify_login_message(self,sel):
     Description: verifies the widget must login message is displayed when a user is not logged in.
     """
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Must_Login"])
-    self.failUnless(sel.get_text(testvars.WidgetUI['Must_Login'] +":contains('LOGIN')"))
+    self.assertTrue(sel.get_text(testvars.WidgetUI['Must_Login'] +":contains('LOGIN')"),"Login message missing on widget")
 
 def steps_display(self,sel,step_num):
     """
     Description: verifies text contents of Steps.  
     """
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep:contains('"+str(step_num)+"')")
-    self.failUnless("Typing" == sel.get_text("css=h2"))
-    self.failUnless(str(step_num) == sel.get_text("css=.mirosubs-activestep"))
-    self.failUnless("tab" == sel.get_text("css=.mirosubs-tab"))
+    self.assertTrue(str(step_num) == sel.get_text("css=.mirosubs-activestep"),"active step is not: "+str(step_num))
+    self.assertTrue("tab" == sel.get_text("css=.mirosubs-tab"),"tab not in help text")
     if step_num == "1":
+        self.assertTrue("Typing" == sel.get_text("css=h2"), "heading is not Typing")
         self.assertEqual("Play next 8 seconds", sel.get_text("css=.mirosubs-tab + span"))
     else:
         self.assertEqual("Play/Pause", sel.get_text("css=.mirosubs-tab + span"))
