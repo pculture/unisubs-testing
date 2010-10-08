@@ -485,12 +485,12 @@ def verify_sub_text(self,sel,subtextfile):
         sub_li = sub_li + 1
         
 def wait_for_offsite_login(self,sel):
-    
-    for i in range(60):
+    time.sleep(2)
+    for i in range(90):
         try:
             sel.select_window("null")
+            print "wait for spinner to stop and login complete."
             if sel.is_element_present("css=.mirosubs-widget"):
-                print "looking for spinner"
                 if not sel.is_element_present("css=.big_spinner"):break
                 
         except: pass
