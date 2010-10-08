@@ -25,50 +25,24 @@ class subgroup_test(unittest.TestCase):
         self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), "http://staging.universalsubtitles.org" )
         self.selenium.start()
 
-# The test cases of the subgroup
-    def test_409(self):
-        """Widget Step 2, skip-back functionality.
-        
-        http://litmus.pculture.org/show_test.cgi?id=409
+    def test_382(self):
+        """Login from widget using gmail account.
+
+        http://litmus.pculture.org/show_test.cgi?id=382
         """
-        print "starting testcase 409 shift-tab to sktip back step 2"
-        print "known bug: http://bugzilla.pculture.org/show_bug.cgi?id=14292"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
-        # be sure logged out
+        #login
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
-        #step 1 type the subs
-        widget.transcribe_video(self, sel, subtextfile,buffer="yes")
-        # on step 2 test skip back
-        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
-        sel.click(testvars.WidgetUI["Play_pause"])
-        # wait for play to advance and test with screen button
-        time.sleep(9)
-        for x in range(0,3):  
-            # get the time, skip back and get the time again
-            start_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
-            sel.click_at(testvars.WidgetUI["Skip_back"],"")
-            time.sleep(.50)
-            stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
-            diff_time = float(start_time) - float(stop_time)
-            self.failUnless(diff_time > 5,"screen button: jump back not ~8 seconds")
-            time.sleep(10)
-        # wait for play to advance and test with keyboard key
-        # get the time, skip back and get the time again
-        start_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
-        sel.shift_key_down()
-        sel.type_keys("css=.mirosubs-right",'\t')
-        sel.shift_key_up()
-        time.sleep(.20)
-        stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
-        diff_time = int(start_time) - int(stop_time)
-        self.failUnless(diff_time > 5,"screen button: jump back not ~8 seconds")
-        
-
-       
+        widget.Login(self,sel,"google")
+        offsite.GmailAuth(self,sel,testvars.gmailuser,testvars.passw)
+        # verify
+        widget.wait_for_offsite_login(self,sel)
+        widget.close_widget(self,sel)
+        website.verify_login(self,sel,testvars.gmailuser)
+        # logout
+        website.SiteLogout(self,sel)
 
 
           

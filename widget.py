@@ -31,8 +31,10 @@ def Login(self,sel,auth_type):
     mslib.wait_for_element_present(self,sel, testvars.WebsiteUI["SubtitleMe_menu"])
     sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
     time.sleep(3)  # give the widget a chance to open directly if it's going to.
+    if sel.is_element_present("css=h3:contains('Add subtitles')"):
+        select_video_language(self,sel)
+            
     if sel.is_element_present("css=.mirosubs-modal-widget"):
-        print "widget opened directly - no menu displayed."
         close_howto_video(self,sel)
         time.sleep(3)
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Must_Login"])
@@ -398,8 +400,8 @@ def hold_down_delay_sub(self,sel,sub_file,delay_time=2,hold_time=.75, sync_time=
         time.sleep(hold_time)
         sel.key_up("css=.mirosubs-down","\\40")
         new_time = sel.get_text(sub_cell_start_time)
-        self.assertLess(float(new_time),float(old_time), \
-                        '%.2f' % float(new_time) +" !< " '%.2f' % float(old_time))
+        self.assertNotEqual(float(new_time),float(old_time), \
+                        "no time change: "+'%.2f' % float(new_time) +"="+ '%.2f' % float(old_time))
         time.sleep(sync_time)
         sub_li = sub_li + 1
 
@@ -432,8 +434,8 @@ def resync_video (self,sel,subtextfile,start_delay=1,sub_int=1, step="Stop"):
         sel.click_at(testvars.WidgetUI["Sync_sub"],"")
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Active_subtime"])
         new_start_time = sel.get_text(testvars.WidgetUI["Active_subtime"])
-        self.assertNotEqual(float(new_time),float(old_time), \
-                        '%.2f' % float(start_time) +" = " '%.2f' % float(new_start_time))
+        self.assertNotEqual(float(start_time),float(new_start_time), \
+                        '%.2f' % float(start_time) +" = " +'%.2f' % float(new_start_time))
         time.sleep(sub_int)
         sub_li = sub_li + 1
         
@@ -511,7 +513,7 @@ def close_widget(self,sel,submit="Discard"):
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Close_widget"])
     self.assertTrue(sel.is_element_present(testvars.WidgetUI["Close_widget"]),"no close button found")
     time.sleep(3)
-    sel.click("//div[@id=':4']/span[2]")  #Stupid css won't work
+    sel.click("//div[@id=':6']/span[2]")  #Stupid css won't work
 
 #    sel.click(testvars.WidgetUI["Close_widget"])
     if sel.is_element_present("css=.mirosubs-link"):

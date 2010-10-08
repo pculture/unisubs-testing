@@ -52,7 +52,7 @@ def SiteLogout(self,sel):
 def Login(self,sel,auth_type):
     """
     Description: Log on using website button and select an external login option.
-    auth_type can be either '.twitter', '.open-id', or '.google'
+    auth_type can be either 'twitter', 'open-id', or 'google'
 
     Requires: valid account for selected login.  See testvars for existing accounts.
 
@@ -63,11 +63,20 @@ def Login(self,sel,auth_type):
     
     """
     # auth_type can be either ".twitter", ".open-id", "google"
+    if auth_type == "twitter":
+        auth_link = "css=a[href*='twitter']"
+    elif auth_type == "open-id":
+        auth_link = "css=a[href*='openid']"
+    elif auth_type == "google":
+        auth_link = "css=a[href*='gmail']"
+    else:
+        self.fail("unrecognized auth type")
     sel.select_window("null")
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_Button"])
     sel.click(testvars.WebsiteUI["Login_Button"])
-    mslib.wait_for_element_present(self,sel,"css=."+auth_type)
-    sel.click("css=." +auth_type)
+    mslib.wait_for_element_present(self,sel,auth_link)
+    sel.click(auth_link)
+    sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     #After login, use offsite to do auth
 
 def start_demo(self,sel):
@@ -90,6 +99,7 @@ def submit_video(self,sel,url):
     Post-condition: the widget is launched immediately.
     You'll need to deal with the help video, see widget.close_howto_video
     """
+    print "* Submit Video"
     sel.open("/")
     sel.click(testvars.WebsiteUI["Subtitle_Button"])
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
@@ -114,13 +124,11 @@ def start_sub_widget(self,sel,skip="True",vid_lang="English",sub_lang="English")
     sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
     time.sleep(2)
     if sel.is_element_present("css=h3:contains('Add subtitles')"):
-        print "1st subtitles: select the language"
-        widget.select_video_language(self,sel,vid_lang,sub_lang)
-        print "just clicked continue"   
+        # select language if menu displayed
+        widget.select_video_language(self,sel,vid_lang,sub_lang)    
     else:
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["AddSubtitles_menuitem"])
-        sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])
-        
+        sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])   
     time.sleep(2)
     widget.close_howto_video(self,sel,skip)
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
@@ -154,6 +162,7 @@ def verify_submitted_video(self,sel,vid_url,embed_type="html5"):
 
     Returns: url of the video on the universalsubtitles site.
     """
+    print " * verify submitted video, embed type"
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
    
     if embed_type == "flow":
@@ -280,6 +289,7 @@ def verify_comment_text(self,sel,comment,result="posted",reply_text=None):
     
     """
     #give it 3 seconds to post
+    print "* Verify Comment"
     time.sleep(5)
     if result == "posted":
         posted_text = sel.get_text("css=ul.comments.big_list li:nth-child(1) > div.info p")

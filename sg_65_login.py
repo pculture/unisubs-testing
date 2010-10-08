@@ -138,7 +138,6 @@ class subgroup_65(unittest.TestCase):
         # logout
         website.SiteLogout(self,sel)
 
-
     def test_384(self):
         """Login from widget using site account.
         

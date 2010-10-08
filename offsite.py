@@ -19,13 +19,20 @@ def TwitterAuth(self,sel,user,passw):
     Requires: valid username and password
     """
     print "twitter auth: "+ user+":"
-    sel.select_pop_up("null")
-    mslib.wait_for_element_present(self,sel,"Username_or_email")
-    sel.type("Username_or_email", user)
-    sel.type("session[password]", passw)
-    sel.click("allow")
-
-
+    if sel.get_eval("window.location") == "http://twitter.com/universalsubs":
+        sel.click("css=.signin span:contains('Sign in')")
+        mslib.wait_for_element_present(self,sel,"css=input[title='username']")
+        sel.type("username", user)
+        sel.type("password", passw)
+        sel.click("signin_submit")
+    else:
+        time.sleep(2)
+        sel.select_pop_up("null")
+        sel.type("username_or_email", user)
+        sel.type("session[password]", passw)
+        sel.click("allow")
+    if sel.is_element_present("css=th:contains('Humaness')"):
+        self.fail("caught by the twitter captcha, can not continue")
 
 def OpenIdAuth(self,sel,user,passw):
     """
