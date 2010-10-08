@@ -83,7 +83,6 @@ def set_browser(testid="none",testdesc="none"):
                         "browser-version": "", \
                         "max-duration": 600, \
                         "idle-timeout": 120, \
-                        "record-video": false, \
                         "job-name": testid +': '+ testdesc \
                     }
                                
@@ -96,7 +95,6 @@ def set_browser(testid="none",testdesc="none"):
                         "browser-version": "8" , \
                         "max-duration": 600, \
                         "idle-timeout": 120, \
-                        "record-video": false, \
                         "job-name": testid +': '+ testdesc \
                     }
         elif controller.testbrowser == ("opera"):
@@ -108,7 +106,6 @@ def set_browser(testid="none",testdesc="none"):
                         "browser-version": "10" , \
                         "max-duration": 600, \
                         "idle-timeout": 120, \
-                        "record-video": false, \
                         "job-name": testid +': '+ testdesc \
                     }
         elif controller.testbrowser == ("safari"):
@@ -120,7 +117,6 @@ def set_browser(testid="none",testdesc="none"):
                         "browser-version": "4", \
                         "max-duration": 600, \
                         "idle-timeout": 120, \
-                        "record-video": false, \
                         "job-name": testid +': '+ testdesc \
                     }
         else:
@@ -132,7 +128,6 @@ def set_browser(testid="none",testdesc="none"):
                         "browser-version": "3.6", \
                         "max-duration": 600, \
                         "idle-timeout": 120, \
-                        "record-video": false, \
                         "job-name": testid +': '+ testdesc \
                     }
         browser = json.dumps(sbrowser, indent=4)
