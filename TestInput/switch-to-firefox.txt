@@ -3,7 +3,7 @@ Just go to getfirefox.com on you browser and click the green download button on 
 to save the firefox setup file to your desktop.
 Close the browser window and double-click the firefox setup icon to start the install.
 Then follow the simple steps on screen and firefox will be installed on your computer.
-Firefox can even import your personalized settings from your current webbrowser, 
+Firefox can even import your personalized settings from your current webbrowser
 for example your favorites and stored passwords.
-Finish the installation and you are now surfing the web using firefox, 
+Finish the installation and you are now surfing the web using firefox
 the fast, secure and customizable webbrowser from Mozilla.

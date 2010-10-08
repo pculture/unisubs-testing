@@ -181,7 +181,7 @@ def back_step(self,sel):
         sel.click("link=Back to Typing")
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
 
-def sync_video(self,sel,sub_file,start_delay=5,sub_int=4,step="Continue"):
+def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
     """
     Description: Use the defined sync button to sync the subtitles.  Waits for
     text present on the video and prints the subtime.
