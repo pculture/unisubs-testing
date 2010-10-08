@@ -26,13 +26,13 @@ class subgroup_test(unittest.TestCase):
         self.selenium.start()
 
 # The test cases of the subgroup
-
-    def test_470(self):
-        """Widget Step 1, advanced (recommended) mode setting.
+    def test_409(self):
+        """Widget Step 2, skip-back functionality.
         
-        http://litmus.pculture.org/show_test.cgi?id=470
+        http://litmus.pculture.org/show_test.cgi?id=409
         """
-        print "starting testcase 470"
+        print "starting testcase 409 shift-tab to sktip back step 2"
+        print "known bug: http://bugzilla.pculture.org/show_bug.cgi?id=14292"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
@@ -40,26 +40,32 @@ class subgroup_test(unittest.TestCase):
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
         website.start_sub_widget(self,sel)
-        #Type sub-text in the video, then wait stay on Step-1 screen
+        #step 1 type the subs
+        widget.transcribe_video(self, sel, subtextfile,buffer="yes")
+        # on step 2 test skip back
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
-        mode_label = sel.get_text("css=.mirosubs-speedmode option:contains('Recommended')")
-        sel.select("//select", "label=" +mode_label)
-        mslib.wait_for_video_to_buffer(self,sel)
         sel.click(testvars.WidgetUI["Play_pause"])
-        # keep typing while in playback mode until button changes to play button (indicating paused)
-        sel.click("//div/input")
-        for x in range(0,4):
-            while sel.is_element_present(testvars.WidgetUI["Video_pause_button"]):
-                time.sleep(.2)
-                sel.type_keys("//div/input","Hi ")
-            # stop typing and wait for playback to resume (pause button present)
-            stop_time = sel.get_text(testvars.WidgetUI['Video_elapsed_time'])
-            sel.type_keys("//div/input", "I'm Asa Dotzler")
-            widget.transcribe_enter_text(self,sel)
-            mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
-            time.sleep(.5)
-            resume_time = sel.get_text(testvars.WidgetUI['Video_elapsed_time'])
-            self.failUnless(float(stop_time) > float(resume_time),"restarted at same position, no jump back")
+        # wait for play to advance and test with screen button
+        time.sleep(9)
+        for x in range(0,3):  
+            # get the time, skip back and get the time again
+            start_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
+            sel.click_at(testvars.WidgetUI["Skip_back"],"")
+            time.sleep(.50)
+            stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
+            diff_time = float(start_time) - float(stop_time)
+            self.failUnlessAlmostEqual(diff_time,8,"screen button: jump back not ~8 seconds",3)
+            time.sleep(10)
+        # wait for play to advance and test with keyboard key
+        # get the time, skip back and get the time again
+        start_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
+        sel.shift_key_down()
+        sel.type_keys("css=.mirosubs-right",'\t')
+        sel.shift_key_up()
+        time.sleep(.20)
+        stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
+        diff_time = int(start_time) - int(stop_time)
+        self.failUnlessAlmostEqual(diff_time,8,"key cmd: jump back not ~8 seconds",3)
         
 
        
