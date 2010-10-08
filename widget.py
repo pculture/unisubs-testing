@@ -98,7 +98,7 @@ def close_howto_video(self,sel,skip="True"):
     
     Post-condition: help video is closed and returned to previous widget page.
     """
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-modal-widget-content")
+    time.sleep(5)
     if sel.is_element_present("css=.mirosubs-howtopanel"):
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-done:contains('Continue')")
         mslib.wait_for_element_present(self,sel,"css=.goog-checkbox-unchecked")
@@ -145,22 +145,26 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
         self.assertEqual(line.rstrip(),current_sub.rstrip(),\
                          "sub text mismatch - expected: "+line.rstrip()+" found: "+current_sub.rstrip())
         
-        if (selvars.vbrowser == "*iexplore" or selvars.vbrowser == "*iexploreproxy"):
-            print "entering text for ie browser"
-            sel.key_press_native('10')
-        elif selvars.vbrowser == "*safari":
-            print "browser safari"
-            sel.focus("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]")
-            time.sleep(1)
-            sel.key_press_native('10')
-        else:
-            sel.key_press("css=.trans", "13")
+        transcribe_enter_text()
         time.sleep(1)
         line_count = line_count+1
     if step == "Continue":
         sel.click(testvars.WidgetUI["Next_step"])
     return line_count
 
+
+def transcribe_enter_text():
+    """ Handle the text entry in Step 1 typing for all browsers
+
+    """
+    if (selvars.vbrowser == "*iexplore" or selvars.vbrowser == "*iexploreproxy"):
+        sel.key_press_native('10')
+    elif selvars.vbrowser == "*safari":
+        sel.focus("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]")
+        time.sleep(1)
+        sel.key_press_native('10')
+    else:
+        sel.key_press("css=.trans", "13")
 
 
 def restart_step(self,sel):
@@ -383,7 +387,7 @@ def hold_down_delay_sub(self,sel,sub_file,delay_time=2,hold_time=.75, sync_time=
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     sel.click(testvars.WidgetUI["Video_playPause"])
     time.sleep(delay_time)
-    sel.click(testvars.WidgetUI[""])
+  
     sub_li = 1
     for line in open(sub_file):
         sub_cell_start_time = "//li["+str(sub_li)+"]/span[1]/span/span[1]"
@@ -429,7 +433,7 @@ def resync_video (self,sel,subtextfile,start_delay=1,sub_int=1, step="Stop"):
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Active_subtime"])
         new_start_time = sel.get_text(testvars.WidgetUI["Active_subtime"])
         self.assertNotEqual(float(new_time),float(old_time), \
-                        '%.2f' % float(new_time) +" = " '%.2f' % float(new_start_time))
+                        '%.2f' % float(start_time) +" = " '%.2f' % float(new_start_time))
         time.sleep(sub_int)
         sub_li = sub_li + 1
         

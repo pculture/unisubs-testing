@@ -175,7 +175,7 @@ class subgroup_69(unittest.TestCase):
             # stop typing and wait for playback to resume (pause button present)
             print "playback stopped at: "+sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
             sel.type_keys("//div/input", "I'm Asa Dotzler")
-            sel.key_press("//div/input", "\\13")
+            widget_transcribe_enter_text()
             mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
             print "playback resumed at: "+sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
 
@@ -367,7 +367,7 @@ class subgroup_69(unittest.TestCase):
             time.sleep(.50)
             stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
             diff_time = float(start_time) - float(stop_time)
-            self.assertLess(float(stop_time),float(start_time), \
+            self.failUnless(float(stop_time) < float(start_time), \
                         "screen button skip back"+'%.2f' % float(stop_time) +" !< " '%.2f' % float(start_time))
             sel.click(testvars.WidgetUI["Play_pause"])
             time.sleep(10)
@@ -381,7 +381,7 @@ class subgroup_69(unittest.TestCase):
         time.sleep(.50)
         stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
         diff_time = float(start_time) - float(stop_time)
-        self.assertLess(float(stop_time),float(start_time), \
+        self.failUnless(float(stop_time) < float(start_time), \
                     "screen button skip back"+'%.2f' % float(stop_time) +" !< " '%.2f' % float(start_time))
         sel.click(testvars.WidgetUI["Play_pause"])
         time.sleep(10)
