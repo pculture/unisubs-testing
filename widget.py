@@ -497,8 +497,6 @@ def wait_for_offsite_login(self,sel):
         time.sleep(1)
 
 
-
-
 def close_widget(self,sel,submit="Discard"):
     """
     Description: uses the red close x to close out the widget.
@@ -513,7 +511,10 @@ def close_widget(self,sel,submit="Discard"):
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Close_widget"])
     self.assertTrue(sel.is_element_present(testvars.WidgetUI["Close_widget"]),"no close button found")
     time.sleep(3)
-    sel.click("//div[@id=':6']/span[2]")  #Stupid css won't work
+    sel.click(testvars.WidgetUI["Close_widget"])
+    time.sleep(3)
+    if sel.is_element_present(testvars.WidgetUI["Close_widget"]):
+        sel.open()
 
 #    sel.click(testvars.WidgetUI["Close_widget"])
     if sel.is_element_present("css=.mirosubs-link"):
