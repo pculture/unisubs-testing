@@ -76,18 +76,20 @@ class Test_HTMLTestRunner(unittest.TestCase):
         ## Run a smaller group of tests when using sauce
         if testsauce == True:
             self.suite.addTests([
-            unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_532'),
+            unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_533'),
             unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_534'),
             unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_404'),
             unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_408'),
+            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_406'),
+            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_414'),
             unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_401'),
             unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_395'),
             unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_388'),
             unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78.test_369'),
             unittest.defaultTestLoader.loadTestsFromName('sg_80_comments.subgroup_80.test_536'),
             unittest.defaultTestLoader.loadTestsFromName('sg_80_comments.subgroup_80.test_537'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_379'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_382'),
+            unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_384'),
+            unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_383'),
             unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_378')
             
             ])
