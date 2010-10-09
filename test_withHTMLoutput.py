@@ -78,7 +78,6 @@ class Test_HTMLTestRunner(unittest.TestCase):
             self.suite.addTests([
             unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_533'),
             unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_534'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_404'),
             unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_408'),
             unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_406'),
             unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_414'),

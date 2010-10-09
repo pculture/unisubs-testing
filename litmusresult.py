@@ -38,7 +38,7 @@ def set_test_browser():
         return "IE 8"
     elif selvars.vbrowser == "*iexploreproxy":
         return "IE 8"
-    elif selvars.vbrowser == "*google-chrome":
+    elif selvars.vbrowser == "*googlechrome":
         return "Google Chrome"
     else:
         print "no idea what the browser is"
