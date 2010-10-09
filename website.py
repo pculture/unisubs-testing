@@ -106,6 +106,7 @@ def submit_video(self,sel,url):
     sel.type("video_url", url)
     sel.click(testvars.WebsiteUI["Video_Submit_Button"])
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+    widget.close_howto_video(self,sel,skip)
     
 
 def start_sub_widget(self,sel,skip="True",vid_lang="English",sub_lang="English"):
