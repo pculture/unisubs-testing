@@ -13,10 +13,10 @@ MSTestVariables = {"DataDirectory": os.path.join(os.getcwd(), "TestInput"), \
 # Mapping to the MiroSubs website UI navigations buttons and links
 
 WebsiteUI = {"Home":"css=a:contains('Miro Subs Alpha')", \
-             "Login_Button":"css=.login_link span:contains(\"Login\")", \
-             "Logout_Button":"css=.login_link span:contains('Logout')", \
+             "Login_Button":"css=a[href*=/auth/login]", \
+             "Logout_Button":"css=a[href*=/logout]", \
              "SiteLogoutUrl": "/logout/?next=/",\
-             "Subtitle_Button":"css=a:contains('Subtitle a video now')", \
+             "Subtitle_Button":"css=a[href=/videos/create/]", \
              "All_Videos_Button":"css=a:contains('All Videos')", \
              "About_Button":"css=a:contains('About')", \
              "FAQ_Button":"css=a:contains('FAQ')", \
@@ -57,7 +57,7 @@ WidgetUI = {"Video_playPause":"css=.mirosubs-playPause", \
             "Active_subtime":"css=li.active span.mirosubs-timestamp-time",\
             "Active_subtext":"css=li.active span.mirosubs-title",\
             "Must_Login":"css=.mirosubs-needLogin a", \
-            "Close_widget":"css=.mirosubs-modal-widget-title-close", \
+            "Close_widget":"css=div[id*=:4]", \
     
         }
 

@@ -248,9 +248,7 @@ def edit_text(self,sel,subtextfile,new_text="my hovercraft is full of eels"):
         sel.type("css=textarea", new_text)
         sel.key_press("css=textarea", "\\13")
         sub_cell_text=sel.get_text(sub_cell)
-        if sub_cell_text.rstrip() != new_text.rstrip():
-            mslib.AppendErrorMessage(self,sel,"text not edited correctly")
-            print "expected: " +new_text+ "found: "+ sub_cell_text.rstrip
+        self.assertEqual(sub_cell_text.rstrip(),new_text.rstrip())
         sub_li = sub_li + 1
         
 def drag_time_bubbles(self,sel,subtextfile):
@@ -356,15 +354,16 @@ def click_time_shift_arrows(self,sel,subtextfile):
             sel.focus(up_arrow)
             sel.click_at(up_arrow,"")
             new_start_time = sel.get_text(sub_cell_start_time)
-            self.failUnless(float(new_start_time) - float(start_time)) == .05
+            self.assertEqual(int(new_start_time) - int(start_time), .05)
             #maybe verify the pixel change on the timeline
         for x in range(0,5):
             #Click text-arrow right and verify time jump
             start_time = sel.get_text(sub_cell_start_time)
             sel.click_at(down_arrow,"")
             new_start_time = sel.get_text(sub_cell_start_time)
-            self.failUnless(float(start_time) - float(new_start_time)) == .05
+            self.assertEqual(int(start_time) - int(new_start_time),05)
             #maybe verify the pixel change on the timeline
+        sub_li = sub_li + 1
 
     
 def hold_down_delay_sub(self,sel,sub_file,delay_time=2,hold_time=.75, sync_time=1):
@@ -513,9 +512,7 @@ def close_widget(self,sel,submit="Discard"):
     time.sleep(3)
     sel.click(testvars.WidgetUI["Close_widget"])
     time.sleep(3)
+    # if it doesn't close - just open the page again.
     if sel.is_element_present(testvars.WidgetUI["Close_widget"]):
+        print "widget didn't close the way I want it too"
         sel.open()
-
-#    sel.click(testvars.WidgetUI["Close_widget"])
-    if sel.is_element_present("css=.mirosubs-link"):
-        sel.click("css=.mirosubs-link:contains("+submit+")")
