@@ -31,8 +31,7 @@ def Login(self,sel,auth_type):
     mslib.wait_for_element_present(self,sel, testvars.WebsiteUI["SubtitleMe_menu"])
     sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
     time.sleep(3)  # give the widget a chance to open directly if it's going to.
-    if sel.is_element_present("css=h3:contains('Add subtitles')"):
-        select_video_language(self,sel)
+    select_video_language(self,sel)
             
     if sel.is_element_present("css=.mirosubs-modal-widget"):
         close_howto_video(self,sel)
@@ -85,11 +84,16 @@ def site_login_auth(self,sel):
 
 
 def select_video_language(self,sel,vid_lang="English",sub_lang="English"):
-    vid_label = sel.get_text("css=p:nth-child(1) > select option:contains("+vid_lang+")")
-    sel.select("//select", "label=" +vid_label)
-    sub_label = sel.get_text("css=p:nth-child(2) > select option:contains("+sub_lang+")")
-    sel.select("//select", "label=" +sub_label)
-    sel.click("link=Continue")
+    time.sleep(3)
+    if sel.is_element_present(testvars.WidgetUI["Select_language"]):
+        sel.select_frame("relative=top")
+        vid_label = sel.get_text("css=p:nth-child(1) > select option:contains("+vid_lang+")")
+        sel.select("//select", "label=" +vid_label)
+        sub_label = sel.get_text("css=p:nth-child(2) > select option:contains("+sub_lang+")")
+        sel.select("//select", "label=" +sub_label)
+        sel.click("link=Continue")
+    else:
+        print "no language selection box"
         
 def close_howto_video(self,sel,skip="True"):
     """
@@ -100,7 +104,7 @@ def close_howto_video(self,sel,skip="True"):
     
     Post-condition: help video is closed and returned to previous widget page.
     """
-    time.sleep(5)
+    time.sleep(3)
     if sel.is_element_present("css=.mirosubs-howtopanel"):
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-done:contains('Continue')")
         mslib.wait_for_element_present(self,sel,"css=.goog-checkbox-unchecked")
@@ -132,14 +136,16 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
     if sel.is_element_present("css=.mirosubs-videoDiv video") or buffer != "no":
         mslib.wait_for_video_to_buffer(self,sel)
     else: time.sleep(10)
-    if sel.is_element_present(testvars.WidgetUI["Video_play_button"]):
-        sel.click(testvars.WidgetUI["Video_play_button"])
-
+    sel.type_keys("css=.mirosubs-play",u'\u0009')
+    
     line_count = 0
     for line in codecs.open(sub_file,encoding='utf-8'):
-        sel.focus("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]")
-        sel.type("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]",line)
-        sel.type_keys("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]", ' ')        
+        sel.type("css=input[class*=trans]",line)
+        sel.type_keys("css=input[class*=trans]",' ')
+   #     sel.focus("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]")
+##        time.sleep(1)
+##        sel.type("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]",line)
+##        sel.type_keys("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]", ' ')        
             
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
         current_sub = sel.get_text(testvars.WidgetUI["Current_playing_sub"])
@@ -159,14 +165,11 @@ def transcribe_enter_text(self,sel):
     """ Handle the text entry in Step 1 typing for all browsers
 
     """
-    if (selvars.vbrowser == "*iexplore" or selvars.vbrowser == "*iexploreproxy"):
-        sel.key_press_native('10')
-    elif selvars.vbrowser == "*safari":
-        sel.focus("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]")
-        time.sleep(1)
-        sel.key_press_native('10')
-    else:
+    if (selvars.vbrowser == "*firefox") or (selvars.vbrowser == "*chrome"):
+   #     sel.click("css=input[class*=trans]")
         sel.key_press("css=.trans", "13")
+    else:
+        sel.key_press_native('10')    
 
 
 def restart_step(self,sel):

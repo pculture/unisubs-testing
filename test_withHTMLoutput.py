@@ -77,10 +77,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
         if testsauce == True:
             self.suite.addTests([
             unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_389'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_373'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_411'),
             unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_414'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_533'),
             unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_534'),
             unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_408'),
             unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_406'),
@@ -90,7 +87,6 @@ class Test_HTMLTestRunner(unittest.TestCase):
             unittest.defaultTestLoader.loadTestsFromName('sg_80_comments.subgroup_80.test_536'),
             unittest.defaultTestLoader.loadTestsFromName('sg_80_comments.subgroup_80.test_537'),
             unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_384'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_383'),
             unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_378')
             
             ])

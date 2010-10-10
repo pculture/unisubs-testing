@@ -123,15 +123,16 @@ def start_sub_widget(self,sel,skip="True",vid_lang="English",sub_lang="English")
     
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
     sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
-    time.sleep(2)
-    if sel.is_element_present("css=h3:contains('Add subtitles')"):
-        # select language if menu displayed
+    time.sleep(5)
+    if sel.is_element_present(testvars.WidgetUI["Select_language"]):
+        widget.select_video_language(self,sel,vid_lang,sub_lang)
+        widget.close_howto_video(self,sel,skip)
+    elif sel.is_element_present(testvars.WebsiteUI["AddSubtitles_menuitem"]):
+        sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])
         widget.select_video_language(self,sel,vid_lang,sub_lang)    
+        widget.close_howto_video(self,sel,skip)
     else:
-        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["AddSubtitles_menuitem"])
-        sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])   
-    time.sleep(2)
-    widget.close_howto_video(self,sel,skip)
+        self.fail("wtf - no widget, no sub menu")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
     sel.select_frame("relative=top")
 
