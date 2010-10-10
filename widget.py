@@ -364,7 +364,7 @@ def click_time_shift_arrows(self,sel,subtextfile):
             start_time = sel.get_text(sub_cell_start_time)
             sel.click_at(down_arrow,"")
             new_start_time = sel.get_text(sub_cell_start_time)
-            self.assertEqual(int(start_time) - int(new_start_time),05)
+            self.assertEqual(float(start_time) - float(new_start_time),float(.05))
             #maybe verify the pixel change on the timeline
         sub_li = sub_li + 1
 
