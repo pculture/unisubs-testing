@@ -106,7 +106,7 @@ def submit_video(self,sel,url):
     sel.type("video_url", url)
     sel.click(testvars.WebsiteUI["Video_Submit_Button"])
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-    widget.close_howto_video(self,sel,skip)
+    widget.close_howto_video(self,sel)
     
 
 def start_sub_widget(self,sel,wig_menu=testvars.WebsiteUI["SubtitleMe_menu"],skip="True",vid_lang="English",sub_lang="English"):
@@ -122,15 +122,15 @@ def start_sub_widget(self,sel,wig_menu=testvars.WebsiteUI["SubtitleMe_menu"],ski
     """
     
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
-    sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
+    sel.click(testvars.WebsiteUI["SubtitleMe_menu"]
     time.sleep(5)
     if sel.is_element_present(testvars.WidgetUI["Select_language"]):
         widget.select_video_language(self,sel,vid_lang,sub_lang)
-        widget.close_howto_video(self,sel,skip)
+        widget.close_howto_video(self,sel)
     elif sel.is_element_present(testvars.WebsiteUI["AddSubtitles_menuitem"]):
         sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])
         widget.select_video_language(self,sel,vid_lang,sub_lang)    
-        widget.close_howto_video(self,sel,skip)
+        widget.close_howto_video(self,sel)
     else:
         self.fail("wtf - no widget, no sub menu")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")

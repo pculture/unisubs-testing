@@ -95,7 +95,7 @@ def select_video_language(self,sel,vid_lang="English",sub_lang="English"):
     else:
         print "no language selection box"
         
-def close_howto_video(self,sel,skip="True"):
+def close_howto_video(self,sel,skip=True):
     """
     Description: closes the how-to interstitial help video
     Default is set to "True", to skip the video on proceeding steps.
@@ -108,7 +108,7 @@ def close_howto_video(self,sel,skip="True"):
     if sel.is_element_present("css=.mirosubs-howtopanel"):
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-done:contains('Continue')")
         mslib.wait_for_element_present(self,sel,"css=.goog-checkbox-unchecked")
-        if skip=="True":
+        if skip==True:
             sel.click("css=.goog-checkbox-unchecked")
         sel.click("css=.mirosubs-done:contains('Continue')")
 
