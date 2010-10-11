@@ -59,7 +59,7 @@ def wait_for_video_to_buffer(self,sel):
     print " - video buffered to 50% " +time.strftime("%M:%S", time.gmtime())
 
 def calc_time_diff(time1,time2):
-    t2 = datetime.datetime.strptime(time2, "%H:%M.%S")
-    t1 = datetime.datetime.strptime(time1, "%H:%M.%S")
+    t2 = datetime.datetime.strptime(time2, "%M.%S")
+    t1 = datetime.datetime.strptime(time1, "%M.%S")
     diff = t2 - t1
     return diff.seconds

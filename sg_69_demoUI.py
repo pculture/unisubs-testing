@@ -231,10 +231,10 @@ class subgroup_69(unittest.TestCase):
         time.sleep(3)
         #play-pause with unicode tab char
         print "play-pause with keyboard"
-        sel.type_keys("//div/input",'\t')
+        sel.type_keys("css=.mirosubs-play",u'\u0009')
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
         time.sleep(3)
-        sel.type_keys("//div/input",'\t')
+        sel.type_keys("css=.mirosubs-play",u'\u0009')
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_play_button"])
         time.sleep(3)
         #play-pause with Video play-pause button
