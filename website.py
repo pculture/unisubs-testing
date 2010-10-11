@@ -109,7 +109,7 @@ def submit_video(self,sel,url):
     widget.close_howto_video(self,sel,skip)
     
 
-def start_sub_widget(self,sel,skip="True",vid_lang="English",sub_lang="English"):
+def start_sub_widget(self,sel,wig_menu=testvars.WebsiteUI["SubtitleMe_menu"],skip="True",vid_lang="English",sub_lang="English"):
     """Start the Subtitle Widget using the Subtitle Me menu.
 
     This will handle the language choice for demo or submitted videos.
@@ -134,7 +134,6 @@ def start_sub_widget(self,sel,skip="True",vid_lang="English",sub_lang="English")
     else:
         self.fail("wtf - no widget, no sub menu")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
-    sel.select_frame("relative=top")
 
 def verify_login(self,sel,username="sub_writer"):
     """

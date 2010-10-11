@@ -140,13 +140,9 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
     
     line_count = 0
     for line in codecs.open(sub_file,encoding='utf-8'):
+        sel.focus("css=input[class*=trans]")
         sel.type("css=input[class*=trans]",line)
-        sel.type_keys("css=input[class*=trans]",' ')
-   #     sel.focus("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]")
-##        time.sleep(1)
-##        sel.type("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]",line)
-##        sel.type_keys("//div[@class='mirosubs-transcribeControls']/input[contains(@class,'trans')]", ' ')        
-            
+        sel.type_keys("css=input[class*=trans]",' ')    
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
         current_sub = sel.get_text(testvars.WidgetUI["Current_playing_sub"])
         # compare input text
@@ -166,7 +162,6 @@ def transcribe_enter_text(self,sel):
 
     """
     if (selvars.vbrowser == "*firefox") or (selvars.vbrowser == "*chrome"):
-   #     sel.click("css=input[class*=trans]")
         sel.key_press("css=.trans", "13")
     else:
         sel.key_press_native('10')    
@@ -221,7 +216,7 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
         sub_cell_start_time = "//li["+str(sub_li)+"]/span[1]/span/span[1]"
         start_time=sel.get_text(sub_cell_start_time)
-        print " - sub time: " '%.2f' % float(start_time) + " - sub text: "+ sel.get_text(testvars.WidgetUI["Current_playing_sub"])
+#        print " - sub time: " '%.2f' % float(start_time) + " - sub text: "+ sel.get_text(testvars.WidgetUI["Current_playing_sub"])
         time.sleep(sub_int)
         sub_li = sub_li + 1
     if step == "Continue":
@@ -364,7 +359,7 @@ def click_time_shift_arrows(self,sel,subtextfile):
             start_time = sel.get_text(sub_cell_start_time)
             sel.click_at(down_arrow,"")
             new_start_time = sel.get_text(sub_cell_start_time)
-            self.assertEqual(float(start_time) - float(new_start_time),float(.05))
+            self.assertEqual(mslib.calc_time_diff(start_time,new_start_time),float(.05))
             #maybe verify the pixel change on the timeline
         sub_li = sub_li + 1
 

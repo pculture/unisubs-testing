@@ -58,8 +58,7 @@ WidgetUI = {"Video_playPause":"css=.mirosubs-playPause", \
             "Active_subtext":"css=li.active span.mirosubs-title",\
             "Must_Login":"css=.mirosubs-needLogin a", \
             "Select_language":"css=h3:contains('Add subtitles')", \
-            "Close_widget":"css=div[id*=:4]", \
-    
+            "Close_widget":"css=span[class=mirosubs-modal-widget-title-close]"    
         }
 
 # TestData

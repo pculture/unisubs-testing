@@ -5,6 +5,7 @@ Help Modules specific to universal subtitles project
 
 import re
 import time
+import datetime
 import testvars
 
 def remove_html_tags(data):
@@ -56,3 +57,9 @@ def wait_for_video_to_buffer(self,sel):
         except: pass
         time.sleep(1)
     print " - video buffered to 50% " +time.strftime("%M:%S", time.gmtime())
+
+def calc_time_diff(time1,time2):
+    t2 = datetime.datetime.strptime(time2, "%H:%M.%S")
+    t1 = datetime.datetime.strptime(time1, "%H:%M.%S")
+    diff = t2 - t1
+    return diff.seconds

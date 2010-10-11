@@ -43,7 +43,8 @@ class subgroup_78(unittest.TestCase):
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         sel.open(selvars.set_widget_null_page())
-        offsite.start_widget_null(self,sel,"youtube")
+        mslib.wait_for_element_present(self,sel,"css=.left_column span.mirosubs-tabTextchoose")
+        website.start_sub_widget(self,sel,"css=.left_column span.mirosubs-tabTextchoose")
         # Transcribe
         widget.transcribe_video(self,sel,subtextfile)
         # Sync
@@ -63,7 +64,8 @@ class subgroup_78(unittest.TestCase):
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         sel.open(selvars.set_widget_null_page())
-        offsite.start_widget_null(self,sel,"ogg")
+        mslib.wait_for_element_present(self,sel,"css=.left_column span.mirosubs-tabTextchoose")
+        website.start_sub_widget(self,sel,"css=.left_column span.mirosubs-tabTextchoose")
 
         # Transcribe
         widget.transcribe_video(self,sel,subtextfile)
