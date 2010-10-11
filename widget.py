@@ -352,7 +352,7 @@ def click_time_shift_arrows(self,sel,subtextfile):
             sel.focus(up_arrow)
             sel.click_at(up_arrow,"")
             new_start_time = sel.get_text(sub_cell_start_time)
-            self.assertEqual(int(new_start_time) - int(start_time), .05)
+            self.assertEqual(mslib.calc_time_diff(start_time,new_start_time),float(.05))
             #maybe verify the pixel change on the timeline
         for x in range(0,5):
             #Click text-arrow right and verify time jump
