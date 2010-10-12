@@ -8,6 +8,7 @@ from selenium import selenium
 import unittest
 import time
 import re
+import codecs
 import mslib
 import testvars
 import widget
@@ -214,13 +215,42 @@ def get_video_with_translations(self,sel):
         
     if int(sel.get_text("css=tr:nth-child("+str(row_no)+ " ) > "+testvars.videos_trans_td)) == 0:
         print "no translations - have to add one"
-        translate_video(self,sel,local_url)
+        get_video_no_translations(self,sel)
+        translate_video(self,sel)
        
+        
+    return local_url
+def get_video_no_translations(self,sel):
+    """Get the url of the video page for a video that has translations.
+
+    Returns: video_url
+    """
+    sel.open("videos/")
+    sort_videos_table(self,sel,"Translations","asc") 
+    row_no = 3
+    local_url = "none"
+    
+    subtitled_cell="css=tr:nth-child("+str(row_no)+") > "+testvars.videos_trans_td
+    while sel.is_element_present(subtitled_cell):
+        subtitled_cell=("css=tr:nth-child("+str(row_no)+") > "+testvars.videos_trans_td)
+        if int(sel.get_text(subtitled_cell)) == 0:
+            local_url = sel.get_attribute("css=tr:nth-child("+str(row_no)+ ") > "+testvars.videos_url_td+" > a@href")
+            break
+        row_no = row_no + 1
+        
+    if local_url == "none":
+        print "no untranslated vidoes - must add one."
+        vid_url = offsite.get_youtube_video_url(self)
+        submit_video(self,sel,vid_url)
+        widget.select_video_language(self,sel)
+        widget.close_howto_video(self,sel)
+        widget.close_widget(self,sel)
+        local_url = sel.get_eval("window.location")
         
     return local_url
 
 def get_translated_lang(self,sel):
-    """Locate a language (not metadata or original) tab for a video
+    """Locate a language (not metadata or original) tab for a video.
 
     Need to exclude Original, Video Info, and Metadata
     """
@@ -238,6 +268,22 @@ def get_translated_lang(self,sel):
     print test_lang
     return test_lang
 
+def upload_subtitles(self,sel,sub_file,lang=None):
+    """Uploads subtitles for the specified language."
+
+    """
+    sel.click(testvars.video_upload_subtitles)
+    sel.type("subtitles-file-field",sub_file)
+    sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+
+def verify_sub_upload(self,sel,sub_file):
+    sub_td = 1
+    for line in codecs.open(sub_file,encoding='utf-8'):
+        subline = line.split(',')
+        sub = subline[0].rstrip()
+        self.assertTrue(sel.get_text("css=tr:nth-child("+str(sub_td)+") > td.last:contains('"+sub+"')"))
+        sub_td = sub_td + 1
+
 def translate_video(self,sel,url=None,lang=None):
     """Given the local url of a video, adds a translation.
         
@@ -248,10 +294,7 @@ def translate_video(self,sel,url=None,lang=None):
         print "opening video page to translate"
         sel.open(url)
     self.assertTrue(sel.is_element_present("css=a#add_translation"),"add translation button not found")
-    sel.click(testvars.add_translation_button)
-        
-    
-        
+    sel.click(testvars.add_translation_button)       
 
 def sort_videos_table(self,sel,column,order):
     """Sort the videos table by the specified heading in the specified order

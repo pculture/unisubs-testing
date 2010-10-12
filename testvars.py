@@ -39,6 +39,7 @@ videos_subtitled_td = "td:nth-child(5)"
 video_original = "css=ul.left_nav li a[href:contains('original/')]"
 video_metadata = "css=ul.left_nav li a[href:contains('meta-')]"
 video_video_info = "css=li a:contains('Video Info')"
+video_upload_subtitles = "css=a[id=upload-subtitles-link]"
 comments_tab = "css=.inline_text:contains('Comments')"
 add_translation_button = "css=a#add_translation"
 

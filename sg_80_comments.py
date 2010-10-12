@@ -13,10 +13,10 @@ import comments_text
 
 
 class subgroup_80(unittest.TestCase):
-    """
-    Litmus Subgroup 64 - offsite subwidget:
-        Tests designed to exercise the subtitle widget embedded
-        in sites external to universalsubtitles.org (live, dev or staging)  
+    """Litmus Subgroup 80 - comments.
+    
+        Tests designed to verify adding comments to original lang
+        and translated lang of videos
     """
     
 # Open the desired browser and set up the test

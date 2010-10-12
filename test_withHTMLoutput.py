@@ -32,7 +32,7 @@ parser.add_option("-b", "--browser", action="store",
 parser.add_option("-p", "--port", action="store", type="int", dest="port")
 parser.add_option("-u", "--siteurl", action="store",
                   choices=('dev', 'staging'),type="choice",
-                  dest="site", default='dev',
+                  dest="site", default='staging',
                   help="""dev for: http://dev.universalsubtitles.org,
                         staging for: http://staging.universalsubtitles.org""")
 parser.add_option("-l", "--litmus",action="store_true",dest="litmus",
