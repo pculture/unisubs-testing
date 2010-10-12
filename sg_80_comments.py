@@ -46,9 +46,7 @@ class subgroup_80(unittest.TestCase):
         test_video_url = website.get_video_with_translations(self,sel)
         print test_video_url
         sel.open(test_video_url)
-        #Open the Original tab / then comments tab
-        sel.click(testvars.video_original)
-        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+        #Open the Original is the default tab when  video opened.
         sel.click(testvars.comments_tab)
         #Not logged in, enter a comment
         print "1. trying to enter a comment when not logged in"
@@ -58,8 +56,6 @@ class subgroup_80(unittest.TestCase):
         #Login
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         sel.open(test_video_url)
-        sel.click(testvars.video_original)
-        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         sel.click(testvars.comments_tab)
         #Enter a 1-char comment
         print "2. entering a 1-char comment on original"
@@ -87,6 +83,8 @@ class subgroup_80(unittest.TestCase):
         test_video_url = website.get_video_with_translations(self,sel)
         print test_video_url
         sel.open(test_video_url)
+        sel.click(testvars.video_video_info)
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         sel.click(testvars.comments_tab)
         #Open the Original tab / then comments tab
         self.assertTrue(sel.get_text("css=li.active:contains('Video Info')"),"Video Info is not the active tab")
@@ -98,6 +96,8 @@ class subgroup_80(unittest.TestCase):
         #Login
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         sel.open(test_video_url)
+        sel.click(testvars.video_video_info)
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         sel.click(testvars.comments_tab)
         #Enter a 1-char comment
         print "2. entering a 1-char comment on Video Info"
@@ -131,7 +131,6 @@ class subgroup_80(unittest.TestCase):
         
         #Open the Language tab / then the comments
         sel.click("link="+language)
-        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         self.failUnless(sel.is_element_present("css=div#languages-tab h4:contains("+language+")"))
         sel.click(testvars.comments_tab) 

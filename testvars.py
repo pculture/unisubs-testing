@@ -34,9 +34,8 @@ WebsiteUI = {"Home":"css=a:contains('Miro Subs Alpha')", \
 
 # Website Videos page
 videos_url_td = "td:nth-child(1)"
-videos_history_td = "td:nth-child(2)"
-videos_trans_td = "td:nth-child(5)"
-videos_subtitled_td = "td:nth-child(6)"
+videos_trans_td = "td:nth-child(4)"
+videos_subtitled_td = "td:nth-child(5)"
 video_original = "css=ul.left_nav li a[href:contains('original/')]"
 video_metadata = "css=ul.left_nav li a[href:contains('meta-')]"
 video_video_info = "css=li:contains('Video Info')"
