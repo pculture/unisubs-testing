@@ -38,7 +38,7 @@ videos_trans_td = "td:nth-child(4)"
 videos_subtitled_td = "td:nth-child(5)"
 video_original = "css=ul.left_nav li a[href:contains('original/')]"
 video_metadata = "css=ul.left_nav li a[href:contains('meta-')]"
-video_video_info = "css=li:contains('Video Info')"
+video_video_info = "css=li a:contains('Video Info')"
 comments_tab = "css=.inline_text:contains('Comments')"
 add_translation_button = "css=a#add_translation"
 
