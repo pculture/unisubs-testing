@@ -128,7 +128,7 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
     """
     print " * Transcribe video"
     # giving the video a chance to load.
-    sel.select_window("null")
+    sel.select_frame("relative=top")
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     mode_label = sel.get_text("css=.mirosubs-speedmode option:contains("+mode+")")
     sel.select("//select", "label=" +mode_label)
