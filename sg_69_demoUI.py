@@ -678,7 +678,7 @@ class subgroup_69(unittest.TestCase):
 
 
         
-    def skiptest_413(self):
+    def test_413(self):
         """Widget Step 3, drag time bubbles.
         
         http://litmus.pculture.org/show_test.cgi?id=413

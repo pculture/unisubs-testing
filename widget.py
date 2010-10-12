@@ -132,10 +132,8 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     mode_label = sel.get_text("css=.mirosubs-speedmode option:contains("+mode+")")
     sel.select("//select", "label=" +mode_label)
-    # For html5 video, wait for the video to buffer
-    if sel.is_element_present("css=.mirosubs-videoDiv video") or buffer != "no":
-        mslib.wait_for_video_to_buffer(self,sel)
-    else: time.sleep(10)
+    # give time to buffer
+    time.sleep(10)
     sel.type_keys("css=.mirosubs-play",u'\u0009')
     
     line_count = 0
@@ -214,7 +212,7 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
         sel.focus(testvars.WidgetUI["Sync_sub"])
         sel.click_at(testvars.WidgetUI["Sync_sub"],"")
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
-        sub_cell_start_time = "//li["+str(sub_li)+"]/span[1]/span/span[1]"
+        sub_cell_start_time = "css=li:nth-child("+str(sub_li)+") > .mirosubs-timestamp .mirosubs-timestamp-time"
         start_time=sel.get_text(sub_cell_start_time)
 #        print " - sub time: " '%.2f' % float(start_time) + " - sub text: "+ sel.get_text(testvars.WidgetUI["Current_playing_sub"])
         time.sleep(sub_int)
@@ -239,7 +237,7 @@ def edit_text(self,sel,subtextfile,new_text="my hovercraft is full of eels"):
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
     sub_li=1
     for line in open(subtextfile):
-        sub_cell = "//li["+str(sub_li)+"]/span[2]"
+        sub_cell = "css=li:nth-child("+str(sub_li)+") > .mirosubs-title"
         sel.focus(sub_cell)
         sel.click(sub_cell)
         mslib.wait_for_element_present(self,sel,"css=textarea")
@@ -251,7 +249,7 @@ def edit_text(self,sel,subtextfile,new_text="my hovercraft is full of eels"):
         
 def drag_time_bubbles(self,sel,subtextfile):
     """
-    Description: For each line, initially used in transcribe_video, grab
+    Description: Grab
     the left and right sides of the timeline bubbles and edit the time.
     Verifies the time stamp has been modified.
     
@@ -262,54 +260,16 @@ def drag_time_bubbles(self,sel,subtextfile):
     """
     sel.select_window("null")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep:contains('3')")
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Sync_sub"])
-    sub_li = 1
-    for line in open(subtextfile):
-        
-        sub_cell_start_time = "//li["+str(sub_li)+"]/span[1]/span/span[1]"
-        sub_cell_end_time = "//span["+str(sub_li)+"]/span/span[2]"
-
-        #start playback - wait for sub to appear on screen then pause playback
-        sub_line = line.split(',')
-        first_phrase = sub_line[0]
-        print first_phrase
-        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
-        sel.click(testvars.WidgetUI["Video_playPause"])
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-captionDiv:contains('" + first_phrase + "')")
-        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
-        sel.click(testvars.WidgetUI["Video_playPause"])
-        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_play_button"])
-        # drag start time to the left and verify time change
-        start_time = sel.get_text(sub_cell_start_time)
-        print start_time
-##        drag_it(self,sel,first_phrase,"left","-60")
-##        new_start_time = sel.get_text(sub_cell_start_time)
-##        self.failUnless(int(start_time) > int(new_start_time))
-##
-        # drag start time to the right and verify time change
-        start_time = sel.get_text(sub_cell_start_time)
-        print " - sub time: " '%.2f' % float(start_time)
-        drag_it(self,sel,"left","+60")
-        time.sleep(10)
-        new_start_time = sel.get_text(sub_cell_start_time)
-        print " - new sub time: " '%.2f' % float(new_start_time)
-        self.failUnless(float(start_time) < float(new_start_time))
-##           
-##        # drag end time to the left and verify time change
-##        end_time = sel.get_text(sub_cell_end_time)
-##        print end_time
-##        drag_it(self,sel,first_word,"right","-60")
-##        new_end_time = sel.get_text(sub_cell_end_time)
-##        self.failUnless(int(end_time) > int(new_end_time))
-##
-        # drag end time to the right and verify time change
-        end_time = sel.get_text(sub_cell_end_time)
-        print " - sub end time: " '%.2f' % float(end_time)
-        drag_it(self,sel,"right","+60")
-        time.sleep(10)
-        new_end_time = sel.get_text(sub_cell_end_time)
-        print " - sub end time: " '%.2f' % float(new_end_time)
-        self.failUnless(float(end_time) < float(new_end_time))
+           
+    sub_cell_start_time = "css=li:nth-child(1) > .mirosubs-timestamp .mirosubs-timestamp-time"
+    # drag bubble to the left and verify time change
+    start_time = sel.get_text(sub_cell_start_time)
+    print "sub start time: " '%.2f' % float(start_time)
+    drag_it(self,sel,"left","60")
+    time.sleep(1)
+    new_start_time = sel.get_text(sub_cell_start_time)
+    print " - new sub time: " '%.2f' % float(new_start_time)
+    self.failUnless(float(start_time) < float(new_start_time))
 
   
 def drag_it(self,sel,side,move_pixels):
@@ -322,12 +282,14 @@ def drag_it(self,sel,side,move_pixels):
         move_pixels - number of pixels to move bubble { + | - }
     """
     if side == "left":
-        sel.focus("css=.mirosubs-grabber.mirosubs-leftGrabber")
-        sel.drag_and_drop("css=.mirosubs-grabber.mirosubs-leftGrabber", "'"+move_pixels+",0'")
+        sel.focus("css=.mirosubs-timeline-sub .mirosubs-grabber.mirosubs-leftGrabber")
+        sel.drag_and_drop("css=.mirosubs-timeline-sub .mirosubs-grabber.mirosubs-leftGrabber", move_pixels+",0")
+
 
     if side == "right":
-        sel.focus("css=.mirosubs-grabber.mirosubs-rightGrabber")
-        sel.drag_and_drop("css=.mirosubs-grabber.mirosubs-rightGrabber", "'"+move_pixels+",0'")                
+        sel.focus("css=.mirosubs-timeline-sub .mirosubs-grabber.mirosubs-rightGrabber")
+        sel.drag_and_drop("css=.mirosubs-timeline-sub .mirosubs-grabber.mirosubs-rightGrabber", move_pixels+",0")
+
 
 def click_time_shift_arrows(self,sel,subtextfile):
     """
@@ -343,9 +305,9 @@ def click_time_shift_arrows(self,sel,subtextfile):
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Sync_sub"])
     sub_li = 1
     for line in open(subtextfile):
-        sub_cell_start_time = "//li["+str(sub_li)+"]/span[1]/span/span[1]"
-        up_arrow = "//li["+str(sub_li)+"]/span[1]/span/span[2]/a[1]"
-        down_arrow = "//li["+str(sub_li)+"]/span[1]/span/span[2]/a[2]"
+        sub_cell_start_time = "css=li:nth-child("+str(sub_li)+") > .mirosubs-timestamp .mirosubs-timestamp-time"
+        up_arrow = "css=li:nth-child("+str(sub_li)+") > .mirosubs-timestamp .mirosubs-changeTime .mirosubs-up"
+        down_arrow = "css=li:nth-child("+str(sub_li)+") > .mirosubs-timestamp .mirosubs-changeTime .mirosubs-down"
         for x in range(0,5):  
             #Click up (right) and verify time jump of .05 seconds
             start_time = sel.get_text(sub_cell_start_time)
@@ -389,7 +351,7 @@ def hold_down_delay_sub(self,sel,sub_file,delay_time=2,hold_time=.75, sync_time=
   
     sub_li = 1
     for line in open(sub_file):
-        sub_cell_start_time = "//li["+str(sub_li)+"]/span[1]/span/span[1]"
+        sub_cell_start_time = "css=li:nth-child("+str(sub_li)+") > .mirosubs-timestamp .mirosubs-timestamp-time"
         old_time = sel.get_text(sub_cell_start_time)
         # 40 is the key code for down arrow key
         sel.focus("css=.mirosubs-down")
@@ -425,7 +387,7 @@ def resync_video (self,sel,subtextfile,start_delay=1,sub_int=1, step="Stop"):
     sub_li = 1
     
     for line in codecs.open(subtextfile,encoding='utf-8'):
-        sub_cell_start_time = "//li["+str(sub_li)+"]/span[1]/span/span[1]"
+        sub_cell_start_time = "css=li:nth-child("+str(sub_li)+") > .mirosubs-timestamp .mirosubs-timestamp-time"
         start_time=sel.get_text(sub_cell_start_time)
         sel.focus(testvars.WidgetUI["Sync_sub"])
         sel.click_at(testvars.WidgetUI["Sync_sub"],"")
@@ -477,7 +439,7 @@ def verify_sub_text(self,sel,subtextfile):
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
     sub_li=1
     for line in codecs.open(subtextfile,encoding='utf-8'):
-        sub_cell_text = "//li["+str(sub_li)+"]/span[2]"
+        sub_cell_text = "css=li:nth-child("+str(sub_li)+") > .mirosubs-title"
         self.assertEqual(line.rstrip(), sel.get_text(sub_cell_text).rstrip())
         sub_li = sub_li + 1
         
