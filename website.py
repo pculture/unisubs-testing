@@ -274,15 +274,12 @@ def upload_subtitles(self,sel,sub_file,lang=None):
         sel.select("id_language", "label="+lang)
     sel.type("subtitles-file-field",sub_file)
 
-    if (sel.get_text("css=p.error_list")):
-        print "error on upload"
-    else:
-        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
 
 def verify_sub_upload(self,sel,sub_file,lang=""):
     """Verifies the uploaded subtitle text matches the text of a corresponing test file.
 
     """
+    sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     sub_td = 1
     for line in codecs.open(sub_file,encoding='utf-8'):
         subline = line.split(',')
