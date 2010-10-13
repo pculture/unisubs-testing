@@ -1,0 +1,43 @@
+﻿[Script Info]
+Title: Every woman has a story, every story can create change
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:11.73,0:00:15.77,Default,,0000,0000,0000,,Film wypełnia lukę pomiędzy tymi, którzy ocaleli a widzem
+Dialogue: 0,0:00:15.77,0:00:18.98,Default,,0000,0000,0000,,pomiędzy patrzeniem a wprowadzaniem zmian,
+Dialogue: 0,0:00:18.98,0:00:22.77,Default,,0000,0000,0000,,Celem filmów w WITNESS jest opowiedzenie historii
+Dialogue: 0,0:00:22.77,0:00:26.04,Default,,0000,0000,0000,,
+Dialogue: 0,0:00:26.73,0:00:31.48,Default,,0000,0000,0000,,WITNESS przywraca władzę kobietom już od 17 lat
+Dialogue: 0,0:00:31.48,0:00:37.54,Default,,0000,0000,0000,,współpracuje z różnymi organizacjami i podejmuje działania dotyczące 
+Dialogue: 0,0:00:39.18,0:00:42.34,Default,,0000,0000,0000,,począwszy od handlu kobietami w Europie Wschodniej
+Dialogue: 0,0:00:42.34,0:00:45.95,Default,,0000,0000,0000,,poprzez 
+Dialogue: 0,0:00:45.95,0:00:50.28,Default,,0000,0000,0000,,aż po ochronę osób starszych przed wykorzystywaniem tu w Stanach Zjednoczonych...
+Dialogue: 0,0:00:50.28,0:00:52.62,Default,,0000,0000,0000,,WITNESS odmienia życia
+Dialogue: 0,0:00:53.66,0:00:57.34,Default,,0000,0000,0000,,Kobiety, których prawa człowieka zostały wykorzystane a którym udało się przeżyć głośno mówią
+Dialogue: 0,0:00:57.34,0:01:00.63,Default,,0000,0000,0000,,tak aby 
+Dialogue: 0,0:01:18.78,0:01:21.58,Default,,0000,0000,0000,,Przemoc wobec kobiet w Zimbabwe ma na celu
+Dialogue: 0,0:01:21.58,0:01:25.45,Default,,0000,0000,0000,,kobiety mają coraz większy wpływ na politykę
+Dialogue: 0,0:01:25.45,0:01:29.48,Default,,0000,0000,0000,,zatrzymać ich wpływ i zaangażowanie w politykę
+Dialogue: 0,0:01:29.48,0:01:32.17,Default,,0000,0000,0000,,są one bite i wykorzystywane sexualnie
+Dialogue: 0,0:01:32.17,0:01:35.57,Default,,0000,0000,0000,,RAU zdecydowało się na współpracę z WITNESS
+Dialogue: 0,0:01:35.57,0:01:38.95,Default,,0000,0000,0000,,ponieważ daje to ludziom szansę obejrzenia filmów
+Dialogue: 0,0:01:38.95,0:01:41.77,Default,,0000,0000,0000,,i zobaczenia na własne oczy co się dzieje w Zimbabwe
+Dialogue: 0,0:01:43.56,0:01:47.02,Default,,0000,0000,0000,,W Jemenie WITNESS współpracuje z Sisters Arab Forum
+Dialogue: 0,0:01:47.02,0:01:50.20,Default,,0000,0000,0000,,aby bronić praw kobiet z mniejszości "Akhdam"
+Dialogue: 0,0:01:59.85,0:02:01.94,Default,,0000,0000,0000,,Film został wyświetlony w Jemenie dla członków
+Dialogue: 0,0:02:01.94,0:02:05.01,Default,,0000,0000,0000,,Parlamentu, dziennikarzy oraz społeczności lokalnej
+Dialogue: 0,0:02:05.01,0:02:08.34,Default,,0000,0000,0000,,i niestety jego wyświetlanie zostało zakazane
+Dialogue: 0,0:02:08.58,0:02:11.04,Default,,0000,0000,0000,,WITNESS pracuje nad zniesieniem owego zakazu
+Dialogue: 0,0:02:12.21,0:02:17.66,Default,,0000,0000,0000,,W Meksyku DUAL INJUSTICE przedstawia historię 19letniej Neyry
+Dialogue: 0,0:02:17.66,0:02:21.70,Default,,0000,0000,0000,,która zaginęła w drodze do domu ze szkoły w 2003r.
+Dialogue: 0,0:02:27.58,0:02:32.23,Default,,0000,0000,0000,,WITNESS spotkało się niedawno z prezydentem Meksyku i wybranymi przedstawicielami rządu
+Dialogue: 0,0:02:32.83,0:02:34.94,Default,,0000,0000,0000,,Odkąd powatałą specjalna grupa pracująca
+Dialogue: 0,0:02:34.94,0:02:37.04,Default,,0000,0000,0000,,nad zatrzymaniem przypadków zaginięć i morderstw
+Dialogue: 0,0:02:37.04,0:02:41.71,Default,,0000,0000,0000,,ofiarami zostało ponad 450 dziewcząt i młodych kobiet.
+Dialogue: 0,0:02:43.10,0:02:45.90,Default,,0000,0000,0000,,W Macedonii partner WITNESS  
+Dialogue: 0,0:02:45.90,0:02:48.64,Default,,0000,0000,0000,,stara się zatrzymać dyskryminację oraz przemoc wobec kobiet
+Dialogue: 0,0:02:48.64,0:02:50.65,Default,,0000,0000,0000,,łącznie z problemem prostytucji
+Dialogue: 0,0:03:05.71,0:03:08.90,Default,,0000,0000,0000,,Przemoc i dyskryminacja przeciwko kobietom i dziewczętom
+Dialogue: 0,0:03:08.90,0:03:13.15,Default,,0000,0000,0000,,jest przypadkiem najczęściej łamanych praw człowieka
+Dialogue: 0,0:03:13.15,0:03:16.52,Default,,0000,0000,0000,,WITNESS daje władzę tym, którzy ujmują się za szanowaniem praw kobiet
+Dialogue: 0,0:03:16.52,0:03:20.32,Default,,0000,0000,0000,,aby niesprawiedliwość ujrzała światło dzienne, opowiada ich historie
+Dialogue: 0,0:03:20.32,0:03:22.89,Default,,0000,0000,0000,,i wprowadza trwałe zmiany.

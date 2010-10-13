@@ -201,12 +201,11 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
     #give video a chance to load
     time.sleep(10)
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
-
-    sel.focus(testvars.WidgetUI["Sync_sub"])
-    sel.click_at(testvars.WidgetUI["Sync_sub"],"")   
-       
+    #start playback
+    sel.focus(testvars.WidgetUI["Play_pause"])
+    sel.click_at(testvars.WidgetUI["Play_pause"],"")
+    #start syncing   
     time.sleep(start_delay)
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Sync_sub"])
     sub_li=1
     for line in open(sub_file):
         sel.focus(testvars.WidgetUI["Sync_sub"])

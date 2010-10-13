@@ -273,16 +273,24 @@ def upload_subtitles(self,sel,sub_file,lang=None):
 
     """
     sel.click(testvars.video_upload_subtitles)
+    if lang == None:
+        sel.select("id_language", "label=English")
+    else:
+        sel.select("id_language", "label="+lang)
     sel.type("subtitles-file-field",sub_file)
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
 
-def verify_sub_upload(self,sel,sub_file):
+def verify_sub_upload(self,sel,sub_file,lang=""):
     sub_td = 1
     for line in codecs.open(sub_file,encoding='utf-8'):
         subline = line.split(',')
         sub = subline[0].rstrip()
         self.assertTrue(sel.get_text("css=tr:nth-child("+str(sub_td)+") > td.last:contains('"+sub+"')"))
         sub_td = sub_td + 1
+    if lang == "":
+        self.assertEqual(sel.get_text("css=.active a"),"English")
+    else:
+        self.assertEqual(sel.get_text("css=.active a"),lang)
 
 def translate_video(self,sel,url=None,lang=None):
     """Given the local url of a video, adds a translation.
