@@ -169,24 +169,19 @@ def verify_submitted_video(self,sel,vid_url,embed_type="html5"):
    
     if embed_type == "flow":
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv object")
-        self.assertTrue(sel.is_element_present("css=.mirosubs-videoDiv object[data*='flowplayer']"),\
-                        "can't verify video embedded with flowplayer")
+        self.assertTrue(sel.is_element_present("css=.mirosubs-videoDiv object[data*='flowplayer']"))
     elif embed_type == "youtube":
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv object[data]")
-        self.assertTrue(sel.is_element_present("css=.mirosubs-videoDiv object[data*='youtube.com']"),\
-                        "can't verify video embed is youtube native")
+        self.assertTrue(sel.is_element_present("css=.mirosubs-videoDiv object[data*='youtube.com']"))
     elif embed_type == 'vimeo':
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv object")
-        self.assertTrue(sel.is_element_present("css=.mirosubs-videoDiv object[data*='moogaloop.swf']"),\
-                        "can't verify video embed is vimeo native")
+        self.assertTrue(sel.is_element_present("css=.mirosubs-videoDiv object[data*='moogaloop.swf']"))
     elif embed_type == 'dailymotion':
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv object")
-        self.assertTrue(sel.is_element_present("css=.mirosubs-videoDiv object[id$='_dailymotionplayer']"),\
-                        "can't verify video embed is dailymotion native")
+        self.assertTrue(sel.is_element_present("css=.mirosubs-videoDiv object[id$='_dailymotionplayer']"))
     else:
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv")
-        self.assertTrue(sel.is_element_present("css=.mirosubs-videoDiv video"),\
-                        "can't verify video embed is html5 native")
+        self.assertTrue(sel.is_element_present("css=.mirosubs-videoDiv video"))
         
    
     self.assertTrue(sel.is_element_present("css=.mirosubs-embed"),\
@@ -278,14 +273,24 @@ def upload_subtitles(self,sel,sub_file,lang=None):
     else:
         sel.select("id_language", "label="+lang)
     sel.type("subtitles-file-field",sub_file)
-    sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+
+    if (sel.get_text("css=p.error_list")):
+        print "error on upload"
+    else:
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
 
 def verify_sub_upload(self,sel,sub_file,lang=""):
+    """Verifies the uploaded subtitle text matches the text of a corresponing test file.
+
+    """
     sub_td = 1
     for line in codecs.open(sub_file,encoding='utf-8'):
         subline = line.split(',')
         sub = subline[0].rstrip()
-        self.assertTrue(sel.get_text("css=tr:nth-child("+str(sub_td)+") > td.last:contains('"+sub+"')"))
+
+   #     siteline = sel.get_text("css=tr:nth-child("+str(sub_td)+") > td.last")
+   #     sitesub = siteline[16:].split(',')
+        self.assertTrue("css=tr:nth-child("+str(sub_td)+") > td.last:contains("+sub+")")
         sub_td = sub_td + 1
     if lang == "":
         self.assertEqual(sel.get_text("css=.active a"),"English")
