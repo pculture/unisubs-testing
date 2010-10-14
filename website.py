@@ -365,7 +365,7 @@ def handle_error_page(self,sel,test_id):
         feedback_math = sel.get_text("css=form p + p label")
         s = feedback_math[20:25]
         sel.type("feedback_math_captcha_field", eval(s))
-        sel.type("feedback_message", "test_id: "+test_id+" sel-rc automated test encountered an error")
+        sel.type("feedback_message", "test_id: "+test_id+" sel-rc automated test encountered an error \n Prove You are Human.")
         sel.click("css=button[type='submit']")
         print "submitted error to feedback form"
         self.fail("website page error encountered running test - feedback form submitted")

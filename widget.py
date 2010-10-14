@@ -162,6 +162,7 @@ def transcribe_enter_text(self,sel):
     if (selvars.vbrowser == "*firefox") or (selvars.vbrowser == "*chrome"):
         sel.key_press("css=.trans", "13")
     else:
+        sel.focus("css=input[class*=trans]")
         sel.key_press_native('10')    
 
 
@@ -216,6 +217,9 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
 #        print " - sub time: " '%.2f' % float(start_time) + " - sub text: "+ sel.get_text(testvars.WidgetUI["Current_playing_sub"])
         time.sleep(sub_int)
         sub_li = sub_li + 1
+    # finish sync of the last sub
+    sel.focus(testvars.WidgetUI["Sync_sub"])
+    sel.click_at(testvars.WidgetUI["Sync_sub"],"")
     if step == "Continue":
         sel.click(testvars.WidgetUI["Next_step"])
     
