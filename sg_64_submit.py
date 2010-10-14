@@ -55,6 +55,7 @@ class subgroup_64(unittest.TestCase):
                 # Verify embed and player
                 print "verifying embed and video player"
                 website.verify_submitted_video(self,sel,vid_url,embed_type="flow")
+                website.handle_error_page(self,sel,self.id())
                 # Start sub widget
                 print "starting sub widget"
                 website.start_sub_widget(self,sel)
@@ -70,8 +71,7 @@ class subgroup_64(unittest.TestCase):
                 sel.click(testvars.WidgetUI["Next_step"])
             except:
                 print "failure testing format: " + x
-                # check for Site Error notification and submit
-                website.handle_error_page(self,sel,self.id())
+        
                 
     def test_532(self):
         """Submit html5 videos from blip.tv.
