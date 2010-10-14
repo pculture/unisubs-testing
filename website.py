@@ -106,8 +106,7 @@ def submit_video(self,sel,url):
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     sel.type("video_url", url)
     sel.click(testvars.WebsiteUI["Video_Submit_Button"])
-    sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-    widget.close_howto_video(self,sel)
+    
     
 
 def start_sub_widget(self,sel,wig_menu=testvars.WebsiteUI["SubtitleMe_menu"],skip="True",vid_lang="English",sub_lang="English"):
@@ -361,18 +360,15 @@ def verify_comment_text(self,sel,comment,result="posted",reply_text=None):
 
 
 def handle_error_page(self,sel,test_id):
-    if sel.is_element_present("css=form h2:contains('Error')"):
-        print sel.get_attribute("css=h2 + input@value")
-        print sel.get_attribute("css=h2 + input@name")
+    if sel.is_element_present("css=h2:contains('when you encountered this error.')"):
         sel.type("feedback_email", testvars.gmail)
-        feedback_math = sel.get_text("css=form#feedback_form p + p label")
-        s = feeback_math[20:25]
+        feedback_math = sel.get_text("css=form p + p label")
+        s = feedback_math[20:25]
         sel.type("feedback_math_captcha_field", eval(s))
         sel.type("feedback_message", "test_id: "+test_id+" sel-rc automated test encountered an error")
         sel.click("css=button[type='submit']")
         print "submitted error to feedback form"
-    else:
-        pass
+        self.fail("website page error encountered running test - feedback form submitted")
 
 
 

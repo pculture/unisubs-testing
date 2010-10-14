@@ -92,8 +92,10 @@ def get_blip_video_url(self,file_type="flv"):
         print "opening: "+random_url
         mslib.wait_for_element_present(self,bsel,"css=.EpisodeListThumb img")
         bsel.click("css=.EpisodeListThumb img")
-        bsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+        time.sleep(5)
         blipURL = bsel.get_eval("window.location")
+    except:
+        print "error getting video, type:" +file_type
     finally:
         bsel.close()
         bsel.stop()

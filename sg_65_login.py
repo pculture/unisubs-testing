@@ -221,6 +221,8 @@ class subgroup_65(unittest.TestCase):
         """
         Clean up log erros and close the browser
         """
+        # check for Site Error notification and submit
+        website.handle_error_page(self,self.selenium,self.id())
         #Close the browser
         self.selenium.stop()
         # log and errors

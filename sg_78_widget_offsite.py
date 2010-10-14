@@ -82,6 +82,8 @@ class subgroup_78(unittest.TestCase):
         """
         Closes the browser test window and logs errors
         """
+        # check for Site Error notification and submit
+        website.handle_error_page(self,self.selenium,self.id())
         #Close the browser
         self.selenium.stop()
         #Log any errors

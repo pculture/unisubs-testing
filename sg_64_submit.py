@@ -69,8 +69,9 @@ class subgroup_64(unittest.TestCase):
   #              widget.edit_text(self,sel,subtextfile)
                 sel.click(testvars.WidgetUI["Next_step"])
             except:
-                mslib.AppendErrorMessage(self,sel, "failure testing, format: " + x)
-                sel.close()
+                print "failure testing format: " + x
+                # check for Site Error notification and submit
+                website.handle_error_page(self,sel,self.id())
                 
     def test_532(self):
         """Submit html5 videos from blip.tv.
@@ -107,7 +108,9 @@ class subgroup_64(unittest.TestCase):
     #            widget.edit_text(self,sel,subtextfile)
                 sel.click(testvars.WidgetUI["Next_step"])
             except:
-                mslib.AppendErrorMessage(self,sel, "failure testing, format: " + x)
+                print "error encountered testing, format: " + x
+                # check for Site Error notification and submit
+                website.handle_error_page(self,sel,self.id())
                 sel.close()
 
 
@@ -183,7 +186,7 @@ class subgroup_64(unittest.TestCase):
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         print "submitting a vimeo video, format: "
-        vid_url = offsite.get_youtube_video_url(self)
+        vid_url = offsite.get_dailymotion_video_url(self)
         # Submit Video
         print "logging in and submitting video"
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
@@ -210,6 +213,8 @@ class subgroup_64(unittest.TestCase):
         """
         Closes the browser test window and logs errors
         """
+        # check for Site Error notification and submit
+        website.handle_error_page(self,self.selenium,self.id())
         #Close the browser
         self.selenium.stop()
         #Log any errors
