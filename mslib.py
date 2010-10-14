@@ -29,7 +29,7 @@ def wait_for_element_present(self,sel,input_field):
     Description: Waits 60 seconds for element to present itself.
     Requires: valid element identifier, can be css, xpath
     """
-    for i in range(60):
+    for i in range(20):
         try:
             if sel.is_element_present(input_field): break
         except: pass
