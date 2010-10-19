@@ -271,7 +271,7 @@ def upload_subtitles(self,sel,sub_file,lang=None):
         sel.select("id_language", "label=English")
     else:
         sel.select("id_language", "label="+lang)
-    sel.attach_file("subtitles-file-field",sub_file)
+    sel.type("subtitles-file-field",sub_file)
 
 
 def verify_sub_upload(self,sel,sub_file,lang=""):
