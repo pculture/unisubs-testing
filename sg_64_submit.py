@@ -42,6 +42,7 @@ class subgroup_64(unittest.TestCase):
         print "starting 469 blip.tv submit embedded video"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        sel.open()
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         ext_list = ("flv", "mpeg4", "mov")
         for x in ext_list:
@@ -82,6 +83,7 @@ class subgroup_64(unittest.TestCase):
         print "starting 469 blip.tv submit html5 video"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        sel.open()
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         ext_list = ("ogg", "ogv")
         for x in ext_list:
@@ -122,6 +124,7 @@ class subgroup_64(unittest.TestCase):
         print "starting 533 vimeo.com submit video"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        sel.open()
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         print "submitting a vimeo video, format: "
         vid_url = offsite.get_vimeo_video_url(self)
@@ -154,6 +157,7 @@ class subgroup_64(unittest.TestCase):
         print "starting 534 youtube.com submit video"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        sel.open()
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         print "submitting a vimeo video, format: "
         vid_url = offsite.get_youtube_video_url(self)
@@ -184,6 +188,7 @@ class subgroup_64(unittest.TestCase):
         """
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        sel.open()
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         print "submitting a vimeo video, format: "
         vid_url = offsite.get_dailymotion_video_url(self)

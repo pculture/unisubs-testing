@@ -161,7 +161,7 @@ def get_dailymotion_video_url(self):
         # open most recent cc licensed videos
         vsel.open("/en/creative/1")
         vsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        vsel.sel.click("css=h3 a.dmco_simplelink")
+        vsel.click("css=h3 a.dmco_simplelink")
         vsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         dailymotionURL = vsel.get_eval("window.location")
         print dailymotionURL      

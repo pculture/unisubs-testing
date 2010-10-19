@@ -303,30 +303,28 @@ def click_time_shift_arrows(self,sel,subtextfile):
         subtextfile - text used in transcribe step.
         
     """
+    sub_li = 1
     sel.select_window("null")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep:contains('3')")
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Sync_sub"])
-    sub_li = 1
-    for line in open(subtextfile):
-        sub_cell_start_time = "css=li:nth-child("+str(sub_li)+") > .mirosubs-timestamp .mirosubs-timestamp-time"
-        up_arrow = "css=li:nth-child("+str(sub_li)+") > .mirosubs-timestamp .mirosubs-changeTime .mirosubs-up"
-        down_arrow = "css=li:nth-child("+str(sub_li)+") > .mirosubs-timestamp .mirosubs-changeTime .mirosubs-down"
-        for x in range(0,5):  
-            #Click up (right) and verify time jump of .05 seconds
-            start_time = sel.get_text(sub_cell_start_time)
-            sel.focus(up_arrow)
-            sel.click_at(up_arrow,"")
-            new_start_time = sel.get_text(sub_cell_start_time)
-            self.assertEqual(mslib.calc_time_diff(start_time,new_start_time),float(.05))
-            #maybe verify the pixel change on the timeline
-        for x in range(0,5):
-            #Click text-arrow right and verify time jump
-            start_time = sel.get_text(sub_cell_start_time)
-            sel.click_at(down_arrow,"")
-            new_start_time = sel.get_text(sub_cell_start_time)
-            self.assertEqual(mslib.calc_time_diff(start_time,new_start_time),float(.05))
-            #maybe verify the pixel change on the timeline
-        sub_li = sub_li + 1
+    sub_cell_start_time = "css=li:nth-child("+str(sub_li)+") > .mirosubs-timestamp .mirosubs-timestamp-time"
+    up_arrow = "css=li:nth-child("+str(sub_li)+") > .mirosubs-timestamp .mirosubs-changeTime .mirosubs-up"
+    down_arrow = "css=li:nth-child("+str(sub_li)+") > .mirosubs-timestamp .mirosubs-changeTime .mirosubs-down"
+    for x in range(0,3):  
+        #Click up (right) and verify time jump of .05 seconds
+        start_time = sel.get_text(sub_cell_start_time)
+        sel.focus(up_arrow)
+        sel.click_at(up_arrow,"")
+        new_start_time = sel.get_text(sub_cell_start_time)
+        self.assertAlmostEqual(mslib.calc_time_diff(start_time,new_start_time),float(.05),3)
+        #maybe verify the pixel change on the timeline
+    for x in range(0,3):
+        #Click text-arrow right and verify time jump
+        start_time = sel.get_text(sub_cell_start_time)
+        sel.click_at(down_arrow,"")
+        new_start_time = sel.get_text(sub_cell_start_time)
+        self.assertAlmostEqual(mslib.calc_time_diff(new_start_time,start_time),float(.05),3)
+        #maybe verify the pixel change on the timeline
 
     
 def hold_down_delay_sub(self,sel,sub_file,delay_time=2,hold_time=.75, sync_time=1):
