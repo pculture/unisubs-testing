@@ -467,9 +467,10 @@ class subgroup_69(unittest.TestCase):
         sel.shift_key_down()
         sel.type_keys("css=.mirosubs-right",u'\u0009')
         sel.shift_key_up()
-        time.sleep(.20)
+        time.sleep(.50)
         stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
         diff_time = int(start_time) - int(stop_time)
+        print diff_time
         self.failUnless(diff_time > 5)
 
 
