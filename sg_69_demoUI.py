@@ -447,7 +447,7 @@ class subgroup_69(unittest.TestCase):
         #complete step 1 typing
         widget.transcribe_video(self, sel, subtextfile, buffer="yes")
         #complete step 2 syncing
-        widget.sync_video(self,sel,subtextfile,step="Stop")
+        widget.sync_video(self,sel,subtextfile)
         #on step 3 test ctrl to skip back        
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
         sel.click(testvars.WidgetUI["Play_pause"])

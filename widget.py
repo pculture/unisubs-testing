@@ -133,6 +133,8 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
     mode_label = sel.get_text("css=.mirosubs-speedmode option:contains("+mode+")")
     sel.select("//select", "label=" +mode_label)
     # give time to buffer
+    if buffer == "yes":
+        mslib.wait_for_video_to_buffer(self,sel)
     time.sleep(10)
     sel.type_keys("css=.mirosubs-play",u'\u0009')
     

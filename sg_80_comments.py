@@ -132,7 +132,7 @@ class subgroup_80(unittest.TestCase):
         #Open the Language tab / then the comments
         sel.click("link="+language)
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        self.failUnless(sel.is_element_present("css=div#languages-tab h4:contains("+language+")"))
+        self.failUnless(sel.is_element_present("css=h4.inline:contains("+language+")"))
         sel.click(testvars.comments_tab) 
 
         #Not logged in, enter a comment
@@ -145,7 +145,7 @@ class subgroup_80(unittest.TestCase):
         sel.open(test_video_url)
         sel.click("link="+language)
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        self.failUnless(sel.is_element_present("css=div#languages-tab h4:contains("+language+")"))
+        self.failUnless(sel.is_element_present("css=h4.inline:contains("+language+")"))
         sel.click(testvars.comments_tab) 
 
         #Enter a 1-char comment
@@ -183,7 +183,7 @@ class subgroup_80(unittest.TestCase):
         sel.open(test_video_url)
         sel.click("link="+language)
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        self.assertTrue(sel.is_element_present("css=div#languages-tab h4:contains("+language+")"), "language heading not found")
+        self.assertTrue(sel.is_element_present("css=h4.inline:contains("+language+")"))
         sel.click(testvars.comments_tab) 
 
         #Enter some non-ascii comments
