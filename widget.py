@@ -242,12 +242,12 @@ def edit_text(self,sel,subtextfile,new_text="my hovercraft is full of eels"):
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
     sub_li=1
     for line in open(subtextfile):
-        sub_cell = "css=li:nth-child("+str(sub_li)+") > .mirosubs-title"
+        sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") > .mirosubs-title"
         sel.focus(sub_cell)
         sel.click(sub_cell)
         mslib.wait_for_element_present(self,sel,"css=textarea")
-        sel.type("css=textarea", new_text)
-        sel.key_press("css=textarea", "\\13")
+        sel.type("css=.mirosubs-title textarea", new_text)
+        sel.key_press("css=.mirosubs-title textarea", "\\13")
         sub_cell_text=sel.get_text(sub_cell)
         self.assertEqual(sub_cell_text.rstrip(),new_text.rstrip())
         sub_li = sub_li + 1
