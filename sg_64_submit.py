@@ -151,7 +151,7 @@ class subgroup_64(unittest.TestCase):
             print "review step - just submitting video"
      #       widget.edit_text(self,sel,subtextfile, "vimeo video text edit")
             widget.submit_sub_edits(self,sel)
-        finally:
+        except:
             # check for Site Error notification and submit
             website.handle_error_page(self,self.selenium,self.id())
            
@@ -187,7 +187,7 @@ class subgroup_64(unittest.TestCase):
             # Review
             print "review step - just submitting video"
             widget.submit_sub_edits(self,sel)
-        finally:
+        except:
             # check for Site Error notification and submit
             website.handle_error_page(self,self.selenium,self.id())
 
@@ -222,7 +222,7 @@ class subgroup_64(unittest.TestCase):
             # Review
             print "review step - just submitting video"
             widget.submit_sub_edits(self,sel)
-        finally:
+        except:
             # check for Site Error notification and submit
             website.handle_error_page(self,self.selenium,self.id())
 

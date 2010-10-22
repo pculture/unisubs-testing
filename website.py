@@ -360,7 +360,7 @@ def verify_comment_text(self,sel,comment,result="posted",reply_text=None):
 
 
 def handle_error_page(self,sel,test_id):
-    sel.select_window("null")
+    sel.select_frame("relative=top")
     if sel.is_element_present("css=h2:contains('when you encountered this error.')"):
         sel.type("feedback_email", testvars.gmail)
         feedback_math = sel.get_text("css=form p + p label")
