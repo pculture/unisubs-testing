@@ -408,22 +408,24 @@ class subgroup_69(unittest.TestCase):
         sel.click(testvars.WidgetUI["Play_pause"])
         # wait for play to advance and test with screen button
         time.sleep(9)
+        print "1. screen button skip back"
         for x in range(0,3):  
             # get the time, skip back and get the time again
             start_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
             sel.click_at(testvars.WidgetUI["Skip_back"],"")
-            time.sleep(.50)
+            time.sleep(1)
             stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
             diff_time = int(start_time) - int(stop_time)
             self.failUnless(diff_time > 5)
             time.sleep(10)
         # wait for play to advance and test with keyboard key
         # get the time, skip back and get the time again
+        print "2. key cmd skip back"
         start_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
         sel.shift_key_down()
         sel.type_keys("css=.mirosubs-right",u'\u0009')
         sel.shift_key_up()
-        time.sleep(.20)
+        time.sleep(1)
         stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
         diff_time = int(start_time) - int(stop_time)
         self.failUnless(diff_time > 5)
@@ -452,22 +454,24 @@ class subgroup_69(unittest.TestCase):
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
         sel.click(testvars.WidgetUI["Play_pause"])
         # wait for play to advance and test with screen button
-        time.sleep(7)
+        time.sleep(10)
+        print "1. screen button skip back"
         for x in range(0,3):  
             # get the time, skip back and get the time again
             start_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
             sel.click_at(testvars.WidgetUI["Skip_back"],"")
-            time.sleep(.50)
+            time.sleep(1)
             stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
             diff_time = float(start_time) - float(stop_time)
             self.failUnless(diff_time > 5)
         # wait for play to advance and test with keyboard key
         # get the time, skip back and get the time again
         start_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
+        print "2. key button skip back"
         sel.shift_key_down()
         sel.type_keys("css=.mirosubs-right",u'\u0009')
         sel.shift_key_up()
-        time.sleep(.50)
+        time.sleep(1)
         stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
         diff_time = int(start_time) - int(stop_time)
         print diff_time
