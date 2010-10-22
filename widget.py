@@ -460,7 +460,7 @@ def wait_for_offsite_login(self,sel):
 
 def submit_sub_edits(self,sel):
     sel.click(testvars.WidgetUI["Next_step"])
-    sel.wait_for_page_to_load(testvars..MSTestVariables["TimeOut"])
+    sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     assertTrue(sel.is_element_present(testvars.video_video_info))
 
 
