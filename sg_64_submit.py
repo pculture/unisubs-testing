@@ -73,7 +73,7 @@ class subgroup_64(unittest.TestCase):
             except:
                 print "failure testing format: " + x
                 # check for Site Error notification and submit
-                website.handle_error_page(self,self.selenium,self.id())
+                
         
                 
     def test_532(self):
@@ -114,8 +114,7 @@ class subgroup_64(unittest.TestCase):
             except:
                 print "error encountered testing, format: " + x
                 # check for Site Error notification and submit
-                website.handle_error_page(self,sel,self.id())
-                sel.close()
+                
 
 
     def test_533(self):
@@ -127,34 +126,30 @@ class subgroup_64(unittest.TestCase):
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         sel.open("/")
-        try:
-            subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
-            print "submitting a vimeo video, format: "
-            vid_url = offsite.get_vimeo_video_url(self)
-            # Submit Video
-            print "logging in and submitting video"
-            website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
-            website.submit_video(self,sel,vid_url)
-            # Verify embed and player
-            print "verifying embed"
-            website.verify_submitted_video(self,sel,vid_url,embed_type="vimeo")
-            # Start sub widget
-            print "starting sub widget"
-            website.start_sub_widget(self,sel)
-            # Transcribe
-            print "transcribing video"
-            widget.transcribe_video(self,sel,subtextfile)
-            # Sync
-            print "syncing video"
-            widget.sync_video(self,sel,subtextfile,3,4)
-            # Review
-            print "review step - just submitting video"
-     #       widget.edit_text(self,sel,subtextfile, "vimeo video text edit")
-            widget.submit_sub_edits(self,sel)
-        except:
-            # check for Site Error notification and submit
-            website.handle_error_page(self,self.selenium,self.id())
-           
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
+        print "submitting a vimeo video, format: "
+        vid_url = offsite.get_vimeo_video_url(self)
+        # Submit Video
+        print "logging in and submitting video"
+        website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
+        website.submit_video(self,sel,vid_url)
+        # Verify embed and player
+        print "verifying embed"
+        website.verify_submitted_video(self,sel,vid_url,embed_type="vimeo")
+        # Start sub widget
+        print "starting sub widget"
+        website.start_sub_widget(self,sel)
+        # Transcribe
+        print "transcribing video"
+        widget.transcribe_video(self,sel,subtextfile)
+        # Sync
+        print "syncing video"
+        widget.sync_video(self,sel,subtextfile,3,4)
+        # Review
+        print "review step - just submitting video"
+ #       widget.edit_text(self,sel,subtextfile, "vimeo video text edit")
+        widget.submit_sub_edits(self,sel)
+
     def test_534(self):
         """Submit and subtitle youtube videos.
 
@@ -164,33 +159,30 @@ class subgroup_64(unittest.TestCase):
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         sel.open("/")
-        try:
-            subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
-            print "submitting a vimeo video, format: "
-            vid_url = offsite.get_youtube_video_url(self)
-            # Submit Video
-            print "logging in and submitting video"
-            website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
-            website.submit_video(self,sel,vid_url)
-            # Verify embed and player
-            print "verifying embed"
-            website.verify_submitted_video(self,sel,vid_url,embed_type="youtube")
-            # Start sub widget
-            print "starting sub widget"
-            website.start_sub_widget(self,sel)
-            # Transcribe
-            print "transcribing video"
-            widget.transcribe_video(self,sel,subtextfile)
-            # Sync
-            print "syncing video"
-            widget.sync_video(self,sel,subtextfile,3,4)
-            # Review
-            print "review step - just submitting video"
-            widget.submit_sub_edits(self,sel)
-        except:
-            # check for Site Error notification and submit
-            website.handle_error_page(self,self.selenium,self.id())
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
+        print "submitting a vimeo video, format: "
+        vid_url = offsite.get_youtube_video_url(self)
+        # Submit Video
+        print "logging in and submitting video"
+        website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
+        website.submit_video(self,sel,vid_url)
+        # Verify embed and player
+        print "verifying embed"
+        website.verify_submitted_video(self,sel,vid_url,embed_type="youtube")
+        # Start sub widget
+        print "starting sub widget"
+        website.start_sub_widget(self,sel)
+        # Transcribe
+        print "transcribing video"
+        widget.transcribe_video(self,sel,subtextfile)
+        # Sync
+        print "syncing video"
+        widget.sync_video(self,sel,subtextfile,3,4)
+        # Review
+        print "review step - just submitting video"
+        widget.submit_sub_edits(self,sel)
 
+         
     def test_538(self):
         """Submit and subtitle dailymotion videos.
 
@@ -199,32 +191,28 @@ class subgroup_64(unittest.TestCase):
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         sel.open("/")
-        try:
-            subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
-            print "submitting a vimeo video, format: "
-            vid_url = offsite.get_dailymotion_video_url(self)
-            # Submit Video
-            print "logging in and submitting video"
-            website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
-            website.submit_video(self,sel,vid_url)
-            # Verify embed and player
-            print "verifying embed"
-            website.verify_submitted_video(self,sel,vid_url,embed_type="dailymotion")
-            # Start sub widget
-            print "starting sub widget"
-            website.start_sub_widget(self,sel)
-            # Transcribe
-            print "transcribing video"
-            widget.transcribe_video(self,sel,subtextfile)
-            # Sync
-            print "syncing video"
-            widget.sync_video(self,sel,subtextfile,3,4)
-            # Review
-            print "review step - just submitting video"
-            widget.submit_sub_edits(self,sel)
-        except:
-            # check for Site Error notification and submit
-            website.handle_error_page(self,self.selenium,self.id())
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
+        print "submitting a vimeo video, format: "
+        vid_url = offsite.get_dailymotion_video_url(self)
+        # Submit Video
+        print "logging in and submitting video"
+        website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
+        website.submit_video(self,sel,vid_url)
+        # Verify embed and player
+        print "verifying embed"
+        website.verify_submitted_video(self,sel,vid_url,embed_type="dailymotion")
+        # Start sub widget
+        print "starting sub widget"
+        website.start_sub_widget(self,sel)
+        # Transcribe
+        print "transcribing video"
+        widget.transcribe_video(self,sel,subtextfile)
+        # Sync
+        print "syncing video"
+        widget.sync_video(self,sel,subtextfile,3,4)
+        # Review
+        print "review step - just submitting video"
+        widget.submit_sub_edits(self,sel)
 
 
 # Close the browser, log errors, perform cleanup
