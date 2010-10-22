@@ -73,21 +73,22 @@ class subgroup_81(unittest.TestCase):
         sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_fakesub.xml")
         sel.click(testvars.video_upload_subtitles)
         website.upload_subtitles(self,sel,sub_file)
-        self.assertTrue(sel.get_text("css=p.error_list:contains('Incorrect format of TTML subtitles')"))
+        self.assertTrue(sel.is_element_present("css=p.error_list:contains('Incorrect format of TTML subtitles')"))
+
         sel.click("css=a[id=closeBut]")
         
         print "2. invalid srt"
         sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_invalid.srt")
         sel.click(testvars.video_upload_subtitles)
         website.upload_subtitles(self,sel,sub_file)
-        self.assertTrue(sel.get_text("css=p.error_list:contains('Incorrect subtitles format')"))
+        self.assertTrue(sel.is_element_present("css=p.error_list:contains('Incorrect subtitles format')"))
         sel.click("css=a[id=closeBut]")
         
         print "3. unsupported format"
         sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_text.txt")
         sel.click(testvars.video_upload_subtitles)
         website.upload_subtitles(self,sel,sub_file)
-        self.assertEqual(sel.get_text("css=p.error_list:contains('Incorrect format. Upload srt')"))
+        self.assertTrue(sel.is_element_present("css=p.error_list:contains('Incorrect format. Upload srt')"))
         sel.click("css=a[id=closeBut]")
    
     def test_509(self):
