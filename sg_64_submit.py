@@ -69,7 +69,7 @@ class subgroup_64(unittest.TestCase):
                 # Review
                 print "starting review"
   #              widget.edit_text(self,sel,subtextfile)
-                sel.click(testvars.WidgetUI["Next_step"])
+                widget.submit_sub_edits(self,sel)
             except:
                 print "failure testing format: " + x
                 # check for Site Error notification and submit
@@ -110,7 +110,7 @@ class subgroup_64(unittest.TestCase):
                 # Review
                 print "starting review"
     #            widget.edit_text(self,sel,subtextfile)
-                sel.click(testvars.WidgetUI["Next_step"])
+                widget.submit_sub_edits(self,sel)
             except:
                 print "error encountered testing, format: " + x
                 # check for Site Error notification and submit
@@ -150,7 +150,7 @@ class subgroup_64(unittest.TestCase):
             # Review
             print "review step - just submitting video"
      #       widget.edit_text(self,sel,subtextfile, "vimeo video text edit")
-            sel.click(testvars.WidgetUI["Next_step"])
+            widget.submit_sub_edits(self,sel)
         finally:
             # check for Site Error notification and submit
             website.handle_error_page(self,self.selenium,self.id())
@@ -186,7 +186,7 @@ class subgroup_64(unittest.TestCase):
             widget.sync_video(self,sel,subtextfile,3,4)
             # Review
             print "review step - just submitting video"
-            sel.click(testvars.WidgetUI["Next_step"])
+            widget.submit_sub_edits(self,sel)
         finally:
             # check for Site Error notification and submit
             website.handle_error_page(self,self.selenium,self.id())
@@ -221,7 +221,7 @@ class subgroup_64(unittest.TestCase):
             widget.sync_video(self,sel,subtextfile,3,4)
             # Review
             print "review step - just submitting video"
-            sel.click(testvars.WidgetUI["Next_step"])
+            widget.submit_sub_edits(self,sel)
         finally:
             # check for Site Error notification and submit
             website.handle_error_page(self,self.selenium,self.id())
