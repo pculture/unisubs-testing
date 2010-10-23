@@ -262,15 +262,12 @@ def get_translated_lang(self,sel):
     print test_lang
     return test_lang
 
-def upload_subtitles(self,sel,sub_file,lang=None):
+def upload_subtitles(self,sel,sub_file,lang="English"):
     """Uploads subtitles for the specified language."
 
     """
     sel.click(testvars.video_upload_subtitles)
-    if lang == None:
-        sel.select("id_language", "label=English")
-    else:
-        sel.select("id_language", "label="+lang)
+    sel.select("css=form[id='upload-subtitles-form'] select", "label="+lang)
     sel.type("subtitles-file-field",sub_file)
 
 
@@ -289,9 +286,9 @@ def verify_sub_upload(self,sel,sub_file,lang=""):
         self.assertTrue("css=tr:nth-child("+str(sub_td)+") > td.last:contains("+sub+")")
         sub_td = sub_td + 1
     if lang == "":
-        self.assertEqual(sel.get_text("css=.active a"),"English")
+        self.assertEqual(sel.get_text("css=li.active a"),"English")
     else:
-        self.assertEqual(sel.get_text("css=.active a"),lang)
+        self.assertEqual(sel.get_text("css=li.active a"),lang)
 
 def translate_video(self,sel,url=None,lang=None):
     """Given the local url of a video, adds a translation.
