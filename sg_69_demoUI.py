@@ -452,6 +452,7 @@ class subgroup_69(unittest.TestCase):
         widget.sync_video(self,sel,subtextfile)
         #on step 3 test ctrl to skip back        
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
+        time.sleep(3)
         sel.click(testvars.WidgetUI["Play_pause"])
         # wait for play to advance and test with screen button
         time.sleep(10)
