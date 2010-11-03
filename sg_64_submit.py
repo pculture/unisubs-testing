@@ -160,7 +160,7 @@ class subgroup_64(unittest.TestCase):
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         sel.open("/")
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
-        print "submitting a vimeo video, format: "
+        print "submitting a youtube video, format: "
         vid_url = offsite.get_youtube_video_url(self)
         # Submit Video
         print "logging in and submitting video"
@@ -180,7 +180,7 @@ class subgroup_64(unittest.TestCase):
         widget.sync_video(self,sel,subtextfile,3,4)
         # Review
         print "review step - just submitting video"
-        widget.submit_sub_edits(self,sel)
+ #       widget.submit_sub_edits(self,sel)
 
          
     def test_538(self):
@@ -192,7 +192,7 @@ class subgroup_64(unittest.TestCase):
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         sel.open("/")
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
-        print "submitting a vimeo video, format: "
+        print "submitting a dailymotion video, format: "
         vid_url = offsite.get_dailymotion_video_url(self)
         # Submit Video
         print "logging in and submitting video"
@@ -212,7 +212,7 @@ class subgroup_64(unittest.TestCase):
         widget.sync_video(self,sel,subtextfile,3,4)
         # Review
         print "review step - just submitting video"
-        widget.submit_sub_edits(self,sel)
+ #       widget.submit_sub_edits(self,sel)
 
 
 # Close the browser, log errors, perform cleanup
