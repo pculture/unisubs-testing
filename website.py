@@ -221,7 +221,7 @@ def get_video_no_translations(self,sel):
     """
     sel.open("videos/")
     sort_videos_table(self,sel,"Translations","asc") 
-    row_no = 3
+    row_no = 0
     local_url = "none"
     
     subtitled_cell="css=tr:nth-child("+str(row_no)+") > "+testvars.videos_trans_td
@@ -250,7 +250,7 @@ def get_translated_lang(self,sel):
     """
     #get the original language
     original_lang = sel.get_text(testvars.video_original)
-    tab_no = 1
+    tab_no = 0
     tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+")"
     skip_list = [original_lang, "Video Info", "Metadata: Twitter", "Metadata: Geo", "Metadata: Wikipedia"]
     while sel.is_element_present(tab_li):
