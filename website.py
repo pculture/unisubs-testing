@@ -199,15 +199,15 @@ def get_video_with_translations(self,sel):
     row_no = 3
     local_url = "none"
     
-    subtitled_cell="css=tr:nth-child("+str(row_no)+") > "+testvars.videos_subtitled_td
+    subtitled_cell="css=tr:nth-child("+str(row_no)+") > "+testvars.videos_trans_td
     while sel.is_element_present(subtitled_cell):
-        subtitled_cell=("css=tr:nth-child("+str(row_no)+") > "+testvars.videos_subtitled_td)
-        if sel.get_text(subtitled_cell) == 'yes':
+        subtitled_cell=("css=tr:nth-child("+str(row_no)+") > "+testvars.videos_trans_td)
+        if int(sel.get_text(subtitled_cell)) > 0:
             local_url = sel.get_attribute("css=tr:nth-child("+str(row_no)+ ") > "+testvars.videos_url_td+" > a@href")
             break
         row_no = row_no + 1
         
-    if int(sel.get_text("css=tr:nth-child("+str(row_no)+ " ) > "+testvars.videos_trans_td)) == 0:
+    if local_url == "none":
         print "no translations - have to add one"
         get_video_no_translations(self,sel)
         translate_video(self,sel)
