@@ -215,6 +215,48 @@ class subgroup_64(unittest.TestCase):
  #       widget.submit_sub_edits(self,sel)
 
 
+    def test_376(self):
+        """Widget requires login to submit subtitles.
+
+        http://litmus.pculture.org/show_test.cgi?id=376 .
+
+               
+        """
+        print "starting" +self.shortDescription()
+        
+        sel = self.selenium
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        website.SiteLogout(self,sel)
+        vid_url = offsite.get_youtube_video_url(self)
+        # Submit Video
+        website.submit_video(self,sel,vid_url)
+        website.start_sub_widget(self,sel)        
+        # Check message in transcribe step
+        widget.verify_login_message(self,sel)
+        widget.transcribe_video(self,sel,subtextfile)
+        
+        # Check message in sync step
+        widget.verify_login_message(self,sel)
+        widget.sync_video(self,sel,subtextfile,2,2)
+
+        # Check message in review step and click done
+        widget.verify_login_message(self,sel)
+        sel.click(testvars.WidgetUI["Next_step"])
+        self.failUnless(sel.is_element_present("css=.mirosubs-modal-login"))
+        sel.click("css=.mirosubs-log")
+        #Login
+        widget.site_login_auth(self,sel)
+        sel.select_window("null")
+        self.assertTrue(sel.is_element_present(testvars.WidgetUI["Next_step"]),"Done button not found, maybe widget not redisplayed after login")
+        sel.click(testvars.WidgetUI["Next_step"])
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"]) 
+        print "logging out from site"
+        website.SiteLogout(self,sel)
+
+
+
 # Close the browser, log errors, perform cleanup
     def tearDown(self):
         """

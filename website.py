@@ -180,7 +180,11 @@ def verify_submitted_video(self,sel,vid_url,embed_type="html5"):
         self.assertTrue(sel.is_element_present("css=.mirosubs-videoDiv object[id$='_dailymotionplayer']"))
     else:
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv")
-        self.assertTrue(sel.is_element_present("css=.mirosubs-videoDiv video"))
+        if sel.is_element_present("css=.mirosubs-videoDiv object[data*='flowplayer']"):
+            vid_embed = 'flow'
+        elif sel.is_element_present("css=.mirosubs-videoDiv video"):
+            vid_embed = 'html5'
+        self.assertTrue(vid_embed,"video not embedded in site: "+str(vid_url))
         
    
     self.assertTrue(sel.is_element_present("css=.mirosubs-embed"),\
@@ -226,11 +230,11 @@ def get_video_no_translations(self,sel):
     
     subtitled_cell="css=tr:nth-child("+str(row_no)+") > "+testvars.videos_trans_td
     while sel.is_element_present(subtitled_cell):
-        subtitled_cell=("css=tr:nth-child("+str(row_no)+") > "+testvars.videos_trans_td)
         if int(sel.get_text(subtitled_cell)) == 0:
             local_url = sel.get_attribute("css=tr:nth-child("+str(row_no)+ ") > "+testvars.videos_url_td+" > a@href")
             break
         row_no = row_no + 1
+        subtitled_cell=("css=tr:nth-child("+str(row_no)+") > "+testvars.videos_trans_td)
         
     if local_url == "none":
         print "no untranslated vidoes - must add one."

@@ -219,8 +219,10 @@ class subgroup_69(unittest.TestCase):
         website.start_demo(self,sel)
         website.start_sub_widget(self,sel)
         # wait for video to load
-        mslib.wait_for_video_to_buffer(self,sel)
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_play_button"])
+        # set expert mode
+        mode_label = sel.get_text("css=.mirosubs-speedmode option:contains("+mode+")")
+        sel.select("//select", "label=" +mode_label)
         #play-pause with screen button
         print "play-pause with screen button"
         sel.click(testvars.WidgetUI["Play_pause"])
@@ -465,6 +467,7 @@ class subgroup_69(unittest.TestCase):
             stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
             diff_time = float(start_time) - float(stop_time)
             self.failUnless(diff_time > 5)
+            time.sleep(5)
         # wait for play to advance and test with keyboard key
         # get the time, skip back and get the time again
         start_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
