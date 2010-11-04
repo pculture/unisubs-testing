@@ -259,15 +259,14 @@ def get_translated_lang(self,sel):
     #get the original language
     original_lang = sel.get_text(testvars.video_original)
     tab_no = 1
-    tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+") > span.done_indicator"
+    tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+") > a .done_indicator"
     skip_list = [original_lang, "Video Info", "Metadata: Twitter", "Metadata: Geo", "Metadata: Wikipedia"]
     while sel.is_element_present(tab_li):
-        tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+") > span.done_indicator"
+        tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+") > a .done_indicator"
         if sel.get_text(tab_li) not in skip_list:
             test_lang = sel.get_text(tab_li)
             break
         tab_no = tab_no + 1
-    print test_lang
     return test_lang
 
 def upload_subtitles(self,sel,sub_file,lang="English"):
@@ -288,13 +287,12 @@ def verify_sub_upload(self,sel,sub_file,lang=""):
     for line in codecs.open(sub_file,encoding='utf-8'):
         subline = line.split(',')
         sub = subline[0].rstrip()
-
         self.assertTrue("css=tr:nth-child("+str(sub_td)+") > td.last:contains("+sub+")")
         sub_td = sub_td + 1
     if lang == "":
-        self.assertEqual(sel.get_text("css=li.active a"),"English")
+        self.assertEqual(sel.get_text("css=li.active a .done_indicator"),"English")
     else:
-        self.assertEqual(sel.get_text("css=li.active a"),lang)
+        self.assertEqual(sel.get_text("css=li.active a .done_indicator"),lang)
 
 def verify_subs(self,sel,sub_file):
     """Compares the displayed text for subtitles in the history table to the input file.

@@ -42,6 +42,7 @@ class subgroup_64(unittest.TestCase):
         sel.open("/")
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         ext_list = ("flv", "mpeg4", "mov")
+        vid_url = None
         for x in ext_list:
             try:
                 print "getting a video url from blip, format: "+ x
@@ -68,7 +69,7 @@ class subgroup_64(unittest.TestCase):
   #              widget.edit_text(self,sel,subtextfile)
                 widget.submit_sub_edits(self,sel)
             except:
-                print self.verificationErrors.append("error submitting "+ x+ " video: "+vid_url)
+                self.verificationErrors.append("error submitting "+ x+ " video: "+vid_url)
                 # check for Site Error notification and submit
                 
         
@@ -85,6 +86,7 @@ class subgroup_64(unittest.TestCase):
         sel.open("/")
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         ext_list = ("ogg", "ogv")
+        vid_url = None
         for x in ext_list:
             try:
                 print "submitting a blip video, format: "+ x
@@ -106,10 +108,9 @@ class subgroup_64(unittest.TestCase):
                 widget.sync_video(self,sel,subtextfile,3,4)
                 # Review
                 print "starting review"
-    #            widget.edit_text(self,sel,subtextfile)
                 widget.submit_sub_edits(self,sel)
             except:
-                print self.verificationErrors.append("error submitting "+ x+ " video: "+vid_url)
+                self.verificationErrors.append("error submitting "+ x+ " video: "+vid_url)
                 # check for Site Error notification and submit
                 
 
@@ -144,7 +145,6 @@ class subgroup_64(unittest.TestCase):
         widget.sync_video(self,sel,subtextfile,3,4)
         # Review
         print "review step - just submitting video"
- #       widget.edit_text(self,sel,subtextfile, "vimeo video text edit")
         widget.submit_sub_edits(self,sel)
 
     def test_534(self):
@@ -177,7 +177,7 @@ class subgroup_64(unittest.TestCase):
         widget.sync_video(self,sel,subtextfile,3,4)
         # Review
         print "review step - just submitting video"
- #       widget.submit_sub_edits(self,sel)
+        widget.submit_sub_edits(self,sel)
 
          
     def test_538(self):
@@ -209,7 +209,7 @@ class subgroup_64(unittest.TestCase):
         widget.sync_video(self,sel,subtextfile,3,4)
         # Review
         print "review step - just submitting video"
- #       widget.submit_sub_edits(self,sel)
+        widget.submit_sub_edits(self,sel)
 
 
     def test_376(self):
