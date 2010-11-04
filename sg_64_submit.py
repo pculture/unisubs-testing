@@ -9,9 +9,6 @@ import widget
 import offsite
 import testvars
 import selvars
-import json
-import sauce_auth
-
 
 class subgroup_64(unittest.TestCase):
     """

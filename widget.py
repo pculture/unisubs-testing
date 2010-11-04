@@ -460,9 +460,11 @@ def wait_for_offsite_login(self,sel):
         time.sleep(1)
 
 def submit_sub_edits(self,sel):
+    sel.select_frame("relative=top")
+    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     sel.click(testvars.WidgetUI["Next_step"])
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-    self.assertTrue(sel.is_element_present(testvars.video_video_info))
+    mslib.wait_for_element_present(self,sel,testvars.video_video_info)
 
 
 def close_widget(self,sel,submit="Discard"):

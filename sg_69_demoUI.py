@@ -13,7 +13,7 @@ import mslib, website, widget, offsite, testvars
 
 
 class subgroup_69(unittest.TestCase):
-    """Subgroup 69: Widget functionality tests using the site demo.
+    """Widget UI tests.
 
     Litmus Subgroup 69 - Demo Wiget UI tests
     389 How-to video continue
@@ -221,7 +221,7 @@ class subgroup_69(unittest.TestCase):
         # wait for video to load
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_play_button"])
         # set expert mode
-        mode_label = sel.get_text("css=.mirosubs-speedmode option:contains("+mode+")")
+        mode_label = sel.get_text("css=.mirosubs-speedmode option:contains('Expert')")
         sel.select("//select", "label=" +mode_label)
         #play-pause with screen button
         print "play-pause with screen button"
@@ -466,8 +466,9 @@ class subgroup_69(unittest.TestCase):
             time.sleep(1)
             stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
             diff_time = float(start_time) - float(stop_time)
-            self.failUnless(diff_time > 5)
-            time.sleep(5)
+            self.assertTrue(diff_time > 5)
+            #wait for playback to progress
+            time.sleep(10)
         # wait for play to advance and test with keyboard key
         # get the time, skip back and get the time again
         start_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
@@ -479,7 +480,7 @@ class subgroup_69(unittest.TestCase):
         stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
         diff_time = int(start_time) - int(stop_time)
         print diff_time
-        self.failUnless(diff_time > 5)
+        self.assertTrue(diff_time > 5)
 
 
     def test_406(self):

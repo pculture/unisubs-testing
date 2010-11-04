@@ -107,7 +107,11 @@ def submit_video(self,sel,url):
     sel.type("video_url", url)
     sel.click(testvars.WebsiteUI["Video_Submit_Button"])
     
-    
+def front_page_submit(self,sel,url):
+    sel.open("/")
+    sel.type("css=input[name=video_url]", "http://www.youtube.com/watch?v=4Q97ilVo1T4&feature=topvideos")
+    sel.click("css=button:contains('Go')")
+
 
 def start_sub_widget(self,sel,wig_menu=testvars.WebsiteUI["SubtitleMe_menu"],skip="True",vid_lang="English",sub_lang="English"):
     """Start the Subtitle Widget using the Subtitle Me menu.
@@ -255,10 +259,10 @@ def get_translated_lang(self,sel):
     #get the original language
     original_lang = sel.get_text(testvars.video_original)
     tab_no = 1
-    tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+")"
+    tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+") > span.done_indicator"
     skip_list = [original_lang, "Video Info", "Metadata: Twitter", "Metadata: Geo", "Metadata: Wikipedia"]
     while sel.is_element_present(tab_li):
-        tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+")"
+        tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+") > span.done_indicator"
         if sel.get_text(tab_li) not in skip_list:
             test_lang = sel.get_text(tab_li)
             break
@@ -285,14 +289,25 @@ def verify_sub_upload(self,sel,sub_file,lang=""):
         subline = line.split(',')
         sub = subline[0].rstrip()
 
-   #     siteline = sel.get_text("css=tr:nth-child("+str(sub_td)+") > td.last")
-   #     sitesub = siteline[16:].split(',')
         self.assertTrue("css=tr:nth-child("+str(sub_td)+") > td.last:contains("+sub+")")
         sub_td = sub_td + 1
     if lang == "":
         self.assertEqual(sel.get_text("css=li.active a"),"English")
     else:
         self.assertEqual(sel.get_text("css=li.active a"),lang)
+
+def verify_subs(self,sel,sub_file):
+    """Compares the displayed text for subtitles in the history table to the input file.
+
+    """
+    sub_td = 1
+    for line in codecs.open(sub_file,encoding='utf-8'):
+        subline = line.split(',')
+        sub = subline[0].rstrip()
+        self.assertTrue("css=tr:nth-child("+str(sub_td)+") > td div.sub_content:contains("+sub+")")
+        sub_td = sub_td + 1
+
+
 
 def translate_video(self,sel,url=None,lang=None):
     """Given the local url of a video, adds a translation.

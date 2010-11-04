@@ -8,12 +8,8 @@ import testvars
 import selvars
 import comments_text
 
-
-
-
-
 class subgroup_80(unittest.TestCase):
-    """Litmus Subgroup 80 - comments.
+    """Comments tests.
     
         Tests designed to verify adding comments to original lang
         and translated lang of videos
