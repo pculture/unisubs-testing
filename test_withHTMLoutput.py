@@ -12,7 +12,8 @@ import litmusresult
 import mslib
 import sg_64_submit
 import sg_65_login 
-import sg_69_demoUI 
+import sg_69_demoUI
+import sg_70_revisions
 import sg_78_widget_offsite
 import sg_80_comments
 import sg_81_ul_dl
