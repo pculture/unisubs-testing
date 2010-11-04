@@ -109,7 +109,7 @@ def submit_video(self,sel,url):
     
 def front_page_submit(self,sel,url):
     sel.open("/")
-    sel.type("css=input[name=video_url]", "http://www.youtube.com/watch?v=4Q97ilVo1T4&feature=topvideos")
+    sel.type("css=input[name=video_url]", url)
     sel.click("css=button:contains('Go')")
 
 
@@ -319,7 +319,7 @@ def translate_video(self,sel,url=None,lang=None):
         print "opening video page to translate"
         sel.open(url)
     self.assertTrue(sel.is_element_present("css=a#add_translation"),"add translation button not found")
-    sel.click(testvars.add_translation_button)       
+    sel.click(testvars.video_add_translation)       
 
 def sort_videos_table(self,sel,column,order):
     """Sort the videos table by the specified heading in the specified order
@@ -372,7 +372,18 @@ def verify_comment_text(self,sel,comment,result="posted",reply_text=None):
         if sel.is_element_present("css=ul.comments.big_list li:nth-child(1) > div.info p"):
             self.assertNotEqual(sel.get_text("css=ul.comments.big_list li:nth-child(1) > div.info p"),"comment", \
                                 "comment posted without login")  
-   
+
+def verify_latest_history(self,sel,rev=None,user=None,time=None,text=None):
+    print "verifying history tab contents"
+    sel.click(testvars.history_tab)
+    if rev:
+        self.assertTrue(sel.is_element_present("css=div[id=revisions-tab] tr:nth-child(1) > td:nth-child(1) > a:contains('"+rev+"')"))
+    if user:
+        self.assertTrue(sel.is_element_present("css=div[id=revisions-tab] tr:nth-child(1) > td:nth-child(2) > a:contains('"+user+"')"))
+    if time:
+        self.assertTrue(sel.is_element_present("css=div[id=revisions-tab] tr:nth-child(1) > td:nth-child(4):contains('"+time+"')"))
+    if text:
+        self.assertTrue(sel.is_element_present("css=div[id=revisions-tab] tr:nth-child(1) > td:nth-child(5):contains('"+text+"')"))
 
 
 def handle_error_page(self,sel,test_id):

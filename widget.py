@@ -237,7 +237,7 @@ def edit_text(self,sel,subtextfile,new_text="my hovercraft is full of eels"):
     Options:
         new_text - text string
 
-    Pre-condition - can use this to sync on Step 2, Step 3 or Edit.
+    Pre-condition - can use this to sync on Step 2, Step 3.
     """
     sel.select_window("null")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
@@ -462,9 +462,18 @@ def wait_for_offsite_login(self,sel):
 def submit_sub_edits(self,sel):
     sel.select_frame("relative=top")
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
+    #Go to step 3 before submit
+    if not sel.get_text("css=li.mirosubs-activestep") == "3":
+        sel.click("css=.mirosubs-help-heading li a:contains('3')")
     sel.click(testvars.WidgetUI["Next_step"])
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     mslib.wait_for_element_present(self,sel,testvars.video_video_info)
+
+def goto_step(self,sel,step="3"):
+    
+    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
+    sel.click("css=.mirosubs-help-heading li a:contains('"+step+"')")
+    self.assertTrue(sel.get_text("css=li.mirosubs-activestep:contains('"+step+"')"))
 
 
 def close_widget(self,sel,submit="Discard"):

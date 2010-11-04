@@ -7,7 +7,7 @@ preE=" --- ERROR: "
 
 
 MSTestVariables = {"DataDirectory": os.path.join(os.getcwd(), "TestInput"), \
-                   "TimeOut":"90000", \
+                   "TimeOut":"190000", \
                   }
 
 # Mapping to the MiroSubs website UI navigations buttons and links
@@ -39,9 +39,15 @@ videos_subtitled_td = "td:nth-child(5)"
 video_original = "css=ul.left_nav li a[href:contains('original/')]"
 video_metadata = "css=ul.left_nav li a[href:contains('meta-')]"
 video_video_info = "css=li a:contains('Video Info')"
+## action links
 video_upload_subtitles = "css=a[id=upload-subtitles-link]"
+video_edit_subtitles = "css=a[id=edit_subtitles]"
+video_add_translation = "css=a[id=add_translation]"
+
+history_tab = "css=.inline_text:contains('History')"
 comments_tab = "css=.inline_text:contains('Comments')"
-add_translation_button = "css=a[id=add_translation]"
+transcripts_tab = "css=.inline_text:contains('Subtitles')"
+
 
 WidgetUI = {"Video_playPause":"css=.mirosubs-playPause", \
             "Video_play_button":"css=.mirosubs-playPause.play", \
@@ -60,6 +66,9 @@ WidgetUI = {"Video_playPause":"css=.mirosubs-playPause", \
             "Select_language":"css=h3:contains('Add subtitles')", \
             "Close_widget":"css=span[class=mirosubs-modal-widget-title-close]"    
         }
+widget_step3 = "css=.mirosubs-help-heading li a:contains('3')"
+widget_step2 = "css=.mirosubs-help-heading li a:contains('2')"
+widget_step1 = "css=.mirosubs-help-heading li a:contains('1')"
 
 # TestData
 
