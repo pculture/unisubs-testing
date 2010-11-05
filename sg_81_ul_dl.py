@@ -73,7 +73,7 @@ class subgroup_81(unittest.TestCase):
         sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_fakesub.xml")
         sel.click(testvars.video_upload_subtitles)
         website.upload_subtitles(self,sel,sub_file)
-        mslib.wait_for_element_present("css=p.error_list")
+        mslib.wait_for_element_present(self,sel,"css=p.error_list")
         self.assertTrue(sel.is_element_present("css=p.error_list:contains('Incorrect format of TTML subtitles')"))
         sel.click("css=a[id=closeBut]")
         

@@ -66,6 +66,7 @@ WidgetUI = {"Video_playPause":"css=.mirosubs-playPause", \
             "Select_language":"css=h3:contains('Add subtitles')", \
             "Close_widget":"css=span[class=mirosubs-modal-widget-title-close]"    
         }
+widget_steps = "css=.mirosubs-help-heading li a"
 widget_step3 = "css=.mirosubs-help-heading li a:contains('3')"
 widget_step2 = "css=.mirosubs-help-heading li a:contains('2')"
 widget_step1 = "css=.mirosubs-help-heading li a:contains('1')"

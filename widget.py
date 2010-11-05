@@ -460,10 +460,12 @@ def wait_for_offsite_login(self,sel):
         time.sleep(1)
 
 def submit_sub_edits(self,sel):
+    print " * Submit subtitles"
     sel.select_frame("relative=top")
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
+    #give video a chance to load
+    mslib.wait_for_element_present(self,sel,testvars.widget_steps)
     #Go to step 3 before submit
-    if not sel.get_text("css=li.mirosubs-activestep") == "3":
+    if not sel.get_text("css=li a.mirosubs-activestep") == "3":
         sel.click("css=.mirosubs-help-heading li a:contains('3')")
     sel.click(testvars.WidgetUI["Next_step"])
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
