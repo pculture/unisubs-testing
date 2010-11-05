@@ -69,7 +69,7 @@ class subgroup_64(unittest.TestCase):
   #              widget.edit_text(self,sel,subtextfile)
                 widget.submit_sub_edits(self,sel)
             except:
-                self.verificationErrors.append("error submitting "+ x+ " video: "+vid_url)
+                self.verificationErrors.append("error submitting "+ str(x)+ " video: "+str(vid_url))
                 # check for Site Error notification and submit
                 
         
@@ -110,7 +110,7 @@ class subgroup_64(unittest.TestCase):
                 print "starting review"
                 widget.submit_sub_edits(self,sel)
             except:
-                self.verificationErrors.append("error submitting "+ x+ " video: "+vid_url)
+                self.verificationErrors.append("error submitting "+ str(x)+ " video: "+str(vid_url))
                 # check for Site Error notification and submit
                 
 

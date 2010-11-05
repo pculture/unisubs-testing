@@ -158,7 +158,7 @@ def verify_login(self,sel,username="sub_writer"):
 
 
 
-def verify_submitted_video(self,sel,vid_url,embed_type="html5"):
+def verify_submitted_video(self,sel,vid_url,embed_type=""):
     """
     Description: Verifies the contents of the main video page of a submitted video.
     Require's the original url and expected type of embed.  Assumes html5 video if not specified.
@@ -169,7 +169,7 @@ def verify_submitted_video(self,sel,vid_url,embed_type="html5"):
     """
     print " * verify submitted video, embed type"
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-   
+    vid_embed = None
     if embed_type == "flow":
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv object")
         self.assertTrue(sel.is_element_present("css=.mirosubs-videoDiv object[data*='flowplayer']"))
