@@ -161,7 +161,7 @@ def transcribe_enter_text(self,sel):
     """ Handle the text entry in Step 1 typing for all browsers
 
     """
-    if (selvars.vbrowser == "*firefox") or (selvars.vbrowser == "*chrome"):
+    if (selvars.set_browser() == "*firefox") or (selvars.set_browser()== "*chrome"):
         sel.key_press("css=.trans", "13")
     else:
         sel.focus("css=input[class*=trans]")
@@ -242,8 +242,8 @@ def edit_text(self,sel,subtextfile,new_text="my hovercraft is full of eels"):
     sel.select_window("null")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
     sub_li=1
+    sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") > .mirosubs-title"
     for line in open(subtextfile):
-        sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") > .mirosubs-title"
         sel.focus(sub_cell)
         sel.click(sub_cell)
         mslib.wait_for_element_present(self,sel,"css=textarea")
@@ -252,6 +252,7 @@ def edit_text(self,sel,subtextfile,new_text="my hovercraft is full of eels"):
         sub_cell_text=sel.get_text(sub_cell)
         self.assertEqual(sub_cell_text.rstrip(),new_text.rstrip())
         sub_li = sub_li + 1
+        sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") > .mirosubs-title"
         
 def drag_time_bubbles(self,sel,subtextfile):
     """
@@ -475,7 +476,7 @@ def goto_step(self,sel,step="3"):
     
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     sel.click("css=.mirosubs-help-heading li a:contains('"+step+"')")
-    self.assertTrue(sel.get_text("css=li.mirosubs-activestep:contains('"+step+"')"))
+    self.assertTrue(sel.get_text("css=li a.mirosubs-activestep:contains('"+step+"')"))
 
 
 def close_widget(self,sel,submit="Discard"):

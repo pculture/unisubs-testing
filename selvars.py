@@ -4,24 +4,17 @@ testvars uses these values if they exist, they get set at the commandline
 by test_withHTMLoutput.py
 
 """
-
 import test_withHTMLoutput as controller
 import sauce_auth
 import json
 
 
-""" localhost should default to 'localhost' unless using sauce, then it
-    needs to be the sauce url
-"""
+def set_localhost(): 
+    """ localhost should default to 'localhost'.
 
-if controller.testsauce==True:
-    sauce = True
-else:
-    sauce = False
-        
-
-
-def set_localhost():
+    If we are runnign tests on sauce on-demand, then it
+    needs to be the sauce url.
+    """
     if controller.testsauce==True:
         localhost = "saucelabs.com"
     else:
@@ -59,15 +52,10 @@ def set_widget_null_page():
         page = "mirosubs_tests/dev-widget-null.html"
     return page
 
-if controller.testbrowser:
-    vbrowser = "*"+controller.testbrowser
-else:
-    vbrowser = "*firefox"
-
 
 def set_browser(testid="none",testdesc="none"):
     """ Sets up the browser to either the *browser name or the correct
-    json string if the tests are to be run with sauce
+    json string if the tests are to be run with sauce on-demand
     """
     # if using sauce - create the correctly formated json string
     # - assume windows 2003

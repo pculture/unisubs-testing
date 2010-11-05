@@ -1,8 +1,3 @@
-"""Functions to take care of business on the universalsubtitles website
-
-
-"""
-
 from selenium import selenium
 
 import unittest
@@ -267,7 +262,7 @@ def get_translated_lang(self,sel):
             break
         tab_no = tab_no + 1
         tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+") > a"
-    return test_lang.rstrip()
+    return test_lang[0].rstrip()
 
 def upload_subtitles(self,sel,sub_file,lang="English"):
     """Uploads subtitles for the specified language."
@@ -306,7 +301,6 @@ def verify_subs(self,sel,sub_file):
         sub = subline[0].rstrip()
         self.assertTrue("css=tr:nth-child("+str(sub_td)+") > td div.sub_content:contains("+sub+")")
         sub_td = sub_td + 1
-
 
 
 def translate_video(self,sel,url=None,lang=None):

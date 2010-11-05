@@ -11,9 +11,6 @@ import testvars
 import selvars
 
 
-
-
-
 class subgroup_78(unittest.TestCase):
     """
     Litmus Subgroup 64 - offsite subwidget:

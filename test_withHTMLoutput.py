@@ -22,7 +22,7 @@ import sg_81_ul_dl
 
 from optparse import OptionParser
 parser = OptionParser()
-parser.add_option("-s", "--sauce", action="store_true", dest="sauce",
+parser.add_option("-s", "--sauce", action="store_true", dest="sauce", default=False,
                   help='Runs the test on saucelabs.com using specified browser')
 parser.add_option("-b", "--browser", action="store",
                   choices=('firefox','chrome','opera', 'safari', 'iexplore', 'googlechrome'),type="choice",
