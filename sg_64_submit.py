@@ -26,6 +26,7 @@ class subgroup_64(unittest.TestCase):
         self.verificationErrors = []
         self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), selvars.set_site() )
         self.selenium.start()
+        print "starting: " +self.id() +"-"+self.shortDescription()
 
 ## The test cases of the subgroup.
 
@@ -219,8 +220,7 @@ class subgroup_64(unittest.TestCase):
 
                
         """
-        print "starting" +self.shortDescription()
-        
+                
         sel = self.selenium
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])

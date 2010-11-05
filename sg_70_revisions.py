@@ -28,6 +28,7 @@ class subgroup_70(unittest.TestCase):
         self.verificationErrors = []
         self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), selvars.set_site() )
         self.selenium.start()
+        print "starting: " +self.id() +"-"+self.shortDescription()
 
 ## The test cases of the subgroup.
 
