@@ -26,19 +26,19 @@ def set_test_browser():
     """Returns the browser name for the litmus platform field"
 
     """
-    if selvars.vbrowser == "*firefox":
+    if selvars.set_browser() == "*firefox":
         return "Firefox"
-    elif selvars.vbrowser == "*chrome":
+    elif selvars.set_browser() == "*chrome":
         return "Firefox"
-    elif selvars.vbrowser == "*safari":
+    elif selvars.set_browser() == "*safari":
         return "Safari"
-    elif selvars.vbrowser == "*opera":
+    elif selvars.set_browser() == "*opera":
         return "Opera"
-    elif selvars.vbrowser == "*iexplore":
+    elif selvars.set_browser() == "*iexplore":
         return "IE 8"
-    elif selvars.vbrowser == "*iexploreproxy":
+    elif selvars.set_browser() == "*iexploreproxy":
         return "IE 8"
-    elif selvars.vbrowser == "*googlechrome":
+    elif selvars.set_browser() == "*googlechrome":
         return "Google Chrome"
     else:
         print "no idea what the browser is"

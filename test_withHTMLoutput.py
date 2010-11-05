@@ -9,7 +9,6 @@ import StringIO
 import sys
 import HTMLTestRunner
 import litmusresult
-import mslib
 import sg_64_submit
 import sg_65_login 
 import sg_69_demoUI
@@ -19,25 +18,28 @@ import sg_80_comments
 import sg_81_ul_dl
 
 
-
 from optparse import OptionParser
 parser = OptionParser()
 parser.add_option("-s", "--sauce", action="store_true", dest="sauce", default=False,
                   help='Runs the test on saucelabs.com using specified browser')
+
 parser.add_option("-b", "--browser", action="store",
                   choices=('firefox','chrome','opera', 'safari', 'iexplore', 'googlechrome'),type="choice",
                   dest="browser", default="firefox",
                   help='Possible browser choices: firefox,chrome,opera, safari, iexplore, googlechrome'
                   )
 
-parser.add_option("-p", "--port", action="store", type="int", dest="port")
+parser.add_option("-p", "--port", action="store", type="int", dest="port", default=4444)
+
 parser.add_option("-u", "--siteurl", action="store",
                   choices=('dev', 'staging'),type="choice",
                   dest="site", default='dev',
                   help="""dev for: http://dev.universalsubtitles.org,
                         staging for: http://staging.universalsubtitles.org""")
-parser.add_option("-l", "--litmus",action="store_true",dest="litmus",
+
+parser.add_option("-l", "--litmus",action="store_true",dest="litmus",default=False,
                   help='Sends test output directly to litmus.pculture.org')
+
 parser.add_option("-i", "--buildid", action="store", dest="buildid",
                   default=time.strftime("%Y%m%d", time.gmtime()) + "99",
                   help="specify the build id of the litmus testrun results to display there")
