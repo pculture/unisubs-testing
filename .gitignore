@@ -1,2 +1,5 @@
 # ignore .pyc files
 *.pyc
+# ignore results files
+Results/*.html
+
