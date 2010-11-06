@@ -1,0 +1,388 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module HTMLTestRunner</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>HTMLTestRunner</strong></big></big> (version 0.8.1)</font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/janetPCF/RC-testing/universal-subtitles/HTMLTestRunner.py">/Users/janetPCF/RC-testing/universal-subtitles/HTMLTestRunner.py</a></font></td></tr></table>
+    <p><tt>A&nbsp;TestRunner&nbsp;for&nbsp;use&nbsp;with&nbsp;the&nbsp;Python&nbsp;unit&nbsp;testing&nbsp;framework.&nbsp;It<br>
+generates&nbsp;a&nbsp;HTML&nbsp;report&nbsp;to&nbsp;show&nbsp;the&nbsp;result&nbsp;at&nbsp;a&nbsp;glance.<br>
+&nbsp;<br>
+The&nbsp;simplest&nbsp;way&nbsp;to&nbsp;use&nbsp;this&nbsp;is&nbsp;to&nbsp;invoke&nbsp;its&nbsp;<a href="#main">main</a>&nbsp;method.&nbsp;E.g.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;unittest<br>
+&nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;<a href="#HTMLTestRunner">HTMLTestRunner</a><br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;define&nbsp;your&nbsp;tests&nbsp;...<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;__name__&nbsp;==&nbsp;'__main__':<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#HTMLTestRunner">HTMLTestRunner</a>.<a href="#main">main</a>()<br>
+&nbsp;<br>
+&nbsp;<br>
+For&nbsp;more&nbsp;customization&nbsp;options,&nbsp;instantiates&nbsp;a&nbsp;<a href="#HTMLTestRunner">HTMLTestRunner</a>&nbsp;<a href="__builtin__.html#object">object</a>.<br>
+<a href="#HTMLTestRunner">HTMLTestRunner</a>&nbsp;is&nbsp;a&nbsp;counterpart&nbsp;to&nbsp;unittest's&nbsp;TextTestRunner.&nbsp;E.g.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;output&nbsp;to&nbsp;a&nbsp;file<br>
+&nbsp;&nbsp;&nbsp;&nbsp;fp&nbsp;=&nbsp;file('my_report.html',&nbsp;'wb')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;runner&nbsp;=&nbsp;<a href="#HTMLTestRunner">HTMLTestRunner</a>.<a href="#HTMLTestRunner">HTMLTestRunner</a>(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stream=fp,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title='My&nbsp;unit&nbsp;test',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;description='This&nbsp;demonstrates&nbsp;the&nbsp;report&nbsp;output&nbsp;by&nbsp;<a href="#HTMLTestRunner">HTMLTestRunner</a>.'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Use&nbsp;an&nbsp;external&nbsp;stylesheet.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;See&nbsp;the&nbsp;<a href="#Template_mixin">Template_mixin</a>&nbsp;class&nbsp;for&nbsp;more&nbsp;customizable&nbsp;options<br>
+&nbsp;&nbsp;&nbsp;&nbsp;runner.STYLESHEET_TMPL&nbsp;=&nbsp;'&lt;link&nbsp;rel="stylesheet"&nbsp;href="my_stylesheet.css"&nbsp;type="text/css"&gt;'<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;run&nbsp;the&nbsp;test<br>
+&nbsp;&nbsp;&nbsp;&nbsp;runner.run(my_test_suite)<br>
+&nbsp;<br>
+&nbsp;<br>
+------------------------------------------------------------------------<br>
+Copyright&nbsp;(c)&nbsp;2004-2006,&nbsp;Wai&nbsp;Yip&nbsp;Tung<br>
+All&nbsp;rights&nbsp;reserved.<br>
+&nbsp;<br>
+Redistribution&nbsp;and&nbsp;use&nbsp;in&nbsp;source&nbsp;and&nbsp;binary&nbsp;forms,&nbsp;with&nbsp;or&nbsp;without<br>
+modification,&nbsp;are&nbsp;permitted&nbsp;provided&nbsp;that&nbsp;the&nbsp;following&nbsp;conditions&nbsp;are<br>
+met:<br>
+&nbsp;<br>
+*&nbsp;Redistributions&nbsp;of&nbsp;source&nbsp;code&nbsp;must&nbsp;retain&nbsp;the&nbsp;above&nbsp;copyright&nbsp;notice,<br>
+&nbsp;&nbsp;this&nbsp;list&nbsp;of&nbsp;conditions&nbsp;and&nbsp;the&nbsp;following&nbsp;disclaimer.<br>
+*&nbsp;Redistributions&nbsp;in&nbsp;binary&nbsp;form&nbsp;must&nbsp;reproduce&nbsp;the&nbsp;above&nbsp;copyright<br>
+&nbsp;&nbsp;notice,&nbsp;this&nbsp;list&nbsp;of&nbsp;conditions&nbsp;and&nbsp;the&nbsp;following&nbsp;disclaimer&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;documentation&nbsp;and/or&nbsp;other&nbsp;materials&nbsp;provided&nbsp;with&nbsp;the&nbsp;distribution.<br>
+*&nbsp;Neither&nbsp;the&nbsp;name&nbsp;Wai&nbsp;Yip&nbsp;Tung&nbsp;nor&nbsp;the&nbsp;names&nbsp;of&nbsp;its&nbsp;contributors&nbsp;may&nbsp;be<br>
+&nbsp;&nbsp;used&nbsp;to&nbsp;endorse&nbsp;or&nbsp;promote&nbsp;products&nbsp;derived&nbsp;from&nbsp;this&nbsp;software&nbsp;without<br>
+&nbsp;&nbsp;specific&nbsp;prior&nbsp;written&nbsp;permission.<br>
+&nbsp;<br>
+THIS&nbsp;SOFTWARE&nbsp;IS&nbsp;PROVIDED&nbsp;BY&nbsp;THE&nbsp;COPYRIGHT&nbsp;HOLDERS&nbsp;AND&nbsp;CONTRIBUTORS&nbsp;"AS<br>
+IS"&nbsp;AND&nbsp;ANY&nbsp;EXPRESS&nbsp;OR&nbsp;IMPLIED&nbsp;WARRANTIES,&nbsp;INCLUDING,&nbsp;BUT&nbsp;NOT&nbsp;LIMITED<br>
+TO,&nbsp;THE&nbsp;IMPLIED&nbsp;WARRANTIES&nbsp;OF&nbsp;MERCHANTABILITY&nbsp;AND&nbsp;FITNESS&nbsp;FOR&nbsp;A<br>
+PARTICULAR&nbsp;PURPOSE&nbsp;ARE&nbsp;DISCLAIMED.&nbsp;IN&nbsp;NO&nbsp;EVENT&nbsp;SHALL&nbsp;THE&nbsp;COPYRIGHT&nbsp;OWNER<br>
+OR&nbsp;CONTRIBUTORS&nbsp;BE&nbsp;LIABLE&nbsp;FOR&nbsp;ANY&nbsp;DIRECT,&nbsp;INDIRECT,&nbsp;INCIDENTAL,&nbsp;SPECIAL,<br>
+EXEMPLARY,&nbsp;OR&nbsp;CONSEQUENTIAL&nbsp;DAMAGES&nbsp;(INCLUDING,&nbsp;BUT&nbsp;NOT&nbsp;LIMITED&nbsp;TO,<br>
+PROCUREMENT&nbsp;OF&nbsp;SUBSTITUTE&nbsp;GOODS&nbsp;OR&nbsp;SERVICES;&nbsp;LOSS&nbsp;OF&nbsp;USE,&nbsp;DATA,&nbsp;OR<br>
+PROFITS;&nbsp;OR&nbsp;BUSINESS&nbsp;INTERRUPTION)&nbsp;HOWEVER&nbsp;CAUSED&nbsp;AND&nbsp;ON&nbsp;ANY&nbsp;THEORY&nbsp;OF<br>
+LIABILITY,&nbsp;WHETHER&nbsp;IN&nbsp;CONTRACT,&nbsp;STRICT&nbsp;LIABILITY,&nbsp;OR&nbsp;TORT&nbsp;(INCLUDING<br>
+NEGLIGENCE&nbsp;OR&nbsp;OTHERWISE)&nbsp;ARISING&nbsp;IN&nbsp;ANY&nbsp;WAY&nbsp;OUT&nbsp;OF&nbsp;THE&nbsp;USE&nbsp;OF&nbsp;THIS<br>
+SOFTWARE,&nbsp;EVEN&nbsp;IF&nbsp;ADVISED&nbsp;OF&nbsp;THE&nbsp;POSSIBILITY&nbsp;OF&nbsp;SUCH&nbsp;DAMAGE.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="StringIO.html">StringIO</a><br>
+<a href="datetime.html">datetime</a><br>
+</td><td width="25%" valign=top><a href="xml.sax.saxutils.html">xml.sax.saxutils</a><br>
+<a href="sys.html">sys</a><br>
+</td><td width="25%" valign=top><a href="time.html">time</a><br>
+<a href="unittest.html">unittest</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="HTMLTestRunner.html#OutputRedirector">OutputRedirector</a>
+</font></dt><dt><font face="helvetica, arial"><a href="HTMLTestRunner.html#Template_mixin">Template_mixin</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="HTMLTestRunner.html#HTMLTestRunner">HTMLTestRunner</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="unittest.html#TestProgram">unittest.TestProgram</a>(<a href="__builtin__.html#object">__builtin__.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="HTMLTestRunner.html#TestProgram">TestProgram</a>
+</font></dt><dt><font face="helvetica, arial"><a href="HTMLTestRunner.html#TestProgram">TestProgram</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="HTMLTestRunner">class <strong>HTMLTestRunner</strong></a>(<a href="HTMLTestRunner.html#Template_mixin">Template_mixin</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="HTMLTestRunner.html#HTMLTestRunner">HTMLTestRunner</a></dd>
+<dd><a href="HTMLTestRunner.html#Template_mixin">Template_mixin</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="HTMLTestRunner-__init__"><strong>__init__</strong></a>(self, stream<font color="#909090">=&lt;open file '&lt;stdout&gt;', mode 'w'&gt;</font>, verbosity<font color="#909090">=1</font>, title<font color="#909090">=None</font>, description<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="HTMLTestRunner-generateReport"><strong>generateReport</strong></a>(self, test, result)</dt></dl>
+
+<dl><dt><a name="HTMLTestRunner-getReportAttributes"><strong>getReportAttributes</strong></a>(self, result)</dt><dd><tt>Return&nbsp;report&nbsp;attributes&nbsp;as&nbsp;a&nbsp;list&nbsp;of&nbsp;(name,&nbsp;value).<br>
+Override&nbsp;this&nbsp;to&nbsp;add&nbsp;custom&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="HTMLTestRunner-run"><strong>run</strong></a>(self, test)</dt><dd><tt>Run&nbsp;the&nbsp;given&nbsp;test&nbsp;case&nbsp;or&nbsp;test&nbsp;suite.</tt></dd></dl>
+
+<dl><dt><a name="HTMLTestRunner-sortResult"><strong>sortResult</strong></a>(self, result_list)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="HTMLTestRunner.html#Template_mixin">Template_mixin</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="HTMLTestRunner.html#Template_mixin">Template_mixin</a>:<br>
+<dl><dt><strong>DEFAULT_DESCRIPTION</strong> = ''</dl>
+
+<dl><dt><strong>DEFAULT_TITLE</strong> = 'Unit Test Report'</dl>
+
+<dl><dt><strong>ENDING_TMPL</strong> = "&lt;div id='ending'&gt;&amp;nbsp;&lt;/div&gt;"</dl>
+
+<dl><dt><strong>HEADING_ATTRIBUTE_TMPL</strong> = "&lt;p class='attribute'&gt;&lt;strong&gt;%(name)s:&lt;/strong&gt; %(value)s&lt;/p&gt;<font color="#c040c0">\n</font>"</dl>
+
+<dl><dt><strong>HEADING_TMPL</strong> = "&lt;div class='heading'&gt;<font color="#c040c0">\n</font>&lt;h1&gt;%(title)s&lt;/h1&gt;<font color="#c040c0">\n</font>%(param... class='description'&gt;%(description)s&lt;/p&gt;<font color="#c040c0">\n</font>&lt;/div&gt;<font color="#c040c0">\n\n</font>"</dl>
+
+<dl><dt><strong>HTML_TMPL</strong> = '&lt;?xml version="1.0" encoding="UTF-8"?&gt;<font color="#c040c0">\n</font>&lt;!DOCTYPE...heading)s<font color="#c040c0">\n</font>%(report)s<font color="#c040c0">\n</font>%(ending)s<font color="#c040c0">\n\n</font>&lt;/body&gt;<font color="#c040c0">\n</font>&lt;/html&gt;<font color="#c040c0">\n</font>'</dl>
+
+<dl><dt><strong>REPORT_CLASS_TMPL</strong> = '<font color="#c040c0">\n</font>&lt;tr class=<font color="#c040c0">\'</font>%(style)s<font color="#c040c0">\'</font>&gt;<font color="#c040c0">\n</font>    &lt;td&gt;%(desc)s&lt;/td&gt;<font color="#c040c0">\n</font>  ...tail(<font color="#c040c0">\'</font>%(cid)s<font color="#c040c0">\'</font>,%(count)s)"&gt;Detail&lt;/a&gt;&lt;/td&gt;<font color="#c040c0">\n</font>&lt;/tr&gt;<font color="#c040c0">\n</font>'</dl>
+
+<dl><dt><strong>REPORT_TEST_NO_OUTPUT_TMPL</strong> = "<font color="#c040c0">\n</font>&lt;tr id='%(tid)s' class='%(Class)s'&gt;<font color="#c040c0">\n</font>    &lt;td cla...colspan='5' align='center'&gt;%(status)s&lt;/td&gt;<font color="#c040c0">\n</font>&lt;/tr&gt;<font color="#c040c0">\n</font>"</dl>
+
+<dl><dt><strong>REPORT_TEST_OUTPUT_TMPL</strong> = '<font color="#c040c0">\n</font>&lt;script language="javascript" type="text/javasc..."&gt;output_list[<font color="#c040c0">\'</font>%(id)s<font color="#c040c0">\'</font>] = <font color="#c040c0">\'</font>%(output)s<font color="#c040c0">\'</font>;&lt;/script&gt;<font color="#c040c0">\n</font>'</dl>
+
+<dl><dt><strong>REPORT_TEST_WITH_OUTPUT_TMPL</strong> = '<font color="#c040c0">\n</font>&lt;tr id=<font color="#c040c0">\'</font>%(tid)s<font color="#c040c0">\'</font> class=<font color="#c040c0">\'</font>%(Class)s<font color="#c040c0">\'</font>&gt;<font color="#c040c0">\n</font>    &lt;td cla...<font color="#c040c0">\'</font>%(desc)s<font color="#c040c0">\'</font>)"&gt;%(status)s&lt;/a&gt;%(script)s&lt;/td&gt;<font color="#c040c0">\n</font>&lt;/tr&gt;<font color="#c040c0">\n</font>'</dl>
+
+<dl><dt><strong>REPORT_TMPL</strong> = "<font color="#c040c0">\n</font>&lt;p id='show_detail_line'&gt;Show<font color="#c040c0">\n</font>&lt;a href='javascri...(error)s&lt;/td&gt;<font color="#c040c0">\n</font>    &lt;td&gt;&amp;nbsp;&lt;/td&gt;<font color="#c040c0">\n</font>&lt;/tr&gt;<font color="#c040c0">\n</font>&lt;/table&gt;<font color="#c040c0">\n</font>"</dl>
+
+<dl><dt><strong>STATUS</strong> = {0: 'pass', 1: 'fail', 2: 'error'}</dl>
+
+<dl><dt><strong>STYLESHEET_TMPL</strong> = '<font color="#c040c0">\n</font>&lt;style type="text/css" media="screen"&gt;<font color="#c040c0">\n</font>body    ...----------------------- */<font color="#c040c0">\n</font>#ending {<font color="#c040c0">\n</font>}<font color="#c040c0">\n\n</font>&lt;/style&gt;<font color="#c040c0">\n</font>'</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="OutputRedirector">class <strong>OutputRedirector</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Wrapper&nbsp;to&nbsp;redirect&nbsp;stdout&nbsp;or&nbsp;stderr<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="OutputRedirector-__init__"><strong>__init__</strong></a>(self, fp)</dt></dl>
+
+<dl><dt><a name="OutputRedirector-flush"><strong>flush</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="OutputRedirector-write"><strong>write</strong></a>(self, s)</dt></dl>
+
+<dl><dt><a name="OutputRedirector-writelines"><strong>writelines</strong></a>(self, lines)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Template_mixin">class <strong>Template_mixin</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Define&nbsp;a&nbsp;HTML&nbsp;template&nbsp;for&nbsp;report&nbsp;customerization&nbsp;and&nbsp;generation.<br>
+&nbsp;<br>
+Overall&nbsp;structure&nbsp;of&nbsp;an&nbsp;HTML&nbsp;report<br>
+&nbsp;<br>
+HTML<br>
++------------------------+<br>
+|&lt;html&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&lt;head&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&nbsp;STYLESHEET&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&nbsp;+----------------+&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&nbsp;+----------------+&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&lt;/head&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&lt;body&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&nbsp;HEADING&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&nbsp;+----------------+&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&nbsp;+----------------+&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&nbsp;REPORT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&nbsp;+----------------+&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&nbsp;+----------------+&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&nbsp;ENDING&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&nbsp;+----------------+&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&nbsp;+----------------+&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+|&nbsp;&nbsp;&lt;/body&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+|&lt;/html&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
++------------------------+<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>DEFAULT_DESCRIPTION</strong> = ''</dl>
+
+<dl><dt><strong>DEFAULT_TITLE</strong> = 'Unit Test Report'</dl>
+
+<dl><dt><strong>ENDING_TMPL</strong> = "&lt;div id='ending'&gt;&amp;nbsp;&lt;/div&gt;"</dl>
+
+<dl><dt><strong>HEADING_ATTRIBUTE_TMPL</strong> = "&lt;p class='attribute'&gt;&lt;strong&gt;%(name)s:&lt;/strong&gt; %(value)s&lt;/p&gt;<font color="#c040c0">\n</font>"</dl>
+
+<dl><dt><strong>HEADING_TMPL</strong> = "&lt;div class='heading'&gt;<font color="#c040c0">\n</font>&lt;h1&gt;%(title)s&lt;/h1&gt;<font color="#c040c0">\n</font>%(param... class='description'&gt;%(description)s&lt;/p&gt;<font color="#c040c0">\n</font>&lt;/div&gt;<font color="#c040c0">\n\n</font>"</dl>
+
+<dl><dt><strong>HTML_TMPL</strong> = '&lt;?xml version="1.0" encoding="UTF-8"?&gt;<font color="#c040c0">\n</font>&lt;!DOCTYPE...heading)s<font color="#c040c0">\n</font>%(report)s<font color="#c040c0">\n</font>%(ending)s<font color="#c040c0">\n\n</font>&lt;/body&gt;<font color="#c040c0">\n</font>&lt;/html&gt;<font color="#c040c0">\n</font>'</dl>
+
+<dl><dt><strong>REPORT_CLASS_TMPL</strong> = '<font color="#c040c0">\n</font>&lt;tr class=<font color="#c040c0">\'</font>%(style)s<font color="#c040c0">\'</font>&gt;<font color="#c040c0">\n</font>    &lt;td&gt;%(desc)s&lt;/td&gt;<font color="#c040c0">\n</font>  ...tail(<font color="#c040c0">\'</font>%(cid)s<font color="#c040c0">\'</font>,%(count)s)"&gt;Detail&lt;/a&gt;&lt;/td&gt;<font color="#c040c0">\n</font>&lt;/tr&gt;<font color="#c040c0">\n</font>'</dl>
+
+<dl><dt><strong>REPORT_TEST_NO_OUTPUT_TMPL</strong> = "<font color="#c040c0">\n</font>&lt;tr id='%(tid)s' class='%(Class)s'&gt;<font color="#c040c0">\n</font>    &lt;td cla...colspan='5' align='center'&gt;%(status)s&lt;/td&gt;<font color="#c040c0">\n</font>&lt;/tr&gt;<font color="#c040c0">\n</font>"</dl>
+
+<dl><dt><strong>REPORT_TEST_OUTPUT_TMPL</strong> = '<font color="#c040c0">\n</font>&lt;script language="javascript" type="text/javasc..."&gt;output_list[<font color="#c040c0">\'</font>%(id)s<font color="#c040c0">\'</font>] = <font color="#c040c0">\'</font>%(output)s<font color="#c040c0">\'</font>;&lt;/script&gt;<font color="#c040c0">\n</font>'</dl>
+
+<dl><dt><strong>REPORT_TEST_WITH_OUTPUT_TMPL</strong> = '<font color="#c040c0">\n</font>&lt;tr id=<font color="#c040c0">\'</font>%(tid)s<font color="#c040c0">\'</font> class=<font color="#c040c0">\'</font>%(Class)s<font color="#c040c0">\'</font>&gt;<font color="#c040c0">\n</font>    &lt;td cla...<font color="#c040c0">\'</font>%(desc)s<font color="#c040c0">\'</font>)"&gt;%(status)s&lt;/a&gt;%(script)s&lt;/td&gt;<font color="#c040c0">\n</font>&lt;/tr&gt;<font color="#c040c0">\n</font>'</dl>
+
+<dl><dt><strong>REPORT_TMPL</strong> = "<font color="#c040c0">\n</font>&lt;p id='show_detail_line'&gt;Show<font color="#c040c0">\n</font>&lt;a href='javascri...(error)s&lt;/td&gt;<font color="#c040c0">\n</font>    &lt;td&gt;&amp;nbsp;&lt;/td&gt;<font color="#c040c0">\n</font>&lt;/tr&gt;<font color="#c040c0">\n</font>&lt;/table&gt;<font color="#c040c0">\n</font>"</dl>
+
+<dl><dt><strong>STATUS</strong> = {0: 'pass', 1: 'fail', 2: 'error'}</dl>
+
+<dl><dt><strong>STYLESHEET_TMPL</strong> = '<font color="#c040c0">\n</font>&lt;style type="text/css" media="screen"&gt;<font color="#c040c0">\n</font>body    ...----------------------- */<font color="#c040c0">\n</font>#ending {<font color="#c040c0">\n</font>}<font color="#c040c0">\n\n</font>&lt;/style&gt;<font color="#c040c0">\n</font>'</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TestProgram">class <strong>TestProgram</strong></a>(<a href="unittest.html#TestProgram">unittest.TestProgram</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;variation&nbsp;of&nbsp;the&nbsp;unittest.<a href="#TestProgram">TestProgram</a>.&nbsp;Please&nbsp;refer&nbsp;to&nbsp;the&nbsp;base<br>
+class&nbsp;for&nbsp;command&nbsp;line&nbsp;parameters.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="HTMLTestRunner.html#TestProgram">TestProgram</a></dd>
+<dd><a href="unittest.html#TestProgram">unittest.TestProgram</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TestProgram-runTests"><strong>runTests</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="unittest.html#TestProgram">unittest.TestProgram</a>:<br>
+<dl><dt><a name="TestProgram-__init__"><strong>__init__</strong></a>(self, module<font color="#909090">='__main__'</font>, defaultTest<font color="#909090">=None</font>, argv<font color="#909090">=None</font>, testRunner<font color="#909090">=None</font>, testLoader<font color="#909090">=&lt;unittest.TestLoader object&gt;</font>)</dt></dl>
+
+<dl><dt><a name="TestProgram-createTests"><strong>createTests</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TestProgram-parseArgs"><strong>parseArgs</strong></a>(self, argv)</dt></dl>
+
+<dl><dt><a name="TestProgram-usageExit"><strong>usageExit</strong></a>(self, msg<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="unittest.html#TestProgram">unittest.TestProgram</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="unittest.html#TestProgram">unittest.TestProgram</a>:<br>
+<dl><dt><strong>USAGE</strong> = 'Usage: %(progName)s [options] [test] [...]<font color="#c040c0">\n\n</font>Opti...                                   in MyTestCase<font color="#c040c0">\n</font>'</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><strong>main</strong> = <a name="main">class TestProgram</a>(<a href="unittest.html#TestProgram">unittest.TestProgram</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;variation&nbsp;of&nbsp;the&nbsp;unittest.<a href="#TestProgram">TestProgram</a>.&nbsp;Please&nbsp;refer&nbsp;to&nbsp;the&nbsp;base<br>
+class&nbsp;for&nbsp;command&nbsp;line&nbsp;parameters.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="HTMLTestRunner.html#TestProgram">TestProgram</a></dd>
+<dd><a href="unittest.html#TestProgram">unittest.TestProgram</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TestProgram-runTests"><strong>runTests</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="unittest.html#TestProgram">unittest.TestProgram</a>:<br>
+<dl><dt><a name="TestProgram-__init__"><strong>__init__</strong></a>(self, module<font color="#909090">='__main__'</font>, defaultTest<font color="#909090">=None</font>, argv<font color="#909090">=None</font>, testRunner<font color="#909090">=None</font>, testLoader<font color="#909090">=&lt;unittest.TestLoader object&gt;</font>)</dt></dl>
+
+<dl><dt><a name="TestProgram-createTests"><strong>createTests</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TestProgram-parseArgs"><strong>parseArgs</strong></a>(self, argv)</dt></dl>
+
+<dl><dt><a name="TestProgram-usageExit"><strong>usageExit</strong></a>(self, msg<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="unittest.html#TestProgram">unittest.TestProgram</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="unittest.html#TestProgram">unittest.TestProgram</a>:<br>
+<dl><dt><strong>USAGE</strong> = 'Usage: %(progName)s [options] [test] [...]<font color="#c040c0">\n\n</font>Opti...                                   in MyTestCase<font color="#c040c0">\n</font>'</dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-jsEscapeString"><strong>jsEscapeString</strong></a>(s)</dt><dd><tt>Escape&nbsp;s&nbsp;for&nbsp;use&nbsp;as&nbsp;a&nbsp;Javascript&nbsp;String</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__author__</strong> = 'Wai Yip Tung'<br>
+<strong>__version__</strong> = '0.8.1'<br>
+<strong>stderr_redirector</strong> = &lt;HTMLTestRunner.OutputRedirector object&gt;<br>
+<strong>stdout_redirector</strong> = &lt;HTMLTestRunner.OutputRedirector object&gt;</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#7799ee">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Wai&nbsp;Yip&nbsp;Tung</td></tr></table>
+</body></html>
