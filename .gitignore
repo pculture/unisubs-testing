@@ -6,6 +6,7 @@ testtest.py
 *.html
 # ignore sauce_auth.py - don't want key public
 sauce_auth.py
+sauce_auth.pyc
 # ignore results
 Results/*.html
 log.xml
