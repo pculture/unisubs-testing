@@ -1,5 +1,5 @@
 
-<!DOCTYPE html PUBLIC "-/W3C/DTD HTML 4.0 Transitional/EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html><head><title>Python: module widget</title>
 </head><body bgcolor="#f0f0f8">
 
@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>widget</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:../widget.py">../widget.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/janetPCF/RC-testing/universal-subtitles/widget.py">/Users/janetPCF/RC-testing/universal-subtitles/widget.py</a></font></td></tr></table>
     <p><tt>widget.py<br>
 Description:&nbsp;handles&nbsp;actions&nbsp;that&nbsp;are&nbsp;performed&nbsp;within&nbsp;the&nbsp;widget.</tt></p>
 <p>
@@ -20,10 +20,12 @@ Description:&nbsp;handles&nbsp;actions&nbsp;that&nbsp;are&nbsp;performed&nbsp;wi
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="codecs.html">codecs</a><br>
 <a href="mslib.html">mslib</a><br>
+</td><td width="25%" valign=top><a href="re.html">re</a><br>
+<a href="selvars.html">selvars</a><br>
 </td><td width="25%" valign=top><a href="testvars.html">testvars</a><br>
 <a href="time.html">time</a><br>
 </td><td width="25%" valign=top><a href="unittest.html">unittest</a><br>
-</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+</td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#eeaa77">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -31,9 +33,9 @@ Description:&nbsp;handles&nbsp;actions&nbsp;that&nbsp;are&nbsp;performed&nbsp;wi
     
 <tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><dl><dt><a name="-Login"><strong>Login</strong></a>(self, sel, auth_type)</dt><dd><tt>Description:&nbsp;Initiates&nbsp;login&nbsp;sequence&nbsp;using&nbsp;the&nbsp;Subtitle&nbsp;Me&nbsp;menu&nbsp;that's&nbsp;attached&nbsp;to<br>
-an&nbsp;embedded&nbsp;vidoe,&nbsp;either&nbsp;onsite&nbsp;or&nbsp;offsite.<br>
+an&nbsp;embedded&nbsp;video,&nbsp;either&nbsp;onsite&nbsp;or&nbsp;offsite.<br>
 &nbsp;<br>
-auth_type&nbsp;can&nbsp;be&nbsp;'log'&nbsp;(for&nbsp;site),&nbsp;'twitter','openid','gmail'<br>
+auth_type&nbsp;can&nbsp;be&nbsp;'log'&nbsp;(for&nbsp;site),&nbsp;'twitter','openid','google'<br>
 Requires&nbsp;valid&nbsp;accounts&nbsp;for&nbsp;chosen&nbsp;login&nbsp;type<br>
 &nbsp;<br>
 Pre-condition:&nbsp;Subtitle&nbsp;me&nbsp;widget&nbsp;menu&nbsp;should&nbsp;be&nbsp;present&nbsp;on&nbsp;page.<br>
@@ -46,19 +48,26 @@ Verifies&nbsp;that&nbsp;the&nbsp;time&nbsp;has&nbsp;been&nbsp;changed&nbsp;by&nb
 &nbsp;<br>
 Options:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;subtextfile&nbsp;-&nbsp;text&nbsp;used&nbsp;in&nbsp;transcribe&nbsp;step.</tt></dd></dl>
- <dl><dt><a name="-close_howto_video"><strong>close_howto_video</strong></a>(self, sel, skip<font color="#909090">='True'</font>)</dt><dd><tt>Description:&nbsp;closes&nbsp;the&nbsp;how-to&nbsp;interstitial&nbsp;help&nbsp;video<br>
+ <dl><dt><a name="-close_howto_video"><strong>close_howto_video</strong></a>(self, sel, skip<font color="#909090">=True</font>)</dt><dd><tt>Description:&nbsp;closes&nbsp;the&nbsp;how-to&nbsp;interstitial&nbsp;help&nbsp;video<br>
 Default&nbsp;is&nbsp;set&nbsp;to&nbsp;"True",&nbsp;to&nbsp;skip&nbsp;the&nbsp;video&nbsp;on&nbsp;proceeding&nbsp;steps.<br>
 &nbsp;<br>
 Pre-condition:&nbsp;widget&nbsp;has&nbsp;been&nbsp;launched.<br>
 &nbsp;<br>
 Post-condition:&nbsp;help&nbsp;video&nbsp;is&nbsp;closed&nbsp;and&nbsp;returned&nbsp;to&nbsp;previous&nbsp;widget&nbsp;page.</tt></dd></dl>
- <dl><dt><a name="-drag_it"><strong>drag_it</strong></a>(self, sel, sub_text, side, move_pixels)</dt><dd><tt>Description:&nbsp;actually&nbsp;grabs&nbsp;the&nbsp;timeline&nbsp;bubbles&nbsp;and&nbsp;moves&nbsp;them<br>
+ <dl><dt><a name="-close_widget"><strong>close_widget</strong></a>(self, sel, submit<font color="#909090">='Discard'</font>)</dt><dd><tt>Description:&nbsp;uses&nbsp;the&nbsp;red&nbsp;close&nbsp;x&nbsp;to&nbsp;close&nbsp;out&nbsp;the&nbsp;widget.<br>
+&nbsp;<br>
+Options:&nbsp;"Submit"&nbsp;or&nbsp;"Discard"&nbsp;{default}&nbsp;subtitles.<br>
+&nbsp;<br>
+Pre-Condition:&nbsp;Widget&nbsp;is&nbsp;opened&nbsp;on&nbsp;page.<br>
+&nbsp;<br>
+Post&nbsp;Conditions:&nbsp;Returned&nbsp;to&nbsp;originating&nbsp;site.</tt></dd></dl>
+ <dl><dt><a name="-drag_it"><strong>drag_it</strong></a>(self, sel, side, move_pixels)</dt><dd><tt>Description:&nbsp;actually&nbsp;grabs&nbsp;the&nbsp;timeline&nbsp;bubbles&nbsp;and&nbsp;moves&nbsp;them<br>
 &nbsp;<br>
 Options:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;sub_text&nbsp;-&nbsp;text&nbsp;used&nbsp;to&nbsp;locate&nbsp;correct&nbsp;bubble<br>
 &nbsp;&nbsp;&nbsp;&nbsp;side&nbsp;-&nbsp;{'left'&nbsp;|&nbsp;'right'}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;move_pixels&nbsp;-&nbsp;number&nbsp;of&nbsp;pixels&nbsp;to&nbsp;move&nbsp;bubble&nbsp;{&nbsp;+&nbsp;|&nbsp;-&nbsp;}</tt></dd></dl>
- <dl><dt><a name="-drag_time_bubbles"><strong>drag_time_bubbles</strong></a>(self, sel, subtextfile)</dt><dd><tt>Description:&nbsp;For&nbsp;each&nbsp;line,&nbsp;initially&nbsp;used&nbsp;in&nbsp;transcribe_video,&nbsp;grab<br>
+ <dl><dt><a name="-drag_time_bubbles"><strong>drag_time_bubbles</strong></a>(self, sel, subtextfile)</dt><dd><tt>Description:&nbsp;Grab<br>
 the&nbsp;left&nbsp;and&nbsp;right&nbsp;sides&nbsp;of&nbsp;the&nbsp;timeline&nbsp;bubbles&nbsp;and&nbsp;edit&nbsp;the&nbsp;time.<br>
 Verifies&nbsp;the&nbsp;time&nbsp;stamp&nbsp;has&nbsp;been&nbsp;modified.<br>
 &nbsp;<br>
@@ -72,8 +81,9 @@ edit&nbsp;the&nbsp;text&nbsp;with&nbsp;new_text.&nbsp;&nbsp;Verifies&nbsp;text&n
 Options:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;new_text&nbsp;-&nbsp;text&nbsp;string<br>
 &nbsp;<br>
-Pre-condition&nbsp;-&nbsp;can&nbsp;use&nbsp;this&nbsp;to&nbsp;sync&nbsp;on&nbsp;Step&nbsp;2,&nbsp;Step&nbsp;3&nbsp;or&nbsp;Edit.</tt></dd></dl>
- <dl><dt><a name="-hold_down_delay_sub"><strong>hold_down_delay_sub</strong></a>(self, sel, sub_file, delay_time<font color="#909090">=4</font>, hold_time<font color="#909090">=2</font>, sync_time<font color="#909090">=2</font>)</dt><dd><tt>Description:&nbsp;tests&nbsp;the&nbsp;time&nbsp;shift&nbsp;of&nbsp;subs&nbsp;when&nbsp;holding&nbsp;then&nbsp;releasing&nbsp;the&nbsp;down&nbsp;key.<br>
+Pre-condition&nbsp;-&nbsp;can&nbsp;use&nbsp;this&nbsp;to&nbsp;sync&nbsp;on&nbsp;Step&nbsp;2,&nbsp;Step&nbsp;3.</tt></dd></dl>
+ <dl><dt><a name="-goto_step"><strong>goto_step</strong></a>(self, sel, step<font color="#909090">='3'</font>)</dt></dl>
+ <dl><dt><a name="-hold_down_delay_sub"><strong>hold_down_delay_sub</strong></a>(self, sel, sub_file, delay_time<font color="#909090">=2</font>, hold_time<font color="#909090">=0.75</font>, sync_time<font color="#909090">=1</font>)</dt><dd><tt>Description:&nbsp;tests&nbsp;the&nbsp;time&nbsp;shift&nbsp;of&nbsp;subs&nbsp;when&nbsp;holding&nbsp;then&nbsp;releasing&nbsp;the&nbsp;down&nbsp;key.<br>
 Verifies&nbsp;that&nbsp;the&nbsp;time&nbsp;has&nbsp;been&nbsp;shifted.<br>
 &nbsp;<br>
 Options:<br>
@@ -85,7 +95,7 @@ Pre-conditions:&nbsp;must&nbsp;coordinate&nbsp;this&nbsp;with&nbsp;the&nbsp;time
 comparision&nbsp;may&nbsp;fail.<br>
 &nbsp;<br>
 Post-condition&nbsp;-&nbsp;still&nbsp;on&nbsp;same&nbsp;step&nbsp;in&nbsp;widget,&nbsp;with&nbsp;new&nbsp;times.</tt></dd></dl>
- <dl><dt><a name="-restart_typing"><strong>restart_typing</strong></a>(self, sel)</dt><dd><tt>Description:&nbsp;Clicks&nbsp;the&nbsp;'Restart&nbsp;Typing'&nbsp;link,&nbsp;and&nbsp;handle&nbsp;the&nbsp;confirmation&nbsp;dialog.</tt></dd></dl>
+ <dl><dt><a name="-restart_step"><strong>restart_step</strong></a>(self, sel)</dt><dd><tt>Description:&nbsp;Clicks&nbsp;the&nbsp;'Restart&nbsp;this&nbsp;Step'&nbsp;link,&nbsp;and&nbsp;handle&nbsp;the&nbsp;confirmation&nbsp;dialog.</tt></dd></dl>
  <dl><dt><a name="-resync_video"><strong>resync_video</strong></a>(self, sel, subtextfile, start_delay<font color="#909090">=1</font>, sub_int<font color="#909090">=1</font>, step<font color="#909090">='Stop'</font>)</dt><dd><tt>Description:&nbsp;tests&nbsp;the&nbsp;time&nbsp;shift&nbsp;of&nbsp;subs&nbsp;when&nbsp;using&nbsp;down&nbsp;key&nbsp;to&nbsp;resyncronize.<br>
 Verifies&nbsp;time&nbsp;stamp&nbsp;has&nbsp;changed.<br>
 &nbsp;<br>
@@ -96,9 +106,10 @@ Options:<br>
 &nbsp;<br>
 Pre-conditions:&nbsp;must&nbsp;coordinate&nbsp;this&nbsp;with&nbsp;the&nbsp;times&nbsp;used&nbsp;in&nbsp;sync_video&nbsp;or&nbsp;the&nbsp;time&nbsp;shift<br>
 comparision&nbsp;may&nbsp;fail.</tt></dd></dl>
+ <dl><dt><a name="-select_video_language"><strong>select_video_language</strong></a>(self, sel, vid_lang<font color="#909090">='English'</font>, sub_lang<font color="#909090">='English'</font>)</dt></dl>
  <dl><dt><a name="-site_login_auth"><strong>site_login_auth</strong></a>(self, sel)</dt><dd><tt>Description:&nbsp;specifically&nbsp;logs&nbsp;in&nbsp;as&nbsp;the&nbsp;site&nbsp;user&nbsp;defined&nbsp;in&nbsp;&lt;a&nbsp;href="testvars.html"&gt;testvars&lt;/a&gt;<br>
 &nbsp;<br>
-Pre-condition:&nbsp;Login&nbsp;link&nbsp;was&nbsp;clicked&nbsp;from&nbsp;widget<br>
+Pre-condition:&nbsp;Login&nbsp;was&nbsp;clicked&nbsp;from&nbsp;widget<br>
 &nbsp;<br>
 Post-condition:&nbsp;user&nbsp;logged&nbsp;in&nbsp;and&nbsp;returned&nbsp;to&nbsp;widget&nbsp;page.</tt></dd></dl>
  <dl><dt><a name="-site_login_from_widget_link"><strong>site_login_from_widget_link</strong></a>(self, sel)</dt><dd><tt>Description:&nbsp;performs&nbsp;a&nbsp;site&nbsp;login&nbsp;from&nbsp;the&nbsp;Login&nbsp;link&nbsp;on&nbsp;the&nbsp;widget&nbsp;steps.<br>
@@ -107,7 +118,8 @@ Pre-condition:&nbsp;widget&nbsp;is&nbsp;opened&nbsp;and&nbsp;user&nbsp;is&nbsp;n
 &nbsp;<br>
 Post-condition:&nbsp;user&nbsp;is&nbsp;returned&nbsp;to&nbsp;starting&nbsp;widget&nbsp;page.</tt></dd></dl>
  <dl><dt><a name="-steps_display"><strong>steps_display</strong></a>(self, sel, step_num)</dt><dd><tt>Description:&nbsp;verifies&nbsp;text&nbsp;contents&nbsp;of&nbsp;Steps.</tt></dd></dl>
- <dl><dt><a name="-sync_video"><strong>sync_video</strong></a>(self, sel, sub_file, start_delay<font color="#909090">=2</font>, sub_int<font color="#909090">=2</font>, step<font color="#909090">='Continue'</font>)</dt><dd><tt>Description:&nbsp;Use&nbsp;the&nbsp;defined&nbsp;sync&nbsp;button&nbsp;to&nbsp;sync&nbsp;the&nbsp;subtitles.&nbsp;&nbsp;Waits&nbsp;for<br>
+ <dl><dt><a name="-submit_sub_edits"><strong>submit_sub_edits</strong></a>(self, sel)</dt></dl>
+ <dl><dt><a name="-sync_video"><strong>sync_video</strong></a>(self, sel, sub_file, start_delay<font color="#909090">=4</font>, sub_int<font color="#909090">=3</font>, step<font color="#909090">='Continue'</font>)</dt><dd><tt>Description:&nbsp;Use&nbsp;the&nbsp;defined&nbsp;sync&nbsp;button&nbsp;to&nbsp;sync&nbsp;the&nbsp;subtitles.&nbsp;&nbsp;Waits&nbsp;for<br>
 text&nbsp;present&nbsp;on&nbsp;the&nbsp;video&nbsp;and&nbsp;prints&nbsp;the&nbsp;subtime.<br>
 &nbsp;<br>
 Options:<br>
@@ -117,17 +129,21 @@ Options:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;step&nbsp;-&nbsp;{'Continue'&nbsp;(default)&nbsp;|&nbsp;'Stop}&nbsp;move&nbsp;on&nbsp;to&nbsp;next&nbsp;step&nbsp;when&nbsp;done.<br>
 &nbsp;<br>
 Pre-condition&nbsp;-&nbsp;can&nbsp;use&nbsp;this&nbsp;to&nbsp;sync&nbsp;on&nbsp;Step&nbsp;2,&nbsp;Step&nbsp;3&nbsp;or&nbsp;Edit.</tt></dd></dl>
- <dl><dt><a name="-transcribe_video"><strong>transcribe_video</strong></a>(self, sel, sub_file, mode<font color="#909090">='Expert'</font>, step<font color="#909090">='Continue'</font>, buffer<font color="#909090">='yes'</font>)</dt><dd><tt>Description:&nbsp;On&nbsp;widget&nbsp;Step&nbsp;1,&nbsp;reads&nbsp;in&nbsp;lines&nbsp;of&nbsp;subtitle&nbsp;text&nbsp;and&nbsp;types&nbsp;it.<br>
+ <dl><dt><a name="-transcribe_enter_text"><strong>transcribe_enter_text</strong></a>(self, sel)</dt><dd><tt>Handle&nbsp;the&nbsp;text&nbsp;entry&nbsp;in&nbsp;Step&nbsp;1&nbsp;typing&nbsp;for&nbsp;all&nbsp;browsers</tt></dd></dl>
+ <dl><dt><a name="-transcribe_video"><strong>transcribe_video</strong></a>(self, sel, sub_file, mode<font color="#909090">='Expert'</font>, step<font color="#909090">='Continue'</font>, buffer<font color="#909090">='no'</font>)</dt><dd><tt>Description:&nbsp;On&nbsp;widget&nbsp;Step&nbsp;1,&nbsp;reads&nbsp;in&nbsp;lines&nbsp;of&nbsp;subtitle&nbsp;text&nbsp;and&nbsp;types&nbsp;it.<br>
 &nbsp;<br>
-Options:<br>
+Options:&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;sub_file&nbsp;-&nbsp;the&nbsp;full&nbsp;path&nbsp;to&nbsp;the&nbsp;text&nbsp;to&nbsp;enter<br>
 &nbsp;&nbsp;&nbsp;&nbsp;mode&nbsp;-&nbsp;sets&nbsp;typing&nbsp;mode&nbsp;{'Beginner'&nbsp;|&nbsp;'Recommended'&nbsp;|&nbsp;'Expert&nbsp;(default)'}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;step&nbsp;-&nbsp;{'Stop'&nbsp;|&nbsp;'Continue'&nbsp;(default)}&nbsp;Continue&nbsp;on&nbsp;to&nbsp;next&nbsp;step.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;buffer&nbsp;{'yes'&nbsp;(default)&nbsp;|&nbsp;'no'}&nbsp;will&nbsp;buffer&nbsp;the&nbsp;video&nbsp;to&nbsp;75%&nbsp;before<br>
-&nbsp;&nbsp;&nbsp;&nbsp;proceeding.&nbsp;see&nbsp;wait_for_video_to_buffer</tt></dd></dl>
- <dl><dt><a name="-verify_login_message"><strong>verify_login_message</strong></a>(self, sel)</dt><dd><tt>Description:&nbsp;verifies&nbsp;must&nbsp;login&nbsp;message&nbsp;is&nbsp;displayed.</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;buffer&nbsp;{'yes'&nbsp;|&nbsp;'no'&nbsp;(default)&nbsp;}&nbsp;will&nbsp;buffer&nbsp;the&nbsp;video&nbsp;to&nbsp;75%&nbsp;before<br>
+&nbsp;&nbsp;&nbsp;&nbsp;proceeding.&nbsp;see&nbsp;wait_for_video_to_buffer<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;returns&nbsp;line_count&nbsp;-&nbsp;the&nbsp;number&nbsp;of&nbsp;text&nbsp;lines&nbsp;input&nbsp;for&nbsp;the&nbsp;translation</tt></dd></dl>
+ <dl><dt><a name="-verify_login_message"><strong>verify_login_message</strong></a>(self, sel)</dt><dd><tt>Description:&nbsp;verifies&nbsp;the&nbsp;widget&nbsp;must&nbsp;login&nbsp;message&nbsp;is&nbsp;displayed&nbsp;when&nbsp;a&nbsp;user&nbsp;is&nbsp;not&nbsp;logged&nbsp;in.</tt></dd></dl>
  <dl><dt><a name="-verify_sub_text"><strong>verify_sub_text</strong></a>(self, sel, subtextfile)</dt><dd><tt>Description:&nbsp;Compares&nbsp;the&nbsp;current&nbsp;text&nbsp;in&nbsp;the&nbsp;text&nbsp;box&nbsp;with&nbsp;the&nbsp;text&nbsp;in&nbsp;the&nbsp;input&nbsp;subtextfile.<br>
 &nbsp;<br>
 Pre-condition:&nbsp;User&nbsp;in&nbsp;widget,&nbsp;steps&nbsp;1,2,3&nbsp;or&nbsp;Edit.</tt></dd></dl>
+ <dl><dt><a name="-wait_for_offsite_login"><strong>wait_for_offsite_login</strong></a>(self, sel)</dt></dl>
 </td></tr></table>
 </body></html>

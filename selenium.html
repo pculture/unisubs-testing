@@ -1,5 +1,5 @@
 
-<!DOCTYPE html PUBLIC "-/W3C/DTD HTML 4.0 Transitional/EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html><head><title>Python: module selenium</title>
 </head><body bgcolor="#f0f0f8">
 
@@ -8,14 +8,14 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>selenium</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:../selenium.py">../selenium.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/janetPCF/RC-testing/universal-subtitles/selenium.py">/Users/janetPCF/RC-testing/universal-subtitles/selenium.py</a></font></td></tr></table>
     <p><tt>Copyright&nbsp;2006&nbsp;ThoughtWorks,&nbsp;Inc.<br>
 &nbsp;<br>
 Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;"License");<br>
 you&nbsp;may&nbsp;not&nbsp;use&nbsp;this&nbsp;file&nbsp;except&nbsp;in&nbsp;compliance&nbsp;with&nbsp;the&nbsp;License.<br>
 You&nbsp;may&nbsp;obtain&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;License&nbsp;at<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="http:/www.apache.org/licenses/LICENSE-2.0">http:/www.apache.org/licenses/LICENSE-2.0</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a><br>
 &nbsp;<br>
 Unless&nbsp;required&nbsp;by&nbsp;applicable&nbsp;law&nbsp;or&nbsp;agreed&nbsp;to&nbsp;in&nbsp;writing,&nbsp;software<br>
 distributed&nbsp;under&nbsp;the&nbsp;License&nbsp;is&nbsp;distributed&nbsp;on&nbsp;an&nbsp;"AS&nbsp;IS"&nbsp;BASIS,<br>
@@ -94,13 +94,13 @@ We&nbsp;support&nbsp;the&nbsp;following&nbsp;strategies&nbsp;for&nbsp;locating&n
 *&nbsp;&nbsp;&nbsp;\&nbsp;**xpath**\&nbsp;=\&nbsp;*xpathExpression*:&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Locate&nbsp;an&nbsp;element&nbsp;using&nbsp;an&nbsp;XPath&nbsp;expression.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;xpath=/img[@alt='The&nbsp;image&nbsp;alt&nbsp;text']<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;xpath=/table[@id='table1']/tr[4]/td[2]<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;xpath=/a[contains(@href,'#id1')]<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;xpath=/a[contains(@href,'#id1')]/@class<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;xpath=(/table[@class='stylee'])/th[text()='theHeaderText']/../td<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;xpath=/input[@name='name2'&nbsp;and&nbsp;@value='yes']<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;xpath=/\*[text()="right"]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;xpath=//img[@alt='The&nbsp;image&nbsp;alt&nbsp;text']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;xpath=//table[@id='table1']//tr[4]/td[2]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;xpath=//a[contains(@href,'#id1')]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;xpath=//a[contains(@href,'#id1')]/@class<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;xpath=(//table[@class='stylee'])//th[text()='theHeaderText']/../td<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;xpath=//input[@name='name2'&nbsp;and&nbsp;@value='yes']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;xpath=//\*[text()="right"]<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
 *&nbsp;&nbsp;&nbsp;\&nbsp;**link**\&nbsp;=\&nbsp;*textPattern*:<br>
@@ -124,7 +124,7 @@ We&nbsp;support&nbsp;the&nbsp;following&nbsp;strategies&nbsp;for&nbsp;locating&n
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;ui=loginPages::loginButton()<br>
 &nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;ui=settingsPages::toggle(label=Hide&nbsp;Email)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;ui=forumPages::postBody(index=2)/a[2]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;ui=forumPages::postBody(index=2)//a[2]<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;<br>
@@ -135,7 +135,7 @@ strategies:<br>
 &nbsp;<br>
 &nbsp;<br>
 *&nbsp;&nbsp;&nbsp;\&nbsp;**dom**\&nbsp;,&nbsp;for&nbsp;locators&nbsp;starting&nbsp;with&nbsp;"document."<br>
-*&nbsp;&nbsp;&nbsp;\&nbsp;**xpath**\&nbsp;,&nbsp;for&nbsp;locators&nbsp;starting&nbsp;with&nbsp;"/"<br>
+*&nbsp;&nbsp;&nbsp;\&nbsp;**xpath**\&nbsp;,&nbsp;for&nbsp;locators&nbsp;starting&nbsp;with&nbsp;"//"<br>
 *&nbsp;&nbsp;&nbsp;\&nbsp;**identifier**\&nbsp;,&nbsp;otherwise<br>
 &nbsp;<br>
 Element&nbsp;Filters<br>
@@ -285,7 +285,7 @@ on&nbsp;the&nbsp;monitor),&nbsp;and&nbsp;is&nbsp;implemented&nbsp;in&nbsp;the&nb
 works&nbsp;in&nbsp;Firefox&nbsp;when&nbsp;running&nbsp;in&nbsp;chrome&nbsp;mode,&nbsp;and&nbsp;in&nbsp;IE&nbsp;non-HTA&nbsp;using<br>
 the&nbsp;EXPERIMENTAL&nbsp;"Snapsie"&nbsp;utility.&nbsp;The&nbsp;Firefox&nbsp;implementation&nbsp;is&nbsp;mostly<br>
 borrowed&nbsp;from&nbsp;the&nbsp;Screengrab!&nbsp;Firefox&nbsp;extension.&nbsp;Please&nbsp;see<br>
-<a href="http:/www.screengrab.org">http:/www.screengrab.org</a>&nbsp;and&nbsp;<a href="http:/snapsie.sourceforge.net/">http:/snapsie.sourceforge.net/</a>&nbsp;for<br>
+<a href="http://www.screengrab.org">http://www.screengrab.org</a>&nbsp;and&nbsp;<a href="http://snapsie.sourceforge.net/">http://snapsie.sourceforge.net/</a>&nbsp;for<br>
 details.<br>
 &nbsp;<br>
 'filename'&nbsp;is&nbsp;the&nbsp;path&nbsp;to&nbsp;the&nbsp;file&nbsp;to&nbsp;persist&nbsp;the&nbsp;screenshot&nbsp;as.&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filename&nbsp;extension&nbsp;will&nbsp;be&nbsp;appended&nbsp;by&nbsp;default.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Directories&nbsp;will&nbsp;not&nbsp;be&nbsp;created&nbsp;if&nbsp;they&nbsp;do&nbsp;not&nbsp;exist,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;an&nbsp;exception&nbsp;will&nbsp;be&nbsp;thrown,&nbsp;possibly&nbsp;by&nbsp;native&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;code.<br>
@@ -692,7 +692,7 @@ The&nbsp;selected&nbsp;window&nbsp;will&nbsp;return&nbsp;true,&nbsp;while&nbsp;a
 'currentWindowString'&nbsp;is&nbsp;starting&nbsp;window<br>
 'target'&nbsp;is&nbsp;new&nbsp;window&nbsp;(which&nbsp;might&nbsp;be&nbsp;relative&nbsp;to&nbsp;the&nbsp;current&nbsp;one,&nbsp;e.g.,&nbsp;"_parent")</tt></dd></dl>
 
-<dl><dt><a name="selenium-get_xpath_count"><strong>get_xpath_count</strong></a>(self, xpath)</dt><dd><tt>Returns&nbsp;the&nbsp;number&nbsp;of&nbsp;nodes&nbsp;that&nbsp;match&nbsp;the&nbsp;specified&nbsp;xpath,&nbsp;eg.&nbsp;"/table"&nbsp;would&nbsp;give<br>
+<dl><dt><a name="selenium-get_xpath_count"><strong>get_xpath_count</strong></a>(self, xpath)</dt><dd><tt>Returns&nbsp;the&nbsp;number&nbsp;of&nbsp;nodes&nbsp;that&nbsp;match&nbsp;the&nbsp;specified&nbsp;xpath,&nbsp;eg.&nbsp;"//table"&nbsp;would&nbsp;give<br>
 the&nbsp;number&nbsp;of&nbsp;tables.<br>
 &nbsp;<br>
 'xpath'&nbsp;is&nbsp;the&nbsp;xpath&nbsp;expression&nbsp;to&nbsp;evaluate.&nbsp;do&nbsp;NOT&nbsp;wrap&nbsp;this&nbsp;expression&nbsp;in&nbsp;a&nbsp;'count()'&nbsp;function;&nbsp;we&nbsp;will&nbsp;do&nbsp;that&nbsp;for&nbsp;you.</tt></dd></dl>
