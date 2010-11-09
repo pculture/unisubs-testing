@@ -170,7 +170,7 @@ def verify_submitted_video(self,sel,vid_url,embed_type=""):
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv object")
         self.assertTrue(sel.is_element_present("css=.mirosubs-videoDiv object[data*='flowplayer']"))
     elif embed_type == "youtube":
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv object[data]")
+        mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv object")
         self.assertTrue(sel.is_element_present("css=.mirosubs-videoDiv object[data*='youtube.com']"))
     elif embed_type == 'vimeo':
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv object")
@@ -199,7 +199,7 @@ def get_video_with_translations(self,sel):
     Returns: video_url
     """
     sel.open("videos/")
-    sort_videos_table(self,sel,"Translations","desc") 
+    sort_videos_table(self,sel,"Subtitles and Translations","desc") 
     row_no = 3
     local_url = "none"
     
@@ -224,7 +224,7 @@ def get_video_no_translations(self,sel):
     Returns: video_url
     """
     sel.open("videos/")
-    sort_videos_table(self,sel,"Translations","asc") 
+    sort_videos_table(self,sel,"Subtitles and Translations","asc") 
     row_no = 1
     local_url = "none"
     
