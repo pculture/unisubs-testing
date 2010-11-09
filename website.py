@@ -7,6 +7,7 @@ import codecs
 import mslib
 import testvars
 import widget
+import offsite
 
 
 #Login as a user
