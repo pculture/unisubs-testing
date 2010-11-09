@@ -35,7 +35,7 @@ WebsiteUI = {"Home":"css=a:contains('Miro Subs Alpha')", \
 videos_url_td = "td:nth-child(1)"
 videos_trans_td = "td:nth-child(4)"
 videos_subtitled_td = "td:nth-child(5)"
-video_original = "css=ul.left_nav li a[href:contains('original/')]"
+video_original = "css=ul.left_nav li:nth-child(2)"
 video_metadata = "css=ul.left_nav li a[href:contains('meta-')]"
 video_video_info = "css=li a:contains('Video Info')"
 ## action links
