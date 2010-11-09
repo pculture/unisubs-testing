@@ -166,23 +166,21 @@ def verify_submitted_video(self,sel,vid_url,embed_type=""):
     print " * verify submitted video, embed type"
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     vid_embed = None
+    vid_css = "css=div[id=widget_div] object"
+    html5_el = "css=div[id=widget_div] video"
+    mslib.wait_for_element_present(self,sel,vid_css)
     if embed_type == "flow":
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv object")
-        self.assertTrue(sel.is_element_present("css=.mirosubs-videoDiv object[data*='flowplayer']"))
-    elif embed_type == "youtube":
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv object")
-        self.assertTrue(sel.is_element_present("css=.mirosubs-videoDiv object[data*='youtube.com']"))
-    elif embed_type == 'vimeo':
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv object")
-        self.assertTrue(sel.is_element_present("css=.mirosubs-videoDiv object[data*='moogaloop.swf']"))
-    elif embed_type == 'dailymotion':
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv object")
-        self.assertTrue(sel.is_element_present("css=.mirosubs-videoDiv object[id$='_dailymotionplayer']"))
+        self.assertTrue(sel.is_element_present(vid_css+"[data*='flowplayer']"))
+    elif embed_type == "youtube":       
+        self.assertTrue(sel.is_element_present(vid_css+"[data*='youtube.com']"))
+    elif embed_type == 'vimeo':      
+        self.assertTrue(sel.is_element_present(vid_css+"[data*='moogaloop.swf']"))
+    elif embed_type == 'dailymotion':      
+        self.assertTrue(sel.is_element_present(vid_css+"[id$='_dailymotionplayer']"))
     else:
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-videoDiv")
-        if sel.is_element_present("css=.mirosubs-videoDiv object[data*='flowplayer']"):
+        if sel.is_element_present(vid_css+"[data*='flowplayer']"):
             vid_embed = 'flow'
-        elif sel.is_element_present("css=.mirosubs-videoDiv video"):
+        elif sel.is_element_present(html5_el):
             vid_embed = 'html5'
         self.assertTrue(vid_embed,"video not embedded in site: "+str(vid_url))
         
@@ -240,9 +238,9 @@ def get_video_no_translations(self,sel):
         print "no untranslated vidoes - must add one."
         vid_url = offsite.get_youtube_video_url(self)
         submit_video(self,sel,vid_url)
-        widget.select_video_language(self,sel)
-        widget.close_howto_video(self,sel)
-        widget.close_widget(self,sel)
+ #       widget.select_video_language(self,sel)
+ #       widget.close_howto_video(self,sel)
+ #       widget.close_widget(self,sel)
         local_url = sel.get_eval("window.location")
         
     return local_url
