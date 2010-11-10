@@ -242,17 +242,17 @@ def edit_text(self,sel,subtextfile,new_text="my hovercraft is full of eels"):
     sel.select_window("null")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
     sub_li=1
-    sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") > .mirosubs-title"
+    sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") > span.mirosubs-title span"
     for line in open(subtextfile):
         sel.focus(sub_cell)
         sel.click(sub_cell)
-        mslib.wait_for_element_present(self,sel,"css=textarea")
+        mslib.wait_for_element_present(self,sel,"css=span.mirosubs-title textarea")
         sel.type("css=.mirosubs-title textarea", new_text)
         sel.key_press("css=.mirosubs-title textarea", "\\13")
         sub_cell_text=sel.get_text(sub_cell)
         self.assertEqual(sub_cell_text.rstrip(),new_text.rstrip())
         sub_li = sub_li + 1
-        sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") > .mirosubs-title"
+        sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") > span.mirosubs-title span"
         
 def drag_time_bubbles(self,sel,subtextfile):
     """
