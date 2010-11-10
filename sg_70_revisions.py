@@ -59,7 +59,7 @@ class subgroup_70(unittest.TestCase):
         widget.transcribe_video(self,sel,subtextfile)
         # Sync
         print "syncing video"
-        widget.sync_video(self,sel,subtextfile,8,6)
+        widget.sync_video(self,sel,subtextfile)
         # Review
         print "review step - just submitting video"
         sel.click(testvars.WidgetUI["Next_step"])
@@ -95,7 +95,7 @@ class subgroup_70(unittest.TestCase):
         widget.transcribe_video(self,sel,subtextfile)
         # Sync
         print "syncing video"
-        widget.sync_video(self,sel,subtextfile,8,6)
+        widget.sync_video(self,sel,subtextfile)
         # Review
         print "review step - just submitting video"
         sel.click(testvars.WidgetUI["Next_step"])
@@ -135,7 +135,7 @@ class subgroup_70(unittest.TestCase):
         widget.transcribe_video(self,sel,subtextfile)
         # Sync
         print "syncing video"
-        widget.sync_video(self,sel,subtextfile,8,6)
+        widget.sync_video(self,sel,subtextfile)
         # Review
         print "review step - just submitting video"
         sel.click(testvars.WidgetUI["Next_step"])
