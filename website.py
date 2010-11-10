@@ -268,6 +268,7 @@ def upload_subtitles(self,sel,sub_file,lang="English"):
     """Uploads subtitles for the specified language."
 
     """
+    mslib.wait_for_element_present(self,sel,testvars.video_upload_subtitles)
     sel.click(testvars.video_upload_subtitles)
     sel.select("css=form[id='upload-subtitles-form'] select", "label="+lang)
     sel.type("subtitles-file-field",sub_file)
