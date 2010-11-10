@@ -141,7 +141,7 @@ class subgroup_80(unittest.TestCase):
         #Login and go to language comments page
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         sel.open(test_video_url)
-        sel.click("css=li.full a:contains('"+language+"'")
+        sel.click("css=li.full a:contains('"+language+"')")
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         self.failUnless(sel.is_element_present("css=h4.inline:contains("+language+")"))
         sel.click(testvars.comments_tab) 
