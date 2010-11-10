@@ -241,6 +241,7 @@ def get_video_no_translations(self,sel):
  #       widget.select_video_language(self,sel)
  #       widget.close_howto_video(self,sel)
  #       widget.close_widget(self,sel)
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         local_url = sel.get_eval("window.location")
         
     return local_url
@@ -284,10 +285,10 @@ def verify_sub_upload(self,sel,sub_file,lang=""):
         self.assertTrue("css=tr:nth-child("+str(sub_td)+") > td.last:contains("+sub+")")
         sub_td = sub_td + 1
     if lang == "":
-        sublang = (sel.get_text("css=li.active a").split('(')) # split off the number of lines
+        sublang = (sel.get_text("css=li.full.active a").split('(')) # split off the number of lines
         self.assertEqual(sublang[0].rstrip(),"English")
     else:
-        sublang = (sel.get_text("css=li.active a").split('(')) # split off the number of lines
+        sublang = (sel.get_text("css=li.full.active a").split('(')) # split off the number of lines
         self.assertEqual(sublang[0].rstrip(),lang)
 
 def verify_subs(self,sel,sub_file):
