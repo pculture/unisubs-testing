@@ -337,7 +337,7 @@ def enter_comment_text(self,sel,comment):
 
     Assumes user is on the comments tab
     """
-    self.assertTrue(sel.is_element_present("css=li.active span:contains(\"Comments\")"),"comments tab not found")
+    self.assertTrue(sel.is_element_present("css=li.active a span:contains('Comments')"))
     sel.type("css=textarea#id_comment_form_content", comment)
     sel.click("css=button:contains('Comment')")
 
