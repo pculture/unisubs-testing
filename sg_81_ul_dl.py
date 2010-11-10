@@ -78,6 +78,7 @@ class subgroup_81(unittest.TestCase):
             website.upload_subtitles(self,sel,sub_file)
             mslib.wait_for_element_present(self,sel,"css=p.error_list")
             self.assertTrue(sel.is_element_present("css=p.error_list:contains('Can not detect file encoding')"))
+            mslib.wait_for_element_present(self,sel,"css=a[id=closeBut]")
             sel.click("css=a[id=closeBut]")
             
             print "2. invalid srt"
@@ -86,6 +87,7 @@ class subgroup_81(unittest.TestCase):
             website.upload_subtitles(self,sel,sub_file)
             mslib.wait_for_element_present(self,sel,"css=p.error_list")
             self.assertTrue(sel.is_element_present("css=p.error_list:contains('Incorrect subtitles format')"))
+            mslib.wait_for_element_present(self,sel,"css=a[id=closeBut]")
             sel.click("css=a[id=closeBut]")
             
             print "3. unsupported format"
@@ -94,6 +96,7 @@ class subgroup_81(unittest.TestCase):
             website.upload_subtitles(self,sel,sub_file)
             mslib.wait_for_element_present(self,sel,"css=p.error_list")
             self.assertTrue(sel.is_element_present("css=p.error_list:contains('Incorrect format. Upload srt')"))
+            mslib.wait_for_element_present(self,sel,"css=a[id=closeBut]")
             sel.click("css=a[id=closeBut]")
         finally:
             # check for Site Error notification and submit
