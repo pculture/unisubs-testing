@@ -42,6 +42,7 @@ class subgroup_80(unittest.TestCase):
         test_video_url = website.get_video_with_translations(self,sel)
         print test_video_url
         sel.open(test_video_url)
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         #Open the Original is the default tab when  video opened.
         sel.click(testvars.comments_tab)
         #Not logged in, enter a comment
@@ -110,7 +111,7 @@ class subgroup_80(unittest.TestCase):
 
 
 
-    def test_1488(self):
+    def test_488(self):
         """Add comments on a translation
         
         http://litmus.pculture.org/show_test.cgi?id=488
