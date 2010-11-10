@@ -44,7 +44,7 @@ video_edit_subtitles = "css=a[id=edit_subtitles]"
 video_add_translation = "css=a[id=add_translation]"
 
 history_tab = "css=.inline_text:contains('History')"
-comments_tab = "css=.inline_text:contains('Comments')"
+comments_tab = "css=span.inline_text:contains('Comments')"
 transcripts_tab = "css=.inline_text:contains('Subtitles')"
 
 

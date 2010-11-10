@@ -110,7 +110,7 @@ class subgroup_80(unittest.TestCase):
 
 
 
-    def test_488(self):
+    def test_1488(self):
         """Add comments on a translation
         
         http://litmus.pculture.org/show_test.cgi?id=488
@@ -126,7 +126,8 @@ class subgroup_80(unittest.TestCase):
         language = website.get_translated_lang(self,sel)
         
         #Open the Language tab / then the comments
-        sel.click("link="+language)
+        mslib.wait_for_element_present(self,sel,"css=a:contains('"+language+"')")
+        sel.click("css=a:contains('"+language+"')")
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         self.failUnless(sel.is_element_present("css=h4.inline:contains("+language+")"))
         sel.click(testvars.comments_tab) 
@@ -139,7 +140,7 @@ class subgroup_80(unittest.TestCase):
         #Login and go to language comments page
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         sel.open(test_video_url)
-        sel.click("link="+language)
+        sel.click("css=li.full a:contains('"+language+"'")
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         self.failUnless(sel.is_element_present("css=h4.inline:contains("+language+")"))
         sel.click(testvars.comments_tab) 
@@ -177,7 +178,8 @@ class subgroup_80(unittest.TestCase):
         #Login and go to language comments page
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         sel.open(test_video_url)
-        sel.click("link="+language)
+        mslib.wait_for_element_present(self,sel,"css=a:contains('"+language+"')")
+        sel.click("css=a:contains('"+language+"')")
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         self.assertTrue(sel.is_element_present("css=h4.inline:contains("+language+")"))
         sel.click(testvars.comments_tab) 
