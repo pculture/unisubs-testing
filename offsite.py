@@ -6,6 +6,7 @@ from selenium import selenium
 import unittest
 import time
 import urllib
+import random
 import mslib
 import testvars
 import widget
@@ -133,6 +134,7 @@ def get_vimeo_video_url(self):
 
         
 def get_youtube_video_url(self,vid_format="embed"):
+    cat_num = random.randint(1,26)
     try:
         self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("youtube"," get video url"), "http://youtube.com/"))
         self.selenium.start()
@@ -141,11 +143,11 @@ def get_youtube_video_url(self,vid_format="embed"):
         if vid_format == "webm":
             vsel.open("results?uploaded=w&search_query=crazy&search_duration=short&webm=1&search_type=videos&uni=3&search_sort=video_date_uploaded")
         else:
-            vsel.open("videos?s=mr&c=1")
+            vsel.open("videos?s=mr&c="+cat_num)
             #vsel.open("results?uploaded=w&search_query=crazy&search_duration=short&search_type=videos&uni=3&search_sort=video_date_uploaded")
         vsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
 #        vsel.click("css=h3 a[id^='video-long-title']")
-        vsel.click("css=div.video-entry:nth-child(2) > a[id^=video-thumb]")             
+        vsel.click("css=div.video-entry a[id^=video-thumb]")             
         vsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         youtubeURL = vsel.get_eval("window.location")
         print youtubeURL      
