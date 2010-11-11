@@ -143,7 +143,7 @@ def get_youtube_video_url(self,vid_format="embed"):
         if vid_format == "webm":
             vsel.open("results?uploaded=w&search_query=crazy&search_duration=short&webm=1&search_type=videos&uni=3&search_sort=video_date_uploaded")
         else:
-            vsel.open("videos?s=mr&c="+cat_num)
+            vsel.open("videos?s=mr&c="+str(cat_num))
             #vsel.open("results?uploaded=w&search_query=crazy&search_duration=short&search_type=videos&uni=3&search_sort=video_date_uploaded")
         vsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
 #        vsel.click("css=h3 a[id^='video-long-title']")
