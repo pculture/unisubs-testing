@@ -82,6 +82,7 @@ class subgroup_81(unittest.TestCase):
             sel.click("css=a[id=closeBut]")
             
             print "2. invalid srt"
+            sel.select_frame("relative=top")
             sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_invalid.srt")
             sel.click(testvars.video_upload_subtitles)
             website.upload_subtitles(self,sel,sub_file)
@@ -91,6 +92,7 @@ class subgroup_81(unittest.TestCase):
             sel.click("css=a[id=closeBut]")
             
             print "3. unsupported format"
+            sel.select_frame("relative=top")
             sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_text.txt")
             sel.click(testvars.video_upload_subtitles)
             website.upload_subtitles(self,sel,sub_file)
