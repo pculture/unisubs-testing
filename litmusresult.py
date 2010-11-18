@@ -11,7 +11,7 @@ import selvars
 def set_test_os():
     """Returns the os string for the SUT
     """
-    if selvars.sauce:
+    if selvars.set_sauce():
         return "Windows"
     if sys.platform.startswith("win32"):
         return "Windows"

@@ -8,6 +8,11 @@ import test_withHTMLoutput as controller
 import sauce_auth
 import json
 
+def set_sauce():
+    if controller.testsauce==True:
+        sauce = True
+        return sauce
+
 def set_localhost(): 
     """ localhost should default to 'localhost'.
 
