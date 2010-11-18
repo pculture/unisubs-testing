@@ -324,6 +324,7 @@ def sort_videos_table(self,sel,column,order):
 
     """
     sel.click("link="+column)
+    sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     if sel.is_element_present("css=a."+order+":contains("+column+")"):
         sel.click("link="+column)
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
