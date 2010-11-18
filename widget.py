@@ -217,7 +217,7 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
         sel.click_at(testvars.WidgetUI["Sync_sub"],"")
 ##        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
         sub_cell_start_time = "css=li:nth-child("+str(sub_li)+") > .mirosubs-timestamp .mirosubs-timestamp-time"
-        sub_cell_text = "css=li:nth-child("+str(sub_li)+") > span.mirosubs.title span"
+        sub_cell_text = "css=li:nth-child("+str(sub_li)+") > span.mirosubs-title span"
         start_time=sel.get_text(sub_cell_start_time)
         print " - sub time: " '%.2f' % float(start_time) + " - sub text: "+ sel.get_text(sub_cell_text)
         time.sleep(sub_int)
