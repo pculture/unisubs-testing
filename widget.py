@@ -142,12 +142,13 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
     for line in codecs.open(sub_file,encoding='utf-8'):
         sel.focus("css=input[class*=trans]")
         sel.type("css=input[class*=trans]",line)
-        sel.type_keys("css=input[class*=trans]",' ')    
-        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
-        current_sub = sel.get_text(testvars.WidgetUI["Current_playing_sub"])
-        # compare input text
-        self.assertEqual(line.rstrip(),current_sub.rstrip(),\
-                         "sub text mismatch - expected: "+line.rstrip()+" found: "+current_sub.rstrip())
+        sel.type_keys("css=input[class*=trans]",' ')
+## Can't do the compare here anymore - there's no way to find the text on the video, except for on demo.
+##        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
+##        current_sub = sel.get_text(testvars.WidgetUI["Current_playing_sub"])
+##        # compare input text
+##        self.assertEqual(line.rstrip(),current_sub.rstrip(),\
+##                         "sub text mismatch - expected: "+line.rstrip()+" found: "+current_sub.rstrip())
         
         transcribe_enter_text(self,sel)
         time.sleep(1)
@@ -214,10 +215,11 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
     for line in open(sub_file):
         sel.focus(testvars.WidgetUI["Sync_sub"])
         sel.click_at(testvars.WidgetUI["Sync_sub"],"")
-        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
+##        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
         sub_cell_start_time = "css=li:nth-child("+str(sub_li)+") > .mirosubs-timestamp .mirosubs-timestamp-time"
+        sub_cell_text = "css=li:nth-child("+str(sub_li)+") > span.mirosubs.title span"
         start_time=sel.get_text(sub_cell_start_time)
-        print " - sub time: " '%.2f' % float(start_time) + " - sub text: "+ sel.get_text(testvars.WidgetUI["Current_playing_sub"])
+        print " - sub time: " '%.2f' % float(start_time) + " - sub text: "+ sel.get_text(sub_cell_text)
         time.sleep(sub_int)
         sub_li = sub_li + 1
     # finish sync of the last sub
