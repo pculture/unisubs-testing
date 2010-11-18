@@ -130,7 +130,7 @@ class subgroup_80(unittest.TestCase):
         mslib.wait_for_element_present(self,sel,"css=a:contains('"+language+"')")
         sel.click("css=a:contains('"+language+"')")
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        self.failUnless(sel.is_element_present("css=h4.inline:contains("+language+")"))
+        self.failUnless(sel.is_element_present("css=span.inline_text:contains("+language+")"))
         sel.click(testvars.comments_tab) 
 
         #Not logged in, enter a comment
@@ -143,7 +143,7 @@ class subgroup_80(unittest.TestCase):
         sel.open(test_video_url)
         sel.click("css=li.full a:contains('"+language+"')")
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        self.failUnless(sel.is_element_present("css=h4.inline:contains("+language+")"))
+        self.failUnless(sel.is_element_present("css=span.inline_text:contains("+language+")"))
         sel.click(testvars.comments_tab) 
 
         #Enter a 1-char comment
@@ -182,7 +182,7 @@ class subgroup_80(unittest.TestCase):
         mslib.wait_for_element_present(self,sel,"css=a:contains('"+language+"')")
         sel.click("css=a:contains('"+language+"')")
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        self.assertTrue(sel.is_element_present("css=h4.inline:contains("+language+")"))
+        self.assertTrue(sel.is_element_present("css=span.inline_text:contains("+language+")"))
         sel.click(testvars.comments_tab) 
 
         #Enter some non-ascii comments
