@@ -140,10 +140,6 @@ class subgroup_78_subtesting(unittest.TestCase):
             widget.goto_step(self,sel,"3")
             widget.edit_text(self,sel,subtextfile)
             
-            
-    
-
-      
 
 
 

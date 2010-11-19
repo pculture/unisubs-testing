@@ -197,23 +197,25 @@ def get_video_with_translations(self,sel):
     Returns: video_url
     """
     sel.open("videos/")
-    sort_videos_table(self,sel,"Subtitles and Translations","desc") 
+ #   sort_videos_table(self,sel,"Subtitles and Translations","desc") 
     row_no = 1
     local_url = "none"    
     while sel.is_element_present("css=tr:nth-child("+str(row_no)+") > "+testvars.videos_trans_td):
-        
-        if int(sel.get_text("css=tr:nth-child("+str(row_no)+") > "+testvars.videos_trans_td)) > 0:
+        num_trans = sel.get_text("css=tr:nth-child("+str(row_no)+") > "+testvars.videos_trans_td)
+        print num_trans
+        if int(num_trans) > 1:
             local_url = sel.get_attribute("css=tr:nth-child("+str(row_no)+ ") > "+testvars.videos_url_td+" > a@href")
-            break
-        
-        row_no = row_no + 1
-        
+            break        
+        row_no = row_no + 1        
     if local_url == "none":
         print "no translations - have to add one"
-        get_video_no_translations(self,sel)
-        translate_video(self,sel)
-       
-        
+        vid_url = offsite.get_youtube_video_url(self)
+        SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
+        submit_video(self,sel,vid_url)
+        sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_en_subs.ssa")
+        website.upload_subtitles(self,sel,sub_file)
+        local_url = sel.get_attribute(testvars.video_original +" > a@href")
+        SiteLogout(self,sel)
     return local_url
 def get_video_no_translations(self,sel):
     """Get the url of the video page for a video that has translations.
@@ -241,7 +243,7 @@ def get_video_no_translations(self,sel):
  #       widget.close_howto_video(self,sel)
  #       widget.close_widget(self,sel)
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        local_url = sel.get_eval("window.location")
+        local_url = sel.get_attribute(testvars.video_original +" > a@href")
         
     return local_url
 
@@ -324,7 +326,9 @@ def translate_video(self,sel,url=None,lang=None):
         print "opening video page to translate"
         sel.open(url)
     self.assertTrue(sel.is_element_present("css=a#add_translation"),"add translation button not found")
-    sel.click(testvars.video_add_translation)       
+    sel.click(testvars.video_add_translation)
+
+    
 
 def sort_videos_table(self,sel,column,order):
     """Sort the videos table by the specified heading in the specified order

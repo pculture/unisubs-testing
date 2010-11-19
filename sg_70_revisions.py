@@ -69,10 +69,10 @@ class subgroup_70(unittest.TestCase):
         website.verify_latest_history(self,sel,rev="#0",user="sub_writer",time="100%",text="100%")
 
 
-    def test_486a(self):
+    def test_486(self):
         """Revisions - edit subtitles timing and verify in history table.
 
-        http://litmus.pculture.org/show_test.cgi?id=485
+        http://litmus.pculture.org/show_test.cgi?id=486
         """
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
@@ -109,10 +109,10 @@ class subgroup_70(unittest.TestCase):
         # Click History tab
         website.verify_latest_history(self,sel,rev="#1",user="sub_writer",time="100%",text="0%")
                 
-    def test_487b(self):
+    def test_602(self):
         """Revisions - edit subtitles text and verify in history table.
 
-        http://litmus.pculture.org/show_test.cgi?id=485
+        http://litmus.pculture.org/show_test.cgi?id=602
         """
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
