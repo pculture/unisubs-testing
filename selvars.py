@@ -43,7 +43,7 @@ def set_site():
     if controller.testsite:
         site = "http://"+controller.testsite+".universalsubtitles.org"
     else:
-        site = "http://dev.universalsubtitles.org"
+        site = "http://staging.universalsubtitles.org"
     return site
 
 def set_widget_null_page():
