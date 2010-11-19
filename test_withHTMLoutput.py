@@ -102,7 +102,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
                           ['sg_80_comments.subgroup_80',unittest.getTestCaseNames(sg_80_comments.subgroup_80,'test')],  \
                           ['sg_65_login.subgroup_65',unittest.getTestCaseNames(sg_65_login.subgroup_65,'test')], \
                           ['sg_78_widget_offsite.subgroup_78_pculture',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78_pculture,'test')], \
-                          'sg_78_widget_offsite.subgroup_78_subtesting',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78_subtesting,'test')], \
+                          ['sg_78_widget_offsite.subgroup_78_subtesting',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78_subtesting,'test')], \
                           ['sg_70_revisions.subgroup_70',unittest.getTestCaseNames(sg_70_revisions.subgroup_70,'test')], \
                            ]
 
