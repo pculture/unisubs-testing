@@ -11,7 +11,7 @@ import testvars
 import selvars
 
 
-class subgroup_78(unittest.TestCase):
+class subgroup_78_pculture(unittest.TestCase):
     """
     Litmus Subgroup 64 - offsite subwidget:
         Tests designed to exercise the subtitle widget embedded
@@ -30,7 +30,7 @@ class subgroup_78(unittest.TestCase):
 # The test cases of the subgroup.
 
 
-    def test_369(self):
+    def stest_369(self):
         """Subtitle Youtube video in offsite embed.
         
         http://litmus.pculture.org/show_test.cgi?id=369
@@ -51,7 +51,7 @@ class subgroup_78(unittest.TestCase):
 
       
 
-    def test_370(self):
+    def stest_370(self):
         """Subtitle ogg video in offsite embed.
        
         http://litmus.pculture.org/show_test.cgi?id=370
@@ -83,6 +83,79 @@ class subgroup_78(unittest.TestCase):
         website.handle_error_page(self,self.selenium,self.id())
         #Close the browser
         self.selenium.stop()
+        #Log any errors
+        self.assertEqual([], self.verificationErrors)
+
+
+class subgroup_78_subtesting(unittest.TestCase):
+    """
+    Litmus Subgroup 64 - offsite subwidget:
+        Tests designed to exercise the subtitle widget embedded
+        in sites external to universalsubtitles.org (live, dev or staging)  
+    """
+    
+# Open the desired browser and set up the test
+    def setUp(self):
+        """
+        Sets up run envirnment for selenium server
+        """
+        self.verificationErrors = []
+        self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), "http://subtesting.com/"))
+        self.selenium.start()
+   
+# The test cases of the subgroup.
+
+
+    def test_601(self):
+        """Subtitle Youtube video in offsite Wordpress embed.
+        
+        http://litmus.pculture.org/show_test.cgi?id=601
+        """
+        youtube_vid1 = "css=div:nth-child(3) > a span"
+        print self.shortDescription()
+        sel = self.selenium
+        
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        sel.open(selvars.set_subtesting_wordpress_page())
+        mslib.wait_for_element_present(self,sel,"css=div:nth-child(3) > a span")
+        if sel.get_text(youtube_vid1) == "Subtitle Me":
+            print "no subs yet - making new ones"
+            subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
+            website.start_sub_widget(self,sel,youtube_vid1)
+            # Transcribe
+            widget.transcribe_video(self,sel,subtextfile)
+            # Sync
+            widget.sync_video(self,sel,subtextfile,6,8)
+            # Review
+            widget.edit_text(self,sel,subtextfile)
+        else:
+            print "has subs - just editing"
+            sel.click(testvars.WebsiteUI["Subhomepage_menuitem"])
+            sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+            website.store_subs(self,sel)
+            subtextfile = "subs.txt"
+            sel.open(selvars.set_subtesting_wordpress_page())
+            mslib.wait_for_element_present(self,sel,"css=div:nth-child(3) > a span")
+            website.start_sub_widget(self,sel,youtube_vid1)
+            widget.goto_step(self,sel,"3")
+            widget.edit_text(self,sel,subtextfile)
+            
+            
+    
+
+      
+
+
+
+# Close the browser, log errors, perform cleanup 
+    def tearDown(self):
+        """
+        Closes the browser test window and logs errors
+        """
+        # check for Site Error notification and submit
+        website.handle_error_page(self,self.selenium,self.id())
+        #Close the browser
+#        self.selenium.stop()
         #Log any errors
         self.assertEqual([], self.verificationErrors)
       

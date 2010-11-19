@@ -144,10 +144,8 @@ def get_youtube_video_url(self,vid_format="embed"):
             vsel.open("results?uploaded=w&search_query=crazy&search_duration=short&webm=1&search_type=videos&uni=3&search_sort=video_date_uploaded")
         else:
             vsel.open("videos?s=mr&c="+str(cat_num))
-            #vsel.open("results?uploaded=w&search_query=crazy&search_duration=short&search_type=videos&uni=3&search_sort=video_date_uploaded")
         vsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-#        vsel.click("css=h3 a[id^='video-long-title']")
-        vsel.click("css=div.video-entry a[id^=video-thumb]")             
+        vsel.click("css=a[id^=video-short-title]")             
         vsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         youtubeURL = vsel.get_eval("window.location")
         print youtubeURL      

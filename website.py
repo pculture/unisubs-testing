@@ -198,15 +198,14 @@ def get_video_with_translations(self,sel):
     """
     sel.open("videos/")
     sort_videos_table(self,sel,"Subtitles and Translations","desc") 
-    row_no = 3
-    local_url = "none"
-    
-    subtitled_cell="css=tr:nth-child("+str(row_no)+") > "+testvars.videos_trans_td
-    while sel.is_element_present(subtitled_cell):
-        subtitled_cell=("css=tr:nth-child("+str(row_no)+") > "+testvars.videos_trans_td)
-        if int(sel.get_text(subtitled_cell)) > 0:
+    row_no = 1
+    local_url = "none"    
+    while sel.is_element_present("css=tr:nth-child("+str(row_no)+") > "+testvars.videos_trans_td):
+        
+        if int(sel.get_text("css=tr:nth-child("+str(row_no)+") > "+testvars.videos_trans_td)) > 0:
             local_url = sel.get_attribute("css=tr:nth-child("+str(row_no)+ ") > "+testvars.videos_url_td+" > a@href")
             break
+        
         row_no = row_no + 1
         
     if local_url == "none":
@@ -303,6 +302,17 @@ def verify_subs(self,sel,sub_file):
         self.assertTrue("css=tr:nth-child("+str(sub_td)+") > td div.sub_content:contains("+sub+")")
         sub_td = sub_td + 1
 
+def store_subs(self,sel):
+    """reads each line of subs and saves to a file for later use.
+
+    """
+    f = open("subs.txt", "w")
+    sub_td = 1
+    while sel.is_element_present("css=tr:nth-child("+str(sub_td)+") > td div.sub_content"):
+        subline = sel.get_text("css=tr:nth-child("+str(sub_td)+") > td div.sub_content")
+        f.write(subline+ "\n")
+        sub_td = sub_td + 1
+    f.close
 
 def translate_video(self,sel,url=None,lang=None):
     """Given the local url of a video, adds a translation.

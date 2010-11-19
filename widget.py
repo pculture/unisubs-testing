@@ -84,7 +84,7 @@ def site_login_auth(self,sel):
 
 
 def select_video_language(self,sel,vid_lang="English",sub_lang="English"):
-    time.sleep(3)
+    time.sleep(5)
     if sel.is_element_present(testvars.WidgetUI["Select_language"]):
         sel.select_frame("relative=top")
         vid_label = sel.get_text("css=p:nth-child(1) > select option:contains("+vid_lang+")")
@@ -104,7 +104,7 @@ def close_howto_video(self,sel,skip=True):
     
     Post-condition: help video is closed and returned to previous widget page.
     """
-    time.sleep(3)
+    time.sleep(5)
     if sel.is_element_present("css=.mirosubs-howtopanel"):
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-done:contains('Continue')")
         mslib.wait_for_element_present(self,sel,"css=.goog-checkbox-unchecked")
@@ -231,7 +231,7 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
                   
 
 
-def edit_text(self,sel,subtextfile,new_text="my hovercraft is full of eels"):
+def edit_text(self,sel,subtextfile,new_text=""):
     """
     Description: Input the same text used in transcribe_video and for each line,
     edit the text with new_text.  Verifies text has been updated.
@@ -246,9 +246,11 @@ def edit_text(self,sel,subtextfile,new_text="my hovercraft is full of eels"):
     sub_li=1
     sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") > span.mirosubs-title span"
     for line in open(subtextfile):
+        if new_text == "":
+            new_text = str(line).upper()
         sel.focus(sub_cell)
         sel.click(sub_cell)
-        mslib.wait_for_element_present(self,sel,"css=span.mirosubs-title textarea")
+ #       mslib.wait_for_element_present(self,sel,"css=span.mirosubs-title textarea")
         sel.type("css=.mirosubs-title textarea", new_text)
         sel.key_press("css=.mirosubs-title textarea", "\\13")
         sub_cell_text=sel.get_text(sub_cell)
