@@ -110,6 +110,8 @@ class subgroup_78_subtesting(unittest.TestCase):
         """Subtitle Youtube video in offsite Wordpress embed.
         
         http://litmus.pculture.org/show_test.cgi?id=601
+
+        We are explicitly testing the Right-Wing Radio Duck in 1st position on the page
         """
         youtube_vid1 = "css=div:nth-child(3) > a span"
         print self.shortDescription()
@@ -129,16 +131,34 @@ class subgroup_78_subtesting(unittest.TestCase):
             # Review
             widget.edit_text(self,sel,subtextfile)
         else:
-            print "has subs - just editing"
+            print "has subs - going to editing then revert"
             sel.click(testvars.WebsiteUI["Subhomepage_menuitem"])
             sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
             website.store_subs(self,sel)
+            orig_rev = website.get_current_rev(self,sel)
             subtextfile = "subs.txt"
             sel.open(selvars.set_subtesting_wordpress_page())
             mslib.wait_for_element_present(self,sel,"css=div:nth-child(3) > a span")
             website.start_sub_widget(self,sel,youtube_vid1)
             widget.goto_step(self,sel,"3")
             widget.edit_text(self,sel,subtextfile)
+            widget.SiteLogin(self,sel)
+            widget.submit_sub_edits(self,sel)
+            mslib.wait_for_element_present(testvars.video_video_info)
+            self.assertEqual("PCF Sub-writer edited English subtitles for Right-Wing Radio Duck", sel.get_text("css=tr td:nth-child(1)"))
+            sel.click("css=tr td:nth-child(1) > a:contains('English subtitles')")
+            sel.click(testvars.history_tab)
+            mslib.wait_for_element_present(self,sel,testvars.video_compare_revisions)
+            sel.click("td a:contains('"+ orig_rev+"')")
+            sel.click(testvars.video_compare_revisions)
+            mslib.wait_for_element_present(self,sel,testvars.rev_rollback)
+            sel.click(testvars.rev_rollback)
+            self.assertEqual("Subtitles will be rolled back to a previous version", sel.get_confirmation())
+            sel.click(testvars.transcripts_tab)
+            website.verify_subs(self,sel,"subs.txt")
+            
+
+
             
 
 

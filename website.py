@@ -381,10 +381,20 @@ def verify_comment_text(self,sel,comment,result="posted",reply_text=None):
                         "login message not present")
         if sel.is_element_present("css=ul.comments.big_list li:nth-child(1) > div.info p"):
             self.assertNotEqual(sel.get_text("css=ul.comments.big_list li:nth-child(1) > div.info p"),"comment", \
-                                "comment posted without login")  
+                                "comment posted without login")
+
+
+def get_current_rev(self,sel):
+    """Returns the most current revision number for a videos subtitles or translation.
+    
+    Assumes you have the video's page open and are on the history tab.
+    """
+    revision = sel.get_text("css=tr td:nth-child(1) > a")
+    return revision
 
 def verify_latest_history(self,sel,rev=None,user=None,time=None,text=None):
     print "verifying history tab contents"
+    mslib.wait_for_element_present(self,sel,testvars.history_tab)
     sel.click(testvars.history_tab)
     if rev:
         self.assertTrue(sel.is_element_present("css=div[id=revisions-tab] tr:nth-child(1) > td:nth-child(1) > a:contains('"+rev+"')"))

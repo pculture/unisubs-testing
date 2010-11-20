@@ -43,6 +43,9 @@ video_video_info = "css=li a:contains('Video Info')"
 video_upload_subtitles = "css=a[id=upload-subtitles-link]"
 video_edit_subtitles = "css=a[id=edit_subtitles]"
 video_add_translation = "css=a[id=add_translation]"
+video_compare_revisions = "css=button span:contains('Compare Revisions')"
+rev_rollback = "css=a.roll_back"
+
 
 history_tab = "css=.inline_text:contains('History')"
 comments_tab = "css=span.inline_text:contains('Comments')"
