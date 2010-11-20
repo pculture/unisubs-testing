@@ -209,7 +209,7 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     #start playback
     sel.focus(testvars.WidgetUI["Play_pause"])
-    sel.click_at(testvars.WidgetUI["Play_pause"],"")
+    sel.click("css=.mirosubs-tab:contains('tab')")
     #start syncing   
     time.sleep(start_delay)
     sub_li=1
@@ -242,6 +242,7 @@ def edit_text(self,sel,subtextfile,new_text=""):
 
     Pre-condition - can use this to sync on Step 2, Step 3.
     """
+    print "* Edit Text"
     sel.select_window("null")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
     sub_li=1
@@ -257,8 +258,8 @@ def edit_text(self,sel,subtextfile,new_text=""):
         sel.click(sub_cell)
         time.sleep(1)
  #       mslib.wait_for_element_present(self,sel,"css=span.mirosubs-title textarea")
-        sel.type("css=span textarea", ed_text)
-        sel.key_press("css=span textarea", "\\13")
+        sel.type("css=span.mirosubs-title textarea", ed_text)
+        sel.key_press("css=span.mirosubs-title textarea", "\\13")
         sub_cell_text=sel.get_text(sub_cell)
         self.assertEqual(sub_cell_text.rstrip(),ed_text.rstrip())
         sub_li = sub_li + 1
