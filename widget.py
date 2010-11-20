@@ -209,8 +209,7 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
     time.sleep(10)
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     #start playback
-    sel.focus(testvars.WidgetUI["Play_pause"])
-    sel.click(testvars.WidgetUI["Play_pause"])
+    sel.type_keys("css=.mirosubs-play",u'\u0009')
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
     #start syncing   
     time.sleep(start_delay)
