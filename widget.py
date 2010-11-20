@@ -209,8 +209,11 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
     time.sleep(10)
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     #start playback
-    sel.type_keys("css=.mirosubs-play",u'\u0009')
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
+    for x in range(1,4):
+        sel.click(testvars.WidgetUI["Play_pause"])
+        time.sleep(1)
+        if sel.is_element_present(testvars.WidgetUI["Video_pause_button"]):
+            break
     #start syncing   
     time.sleep(start_delay)
     sub_li=1
@@ -255,10 +258,12 @@ def edit_text(self,sel,subtextfile,new_text=""):
             ed_text = str(line).upper()
         else:
             ed_text = new_text
-        sel.click(sub_cell)
-        time.sleep(1)
-        if not sel.is_element_present("//textarea"):
+
+        for x in range(1,4):
             sel.click(sub_cell)
+            time.sleep(.5)
+            if sel.is_element_present("//textarea"):
+                break
         sel.type("//textarea", ed_text)
         sel.key_press("css=span.mirosubs-title textarea", "\\13")
         sub_cell_text=sel.get_text(sub_cell)
