@@ -171,7 +171,7 @@ class subgroup_78_subtesting(unittest.TestCase):
         # check for Site Error notification and submit
         website.handle_error_page(self,self.selenium,self.id())
         #Close the browser
-#        self.selenium.stop()
+        self.selenium.stop()
         #Log any errors
         self.assertEqual([], self.verificationErrors)
       
