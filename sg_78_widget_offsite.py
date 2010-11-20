@@ -30,7 +30,7 @@ class subgroup_78_pculture(unittest.TestCase):
 # The test cases of the subgroup.
 
 
-    def stest_369(self):
+    def test_369(self):
         """Subtitle Youtube video in offsite embed.
         
         http://litmus.pculture.org/show_test.cgi?id=369
@@ -51,7 +51,7 @@ class subgroup_78_pculture(unittest.TestCase):
 
       
 
-    def stest_370(self):
+    def test_370(self):
         """Subtitle ogg video in offsite embed.
        
         http://litmus.pculture.org/show_test.cgi?id=370
