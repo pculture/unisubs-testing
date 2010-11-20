@@ -254,8 +254,8 @@ def edit_text(self,sel,subtextfile,new_text=""):
         sel.focus(sub_cell)
         sel.click(sub_cell)
  #       mslib.wait_for_element_present(self,sel,"css=span.mirosubs-title textarea")
-        sel.type("css=.mirosubs-title textarea", ed_text)
-        sel.key_press("css=.mirosubs-title textarea", "\\13")
+        sel.type("css=span textarea", ed_text)
+        sel.key_press("css=span textarea", "\\13")
         sub_cell_text=sel.get_text(sub_cell)
         self.assertEqual(sub_cell_text.rstrip(),ed_text.rstrip())
         sub_li = sub_li + 1
