@@ -201,6 +201,7 @@ class subgroup_64(unittest.TestCase):
         website.verify_submitted_video(self,sel,vid_url,embed_type="dailymotion")
         # Start sub widget
         print "starting sub widget"
+        time.sleep(5)
         website.start_sub_widget(self,sel)
         # Transcribe
         print "transcribing video"
