@@ -257,8 +257,6 @@ def edit_text(self,sel,subtextfile,new_text=""):
         else:
             ed_text = new_text
         sel.click(sub_cell)
-        time.sleep(1)
-        mslib.wait_for_element_present(self,sel,"css=span.mirosubs-title textarea")
         sel.type("css=span.mirosubs-title textarea", ed_text)
         sel.key_press("css=span.mirosubs-title textarea", "\\13")
         sub_cell_text=sel.get_text(sub_cell)
