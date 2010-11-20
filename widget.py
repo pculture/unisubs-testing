@@ -266,8 +266,8 @@ def edit_text(self,sel,subtextfile,new_text=""):
             time.sleep(1)
             if sel.is_element_present("css=span.mirosubs-title textarea"):
                 break
-        sel.type("css=span.mirosubs-title textarea", ed_text)
-        sel.key_press("css=span.mirosubs-title textarea", "\\13")
+        sel.type("css=span.mirosubs-title textarea", ed_text+"\n")
+  #      sel.key_press("css=span.mirosubs-title textarea", "\\13")
         sub_cell_text=sel.get_text(sub_cell)
         self.assertEqual(sub_cell_text.rstrip(),ed_text.rstrip())
         sub_li = sub_li + 1
