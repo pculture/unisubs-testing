@@ -253,6 +253,7 @@ def edit_text(self,sel,subtextfile,new_text=""):
             ed_text = new_text
         sel.focus(sub_cell)
         sel.click(sub_cell)
+        time.sleep(1)
  #       mslib.wait_for_element_present(self,sel,"css=span.mirosubs-title textarea")
         sel.type("css=span textarea", ed_text)
         sel.key_press("css=span textarea", "\\13")
