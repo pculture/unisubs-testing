@@ -203,7 +203,8 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
     Pre-condition - can use this to sync on Step 2, Step 3 or Edit.
     """
     print " * Sub syncing"
-    sel.select_frame("relative=top")
+    time.sleep(3)
+    sel.select_window("null")
     #give video a chance to load
     time.sleep(10)
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
@@ -244,7 +245,8 @@ def edit_text(self,sel,subtextfile,new_text=""):
     Pre-condition - can use this on Step 2, Step 3.
     """
     print "* Edit Text"
-    sel.select_frame("relative=top")
+    time.sleep(3)
+    sel.select_window("null")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
     sub_li=1
     sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") > span.mirosubs-title span"
