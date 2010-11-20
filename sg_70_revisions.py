@@ -66,6 +66,7 @@ class subgroup_70(unittest.TestCase):
         mslib.wait_for_element_present(self,sel,testvars.video_video_info)
         website.verify_subs(self,sel,subtextfile)
         # Click History tab
+        sel.click(testvars.video_original)
         website.verify_latest_history(self,sel,rev="#0",user="sub_writer",time="100%",text="100%")
 
 
@@ -107,6 +108,7 @@ class subgroup_70(unittest.TestCase):
         widget.resync_video(self,sel,subtextfile)
         widget.submit_sub_edits(self,sel)
         # Click History tab
+        sel.click(testvars.video_original)
         website.verify_latest_history(self,sel,rev="#1",user="sub_writer",time="100%",text="0%")
                 
     def test_602(self):
@@ -146,7 +148,9 @@ class subgroup_70(unittest.TestCase):
         widget.goto_step(self,sel,"3")
         widget.edit_text(self,sel,subtextfile)
         widget.submit_sub_edits(self,sel)
-        # Click History tab
+        
+        # Click Original language then History tab
+        sel.click(testvars.video_original)
         website.verify_latest_history(self,sel,rev="#1",user="sub_writer",time="0%",text="100%")
     
 

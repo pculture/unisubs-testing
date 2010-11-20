@@ -14,6 +14,8 @@ import testvars
 import selvars
 
 
+
+
 def Login(self,sel,auth_type):
     """
     Description: Initiates login sequence using the Subtitle Me menu that's attached to
@@ -30,12 +32,11 @@ def Login(self,sel,auth_type):
     print "logging in using "+auth_type+ " account"
     mslib.wait_for_element_present(self,sel, testvars.WebsiteUI["SubtitleMe_menu"])
     sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
-    time.sleep(3)  # give the widget a chance to open directly if it's going to.
+    time.sleep(5)  # give the widget a chance to open directly if it's going to.
     select_video_language(self,sel)
+    close_howto_video(self,sel)
             
     if sel.is_element_present("css=.mirosubs-modal-widget"):
-        close_howto_video(self,sel)
-        time.sleep(3)
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Must_Login"])
         sel.click(testvars.WidgetUI["Must_Login"])
         
@@ -45,8 +46,8 @@ def Login(self,sel,auth_type):
             sel.click(testvars.WebsiteUI["Login_menuitem"])
 
  #   sel.select_frame("relative=top")
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-modal-login")
-    sel.click("css=.mirosubs-" +auth_type)
+    mslib.wait_for_element_present(self,sel,"css=.mirosubs-modal-login-content")
+    sel.click("css=a.mirosubs-" +auth_type)
     
         
 
