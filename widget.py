@@ -251,6 +251,8 @@ def edit_text(self,sel,subtextfile,new_text=""):
             ed_text = str(line).upper()
         else:
             ed_text = new_text
+        print line
+        print ed_text
         sel.focus(sub_cell)
         sel.click(sub_cell)
         time.sleep(1)
