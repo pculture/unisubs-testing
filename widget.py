@@ -247,7 +247,6 @@ def edit_text(self,sel,subtextfile,new_text=""):
     time.sleep(3)
     sel.select_window("null")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
-    sel.click("css=div.mirosubs-captioning-area")
     sub_li=1
     sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") > span.mirosubs-title span"
     print sub_cell
