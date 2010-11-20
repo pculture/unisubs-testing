@@ -256,7 +256,7 @@ def edit_text(self,sel,subtextfile,new_text=""):
         else:
             ed_text = new_text
         sel.click(sub_cell)
-        sel.type("css=span.mirosubs-title textarea", ed_text)
+        sel.type("//textarea", ed_text)
         sel.key_press("css=span.mirosubs-title textarea", "\\13")
         sub_cell_text=sel.get_text(sub_cell)
         self.assertEqual(sub_cell_text.rstrip(),ed_text.rstrip())
