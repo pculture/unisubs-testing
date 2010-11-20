@@ -30,7 +30,7 @@ class subgroup_78_pculture(unittest.TestCase):
 # The test cases of the subgroup.
 
 
-    def stest_369(self):
+    def test_369(self):
         """Subtitle Youtube video in offsite embed.
         
         http://litmus.pculture.org/show_test.cgi?id=369
@@ -142,7 +142,7 @@ class subgroup_78_subtesting(unittest.TestCase):
             website.start_sub_widget(self,sel,youtube_vid1)
             widget.goto_step(self,sel,"3")
             widget.edit_text(self,sel,subtextfile)
-            widget.SiteLogin(self,sel)
+            widget.site_login_from_widget_link(self,sel)
             widget.submit_sub_edits(self,sel)
             mslib.wait_for_element_present(testvars.video_video_info)
             self.assertEqual("PCF Sub-writer edited English subtitles for Right-Wing Radio Duck", sel.get_text("css=tr td:nth-child(1)"))
