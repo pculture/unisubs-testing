@@ -210,6 +210,7 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     #start playback
     for x in range(1,4):
+        print x
         sel.click(testvars.WidgetUI["Play_pause"])
         time.sleep(1)
         if sel.is_element_present(testvars.WidgetUI["Video_pause_button"]):
@@ -260,11 +261,12 @@ def edit_text(self,sel,subtextfile,new_text=""):
             ed_text = new_text
 
         for x in range(1,4):
+            print x
             sel.click(sub_cell)
             time.sleep(.5)
-            if sel.is_element_present("//textarea"):
+            if sel.is_element_present("css=span.mirosubs-title textarea"):
                 break
-        sel.type("//textarea", ed_text)
+        sel.type("css=span.mirosubs-title textarea", ed_text)
         sel.key_press("css=span.mirosubs-title textarea", "\\13")
         sub_cell_text=sel.get_text(sub_cell)
         self.assertEqual(sub_cell_text.rstrip(),ed_text.rstrip())
