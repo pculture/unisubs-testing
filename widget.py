@@ -247,6 +247,7 @@ def edit_text(self,sel,subtextfile,new_text=""):
     time.sleep(3)
     sel.select_window("null")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
+    sel.click("css=div.mirosubs-captioning-area")
     sub_li=1
     sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") > span.mirosubs-title span"
     print sub_cell
@@ -256,6 +257,9 @@ def edit_text(self,sel,subtextfile,new_text=""):
         else:
             ed_text = new_text
         sel.click(sub_cell)
+        time.sleep(1)
+        if not sel.is_element_present("//textarea"):
+            sel.click(sub_cell)
         sel.type("//textarea", ed_text)
         sel.key_press("css=span.mirosubs-title textarea", "\\13")
         sub_cell_text=sel.get_text(sub_cell)
