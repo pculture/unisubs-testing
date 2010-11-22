@@ -82,6 +82,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
             unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_389'),
             unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_414'),
             unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_534'),
+            unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_533'),
             unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_408'),
             unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_406'),
             unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_414'),
@@ -92,6 +93,9 @@ class Test_HTMLTestRunner(unittest.TestCase):
             unittest.defaultTestLoader.loadTestsFromName('sg_80_comments.subgroup_80.test_537'),
             unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_384'),
             unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_378')
+            unittest.defaultTestLoader.loadTestsFromName('sg_70_revisions.subgroup_70.test_485'),
+            unittest.defaultTestLoader.loadTestsFromName('sg_70_revisions.subgroup_70.test_486'),
+            unittest.defaultTestLoader.loadTestsFromName('sg_70_revisions.subgroup_70.test_602'),
             
             ])
         ## Running on pcf server or local, run all the tests
