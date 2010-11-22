@@ -51,7 +51,7 @@ class subgroup_78_pculture(unittest.TestCase):
 
       
 
-    def stest_370(self):
+    def test_370(self):
         """Subtitle ogg video in offsite embed.
        
         http://litmus.pculture.org/show_test.cgi?id=370

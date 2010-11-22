@@ -105,7 +105,7 @@ def close_howto_video(self,sel,skip=True):
     
     Post-condition: help video is closed and returned to previous widget page.
     """
-    time.sleep(5)
+    time.sleep(15)
     if sel.is_element_present("css=.mirosubs-howtopanel"):
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-done:contains('Continue')")
         mslib.wait_for_element_present(self,sel,"css=.goog-checkbox-unchecked")
@@ -196,33 +196,30 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
 
     Options:
         sub_file - path to file or text lines to enter
-        start_delay - time to wait before 1st sync (default = 2 secs)
+        start_delay - time to wait before 1st sync (default = 4 secs)
         sub_int - time to wait before next sub (default = 2 secs
         step - {'Continue' (default) | 'Stop} move on to next step when done.
 
     Pre-condition - can use this to sync on Step 2, Step 3 or Edit.
     """
     print " * Sub syncing"
-    time.sleep(3)
-    sel.select_window("null")
-    #give video a chance to load
+    time.sleep(10) #give video a chance to load
+    sel.select_window("null")   
     time.sleep(10)
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     #start playback
-    for x in range(1,4):
-        print x
-        sel.click_at(testvars.WidgetUI["Play_pause"],"")
-        time.sleep(2)
-        if sel.is_element_present(testvars.WidgetUI["Video_pause_button"]):
-            break
-    #start syncing   
+    sel.click_at(testvars.WidgetUI["Play_pause"],"")
     time.sleep(start_delay)
+    if not sel.is_element_present(testvars.WidgetUI["Video_pause_button"]):
+        sel.click_at(testvars.WidgetUI["Play_pause"],"")
+        time.sleep(start_delay)
+    #start syncing   
+    
     sub_li=1
     for line in open(sub_file):
         sel.focus(testvars.WidgetUI["Sync_sub"])
         sel.click_at(testvars.WidgetUI["Sync_sub"],"")
         time.sleep(2)
-##        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
         sub_cell_start_time = "css=li:nth-child("+str(sub_li)+") > .mirosubs-timestamp .mirosubs-timestamp-time"
         sub_cell_text = "css=li:nth-child("+str(sub_li)+") > span.mirosubs-title span"
         start_time=sel.get_text(sub_cell_start_time)
@@ -249,30 +246,25 @@ def edit_text(self,sel,subtextfile,new_text=""):
     Pre-condition - can use this on Step 2, Step 3.
     """
     print "* Edit Text"
-    time.sleep(3)
+    time.sleep(10) #give video a chance to load
     sel.select_window("null")
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
+    
     sub_li=1
     sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") > span.mirosubs-title span"
-    print sub_cell
+    mslib.wait_for_element_present(self,sel,sub_cell)
     for line in open(subtextfile):
         if new_text == "":
             ed_text = str(line).upper()
         else:
             ed_text = new_text
-
-        for x in range(1,4):
-            print x
-            sel.click_at(sub_cell,"")
-            time.sleep(2)
-            if sel.is_element_present("css=span.mirosubs-title textarea"):
-                break
-        sel.type("css=span.mirosubs-title textarea", ed_text+"\n")
-  #      sel.key_press("css=span.mirosubs-title textarea", "\\13")
-        sub_cell_text=sel.get_text(sub_cell)
-        self.assertEqual(sub_cell_text.rstrip(),ed_text.rstrip())
-        sub_li = sub_li + 1
-        sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") > span.mirosubs-title span"
+    sel.click(sub_cell)
+    sel.type("css=span.mirosubs-title textarea", ed_text)
+    sel.key_press("css=span.mirosubs-title textarea", "\\13")
+    mslib.wait_for_element_present(self,sel,sub_cell)
+    sub_cell_text=sel.get_text(sub_cell)
+    self.assertEqual(sub_cell_text.rstrip(),ed_text.rstrip())
+    sub_li = sub_li + 1
+    sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") > span.mirosubs-title span"
         
 def drag_time_bubbles(self,sel,subtextfile):
     """
