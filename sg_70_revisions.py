@@ -63,6 +63,8 @@ class subgroup_70(unittest.TestCase):
         # Review
         print "review step - just submitting video"
         sel.click(testvars.WidgetUI["Next_step"])
+        time.sleep(2)
+        sel.select_frame("relative=top")
         mslib.wait_for_element_present(self,sel,testvars.video_video_info)
         website.verify_subs(self,sel,subtextfile)
         # Click History tab
@@ -107,6 +109,8 @@ class subgroup_70(unittest.TestCase):
         widget.goto_step(self,sel,"2")
         widget.resync_video(self,sel,subtextfile)
         widget.submit_sub_edits(self,sel)
+        time.sleep(2)
+        sel.select_frame("relative=top")
         # Click History tab
         sel.click(testvars.video_original)
         website.verify_latest_history(self,sel,rev="#1",user="sub_writer",time="100%",text="0%")
@@ -148,6 +152,8 @@ class subgroup_70(unittest.TestCase):
         widget.goto_step(self,sel,"3")
         widget.edit_text(self,sel,subtextfile)
         widget.submit_sub_edits(self,sel)
+        time.sleep(2)
+        sel.select_frame("relative=top")
         
         # Click Original language then History tab
         sel.click(testvars.video_original)

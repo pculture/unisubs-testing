@@ -407,6 +407,7 @@ def verify_latest_history(self,sel,rev=None,user=None,time=None,text=None):
 
 
 def handle_error_page(self,sel,test_id):
+    sel.select_window("null") #just making sure I'm really here, if I am.
     sel.select_frame("relative=top")
     if sel.is_element_present("css=h2:contains('when you encountered this error.')"):
         sel.type("feedback_email", testvars.gmail)
