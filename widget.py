@@ -474,7 +474,7 @@ def wait_for_offsite_login(self,sel):
 
 def submit_sub_edits(self,sel):
     print " * Submit subtitles"
-    sel.select_frame("relative=top")
+    sel.select_window("null")
     #give video a chance to load
     mslib.wait_for_element_present(self,sel,testvars.widget_steps)
     #Go to step 3 before submit
