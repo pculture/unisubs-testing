@@ -144,9 +144,12 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
     for line in codecs.open(sub_file,encoding='utf-8'):
         sel.focus("css=input[class*=trans]")
         sel.type("css=input[class*=trans]",line)
-        sel.type_keys("css=input[class*=trans]",' ')   
-        sel.key_press_native('10')
-        sel.key_press("css=.trans", "13")
+        sel.type_keys("css=input[class*=trans]",' ')
+        if "firefox" in selvars.set_browser():
+            sel.key_press("css=.trans", "13")            
+        else:
+            sel.focus("css=input[class*=trans]")
+            sel.key_press_native('10')
         time.sleep(3)
         line_count = line_count+1
     if step == "Continue":
