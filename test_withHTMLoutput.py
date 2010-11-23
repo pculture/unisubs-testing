@@ -25,7 +25,7 @@ parser.add_option("-s", "--sauce", action="store_true", dest="sauce", default=Fa
 
 parser.add_option("-b", "--browser", action="store",
                   choices=('firefox','chrome','opera', 'safari', 'iexplore', 'googlechrome'),type="choice",
-                  dest="browser", default="firefox",
+                  dest="browser", default="safari",
                   help='Possible browser choices: firefox,chrome,opera, safari, iexplore, googlechrome'
                   )
 
@@ -79,23 +79,24 @@ class Test_HTMLTestRunner(unittest.TestCase):
         ## Run a smaller group of tests when using sauce
         if testsauce == True:
             self.suite.addTests([
-            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_389'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_414'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_534'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_533'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_408'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_406'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_414'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_388'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_pculture.test_369'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_subtesting.test_601'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_80_comments.subgroup_80.test_536'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_80_comments.subgroup_80.test_537'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_384'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_378'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_70_revisions.subgroup_70.test_485'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_70_revisions.subgroup_70.test_486'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_70_revisions.subgroup_70.test_602'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_373'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_389'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_414'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_534'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_533'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_408'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_406'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_414'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_388'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_pculture.test_369'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_subtesting.test_601'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_80_comments.subgroup_80.test_536'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_80_comments.subgroup_80.test_537'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_384'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_378'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_70_revisions.subgroup_70.test_485'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_70_revisions.subgroup_70.test_486'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_70_revisions.subgroup_70.test_602'),
             
             ])
         ## Running on pcf server or local, run all the tests
