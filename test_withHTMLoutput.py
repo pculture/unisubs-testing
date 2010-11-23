@@ -92,7 +92,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
             unittest.defaultTestLoader.loadTestsFromName('sg_80_comments.subgroup_80.test_536'),
             unittest.defaultTestLoader.loadTestsFromName('sg_80_comments.subgroup_80.test_537'),
             unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_384'),
-            unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_378')
+            unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_378'),
             unittest.defaultTestLoader.loadTestsFromName('sg_70_revisions.subgroup_70.test_485'),
             unittest.defaultTestLoader.loadTestsFromName('sg_70_revisions.subgroup_70.test_486'),
             unittest.defaultTestLoader.loadTestsFromName('sg_70_revisions.subgroup_70.test_602'),
