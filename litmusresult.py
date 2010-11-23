@@ -4,6 +4,7 @@ import sys
 import os
 import httplib
 import urllib
+import json
 import time
 import selvars
 
@@ -26,6 +27,25 @@ def set_test_browser():
     """Returns the browser name for the litmus platform field"
 
     """
+    if selvars.set_sauce() == True:
+        b = json.loads(selvars.set_browser())
+        if b["browser"] == "firefox":
+            return "Firefox"
+        elif b["browser"] == "chrome":
+            return "Firefox"
+        elif b["browser"] == "safariproxy":
+            return "Safari"
+        elif b["browser"] == "opera":
+            return "Opera"
+        elif b["browser"] == "iexplore":
+            return "IE 8"
+        elif b["browser"] == "iexploreproxy":
+            return "IE 8"
+        elif b["browser"] == "googlechrome":
+            return "Google Chrome"
+        else:
+            print "no idea what the browser is: "+ b["browser"]
+      
     if selvars.set_browser() == "*firefox":
         return "Firefox"
     elif selvars.set_browser() == "*chrome":

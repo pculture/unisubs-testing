@@ -1,3 +1,4 @@
+
 """
 Sets up the runtime varsf or browser, sauce (True / False) and  Port.
 testvars uses these values if they exist, they get set at the commandline
@@ -75,7 +76,6 @@ def set_browser(testid="none",testdesc="none"):
     # - assume windows 2003
     # otherwise use *browser name
     if controller.testsauce==True:
-        print "running tests with sauce"
         if controller.testbrowser == "googlechrome":
             sbrowser = {\
                         "username": sauce_auth.sauce_user,\
@@ -99,7 +99,7 @@ def set_browser(testid="none",testdesc="none"):
                         "idle-timeout": 120, \
                         "job-name": testid +': '+ testdesc \
                     }
-        elif controller.testbrowser == ("opera"):
+        elif controller.testbrowser == "opera":
             sbrowser = {\
                         "username": sauce_auth.sauce_user,\
                         "access-key": sauce_auth.sauce_key,\
@@ -110,13 +110,13 @@ def set_browser(testid="none",testdesc="none"):
                         "idle-timeout": 120, \
                         "job-name": testid +': '+ testdesc \
                     }
-        elif controller.testbrowser == ("safari"):
+        elif controller.testbrowser == "safari":
             sbrowser = {\
                         "username": sauce_auth.sauce_user,\
                         "access-key": sauce_auth.sauce_key,\
                         "os": "Windows 2003",\
-                        "browser": "safari",\
-                        "browser-version": "4", \
+                        "browser": "safariproxy",\
+                        "browser-version": "5", \
                         "max-duration": 600, \
                         "idle-timeout": 120, \
                         "job-name": testid +': '+ testdesc \

@@ -126,6 +126,7 @@ def start_sub_widget(self,sel,wig_menu=testvars.WebsiteUI["SubtitleMe_menu"],ski
     time.sleep(5)
     if sel.is_element_present(testvars.WidgetUI["Select_language"]):
         widget.select_video_language(self,sel,vid_lang,sub_lang)
+        time.sleep(15)
         widget.close_howto_video(self,sel)
     elif sel.is_element_present(testvars.WebsiteUI["AddSubtitles_menuitem"]):
         sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])

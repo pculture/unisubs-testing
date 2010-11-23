@@ -106,6 +106,7 @@ def close_howto_video(self,sel,skip=True):
     Post-condition: help video is closed and returned to previous widget page.
     """
     time.sleep(15)
+    sel.select_frame("relative=top")
     if sel.is_element_present("css=.mirosubs-howtopanel"):
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-done:contains('Continue')")
         mslib.wait_for_element_present(self,sel,"css=.goog-checkbox-unchecked")
@@ -142,8 +143,8 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
     line_count = 0
     for line in codecs.open(sub_file,encoding='utf-8'):
         sel.focus("css=input[class*=trans]")
-        sel.type("css=input[class*=trans]",line)
-        sel.type_keys("css=input[class*=trans]",' ')
+        sel.type("css=input[class*=trans]",line +"\n")
+   #     sel.type_keys("css=input[class*=trans]",' ')
 ## Can't do the compare here anymore - there's no way to find the text on the video, except for on demo.
 ##        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
 ##        current_sub = sel.get_text(testvars.WidgetUI["Current_playing_sub"])
@@ -151,7 +152,7 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
 ##        self.assertEqual(line.rstrip(),current_sub.rstrip(),\
 ##                         "sub text mismatch - expected: "+line.rstrip()+" found: "+current_sub.rstrip())
         
-        transcribe_enter_text(self,sel)
+ #       transcribe_enter_text(self,sel)
         time.sleep(1)
         line_count = line_count+1
     if step == "Continue":
@@ -163,11 +164,12 @@ def transcribe_enter_text(self,sel):
     """ Handle the text entry in Step 1 typing for all browsers
 
     """
-    if (selvars.set_browser() == "*firefox") or (selvars.set_browser()== "*chrome"):
-        sel.key_press("css=.trans", "13")
-    else:
+    if (selvars.set_browser()) == "*safari":
         sel.focus("css=input[class*=trans]")
-        sel.key_press_native('10')    
+        sel.key_press_native('10')   
+    else:
+        sel.key_press("css=.trans", "13")
+ 
 
 
 def restart_step(self,sel):
@@ -258,8 +260,8 @@ def edit_text(self,sel,subtextfile,new_text=""):
         else:
             ed_text = new_text
     sel.click(sub_cell)
-    sel.type("css=span.mirosubs-title textarea", ed_text)
-    sel.key_press("css=span.mirosubs-title textarea", "\\13")
+    sel.type("css=span.mirosubs-title textarea", ed_text+"\n")
+ #   sel.key_press("css=span.mirosubs-title textarea", "\\13")
     mslib.wait_for_element_present(self,sel,sub_cell)
     sub_cell_text=sel.get_text(sub_cell)
     self.assertEqual(sub_cell_text.rstrip(),ed_text.rstrip())
