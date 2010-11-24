@@ -69,6 +69,7 @@ class subgroup_70(unittest.TestCase):
         website.verify_subs(self,sel,subtextfile)
         # Click History tab
         sel.click(testvars.video_original)
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         website.verify_latest_history(self,sel,rev="#0",user="sub_writer",time="100%",text="100%")
 
 
@@ -114,6 +115,7 @@ class subgroup_70(unittest.TestCase):
         sel.select_frame("relative=top")
         # Click History tab
         sel.click(testvars.video_original)
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         website.verify_latest_history(self,sel,rev="#1",user="sub_writer",time="100%",text="0%")
                 
     def test_602(self):
@@ -149,6 +151,7 @@ class subgroup_70(unittest.TestCase):
         mslib.wait_for_element_present(self,sel,testvars.video_video_info)
         website.verify_subs(self,sel,subtextfile)
         sel.click(testvars.video_original)
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         sel.click(testvars.video_edit_subtitles)
         widget.close_howto_video(self,sel)
         widget.goto_step(self,sel,"3")
@@ -159,10 +162,56 @@ class subgroup_70(unittest.TestCase):
         
         # Click Original language then History tab
         sel.click(testvars.video_original)
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         website.verify_latest_history(self,sel,rev="#1",user="sub_writer",time="0%",text="100%")
-    
 
- 
+
+    def test_491(self):
+        """Revisions - compare original lang revisions.
+
+        http://litmus.pculture.org/show_test.cgi?id=491
+        """
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+  #      website.SiteLogIn(self,sel,testvars.siteuser, testvars.passw)
+        #get a video and open page    
+ #       website.SiteLogout(self,sel)
+ #       test_video_url = website.get_video_with_translations(self,sel)
+ #       print test_video_url
+ #       sel.open(test_video_url)
+        sel.open("/videos/NmkV5cbiCqUU/")
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+        website.store_subs(self,sel)
+        orig_rev = website.get_current_rev(self,sel)
+        rev_num = orig_rev.lstrip('#')
+        subtextfile = "subs.txt"
+        #If there is only 1 revision - edit the subs to make a new revision
+        if int(rev_num) < 2:
+            print "only 1 rev - editing text first"
+            sel.click(testvars.video_edit_subtitles)
+            widget.goto_step(self,sel,"3")
+            widget.edit_text(self,sel,subtextfile)
+            widget.site_login_from_widget_link(self,sel)
+            widget.submit_sub_edits(self,sel)
+            mslib.wait_for_element_present(testvars.video_video_info)
+            sel.click(testvars.video_original)
+            sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+        sel.click(testvars.history_tab)
+        mslib.wait_for_element_present(self,sel,testvars.video_compare_revisions)
+        #get the checkbox value for comparing
+        diff_id = website.get_diff_url(self,sel,"css=td a:contains('#"+str(int(rev_num) - 1)+"')")
+        sel.click("css=input[value='"+diff_id+"']")
+        sel.click(testvars.video_compare_revisions)
+        website.verify_compare_revisions(self,sel,str(int(rev_num) - 1),str(rev_num))
+
+        #If there are more than 2 revision, test another compare
+        if int(rev_num) > 2:
+            diff_id = website.get_diff_url(self,sel,"css=td a:contains('#"+str(int(rev_num) - 2)+"')")
+            sel.click("css=input[value='"+diff_id+"']")
+            sel.click(testvars.video_compare_revisions)
+            website.verify_compare_revisions(self,sel,str(int(rev_num) - 2),str(rev_num))
+
+
 
 # Close the browser, log errors, perform cleanup
     def tearDown(self):
@@ -171,7 +220,7 @@ class subgroup_70(unittest.TestCase):
         """
         
         #Close the browser
-        self.selenium.stop()
+  #      self.selenium.stop()
         #Log any errors
         self.assertEqual([], self.verificationErrors)
       

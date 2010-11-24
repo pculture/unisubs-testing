@@ -407,6 +407,38 @@ def verify_latest_history(self,sel,rev=None,user=None,time=None,text=None):
         self.assertTrue(sel.is_element_present("css=div[id=revisions-tab] tr:nth-child(1) > td:nth-child(5):contains('"+text+"')"))
 
 
+def get_diff_url(self,sel,rev_link):
+    """Gets the url id of a revision for comparing.
+
+    """
+    sel.click(rev_link)
+    mslib.wait_for_element_present(self,sel,"css=ul.breadcrumb li a:contains('Revision History')"
+    diff_id = sel.get_eval("window.location").split('/')[-1]
+    sel.click("css=ul.breadcrumb li a:contains('Revision History')")
+    sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+    return diff_id
+
+def verify_compare_revisions(self,sel,older_rev, newer_rev):
+    """Verifies contents of page comparing 2 revisions.
+
+    compares the older rev and newer rev numbers.
+
+    """
+    #Verify the heading
+    self.assertTrue(sel.is_element_present("css=h2.main-title:contains('#"+older_rev+"')"))
+    self.assertTrue(sel.is_element_present("css=h2.main-title:contains('#"+newer_rev+"')"))
+    #Verify left column - older
+    self.assertTrue(sel.is_element_present("css=div.left_column h3.diff_title:contains('Revision #"+older_rev+"')"))
+    self.assertTrue(sel.is_element_present("css=div.left_column div.revision_buttons a.new_edit:contains('Submit a new edit based on this version (#"+older_rev+")')"))
+    #Verify right column - newer
+    self.assertTrue(sel.is_element_present("css=div.right_column h3.diff_title:contains('Revision #"+newer_rev+"')"))
+    self.assertTrue(sel.is_element_present("css=div.right_column div.revision_buttons a.new_edit:contains('Submit a new edit based on this version (#"+newer_rev+")')"))
+
+    #Back to history tab, by clicking breadcrumb link
+    sel.click("css=ul.breadcrumb li a:contains('Revision History')")
+
+
+
 def handle_error_page(self,sel,test_id):
     sel.select_window("null") #just making sure I'm really here, if I am.
     sel.select_frame("relative=top")

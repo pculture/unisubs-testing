@@ -132,6 +132,7 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
     # giving the video a chance to load.
     sel.select_window("null")
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
+    mslib.wait_for_element_present(self,sel,"css=.mirosubs-speedmode")
     mode_label = sel.get_text("css=.mirosubs-speedmode option:contains("+mode+")")
     sel.select("//select", "label=" +mode_label)
     # give time to buffer
@@ -156,16 +157,6 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
         sel.click(testvars.WidgetUI["Next_step"])
     return line_count
 
-
-def transcribe_enter_text(self,sel):
-    """ Handle the text entry in Step 1 typing for all browsers
-
-    """
-    if (selvars.set_browser()) == "*safari":
-        sel.focus("css=input[class*=trans]")
-        sel.key_press_native('10')   
-    else:
-        sel.key_press("css=.trans", "13")
  
 
 

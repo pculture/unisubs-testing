@@ -25,7 +25,7 @@ parser.add_option("-s", "--sauce", action="store_true", dest="sauce", default=Fa
 
 parser.add_option("-b", "--browser", action="store",
                   choices=('firefox','chrome','opera', 'safari', 'iexplore', 'googlechrome'),type="choice",
-                  dest="browser", default="safari",
+                  dest="browser", default="firefox",
                   help='Possible browser choices: firefox,chrome,opera, safari, iexplore, googlechrome'
                   )
 
@@ -37,11 +37,12 @@ parser.add_option("-u", "--siteurl", action="store",
                   help="""dev for: http://dev.universalsubtitles.org,
                         staging for: http://staging.universalsubtitles.org""")
 
-parser.add_option("-l", "--litmus",action="store_true",dest="litmus",default=False,
+parser.add_option("-l", "--litmus",action="store_true",dest="litmus",default=True,
                   help='Sends test output directly to litmus.pculture.org')
 
 parser.add_option("-i", "--buildid", action="store", dest="buildid",
-                  default=time.strftime("%Y%m%d", time.gmtime()) + "99",
+               #   default=time.strftime("%Y%m%d", time.gmtime()) + "99",
+                  default=("2010112200"),
                   help="specify the build id of the litmus testrun results to display there")
 
 (options, args) = parser.parse_args()
@@ -101,13 +102,14 @@ class Test_HTMLTestRunner(unittest.TestCase):
             ])
         ## Running on pcf server or local, run all the tests
         else:
-            suite_list = [['sg_64_submit.subgroup_64',unittest.getTestCaseNames(sg_64_submit.subgroup_64,'test')], \
-                          ['sg_81_ul_dl.subgroup_81',unittest.getTestCaseNames(sg_81_ul_dl.subgroup_81,'test')], \
-                          ['sg_69_demoUI.subgroup_69',unittest.getTestCaseNames(sg_69_demoUI.subgroup_69,'test')], \
-                          ['sg_80_comments.subgroup_80',unittest.getTestCaseNames(sg_80_comments.subgroup_80,'test')],  \
-                          ['sg_65_login.subgroup_65',unittest.getTestCaseNames(sg_65_login.subgroup_65,'test')], \
-                          ['sg_78_widget_offsite.subgroup_78_pculture',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78_pculture,'test')], \
-                          ['sg_78_widget_offsite.subgroup_78_subtesting',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78_subtesting,'test')], \
+            suite_list = [
+##                ['sg_64_submit.subgroup_64',unittest.getTestCaseNames(sg_64_submit.subgroup_64,'test')], \
+##                          ['sg_81_ul_dl.subgroup_81',unittest.getTestCaseNames(sg_81_ul_dl.subgroup_81,'test')], \
+##                          ['sg_69_demoUI.subgroup_69',unittest.getTestCaseNames(sg_69_demoUI.subgroup_69,'test')], \
+##                          ['sg_80_comments.subgroup_80',unittest.getTestCaseNames(sg_80_comments.subgroup_80,'test')],  \
+##                          ['sg_65_login.subgroup_65',unittest.getTestCaseNames(sg_65_login.subgroup_65,'test')], \
+##                          ['sg_78_widget_offsite.subgroup_78_pculture',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78_pculture,'test')], \
+##                          ['sg_78_widget_offsite.subgroup_78_subtesting',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78_subtesting,'test')], \
                           ['sg_70_revisions.subgroup_70',unittest.getTestCaseNames(sg_70_revisions.subgroup_70,'test')], \
                            ]
 

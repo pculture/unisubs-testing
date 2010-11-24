@@ -47,7 +47,7 @@ video_compare_revisions = "css=button span:contains('Compare Revisions')"
 rev_rollback = "css=a.roll_back"
 
 
-history_tab = "css=.inline_text:contains('History')"
+history_tab = "css=span.inline_text:contains('History')"
 comments_tab = "css=span.inline_text:contains('Comments')"
 transcripts_tab = "css=.inline_text:contains('Subtitles')"
 
