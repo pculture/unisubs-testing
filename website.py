@@ -412,8 +412,9 @@ def get_diff_url(self,sel,rev_link):
 
     """
     sel.click(rev_link)
-    mslib.wait_for_element_present(self,sel,"css=ul.breadcrumb li a:contains('Revision History')"
-    diff_id = sel.get_eval("window.location").split('/')[-1]
+    mslib.wait_for_element_present(self,sel,"css=ul.breadcrumb li a:contains('Revision History')")
+    d = sel.get_eval("window.location")
+    diff_id = d.split('/')[-1]
     sel.click("css=ul.breadcrumb li a:contains('Revision History')")
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     return diff_id
