@@ -201,8 +201,6 @@ class subgroup_80(unittest.TestCase):
 # Close the browser, log errors, perform cleanup 
     def tearDown(self):
         # check for Site Error notification and submit
-        sel.select_window("null") #just making sure I'm really here, if I am.
-        sel.select_frame("relative=top")
         website.handle_error_page(self,self.selenium,self.id())
         """
         Closes the browser test window and logs errors

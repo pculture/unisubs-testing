@@ -25,7 +25,7 @@ parser.add_option("-s", "--sauce", action="store_true", dest="sauce", default=Fa
 
 parser.add_option("-b", "--browser", action="store",
                   choices=('firefox','chrome','opera', 'safari', 'iexplore', 'googlechrome'),type="choice",
-                  dest="browser", default="firefox",
+                  dest="browser", default="safari",
                   help='Possible browser choices: firefox,chrome,opera, safari, iexplore, googlechrome'
                   )
 

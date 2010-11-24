@@ -169,7 +169,7 @@ class subgroup_70(unittest.TestCase):
         """
         
         #Close the browser
- #       self.selenium.stop()
+        self.selenium.stop()
         #Log any errors
         self.assertEqual([], self.verificationErrors)
       
