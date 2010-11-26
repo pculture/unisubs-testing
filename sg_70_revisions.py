@@ -61,11 +61,10 @@ class subgroup_70(unittest.TestCase):
         print "syncing video"
         widget.sync_video(self,sel,subtextfile)
         # Review
-        print "review step - just submitting video"
-        sel.click(testvars.WidgetUI["Next_step"])
-        time.sleep(2)
+        widget.submit_sub_edits(self,sel)
         sel.select_frame("relative=top")
-        mslib.wait_for_element_present(self,sel,testvars.video_video_info)
+        sel.click(testvars.video_original)
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         website.verify_subs(self,sel,subtextfile)
         # Click History tab
         sel.click(testvars.video_original)
@@ -102,10 +101,13 @@ class subgroup_70(unittest.TestCase):
         widget.sync_video(self,sel,subtextfile)
         # Review
         print "review step - just submitting video"
-        sel.click(testvars.WidgetUI["Next_step"])
+        widget.submit_sub_edits(self,sel)
         mslib.wait_for_element_present(self,sel,testvars.video_video_info)
-        website.verify_subs(self,sel,subtextfile)
+        sel.select_frame("relative=top")
         sel.click(testvars.video_original)
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+        # Verify subtitles
+        website.verify_subs(self,sel,subtextfile)
         sel.click(testvars.video_edit_subtitles)
         widget.close_howto_video(self,sel)
         widget.goto_step(self,sel,"2")
@@ -147,11 +149,13 @@ class subgroup_70(unittest.TestCase):
         widget.sync_video(self,sel,subtextfile)
         # Review
         print "review step - just submitting video"
-        sel.click(testvars.WidgetUI["Next_step"])
-        mslib.wait_for_element_present(self,sel,testvars.video_video_info)
-        website.verify_subs(self,sel,subtextfile)
+        widget.submit_sub_edits(self,sel)
+        #Website verify subs        
+        sel.select_frame("relative=top")
         sel.click(testvars.video_original)
+        website.verify_subs(self,sel,subtextfile)
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+        #Edit subtitles
         sel.click(testvars.video_edit_subtitles)
         widget.close_howto_video(self,sel)
         widget.goto_step(self,sel,"3")
@@ -173,13 +177,13 @@ class subgroup_70(unittest.TestCase):
         """
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-  #      website.SiteLogIn(self,sel,testvars.siteuser, testvars.passw)
+        website.SiteLogIn(self,sel,testvars.siteuser, testvars.passw)
         #get a video and open page    
- #       website.SiteLogout(self,sel)
- #       test_video_url = website.get_video_with_translations(self,sel)
- #       print test_video_url
- #       sel.open(test_video_url)
-        sel.open("/videos/NmkV5cbiCqUU/")
+        website.SiteLogout(self,sel)
+        test_video_url = website.get_video_with_translations(self,sel)
+        print test_video_url
+        sel.open(test_video_url)
+    
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         website.store_subs(self,sel)
         orig_rev = website.get_current_rev(self,sel)
@@ -193,7 +197,8 @@ class subgroup_70(unittest.TestCase):
             widget.edit_text(self,sel,subtextfile)
             widget.site_login_from_widget_link(self,sel)
             widget.submit_sub_edits(self,sel)
-            mslib.wait_for_element_present(testvars.video_video_info)
+            sel.select_frame("relative=top")
+            
             sel.click(testvars.video_original)
             sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         sel.click(testvars.history_tab)

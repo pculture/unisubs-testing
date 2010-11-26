@@ -247,19 +247,19 @@ def edit_text(self,sel,subtextfile,new_text=""):
             ed_text = str(line).upper()
         else:
             ed_text = new_text
-    sel.click(sub_cell)
-    sel.type("css=span.mirosubs-title textarea", ed_text)
-    if "firefox" in selvars.set_browser():
-        sel.key_press("css=span.mirosubs-title textarea", "13")            
-    else:
-        sel.focus("css=span.mirosubs-title textarea")
-        sel.key_press_native('10')
- #   sel.key_press("css=span.mirosubs-title textarea", "\\13")
-    mslib.wait_for_element_present(self,sel,sub_cell)
-    sub_cell_text=sel.get_text(sub_cell)
-    self.assertEqual(sub_cell_text.rstrip(),ed_text.rstrip())
-    sub_li = sub_li + 1
-    sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") > span.mirosubs-title span"
+        sel.click(sub_cell)
+        sel.type("css=span.mirosubs-title textarea", ed_text)
+        if "firefox" in selvars.set_browser():
+            sel.key_press("css=span.mirosubs-title textarea", "13")            
+        else:
+            sel.focus("css=span.mirosubs-title textarea")
+            sel.key_press_native('10')
+     #   sel.key_press("css=span.mirosubs-title textarea", "\\13")
+        mslib.wait_for_element_present(self,sel,sub_cell)
+        sub_cell_text=sel.get_text(sub_cell)
+        self.assertEqual(sub_cell_text.rstrip(),ed_text.rstrip())
+        sub_li += sub_li
+        sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") > span.mirosubs-title span"
         
 def drag_time_bubbles(self,sel,subtextfile):
     """

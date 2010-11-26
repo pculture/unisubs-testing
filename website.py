@@ -295,9 +295,10 @@ def verify_sub_upload(self,sel,sub_file,lang=""):
         self.assertEqual(sublang[0].rstrip(),lang)
 
 def verify_subs(self,sel,sub_file):
-    """Compares the displayed text for subtitles in the history table to the input file.
+    """Compares the displayed text for subtitles in the to the input file.
 
     """
+    print " * verifying subtitle text"
     sub_td = 1
     for line in codecs.open(sub_file,encoding='utf-8'):
         subline = line.split(',')
