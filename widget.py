@@ -129,10 +129,12 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
         returns line_count - the number of text lines input for the translation
     """
     print " * Transcribe video"
+
     # giving the video a chance to load.
     sel.select_window("null")
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-speedmode")
+    restart_step(self,sel)
     mode_label = sel.get_text("css=.mirosubs-speedmode option:contains("+mode+")")
     sel.select("//select", "label=" +mode_label)
     # give time to buffer
