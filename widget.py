@@ -260,6 +260,38 @@ def edit_text(self,sel,subtextfile,new_text=""):
         self.assertEqual(sub_cell_text.rstrip(),ed_text.rstrip())
         sub_li += sub_li
         sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") > span.mirosubs-title span"
+
+
+def edit_translation(self,sel,subtextfile,new_text=""):
+    """
+    Description: Update the translation text with either the orig text or text provided in a file.
+
+    Options:
+        new_text - text string
+
+    Pre-condition - Editing Translation Widget opened
+    """
+    print "* Edit Translation"
+     sel.select_window("null")
+    
+    sub_li=1
+    sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") > textarea"
+    mslib.wait_for_element_present(self,sel,sub_cell)
+    for line in open(subtextfile):
+        if new_text == "":
+            ed_text = str(line).upper()
+        else:
+            ed_text = new_text
+        sel.click(sub_cell)
+        sel.type(sub_cell, ed_text)
+        if "firefox" in selvars.set_browser():
+            sel.key_press(sub_cell, "13")            
+        else:
+            sel.focus(sub_cell)
+            sel.key_press_native('10')
+        sub_li += 1
+
+    sel.click(testvars.WidgetUI["Next_step"])
         
 def drag_time_bubbles(self,sel,subtextfile):
     """
@@ -392,6 +424,7 @@ def resync_video (self,sel,subtextfile,start_delay=1,sub_int=1, step="Stop"):
     print " * Resync subs - shorter interval"
     sel.select_frame("relative=top")
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
+    time.sleep(10) #give the video a chance load
     sel.click(testvars.WidgetUI["Video_playPause"])
        
     time.sleep(start_delay)

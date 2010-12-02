@@ -438,6 +438,7 @@ def verify_compare_revisions(self,sel,older_rev, newer_rev):
 
     #Back to history tab, by clicking breadcrumb link
     sel.click("css=ul.breadcrumb li a:contains('Revision History')")
+    sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
 
 
 

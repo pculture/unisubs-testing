@@ -170,22 +170,26 @@ class subgroup_70(unittest.TestCase):
         website.verify_latest_history(self,sel,rev="#1",user="sub_writer",time="0%",text="100%")
 
 
-    def test_491(self):
-        """Revisions - compare original lang revisions.
 
-        http://litmus.pculture.org/show_test.cgi?id=491
+    def test_492(self):
+        """Revisions - compare translation revisions.
+
+        http://litmus.pculture.org/show_test.cgi?id=492
         """
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         website.SiteLogIn(self,sel,testvars.siteuser, testvars.passw)
         #get a video and open page    
-        website.SiteLogout(self,sel)
         test_video_url = website.get_video_with_translations(self,sel)
         print test_video_url
         sel.open(test_video_url)
+        language = website.get_translated_lang(self,sel)
     
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+        mslib.wait_for_element_present(self,sel,"css=a:contains('"+language+"')")
+        sel.click("css=a:contains('"+language+"')")
         website.store_subs(self,sel)
+        sel.click(testvars.history_tab)
         orig_rev = website.get_current_rev(self,sel)
         rev_num = orig_rev.lstrip('#')
         subtextfile = "subs.txt"
@@ -193,14 +197,9 @@ class subgroup_70(unittest.TestCase):
         if int(rev_num) < 2:
             print "only 1 rev - editing text first"
             sel.click(testvars.video_edit_subtitles)
-            widget.goto_step(self,sel,"3")
-            widget.edit_text(self,sel,subtextfile)
-            widget.site_login_from_widget_link(self,sel)
-            widget.submit_sub_edits(self,sel)
-            sel.select_frame("relative=top")
+            widget.edit_translation(self,sel,subtextfile)
             
-            sel.click(testvars.video_original)
-            sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+        sel.select_frame("relative=top")  
         sel.click(testvars.history_tab)
         mslib.wait_for_element_present(self,sel,testvars.video_compare_revisions)
         #get the checkbox value for comparing
@@ -216,6 +215,81 @@ class subgroup_70(unittest.TestCase):
             sel.click(testvars.video_compare_revisions)
             website.verify_compare_revisions(self,sel,str(int(rev_num) - 2),str(rev_num))
 
+    def test_493(self):
+        """Revisions - original - invalid comparison selection
+
+        http://litmus.pculture.org/show_test.cgi?id=493
+        """
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        website.SiteLogIn(self,sel,testvars.siteuser, testvars.passw)
+        #get a video and open page    
+        test_video_url = website.get_video_with_translations(self,sel)
+        print test_video_url
+        sel.open(test_video_url)
+        sel.click(testvars.video_original)
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+
+        sel.click(testvars.history_tab)    
+        row_num = 1
+        #uncheck default 1st box checked
+        sel.click("css=tr td:nth-child("+str(row_num)+") > a:contains('#')")
+        
+        while sel.is_element_present("css=tr td:nth-child("+str(row_num)+")"):
+            sel.click("css=tr td:nth-child("+str(row_num)+") > a:contains('#')") #check the box
+            sel.click(testvars.video_compare_revisions)
+            self.assertEqual("Select two revisions for compare, please", sel.get_alert())
+            sel.click("css=tr td:nth-child("+str(row_num)+") > a:contains('#')") #uncheck the box
+            
+    def test_494(self):
+        """Revisions - translation - invalid comparison selection
+
+        http://litmus.pculture.org/show_test.cgi?id=494
+        """
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        website.SiteLogIn(self,sel,testvars.siteuser, testvars.passw)
+        #get a video and open page    
+        test_video_url = website.get_video_with_translations(self,sel)
+        print test_video_url
+        sel.open(test_video_url)
+        language = website.get_translated_lang(self,sel)
+    
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+        mslib.wait_for_element_present(self,sel,"css=a:contains('"+language+"')")
+        sel.click("css=a:contains('"+language+"')")
+        sel.click(testvars.history_tab)
+        while sel.is_element_present("css=tr td:nth-child("+str(row_num)+")"):
+            sel.click("css=tr td:nth-child("+str(row_num)+") > a:contains('#')") #check the box
+            sel.click(testvars.video_compare_revisions)
+            self.assertEqual("Select two revisions for compare, please", sel.get_alert())
+            sel.click("css=tr td:nth-child("+str(row_num)+") > a:contains('#')") #uncheck the box
+
+    def test_495(self):
+        """Revisions - original - hiostory diffs
+
+        http://litmus.pculture.org/show_test.cgi?id=495
+        """
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        website.SiteLogIn(self,sel,testvars.siteuser, testvars.passw)
+        #get a video and open page    
+        test_video_url = website.get_video_with_translations(self,sel)
+        print test_video_url
+        sel.open(test_video_url)
+        sel.click(testvars.video_original)
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+
+        sel.click(testvars.history_tab)
+        orig_rev = website.get_current_rev(self,sel)
+        rev_num = orig_rev.lstrip('#')
+        row_num = 2
+                
+        while sel.is_element_present("css=tr td:nth-child("+str(row_num)+")"):
+            sel.click("css=tr td:nth-child("+str(row_num)+") > a:contains('#')") #check the box
+            sel.click(testvars.video_compare_revisions)
+            website.verify_compare_revisions(self,sel,str(int(rev_num) - (int(row_num) -1)),str(rev_num))
+          
 
 
 # Close the browser, log errors, perform cleanup
