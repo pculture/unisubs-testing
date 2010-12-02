@@ -385,6 +385,15 @@ def verify_comment_text(self,sel,comment,result="posted",reply_text=None):
             self.assertNotEqual(sel.get_text("css=ul.comments.big_list li:nth-child(1) > div.info p"),"comment", \
                                 "comment posted without login")
 
+def check_the_box(self,sel,row_num):
+    """Check or uncheck the box in the revision history table.
+
+    returns the attribute in case we need it.
+
+    """
+    myval = sel.get_attribute("//div[@id='revisions-tab']/table/tbody/tr["+str(row_num)+"]/td[1]/input@value")
+    sel.click("//input[@value="+myval+"]") #check the box
+    return myval
 
 def get_current_rev(self,sel):
     """Returns the most current revision number for a videos subtitles or translation.
