@@ -440,15 +440,16 @@ def verify_compare_revisions(self,sel,older_rev, newer_rev):
     compares the older rev and newer rev numbers.
 
     """
+    print "older_rev: "+str(older_rev)+" newer_rev: "+str(newer_rev)
     #Verify the heading
-    self.assertTrue(sel.is_element_present("css=h2.main-title:contains('#"+older_rev+"')"))
-    self.assertTrue(sel.is_element_present("css=h2.main-title:contains('#"+newer_rev+"')"))
+    self.assertTrue(sel.is_element_present("css=h2.main-title:contains('#"+str(older_rev)+"')"))
+    self.assertTrue(sel.is_element_present("css=h2.main-title:contains('#"+str(newer_rev)+"')"))
     #Verify left column - older
-    self.assertTrue(sel.is_element_present("css=div.left_column h3.diff_title:contains('Revision #"+older_rev+"')"))
-    self.assertTrue(sel.is_element_present("css=div.left_column div.revision_buttons a.new_edit:contains('Submit a new edit based on this version (#"+older_rev+")')"))
+    self.assertTrue(sel.is_element_present("css=div.left_column h3.diff_title:contains('Revision #"+str(older_rev)+"')"))
+    self.assertTrue(sel.is_element_present("css=div.left_column div.revision_buttons a.new_edit:contains('Submit a new edit based on this version (#"+str(older_rev)+")')"))
     #Verify right column - newer
-    self.assertTrue(sel.is_element_present("css=div.right_column h3.diff_title:contains('Revision #"+newer_rev+"')"))
-    self.assertTrue(sel.is_element_present("css=div.right_column div.revision_buttons a.new_edit:contains('Submit a new edit based on this version (#"+newer_rev+")')"))
+    self.assertTrue(sel.is_element_present("css=div.right_column h3.diff_title:contains('Revision #"+str(newer_rev)+"')"))
+    self.assertTrue(sel.is_element_present("css=div.right_column div.revision_buttons a.new_edit:contains('Submit a new edit based on this version (#"+str(newer_rev)+")')"))
 
     #Back to history tab, by clicking breadcrumb link
     sel.click("css=ul.breadcrumb li a:contains('Revision History')")

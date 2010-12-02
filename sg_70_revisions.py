@@ -254,8 +254,10 @@ class subgroup_70(unittest.TestCase):
         language = website.get_translated_lang(self,sel)
         mslib.wait_for_element_present(self,sel,"css=a:contains('"+language+"')")
         sel.click("css=a:contains('"+language+"')")
-        row_num = 2
         sel.click(testvars.history_tab)
+        
+        row_num = 1
+        website.check_the_box(self,sel,row_num) #uncheck the box to start
         while sel.is_element_present("//div[@id='revisions-tab']/table/tbody/tr["+str(row_num)+"]"):
             website.check_the_box(self,sel,row_num)                
             sel.click(testvars.video_compare_revisions)
@@ -282,12 +284,13 @@ class subgroup_70(unittest.TestCase):
         orig_rev = website.get_current_rev(self,sel)
         rev_num = orig_rev.lstrip('#')
         row_num = 2
+        
                 
-        while sel.is_element_presentsel.is_element_present("//div[@id='revisions-tab']/table/tbody/tr["+str(row_num)+"]"):
-            myval = sel.get_attribute("//div[@id='revisions-tab']/table/tbody/tr["+str(row_num)+"]/td[1]/input@value")
-            sel.click("//input[@value="+myval+"]") #check the box
+        while sel.is_element_present("//div[@id='revisions-tab']/table/tbody/tr["+str(row_num)+"]"):
+            website.check_the_box(self,sel,row_num) #check the box
+            old_rev = int(rev_num) - (int(row_num) -1)
             sel.click(testvars.video_compare_revisions)
-            website.verify_compare_revisions(self,sel,str(int(rev_num) - (int(row_num) -1)),str(rev_num))
+            website.verify_compare_revisions(self,sel,str(old_rev),str(rev_num))
             row_num += 1
           
 
