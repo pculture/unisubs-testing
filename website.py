@@ -440,6 +440,7 @@ def verify_compare_revisions(self,sel,older_rev, newer_rev):
     compares the older rev and newer rev numbers.
 
     """
+    sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     print "older_rev: "+str(older_rev)+" newer_rev: "+str(newer_rev)
     #Verify the heading
     self.assertTrue(sel.is_element_present("css=h2.main-title:contains('#"+str(older_rev)+"')"))
