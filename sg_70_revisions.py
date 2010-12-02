@@ -228,19 +228,24 @@ class subgroup_70(unittest.TestCase):
         print test_video_url
         sel.open(test_video_url)
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+        print "open original lang"
         sel.click(testvars.video_original)
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-
+        print "go to history tab"
         sel.click(testvars.history_tab)    
         row_num = 1
         #uncheck default 1st box checked
         website.check_the_box(self,sel,row_num) #uncheck the box
-        
+        print "verifing invalid message when 1 box checked"
         while sel.is_element_present("//div[@id='revisions-tab']/table/tbody/tr["+str(row_num)+"]"):
             website.check_the_box(self,sel,row_num)   
             sel.click(testvars.video_compare_revisions)
             self.assertEqual("Select two revisions for compare, please", sel.get_alert())
             website.check_the_box(self,sel,row_num)    #uncheck the box
+            row_num += 1
+            if row_num == 3:
+                break
+            
             
     def test_494(self):
         """Revisions - translation - invalid comparison selection
@@ -267,6 +272,8 @@ class subgroup_70(unittest.TestCase):
             self.assertEqual("Select two revisions for compare, please", sel.get_alert())
             website.check_the_box(self,sel,row_num) #uncheck the box
             row_num += 1
+            if row_num == 3:
+                break
 
     def test_495(self):
         """Revisions - original - history diffs
@@ -296,6 +303,8 @@ class subgroup_70(unittest.TestCase):
             sel.click(testvars.video_compare_revisions)
             website.verify_compare_revisions(self,sel,str(old_rev),str(rev_num))
             row_num += 1
+            if row_num == 4:
+                break
           
 
 
