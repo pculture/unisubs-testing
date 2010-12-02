@@ -264,7 +264,9 @@ def get_translated_lang(self,sel):
             break
         tab_no = tab_no + 1
         tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+") > a"
-    return test_lang[0].rstrip()
+    print "test_lang"
+    lang = test_lang[0].rstrip()
+    return lang
 
 def upload_subtitles(self,sel,sub_file,lang="English"):
     """Uploads subtitles for the specified language."
