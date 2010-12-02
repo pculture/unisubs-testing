@@ -171,7 +171,7 @@ class subgroup_70(unittest.TestCase):
 
 
 
-    def test_492(self):
+    def test_1492(self):
         """Revisions - compare translation revisions.
 
         http://litmus.pculture.org/show_test.cgi?id=492
