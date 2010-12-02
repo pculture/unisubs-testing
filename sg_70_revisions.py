@@ -32,7 +32,7 @@ class subgroup_70(unittest.TestCase):
 
 ## The test cases of the subgroup.
 
-    def test_485(self):
+    def stest_485(self):
         """Revisions - display history info for original subtitle language.
 
         http://litmus.pculture.org/show_test.cgi?id=485
@@ -72,7 +72,7 @@ class subgroup_70(unittest.TestCase):
         website.verify_latest_history(self,sel,rev="#0",user="sub_writer",time="100%",text="100%")
 
 
-    def test_486(self):
+    def stest_486(self):
         """Revisions - edit subtitles timing and verify in history table.
 
         http://litmus.pculture.org/show_test.cgi?id=486
@@ -120,7 +120,7 @@ class subgroup_70(unittest.TestCase):
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         website.verify_latest_history(self,sel,rev="#1",user="sub_writer",time="100%",text="0%")
                 
-    def test_602(self):
+    def stest_602(self):
         """Revisions - edit subtitles text and verify in history table.
 
         http://litmus.pculture.org/show_test.cgi?id=602
@@ -171,7 +171,7 @@ class subgroup_70(unittest.TestCase):
 
 
 
-    def test_1492(self):
+    def test_492(self):
         """Revisions - compare translation revisions.
 
         http://litmus.pculture.org/show_test.cgi?id=492
