@@ -205,6 +205,8 @@ class subgroup_70(unittest.TestCase):
         website.check_the_box(self,sel,row_num) #check the box
         sel.click(testvars.video_compare_revisions)
         website.verify_compare_revisions(self,sel,str(int(rev_num) - 1),str(rev_num))
+        if sel.get_value("//div[@id='revisions-tab']/table/tbody/tr["+str(row_num)+"]/td[1]/input") == "on":
+            website.check_the_box(self,sel,row_num) #uncheck the box
 
         #If there are more than 2 revision, test another compare
         if int(rev_num) > 2:
@@ -225,6 +227,7 @@ class subgroup_70(unittest.TestCase):
         test_video_url = website.get_video_with_translations(self,sel)
         print test_video_url
         sel.open(test_video_url)
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         sel.click(testvars.video_original)
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
 
@@ -277,6 +280,7 @@ class subgroup_70(unittest.TestCase):
         test_video_url = website.get_video_with_translations(self,sel)
         print test_video_url
         sel.open(test_video_url)
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         sel.click(testvars.video_original)
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
 

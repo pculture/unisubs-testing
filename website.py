@@ -240,9 +240,6 @@ def get_video_no_translations(self,sel):
         print "no untranslated vidoes - must add one."
         vid_url = offsite.get_youtube_video_url(self)
         submit_video(self,sel,vid_url)
- #       widget.select_video_language(self,sel)
- #       widget.close_howto_video(self,sel)
- #       widget.close_widget(self,sel)
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         local_url = sel.get_attribute(testvars.video_original +" > a@href")
         
@@ -264,7 +261,6 @@ def get_translated_lang(self,sel):
             break
         tab_no = tab_no + 1
         tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+") > a"
-    print test_lang
     lang = test_lang[0].rstrip()
     print lang
     return lang

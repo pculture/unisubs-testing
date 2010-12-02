@@ -6,7 +6,7 @@ preE=" --- ERROR: "
 
 
 MSTestVariables = {"DataDirectory": os.path.join(os.getcwd(), "TestInput"), \
-                   "TimeOut":"190000", \
+                   "TimeOut":"90000", \
                   }
 
 # Mapping to the MiroSubs website UI navigations buttons and links
