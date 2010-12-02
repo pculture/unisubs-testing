@@ -272,7 +272,7 @@ def edit_translation(self,sel,subtextfile,new_text=""):
     Pre-condition - Editing Translation Widget opened
     """
     print "* Edit Translation"
-     sel.select_window("null")
+    sel.select_window("null")
     
     sub_li=1
     sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") > textarea"
