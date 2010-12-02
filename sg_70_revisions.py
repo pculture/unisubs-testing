@@ -184,8 +184,6 @@ class subgroup_70(unittest.TestCase):
         print test_video_url
         sel.open(test_video_url)
         language = website.get_translated_lang(self,sel)
-    
-        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         mslib.wait_for_element_present(self,sel,"css=a:contains('"+language+"')")
         sel.click("css=a:contains('"+language+"')")
         website.store_subs(self,sel)
@@ -203,17 +201,17 @@ class subgroup_70(unittest.TestCase):
         sel.click(testvars.history_tab)
         mslib.wait_for_element_present(self,sel,testvars.video_compare_revisions)
         #get the checkbox value for comparing
-        diff_id = website.get_diff_url(self,sel,"css=td a:contains('#"+str(int(rev_num) - 1)+"')")
-        sel.click("css=input[value='"+diff_id+"']")
+        row_num = 2
+        website.check_the_box(self,sel,row_num) #check the box
         sel.click(testvars.video_compare_revisions)
         website.verify_compare_revisions(self,sel,str(int(rev_num) - 1),str(rev_num))
 
         #If there are more than 2 revision, test another compare
         if int(rev_num) > 2:
-            diff_id = website.get_diff_url(self,sel,"css=td a:contains('#"+str(int(rev_num) - 2)+"')")
-            sel.click("css=input[value='"+diff_id+"']")
+            row_num = int(rev_num)-2
+            website.check_the_box(self,sel,row_num)
             sel.click(testvars.video_compare_revisions)
-            website.verify_compare_revisions(self,sel,str(int(rev_num) - 2),str(rev_num))
+            website.verify_compare_revisions(self,sel,str(row_num),str(rev_num))
 
     def test_493(self):
         """Revisions - original - invalid comparison selection
@@ -233,13 +231,13 @@ class subgroup_70(unittest.TestCase):
         sel.click(testvars.history_tab)    
         row_num = 1
         #uncheck default 1st box checked
-        sel.click("css=tr td:nth-child("+str(row_num)+") > a:contains('#')")
+        website.check_the_box(self,sel,row_num) #uncheck the box
         
-        while sel.is_element_present("css=tr td:nth-child("+str(row_num)+")"):
-            sel.click("css=tr td:nth-child("+str(row_num)+") > a:contains('#')") #check the box
+        while sel.is_element_present("//div[@id='revisions-tab']/table/tbody/tr["+str(row_num)+"]"):
+            website.check_the_box(self,sel,row_num)   
             sel.click(testvars.video_compare_revisions)
             self.assertEqual("Select two revisions for compare, please", sel.get_alert())
-            sel.click("css=tr td:nth-child("+str(row_num)+") > a:contains('#')") #uncheck the box
+            website.check_the_box(self,sel,row_num)    #uncheck the box
             
     def test_494(self):
         """Revisions - translation - invalid comparison selection
@@ -254,19 +252,19 @@ class subgroup_70(unittest.TestCase):
         print test_video_url
         sel.open(test_video_url)
         language = website.get_translated_lang(self,sel)
-    
-        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         mslib.wait_for_element_present(self,sel,"css=a:contains('"+language+"')")
         sel.click("css=a:contains('"+language+"')")
+        row_num = 2
         sel.click(testvars.history_tab)
-        while sel.is_element_present("css=tr td:nth-child("+str(row_num)+")"):
-            sel.click("css=tr td:nth-child("+str(row_num)+") > a:contains('#')") #check the box
+        while sel.is_element_present("//div[@id='revisions-tab']/table/tbody/tr["+str(row_num)+"]"):
+            website.check_the_box(self,sel,row_num)                
             sel.click(testvars.video_compare_revisions)
             self.assertEqual("Select two revisions for compare, please", sel.get_alert())
-            sel.click("css=tr td:nth-child("+str(row_num)+") > a:contains('#')") #uncheck the box
+            website.check_the_box(self,sel,row_num) #uncheck the box
+            row_num += 1
 
     def test_495(self):
-        """Revisions - original - hiostory diffs
+        """Revisions - original - history diffs
 
         http://litmus.pculture.org/show_test.cgi?id=495
         """
@@ -285,10 +283,12 @@ class subgroup_70(unittest.TestCase):
         rev_num = orig_rev.lstrip('#')
         row_num = 2
                 
-        while sel.is_element_present("css=tr td:nth-child("+str(row_num)+")"):
-            sel.click("css=tr td:nth-child("+str(row_num)+") > a:contains('#')") #check the box
+        while sel.is_element_presentsel.is_element_present("//div[@id='revisions-tab']/table/tbody/tr["+str(row_num)+"]"):
+            myval = sel.get_attribute("//div[@id='revisions-tab']/table/tbody/tr["+str(row_num)+"]/td[1]/input@value")
+            sel.click("//input[@value="+myval+"]") #check the box
             sel.click(testvars.video_compare_revisions)
             website.verify_compare_revisions(self,sel,str(int(rev_num) - (int(row_num) -1)),str(rev_num))
+            row_num += 1
           
 
 

@@ -391,7 +391,9 @@ def get_current_rev(self,sel):
     
     Assumes you have the video's page open and are on the history tab.
     """
-    revision = sel.get_text("css=tr td:nth-child(1) > a")
+    myval = sel.get_text("//div[@id='revisions-tab']/table/tbody/tr[1]/td[1]")
+    
+    revision = myval.split()[0]
     return revision
 
 def verify_latest_history(self,sel,rev=None,user=None,time=None,text=None):
