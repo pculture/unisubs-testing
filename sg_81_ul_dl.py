@@ -44,7 +44,7 @@ class subgroup_81(unittest.TestCase):
         try:
             #get a video and open page
             sel.open("/videos")
-            test_video_url = website.get_video_no_translations(self,sel)
+            test_video_url = offsite.get_youtube_video_url(self)
             print test_video_url
             sel.open(test_video_url)
             #Original is the default tab when video opened.
@@ -68,7 +68,7 @@ class subgroup_81(unittest.TestCase):
         try:
             #get a video and open page
             website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
-            test_video_url = website.get_video_no_translations(self,sel)
+            test_video_url = offsite.get_youtube_video_url(self)
             print test_video_url
             sel.open(test_video_url)
             #Original is the default tab when video opened.
@@ -112,7 +112,7 @@ class subgroup_81(unittest.TestCase):
         #get a video and open page
         try:
             website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
-            test_video_url = website.get_video_no_translations(self,sel)
+            test_video_url = offsite.get_youtube_video_url(self)
             print test_video_url
             sel.open(test_video_url)
             #Original is the default tab when video opened.
@@ -156,7 +156,7 @@ class subgroup_81(unittest.TestCase):
         #get a video and open page
         try:
             website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
-            test_video_url = website.get_video_no_translations(self,sel)
+            test_video_url = offsite.get_youtube_video_url(self)
             print test_video_url
             sel.open(test_video_url)
             #Original is the default tab when video opened.
@@ -200,7 +200,7 @@ class subgroup_81(unittest.TestCase):
         #get a video and open page
         try:
             website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
-            test_video_url = website.get_video_no_translations(self,sel)
+            test_video_url = offsite.get_youtube_video_url(self)
             print test_video_url
             sel.open(test_video_url)
             #Original is the default tab when video opened.
@@ -244,7 +244,7 @@ class subgroup_81(unittest.TestCase):
         #get a video and open page
         try:
             website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
-            test_video_url = website.get_video_no_translations(self,sel)
+            test_video_url = offsite.get_youtube_video_url(self)
             print test_video_url
             sel.open(test_video_url)
       
