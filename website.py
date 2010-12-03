@@ -238,11 +238,15 @@ def get_video_no_translations(self,sel):
         
     if local_url == "none":
         print "no untranslated vidoes - must add one."
-        vid_url = offsite.get_youtube_video_url(self)
-        submit_video(self,sel,vid_url)
-        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        local_url = sel.get_attribute(testvars.video_original +" > a@href")
+        local_url = submit_random_youtube(self,sel)
         
+    return local_url
+
+def submit_random_youtube(self,sel):
+    vid_url = offsite.get_youtube_video_url(self)
+    submit_video(self,sel,vid_url)
+    sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+    local_url = sel.get_attribute(testvars.video_original +" > a@href")
     return local_url
 
 def get_translated_lang(self,sel):
