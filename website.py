@@ -231,7 +231,7 @@ def get_video_no_translations(self,sel):
     subtitled_cell="css=tr:nth-child("+str(row_no)+") > "+testvars.videos_trans_td
     while sel.is_element_present(subtitled_cell):
         if int(sel.get_text(subtitled_cell)) == 0:
-            local_url = sel.get_attribute("css=tr:nth-child("+str(row_no)+ ") > "+testvars.videos_url_td+" > a@href")
+            local_url = sel.get_attribute("css=tr:nth-child("+str(row_no)+ ") > "+testvars.videos_url_td+"href")
             break
         row_no = row_no + 1
         subtitled_cell=("css=tr:nth-child("+str(row_no)+") > "+testvars.videos_trans_td)
@@ -246,7 +246,7 @@ def submit_random_youtube(self,sel):
     vid_url = offsite.get_youtube_video_url(self)
     submit_video(self,sel,vid_url)
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-    local_url = sel.get_attribute(testvars.video_original +" > a@href")
+    local_url = sel.get_attribute(testvars.video_original +"@href")
     return local_url
 
 def get_translated_lang(self,sel):
