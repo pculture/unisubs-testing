@@ -148,6 +148,11 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
         sel.focus("css=input[class*=trans]")
         sel.type("css=input[class*=trans]",line)
         sel.type_keys("css=input[class*=trans]",' ')
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
+        current_sub = sel.get_text(testvars.WidgetUI["Current_playing_sub"])
+        # compare input text
+        self.assertEqual(line.rstrip(),current_sub.rstrip(),\
+        "sub text mismatch - expected: "+line.rstrip()+" found: "+current_sub.rstrip())
         if "firefox" in selvars.set_browser():
             sel.key_press("css=.trans", "13")            
         else:
