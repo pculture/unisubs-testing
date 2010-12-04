@@ -37,7 +37,7 @@ parser.add_option("-u", "--siteurl", action="store",
                   help="""dev for: http://dev.universalsubtitles.org,
                         staging for: http://staging.universalsubtitles.org""")
 
-parser.add_option("-l", "--litmus",action="store_true",dest="litmus",default=True,
+parser.add_option("-l", "--litmus",action="store_true",dest="litmus",default=False,
                   help='Sends test output directly to litmus.pculture.org')
 
 parser.add_option("-i", "--buildid", action="store", dest="buildid",
