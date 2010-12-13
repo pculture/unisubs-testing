@@ -175,7 +175,11 @@ class subgroup_69(unittest.TestCase):
             # stop typing and wait for playback to resume (pause button present)
             stop_time = sel.get_text(testvars.WidgetUI['Video_elapsed_time'])
             sel.type_keys("//div/input", "I'm Asa Dotzler")
-            widget.transcribe_enter_text(self,sel)
+            if "firefox" in selvars.set_browser():
+                sel.key_press("css=.trans", "13")            
+            else:
+                sel.focus("css=input[class*=trans]")
+                sel.key_press_native('10')
             mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
             time.sleep(.5)
             resume_time = sel.get_text(testvars.WidgetUI['Video_elapsed_time'])

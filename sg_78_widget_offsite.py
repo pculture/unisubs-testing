@@ -47,7 +47,7 @@ class subgroup_78_pculture(unittest.TestCase):
         # Sync
         widget.sync_video(self,sel,subtextfile,6,8)
         # Review
-        widget.edit_text(self,sel,subtextfile)
+      
 
       
 
@@ -69,7 +69,7 @@ class subgroup_78_pculture(unittest.TestCase):
         # Sync
         widget.sync_video(self,sel,subtextfile,5,5)
         # Review
-        widget.edit_text(self,sel,subtextfile)
+   
 
 
 

@@ -205,7 +205,8 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
     time.sleep(10)
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     #start playback
-    sel.click_at(testvars.WidgetUI["Play_pause"],"")
+    sel.type_keys("css=.mirosubs-play",u'\u0009')
+#    sel.click_at(testvars.WidgetUI["Play_pause"],"")
     time.sleep(start_delay)
     if not sel.is_element_present(testvars.WidgetUI["Video_pause_button"]):
         sel.click_at(testvars.WidgetUI["Play_pause"],"")
@@ -267,6 +268,9 @@ def edit_text(self,sel,subtextfile,new_text=""):
         self.assertEqual(sub_cell_text.rstrip(),ed_text.rstrip())
         sub_li += sub_li
         sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") > span.mirosubs-title span"
+        if not sel.is_element_present(sub_cell):
+            break
+        
 
 
 def edit_translation(self,sel,subtextfile,new_text=""):
