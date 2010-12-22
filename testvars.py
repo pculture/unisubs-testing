@@ -15,7 +15,7 @@ WebsiteUI = {"Home":"css=a:contains('Miro Subs Alpha')", \
              "Login_Button":"css=a[href*=/auth/login]", \
              "Logout_Button":"css=a[href*=/logout]", \
              "SiteLogoutUrl": "/logout/?next=/",\
-             "Subtitle_Button":"css=a[href=/videos/create/]", \
+             "Subtitle_Button":"css=a[href*=/videos/create/]", \
              "All_Videos_Button":"css=a:contains('All Videos')", \
              "About_Button":"css=a:contains('About')", \
              "FAQ_Button":"css=a:contains('FAQ')", \
