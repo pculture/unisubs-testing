@@ -4,6 +4,7 @@ import unittest
 import time
 import re
 import codecs
+import os
 import mslib
 import testvars
 import widget
@@ -40,11 +41,8 @@ def SiteLogout(self,sel):
 
     """
     sel.open("/logout/?next=/")
-    mslib.wait_for_element_present(self,sel,"css=.login_link")
-    if sel.is_element_present(testvars.WebsiteUI["Logout_Button"]):
-        sel.click(testvars.WebsiteUI["Logout_Button"])
-        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_Button"])
-    
+    mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_Button"])
+   
 
 def Login(self,sel,auth_type):
     """
