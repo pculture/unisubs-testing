@@ -104,7 +104,7 @@ def submit_video(self,sel,url):
 def front_page_submit(self,sel,url):
     sel.open("/")
     sel.type("css=input[name=video_url]", url)
-    sel.click("css=button:contains('Begin')")
+    sel.click("css=.btn_submit_video")
 
 
 def start_sub_widget(self,sel,wig_menu=testvars.WebsiteUI["SubtitleMe_menu"],skip="True",vid_lang="English",sub_lang="English"):

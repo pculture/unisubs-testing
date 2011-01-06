@@ -84,14 +84,14 @@ def site_login_auth(self,sel):
     time.sleep(10)
 
 
-def select_video_language(self,sel,vid_lang="English",sub_lang="English"):
+def select_video_language(self,sel,vid_lang="en",sub_lang="en"):
     time.sleep(5)
     if sel.is_element_present(testvars.WidgetUI["Select_language"]):
         sel.select_frame("relative=top")
         vid_label = sel.get_text("css=p:nth-child(1) > select option:contains("+vid_lang+")")
-        sel.select("//select", "label=" +vid_label)
+        sel.select("//select", "value=" +vid_label)
         sub_label = sel.get_text("css=p:nth-child(2) > select option:contains("+sub_lang+")")
-        sel.select("//select", "label=" +sub_label)
+        sel.select("//select", "value=" +sub_label)
         sel.click("link=Continue")
     else:
         print "no language selection box"

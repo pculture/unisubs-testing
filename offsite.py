@@ -22,7 +22,8 @@ def TwitterAuth(self,sel,user,passw):
     print "twitter auth: "+ user+":"
     sel.select_pop_up("null")
     if sel.get_eval("window.location") == "http://twitter.com/universalsubs":
-        sel.click("css=.signin span:contains('Sign in')")
+        if sel.is_element_present("css=.signin span:contains('Sign in')"):
+            sel.click("css=.signin span:contains('Sign in')")
         mslib.wait_for_element_present(self,sel,"css=input[title='username']")
         sel.type("username", user)
         sel.type("password", passw)
