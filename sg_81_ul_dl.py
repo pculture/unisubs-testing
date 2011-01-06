@@ -216,19 +216,19 @@ class subgroup_81(unittest.TestCase):
             print "2. polish srt upload"
             sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_pl_subs.srt")
             sub_text = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_pl_subs.txt")
-            website.upload_subtitles(self,sel,sub_file,lang="Polish")
+            website.upload_subtitles(self,sel,sub_file,lang="pl")
             website.verify_sub_upload(self,sel,sub_text, lang="Polish")
 
             print "3. arabic srt upload"
             sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_ar_subs.srt")
             sub_text = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_ar_subs.txt")
-            website.upload_subtitles(self,sel,sub_file,lang="Arabic")
+            website.upload_subtitles(self,sel,sub_file,lang="ar")
             website.verify_sub_upload(self,sel,sub_text, lang="Arabic")
 
             print "4. macedonian srt upload"
             sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_mk_subs.srt")
             sub_text = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_mk_subs.txt")
-            website.upload_subtitles(self,sel,sub_file,lang="Macedonian")
+            website.upload_subtitles(self,sel,sub_file,lang="mk")
             website.verify_sub_upload(self,sel,sub_text, lang="Macedonian")
         finally:
             # check for Site Error notification and submit

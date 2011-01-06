@@ -267,14 +267,14 @@ def get_translated_lang(self,sel):
     print lang
     return lang
 
-def upload_subtitles(self,sel,sub_file,lang="English"):
+def upload_subtitles(self,sel,sub_file,lang="en"):
     """Uploads subtitles for the specified language."
 
     """
     sel.select_frame("relative=top")
     mslib.wait_for_element_present(self,sel,testvars.video_upload_subtitles)
     sel.click(testvars.video_upload_subtitles)
-    sel.select("css=form[id='upload-subtitles-form'] select", "label="+lang)
+    sel.select("css=form[id='upload-subtitles-form'] select", "value="+lang)
     sel.type("subtitles-file-field",sub_file)
 
 
