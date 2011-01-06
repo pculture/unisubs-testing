@@ -127,19 +127,19 @@ class subgroup_81(unittest.TestCase):
             print "2. polish ssa upload"
             sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_pl_subs.ssa")
             sub_text = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_pl_subs.txt")
-            website.upload_subtitles(self,sel,sub_file,lang="Polish")
+            website.upload_subtitles(self,sel,sub_file,lang="pl")
             website.verify_sub_upload(self,sel,sub_text, lang="Polish")
 
             print "3. arabic ssa upload"
             sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_ar_subs.ssa")
             sub_text = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_ar_subs.txt")
-            website.upload_subtitles(self,sel,sub_file,lang="Arabic")
+            website.upload_subtitles(self,sel,sub_file,lang="ar")
             website.verify_sub_upload(self,sel,sub_text, lang="Arabic")
 
             print "4. macedonian ssa upload"
             sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_mk_subs.ssa")
             sub_text = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_mk_subs.txt")
-            website.upload_subtitles(self,sel,sub_file,lang="Macedonian")
+            website.upload_subtitles(self,sel,sub_file,lang="mk")
         #   website.verify_sub_upload(self,sel,sub_text, lang="Macedonian")
         finally:
             # check for Site Error notification and submit
@@ -171,19 +171,19 @@ class subgroup_81(unittest.TestCase):
             print "2. polish ttml upload"
             sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_pl_subs.xml")
             sub_text = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_pl_subs.txt")
-            website.upload_subtitles(self,sel,sub_file,lang="Polish")
+            website.upload_subtitles(self,sel,sub_file,lang="pl")
             website.verify_sub_upload(self,sel,sub_text, lang="Polish")
 
             print "3. arabic ttml upload"
             sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_ar_subs.xml")
             sub_text = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_ar_subs.txt")
-            website.upload_subtitles(self,sel,sub_file,lang="Arabic")
+            website.upload_subtitles(self,sel,sub_file,lang="ar")
             website.verify_sub_upload(self,sel,sub_text, lang="Arabic")
 
             print "4. macedonian ttml upload"
             sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_mk_subs.xml")
             sub_text = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_mk_subs.txt")
-            website.upload_subtitles(self,sel,sub_file,lang="Macedonian")
+            website.upload_subtitles(self,sel,sub_file,lang="mk")
             website.verify_sub_upload(self,sel,sub_text, lang="Macedonian")
         finally:
             # check for Site Error notification and submit
@@ -260,19 +260,19 @@ class subgroup_81(unittest.TestCase):
             print "2. polish sbv upload"
             sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_pl_subs.sbv")
             sub_text = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_pl_subs.txt")
-            website.upload_subtitles(self,sel,sub_file,lang="Polish")
+            website.upload_subtitles(self,sel,sub_file,lang="pl")
             website.verify_sub_upload(self,sel,sub_text, lang="Polish")
 
             print "3. arabic sbv upload"
             sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_ar_subs.sbv")
             sub_text = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_ar_subs.txt")
-            website.upload_subtitles(self,sel,sub_file,lang="Arabic")
+            website.upload_subtitles(self,sel,sub_file,lang="ar")
             website.verify_sub_upload(self,sel,sub_text, lang="Arabic")
 
             print "4. macedonian sbv upload"
             sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_mk_subs.sbv")
             sub_text = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_mk_subs.txt")
-            website.upload_subtitles(self,sel,sub_file,lang="Macedonian")
+            website.upload_subtitles(self,sel,sub_file,lang="mk")
             website.verify_sub_upload(self,sel,sub_text, lang="Macedonian")
         finally:
             # check for Site Error notification and submit
