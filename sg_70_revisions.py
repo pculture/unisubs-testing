@@ -210,10 +210,11 @@ class subgroup_70(unittest.TestCase):
 
         #If there are more than 2 revision, test another compare
         if int(rev_num) > 2:
-            row_num = int(rev_num)-2
+            row_num = 3
+            old_rev = int(rev_num)-2
             website.check_the_box(self,sel,row_num)
             sel.click(testvars.video_compare_revisions)
-            website.verify_compare_revisions(self,sel,str(row_num),str(rev_num))
+            website.verify_compare_revisions(self,sel,old_rev,str(rev_num))
 
     def test_493(self):
         """Revisions - original - invalid comparison selection

@@ -78,21 +78,18 @@ class subgroup_81(unittest.TestCase):
             website.upload_subtitles(self,sel,sub_file)
             mslib.wait_for_element_present(self,sel,"css=p.error_list")
             self.assertTrue(sel.is_element_present("css=p.error_list:contains('Can not detect file encoding')"))
-            mslib.wait_for_element_present(self,sel,"css=a[id=closeBut]")
-            sel.click("css=a[id=closeBut]")
             
             print "2. invalid srt"
             sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_invalid.srt")
-            website.upload_subtitles(self,sel,sub_file)
+            sel.type("subtitles-file-field",sub_file)
             time.sleep(5)
             mslib.wait_for_element_present(self,sel,"css=p.error_list")
             self.assertTrue(sel.is_element_present("css=p.error_list:contains('Incorrect subtitles format')"))
-            mslib.wait_for_element_present(self,sel,"css=a[id=closeBut]")
-            sel.click("css=a[id=closeBut]")
+            
             
             print "3. unsupported format"
             sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_text.txt")
-            website.upload_subtitles(self,sel,sub_file)
+            sel.type("subtitles-file-field",sub_file)
             time.sleep(5)
             mslib.wait_for_element_present(self,sel,"css=p.error_list")
             self.assertTrue(sel.is_element_present("css=p.error_list:contains('Incorrect format. Upload srt')"))
