@@ -456,6 +456,48 @@ def verify_compare_revisions(self,sel,older_rev, newer_rev):
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
 
 
+def create_team(self,sel,team,url,team_logo):
+    sel.type("id_name", team)
+    sel.type("id_description", "Team "+team+ " - for test purposes only.")
+    sel.type("id_logo", team_logo)
+    sel.type("id_video_url", "http://blip.tv/file/get/Miropcf-Miro20Introduction771.ogv")
+    sel.click("css=.green_button.big:contains('Create Team')")
+    sel.wait_for_page_to_load(testvars.timeout)
+    # Verify team creation parameters
+    current_video = url.split('/')[-1]
+    try:
+        if team == "":
+            self.assertTrue(sel.is_element_present("css=.errorlist li:contains('This field is required')"))
+        else:
+            self.assertEqual(team, sel.get_value("css=input#id_name"))
+            self.assertEqual("Team "+team+" - for test purposes only.", sel.get_value("id_description"))
+            self.failUnless(sel.is_element_present("css=.avatar-container img[src*='png_100x100']"))
+            self.failUnless(sel.is_element_present("css=p:contains(\"Current video:\") > a:contains("+current_video+")"))       
+    except AssertionError, e: self.verificationErrors.append(str(e))
+
+def get_own_team(self,sel):
+    
+    sel.click(testvars.teams_link)
+    sel.wait_for_page_to_load(testvars.timeout)
+    if sel.is_element_present("css=h4 a:contains('your team')"):
+        print 'using existing team'
+        t = sel.get_text("css=h4 a:contains('your team')")
+        team = t.split('(')[0]
+        team = team.rstrip()
+        
+    else:
+        print "creating new team"
+        team = "Miro"+time.strftime("%m%d%H%M%S", time.gmtime())
+        url = "http://blip.tv/file/get/Miropcf-Miro20Introduction771.ogv"
+        team_logo_path = os.path.join(testvars.MSTestVariables["DataDirectory"],"sheep.png")
+        sel.click(testvars.start_team)
+        sel.wait_for_page_to_load(testvars.timeout)
+        create_team(self,sel,team,url,team_logo_path)
+    return team
+
+def save_team_settings(self,sel):
+    sel.click("css=.green_button.small:contains('Save')")
+
 
 def handle_error_page(self,sel,test_id):
     sel.select_window("null") #just making sure I'm really here, if I am.
