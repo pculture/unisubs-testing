@@ -43,8 +43,7 @@ class subgroup_88(unittest.TestCase):
         #login
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         #create team
-        sel.click(testvars.teams_link)
-        sel.wait_for_page_to_load(testvars.timeout)
+        website.open_teams_page(self,sel)
         sel.click(testvars.start_team)
         sel.wait_for_page_to_load(testvars.timeout)
         website.create_team(self,sel,team,url,team_logo_path)
@@ -68,8 +67,7 @@ class subgroup_88(unittest.TestCase):
         #login
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         #create team
-        sel.click(testvars.teams_link)
-        sel.wait_for_page_to_load(testvars.timeout)
+        website.open_teams_page(self,sel)
         sel.click(testvars.start_team)
         sel.wait_for_page_to_load(testvars.timeout)
         website.create_team(self,sel,team,url,team_logo_path)
@@ -152,14 +150,10 @@ class subgroup_88(unittest.TestCase):
         website.save_team_settings(self,sel)
         # logout and verify team no longer displayed
         sel.click(testvars.WebsiteUI["Logout_Button"])
-        mslib.wait_for_element_present(self,sel,testvars.teams_link)
-        sel.click(testvars.teams_link)
-        sel.wait_for_page_to_load(testvars.timeout)
+        website.open_teams_page(self,sel)
         self.failIf(sel.is_element_present("link=Miro"))
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
-        mslib.wait_for_element_present(self,sel,testvars.teams_link)
-        sel.click(testvars.teams_link)
-        sel.wait_for_page_to_load(testvars.timeout)
+        website.open_teams_page(self,sel)
         self.assertTrue(sel.is_element_present("css=a[href*='/teams/miro/']"))
         # reset setting
         sel.open("teams/"+team)

@@ -476,9 +476,7 @@ def create_team(self,sel,team,url,team_logo):
     except AssertionError, e: self.verificationErrors.append(str(e))
 
 def get_own_team(self,sel):
-    
-    sel.click(testvars.teams_link)
-    sel.wait_for_page_to_load(testvars.timeout)
+    open_teams_page(self,sel)
     if sel.is_element_present("css=h4 a:contains('your team')"):
         print 'using existing team'
         t = sel.get_text("css=h4 a:contains('your team')")
@@ -498,6 +496,9 @@ def get_own_team(self,sel):
 def save_team_settings(self,sel):
     sel.click("css=.green_button.small:contains('Save')")
 
+def open_teams_page(self,sel):
+    sel.open("teams")
+    
 
 def handle_error_page(self,sel,test_id):
     sel.select_window("null") #just making sure I'm really here, if I am.
