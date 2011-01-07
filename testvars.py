@@ -4,9 +4,9 @@ import platform
 
 preE=" --- ERROR: "
 
-
+timeout = 120000
 MSTestVariables = {"DataDirectory": os.path.join(os.getcwd(), "TestInput"), \
-                   "TimeOut":"120000", \
+                   "TimeOut":timeout, \
                   }
 
 # Mapping to the MiroSubs website UI navigations buttons and links
@@ -45,6 +45,13 @@ video_edit_subtitles = "css=a[id=edit_subtitles]"
 video_add_translation = "css=a[id=add_translation]"
 video_compare_revisions = "css=button span:contains('Compare Revisions')"
 rev_rollback = "css=a.roll_back"
+
+
+teams_link = "css=a span:contains('Teams')"
+start_team = "css=a[href*='teams/create']"
+manage_team = "css=a:contains('Settings')"
+## teams page
+teams_video_tab ="css=ul.inline_tabs li a[href*='videos']"
 
 
 history_tab = "css=span.inline_text:contains('History')"
