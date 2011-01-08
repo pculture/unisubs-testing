@@ -13,7 +13,7 @@ MSTestVariables = {"DataDirectory": os.path.join(os.getcwd(), "TestInput"), \
 
 WebsiteUI = {"Home":"css=a:contains('Miro Subs Alpha')", \
              "Login_Button":"css=a[href*=/auth/login]", \
-             "Logout_Button":"css=a span:contains('logout')", \
+             "Logout_Button":"css=a span:contains('Logout')", \
              "SiteLogoutUrl": "en/logout/?next=/",\
              "Subtitle_Button":"css=a[href*=/videos/create/]", \
              "All_Videos_Button":"css=a:contains('All Videos')", \
