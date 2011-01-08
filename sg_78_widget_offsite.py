@@ -144,6 +144,8 @@ class subgroup_78_subtesting(unittest.TestCase):
             widget.edit_text(self,sel,subtextfile)
             widget.site_login_from_widget_link(self,sel)
             widget.submit_sub_edits(self,sel)
+            sel.wait_for_element_present(self,sel,testvars.offsite_goto_subs)
+            sel.click(testvars.offsite_goto_subs)
             mslib.wait_for_element_present(testvars.video_video_info)
             self.assertEqual("PCF Sub-writer edited English subtitles for Right-Wing Radio Duck", sel.get_text("css=tr td:nth-child(1)"))
             sel.click("css=tr td:nth-child(1) > a:contains('English subtitles')")
