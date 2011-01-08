@@ -81,6 +81,11 @@ widget_step3 = "css=.mirosubs-help-heading li a:contains('3')"
 widget_step2 = "css=.mirosubs-help-heading li a:contains('2')"
 widget_step1 = "css=.mirosubs-help-heading li a:contains('1')"
 
+
+#offsite option
+offsite_goto_subs = "css=.mirosubs-goBack"
+offsite_goto_site = "css=.mirosubs-otherClose"
+
 # TestData
 
 siteuser = "sub_writer"
