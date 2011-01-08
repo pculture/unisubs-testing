@@ -43,7 +43,7 @@ class subgroup_81(unittest.TestCase):
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         try:
             #get a video and open page
-            sel.open("/videos")
+            sel.open("en/logout/?next=/")
             test_video_url = website.submit_random_youtube(self,sel)
             print test_video_url
             sel.open(test_video_url)
