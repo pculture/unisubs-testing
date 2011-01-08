@@ -92,7 +92,7 @@ class subgroup_81(unittest.TestCase):
             sel.type("subtitles-file-field",sub_file)
             time.sleep(5)
             mslib.wait_for_element_present(self,sel,"css=p.error_list")
-            self.assertTrue(sel.is_element_present("css=p.error_list:contains('Incorrect format. Upload srt')"))
+            self.assertTrue(sel.is_element_present("css=p.error_list:contains('Incorrect format.')"))
             mslib.wait_for_element_present(self,sel,"css=a[id=closeBut]")
             sel.click("css=a[id=closeBut]")
         finally:
