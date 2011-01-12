@@ -100,7 +100,6 @@ def get_blip_video_url(self,file_type="flv"):
     except:
         print "error getting video, type:" +file_type
     finally:
-        bsel.close()
         bsel.stop()
     print blipURL
     return blipURL
@@ -129,7 +128,6 @@ def get_vimeo_video_url(self):
        
 
     finally:
-        vsel.close()
         vsel.stop()
     return vimeoURL
 
@@ -152,7 +150,6 @@ def get_youtube_video_url(self,vid_format="embed"):
         print youtubeURL      
 
     finally:
-        vsel.close()
         vsel.stop()
     return youtubeURL
 
@@ -171,6 +168,5 @@ def get_dailymotion_video_url(self):
         print dailymotionURL      
 
     finally:
-        vsel.close()
         vsel.stop()
     return dailymotionURL
