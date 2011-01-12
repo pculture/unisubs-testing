@@ -89,7 +89,8 @@ def select_video_language(self,sel,vid_lang="English",sub_lang="English"):
     if sel.is_element_present(testvars.WidgetUI["Select_language"]):
         sel.select_frame("relative=top")
         sel.select("css=p:nth-child(1) > select", vid_lang)
-        sel.select("css=p:nth-child(2) > select", sub_lang)
+        if sel.is_element_present("css=p:nth-child(2) > select"):
+            sel.select("css=p:nth-child(2) > select", sub_lang)
         sel.click("link=Continue")
     else:
         print "no language selection box"
