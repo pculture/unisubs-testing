@@ -88,9 +88,10 @@ def select_video_language(self,sel,vid_lang="English",sub_lang="English"):
     time.sleep(5)
     if sel.is_element_present(testvars.WidgetUI["Select_language"]):
         sel.select_frame("relative=top")
-        sel.select("css=p:nth-child(1) > select", vid_lang)
-        if sel.is_element_present("css=p:nth-child(2) > select"):
-            sel.select("css=p:nth-child(2) > select", sub_lang)
+
+        sel.select("css=p div:contains('video is') + select", "label="+vid_lang)
+        time.sleep(1)
+        sel.select("css=p div:contains('subtitling in') + select", "label="+sub_lang)
         sel.click("link=Continue")
     else:
         print "no language selection box"
@@ -201,7 +202,6 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
     print " * Sub syncing"
     time.sleep(10) #give video a chance to load
     sel.select_window("null")   
-    time.sleep(10)
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     #start playback
     sel.type_keys("css=.mirosubs-play",u'\u0009')
