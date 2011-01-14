@@ -112,7 +112,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
                 ['sg_78_widget_offsite.subgroup_78_pculture',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78_pculture,'test')], \
                 ['sg_78_widget_offsite.subgroup_78_subtesting',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78_subtesting,'test')], \
                 ['sg_70_revisions.subgroup_70',unittest.getTestCaseNames(sg_70_revisions.subgroup_70,'test')], \
-                ['sg_88_teams.subgroup_88',unittest.getTestCaseNames(sg_88_teams.subgroup_88,'test')], \
+               # ['sg_88_teams.subgroup_88',unittest.getTestCaseNames(sg_88_teams.subgroup_88,'test')], \
                            ]
 
             for sg in suite_list:

@@ -50,7 +50,7 @@ class subgroup_81(unittest.TestCase):
             #Original is the default tab when video opened.
             sel.click(testvars.video_upload_subtitles)
             time.sleep(2)
-            self.assertTrue(sel.is_element_present("css=a[href^=/auth/login]"))
+            self.assertTrue(sel.is_element_present("css=a[href*=/auth/login]"))
             self.assertTrue(sel.is_element_present("css=a[href*=videos]"))
             sel.click("css=a[id=closeBut]")
         finally:
