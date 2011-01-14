@@ -10,5 +10,8 @@ sauce_auth.pyc
 # ignore results
 Results/*.html
 log.xml
+# ignore temp file
+subs.txt
+
 
 
