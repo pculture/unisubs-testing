@@ -26,11 +26,12 @@ class subgroup_78_pculture(unittest.TestCase):
         self.verificationErrors = []
         self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), "http://pculture.org/"))
         self.selenium.start()
+        self.session = self.selenium.sessionId
    
 # The test cases of the subgroup.
 
 
-    def test_369(self):
+    def stest_369(self):
         """Subtitle Youtube video in offsite embed.
         
         http://litmus.pculture.org/show_test.cgi?id=369
@@ -51,7 +52,7 @@ class subgroup_78_pculture(unittest.TestCase):
 
       
 
-    def test_370(self):
+    def stest_370(self):
         """Subtitle ogg video in offsite embed.
        
         http://litmus.pculture.org/show_test.cgi?id=370
@@ -122,6 +123,9 @@ class subgroup_78_subtesting(unittest.TestCase):
         mslib.wait_for_element_present(self,sel,"css=div:nth-child(3) > a span")
         if sel.get_text(youtube_vid1) == "Subtitle Me":
             print "no subs yet - making new ones"
+
+
+            
             subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
             website.start_sub_widget(self,sel,youtube_vid1)
             # Transcribe
@@ -133,7 +137,7 @@ class subgroup_78_subtesting(unittest.TestCase):
         else:
             print "has subs - going to editing then revert"
             sel.click(testvars.WebsiteUI["Subhomepage_menuitem"])
-            sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+            sel.wait_for_page_to_load(testvars.timeout)
             website.store_subs(self,sel)
             orig_rev = website.get_current_rev(self,sel)
             subtextfile = "subs.txt"
@@ -143,12 +147,15 @@ class subgroup_78_subtesting(unittest.TestCase):
             widget.goto_step(self,sel,"3")
             widget.edit_text(self,sel,subtextfile)
             widget.site_login_from_widget_link(self,sel)
-            widget.submit_sub_edits(self,sel)
-            sel.wait_for_element_present(self,sel,testvars.offsite_goto_subs)
+            widget.submit_sub_edits(self,sel,offsite=True)
+            mslib.wait_for_element_present(self,sel,testvars.offsite_goto_subs)
             sel.click(testvars.offsite_goto_subs)
-            mslib.wait_for_element_present(testvars.video_video_info)
-            self.assertEqual("PCF Sub-writer edited English subtitles for Right-Wing Radio Duck", sel.get_text("css=tr td:nth-child(1)"))
+            sel.wait_for_page_to_load(testvars.timeout)
+            print " * verify edits"
+            mslib.wait_for_element_present(self,sel,testvars.video_video_info)
+            self.assertEqual("sub_writer edited English subtitles for Right-Wing Radio Duck", sel.get_text("css=tr td:nth-child(1)"))
             sel.click("css=tr td:nth-child(1) > a:contains('English subtitles')")
+            sel.wait_for_page_to_load(testvars.timeout)
             sel.click(testvars.history_tab)
             mslib.wait_for_element_present(self,sel,testvars.video_compare_revisions)
             sel.click("td a:contains('"+ orig_rev+"')")
@@ -157,11 +164,7 @@ class subgroup_78_subtesting(unittest.TestCase):
             sel.click(testvars.rev_rollback)
             self.assertEqual("Subtitles will be rolled back to a previous version", sel.get_confirmation())
             sel.click(testvars.transcripts_tab)
-            website.verify_subs(self,sel,"subs.txt")
-            
-
-
-            
+            website.verify_subs(self,sel,"subs.txt")          
 
 
 
@@ -170,10 +173,8 @@ class subgroup_78_subtesting(unittest.TestCase):
         """
         Closes the browser test window and logs errors
         """
-        # check for Site Error notification and submit
-        website.handle_error_page(self,self.selenium,self.id())
-        #Close the browser
-        self.selenium.stop()
+        #Check for an error page, then close the browser
+   #     self.selenium.stop()
         #Log any errors
         self.assertEqual([], self.verificationErrors)
       

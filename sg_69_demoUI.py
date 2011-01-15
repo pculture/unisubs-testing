@@ -48,6 +48,7 @@ class subgroup_69(unittest.TestCase):
         testid = self.id()
         self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), selvars.set_site() )
         self.selenium.start()
+        self.session = self.selenium.sessionId
 
 # The test cases of the subgroup
 
@@ -755,12 +756,16 @@ class subgroup_69(unittest.TestCase):
         """
         Closes the browser test window and logs errors
         """
-        # check for Site Error notification and submit
-        website.handle_error_page(self,self.selenium,self.id())
-        #Close the browser
-        self.selenium.stop()
+        
+        #give it back the session id in case it's lost it
+        self.selenium.sessionId = self.session
+        #Check for an error page, then close the browser
+        try:
+            website.handle_error_page(self,self.selenium,self.id())
+        finally:
+            self.selenium.stop()
         #Log any errors
-        self.assertEqual([], self.verificationErrors) 
+        self.assertEqual([], self.verificationErrors)
 
 
 if __name__ == "__main__":

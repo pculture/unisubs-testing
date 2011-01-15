@@ -24,27 +24,23 @@ class subgroup_test(unittest.TestCase):
         testid = self.id()
         self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), "http://staging.universalsubtitles.org" )
         self.selenium.start()
+        self.session = self.selenium.sessionId
 
 
-    def test_414(self):
+    def test_close(self):
+        
         """Widget Step 3, click time arrows to modify time.
         
         http://litmus.pculture.org/show_test.cgi?id=414
         """
         print "starting testcase 414"
         sel = self.selenium
-        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"switch-to-firefox.txt")
+        sel.set_timeout(180000)
         # be sure logged out
-        website.SiteLogout(self,sel)
-        website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
-        widget.transcribe_video(self, sel, subtextfile)
-        widget.sync_video(self,sel,subtextfile)
-        #on Step 3 resync video times
-        widget.click_time_shift_arrows(self,sel,subtextfile) 
-
-
+        sel.open("/videos/teams")
+        vid_url = offsite.get_youtube_video_url(self)
+        
+  
           
 # Close the browser, log errors, perform cleanup 
     def tearDown(self):
@@ -52,7 +48,9 @@ class subgroup_test(unittest.TestCase):
         Closes the browser test window and logs errors
         """
         #Close the browser
-#        self.selenium.stop()
+        self.selenium.sessionId = self.session
+        print self.selenium.sessionId
+        self.selenium.stop()
         #Log any errors
         self.assertEqual([], self.verificationErrors) 
 

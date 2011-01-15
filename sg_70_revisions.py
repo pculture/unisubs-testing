@@ -24,10 +24,10 @@ class subgroup_70(unittest.TestCase):
         """
         Sets up run envirnment for selenium server
         """      
-        
         self.verificationErrors = []
         self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), selvars.set_site() )
         self.selenium.start()
+        self.session = self.selenium.sessionId
         print "starting: " +self.id() +"-"+self.shortDescription()
 
 ## The test cases of the subgroup.
@@ -315,8 +315,13 @@ class subgroup_70(unittest.TestCase):
         Closes the browser test window and logs errors
         """
         
-        #Close the browser
-  #      self.selenium.stop()
+        #give it back the session id in case it's lost it
+        self.selenium.sessionId = self.session
+        #Check for an error page, then close the browser
+        try:
+            website.handle_error_page(self,self.selenium,self.id())
+        finally:
+            self.selenium.stop()
         #Log any errors
         self.assertEqual([], self.verificationErrors)
       

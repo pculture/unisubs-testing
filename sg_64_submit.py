@@ -26,6 +26,7 @@ class subgroup_64(unittest.TestCase):
         self.verificationErrors = []
         self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), selvars.set_site() )
         self.selenium.start()
+        self.session = self.selenium.sessionId
         print "starting: " +self.id() +"-"+self.shortDescription()
 
 ## The test cases of the subgroup.
@@ -55,7 +56,6 @@ class subgroup_64(unittest.TestCase):
                 # Verify embed and player
                 print "verifying embed and video player"
                 website.verify_submitted_video(self,sel,vid_url,embed_type="flow")
-                website.handle_error_page(self,sel,self.id())
                 # Start sub widget
                 print "starting sub widget"
                 website.start_sub_widget(self,sel)
@@ -261,8 +261,13 @@ class subgroup_64(unittest.TestCase):
         Closes the browser test window and logs errors
         """
         
-        #Close the browser
-        self.selenium.stop()
+        #give it back the session id in case it's lost it
+        self.selenium.sessionId = self.session
+        #Check for an error page, then close the browser
+        try:
+            website.handle_error_page(self,self.selenium,self.id())
+        finally:
+            self.selenium.stop()
         #Log any errors
         self.assertEqual([], self.verificationErrors)
       
