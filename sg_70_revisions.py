@@ -14,9 +14,9 @@ import selvars
 
 class subgroup_70(unittest.TestCase):
     """
-    Litmus Subgroup 64 - offsite subwidget:
-        Tests designed to exercise the subtitle widget embedded
-        in sites external to universalsubtitles.org (live, dev or staging)  
+    Litmus Subgroup 70 - revisions tests.
+    
+    Tests designed to exercise versioning of subtitles.  
     """
     
 # Open the desired browser and set up the test

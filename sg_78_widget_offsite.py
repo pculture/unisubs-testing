@@ -31,7 +31,7 @@ class subgroup_78_pculture(unittest.TestCase):
 # The test cases of the subgroup.
 
 
-    def stest_369(self):
+    def test_369(self):
         """Subtitle Youtube video in offsite embed.
         
         http://litmus.pculture.org/show_test.cgi?id=369
@@ -52,7 +52,7 @@ class subgroup_78_pculture(unittest.TestCase):
 
       
 
-    def stest_370(self):
+    def test_370(self):
         """Subtitle ogg video in offsite embed.
        
         http://litmus.pculture.org/show_test.cgi?id=370
@@ -138,8 +138,9 @@ class subgroup_78_subtesting(unittest.TestCase):
             print "has subs - going to editing then revert"
             sel.click(testvars.WebsiteUI["Subhomepage_menuitem"])
             sel.wait_for_page_to_load(testvars.timeout)
-            website.store_subs(self,sel)
+            website.store_subs(self,sel,modify=True)
             orig_rev = website.get_current_rev(self,sel)
+            print "starting revision is: "+str(orig_rev)
             subtextfile = "subs.txt"
             sel.open(selvars.set_subtesting_wordpress_page())
             mslib.wait_for_element_present(self,sel,"css=div:nth-child(3) > a span")
@@ -158,11 +159,14 @@ class subgroup_78_subtesting(unittest.TestCase):
             sel.wait_for_page_to_load(testvars.timeout)
             sel.click(testvars.history_tab)
             mslib.wait_for_element_present(self,sel,testvars.video_compare_revisions)
-            sel.click("td a:contains('"+ orig_rev+"')")
+
+            rev_num = orig_rev.lstrip('#')
+            website.check_the_box(self,sel,2) #check the box
+            new_rev = int(rev_num) + 1
             sel.click(testvars.video_compare_revisions)
-            mslib.wait_for_element_present(self,sel,testvars.rev_rollback)
-            sel.click(testvars.rev_rollback)
-            self.assertEqual("Subtitles will be rolled back to a previous version", sel.get_confirmation())
+            sel.wait_for_page_to_load(testvars.timeout)
+            print " * comparing revisions and rolling back to original"
+            website.verify_compare_revisions(self,sel,str(rev_num),str(new_rev),rollback=True)
             sel.click(testvars.transcripts_tab)
             website.verify_subs(self,sel,"subs.txt")          
 
@@ -174,7 +178,7 @@ class subgroup_78_subtesting(unittest.TestCase):
         Closes the browser test window and logs errors
         """
         #Check for an error page, then close the browser
-   #     self.selenium.stop()
+        self.selenium.stop()
         #Log any errors
         self.assertEqual([], self.verificationErrors)
       

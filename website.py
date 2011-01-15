@@ -308,14 +308,16 @@ def verify_subs(self,sel,sub_file):
         self.assertTrue("css=tr:nth-child("+str(sub_td)+") > td div.sub_content:contains("+sub+")")
         sub_td = sub_td + 1
 
-def store_subs(self,sel):
+def store_subs(self,sel,modify=False):
     """reads each line of subs and saves to a file for later use.
 
     """
-    f = open("subs.txt", "w")
+    f = codecs.open("subs.txt", "w",encoding='utf-8')
     sub_td = 1
     while sel.is_element_present("css=tr:nth-child("+str(sub_td)+") > td div.sub_content"):
         subline = sel.get_text("css=tr:nth-child("+str(sub_td)+") > td div.sub_content")
+        if modify==True:
+            subline=subline.upper()
         f.write(subline+ "\n")
         sub_td = sub_td + 1
     f.close
@@ -411,6 +413,7 @@ def verify_latest_history(self,sel,rev=None,user=None,time=None,text=None):
     print "verifying history tab contents"
     mslib.wait_for_element_present(self,sel,testvars.history_tab)
     sel.click(testvars.history_tab)
+    mslib.wait_for_element_present(self,sel,"css=div[id=revisions-tab] tr:nth-child(1) > td:nth-child(1) > a")
     if rev:
         self.assertTrue(sel.is_element_present("css=div[id=revisions-tab] tr:nth-child(1) > td:nth-child(1) > a:contains('"+rev+"')"))
     if user:
@@ -433,7 +436,7 @@ def get_diff_url(self,sel,rev_link):
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     return diff_id
 
-def verify_compare_revisions(self,sel,older_rev, newer_rev):
+def verify_compare_revisions(self,sel,older_rev, newer_rev,rollback=False):
     """Verifies contents of page comparing 2 revisions.
 
     compares the older rev and newer rev numbers.
@@ -452,8 +455,17 @@ def verify_compare_revisions(self,sel,older_rev, newer_rev):
     self.assertTrue(sel.is_element_present("css=div.right_column div.revision_buttons a.new_edit:contains('Submit a new edit based on this version (#"+str(newer_rev)+")')"))
 
     #Back to history tab, by clicking breadcrumb link
-    sel.click("css=ul.breadcrumb li a:contains('Revision History')")
-    sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+    if rollback==True:
+        rollback_revision(self,sel)
+    else:
+        sel.click("css=ul.breadcrumb li a:contains('Revision History')")
+        sel.wait_for_page_to_load(testvars.timeout)
+
+def rollback_revision(self,sel):
+    mslib.wait_for_element_present(self,sel,testvars.rev_rollback)
+    sel.click(testvars.rev_rollback)
+    self.assertEqual("Subtitles will be rolled back to a previous version", sel.get_confirmation())
+    sel.wait_for_page_to_load(testvars.timeout)
 
 
 def create_team(self,sel,team,url,team_logo):
