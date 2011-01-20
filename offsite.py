@@ -85,10 +85,11 @@ def handle_warning_popup(self,sel):
     sel.select_window("null")
 
 def get_blip_video_url(self,file_type="flv"):
+    
+    self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("blip"," get video url"), "http://blip.tv/"))
+    self.selenium.start()
+    bsel= self.selenium
     try:
-        self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("blip"," get video url"), "http://blip.tv/"))
-        self.selenium.start()
-        bsel= self.selenium
         bsel.set_timeout(testvars.MSTestVariables["TimeOut"])
         random_url = "posts?sort=random&file_type="+file_type+"&page=1&view=list"
         bsel.open(random_url)
@@ -106,10 +107,11 @@ def get_blip_video_url(self,file_type="flv"):
 
 
 def get_vimeo_video_url(self):
+
+    self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("vimeo"," get video url"), "http://vimeo.com/"))
+    self.selenium.start()
+    vsel= self.selenium
     try:
-        self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("vimeo"," get video url"), "http://vimeo.com/"))
-        self.selenium.start()
-        vsel= self.selenium
         vsel.set_timeout(testvars.MSTestVariables["TimeOut"])
         vsel.open("groups/all/sort:recent")
         vsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
@@ -134,10 +136,10 @@ def get_vimeo_video_url(self):
         
 def get_youtube_video_url(self,vid_format="embed"):
     cat_num = random.randint(1,26)
+    self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("youtube"," get video url"), "http://youtube.com/"))
+    self.selenium.start()
+    vsel= self.selenium
     try:
-        self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("youtube"," get video url"), "http://youtube.com/"))
-        self.selenium.start()
-        vsel= self.selenium
         vsel.set_timeout(testvars.MSTestVariables["TimeOut"])
         if vid_format == "webm":
             vsel.open("results?uploaded=w&search_query=crazy&search_duration=short&webm=1&search_type=videos&uni=3&search_sort=video_date_uploaded")
@@ -154,10 +156,11 @@ def get_youtube_video_url(self,vid_format="embed"):
     return youtubeURL
 
 def get_dailymotion_video_url(self):
+
+    self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("dailymotion"," get video url"), "http://dailymotion.com/"))
+    self.selenium.start()
+    vsel= self.selenium
     try:
-        self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("dailymotion"," get video url"), "http://dailymotion.com/"))
-        self.selenium.start()
-        vsel= self.selenium
         vsel.set_timeout(testvars.MSTestVariables["TimeOut"])
         # open most recent cc licensed videos
         vsel.open("/en/creative/1")
