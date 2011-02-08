@@ -760,10 +760,8 @@ class subgroup_69(unittest.TestCase):
         #give it back the session id in case it's lost it
         self.selenium.sessionId = self.session
         #Check for an error page, then close the browser
-        try:
-            website.handle_error_page(self,self.selenium,self.id())
-        finally:
-            self.selenium.stop()
+        website.handle_error_page(self,self.selenium,self.id())
+        self.selenium.stop()
         #Log any errors
         self.assertEqual([], self.verificationErrors)
 

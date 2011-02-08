@@ -515,13 +515,14 @@ def open_teams_page(self,sel):
 def handle_error_page(self,sel,test_id):
     sel.select_window("null") #just making sure I'm really here, if I am.
     sel.select_frame("relative=top")
-    if sel.is_element_present("css=h2:contains('when you encountered this error.')"):
+    if sel.is_element_present("css=h2:contains('when you encountered this error.')") or sel.is_element_present("css=h2:contains('Sorry')"):
         sel.type("feedback_email", testvars.gmail)
         feedback_math = sel.get_text("css=form p + p label")
         s = feedback_math[20:25]
         sel.type("feedback_math_captcha_field", eval(s))
         sel.type("feedback_message", "test_id: "+test_id+" sel-rc automated test encountered an error \n Prove You are Human.")
         sel.click("css=button[type='submit']")
+        self.verificationErrors.append("submitted error to feedback")
         print "submitted error to feedback form: "+ str(test_id)
         
 
