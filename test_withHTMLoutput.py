@@ -85,7 +85,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
                 unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_subtesting.test_601'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_unisubs_mc.test_623'),            
                 unittest.defaultTestLoader.loadTestsFromName('sg_80_comments.subgroup_80.test_536'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_383'),            
+                unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_379'),            
             ])
             
         ## Running on pcf server or local, run all the tests
