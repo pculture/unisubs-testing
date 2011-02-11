@@ -81,26 +81,13 @@ class Test_HTMLTestRunner(unittest.TestCase):
         ## Run a smaller group of tests when using sauce
         if testsauce == True:
             self.suite.addTests([
-                unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_373'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_389'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_414'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_534'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_533'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_408'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_406'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_414'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_388'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_pculture.test_369'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_399'),                
                 unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_subtesting.test_601'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_unisubs_mc.test_623'),            
                 unittest.defaultTestLoader.loadTestsFromName('sg_80_comments.subgroup_80.test_536'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_80_comments.subgroup_80.test_537'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_384'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_378'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_70_revisions.subgroup_70.test_485'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_70_revisions.subgroup_70.test_486'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_70_revisions.subgroup_70.test_602'),
-            
+                unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_383'),            
             ])
+            
         ## Running on pcf server or local, run all the tests
         else:
             suite_list = [
@@ -109,6 +96,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
                 ['sg_69_demoUI.subgroup_69',unittest.getTestCaseNames(sg_69_demoUI.subgroup_69,'test')], \
                 ['sg_80_comments.subgroup_80',unittest.getTestCaseNames(sg_80_comments.subgroup_80,'test')],  \
                 ['sg_65_login.subgroup_65',unittest.getTestCaseNames(sg_65_login.subgroup_65,'test')], \
+                ['sg_78_widget_offsite.subgroup_78_unisubs_mc',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78_unisubs_mc,'test')], \
                 ['sg_78_widget_offsite.subgroup_78_pculture',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78_pculture,'test')], \
                 ['sg_78_widget_offsite.subgroup_78_subtesting',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78_subtesting,'test')], \
                 ['sg_70_revisions.subgroup_70',unittest.getTestCaseNames(sg_70_revisions.subgroup_70,'test')], \
