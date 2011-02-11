@@ -57,15 +57,37 @@ def set_widget_null_page():
         page = "mirosubs_tests/dev-widget-null.html"
     return page
 
-def set_subtesting_wordpress_page():
+def set_subtesting_wordpress_page(self,test_id):
     """
     sets the wordpress page to use for testing, if not set, defaults to dev
-    """   
-    if controller.testsite == "staging":
-        page = "/2010/10/16/script-linking-to-stagin/"
+    """
+    if test_id == 601: #widgetizer offsite wordpress youtube
+        if controller.testsite == "staging":
+            page = "/2010/10/16/script-linking-to-stagin/"
+        else:
+            page = "/2010/04/20/script-linking-to-dev/"
+        return page
+    elif test_id == 622: #widgetizer offsite wordpress in-page script element youtube
+        if controller.testsite == "staging":
+            page = "/2011/01/11/staging-widget-test-with-script-element-on-page/"
+        else:
+            page = "/2010/11/09/dev-widget-test-with-script-element-on-page/"
+        return page
     else:
-        page = "/2010/04/20/script-linking-to-dev/"
-    return page
+        self.fail("not a valid test case")
+
+def set_unisubs_mc_page(self,test_id):
+    """
+    sets the wordpress page to use for testing, if not set, defaults to dev
+    """
+    if test_id == 623: #offsite widget embedded in <p> element for youtube video
+        if controller.testsite == "staging":
+            page = "/hunter-staging/"
+        else:
+            page = "/hunter/"
+        return page
+    else:
+        self.fail("not a valid test case")
 
 
 def set_browser(testid="none",testdesc="none"):
