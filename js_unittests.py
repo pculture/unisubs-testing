@@ -2,17 +2,9 @@ import unittest
 import time
 from selenium import selenium
 
-
-
-
-
-
-
 class js_unittest(unittest.TestCase):
     """
-    Litmus Subgroup 81 - upload / download subtitles:
-        Tests designed verify the upload of subtitle formats
-        previously downloaded from the subs website.
+    run the js unittests
     """
     
 # Open the desired browser and set up the test
@@ -23,6 +15,7 @@ class js_unittest(unittest.TestCase):
         self.verificationErrors = []
         self.selenium = selenium("localhost", 4444, "*chrome", "http://dev.universalsubtitles.org")
         self.selenium.start()
+        self.selenium.set_timeout(30000)
    
 # The test cases of the subgroup.
 
@@ -30,7 +23,6 @@ class js_unittest(unittest.TestCase):
     def test_videourlparse(self):
 
         sel = self.selenium
-        sel.set_timeout(90000)
         sel.open("jstest/videourlparse_test/")
         for i in range(20):
             try:
