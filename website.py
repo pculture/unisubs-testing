@@ -470,9 +470,14 @@ def rollback_revision(self,sel):
 
 def create_team(self,sel,team,url,team_logo):
     sel.type("id_name", team)
+    sel.type("id_slug", team)
     sel.type("id_description", "Team "+team+ " - for test purposes only.")
     sel.type("id_logo", team_logo)
-    sel.type("id_video_url", "http://blip.tv/file/get/Miropcf-Miro20Introduction771.ogv")
+    if "iexplore" in selvars.set_browser():
+        vid_url = "http://blip.tv/file/1077145/"
+    else:
+        vid_url = "http://blip.tv/file/get/Miropcf-Miro20Introduction771.ogv"
+    sel.type("id_video_url", vid_url )
     sel.click("css=.green_button.big:contains('Create Team')")
     sel.wait_for_page_to_load(testvars.timeout)
     # Verify team creation parameters
@@ -511,6 +516,15 @@ def save_team_settings(self,sel):
 def open_teams_page(self,sel):
     sel.open("teams")
     
+def search_teams(self,sel,team):
+    """Search for the given team name.
+
+    Assumes using the url query string
+    """
+    sel.open("/teams/?q="+team)
+    
+    
+
 
 def handle_error_page(self,sel,test_id):
     sel.select_window("null") #just making sure I'm really here, if I am.

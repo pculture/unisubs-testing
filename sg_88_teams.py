@@ -152,10 +152,11 @@ class subgroup_88(unittest.TestCase):
         # logout and verify team no longer displayed
         sel.click(testvars.WebsiteUI["Logout_Button"])
         website.open_teams_page(self,sel)
-        self.failIf(sel.is_element_present("link=Miro"))
+        website.search_teams(self,sel,team)
+        self.failIf(sel.is_element_present("link="+team))
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         website.open_teams_page(self,sel)
-        self.assertTrue(sel.is_element_present("css=a[href*='/teams/miro/']"))
+        self.assertTrue(sel.is_element_present("css=a[href*='/teams/miro']"))
         # reset setting
         sel.open("teams/"+team)
         sel.click(testvars.manage_team)
