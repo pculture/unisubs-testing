@@ -31,7 +31,7 @@ class subgroup_78_pculture(unittest.TestCase):
 # The test cases of the subgroup.
 
 
-    def stest_369(self):
+    def test_369(self):
         """Subtitle Youtube video in offsite embed.
         
         http://litmus.pculture.org/show_test.cgi?id=369
@@ -52,7 +52,7 @@ class subgroup_78_pculture(unittest.TestCase):
 
       
 
-    def stest_370(self):
+    def test_370(self):
         """Subtitle ogg video in offsite embed.
        
         http://litmus.pculture.org/show_test.cgi?id=370
@@ -109,7 +109,7 @@ class subgroup_78_subtesting(unittest.TestCase):
 # The test cases of the subgroup.
 
 
-    def stest_601(self):
+    def test_601(self):
         """Widgetizer offsite on wordpress with youtube video.
         
         http://litmus.pculture.org/show_test.cgi?id=601
@@ -129,7 +129,7 @@ class subgroup_78_subtesting(unittest.TestCase):
         else:
             edit_subs_and_revert(self,sel,test_page,vid_pos,vid_title)
 
-    def stest_622(self):
+    def test_622(self):
         """widgetizer offsite wordpress in-page script element youtube
         
         http://litmus.pculture.org/show_test.cgi?id=622
