@@ -97,7 +97,7 @@ class subgroup_88(unittest.TestCase):
         self.assertTrue(sel.is_element_present("css=strong:contains('Add video to team')"))
         vid_title = sel.get_text("css=.main-title a")
         #add video to team and verify values
-        sel.click("css=div.arrow")
+        sel.click_at("css=strong:contains('Add video to team')")
         sel.click("css=li a:contains('"+team+"')")
         sel.wait_for_page_to_load(testvars.timeout)
         print "verifying the inital add page"
@@ -109,9 +109,10 @@ class subgroup_88(unittest.TestCase):
         if sel.is_element_present("css=.errorlist:contains('Team has this')"):
             print "video already part of team"
         else:
+            sel.select("id_language", "label=English (English)")
             sel.click("css=.green_button.small:contains('Save')")
             sel.wait_for_page_to_load(testvars.timeout)
-        self.assertTrue(sel.is_element_present("css=li.active a:contains('Your Team')"))
+        self.assertTrue(sel.is_element_present("css=li.active a:contains('"+team+"')"))
         sel.click(testvars.teams_video_tab)
         sel.wait_for_page_to_load(testvars.timeout)
         print "verifying team videos list"
@@ -156,7 +157,8 @@ class subgroup_88(unittest.TestCase):
         self.failIf(sel.is_element_present("link="+team))
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         website.open_teams_page(self,sel)
-        self.assertTrue(sel.is_element_present("css=a[href*='/teams/miro']"))
+        website.search_teams(self,sel,team)
+        self.assertTrue(sel.is_element_present("css=a[href*='/teams/"+team+"']"))
         # reset setting
         sel.open("teams/"+team)
         sel.click(testvars.manage_team)
