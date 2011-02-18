@@ -59,13 +59,14 @@ def site_login_from_widget_link(self,sel):
 
     Post-condition: user is returned to starting widget page.
     """
-
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Must_Login"])        
-    # log in from widget
-    sel.click("link=LOGIN")
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-modal-login")
-    sel.click("css=.mirosubs-log")
-    site_login_auth(self,sel)
+    if sel.is_element_present(testvars.WidgetUI["Must_Login"]):   
+        # log in from widget
+        sel.click("link=LOGIN")
+        mslib.wait_for_element_present(self,sel,"css=.mirosubs-modal-login")
+        sel.click("css=.mirosubs-log")
+        site_login_auth(self,sel)
+    else:
+        print "User is already logged into site"
 
 def site_login_auth(self,sel):
     """
@@ -251,7 +252,7 @@ def edit_text(self,sel,subtextfile,new_text=""):
     mslib.wait_for_element_present(self,sel,sub_cell)
     for line in open(subtextfile):
         if new_text == "":
-            ed_text = str(line).upper()
+            ed_text = str(line).rstrip().upper()
         else:
             ed_text = new_text
         sel.click(sub_cell)
@@ -266,7 +267,7 @@ def edit_text(self,sel,subtextfile,new_text=""):
         sub_cell_text=sel.get_text(sub_cell)
         self.assertEqual(sub_cell_text.rstrip(),ed_text.rstrip())
         sub_li += sub_li
-        sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") > span.mirosubs-title span"
+        sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") "
         if not sel.is_element_present(sub_cell):
             break
         

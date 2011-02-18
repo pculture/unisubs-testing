@@ -31,7 +31,7 @@ class subgroup_78_pculture(unittest.TestCase):
 # The test cases of the subgroup.
 
 
-    def test_369(self):
+    def stest_369(self):
         """Subtitle Youtube video in offsite embed.
         
         http://litmus.pculture.org/show_test.cgi?id=369
@@ -52,7 +52,7 @@ class subgroup_78_pculture(unittest.TestCase):
 
       
 
-    def test_370(self):
+    def stest_370(self):
         """Subtitle ogg video in offsite embed.
        
         http://litmus.pculture.org/show_test.cgi?id=370
@@ -109,7 +109,7 @@ class subgroup_78_subtesting(unittest.TestCase):
 # The test cases of the subgroup.
 
 
-    def test_601(self):
+    def stest_601(self):
         """Widgetizer offsite on wordpress with youtube video.
         
         http://litmus.pculture.org/show_test.cgi?id=601
@@ -129,7 +129,7 @@ class subgroup_78_subtesting(unittest.TestCase):
         else:
             edit_subs_and_revert(self,sel,test_page,vid_pos,vid_title)
 
-    def test_622(self):
+    def stest_622(self):
         """widgetizer offsite wordpress in-page script element youtube
         
         http://litmus.pculture.org/show_test.cgi?id=622
@@ -166,7 +166,7 @@ class subgroup_78_subtesting(unittest.TestCase):
 
 
 class subgroup_78_unisubs_mc(unittest.TestCase):
-    """
+    """offsite widget on MC site.
     Litmus Subgroup 78 - offsite subwidget embedded in mc:
         Tests designed to exercise the subtitle widget embedded
         in sites external to universalsubtitles.org (live, dev or staging)  
@@ -189,11 +189,10 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
 
 
     def test_623(self):
-        """widgetizer offsite wordpress in-page script element youtube
+        """offsite widget on MC site
         
-        http://litmus.pculture.org/show_test.cgi?id=622
-
-        We are explicitly testing the Right-Wing Radio Duck in 1st position on the page
+        http://litmus.pculture.org/show_test.cgi?id=623
+        Video with widget embedded on Miro Community test page.
         """
         test_id = 623
         vid_pos = "css=p.pElementTest span span.mirosubs-widget div.mirosubs-videoTab a span.mirosubs-tabTextchoose"
@@ -218,7 +217,7 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         Closes the browser test window and logs errors
         """
         #Check for an error page, then close the browser
-        self.selenium.stop()
+      #  self.selenium.stop()
         #Log any errors
         self.assertEqual([], self.verificationErrors)
 
@@ -240,6 +239,7 @@ def make_new_subs(self,sel,vid_pos):
 
 def edit_subs_and_revert(self,sel,test_page,vid_pos,vid_title):
         print "has subs - going to editing then revert"
+        sel.click(vid_pos)
         sel.click(testvars.WebsiteUI["Subhomepage_menuitem"])
         sel.wait_for_page_to_load(testvars.timeout)
         website.store_subs(self,sel,modify=True)
