@@ -166,7 +166,7 @@ def verify_submitted_video(self,sel,vid_url,embed_type=""):
     print " * verify submitted video, embed type"
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     vid_embed = None
-    vid_css = "css=div[id=widget_div] object"
+    vid_css = "css=div[id=widget_div] span object"
     html5_el = "css=div[id=widget_div] video"
     mslib.wait_for_element_present(self,sel,vid_css)
     if embed_type == "flow":
