@@ -116,6 +116,12 @@ FOOTER = """</testresults>
 def write_log(testid,stat,buildid,error_info=""):
        
     f = open("log.xml", "w")
+    test_log = []
+    if os.path.isfile("curr_test.log"):
+        logf = open("curr_test.log","r")
+        for line in logf.readlines():
+            test_log.append(line.split(':root:')[1])
+    test_log.append(error_info)
     f.write(HEADER % {"buildid": buildid,
                       "opsys": set_test_os(),
                       "browser": set_test_browser()})
@@ -123,15 +129,13 @@ def write_log(testid,stat,buildid,error_info=""):
     f.write(STORY % {"testid": set_test_id(testid),
                      "status": set_status(stat),
                      "timestamp": time.strftime("%Y%m%d%H%M%S", time.gmtime()),
-                     "error_msg": error_info.lstrip('.')
+                     "error_msg": test_log
                          })
 
     f.write(FOOTER)
     f.close
     
     
-                 
-
 
 
 def send_result():

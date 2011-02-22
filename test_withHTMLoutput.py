@@ -42,8 +42,7 @@ parser.add_option("-l", "--litmus",action="store_true",dest="litmus",default=Fal
                   help='Sends test output directly to litmus.pculture.org')
 
 parser.add_option("-i", "--buildid", action="store", dest="buildid",
-               #   default=time.strftime("%Y%m%d", time.gmtime()) + "99",
-                  default=("2010112200"),
+                  default=time.strftime("%Y%m%d", time.gmtime()) + "99",
                   help="specify the build id of the litmus testrun results to display there")
 
 (options, args) = parser.parse_args()
@@ -84,7 +83,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
                 unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_414'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_538'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_534'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_538'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_533'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_subtesting.test_601'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_unisubs_mc.test_623'),            
                 unittest.defaultTestLoader.loadTestsFromName('sg_80_comments.subgroup_80.test_536'),
@@ -119,6 +118,9 @@ class Test_HTMLTestRunner(unittest.TestCase):
 
         # Post the output directly to Litmus
         if testlitmus == True:
+            #clear out any log files
+            if os.path.isfile("curr_test.log"):
+                os.remove("curr_test.log")
             buf = StringIO.StringIO()
             runner = unittest.TextTestRunner(stream=buf)
             for x in self.suite:
@@ -131,7 +133,10 @@ class Test_HTMLTestRunner(unittest.TestCase):
                     litmusresult.write_log(id_string,stat,testbuildid,byte_output)
                     litmusresult.send_result()
                 finally:
+                    #clean up the buffer and the log files
                     buf.truncate(0)
+                    if os.path.isfile("curr_test.log"):
+                        os.remove("curr_test.log")
 
 
 

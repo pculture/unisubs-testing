@@ -9,6 +9,7 @@ import widget
 import offsite
 import testvars
 import selvars
+import logging
 
 class subgroup_64(unittest.TestCase):
     """
@@ -27,7 +28,14 @@ class subgroup_64(unittest.TestCase):
         self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), selvars.set_site() )
         self.selenium.start()
         self.session = self.selenium.sessionId
-        print "starting: " +self.id() +"-"+self.shortDescription()
+        LOG_FILENAME = "curr_test.log"
+        logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO)
+        if selvars.set_sauce() == True:
+            logging.info("sauce job result: http://saucelabs.com/jobs/"+str(self.session))
+        else:
+            logging.info("starting: " +self.id() +"-"+self.shortDescription())
+            
+
 
 ## The test cases of the subgroup.
 
@@ -121,15 +129,15 @@ class subgroup_64(unittest.TestCase):
 
         http://litmus.pculture.org/show_test.cgi?id=533
         """
-        print "starting 533 vimeo.com submit video"
+        logging.info("starting 533 vimeo.com submit video")
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         sel.open("/")
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
-        print "submitting a vimeo video, format: "
+        logging.info("getting a vimeo video url")
         vid_url = offsite.get_vimeo_video_url(self)
         # Submit Video
-        print "logging in and submitting video"
+        logging.info("logging in and submitting video")
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         website.submit_video(self,sel,vid_url)
         # Verify embed and player
@@ -153,31 +161,30 @@ class subgroup_64(unittest.TestCase):
 
         http://litmus.pculture.org/show_test.cgi?id=534
         """
-        print "starting 534 youtube.com submit video"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         sel.open("/")
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
-        print "submitting a youtube video, format: "
+        logging.info("submitting a youtube video")
         vid_url = offsite.get_youtube_video_url(self)
         # Submit Video
-        print "logging in and submitting video"
+        logging.info("logging in and submitting video")
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         website.submit_video(self,sel,vid_url)
         # Verify embed and player
-        print "verifying embed"
+        logging.info("verifying embed")
         website.verify_submitted_video(self,sel,vid_url,embed_type="youtube")
         # Start sub widget
-        print "starting sub widget"
+        logging.info("starting sub widget")
         website.start_sub_widget(self,sel)
         # Transcribe
-        print "transcribing video"
+        logging.info("transcribing video")
         widget.transcribe_video(self,sel,subtextfile)
         # Sync
-        print "syncing video"
+        logging.info("syncing video")
         widget.sync_video(self,sel,subtextfile,3,4)
         # Review
-        print "review step - just submitting video"
+        logging.info("review step - just submitting video")
         widget.submit_sub_edits(self,sel)
 
          

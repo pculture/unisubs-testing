@@ -107,7 +107,8 @@ def set_browser(testid="none",testdesc="none"):
                         "browser-version": "", \
                         "max-duration": 300, \
                         "idle-timeout": 120, \
-                        "job-name": testid +': '+ testdesc \
+                        "job-name": testid +': '+ testdesc, \
+                        "public": "true", \
                     }
                                
         elif controller.testbrowser == "iexplore":
@@ -119,6 +120,7 @@ def set_browser(testid="none",testdesc="none"):
                         "browser-version": "8" , \
                         "max-duration": 300, \
                         "idle-timeout": 120, \
+                        "public": "true", \
                         "job-name": testid +': '+ testdesc \
                     }
         elif controller.testbrowser == "opera":
@@ -130,6 +132,7 @@ def set_browser(testid="none",testdesc="none"):
                         "browser-version": "10" , \
                         "max-duration": 300, \
                         "idle-timeout": 120, \
+                        "public": "true", \
                         "job-name": testid +': '+ testdesc \
                     }
         elif controller.testbrowser == "safari":
@@ -141,6 +144,7 @@ def set_browser(testid="none",testdesc="none"):
                         "browser-version": "5", \
                         "max-duration": 300, \
                         "idle-timeout": 120, \
+                        "public": "true", \
                         "job-name": testid +': '+ testdesc \
                     }
         else:
@@ -152,6 +156,7 @@ def set_browser(testid="none",testdesc="none"):
                         "browser-version": "3.6", \
                         "max-duration": 300, \
                         "idle-timeout": 120, \
+                        "public": "true", \
                         "job-name": testid +': '+ testdesc \
                     }
         browser = json.dumps(sbrowser, indent=4)

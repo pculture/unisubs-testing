@@ -3,6 +3,7 @@ import unittest
 import time
 import sys
 import os
+import logging
 import mslib
 import website
 import widget
@@ -29,6 +30,12 @@ class subgroup_70(unittest.TestCase):
         self.selenium.start()
         self.session = self.selenium.sessionId
         print "starting: " +self.id() +"-"+self.shortDescription()
+        LOG_FILENAME = "curr_test.log"
+        logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO)
+        if selvars.set_sauce() == True:
+            logging.info("sauce job result: http://saucelabs.com/jobs/"+str(self.session))
+        else:
+            logging.info("starting: " +self.id() +"-"+self.shortDescription())
 
 ## The test cases of the subgroup.
 
@@ -286,7 +293,7 @@ class subgroup_70(unittest.TestCase):
         website.SiteLogIn(self,sel,testvars.siteuser, testvars.passw)
         #get a video and open page    
         test_video_url = website.get_video_with_translations(self,sel)
-        print test_video_url
+        logging.info(test_video_url)
         sel.open(test_video_url)
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         sel.click(testvars.video_original)

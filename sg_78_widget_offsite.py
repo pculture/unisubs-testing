@@ -9,6 +9,7 @@ import widget
 import offsite
 import testvars
 import selvars
+import logging
 
 
 class subgroup_78_pculture(unittest.TestCase):
@@ -27,6 +28,12 @@ class subgroup_78_pculture(unittest.TestCase):
         self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), "http://pculture.org/"))
         self.selenium.start()
         self.session = self.selenium.sessionId
+        LOG_FILENAME = "curr_test.log"
+        logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO)
+        if selvars.set_sauce() == True:
+            logging.info("sauce job result: http://saucelabs.com/jobs/"+str(self.session))
+        else:
+            logging.info("starting: " +self.id() +"-"+self.shortDescription())
    
 # The test cases of the subgroup.
 
@@ -103,14 +110,21 @@ class subgroup_78_subtesting(unittest.TestCase):
         self.verificationErrors = []
         self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), "http://subtesting.com/"))
         self.selenium.start()
+        self.session = self.selenium.sessionId
         self.selenium.set_timeout(testvars.timeout)
+        LOG_FILENAME = "curr_test.log"
+        logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO)
+        if selvars.set_sauce() == True:
+            logging.info("sauce job result: http://saucelabs.com/jobs/"+str(self.session))
+        else:
+            logging.info("starting: " +self.id() +"-"+self.shortDescription())
         
    
 # The test cases of the subgroup.
 
 
     def test_601(self):
-        """Widgetizer offsite on wordpress with youtube video.
+        """test 601 Widgetizer offsite on wordpress with youtube video.
         
         http://litmus.pculture.org/show_test.cgi?id=601
 
@@ -130,7 +144,7 @@ class subgroup_78_subtesting(unittest.TestCase):
             edit_subs_and_revert(self,sel,test_page,vid_pos,vid_title)
 
     def test_622(self):
-        """widgetizer offsite wordpress in-page script element youtube
+        """test 622 widgetizer offsite wordpress in-page script element youtube
         
         http://litmus.pculture.org/show_test.cgi?id=622
 
@@ -143,7 +157,6 @@ class subgroup_78_subtesting(unittest.TestCase):
         sel = self.selenium
         test_page = (selvars.set_subtesting_wordpress_page(self,test_id))
         sel.open(test_page)
-        sel.open(selvars.set_subtesting_wordpress_page(self,test_id))
         mslib.wait_for_element_present(self,sel,vid_pos)
         if sel.get_text(vid_pos) == "Subtitle Me":
             make_new_subs(self,sel,vid_pos)
@@ -160,7 +173,7 @@ class subgroup_78_subtesting(unittest.TestCase):
         Closes the browser test window and logs errors
         """
         #Check for an error page, then close the browser
-        self.selenium.stop()
+   #     self.selenium.stop()
         #Log any errors
         self.assertEqual([], self.verificationErrors)
 
@@ -180,7 +193,14 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         self.verificationErrors = []
         self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), "http://universalsubtitles.mirocommunity.org/"))
         self.selenium.start()
+        self.session = self.selenium.sessionId
         self.selenium.set_timeout(testvars.timeout)
+        LOG_FILENAME = "curr_test.log"
+        logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO)
+        if selvars.set_sauce() == True:
+            logging.info("sauce job result: http://saucelabs.com/jobs/"+str(self.session))
+        else:
+            logging.info("starting: " +self.id() +"-"+self.shortDescription())
         
    
 # The test cases of the subgroup.
@@ -226,7 +246,7 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
 
 def make_new_subs(self,sel,vid_pos):
 
-    print "no subs yet - making new ones"
+    logging.info("no subs yet - making new ones")
     subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
     website.start_sub_widget(self,sel,vid_pos)
     # Transcribe
@@ -238,7 +258,7 @@ def make_new_subs(self,sel,vid_pos):
 
 
 def edit_subs_and_revert(self,sel,test_page,vid_pos,vid_title):
-        print "has subs - going to editing then revert"
+        logging.info("video has subs - going to editing then revert")
         sel.click(vid_pos)
         sel.click(testvars.WebsiteUI["Subhomepage_menuitem"])
         sel.wait_for_page_to_load(testvars.timeout)

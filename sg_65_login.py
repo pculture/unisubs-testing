@@ -2,6 +2,7 @@ from selenium import selenium
 import unittest
 import time
 import os
+import logging
 import mslib
 import website
 import widget
@@ -26,6 +27,14 @@ class subgroup_65(unittest.TestCase):
         self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), selvars.set_site())
         self.selenium.start()
         self.session = self.selenium.sessionId
+        if os.path.isfile("curr_test.log"):
+            os.remove("curr_test.log")
+        LOG_FILENAME = "curr_test.log"
+        logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO)
+        if selvars.set_sauce() == True:
+            logging.info("sauce job result: http://saucelabs.com/jobs/"+str(self.session))
+        else:
+            logging.info("starting: " +self.id() +"-"+self.shortDescription())
         
         
     # The tests in the subgroup

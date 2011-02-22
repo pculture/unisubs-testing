@@ -6,6 +6,7 @@ import re
 import codecs
 import os
 import mslib
+import selvars
 import testvars
 import widget
 import offsite

@@ -12,6 +12,7 @@ import codecs
 import mslib
 import testvars
 import selvars
+import logging
 
 
 
@@ -106,7 +107,7 @@ def close_howto_video(self,sel,skip=True):
     
     Post-condition: help video is closed and returned to previous widget page.
     """
-    time.sleep(15)
+    time.sleep(10)
     sel.select_frame("relative=top")
     if sel.is_element_present("css=.mirosubs-howtopanel"):
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-done:contains('Continue')")
@@ -114,6 +115,9 @@ def close_howto_video(self,sel,skip=True):
         if skip==True:
             sel.click("css=.goog-checkbox-unchecked")
         sel.click("css=.mirosubs-done:contains('Continue')")
+        time.sleep(3)
+        if sel.is_element_present("css=.mirosubs-done:contains('Continue')"):
+            sel.click("css=.mirosubs-done:contains('Continue')")
 
 
 def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no"):
@@ -129,15 +133,25 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
 
         returns line_count - the number of text lines input for the translation
     """
-    print " * Transcribe video"
-
+    logging.info("Transcribing the video")
     # giving the video a chance to load.
     sel.select_window("null")
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     restart_step(self,sel)
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-speedmode")
-    mode_label = sel.get_text("css=.mirosubs-speedmode option:contains("+mode+")")
-    sel.select("//select", "label=" +mode_label)
+    try:
+        if mode == "Recommended":
+        # Recommended mode
+            sel.select("css=.mirosubs-speedmode select", "value=au")
+        elif mode == "Beginner":
+        # Beginner mode
+            sel.select("css=.mirosubs-speedmode select", "value=pl")
+        # Expert mode
+        elif mode == "Expert":
+            sel.select("css=.mirosubs-speedmode select", "value=no")
+    except:
+        logging.info("trouble selecting element (safari issue?) - going with default value")
+        
     # give time to buffer
     if buffer == "yes":
         mslib.wait_for_video_to_buffer(self,sel)
@@ -200,7 +214,7 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
 
     Pre-condition - can use this to sync on Step 2, Step 3 or Edit.
     """
-    print " * Sub syncing"
+    logging.info("Syncing the subs")
     time.sleep(10) #give video a chance to load
     sel.select_window("null")   
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
@@ -243,7 +257,7 @@ def edit_text(self,sel,subtextfile,new_text=""):
 
     Pre-condition - can use this on Step 2, Step 3.
     """
-    print "* Edit Text"
+    logging.info("Editing the sub text in the widget")
     time.sleep(10) #give video a chance to load
     sel.select_window("null")
     
@@ -282,7 +296,7 @@ def edit_translation(self,sel,subtextfile,new_text=""):
 
     Pre-condition - Editing Translation Widget opened
     """
-    print "* Edit Translation"
+    logging.info("Editing the translation")
     sel.select_window("null")
     
     sub_li=1
