@@ -119,11 +119,13 @@ class Test_HTMLTestRunner(unittest.TestCase):
         # Post the output directly to Litmus
         if testlitmus == True:
             #clear out any log files
-            if os.path.isfile("curr_test.log"):
-                os.remove("curr_test.log")
+            
             buf = StringIO.StringIO()
             runner = unittest.TextTestRunner(stream=buf)
             for x in self.suite:
+                if os.path.isfile("curr_test.log"):
+                    os.remove("curr_test.log")
+                    time.sleep(2)
                 runner.run(x)
                 # check out the output
                 byte_output = buf.getvalue()
@@ -135,9 +137,6 @@ class Test_HTMLTestRunner(unittest.TestCase):
                 finally:
                     #clean up the buffer and the log files
                     buf.truncate(0)
-                    if os.path.isfile("curr_test.log"):
-                        os.remove("curr_test.log")
-
 
 
         else:   # Post results to HTML page
