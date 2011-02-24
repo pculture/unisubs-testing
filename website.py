@@ -166,19 +166,20 @@ def verify_submitted_video(self,sel,vid_url,embed_type=""):
     print " * verify submitted video, embed type"
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     vid_embed = None
-    vid_css = "css=div[id=widget_div] span object"
+    vid_span_css = "css=div[id=widget_div] span object"
+    vid_div_css = "css=div[id=widget_div] div object"
     html5_el = "css=div[id=widget_div] video"
     mslib.wait_for_element_present(self,sel,vid_css)
     if embed_type == "flow":
-        self.assertTrue(sel.is_element_present(vid_css+"[data*='flowplayer']"))
+        self.assertTrue(sel.is_element_present("css=object[data*='flowplayer']"))
     elif embed_type == "youtube":       
-        self.assertTrue(sel.is_element_present(vid_css+"[data*='youtube.com']"))
+        self.assertTrue(sel.is_element_present(vid_span_css+"[data*='youtube.com']"))
     elif embed_type == 'vimeo':      
-        self.assertTrue(sel.is_element_present(vid_css+"[data*='moogaloop.swf']"))
+        self.assertTrue(sel.is_element_present(vid_span_css+"[data*='moogaloop.swf']"))
     elif embed_type == 'dailymotion':      
-        self.assertTrue(sel.is_element_present(vid_css+"[id$='_dailymotionplayer']"))
+        self.assertTrue(sel.is_element_present(vid_div_css+"[id$='_dailymotionplayer']"))
     else:
-        if sel.is_element_present(vid_css+"[data*='flowplayer']"):
+        if sel.is_element_present("css=object[data*='flowplayer']"):
             vid_embed = 'flow'
         elif sel.is_element_present(html5_el):
             vid_embed = 'html5'
