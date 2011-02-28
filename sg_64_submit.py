@@ -96,7 +96,7 @@ class subgroup_64(unittest.TestCase):
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         sel.open("/")
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
-        ext_list = ("ogv")
+        ext_list = ("ogv",)
         vid_url = None
         for x in ext_list:
             try:
