@@ -154,6 +154,8 @@ def verify_login(self,sel,username="sub_writer"):
 
 
 
+
+
 def verify_submitted_video(self,sel,vid_url,embed_type=""):
     """
     Description: Verifies the contents of the main video page of a submitted video.
@@ -169,10 +171,10 @@ def verify_submitted_video(self,sel,vid_url,embed_type=""):
     vid_span_css = "css=div[id=widget_div] span object"
     vid_div_css = "css=div[id=widget_div] div object"
     html5_el = "css=div[id=widget_div] video"
-    mslib.wait_for_element_present(self,sel,vid_css)
+    mslib.wait_for_element_present(self,sel,"css=div[id=widget_div]")
     if embed_type == "flow":
         self.assertTrue(sel.is_element_present("css=object[data*='flowplayer']"))
-    elif embed_type == "youtube":       
+    elif embed_type == "youtube":
         self.assertTrue(sel.is_element_present(vid_span_css+"[data*='youtube.com']"))
     elif embed_type == 'vimeo':      
         self.assertTrue(sel.is_element_present(vid_span_css+"[data*='moogaloop.swf']"))
