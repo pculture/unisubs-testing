@@ -270,6 +270,7 @@ def edit_text(self,sel,subtextfile,new_text=""):
         else:
             ed_text = new_text
         sel.click(sub_cell)
+        time.sleep(1)
         sel.type("css=span.mirosubs-title textarea", ed_text)
         if "firefox" in selvars.set_browser():
             sel.key_press("css=span.mirosubs-title textarea", "13")            
@@ -282,6 +283,7 @@ def edit_text(self,sel,subtextfile,new_text=""):
         self.assertEqual(sub_cell_text.rstrip(),ed_text.rstrip())
         sub_li += sub_li
         sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") "
+        time.sleep(2)
         if not sel.is_element_present(sub_cell):
             break
         
