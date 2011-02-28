@@ -470,7 +470,7 @@ def rollback_revision(self,sel):
     sel.wait_for_page_to_load(testvars.timeout)
 
 
-def create_team(self,sel,team,url,team_logo):
+def create_team(self,sel,team,team_logo):
     sel.type("id_name", team)
     sel.type("id_slug", team)
     sel.type("id_description", "Team "+team+ " - for test purposes only.")
@@ -504,12 +504,11 @@ def get_own_team(self,sel):
         
     else:
         print "creating new team"
-        team = "Miro"+time.strftime("%m%d%H%M%S", time.gmtime())
-        url = "http://blip.tv/file/get/Miropcf-Miro20Introduction771.ogv"
+        team = "miro"+time.strftime("%m%d%H%M%S", time.gmtime())
         team_logo_path = os.path.join(testvars.MSTestVariables["DataDirectory"],"sheep.png")
         sel.click(testvars.start_team)
         sel.wait_for_page_to_load(testvars.timeout)
-        create_team(self,sel,team,url,team_logo_path)
+        create_team(self,sel,team,team_logo_path)
     return team
 
 def save_team_settings(self,sel):
@@ -536,7 +535,7 @@ def handle_error_page(self,sel,test_id):
         s = feedback_math[20:25]
         sel.type("feedback_math_captcha_field", eval(s))
         sel.type("feedback_message", "test_id: "+test_id+" sel-rc automated test encountered an error \n Prove You are Human.")
-        sel.click("css=button[type='submit']")
+        sel.click("css=button.green_button")
         self.verificationErrors.append("submitted error to feedback")
         print "submitted error to feedback form: "+ str(test_id)
         

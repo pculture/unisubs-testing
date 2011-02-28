@@ -45,8 +45,7 @@ class subgroup_88(unittest.TestCase):
         sel = self.selenium
         sel.set_timeout(testvars.timeout)
         #test data
-        team = "Miro"+time.strftime("%m%d%H%M%S", time.gmtime())
-        url = "http://blip.tv/file/get/Miropcf-Miro20Introduction771.ogv"
+        team = "miro"+time.strftime("%m%d%H%M%S", time.gmtime())
         team_logo_path = os.path.join(testvars.MSTestVariables["DataDirectory"],"sheep.png")
         
         #login
@@ -55,7 +54,7 @@ class subgroup_88(unittest.TestCase):
         website.open_teams_page(self,sel)
         sel.click(testvars.start_team)
         sel.wait_for_page_to_load(testvars.timeout)
-        website.create_team(self,sel,team,url,team_logo_path)
+        website.create_team(self,sel,team,team_logo_path)
         sel.open("teams/"+team)
         # logout
         sel.click(testvars.WebsiteUI["Logout_Button"])
@@ -79,7 +78,7 @@ class subgroup_88(unittest.TestCase):
         website.open_teams_page(self,sel)
         sel.click(testvars.start_team)
         sel.wait_for_page_to_load(testvars.timeout)
-        website.create_team(self,sel,team,url,team_logo_path)
+        website.create_team(self,sel,team,team_logo_path)
         # logout
         sel.click(testvars.WebsiteUI["Logout_Button"])
         
@@ -105,7 +104,7 @@ class subgroup_88(unittest.TestCase):
         self.assertTrue(sel.is_element_present("css=strong:contains('Add video to team')"))
         vid_title = sel.get_text("css=.main-title a")
         #add video to team and verify values
-        sel.click_at("css=strong:contains('Add video to team')")
+        sel.click_at("css=strong:contains('Add video to team')","")
         sel.click("css=li a:contains('"+team+"')")
         sel.wait_for_page_to_load(testvars.timeout)
         print "verifying the inital add page"

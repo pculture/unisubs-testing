@@ -84,7 +84,7 @@ class subgroup_65(unittest.TestCase):
         website.Login(self,sel,"open-id")
         offsite.OpenIdAuth(self,sel,testvars.openiduser,testvars.passw)
         # verify
-        website.verify_login(self,sel,testvars.openiduser)
+        website.verify_login(self,sel,testvars.openid-username) #cheat for bug #13688
         # logout
         website.SiteLogout(self,sel)
 
@@ -180,7 +180,7 @@ class subgroup_65(unittest.TestCase):
         # verify
         widget.wait_for_offsite_login(self,sel)
         widget.close_widget(self,sel)
-        website.verify_login(self,sel,testvars.openiduser)
+        website.verify_login(self,sel,testvars.openid-username)
         # logout
         website.SiteLogout(self,sel)
 
