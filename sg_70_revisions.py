@@ -328,7 +328,7 @@ class subgroup_70(unittest.TestCase):
         try:
             website.handle_error_page(self,self.selenium,self.id())
         finally:
-            self.selenium.stop()
+           self.selenium.stop()
         #Log any errors
         self.assertEqual([], self.verificationErrors)
       
