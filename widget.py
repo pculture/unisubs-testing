@@ -308,22 +308,24 @@ def edit_translation(self,sel,subtextfile,new_text=""):
     logging.info("Editing the translation")
     sel.select_window("null")
     
-    sub_li=1
-    sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") > textarea"
+
+    sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+")"
+    textarea = sub_cell+ " > textarea"
     mslib.wait_for_element_present(self,sel,sub_cell)
-    for line in open(subtextfile):
+    for i,line in enumerate(codecs.open(subtextfile)):
+        x = i+1
+        sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(x)+")"
         if new_text == "":
             ed_text = str(line).upper()
         else:
             ed_text = new_text
         sel.click(sub_cell)
-        sel.type(sub_cell, ed_text)
+        sel.type(textarea, ed_text)
         if "firefox" in selvars.set_browser():
-            sel.key_press(sub_cell, "13")            
+            sel.key_press(textarea, "13")            
         else:
-            sel.focus(sub_cell)
+            sel.focus(textarea)
             sel.key_press_native('10')
-        sub_li += 1
 
     sel.click(testvars.WidgetUI["Next_step"])
         
