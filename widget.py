@@ -118,6 +118,9 @@ def close_howto_video(self,sel,skip=True):
         time.sleep(3)
         if sel.is_element_present("css=.mirosubs-done:contains('Continue')"):
             sel.click("css=.mirosubs-done:contains('Continue')")
+    else:
+        print "no how-to video"
+        
 
 
 def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="yes"):
