@@ -22,13 +22,13 @@ def wait_for_element_present(self,sel,input_field):
     Description: Waits 60 seconds for element to present itself.
     Requires: valid element identifier, can be css, xpath
     """
-    for i in range(20):
+    for i in range(30):
         try:
             if sel.is_element_present(input_field): break
         except: pass
         time.sleep(1)
     else:
-        self.fail("time out waiting 20s for element " +input_field)
+        self.fail("time out waiting 30s for element " +input_field)
 
 def wait_for_video_to_buffer(self,sel):
     """
@@ -44,7 +44,7 @@ def wait_for_video_to_buffer(self,sel):
         sel.click(testvars.WidgetUI["Play_pause"])
         if sel.is_element_present("css=.mirosubs-buffered"):
             print " - waiting for video to buffer " +time.strftime("%M:%S", time.gmtime())
-            for i in range(15):
+            for i in range(20):
                 try:
                     if int(sel.get_element_width("css=.mirosubs-buffered")) >= 125:
                         print " - video buffered to 50% " +time.strftime("%M:%S", time.gmtime())

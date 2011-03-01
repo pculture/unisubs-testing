@@ -137,7 +137,6 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="ye
         returns line_count - the number of text lines input for the translation
     """
     logging.info("Transcribing the video")
-    # giving the video a chance to load.
     sel.select_window("null")
     restart_step(self,sel)
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-speedmode")
@@ -155,20 +154,17 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="ye
         logging.info("trouble selecting element (safari issue?) - going with default value")
         
     # give time to buffer
-    if buffer == "yes":
-        mslib.wait_for_video_to_buffer(self,sel)
-    else:
-        time.sleep(10)
+    mslib.wait_for_video_to_buffer(self,sel)
     #start playback
     sel.click(testvars.WidgetUI["Play_pause"])
 #    sel.type_keys("css=.mirosubs-play",u'\u0009')
-    line_count = 0
-    for line in codecs.open(sub_file,encoding='utf-8'):
+    for x,line in enumerate(codecs.open(sub_file,encoding='utf-8')):
         sel.focus("css=input[class*=trans]")
         sel.type("css=input[class*=trans]",line)
         sel.type_keys("css=input[class*=trans]",' ')
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
         current_sub = sel.get_text(testvars.WidgetUI["Current_playing_sub"])
+        print current_sub
         # compare input text
         self.assertEqual(line.rstrip(),current_sub.rstrip(),\
         "sub text mismatch - expected: "+line.rstrip()+" found: "+current_sub.rstrip())
@@ -182,10 +178,8 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="ye
             sel.focus("css=input[class*=trans]")
             sel.key_press_native('10')
         time.sleep(3)
-        line_count = line_count+1
     if step == "Continue":
         sel.click(testvars.WidgetUI["Next_step"])
-    return line_count
 
  
 
@@ -223,7 +217,8 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
     Pre-condition - can use this to sync on Step 2, Step 3 or Edit.
     """
     logging.info("Syncing the subs")
-    goto_step(self,sel,step="2")
+    if sel.is_element_present("css=.mirosubs-activestep:contains('1')"):
+        goto_step(self,sel,"2")
     mslib.wait_for_video_to_buffer(self,sel)
     #start playback
     sel.type_keys("css=.mirosubs-play",u'\u0009')
@@ -235,6 +230,7 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
     #start syncing   
     
     for x,line in enumerate(open(sub_file)):
+        print line
         sel.focus(testvars.WidgetUI["Sync_sub"])
         sel.click_at(testvars.WidgetUI["Sync_sub"],"")
         time.sleep(2)
