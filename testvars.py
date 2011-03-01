@@ -68,7 +68,8 @@ WidgetUI = {"Video_playPause":"css=.mirosubs-playPause", \
             "Translate_now_button":"css=a#add_translation"
 , \
             "Play_pause":"css=.mirosubs-tab:contains('tab')",\
-            "Sync_sub":"css=span:contains('Tap when next subtitle')",\
+            "Sync_sub":"css=div.mirosubs-begin span.mirosubs-down",\
+          #  "Sync_sub":"css=span:contains('Tap when next subtitle')",\
             "Skip_back":"css=.mirosubs-control:contains('shift')",\
             "Active_subtime":"css=li.active span.mirosubs-timestamp-time",\
             "Active_subtext":"css=li.active span.mirosubs-title",\
