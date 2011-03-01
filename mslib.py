@@ -40,11 +40,11 @@ def wait_for_video_to_buffer(self,sel):
 #    if selvars.set_browser() == "*firefox":
     try:
         sel.click(testvars.WidgetUI["Play_pause"])
-        time.sleep(1)
+        time.sleep(2)
         sel.click(testvars.WidgetUI["Play_pause"])
         if sel.is_element_present("css=.mirosubs-buffered"):
             print " - waiting for video to buffer " +time.strftime("%M:%S", time.gmtime())
-            for i in range(20):
+            for i in range(10):
                 try:
                     if int(sel.get_element_width("css=.mirosubs-buffered")) >= 125:
                         print " - video buffered to 50% " +time.strftime("%M:%S", time.gmtime())
