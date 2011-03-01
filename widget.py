@@ -118,9 +118,9 @@ def close_howto_video(self,sel,skip=True):
         time.sleep(3)
         if sel.is_element_present("css=.mirosubs-done:contains('Continue')"):
             sel.click("css=.mirosubs-done:contains('Continue')")
-    else:
-        print "no how-to video"
-        
+        else:
+            print "no how-to video"
+            
 
 
 def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="yes"):
@@ -223,7 +223,7 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
     Pre-condition - can use this to sync on Step 2, Step 3 or Edit.
     """
     logging.info("Syncing the subs")
-    sel.select_window("null")
+    goto_step(self,sel,step="2")
     mslib.wait_for_video_to_buffer(self,sel)
     #start playback
     sel.type_keys("css=.mirosubs-play",u'\u0009')
@@ -234,17 +234,15 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
         time.sleep(start_delay)
     #start syncing   
     
-    sub_li=1
-    for line in open(sub_file):
+    for x,line in enumerate(open(sub_file)):
         sel.focus(testvars.WidgetUI["Sync_sub"])
         sel.click_at(testvars.WidgetUI["Sync_sub"],"")
         time.sleep(2)
-        sub_cell_start_time = "css=li:nth-child("+str(sub_li)+") > .mirosubs-timestamp .mirosubs-timestamp-time"
-        sub_cell_text = "css=li:nth-child("+str(sub_li)+") > span.mirosubs-title span"
+        sub_cell_start_time = "css=li:nth-child("+str(x)+") > .mirosubs-timestamp .mirosubs-timestamp-time"
+        sub_cell_text = "css=li:nth-child("+str(x)+") > span.mirosubs-title span"
         start_time=sel.get_text(sub_cell_start_time)
         print " - sub time: " '%.2f' % float(start_time) + " - sub text: "+ sel.get_text(sub_cell_text)
         time.sleep(sub_int)
-        sub_li = sub_li + 1
     # finish sync of the last sub
     sel.focus(testvars.WidgetUI["Sync_sub"])
     sel.click_at(testvars.WidgetUI["Sync_sub"],"")
@@ -270,11 +268,10 @@ def edit_text(self,sel,subtextfile,new_text=""):
     sel.click("css=.mirosubs-activestep")
     mslib.wait_for_video_to_buffer(self,sel)
     sel.click("css=.mirosubs-activestep")
-    
-    sub_li=1
-    for line in open(subtextfile):
-        sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") "       
-        if not sel.is_element_present(sub_cell):
+
+    for x,line in enumerate(open(subtextfile)):
+        sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(x)+") "       
+        if sel.is_element_present(sub_cell) == False:
             break
         textarea = sub_cell + " > .mirosubs-title textarea"
         textspan = sub_cell + " > .mirosubs-title span"
@@ -296,8 +293,6 @@ def edit_text(self,sel,subtextfile,new_text=""):
         mslib.wait_for_element_present(self,sel,textspan)
         sub_cell_text=sel.get_text(textspan)
         self.assertEqual(sub_cell_text.rstrip(),ed_text.rstrip())
-        sub_li += sub_li
-        
         time.sleep(2)
         
 
@@ -462,17 +457,17 @@ def resync_video (self,sel,subtextfile,start_delay=1,sub_int=1, step="Stop"):
     comparision may fail.
     """
     print " * Resync subs - shorter interval"
-    sel.select_frame("relative=top")
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
-    time.sleep(10) #give the video a chance load
+
+    if sel.is_element_present("css=.mirosubs-activestep:contains('1')"):
+        goto_step(self,sel,"2")
+    mslib.wait_for_video_to_buffer(self,sel)
     sel.click(testvars.WidgetUI["Video_playPause"])
        
     time.sleep(start_delay)
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Sync_sub"])
-    sub_li = 1
-    
-    for line in codecs.open(subtextfile,encoding='utf-8'):
-        sub_cell_start_time = "css=li:nth-child("+str(sub_li)+") > .mirosubs-timestamp .mirosubs-timestamp-time"
+       
+    for x,line in enumerate(codecs.open(subtextfile,encoding='utf-8')):
+        sub_cell_start_time = "css=li:nth-child("+str(x)+") > .mirosubs-timestamp .mirosubs-timestamp-time"
         start_time=sel.get_text(sub_cell_start_time)
         sel.focus(testvars.WidgetUI["Sync_sub"])
         sel.click_at(testvars.WidgetUI["Sync_sub"],"")
@@ -481,7 +476,6 @@ def resync_video (self,sel,subtextfile,start_delay=1,sub_int=1, step="Stop"):
         self.assertNotEqual(float(start_time),float(new_start_time), \
                         '%.2f' % float(start_time) +" = " +'%.2f' % float(new_start_time))
         time.sleep(sub_int)
-        sub_li = sub_li + 1
         
     sel.focus(testvars.WidgetUI["Sync_sub"])
     sel.click_at(testvars.WidgetUI["Sync_sub"],"")
