@@ -43,7 +43,7 @@ def wait_for_video_to_buffer(self,sel):
         sel.click(testvars.WidgetUI["Play_pause"])
         if sel.is_element_present(testvars.WidgetUI["Video_elapsed_time"]):
             time.sleep(2)
-            print testvars.WidgetUI["Video_elapsed_time"]        
+            print sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
             sel.click(testvars.WidgetUI["Play_pause"])
         if sel.is_element_present("css=.mirosubs-buffered"):
             print " - waiting for video to buffer " +time.strftime("%M:%S", time.gmtime())
