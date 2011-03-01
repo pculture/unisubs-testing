@@ -126,7 +126,10 @@ class subgroup_70(unittest.TestCase):
         # Click History tab
         sel.click(testvars.video_original)
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        website.verify_latest_history(self,sel,rev="#1",user="sub_writer",time="100%",text="0%")
+        sel.click(testvar.history_tab)
+        sel.wait_for_page_to_load(testvars.timeout)
+        rev_num = get_current_rev(self,sel)
+        website.verify_latest_history(self,sel,rev="#"+str(rev_num),user="sub_writer",time="100%",text="0%")
                 
     def test_602(self):
         """Revisions - edit subtitles text and verify in history table.
@@ -174,8 +177,11 @@ class subgroup_70(unittest.TestCase):
         
         # Click Original language then History tab
         sel.click(testvars.video_original)
-        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        website.verify_latest_history(self,sel,rev="#1",user="sub_writer",time="0%",text="100%")
+        sel.wait_for_page_to_load(testvars.timeout)
+        sel.click(testvars.history_tab)
+        sel.wait_for_page_to_load(testvars.timeout)
+        rev_num = get_current_rev(self,sel)      
+        website.verify_latest_history(self,sel,rev="#"+str(rev_num),user="sub_writer",time="0%",text="100%")
 
 
 

@@ -218,6 +218,8 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
     Pre-condition - can use this to sync on Step 2, Step 3 or Edit.
     """
     logging.info("Syncing the subs")
+    sel.select_window("null")
+    time.sleep(10)
     if sel.is_element_present("css=.mirosubs-activestep:contains('1')"):
         goto_step(self,sel,"2")
     mslib.wait_for_video_to_buffer(self,sel)
@@ -308,7 +310,6 @@ def edit_translation(self,sel,subtextfile,new_text=""):
     logging.info("Editing the translation")
     sel.select_window("null")
     
-    textarea = sub_cell+ " > textarea"
     mslib.wait_for_element_present(self,sel,sub_cell)
     for i,line in enumerate(codecs.open(subtextfile)):
         x = i+1

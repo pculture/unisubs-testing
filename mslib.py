@@ -38,7 +38,7 @@ def wait_for_video_to_buffer(self,sel):
     # on some browsers, need to start playback for browser to start to buffer
     #start play, then pause to wait for buffer
 #    if selvars.set_browser() == "*firefox":
-    time.sleep(10)
+    
     try:
         sel.click_at(testvars.WidgetUI["Play_pause"],"")
         if sel.is_element_present(testvars.WidgetUI["Video_elapsed_time"]):
