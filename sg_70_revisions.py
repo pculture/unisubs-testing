@@ -74,9 +74,10 @@ class subgroup_70(unittest.TestCase):
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         website.verify_subs(self,sel,subtextfile)
         # Click History tab
-        sel.click(testvars.video_original)
-        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        website.verify_latest_history(self,sel,rev="#0",user="sub_writer",time="100%",text="100%")
+        sel.click(testvars.history_tab)
+        sel.wait_for_page_to_load(testvars.timeout)
+        rev_num = get_current_rev(self,sel)
+        website.verify_latest_history(self,sel,rev="#"+str(rev_num),user="sub_writer",time="100%",text="100%")
 
 
     def test_486(self):
