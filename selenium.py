@@ -16,13 +16,10 @@ limitations under the License.
 """
 __docformat__ = "restructuredtext en"
 
-# This file has been automatically generated via XSL
-
 import httplib
 import urllib
-import re
 
-class selenium:
+class selenium(object):
     """
     Defines an object that runs Selenium commands.
     
@@ -185,8 +182,11 @@ class selenium:
     def setExtensionJs(self, extensionJs):
         self.extensionJs = extensionJs
         
-    def start(self):
-        result = self.get_string("getNewBrowserSession", [self.browserStartCommand, self.browserURL, self.extensionJs])
+    def start(self, browserConfigurationOptions=None):
+        start_args = [self.browserStartCommand, self.browserURL, self.extensionJs]
+        if browserConfigurationOptions:
+          start_args.append(browserConfigurationOptions)
+        result = self.get_string("getNewBrowserSession", start_args)
         try:
             self.sessionId = result
         except ValueError:
@@ -198,29 +198,35 @@ class selenium:
 
     def do_command(self, verb, args):
         conn = httplib.HTTPConnection(self.host, self.port)
-        body = u'cmd=' + urllib.quote_plus(unicode(verb).encode('utf-8'))
-        for i in range(len(args)):
-            body += '&' + unicode(i+1) + '=' + urllib.quote_plus(unicode(args[i]).encode('utf-8'))
-        if (None != self.sessionId):
-            body += "&sessionId=" + unicode(self.sessionId)
-        headers = {"Content-Type": "application/x-www-form-urlencoded; charset=utf-8"}
-        conn.request("POST", "/selenium-server/driver/", body, headers)
-    
-        response = conn.getresponse()
-        #print response.status, response.reason
-        data = unicode(response.read(), "UTF-8")
-        result = response.reason
-        #print "Selenium Result: " + repr(data) + "\n\n"
-        if (not data.startswith('OK')):
-            raise Exception, data
-        return data
-    
+        try:
+            body = u'cmd=' + urllib.quote_plus(unicode(verb).encode('utf-8'))
+            for i in range(len(args)):
+                body += '&' + unicode(i+1) + '=' + \
+                        urllib.quote_plus(unicode(args[i]).encode('utf-8'))
+            if (None != self.sessionId):
+                body += "&sessionId=" + unicode(self.sessionId)
+            headers = {
+                "Content-Type":
+                "application/x-www-form-urlencoded; charset=utf-8"
+            }
+            conn.request("POST", "/selenium-server/driver/", body, headers)
+
+            response = conn.getresponse()
+            data = unicode(response.read(), "UTF-8")
+            if (not data.startswith('OK')):
+                raise Exception, data
+            return data
+        finally:
+            conn.close()
+
     def get_string(self, verb, args):
         result = self.do_command(verb, args)
         return result[3:]
-    
+
     def get_string_array(self, verb, args):
         csv = self.get_string(verb, args)
+        if not csv:
+            return []
         token = ""
         tokens = []
         escape = False
@@ -241,12 +247,15 @@ class selenium:
         return tokens
 
     def get_number(self, verb, args):
-        # Is there something I need to do here?
-        return self.get_string(verb, args)
-    
+        return int(self.get_string(verb, args))
+
     def get_number_array(self, verb, args):
-        # Is there something I need to do here?
-        return self.get_string_array(verb, args)
+        string_array = self.get_string_array(verb, args)
+        num_array = []
+        for i in string_array:
+            num_array.append(int(i))
+
+        return num_array 
 
     def get_boolean(self, verb, args):
         boolstr = self.get_string(verb, args)
@@ -255,10 +264,10 @@ class selenium:
         if ("false" == boolstr):
             return False
         raise ValueError, "result is neither 'true' nor 'false': " + boolstr
-    
+
     def get_boolean_array(self, verb, args):
         boolarr = self.get_string_array(verb, args)
-        for i in range(len(boolarr)):
+        for i, boolstr in enumerate(boolarr):
             if ("true" == boolstr):
                 boolarr[i] = True
                 continue
@@ -269,9 +278,6 @@ class selenium:
         return boolarr
     
     
-
-### From here on, everything's auto-generated from XML
-
 
     def click(self,locator):
         """
@@ -633,6 +639,13 @@ class selenium:
         """
         return self.get_string("getSpeed", [])
 
+    def get_log(self):
+        """
+        Get RC logs associated with current session.
+        
+        """
+        return self.get_string("getLog", [])
+
 
     def check(self,locator):
         """
@@ -745,8 +758,7 @@ class selenium:
         """
         self.do_command("submit", [formLocator,])
 
-
-    def open(self,url):
+    def open(self,url,ignoreResponseCode=True):
         """
         Opens an URL in the test frame. This accepts both relative and absolute
         URLs.
@@ -760,8 +772,9 @@ class selenium:
         new browser session on that domain.
         
         'url' is the URL to open; may be relative or absolute
+        'ignoreResponseCode' if set to true: doesnt send ajax HEAD/GET request; if set to false: sends ajax HEAD/GET request to the url and reports error code if any as response to open.
         """
-        self.do_command("open", [url,])
+        self.do_command("open", [url,ignoreResponseCode])
 
 
     def open_window(self,url,windowID):
@@ -1634,6 +1647,14 @@ class selenium:
         """
         return self.get_number("getXpathCount", [xpath,])
 
+    def get_css_count(self,css):
+        """
+        Returns the number of nodes that match the specified css selector, eg. "css=table" would give
+        the number of tables.
+
+        'css' is the css selector to evaluate. do NOT wrap this expression in a 'count()' function; we will do that for you.
+        """
+        return self.get_number("getCssCount", [css,])
 
     def assign_id(self,locator,identifier):
         """
@@ -1988,6 +2009,9 @@ class selenium:
         """
         return self.get_string("captureNetworkTraffic", [type,])
 
+    def capture_network_traffic(self, type):
+        return self.captureNetworkTraffic(type)
+
     def addCustomRequestHeader(self, key, value):
         """
         Tells the Selenium server to add the specificed key and value as a custom outgoing request header. This only works if the browser is configured to use the built in Selenium proxy.
@@ -1996,6 +2020,9 @@ class selenium:
         'value' the header value.
         """
         return self.do_command("addCustomRequestHeader", [key,value,])
+
+    def add_custom_request_header(self, key, value):
+        return self.addCustomRequestHeader(key, value)
 
     def capture_entire_page_screenshot_to_string(self,kwargs):
         """
@@ -2068,4 +2095,3 @@ class selenium:
         'keycode' is an integer keycode number corresponding to a java.awt.event.KeyEvent; note that Java keycodes are NOT the same thing as JavaScript keycodes!
         """
         self.do_command("keyPressNative", [keycode,])
-
