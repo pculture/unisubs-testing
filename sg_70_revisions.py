@@ -195,6 +195,7 @@ class subgroup_70(unittest.TestCase):
         sel.click("css=a:contains('"+language+"')")
         website.store_subs(self,sel)
         sel.click(testvars.history_tab)
+        sel.wait_for_page_to_load(testvars.timeout)
         orig_rev = website.get_current_rev(self,sel)
         rev_num = orig_rev.lstrip('#')
         subtextfile = "subs.txt"
