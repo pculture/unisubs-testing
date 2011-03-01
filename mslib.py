@@ -28,29 +28,34 @@ def wait_for_element_present(self,sel,input_field):
         except: pass
         time.sleep(1)
     else:
-        self.fail("time out waiting for element " +input_field)
+        self.fail("time out waiting 20s for element " +input_field)
 
 def wait_for_video_to_buffer(self,sel):
     """
-    Description: Waits for the video in the frame to buffer to 75%.
+    Description: Waits for the video in the frame to buffer to 30%.
                  This is always called by widget.transcribe_video
     """
     # on some browsers, need to start playback for browser to start to buffer
     #start play, then pause to wait for buffer
 #    if selvars.set_browser() == "*firefox":
-    sel.click(testvars.WidgetUI["Play_pause"])
-    wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
-    sel.click(testvars.WidgetUI["Video_pause_button"])
-    wait_for_element_present(self,sel,testvars.WidgetUI["Video_play_button"])
-    wait_for_element_present(self,sel,"css=.mirosubs-buffered")
-    
-    print " - waiting for video to buffer " +time.strftime("%M:%S", time.gmtime())
-    for i in range(60):
-        try:
-            if int(sel.get_element_width("css=.mirosubs-buffered")) >= 125: break
-        except: pass
-        time.sleep(1)
-    print " - video buffered to 50% " +time.strftime("%M:%S", time.gmtime())
+    try:
+        sel.click(testvars.WidgetUI["Play_pause"])
+        wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
+        sel.click(testvars.WidgetUI["Video_pause_button"])
+        wait_for_element_present(self,sel,testvars.WidgetUI["Video_play_button"])
+        wait_for_element_present(self,sel,"css=.mirosubs-buffered")
+        
+        print " - waiting for video to buffer " +time.strftime("%M:%S", time.gmtime())
+        for i in range(15):
+            try:
+                if int(sel.get_element_width("css=.mirosubs-buffered")) >= 125: 
+                    print " - video buffered to 50% " +time.strftime("%M:%S", time.gmtime())
+                    break
+            except: pass
+            time.sleep(1)
+        
+    finally:
+        print " - done loading video"
 
 def calc_time_diff(time1,time2):
     print float(time2)

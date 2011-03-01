@@ -120,7 +120,7 @@ def close_howto_video(self,sel,skip=True):
             sel.click("css=.mirosubs-done:contains('Continue')")
 
 
-def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no"):
+def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="yes"):
     """
     Description: On widget Step 1, reads in lines of subtitle text and types it.
 
@@ -136,7 +136,6 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
     logging.info("Transcribing the video")
     # giving the video a chance to load.
     sel.select_window("null")
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
     restart_step(self,sel)
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-speedmode")
     try:
@@ -155,9 +154,11 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
     # give time to buffer
     if buffer == "yes":
         mslib.wait_for_video_to_buffer(self,sel)
-    time.sleep(10)
-    sel.type_keys("css=.mirosubs-play",u'\u0009')
-    
+    else:
+        time.sleep(10)
+    #start playback
+    sel.click(testvars.WidgetUI["Play_pause"])
+#    sel.type_keys("css=.mirosubs-play",u'\u0009')
     line_count = 0
     for line in codecs.open(sub_file,encoding='utf-8'):
         sel.focus("css=input[class*=trans]")
@@ -169,7 +170,11 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="no
         self.assertEqual(line.rstrip(),current_sub.rstrip(),\
         "sub text mismatch - expected: "+line.rstrip()+" found: "+current_sub.rstrip())
         if "firefox" in selvars.set_browser():
-            sel.key_press("css=.trans", "13")            
+            sel.key_press("css=.trans", "13")
+        elif "safari" in selvars.set_browser():
+            sel.focus("css=input[class*=trans]")
+            time.sleep(.5)
+            sel.key_press_native('10')
         else:
             sel.focus("css=input[class*=trans]")
             sel.key_press_native('10')
@@ -215,9 +220,8 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
     Pre-condition - can use this to sync on Step 2, Step 3 or Edit.
     """
     logging.info("Syncing the subs")
-    time.sleep(10) #give video a chance to load
-    sel.select_window("null")   
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
+    sel.select_window("null")
+    mslib.wait_for_video_to_buffer(self,sel)
     #start playback
     sel.type_keys("css=.mirosubs-play",u'\u0009')
 #    sel.click_at(testvars.WidgetUI["Play_pause"],"")
@@ -258,34 +262,40 @@ def edit_text(self,sel,subtextfile,new_text=""):
     Pre-condition - can use this on Step 2, Step 3.
     """
     logging.info("Editing the sub text in the widget")
-    time.sleep(10) #give video a chance to load
     sel.select_window("null")
+    mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
+    sel.click("css=.mirosubs-activestep")
+    mslib.wait_for_video_to_buffer(self,sel)
+    sel.click("css=.mirosubs-activestep")
     
     sub_li=1
-    sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") > span.mirosubs-title span"
-    mslib.wait_for_element_present(self,sel,sub_cell)
     for line in open(subtextfile):
+        sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") "       
+        if not sel.is_element_present(sub_cell):
+            break
+        textarea = sub_cell + " > .mirosubs-title textarea"
+        textspan = sub_cell + " > .mirosubs-title span"
+        
         if new_text == "":
             ed_text = str(line).rstrip().upper()
         else:
             ed_text = new_text
-        sel.click(sub_cell)
+        sel.click(textspan)
+        mslib.wait_for_element_present(self,sel,textarea)
         time.sleep(1)
-        sel.type("css=span.mirosubs-title textarea", ed_text)
+        sel.type(textarea,ed_text) # trying this now"css=span.mirosubs-title textarea", ed_text)
         if "firefox" in selvars.set_browser():
-            sel.key_press("css=span.mirosubs-title textarea", "13")            
+            sel.key_press(textarea,"13") #trying this now"("css=span.mirosubs-title textarea", "13")            
         else:
-            sel.focus("css=span.mirosubs-title textarea")
+            sel.focus(sub_cell)# trying this now: "css=span.mirosubs-title textarea")
             sel.key_press_native('10')
      #   sel.key_press("css=span.mirosubs-title textarea", "\\13")
-        mslib.wait_for_element_present(self,sel,sub_cell)
-        sub_cell_text=sel.get_text(sub_cell)
+        mslib.wait_for_element_present(self,sel,textspan)
+        sub_cell_text=sel.get_text(textspan)
         self.assertEqual(sub_cell_text.rstrip(),ed_text.rstrip())
         sub_li += sub_li
-        sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(sub_li)+") "
+        
         time.sleep(2)
-        if not sel.is_element_present(sub_cell):
-            break
         
 
 

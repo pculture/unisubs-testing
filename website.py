@@ -485,7 +485,7 @@ def create_team(self,sel,team,team_logo):
     sel.click("css=.green_button.big:contains('Create Team')")
     sel.wait_for_page_to_load(testvars.timeout)
     # Verify team creation parameters
-    current_video = url.split('/')[-1]
+    current_video = vid_url.split('/')[-1]
     try:
         if team == "":
             self.assertTrue(sel.is_element_present("css=.errorlist li:contains('This field is required')"))
