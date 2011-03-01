@@ -158,7 +158,8 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="ye
     #start playback
     sel.click(testvars.WidgetUI["Play_pause"])
 #    sel.type_keys("css=.mirosubs-play",u'\u0009')
-    for x,line in enumerate(codecs.open(sub_file,encoding='utf-8')):
+    for i,line in enumerate(codecs.open(sub_file,encoding='utf-8')):
+        x=i+1
         sel.focus("css=input[class*=trans]")
         sel.type("css=input[class*=trans]",line)
         sel.type_keys("css=input[class*=trans]",' ')
@@ -229,7 +230,8 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
         time.sleep(start_delay)
     #start syncing   
     
-    for x,line in enumerate(open(sub_file)):
+    for i,line in enumerate(open(sub_file)):
+        x=i+1
         print line
         sel.focus(testvars.WidgetUI["Sync_sub"])
         sel.click_at(testvars.WidgetUI["Sync_sub"],"")
@@ -265,7 +267,8 @@ def edit_text(self,sel,subtextfile,new_text=""):
     mslib.wait_for_video_to_buffer(self,sel)
     sel.click("css=.mirosubs-activestep")
 
-    for x,line in enumerate(open(subtextfile)):
+    for i,line in enumerate(open(subtextfile)):
+        x = i+1
         sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(x)+") "       
         if sel.is_element_present(sub_cell) == False:
             break
@@ -462,7 +465,8 @@ def resync_video (self,sel,subtextfile,start_delay=1,sub_int=1, step="Stop"):
     time.sleep(start_delay)
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Sync_sub"])
        
-    for x,line in enumerate(codecs.open(subtextfile,encoding='utf-8')):
+    for i,line in enumerate(codecs.open(subtextfile,encoding='utf-8')):
+        x = i+1
         sub_cell_start_time = "css=li:nth-child("+str(x)+") > .mirosubs-timestamp .mirosubs-timestamp-time"
         start_time=sel.get_text(sub_cell_start_time)
         sel.focus(testvars.WidgetUI["Sync_sub"])
