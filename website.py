@@ -105,7 +105,6 @@ def submit_video(self,sel,url):
 def front_page_submit(self,sel,url):
     sel.open("/")
     sel.type("css=.submit_video", url)
-    sel.type_keys("css=.submit_video",' ')
     sel.click("css=.btn_submit_video")
     sel.wait_for_page_to_load(testvars.timeout)
 
