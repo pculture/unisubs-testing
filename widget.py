@@ -425,7 +425,7 @@ def hold_down_delay_sub(self,sel,sub_file,delay_time=2,hold_time=.75, sync_time=
     print " * Resync subs: hold down key"
     sel.select_frame("relative=top")
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
-    sel.click(testvars.WidgetUI["Video_playPause"])
+    sel.click(testvars.WidgetUI["Play_pause"])
     time.sleep(delay_time)
   
     sub_li = 1
