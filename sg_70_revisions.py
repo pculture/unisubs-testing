@@ -49,15 +49,15 @@ class subgroup_70(unittest.TestCase):
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         sel.open("/")
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
-        print "submitting a vimeo video, format: "
-        vid_url = offsite.get_vimeo_video_url(self)
+        print "submitting a blip video, format: "
+        vid_url = offsite.get_blip_video_url(self)
         # Submit Video
         print "logging in and submitting video"
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         website.front_page_submit(self,sel,vid_url)
         # Verify embed and player
         print "verifying embed"
-        website.verify_submitted_video(self,sel,vid_url,embed_type="vimeo")
+        website.verify_submitted_video(self,sel,vid_url,embed_type="blip")
         # Start sub widget
         print "starting sub widget"
         website.start_sub_widget(self,sel)
@@ -89,15 +89,15 @@ class subgroup_70(unittest.TestCase):
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         sel.open("/")
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
-        print "submitting a vimeo video, format: "
-        vid_url = offsite.get_vimeo_video_url(self)
+        print "submitting a blip video, format: "
+        vid_url = offsite.get_blip_video_url(self)
         # Submit Video
         print "logging in and submitting video"
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         website.front_page_submit(self,sel,vid_url)
         # Verify embed and player
         print "verifying embed"
-        website.verify_submitted_video(self,sel,vid_url,embed_type="vimeo")
+        website.verify_submitted_video(self,sel,vid_url,embed_type="blip")
         # Start sub widget
         print "starting sub widget"
         website.start_sub_widget(self,sel)
@@ -139,15 +139,15 @@ class subgroup_70(unittest.TestCase):
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         sel.open("/")
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
-        print "submitting a vimeo video, format: "
-        vid_url = offsite.get_vimeo_video_url(self)
+        print "submitting a blip video, format: "
+        vid_url = offsite.get_blip_video_url(self)
         # Submit Video
         print "logging in and submitting video"
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         website.front_page_submit(self,sel,vid_url)
         # Verify embed and player
         print "verifying embed"
-        website.verify_submitted_video(self,sel,vid_url,embed_type="vimeo")
+        website.verify_submitted_video(self,sel,vid_url,embed_type="blip")
         # Start sub widget
         print "starting sub widget"
         website.start_sub_widget(self,sel)
