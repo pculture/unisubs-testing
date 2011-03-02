@@ -218,9 +218,9 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
     Pre-condition - can use this to sync on Step 2, Step 3 or Edit.
     """
     logging.info("Syncing the subs")
+    goto_step(self,sel,"2")
     sel.select_window("null")
-    time.sleep(10)
-    goto_step(self,sel,"3")
+    time.sleep(30) #ridiculous
     mslib.wait_for_video_to_buffer(self,sel)
     #start playback
 #    sel.type_keys("css=.mirosubs-play",u'\u0009')
