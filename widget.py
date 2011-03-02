@@ -218,15 +218,18 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
     Pre-condition - can use this to sync on Step 2, Step 3 or Edit.
     """
     logging.info("Syncing the subs")
+    if sel.is_element_present("css=.mirosubs-activestep:contains('1')") == True:
+        print "still on step 1"
+        goto_step(self,sel,"2")
     sel.select_window("null")
     mslib.wait_for_video_to_buffer(self,sel)
     #start playback
 #    sel.type_keys("css=.mirosubs-play",u'\u0009')
-    sel.click_at(testvars.WidgetUI["Play_pause"],"")
-    time.sleep(start_delay)
-    if sel.is_element_present(testvars.WidgetUI["Video_pause_button"]) == False:
+    if sel.is_element_present(testvars.WidgetUI["Video_pause_button"]):
+        print "video is playing"
+    else:
         sel.click_at(testvars.WidgetUI["Play_pause"],"")
-        time.sleep(start_delay)
+    time.sleep(start_delay)
     #start syncing   
     
     for i,line in enumerate(open(sub_file)):
