@@ -121,9 +121,7 @@ def start_sub_widget(self,sel,wig_menu=testvars.WebsiteUI["SubtitleMe_menu"],ski
     Post-condition: the widget is launched and you will be on step 1 or Edit step
     """
     
-    mslib.wait_for_element_present(self,sel,testvars.video_video_info)
-    sel.click(testvars.video_video_info)
-    sel.wait_for_page_to_load(testvars.timeout)
+    mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
     sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
     time.sleep(5)
     if sel.is_element_present(testvars.WidgetUI["Select_language"]):
