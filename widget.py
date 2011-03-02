@@ -220,8 +220,7 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
     logging.info("Syncing the subs")
     sel.select_window("null")
     time.sleep(10)
-    if sel.is_element_present("css=.mirosubs-activestep:contains('1')"):
-        goto_step(self,sel,"2")
+    goto_step(self,sel,"3")
     mslib.wait_for_video_to_buffer(self,sel)
     #start playback
 #    sel.type_keys("css=.mirosubs-play",u'\u0009')
@@ -246,6 +245,8 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
     # finish sync of the last sub
     sel.focus(testvars.WidgetUI["Sync_sub"])
     sel.click_at(testvars.WidgetUI["Sync_sub"],"")
+    goto_step(self,sel,"2") #back to 2
+    time.sleep(3)
     if step == "Continue":
         sel.click(testvars.WidgetUI["Next_step"])
     
