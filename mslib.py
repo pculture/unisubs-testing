@@ -38,7 +38,7 @@ def wait_for_video_to_buffer(self,sel):
     # on some browsers, need to start playback for browser to start to buffer
     #start play, then pause to wait for buffer
 #    if selvars.set_browser() == "*firefox":
-    
+    time.sleep(5)
     try:
         if sel.is_element_present(testvars.WidgetUI["Video_pause_button"]):
             print "autoplaying"

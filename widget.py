@@ -309,11 +309,12 @@ def edit_translation(self,sel,subtextfile,new_text=""):
     """
     logging.info("Editing the translation")
     sel.select_window("null")
-    
-    mslib.wait_for_element_present(self,sel,sub_cell)
+    mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
     for i,line in enumerate(codecs.open(subtextfile)):
         x = i+1
         sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(x)+")"
+        if sel.is_element_present(sub_cell) == False:
+            break
         textarea = sub_cell+ " > textarea"
         if new_text == "":
             ed_text = str(line).upper()
