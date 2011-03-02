@@ -320,7 +320,7 @@ def edit_translation(self,sel,subtextfile,new_text=""):
         else:
             ed_text = new_text
         sel.click(sub_cell)
-        sel.type(textarea, ed_text)
+        sel.type(textarea, u'ed_text')
         if "firefox" in selvars.set_browser():
             sel.key_press(textarea, "13")            
         else:
