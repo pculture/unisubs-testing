@@ -76,7 +76,7 @@ class subgroup_70(unittest.TestCase):
         # Click History tab
         sel.click(testvars.history_tab)
         sel.wait_for_page_to_load(testvars.timeout)
-        rev_num = get_current_rev(self,sel)
+        rev_num = website.get_current_rev(self,sel)
         website.verify_latest_history(self,sel,rev="#"+str(rev_num),user="sub_writer",time="100%",text="100%")
 
 
@@ -127,7 +127,7 @@ class subgroup_70(unittest.TestCase):
         sel.click(testvars.video_original)
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         sel.click(testvar.history_tab)
-        rev_num = get_current_rev(self,sel)
+        rev_num = website.get_current_rev(self,sel)
         website.verify_latest_history(self,sel,rev="#"+str(rev_num),user="sub_writer",time="100%",text="0%")
                 
     def test_602(self):
@@ -178,7 +178,7 @@ class subgroup_70(unittest.TestCase):
         sel.click(testvars.video_original)
         sel.wait_for_page_to_load(testvars.timeout)
         sel.click(testvars.history_tab)
-        rev_num = get_current_rev(self,sel)      
+        rev_num = website.get_current_rev(self,sel)      
         website.verify_latest_history(self,sel,rev="#"+str(rev_num),user="sub_writer",time="0%",text="100%")
 
 
