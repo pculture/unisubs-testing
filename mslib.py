@@ -38,11 +38,13 @@ def wait_for_video_to_buffer(self,sel):
     # on some browsers, need to start playback for browser to start to buffer
     #start play, then pause to wait for buffer
 #    if selvars.set_browser() == "*firefox":
-    time.sleep(5)
+    time.sleep(2)
     try:
         if sel.is_element_present(testvars.WidgetUI["Video_pause_button"]):
             print "autoplaying"
+            sel.focus(testvars.WidgetUI["Play_pause"])
             sel.click_at(testvars.WidgetUI["Play_pause"],"")
+            time.sleep(5)
         if sel.is_element_present("css=.mirosubs-buffered"):
             print " - waiting for video to buffer " +time.strftime("%M:%S", time.gmtime())
             for i in range(30):
