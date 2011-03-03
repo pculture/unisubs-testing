@@ -180,7 +180,9 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="ye
             sel.key_press_native('10')
         time.sleep(3)
     if step == "Continue":
-        sel.click(testvars.WidgetUI["Next_step"])
+        sel.click_at(testvars.WidgetUI["Next_step"],"")
+        mslib.wait_for_element_present(self,sel,"css=.mirosubs-done span:contains('Reviewing')")
+
 
  
 
