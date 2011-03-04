@@ -238,7 +238,7 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
         sel.focus(testvars.WidgetUI["Sync_sub"])
         sel.click_at(testvars.WidgetUI["Sync_sub"],"")
         time.sleep(2)
-        sub_cell_start_time = "css=li:nth-child("+str(x)+") > .mirosubs-timestamp .mirosubs-timestamp-time"
+        sub_cell_start_time = "css=li:nth-child("+str(x)+") > span.mirosubs-timestamp span span.mirosubs-timestamp-time"
         sub_cell_text = "css=li:nth-child("+str(x)+") > span.mirosubs-title span"
         start_time=sel.get_text(sub_cell_start_time)
         print " - sub time: " '%.2f' % float(start_time) + " - sub text: "+ sel.get_text(sub_cell_text)
@@ -269,22 +269,26 @@ def edit_text(self,sel,subtextfile,new_text=""):
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
     sel.click("css=.mirosubs-activestep")
     mslib.wait_for_video_to_buffer(self,sel)
-    sel.click("css=.mirosubs-activestep")
-
+   
     for i,line in enumerate(open(subtextfile)):
         x = i+1
         sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(x)+") "       
         if sel.is_element_present(sub_cell) == False:
             break
-        textarea = sub_cell + " > .mirosubs-title textarea"
-        textspan = sub_cell + " > .mirosubs-title span"
+        textarea = sub_cell + " > span.mirosubs-title textarea"
+        textspan = sub_cell + " > span.mirosubs-title span"
         
         if new_text == "":
             ed_text = str(line).rstrip().upper()
         else:
             ed_text = new_text
         sel.click(textspan)
-        mslib.wait_for_element_present(self,sel,textarea)
+        time.sleep(.5)
+        if sel.is_element_present(textarea) == False:
+            sel.click(textspan) #try again just to see
+            time.sleep(.5)
+            self.assertTrue(sel.is_element_present(textarea))
+
         time.sleep(1)
         sel.type(textarea,ed_text) # trying this now"css=span.mirosubs-title textarea", ed_text)
         if "firefox" in selvars.set_browser():
@@ -293,7 +297,8 @@ def edit_text(self,sel,subtextfile,new_text=""):
             sel.focus(sub_cell)# trying this now: "css=span.mirosubs-title textarea")
             sel.key_press_native('10')
      #   sel.key_press("css=span.mirosubs-title textarea", "\\13")
-        mslib.wait_for_element_present(self,sel,textspan)
+        time.sleep(1)
+        self.assertTrue(sel.is_element_present(textspan))
         sub_cell_text=sel.get_text(textspan)
         self.assertEqual(sub_cell_text.rstrip(),ed_text.rstrip())
         time.sleep(2)
