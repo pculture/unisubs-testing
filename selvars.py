@@ -147,6 +147,21 @@ def set_browser(testid="none",testdesc="none"):
                         "public": "true", \
                         "job-name": testid +': '+ testdesc \
                     }
+
+        elif controller.testbrowser == "lin_ff":
+            sbrowser = {\
+                        "username": sauce_auth.sauce_user,\
+                        "access-key": sauce_auth.sauce_key,\
+                        "os": "Linux",\
+                        "browser": "firefox",\
+                        "browser-version": "3.6", \
+                        "max-duration": 480, \
+                        "idle-timeout": 120, \
+                        "public": "true", \
+                        "job-name": testid +': '+ testdesc \
+                    }
+
+            
         else:
             sbrowser= { \
                         "username": sauce_auth.sauce_user,
@@ -159,6 +174,7 @@ def set_browser(testid="none",testdesc="none"):
                         "public": "true", \
                         "job-name": testid +': '+ testdesc \
                     }
+
         browser = json.dumps(sbrowser, indent=4)
     else:
         #use default browser

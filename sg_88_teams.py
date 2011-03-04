@@ -200,8 +200,62 @@ class subgroup_88(unittest.TestCase):
         # logout and verify team no longer displayed   
         sel.open("teams/"+team)
         self.assertTrue(sel.is_text_present(new_text))
-             
+
+
+        # Close the browser, log errors, perform cleanup
+        def tearDown(self):
+            """
+            Closes the browser test window and logs errors
+            """
+            
+            #give it back the session id in case it's lost it
+            self.selenium.sessionId = self.session
+            #Check for an error page, then close the browser
+            website.handle_error_page(self,self.selenium,self.id())
+            self.selenium.stop()
+            #Log any errors
+            self.assertEqual([], self.verificationErrors)
+
+
+class subgroup_88_special(unittest.TestCase):
+    """
+    Litmus Subgroup  - Teams Tests
+    Special test designed to catch the lang dialog popup when opening al jazeera teams page
+    """
+    
+    # Open the desired browser and set up the test
+    def setUp(self):
+        """
+        Sets up run envirnment for selenium server
+        """
+        self.verificationErrors = []
+        self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), "http://universalsubtitles.org")
         
+    # The tests in the subgroup
+    def test_60x(self):
+        """Open Al Jazeera team page and see if Language Dialog goes away after lang selected.
+
+        http://litmus.pculture.org/show_test.cgi?id=603.      
+        """
+        for x in range(1,5):
+            try:
+                self.selenium.start()
+                sel= self.selenium
+                sel.set_timeout(testvars.timeout)
+                sel.open("/teams/al-jazeera/")
+                if (sel.is_element_present("css=.language_modal")):
+                    sel.click("css=button.green_button.small")
+                    sel.wait_for_page_to_load(testvars.timeout)
+                    self.assertFalse(sel.is_element_present("css=.language_modal"))
+            except:
+                print "got an error on run#:" +str(x)
+            finally:
+                self.selenium.stop()
+
+                
+                    
+    
+            
         
 
         
@@ -210,14 +264,12 @@ class subgroup_88(unittest.TestCase):
         """
         Closes the browser test window and logs errors
         """
-        
-        #give it back the session id in case it's lost it
-        self.selenium.sessionId = self.session
         #Check for an error page, then close the browser
-        website.handle_error_page(self,self.selenium,self.id())
         self.selenium.stop()
         #Log any errors
         self.assertEqual([], self.verificationErrors)
 
 if __name__ == "__main__":
     unittest.main()
+
+    
