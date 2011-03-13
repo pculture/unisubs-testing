@@ -122,6 +122,7 @@ def start_sub_widget(self,sel,wig_menu=testvars.WebsiteUI["SubtitleMe_menu"],ski
     """
     
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+    sel.window_mazimize()
     sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
     time.sleep(5)
     if sel.is_element_present(testvars.WidgetUI["Select_language"]):
