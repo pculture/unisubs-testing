@@ -235,22 +235,23 @@ class subgroup_88_special(unittest.TestCase):
     def test_60x(self):
         """Open Al Jazeera team page and see if Language Dialog goes away after lang selected.
 
-        http://litmus.pculture.org/show_test.cgi?id=603.      
+        http://litmus.pculture.org/show_test.cgi?id=---.      
         """
         for x in range(1,5):
             try:
                 self.selenium.start()
                 sel= self.selenium
                 sel.set_timeout(testvars.timeout)
-                sel.open("/teams/al-jazeera/")
+                sel.open("s")
                 if (sel.is_element_present("css=.language_modal")):
                     sel.click("css=button.green_button.small")
                     sel.wait_for_page_to_load(testvars.timeout)
+                    time.sleep(2)
                     self.assertFalse(sel.is_element_present("css=.language_modal"))
             except:
                 print "got an error on run#:" +str(x)
-            finally:
-                self.selenium.stop()
+##            finally:
+##                self.selenium.stop()
 
                 
                     
@@ -265,7 +266,7 @@ class subgroup_88_special(unittest.TestCase):
         Closes the browser test window and logs errors
         """
         #Check for an error page, then close the browser
-        self.selenium.stop()
+#        self.selenium.stop()
         #Log any errors
         self.assertEqual([], self.verificationErrors)
 
