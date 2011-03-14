@@ -544,6 +544,17 @@ def wait_for_offsite_login(self,sel):
         except: pass
         time.sleep(1)
 
+def set_subs_complete(self,sel,done=True):
+    
+    sel.select_frame("relative=top")
+    if sel.is_element_present("css=.mirosubs-modal-completed"):
+        mslib.wait_for_element_present(self,sel,"css=.goog-checkbox-unchecked")
+        if done==True:
+            sel.click("css=.goog-checkbox-unchecked")
+        sel.click("css=.mirosubs-green-button.mirosubs-big")
+        time.sleep(3)
+
+        
 def submit_sub_edits(self,sel,offsite=False):
     print " * Submit subtitles"
     sel.select_window("null")
@@ -553,6 +564,7 @@ def submit_sub_edits(self,sel,offsite=False):
     if not sel.get_text("css=li a.mirosubs-activestep") == "3":
         sel.click("css=.mirosubs-help-heading li a:contains('3')")
     sel.click(testvars.WidgetUI["Next_step"])
+    set_subs_complete(self,sel,done=True)
     if offsite==False:
         mslib.wait_for_element_present(self,sel,testvars.video_video_info)
 
