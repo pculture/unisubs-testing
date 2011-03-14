@@ -27,6 +27,7 @@ def SiteLogIn(self,sel,user,passw):
     Post-condition: user is still on the site page
     """
     sel.open("en/logout/?next=/")
+    sel.maximize()
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_Button"])
     sel.click(testvars.WebsiteUI["Login_Button"])
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
@@ -97,6 +98,7 @@ def submit_video(self,sel,url):
     """
     print "* Submit Video"
     sel.open("/")
+    sel.maximize()
     sel.click(testvars.WebsiteUI["Subtitle_Button"])
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     sel.type("video_url", url)
@@ -482,7 +484,7 @@ def create_team(self,sel,team,team_logo):
         vid_url = "http://blip.tv/file/1077145/"
     else:
         vid_url = "http://blip.tv/file/get/Miropcf-Miro20Introduction771.ogv"
-    sel.type("id_video_url", vid_url )
+#    sel.type("id_video_url", vid_url )  comment out until png bug fixed
     sel.click("css=.green_button.big:contains('Create Team')")
     sel.wait_for_page_to_load(testvars.timeout)
     # Verify team creation parameters
