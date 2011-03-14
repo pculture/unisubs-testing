@@ -545,12 +545,15 @@ def wait_for_offsite_login(self,sel):
         time.sleep(1)
 
 def set_subs_complete(self,sel,done=True):
-    
     sel.select_frame("relative=top")
-    if sel.is_element_present("css=.mirosubs-modal-completed"):
-        mslib.wait_for_element_present(self,sel,"css=.goog-checkbox-unchecked")
+    time.sleep(3)
+    if sel.is_text_present("Entire video completed?"):
         if done==True:
-            sel.click("css=.goog-checkbox-unchecked")
+            if sel.is_element_present("css=.goog-checkbox-unchecked"):
+                sel.click("css=.goog-checkbox-unchecked")
+        elif done==False:
+            if sel.is_element_present("css=.goog-checkbox-checked"):
+                sel.click("css=.goog-checkbox-checked")
         sel.click("css=.mirosubs-green-button.mirosubs-big")
         time.sleep(3)
 
