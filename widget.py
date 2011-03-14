@@ -154,7 +154,7 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="ye
         logging.info("trouble selecting element (safari issue?) - going with default value")
         
     # give time to buffer
-    mslib.wait_for_video_to_buffer(self,sel)
+#    mslib.wait_for_video_to_buffer(self,sel)
     #start playback
     sel.click(testvars.WidgetUI["Play_pause"])
 #    sel.type_keys("css=.mirosubs-play",u'\u0009')
@@ -206,7 +206,7 @@ def back_step(self,sel):
         sel.click("link=Back to Typing")
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
 
-def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
+def sync_video(self,sel,sub_file,start_delay=3,sub_int=2,step="Continue"):
     """
     Description: Use the defined sync button to sync the subtitles.  Waits for
     text present on the video and prints the subtime.
@@ -234,10 +234,9 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
     
     for i,line in enumerate(open(sub_file)):
         x=i+1
-        print line
         sel.focus(testvars.WidgetUI["Sync_sub"])
         sel.click_at(testvars.WidgetUI["Sync_sub"],"")
-        time.sleep(2)
+        time.sleep(.5)
         sub_cell_start_time = "css=li:nth-child("+str(x)+") > span.mirosubs-timestamp span span.mirosubs-timestamp-time"
         sub_cell_text = "css=li:nth-child("+str(x)+") > span.mirosubs-title span"
         start_time=sel.get_text(sub_cell_start_time)
@@ -246,8 +245,6 @@ def sync_video(self,sel,sub_file,start_delay=4,sub_int=3,step="Continue"):
     # finish sync of the last sub
     sel.focus(testvars.WidgetUI["Sync_sub"])
     sel.click_at(testvars.WidgetUI["Sync_sub"],"")
-    goto_step(self,sel,"2") #back to 2
-    time.sleep(3)
     if step == "Continue":
         sel.click(testvars.WidgetUI["Next_step"])
     
