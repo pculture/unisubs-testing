@@ -27,7 +27,7 @@ def SiteLogIn(self,sel,user,passw):
     Post-condition: user is still on the site page
     """
     sel.open("en/logout/?next=/")
-    sel.maximize()
+    sel.window_maximize()
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_Button"])
     sel.click(testvars.WebsiteUI["Login_Button"])
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
@@ -99,7 +99,7 @@ def submit_video(self,sel,url):
     print "* Submit Video"
     sel.open("/")
     sel.click(testvars.WebsiteUI["Subtitle_Button"])
-    sel.maximize()
+    sel.window_maximize()
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     sel.type("video_url", url)
     sel.click(testvars.WebsiteUI["Video_Submit_Button"])
