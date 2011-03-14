@@ -98,8 +98,8 @@ def submit_video(self,sel,url):
     """
     print "* Submit Video"
     sel.open("/")
-    sel.maximize()
     sel.click(testvars.WebsiteUI["Subtitle_Button"])
+    sel.maximize()
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     sel.type("video_url", url)
     sel.click(testvars.WebsiteUI["Video_Submit_Button"])
