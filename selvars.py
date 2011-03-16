@@ -39,7 +39,7 @@ def set_port():
 
 def set_site():
     """
-    sets the value of port if specified at the cmdline
+    sets the value of test site if specified at the cmdline
     """   
     if controller.testsite:
         site = "http://"+controller.testsite+".universalsubtitles.org"
