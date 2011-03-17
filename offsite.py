@@ -148,12 +148,13 @@ def get_youtube_video_url(self,vid_format="embed"):
             vsel.open("videos?s=mr&c="+str(cat_num))
         vsel.wait_for_page_to_load(testvars.timeout)
 
-        for x in range(1,3):
+        for x in range(0,5):
+            time.sleep(2)
             if vsel.is_element_present("css=a[id^=video-short-title]"): break
             cat_num = random.randint(1,26)
             vsel.open("videos?s=mr&c="+str(cat_num))
             vsel.wait_for_page_to_load(testvars.timeout)
-            if x == 3:
+            if x == 4:
                 self.fail("can't get youtube video url")          
         vsel.click("css=a[id^=video-short-title]")             
         vsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])

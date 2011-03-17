@@ -74,6 +74,8 @@ class subgroup_70(unittest.TestCase):
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         website.verify_subs(self,sel,subtextfile)
         # Click History tab
+        sel.click(testvars.video_original)
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         sel.click(testvars.history_tab)
         sel.wait_for_page_to_load(testvars.timeout)
         rev_num = website.get_current_rev(self,sel)
@@ -198,6 +200,7 @@ class subgroup_70(unittest.TestCase):
         language = website.get_translated_lang(self,sel)
         mslib.wait_for_element_present(self,sel,"css=a:contains('"+language+"')")
         sel.click("css=a:contains('"+language+"')")
+        sel.wait_for_page_to_load(testvars.timeout)
         website.store_subs(self,sel)
         sel.click(testvars.history_tab)
         sel.wait_for_page_to_load(testvars.timeout)

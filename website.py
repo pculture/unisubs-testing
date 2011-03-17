@@ -5,6 +5,7 @@ import time
 import re
 import codecs
 import os
+import random
 import mslib
 import selvars
 import testvars
@@ -204,7 +205,7 @@ def get_video_with_translations(self,sel):
     """
     sel.open("videos/")
  #   sort_videos_table(self,sel,"Subtitles and Translations","desc") 
-    row_no = 1
+    row_no = random.randint(1,6)
     local_url = "none"    
     while sel.is_element_present("css=tr:nth-child("+str(row_no)+") > "+testvars.videos_trans_td):
         num_trans = sel.get_text("css=tr:nth-child("+str(row_no)+") > "+testvars.videos_trans_td)
@@ -230,7 +231,7 @@ def get_video_no_translations(self,sel):
     """
     sel.open("videos/")
     sort_videos_table(self,sel,"Subtitles and Translations","asc") 
-    row_no = 1
+    row_no = random.randint(1,6)
     local_url = "none"
     
     subtitled_cell="css=tr:nth-child("+str(row_no)+") > "+testvars.videos_trans_td
@@ -321,7 +322,7 @@ def store_subs(self,sel,modify=False):
     """
     f = codecs.open("subs.txt", "w",encoding='utf-8')
     sub_td = 1
-    while sel.is_element_present("css=tr:nth-child("+str(sub_td)+") > td div.sub_content"):
+    while sel.is_element_present("css=tr:nth-child("+str(sub_td)+")"):
         subline = sel.get_text("css=tr:nth-child("+str(sub_td)+") > td div.sub_content")
         if modify==True:
             subline=subline.upper()
@@ -476,8 +477,8 @@ def rollback_revision(self,sel):
 
 
 def create_team(self,sel,team,team_logo):
-    sel.type("id_name", team)
-    sel.type("id_slug", team)
+    sel.type_keys("id_name", team)
+    sel.type_keys("id_slug", team)
     sel.type("id_description", "Team "+team+ " - for test purposes only.")
     sel.type("id_logo", team_logo)
     if "iexplore" in selvars.set_browser():
