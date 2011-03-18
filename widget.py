@@ -12,7 +12,6 @@ import codecs
 import mslib
 import testvars
 import selvars
-import logging
 
 
 
@@ -136,7 +135,7 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="ye
 
         returns line_count - the number of text lines input for the translation
     """
-    logging.info("Transcribing the video")
+    print ("Transcribing the video")
     sel.select_window("null")
     restart_step(self,sel)
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-speedmode")
@@ -151,7 +150,7 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="ye
         elif mode == "Expert":
             sel.select("css=.mirosubs-speedmode select", "value=no")
     except:
-        logging.info("trouble selecting element (safari issue?) - going with default value")
+        print ("trouble selecting element (safari issue?) - going with default value")
         
     # give time to buffer
 #    mslib.wait_for_video_to_buffer(self,sel)
@@ -219,7 +218,7 @@ def sync_video(self,sel,sub_file,start_delay=3,sub_int=2,step="Continue"):
 
     Pre-condition - can use this to sync on Step 2, Step 3 or Edit.
     """
-    logging.info("Syncing the subs")
+    print ("Syncing the subs")
     sel.select_window("null")
     mslib.wait_for_video_to_buffer(self,sel)
     #start playback
@@ -261,7 +260,7 @@ def edit_text(self,sel,subtextfile,new_text=""):
 
     Pre-condition - can use this on Step 2, Step 3.
     """
-    logging.info("Editing the sub text in the widget")
+    print ("Editing the sub text in the widget")
     sel.select_window("null")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
     sel.click("css=.mirosubs-activestep")
@@ -311,7 +310,7 @@ def edit_translation(self,sel,subtextfile,new_text=""):
 
     Pre-condition - Editing Translation Widget opened
     """
-    logging.info("Editing the translation")
+    print ("Editing the translation")
     sel.select_window("null")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
     for i,line in enumerate(codecs.open(subtextfile)):

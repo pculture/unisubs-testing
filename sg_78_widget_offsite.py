@@ -228,7 +228,7 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
 
 def make_new_subs(self,sel,vid_pos):
 
-    logging.info("no subs yet - making new ones")
+    print  ("no subs yet - making new ones")
     subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
     website.start_sub_widget(self,sel,vid_pos)
     # Transcribe
@@ -240,7 +240,7 @@ def make_new_subs(self,sel,vid_pos):
 
 
 def edit_subs_and_revert(self,sel,test_page,vid_pos,vid_title):
-        logging.info("video has subs - going to editing then revert")
+        print "video has subs - going to editing then revert"
         sel.click(vid_pos)
         sel.click(testvars.WebsiteUI["Subhomepage_menuitem"])
         sel.wait_for_page_to_load(testvars.timeout)

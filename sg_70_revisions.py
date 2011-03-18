@@ -3,7 +3,6 @@ import unittest
 import time
 import sys
 import os
-import logging
 import mslib
 import website
 import widget
@@ -297,7 +296,7 @@ class subgroup_70(unittest.TestCase):
         website.SiteLogIn(self,sel,testvars.siteuser, testvars.passw)
         #get a video and open page    
         test_video_url = website.get_video_with_translations(self,sel)
-        logging.info(test_video_url)
+        print test_video_url
         sel.open(test_video_url)
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         sel.click(testvars.video_original)
