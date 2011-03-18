@@ -8,6 +8,7 @@ import os
 import StringIO
 import sys
 from threading import Thread
+from Queue import Queue
 
 import HTMLTestRunner
 import litmusresult
@@ -80,6 +81,34 @@ class Test_HTMLTestRunner(unittest.TestCase):
 ##        self.assert_('</html>' in buf.getvalue())
 
     def test_main(self):
+
+        def runtests():
+            mytest = q.get()
+            tid = set_test_id(str(mytest))
+            tname = "Thread_"+tid+"_"+time.strftime("%M%S", time.gmtime())+".log"
+            res = open(tname,"w")
+            runner = unittest.TextTestRunner(stream=res)
+            runner.run(mytest)
+            res.close()
+            # get the result and send it to litmus
+            logs = file(tname,"r")
+            byte_output = logs.read()
+            id_string = str(mytest)
+            stat = byte_output[0]
+            try:
+                litmusresult.write_log(id_string,stat,testbuildid,byte_output)
+            finally:
+                #clean up the buffer 
+                os.remove(tname)
+            q.task_done()
+
+        def set_test_id(test_id):
+            
+            s = str(test_id).strip(">,<,[,]")
+            L = s.split('_')
+            testid = L.pop()
+            return testid
+        
         # Run HTMLTestRunner.
 
         # suite of TestCases
@@ -126,19 +155,19 @@ class Test_HTMLTestRunner(unittest.TestCase):
 
         # Post the output directly to Litmus
         if testlitmus == True:
-            #clear out any log files
-            
+            if (testsauce == True) or (testfast == True):
+                num_worker_threads = 3
+            else:
+                num_worker_threads = 1
+            q = Queue()
+            for i in range(num_worker_threads):  
+                t = Thread(target=runtests)
+                t.daemon = True
+                t.start()
             for x in self.suite:
-                if (testsauce == True) or (testfast == True):
-                    tid = set_test_id(str(x))
-                    tname = "Thread_"+tid+"_"+time.strftime("%M%S", time.gmtime())+".log"
-                    t = Thread(target=runtests, args=(x,tname))
-                    t.start()
-                else:
-                    
-                    runtests(x,"testlog.log")
-                    
-                
+                q.put(x)
+
+            q.join()
 
 
         else:   # Post results to HTML page
@@ -162,30 +191,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
             lastrun = os.path.join(results_path, 'last_run.html')
             shutil.copyfile(filename,lastrun)
 
-def runtests(mytest,tname):
-    res = open(tname,"w")
-    
-    #tname = StringIO.StringIO()
-    runner = unittest.TextTestRunner(stream=res)
-    runner.run(mytest)
-    res.close()
-    # check out the output
-    logs = file(tname,"r")
-    byte_output = logs.read()
-    id_string = str(mytest)
-    stat = byte_output[0]
-    try:
-        litmusresult.write_log(id_string,stat,testbuildid,byte_output)
-    finally:
-        #clean up the buffer 
-        os.remove(tname)
 
-def set_test_id(test_id):
-    
-    s = str(test_id).strip(">,<,[,]")
-    L = s.split('_')
-    testid = L.pop()
-    return testid
 
 
 ##############################################################################
