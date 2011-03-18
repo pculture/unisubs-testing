@@ -7,9 +7,10 @@ testtest.py
 # ignore sauce_auth.py - don't want key public
 sauce_auth.py
 sauce_auth.pyc
-# ignore results
+# ignore results and log files
 Results/*.html
 log.xml
+*.log
 # ignore temp file
 subs.txt
 curr_test.log
