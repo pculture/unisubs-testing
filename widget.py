@@ -541,9 +541,9 @@ def wait_for_offsite_login(self,sel):
         time.sleep(1)
 
 def set_subs_complete(self,sel,done=True):
-    sel.select_frame("relative=top")
+    sel.select_window("null")
     time.sleep(3)
-    if sel.is_text_present("Entire video completed?"):
+    if sel.is_text_present("Entire video):
         if done==True:
             if sel.is_element_present("css=.goog-checkbox-unchecked"):
                 sel.click("css=.goog-checkbox-unchecked")
