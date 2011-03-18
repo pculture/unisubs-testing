@@ -155,7 +155,9 @@ class Test_HTMLTestRunner(unittest.TestCase):
 
         # Post the output directly to Litmus
         if testlitmus == True:
-            if (testsauce == True) or (testfast == True):
+            if testsauce == True:
+                num_worker_threads = 8
+            elif testfast == True:
                 num_worker_threads = 3
             else:
                 num_worker_threads = 1
