@@ -129,9 +129,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
                     t = Thread(target=runtests, args=(x,))
                     t.start()
                 else:
-                    buf = StringIO.StringIO()
-                    runner = unittest.TextTestRunner(stream=buf)
-                    runtests(runner,x,buf)
+                    runtests(runner)
                     
                 
 
