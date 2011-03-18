@@ -50,12 +50,9 @@ class subgroup_69(unittest.TestCase):
         self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), selvars.set_site() )
         self.selenium.start()
         self.session = self.selenium.sessionId
-        LOG_FILENAME = "curr_test.log"
-        logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO)
+      
         if selvars.set_sauce() == True:
-            logging.info("sauce job result: http://saucelabs.com/jobs/"+str(self.session))
-        else:
-            logging.info("starting: " +self.id() +"-"+self.shortDescription())
+            print"sauce job result: http://saucelabs.com/jobs/"+str(self.session)
 
 # The test cases of the subgroup
 

@@ -125,11 +125,12 @@ class Test_HTMLTestRunner(unittest.TestCase):
             
             for x in self.suite:
                 if testsauce == True:
-                    tname = "Thread_"+time.strftime("%M%S%s", time.gmtime())
-                    t = Thread(target=runtests, args=(x,))
+                    tname = "Thread_"+str(x)+"_"+time.strftime("%S%s", time.gmtime())+".log"
+                    t = Thread(target=runtests, args=(x,tname))
                     t.start()
                 else:
-                    runtests(runner)
+                    
+                    runtests(x,"testlog.log")
                     
                 
 
@@ -155,22 +156,24 @@ class Test_HTMLTestRunner(unittest.TestCase):
             lastrun = os.path.join(results_path, 'last_run.html')
             shutil.copyfile(filename,lastrun)
 
-def runtests(mytest):
- 
-    buf = StringIO.StringIO()
-    runner = unittest.TextTestRunner(stream=buf,descriptions=True, verbosity=1, failfast=False, buffer=True)
+def runtests(mytest,tname):
+    res = open(tname,"w")
+    
+    #tname = StringIO.StringIO()
+    runner = unittest.TextTestRunner(stream=res)
     runner.run(mytest)
+    res.close()
     # check out the output
-    byte_output = buf.getvalue()
-    print byte_output
+    logs = file(tname,"r")
+    byte_output = logs.read()
     id_string = str(mytest)
     stat = byte_output[0]
     try:
         litmusresult.write_log(id_string,stat,testbuildid,byte_output)
     finally:
         #clean up the buffer 
-        buf.truncate(0)
-        
+        os.remove(tname)
+
 
 
 
