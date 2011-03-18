@@ -63,3 +63,11 @@ def calc_time_diff(time1,time2):
     print float(time1)
     diff = float(time2) - float(time1)
     return diff
+
+
+def set_test_id(test_id):
+    
+    s = str(test_id).strip(">,<,[,]")
+    L = s.split('_')
+    testid = L.pop()
+    return testid

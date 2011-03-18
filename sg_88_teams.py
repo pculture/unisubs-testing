@@ -2,7 +2,7 @@ from selenium import selenium
 import unittest
 import time
 import os
-import logging
+import StringIO
 import mslib
 import website
 import widget
@@ -28,12 +28,6 @@ class subgroup_88(unittest.TestCase):
         self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), selvars.set_site())
         self.selenium.start()
         self.session = self.selenium.sessionId
-        LOG_FILENAME = "curr_test.log"
-        logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO)
-        if selvars.set_sauce() == True:
-            logging.info("sauce job result: http://saucelabs.com/jobs/"+str(self.session))
-        else:
-            logging.info("starting: " +self.id() +"-"+self.shortDescription())
         
         
     # The tests in the subgroup
@@ -80,7 +74,7 @@ class subgroup_88(unittest.TestCase):
         sel.wait_for_page_to_load(testvars.timeout)
         website.create_team(self,sel,team,team_logo_path)
         # logout
-        sel.click(testvars.WebsiteUI["Logout_Button"])
+##        website.SiteLogout(self,sel)
         
 
     def test_613(self):
@@ -203,18 +197,21 @@ class subgroup_88(unittest.TestCase):
 
 
         # Close the browser, log errors, perform cleanup
-        def tearDown(self):
-            """
-            Closes the browser test window and logs errors
-            """
-            
-            #give it back the session id in case it's lost it
-            self.selenium.sessionId = self.session
-            #Check for an error page, then close the browser
-            website.handle_error_page(self,self.selenium,self.id())
-            self.selenium.stop()
-            #Log any errors
-            self.assertEqual([], self.verificationErrors)
+    def tearDown(self):
+        """
+        Closes the browser test window and logs errors
+        """
+        
+        #give it back the session id in case it's lost it
+        self.selenium.sessionId = self.session
+        #Check for an error page, then close the browser
+        website.handle_error_page(self,self.selenium,self.id())
+        self.selenium.stop()
+        #Log any errors
+        self.assertEqual([], self.verificationErrors)
+        if selvars.set_sauce() == True:
+            output = StringIO.StringIO()
+            output.write("sauce job result: http://saucelabs.com/jobs/"+str(self.session))
 
 
 class subgroup_88_special(unittest.TestCase):
@@ -250,13 +247,9 @@ class subgroup_88_special(unittest.TestCase):
                     self.assertFalse(sel.is_element_present("css=.language_modal"))
             except:
                 print "got an error on run#:" +str(x)
-##            finally:
-##                self.selenium.stop()
-
-                
-                    
-    
-            
+            finally:
+                self.selenium.stop()
+       
         
 
         
@@ -266,9 +259,12 @@ class subgroup_88_special(unittest.TestCase):
         Closes the browser test window and logs errors
         """
         #Check for an error page, then close the browser
-#        self.selenium.stop()
+        self.selenium.stop()
         #Log any errors
         self.assertEqual([], self.verificationErrors)
+        if selvars.set_sauce() == True:
+            output = StringIO.StringIO()
+            output.write("sauce job result: http://saucelabs.com/jobs/"+str(self.session))
 
 if __name__ == "__main__":
     unittest.main()

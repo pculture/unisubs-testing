@@ -114,13 +114,11 @@ FOOTER = """</testresults>
 """
 
 def write_log(testid,stat,buildid,error_info=""):
-       
-    f = open("log.xml", "w")
+    logname = set_test_id(testid)+"_"+time.strftime("%H%M%s", time.gmtime())+"log.xml"
+    print logname
+    logfile = os.path.join(os.getcwd(),logname)
+    f = open(logfile, "w")
     test_log = []
-    if os.path.isfile("curr_test.log"):
-        logf = open("curr_test.log","r")
-        for line in logf.readlines():
-            test_log.append(line.split(':root:')[1])
     test_log.append(error_info)
     f.write(HEADER % {"buildid": buildid,
                       "opsys": set_test_os(),
@@ -133,13 +131,19 @@ def write_log(testid,stat,buildid,error_info=""):
                          })
 
     f.write(FOOTER)
-    f.close
+    f.close()
+    try:
+        send_result(logfile)
+    finally:
+        if os.path.isfile(logfile):
+            os.remove(logfile)
     
     
 
 
-def send_result():
-    f = open("log.xml")
+def send_result(logfile):
+    f = open(str(logfile))
+    print logfile
     log_data = f.read()
   
     params = urllib.urlencode({'data':log_data
@@ -161,5 +165,5 @@ def send_result():
 if __name__ == "__main__":
 
  #   write_log("381",None)
-    send_result()
+    send_result("test.xml")
 

@@ -294,11 +294,11 @@ def edit_text(self,sel,subtextfile,new_text=""):
             sel.focus(sub_cell)# trying this now: "css=span.mirosubs-title textarea")
             sel.key_press_native('10')
      #   sel.key_press("css=span.mirosubs-title textarea", "\\13")
-        time.sleep(1)
+        time.sleep(.25)
         self.assertTrue(sel.is_element_present(textspan))
         sub_cell_text=sel.get_text(textspan)
         self.assertEqual(sub_cell_text.rstrip(),ed_text.rstrip())
-        time.sleep(2)
+        time.sleep(.5)
         
 
 

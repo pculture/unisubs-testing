@@ -7,6 +7,8 @@ import shutil
 import os
 import StringIO
 import sys
+from threading import Thread
+
 import HTMLTestRunner
 import litmusresult
 import sg_64_submit
@@ -64,13 +66,13 @@ class Test_HTMLTestRunner(unittest.TestCase):
 
 # Open the desired browser and set up the test
 
-    def test0(self):
-        self.suite = unittest.TestSuite()
-        buf = StringIO.StringIO()
-        runner = HTMLTestRunner.HTMLTestRunner(buf)
-        runner.run(self.suite)
-        # didn't blow up? ok.
-        self.assert_('</html>' in buf.getvalue())
+##    def test0(self):
+##        self.suite = unittest.TestSuite()
+##        buf = StringIO.StringIO()
+##        runner = HTMLTestRunner.HTMLTestRunner(buf)
+##        runner.run(self.suite)
+##        # didn't blow up? ok.
+##        self.assert_('</html>' in buf.getvalue())
 
     def test_main(self):
         # Run HTMLTestRunner.
@@ -88,7 +90,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
                 unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_subtesting.test_601'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_unisubs_mc.test_623'),            
                 unittest.defaultTestLoader.loadTestsFromName('sg_80_comments.subgroup_80.test_536'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_88_teams.subgroup_88.test_604'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_88_teams.subgroup_88.test_603'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_379'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_378')
             ])
@@ -121,23 +123,17 @@ class Test_HTMLTestRunner(unittest.TestCase):
         if testlitmus == True:
             #clear out any log files
             
-            buf = StringIO.StringIO()
-            runner = unittest.TextTestRunner(stream=buf)
             for x in self.suite:
-                if os.path.isfile("curr_test.log"):
-                    os.remove("curr_test.log")
-                    time.sleep(2)
-                runner.run(x)
-                # check out the output
-                byte_output = buf.getvalue()
-                id_string = str(x)
-                stat = byte_output[0]
-                try:
-                    litmusresult.write_log(id_string,stat,testbuildid,byte_output)
-                    litmusresult.send_result()
-                finally:
-                    #clean up the buffer and the log files
-                    buf.truncate(0)
+                if testsauce == True:
+                    tname = "Thread_"+time.strftime("%M%S%s", time.gmtime())
+                    t = Thread(target=runtests, args=(x,))
+                    t.start()
+                else:
+                    buf = StringIO.StringIO()
+                    runner = unittest.TextTestRunner(stream=buf)
+                    runtests(runner,x,buf)
+                    
+                
 
 
         else:   # Post results to HTML page
@@ -160,6 +156,25 @@ class Test_HTMLTestRunner(unittest.TestCase):
             #copy the results to a file called last_run.html
             lastrun = os.path.join(results_path, 'last_run.html')
             shutil.copyfile(filename,lastrun)
+
+def runtests(mytest):
+ 
+    buf = StringIO.StringIO()
+    runner = unittest.TextTestRunner(stream=buf,descriptions=True, verbosity=1, failfast=False, buffer=True)
+    runner.run(mytest)
+    # check out the output
+    byte_output = buf.getvalue()
+    print byte_output
+    id_string = str(mytest)
+    stat = byte_output[0]
+    try:
+        litmusresult.write_log(id_string,stat,testbuildid,byte_output)
+    finally:
+        #clean up the buffer 
+        buf.truncate(0)
+        
+
+
 
 ##############################################################################
 # Executing this module from the command line

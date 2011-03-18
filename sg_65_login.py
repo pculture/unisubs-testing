@@ -2,7 +2,8 @@ from selenium import selenium
 import unittest
 import time
 import os
-import logging
+import sys
+import StringIO
 import mslib
 import website
 import widget
@@ -27,14 +28,6 @@ class subgroup_65(unittest.TestCase):
         self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), selvars.set_site())
         self.selenium.start()
         self.session = self.selenium.sessionId
-        if os.path.isfile("curr_test.log"):
-            os.remove("curr_test.log")
-        LOG_FILENAME = "curr_test.log"
-        logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO)
-        if selvars.set_sauce() == True:
-            logging.info("sauce job result: http://saucelabs.com/jobs/"+str(self.session))
-        else:
-            logging.info("starting: " +self.id() +"-"+self.shortDescription())
         
         
     # The tests in the subgroup
@@ -43,6 +36,7 @@ class subgroup_65(unittest.TestCase):
 
         http://litmus.pculture.org/show_test.cgi?id=378.      
         """
+        
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
@@ -51,6 +45,8 @@ class subgroup_65(unittest.TestCase):
         website.verify_login(self,sel,testvars.siteuser)
         # logout
         sel.open("logout/")
+        
+        
 
 
     def test_379(self):
@@ -68,7 +64,7 @@ class subgroup_65(unittest.TestCase):
         website.verify_login(self,sel,username="PCF Sub-writer")
         # logout
         website.SiteLogout(self,sel)
-
+      
     
 
     def test_380(self):
@@ -87,6 +83,7 @@ class subgroup_65(unittest.TestCase):
         website.verify_login(self,sel,testvars.openid_username) #cheat for bug #13688
         # logout
         website.SiteLogout(self,sel)
+       
 
 
 
@@ -105,6 +102,7 @@ class subgroup_65(unittest.TestCase):
         website.verify_login(self,sel,testvars.gmailuser)
         # logout
         website.SiteLogout(self,sel)
+       
 
 
 
@@ -126,6 +124,7 @@ class subgroup_65(unittest.TestCase):
         website.verify_login(self,sel,testvars.gmailuser)
         # logout
         website.SiteLogout(self,sel)
+        
 
 
     def test_383(self):
@@ -147,6 +146,7 @@ class subgroup_65(unittest.TestCase):
         website.verify_login(self,sel,username="PCF Sub-writer")
         # logout
         website.SiteLogout(self,sel)
+      
 
     def test_384(self):
         """Login from widget using site account.
@@ -161,6 +161,7 @@ class subgroup_65(unittest.TestCase):
         website.verify_login(self,sel,testvars.siteuser)
         # logout
         website.SiteLogout(self,sel)
+        return self.session
 
 
 
