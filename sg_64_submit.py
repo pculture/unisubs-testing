@@ -9,7 +9,6 @@ import widget
 import offsite
 import testvars
 import selvars
-import logging
 
 class subgroup_64(unittest.TestCase):
     """
@@ -28,12 +27,8 @@ class subgroup_64(unittest.TestCase):
         self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), selvars.set_site() )
         self.selenium.start()
         self.session = self.selenium.sessionId
-        LOG_FILENAME = self.id()+"_"+time.strftime("%H%M%s", time.gmtime())+"log.xml"
-        logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO)
         if selvars.set_sauce() == True:
-            logging.info("sauce job result: http://saucelabs.com/jobs/"+str(self.session))
-        else:
-            logging.info("starting: " +self.id() +"-"+self.shortDescription())
+            print "sauce job result: http://saucelabs.com/jobs/"+str(self.session)
             
 
 
@@ -131,15 +126,14 @@ class subgroup_64(unittest.TestCase):
 
         http://litmus.pculture.org/show_test.cgi?id=533
         """
-        logging.info("starting 533 vimeo.com submit video")
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         sel.open("/")
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
-        logging.info("getting a vimeo video url")
+        
         vid_url = offsite.get_vimeo_video_url(self)
         # Submit Video
-        logging.info("logging in and submitting video")
+        print "logging in and submitting video"
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         website.submit_video(self,sel,vid_url)
         # Verify embed and player
@@ -167,26 +161,26 @@ class subgroup_64(unittest.TestCase):
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         sel.open("/")
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
-        logging.info("submitting a youtube video")
+        print "submitting a youtube video"
         vid_url = offsite.get_youtube_video_url(self)
         # Submit Video
-        logging.info("logging in and submitting video")
+        print ("logging in and submitting video")
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         website.submit_video(self,sel,vid_url)
         # Verify embed and player
-        logging.info("verifying embed")
+        print ("verifying embed")
         website.verify_submitted_video(self,sel,vid_url,embed_type="youtube")
         # Start sub widget
-        logging.info("starting sub widget")
+        print ("starting sub widget")
         website.start_sub_widget(self,sel)
         # Transcribe
-        logging.info("transcribing video")
+        print ("transcribing video")
         widget.transcribe_video(self,sel,subtextfile)
         # Sync
-        logging.info("syncing video")
+        print ("syncing video")
         widget.sync_video(self,sel,subtextfile,3,4)
         # Review
-        logging.info("review step - just submitting video")
+        print ("review step - just submitting video")
         widget.submit_sub_edits(self,sel)
 
          
