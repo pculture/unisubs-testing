@@ -130,7 +130,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
             
             for x in self.suite:
                 if (testsauce == True) or (testfast == True):
-                    tname = "Thread_"+str(x)+"_"+time.strftime("%S%s", time.gmtime())+".log"
+                    tname = "Thread_"+str(x)+"_"+time.strftime("%M%S", time.gmtime())+".log"
                     t = Thread(target=runtests, args=(x,tname))
                     t.start()
                 else:
