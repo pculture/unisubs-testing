@@ -33,6 +33,10 @@ parser.add_option("-b", "--browser", action="store",
                   help='Possible browser choices: firefox,chrome,opera, safari, iexplore, googlechrome, lin_ff'
                   )
 
+parser.add_option("-f", "--fast", action="store_true", dest="fast", default=False,
+                  help='run threaded - no responsibility for what this does to your machine - no limits'
+                  )
+
 parser.add_option("-p", "--port", action="store", type="int", dest="port", default=4444)
 
 parser.add_option("-u", "--siteurl", action="store",
@@ -52,6 +56,7 @@ parser.add_option("-i", "--buildid", action="store", dest="buildid",
 testbrowser = options.browser
 testport = options.port
 testsauce = options.sauce
+testfast = options.fast
 testsite = options.site
 testbuildid = options.buildid
 testlitmus = options.litmus
@@ -124,7 +129,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
             #clear out any log files
             
             for x in self.suite:
-                if testsauce == True:
+                if (testsauce == True) or (testfast == True):
                     tname = "Thread_"+str(x)+"_"+time.strftime("%S%s", time.gmtime())+".log"
                     t = Thread(target=runtests, args=(x,tname))
                     t.start()
