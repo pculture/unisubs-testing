@@ -130,7 +130,8 @@ class Test_HTMLTestRunner(unittest.TestCase):
             
             for x in self.suite:
                 if (testsauce == True) or (testfast == True):
-                    tname = "Thread_"+str(x)+"_"+time.strftime("%M%S", time.gmtime())+".log"
+                    tid = set_test_id(str(x))
+                    tname = "Thread_"+tid+"_"+time.strftime("%M%S", time.gmtime())+".log"
                     t = Thread(target=runtests, args=(x,tname))
                     t.start()
                 else:
@@ -179,7 +180,12 @@ def runtests(mytest,tname):
         #clean up the buffer 
         os.remove(tname)
 
-
+def set_test_id(test_id):
+    
+    s = str(test_id).strip(">,<,[,]")
+    L = s.split('_')
+    testid = L.pop()
+    return testid
 
 
 ##############################################################################
