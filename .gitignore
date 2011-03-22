@@ -11,6 +11,7 @@ sauce_auth.pyc
 Results/*.html
 log.xml
 *.log
+*.xml
 # ignore temp file
 subs.txt
 curr_test.log

@@ -92,7 +92,7 @@ def select_video_language(self,sel,vid_lang="English",sub_lang="English"):
 
         sel.select("css=p div:contains('video is') + select", "label="+vid_lang)
         time.sleep(1)
-        sel.select("css=p div:contains('subtitling in') + select", "label="+sub_lang)
+        sel.select("css=p div:contains('Subtitle into') + select", "label="+sub_lang)
         sel.click("link=Continue")
     else:
         print "no language selection box"
