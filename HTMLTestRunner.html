@@ -103,7 +103,7 @@ SOFTWARE,&nbsp;EVEN&nbsp;IF&nbsp;ADVISED&nbsp;OF&nbsp;THE&nbsp;POSSIBILITY&nbsp;
 </dd>
 </dl>
 </dd>
-<dt><font face="helvetica, arial"><a href="unittest.html#TestProgram">unittest.TestProgram</a>(<a href="__builtin__.html#object">__builtin__.object</a>)
+<dt><font face="helvetica, arial"><a href="unittest.main.html#TestProgram">unittest.main.TestProgram</a>(<a href="__builtin__.html#object">__builtin__.object</a>)
 </font></dt><dd>
 <dl>
 <dt><font face="helvetica, arial"><a href="HTMLTestRunner.html#TestProgram">TestProgram</a>
@@ -281,7 +281,7 @@ Data and other attributes defined here:<br>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="TestProgram">class <strong>TestProgram</strong></a>(<a href="unittest.html#TestProgram">unittest.TestProgram</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="TestProgram">class <strong>TestProgram</strong></a>(<a href="unittest.main.html#TestProgram">unittest.main.TestProgram</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt>A&nbsp;variation&nbsp;of&nbsp;the&nbsp;unittest.<a href="#TestProgram">TestProgram</a>.&nbsp;Please&nbsp;refer&nbsp;to&nbsp;the&nbsp;base<br>
@@ -289,7 +289,7 @@ class&nbsp;for&nbsp;command&nbsp;line&nbsp;parameters.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="HTMLTestRunner.html#TestProgram">TestProgram</a></dd>
-<dd><a href="unittest.html#TestProgram">unittest.TestProgram</a></dd>
+<dd><a href="unittest.main.html#TestProgram">unittest.main.TestProgram</a></dd>
 <dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
 </dl>
 <hr>
@@ -297,8 +297,8 @@ Methods defined here:<br>
 <dl><dt><a name="TestProgram-runTests"><strong>runTests</strong></a>(self)</dt></dl>
 
 <hr>
-Methods inherited from <a href="unittest.html#TestProgram">unittest.TestProgram</a>:<br>
-<dl><dt><a name="TestProgram-__init__"><strong>__init__</strong></a>(self, module<font color="#909090">='__main__'</font>, defaultTest<font color="#909090">=None</font>, argv<font color="#909090">=None</font>, testRunner<font color="#909090">=None</font>, testLoader<font color="#909090">=&lt;unittest.TestLoader object&gt;</font>)</dt></dl>
+Methods inherited from <a href="unittest.main.html#TestProgram">unittest.main.TestProgram</a>:<br>
+<dl><dt><a name="TestProgram-__init__"><strong>__init__</strong></a>(self, module<font color="#909090">='__main__'</font>, defaultTest<font color="#909090">=None</font>, argv<font color="#909090">=None</font>, testRunner<font color="#909090">=None</font>, testLoader<font color="#909090">=&lt;unittest.loader.TestLoader object&gt;</font>, exit<font color="#909090">=True</font>, verbosity<font color="#909090">=1</font>, failfast<font color="#909090">=None</font>, catchbreak<font color="#909090">=None</font>, buffer<font color="#909090">=None</font>)</dt></dl>
 
 <dl><dt><a name="TestProgram-createTests"><strong>createTests</strong></a>(self)</dt></dl>
 
@@ -307,7 +307,7 @@ Methods inherited from <a href="unittest.html#TestProgram">unittest.TestProgram<
 <dl><dt><a name="TestProgram-usageExit"><strong>usageExit</strong></a>(self, msg<font color="#909090">=None</font>)</dt></dl>
 
 <hr>
-Data descriptors inherited from <a href="unittest.html#TestProgram">unittest.TestProgram</a>:<br>
+Data descriptors inherited from <a href="unittest.main.html#TestProgram">unittest.main.TestProgram</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
 <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
@@ -315,14 +315,22 @@ Data descriptors inherited from <a href="unittest.html#TestProgram">unittest.Tes
 <dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
 <hr>
-Data and other attributes inherited from <a href="unittest.html#TestProgram">unittest.TestProgram</a>:<br>
+Data and other attributes inherited from <a href="unittest.main.html#TestProgram">unittest.main.TestProgram</a>:<br>
 <dl><dt><strong>USAGE</strong> = 'Usage: %(progName)s [options] [test] [...]<font color="#c040c0">\n\n</font>Opti...                                   in MyTestCase<font color="#c040c0">\n</font>'</dl>
+
+<dl><dt><strong>buffer</strong> = None</dl>
+
+<dl><dt><strong>catchbreak</strong> = None</dl>
+
+<dl><dt><strong>failfast</strong> = None</dl>
+
+<dl><dt><strong>progName</strong> = None</dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><strong>main</strong> = <a name="main">class TestProgram</a>(<a href="unittest.html#TestProgram">unittest.TestProgram</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><strong>main</strong> = <a name="main">class TestProgram</a>(<a href="unittest.main.html#TestProgram">unittest.main.TestProgram</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt>A&nbsp;variation&nbsp;of&nbsp;the&nbsp;unittest.<a href="#TestProgram">TestProgram</a>.&nbsp;Please&nbsp;refer&nbsp;to&nbsp;the&nbsp;base<br>
@@ -330,7 +338,7 @@ class&nbsp;for&nbsp;command&nbsp;line&nbsp;parameters.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="HTMLTestRunner.html#TestProgram">TestProgram</a></dd>
-<dd><a href="unittest.html#TestProgram">unittest.TestProgram</a></dd>
+<dd><a href="unittest.main.html#TestProgram">unittest.main.TestProgram</a></dd>
 <dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
 </dl>
 <hr>
@@ -338,8 +346,8 @@ Methods defined here:<br>
 <dl><dt><a name="TestProgram-runTests"><strong>runTests</strong></a>(self)</dt></dl>
 
 <hr>
-Methods inherited from <a href="unittest.html#TestProgram">unittest.TestProgram</a>:<br>
-<dl><dt><a name="TestProgram-__init__"><strong>__init__</strong></a>(self, module<font color="#909090">='__main__'</font>, defaultTest<font color="#909090">=None</font>, argv<font color="#909090">=None</font>, testRunner<font color="#909090">=None</font>, testLoader<font color="#909090">=&lt;unittest.TestLoader object&gt;</font>)</dt></dl>
+Methods inherited from <a href="unittest.main.html#TestProgram">unittest.main.TestProgram</a>:<br>
+<dl><dt><a name="TestProgram-__init__"><strong>__init__</strong></a>(self, module<font color="#909090">='__main__'</font>, defaultTest<font color="#909090">=None</font>, argv<font color="#909090">=None</font>, testRunner<font color="#909090">=None</font>, testLoader<font color="#909090">=&lt;unittest.loader.TestLoader object&gt;</font>, exit<font color="#909090">=True</font>, verbosity<font color="#909090">=1</font>, failfast<font color="#909090">=None</font>, catchbreak<font color="#909090">=None</font>, buffer<font color="#909090">=None</font>)</dt></dl>
 
 <dl><dt><a name="TestProgram-createTests"><strong>createTests</strong></a>(self)</dt></dl>
 
@@ -348,7 +356,7 @@ Methods inherited from <a href="unittest.html#TestProgram">unittest.TestProgram<
 <dl><dt><a name="TestProgram-usageExit"><strong>usageExit</strong></a>(self, msg<font color="#909090">=None</font>)</dt></dl>
 
 <hr>
-Data descriptors inherited from <a href="unittest.html#TestProgram">unittest.TestProgram</a>:<br>
+Data descriptors inherited from <a href="unittest.main.html#TestProgram">unittest.main.TestProgram</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
 <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
@@ -356,8 +364,16 @@ Data descriptors inherited from <a href="unittest.html#TestProgram">unittest.Tes
 <dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
 <hr>
-Data and other attributes inherited from <a href="unittest.html#TestProgram">unittest.TestProgram</a>:<br>
+Data and other attributes inherited from <a href="unittest.main.html#TestProgram">unittest.main.TestProgram</a>:<br>
 <dl><dt><strong>USAGE</strong> = 'Usage: %(progName)s [options] [test] [...]<font color="#c040c0">\n\n</font>Opti...                                   in MyTestCase<font color="#c040c0">\n</font>'</dl>
+
+<dl><dt><strong>buffer</strong> = None</dl>
+
+<dl><dt><strong>catchbreak</strong> = None</dl>
+
+<dl><dt><strong>failfast</strong> = None</dl>
+
+<dl><dt><strong>progName</strong> = None</dl>
 
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
