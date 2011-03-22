@@ -90,9 +90,9 @@ def select_video_language(self,sel,vid_lang="English",sub_lang="English"):
     if sel.is_element_present(testvars.WidgetUI["Select_language"]):
         sel.select_frame("relative=top")
 
-        sel.select("css=p div:contains('video is') + select", "label="+vid_lang)
+        sel.select("css=div p span:contains('video is') + select", "label="+vid_lang)
         time.sleep(1)
-        sel.select("css=p div:contains('Subtitle into') + select", "label="+sub_lang)
+        sel.select("css=div p span:contains('Subtitle into') + select", "label="+sub_lang)
         sel.click("link=Continue")
     else:
         print "no language selection box"
