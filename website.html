@@ -19,11 +19,15 @@
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="codecs.html">codecs</a><br>
 <a href="mslib.html">mslib</a><br>
-</td><td width="25%" valign=top><a href="re.html">re</a><br>
+<a href="offsite.html">offsite</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+<a href="random.html">random</a><br>
+<a href="re.html">re</a><br>
+</td><td width="25%" valign=top><a href="selvars.html">selvars</a><br>
 <a href="testvars.html">testvars</a><br>
-</td><td width="25%" valign=top><a href="time.html">time</a><br>
-<a href="unittest.html">unittest</a><br>
-</td><td width="25%" valign=top><a href="widget.html">widget</a><br>
+<a href="time.html">time</a><br>
+</td><td width="25%" valign=top><a href="unittest.html">unittest</a><br>
+<a href="widget.html">widget</a><br>
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#eeaa77">
@@ -49,10 +53,19 @@ Pre-condition:&nbsp;user&nbsp;is&nbsp;on&nbsp;the&nbsp;site&nbsp;page.<br>
 &nbsp;<br>
 Post-condition:&nbsp;user&nbsp;is&nbsp;still&nbsp;on&nbsp;the&nbsp;site&nbsp;page</tt></dd></dl>
  <dl><dt><a name="-SiteLogout"><strong>SiteLogout</strong></a>(self, sel)</dt><dd><tt>Description:&nbsp;Logout&nbsp;of&nbsp;site&nbsp;using&nbsp;site&nbsp;Logout&nbsp;button.</tt></dd></dl>
+ <dl><dt><a name="-check_the_box"><strong>check_the_box</strong></a>(self, sel, row_num)</dt><dd><tt>Check&nbsp;or&nbsp;uncheck&nbsp;the&nbsp;box&nbsp;in&nbsp;the&nbsp;revision&nbsp;history&nbsp;table.<br>
+&nbsp;<br>
+returns&nbsp;the&nbsp;attribute&nbsp;in&nbsp;case&nbsp;we&nbsp;need&nbsp;it.</tt></dd></dl>
+ <dl><dt><a name="-create_team"><strong>create_team</strong></a>(self, sel, team, team_logo)</dt></dl>
  <dl><dt><a name="-enter_comment_text"><strong>enter_comment_text</strong></a>(self, sel, comment)</dt><dd><tt>Enter&nbsp;text&nbsp;in&nbsp;the&nbsp;Comments&nbsp;box&nbsp;and&nbsp;submit<br>
 &nbsp;<br>
 Assumes&nbsp;user&nbsp;is&nbsp;on&nbsp;the&nbsp;comments&nbsp;tab</tt></dd></dl>
  <dl><dt><a name="-front_page_submit"><strong>front_page_submit</strong></a>(self, sel, url)</dt></dl>
+ <dl><dt><a name="-get_current_rev"><strong>get_current_rev</strong></a>(self, sel)</dt><dd><tt>Returns&nbsp;the&nbsp;most&nbsp;current&nbsp;revision&nbsp;number&nbsp;for&nbsp;a&nbsp;videos&nbsp;subtitles&nbsp;or&nbsp;translation.<br>
+&nbsp;<br>
+Assumes&nbsp;you&nbsp;have&nbsp;the&nbsp;video's&nbsp;page&nbsp;open&nbsp;and&nbsp;are&nbsp;on&nbsp;the&nbsp;history&nbsp;tab.</tt></dd></dl>
+ <dl><dt><a name="-get_diff_url"><strong>get_diff_url</strong></a>(self, sel, rev_link)</dt><dd><tt>Gets&nbsp;the&nbsp;url&nbsp;id&nbsp;of&nbsp;a&nbsp;revision&nbsp;for&nbsp;comparing.</tt></dd></dl>
+ <dl><dt><a name="-get_own_team"><strong>get_own_team</strong></a>(self, sel)</dt></dl>
  <dl><dt><a name="-get_translated_lang"><strong>get_translated_lang</strong></a>(self, sel)</dt><dd><tt>Locate&nbsp;a&nbsp;language&nbsp;(not&nbsp;metadata&nbsp;or&nbsp;original)&nbsp;tab&nbsp;for&nbsp;a&nbsp;video.<br>
 &nbsp;<br>
 Need&nbsp;to&nbsp;exclude&nbsp;Original,&nbsp;Video&nbsp;Info,&nbsp;and&nbsp;Metadata</tt></dd></dl>
@@ -63,6 +76,12 @@ Returns:&nbsp;video_url</tt></dd></dl>
 &nbsp;<br>
 Returns:&nbsp;video_url</tt></dd></dl>
  <dl><dt><a name="-handle_error_page"><strong>handle_error_page</strong></a>(self, sel, test_id)</dt></dl>
+ <dl><dt><a name="-open_teams_page"><strong>open_teams_page</strong></a>(self, sel)</dt></dl>
+ <dl><dt><a name="-rollback_revision"><strong>rollback_revision</strong></a>(self, sel)</dt></dl>
+ <dl><dt><a name="-save_team_settings"><strong>save_team_settings</strong></a>(self, sel)</dt></dl>
+ <dl><dt><a name="-search_teams"><strong>search_teams</strong></a>(self, sel, team)</dt><dd><tt>Search&nbsp;for&nbsp;the&nbsp;given&nbsp;team&nbsp;name.<br>
+&nbsp;<br>
+Assumes&nbsp;using&nbsp;the&nbsp;url&nbsp;query&nbsp;string</tt></dd></dl>
  <dl><dt><a name="-sort_videos_table"><strong>sort_videos_table</strong></a>(self, sel, column, order)</dt><dd><tt>Sort&nbsp;the&nbsp;videos&nbsp;table&nbsp;by&nbsp;the&nbsp;specified&nbsp;heading&nbsp;in&nbsp;the&nbsp;specified&nbsp;order<br>
 &nbsp;<br>
 Current&nbsp;column&nbsp;headings&nbsp;are:&nbsp;URL,&nbsp;Pageloads,&nbsp;Subtitles&nbsp;Fetched,&nbsp;Translations,&nbsp;Subtitled?<br>
@@ -81,6 +100,8 @@ to&nbsp;prevent&nbsp;further&nbsp;how-to&nbsp;video&nbsp;displays.<br>
 Pre-condition:&nbsp;On&nbsp;a&nbsp;page&nbsp;where&nbsp;Subtitle&nbsp;Me&nbsp;menu&nbsp;is&nbsp;present.&nbsp;Video&nbsp;with&nbsp;no&nbsp;subs.<br>
 &nbsp;<br>
 Post-condition:&nbsp;the&nbsp;widget&nbsp;is&nbsp;launched&nbsp;and&nbsp;you&nbsp;will&nbsp;be&nbsp;on&nbsp;step&nbsp;1&nbsp;or&nbsp;Edit&nbsp;step</tt></dd></dl>
+ <dl><dt><a name="-store_subs"><strong>store_subs</strong></a>(self, sel, modify<font color="#909090">=False</font>, limit<font color="#909090">=True</font>)</dt><dd><tt>reads&nbsp;each&nbsp;line&nbsp;of&nbsp;subs&nbsp;and&nbsp;saves&nbsp;to&nbsp;a&nbsp;file&nbsp;for&nbsp;later&nbsp;use.</tt></dd></dl>
+ <dl><dt><a name="-submit_random_youtube"><strong>submit_random_youtube</strong></a>(self, sel)</dt></dl>
  <dl><dt><a name="-submit_video"><strong>submit_video</strong></a>(self, sel, url)</dt><dd><tt>Description:&nbsp;Submit&nbsp;a&nbsp;video&nbsp;using&nbsp;the&nbsp;site&nbsp;button<br>
 &nbsp;<br>
 Pre-condition:&nbsp;site&nbsp;page&nbsp;is&nbsp;opened<br>
@@ -88,7 +109,7 @@ Pre-condition:&nbsp;site&nbsp;page&nbsp;is&nbsp;opened<br>
 Post-condition:&nbsp;the&nbsp;widget&nbsp;is&nbsp;launched&nbsp;immediately.<br>
 You'll&nbsp;need&nbsp;to&nbsp;deal&nbsp;with&nbsp;the&nbsp;help&nbsp;video,&nbsp;see&nbsp;widget.close_howto_video</tt></dd></dl>
  <dl><dt><a name="-translate_video"><strong>translate_video</strong></a>(self, sel, url<font color="#909090">=None</font>, lang<font color="#909090">=None</font>)</dt><dd><tt>Given&nbsp;the&nbsp;local&nbsp;url&nbsp;of&nbsp;a&nbsp;video,&nbsp;adds&nbsp;a&nbsp;translation.</tt></dd></dl>
- <dl><dt><a name="-upload_subtitles"><strong>upload_subtitles</strong></a>(self, sel, sub_file, lang<font color="#909090">='English'</font>)</dt><dd><tt>Uploads&nbsp;subtitles&nbsp;for&nbsp;the&nbsp;specified&nbsp;language."</tt></dd></dl>
+ <dl><dt><a name="-upload_subtitles"><strong>upload_subtitles</strong></a>(self, sel, sub_file, lang<font color="#909090">='en'</font>)</dt><dd><tt>Uploads&nbsp;subtitles&nbsp;for&nbsp;the&nbsp;specified&nbsp;language."</tt></dd></dl>
  <dl><dt><a name="-verify_comment_text"><strong>verify_comment_text</strong></a>(self, sel, comment, result<font color="#909090">='posted'</font>, reply_text<font color="#909090">=None</font>)</dt><dd><tt>After&nbsp;comment&nbsp;text&nbsp;is&nbsp;entered&nbsp;in&nbsp;enter_comment_text,&nbsp;verify&nbsp;correct&nbsp;post&nbsp;behavior<br>
 &nbsp;<br>
 Result&nbsp;options:&nbsp;'posted'&nbsp;comment&nbsp;is&nbsp;posted<br>
@@ -96,6 +117,9 @@ Result&nbsp;options:&nbsp;'posted'&nbsp;comment&nbsp;is&nbsp;posted<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'too&nbsp;long'&nbsp;&gt;&nbsp;3000&nbsp;char&nbsp;length&nbsp;warning<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'login'&nbsp;user&nbsp;must&nbsp;be&nbsp;logged&nbsp;into&nbsp;post<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'reply'&nbsp;reply&nbsp;post&nbsp;contains&nbsp;original&nbsp;and&nbsp;new&nbsp;comment</tt></dd></dl>
+ <dl><dt><a name="-verify_compare_revisions"><strong>verify_compare_revisions</strong></a>(self, sel, older_rev, newer_rev, rollback<font color="#909090">=False</font>)</dt><dd><tt>Verifies&nbsp;contents&nbsp;of&nbsp;page&nbsp;comparing&nbsp;2&nbsp;revisions.<br>
+&nbsp;<br>
+compares&nbsp;the&nbsp;older&nbsp;rev&nbsp;and&nbsp;newer&nbsp;rev&nbsp;numbers.</tt></dd></dl>
  <dl><dt><a name="-verify_latest_history"><strong>verify_latest_history</strong></a>(self, sel, rev<font color="#909090">=None</font>, user<font color="#909090">=None</font>, time<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
  <dl><dt><a name="-verify_login"><strong>verify_login</strong></a>(self, sel, username<font color="#909090">='sub_writer'</font>)</dt><dd><tt>Description:&nbsp;Verifies&nbsp;user&nbsp;is&nbsp;logged&nbsp;in&nbsp;by&nbsp;finding&nbsp;the&nbsp;logout&nbsp;button&nbsp;on&nbsp;the<br>
 website&nbsp;and&nbsp;then&nbsp;starting&nbsp;the&nbsp;demo&nbsp;and&nbsp;looking&nbsp;for&nbsp;logout&nbsp;menu&nbsp;item&nbsp;on&nbsp;the<br>
@@ -111,6 +135,6 @@ Require's&nbsp;the&nbsp;original&nbsp;url&nbsp;and&nbsp;expected&nbsp;type&nbsp;
 embed_type&nbsp;one&nbsp;of&nbsp;'youtube',&nbsp;'flow'&nbsp;'html5'&nbsp;(default)<br>
 &nbsp;<br>
 Returns:&nbsp;url&nbsp;of&nbsp;the&nbsp;video&nbsp;on&nbsp;the&nbsp;universalsubtitles&nbsp;site.</tt></dd></dl>
- <dl><dt><a name="-verify_subs"><strong>verify_subs</strong></a>(self, sel, sub_file)</dt><dd><tt>Compares&nbsp;the&nbsp;displayed&nbsp;text&nbsp;for&nbsp;subtitles&nbsp;in&nbsp;the&nbsp;history&nbsp;table&nbsp;to&nbsp;the&nbsp;input&nbsp;file.</tt></dd></dl>
+ <dl><dt><a name="-verify_subs"><strong>verify_subs</strong></a>(self, sel, sub_file)</dt><dd><tt>Compares&nbsp;the&nbsp;displayed&nbsp;text&nbsp;for&nbsp;subtitles&nbsp;in&nbsp;the&nbsp;to&nbsp;the&nbsp;input&nbsp;file.</tt></dd></dl>
 </td></tr></table>
 </body></html>

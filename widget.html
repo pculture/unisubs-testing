@@ -75,13 +75,19 @@ Options:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;new_text&nbsp;-&nbsp;text&nbsp;string<br>
 &nbsp;<br>
 Pre-condition&nbsp;-&nbsp;use&nbsp;must&nbsp;be&nbsp;on&nbsp;Step&nbsp;3&nbsp;or&nbsp;Review&nbsp;with&nbsp;known&nbsp;text&nbsp;data.</tt></dd></dl>
- <dl><dt><a name="-edit_text"><strong>edit_text</strong></a>(self, sel, subtextfile, new_text<font color="#909090">='my hovercraft is full of eels'</font>)</dt><dd><tt>Description:&nbsp;Input&nbsp;the&nbsp;same&nbsp;text&nbsp;used&nbsp;in&nbsp;transcribe_video&nbsp;and&nbsp;for&nbsp;each&nbsp;line,<br>
+ <dl><dt><a name="-edit_text"><strong>edit_text</strong></a>(self, sel, subtextfile, new_text<font color="#909090">=''</font>)</dt><dd><tt>Description:&nbsp;Input&nbsp;the&nbsp;same&nbsp;text&nbsp;used&nbsp;in&nbsp;transcribe_video&nbsp;and&nbsp;for&nbsp;each&nbsp;line,<br>
 edit&nbsp;the&nbsp;text&nbsp;with&nbsp;new_text.&nbsp;&nbsp;Verifies&nbsp;text&nbsp;has&nbsp;been&nbsp;updated.<br>
 &nbsp;<br>
 Options:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;new_text&nbsp;-&nbsp;text&nbsp;string<br>
 &nbsp;<br>
-Pre-condition&nbsp;-&nbsp;can&nbsp;use&nbsp;this&nbsp;to&nbsp;sync&nbsp;on&nbsp;Step&nbsp;2,&nbsp;Step&nbsp;3.</tt></dd></dl>
+Pre-condition&nbsp;-&nbsp;can&nbsp;use&nbsp;this&nbsp;on&nbsp;Step&nbsp;2,&nbsp;Step&nbsp;3.</tt></dd></dl>
+ <dl><dt><a name="-edit_translation"><strong>edit_translation</strong></a>(self, sel, subtextfile, new_text<font color="#909090">=''</font>)</dt><dd><tt>Description:&nbsp;Update&nbsp;the&nbsp;translation&nbsp;text&nbsp;with&nbsp;either&nbsp;the&nbsp;orig&nbsp;text&nbsp;or&nbsp;text&nbsp;provided&nbsp;in&nbsp;a&nbsp;file.<br>
+&nbsp;<br>
+Options:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;new_text&nbsp;-&nbsp;text&nbsp;string<br>
+&nbsp;<br>
+Pre-condition&nbsp;-&nbsp;Editing&nbsp;Translation&nbsp;Widget&nbsp;opened</tt></dd></dl>
  <dl><dt><a name="-goto_step"><strong>goto_step</strong></a>(self, sel, step<font color="#909090">='3'</font>)</dt></dl>
  <dl><dt><a name="-hold_down_delay_sub"><strong>hold_down_delay_sub</strong></a>(self, sel, sub_file, delay_time<font color="#909090">=2</font>, hold_time<font color="#909090">=0.75</font>, sync_time<font color="#909090">=1</font>)</dt><dd><tt>Description:&nbsp;tests&nbsp;the&nbsp;time&nbsp;shift&nbsp;of&nbsp;subs&nbsp;when&nbsp;holding&nbsp;then&nbsp;releasing&nbsp;the&nbsp;down&nbsp;key.<br>
 Verifies&nbsp;that&nbsp;the&nbsp;time&nbsp;has&nbsp;been&nbsp;shifted.<br>
@@ -107,6 +113,7 @@ Options:<br>
 Pre-conditions:&nbsp;must&nbsp;coordinate&nbsp;this&nbsp;with&nbsp;the&nbsp;times&nbsp;used&nbsp;in&nbsp;sync_video&nbsp;or&nbsp;the&nbsp;time&nbsp;shift<br>
 comparision&nbsp;may&nbsp;fail.</tt></dd></dl>
  <dl><dt><a name="-select_video_language"><strong>select_video_language</strong></a>(self, sel, vid_lang<font color="#909090">='English'</font>, sub_lang<font color="#909090">='English'</font>)</dt></dl>
+ <dl><dt><a name="-set_subs_complete"><strong>set_subs_complete</strong></a>(self, sel, done<font color="#909090">=True</font>)</dt></dl>
  <dl><dt><a name="-site_login_auth"><strong>site_login_auth</strong></a>(self, sel)</dt><dd><tt>Description:&nbsp;specifically&nbsp;logs&nbsp;in&nbsp;as&nbsp;the&nbsp;site&nbsp;user&nbsp;defined&nbsp;in&nbsp;&lt;a&nbsp;href="testvars.html"&gt;testvars&lt;/a&gt;<br>
 &nbsp;<br>
 Pre-condition:&nbsp;Login&nbsp;was&nbsp;clicked&nbsp;from&nbsp;widget<br>
@@ -118,19 +125,18 @@ Pre-condition:&nbsp;widget&nbsp;is&nbsp;opened&nbsp;and&nbsp;user&nbsp;is&nbsp;n
 &nbsp;<br>
 Post-condition:&nbsp;user&nbsp;is&nbsp;returned&nbsp;to&nbsp;starting&nbsp;widget&nbsp;page.</tt></dd></dl>
  <dl><dt><a name="-steps_display"><strong>steps_display</strong></a>(self, sel, step_num)</dt><dd><tt>Description:&nbsp;verifies&nbsp;text&nbsp;contents&nbsp;of&nbsp;Steps.</tt></dd></dl>
- <dl><dt><a name="-submit_sub_edits"><strong>submit_sub_edits</strong></a>(self, sel)</dt></dl>
- <dl><dt><a name="-sync_video"><strong>sync_video</strong></a>(self, sel, sub_file, start_delay<font color="#909090">=4</font>, sub_int<font color="#909090">=3</font>, step<font color="#909090">='Continue'</font>)</dt><dd><tt>Description:&nbsp;Use&nbsp;the&nbsp;defined&nbsp;sync&nbsp;button&nbsp;to&nbsp;sync&nbsp;the&nbsp;subtitles.&nbsp;&nbsp;Waits&nbsp;for<br>
+ <dl><dt><a name="-submit_sub_edits"><strong>submit_sub_edits</strong></a>(self, sel, offsite<font color="#909090">=False</font>)</dt></dl>
+ <dl><dt><a name="-sync_video"><strong>sync_video</strong></a>(self, sel, sub_file, start_delay<font color="#909090">=3</font>, sub_int<font color="#909090">=2</font>, step<font color="#909090">='Continue'</font>)</dt><dd><tt>Description:&nbsp;Use&nbsp;the&nbsp;defined&nbsp;sync&nbsp;button&nbsp;to&nbsp;sync&nbsp;the&nbsp;subtitles.&nbsp;&nbsp;Waits&nbsp;for<br>
 text&nbsp;present&nbsp;on&nbsp;the&nbsp;video&nbsp;and&nbsp;prints&nbsp;the&nbsp;subtime.<br>
 &nbsp;<br>
 Options:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;sub_file&nbsp;-&nbsp;path&nbsp;to&nbsp;file&nbsp;or&nbsp;text&nbsp;lines&nbsp;to&nbsp;enter<br>
-&nbsp;&nbsp;&nbsp;&nbsp;start_delay&nbsp;-&nbsp;time&nbsp;to&nbsp;wait&nbsp;before&nbsp;1st&nbsp;sync&nbsp;(default&nbsp;=&nbsp;2&nbsp;secs)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start_delay&nbsp;-&nbsp;time&nbsp;to&nbsp;wait&nbsp;before&nbsp;1st&nbsp;sync&nbsp;(default&nbsp;=&nbsp;4&nbsp;secs)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;sub_int&nbsp;-&nbsp;time&nbsp;to&nbsp;wait&nbsp;before&nbsp;next&nbsp;sub&nbsp;(default&nbsp;=&nbsp;2&nbsp;secs<br>
 &nbsp;&nbsp;&nbsp;&nbsp;step&nbsp;-&nbsp;{'Continue'&nbsp;(default)&nbsp;|&nbsp;'Stop}&nbsp;move&nbsp;on&nbsp;to&nbsp;next&nbsp;step&nbsp;when&nbsp;done.<br>
 &nbsp;<br>
 Pre-condition&nbsp;-&nbsp;can&nbsp;use&nbsp;this&nbsp;to&nbsp;sync&nbsp;on&nbsp;Step&nbsp;2,&nbsp;Step&nbsp;3&nbsp;or&nbsp;Edit.</tt></dd></dl>
- <dl><dt><a name="-transcribe_enter_text"><strong>transcribe_enter_text</strong></a>(self, sel)</dt><dd><tt>Handle&nbsp;the&nbsp;text&nbsp;entry&nbsp;in&nbsp;Step&nbsp;1&nbsp;typing&nbsp;for&nbsp;all&nbsp;browsers</tt></dd></dl>
- <dl><dt><a name="-transcribe_video"><strong>transcribe_video</strong></a>(self, sel, sub_file, mode<font color="#909090">='Expert'</font>, step<font color="#909090">='Continue'</font>, buffer<font color="#909090">='no'</font>)</dt><dd><tt>Description:&nbsp;On&nbsp;widget&nbsp;Step&nbsp;1,&nbsp;reads&nbsp;in&nbsp;lines&nbsp;of&nbsp;subtitle&nbsp;text&nbsp;and&nbsp;types&nbsp;it.<br>
+ <dl><dt><a name="-transcribe_video"><strong>transcribe_video</strong></a>(self, sel, sub_file, mode<font color="#909090">='Expert'</font>, step<font color="#909090">='Continue'</font>, buffer<font color="#909090">='yes'</font>)</dt><dd><tt>Description:&nbsp;On&nbsp;widget&nbsp;Step&nbsp;1,&nbsp;reads&nbsp;in&nbsp;lines&nbsp;of&nbsp;subtitle&nbsp;text&nbsp;and&nbsp;types&nbsp;it.<br>
 &nbsp;<br>
 Options:&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;sub_file&nbsp;-&nbsp;the&nbsp;full&nbsp;path&nbsp;to&nbsp;the&nbsp;text&nbsp;to&nbsp;enter<br>

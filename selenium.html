@@ -30,9 +30,8 @@ limitations&nbsp;under&nbsp;the&nbsp;License.</tt></p>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="httplib.html">httplib</a><br>
-</td><td width="25%" valign=top><a href="re.html">re</a><br>
 </td><td width="25%" valign=top><a href="urllib.html">urllib</a><br>
-</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -40,16 +39,21 @@ limitations&nbsp;under&nbsp;the&nbsp;License.</tt></p>
     
 <tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
 <dt><font face="helvetica, arial"><a href="selenium.html#selenium">selenium</a>
 </font></dt></dl>
+</dd>
+</dl>
  <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="selenium">class <strong>selenium</strong></a></font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="selenium">class <strong>selenium</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Defines&nbsp;an&nbsp;object&nbsp;that&nbsp;runs&nbsp;Selenium&nbsp;commands.<br>
+<td colspan=2><tt>Defines&nbsp;an&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;that&nbsp;runs&nbsp;Selenium&nbsp;commands.<br>
 &nbsp;<br>
 Element&nbsp;Locators<br>
 ~~~~~~~~~~~~~~~~<br>
@@ -203,6 +207,8 @@ pattern.<br>&nbsp;</tt></td></tr>
 'key'&nbsp;the&nbsp;header&nbsp;name.<br>
 'value'&nbsp;the&nbsp;header&nbsp;value.</tt></dd></dl>
 
+<dl><dt><a name="selenium-add_custom_request_header"><strong>add_custom_request_header</strong></a>(self, key, value)</dt></dl>
+
 <dl><dt><a name="selenium-add_location_strategy"><strong>add_location_strategy</strong></a>(self, strategyName, functionDefinition)</dt><dd><tt>Defines&nbsp;a&nbsp;new&nbsp;function&nbsp;for&nbsp;Selenium&nbsp;to&nbsp;locate&nbsp;elements&nbsp;on&nbsp;the&nbsp;page.<br>
 For&nbsp;example,<br>
 if&nbsp;you&nbsp;define&nbsp;the&nbsp;strategy&nbsp;"foo",&nbsp;and&nbsp;someone&nbsp;runs&nbsp;<a href="#selenium-click">click</a>("foo=blah"),&nbsp;we'll<br>
@@ -300,6 +306,8 @@ including&nbsp;parts&nbsp;rendered&nbsp;outside&nbsp;of&nbsp;the&nbsp;current&nb
 Currently&nbsp;this&nbsp;only&nbsp;works&nbsp;in&nbsp;Mozilla&nbsp;and&nbsp;when&nbsp;running&nbsp;in&nbsp;chrome&nbsp;mode.<br>
 &nbsp;<br>
 'kwargs'&nbsp;is&nbsp;A&nbsp;kwargs&nbsp;string&nbsp;that&nbsp;modifies&nbsp;the&nbsp;way&nbsp;the&nbsp;screenshot&nbsp;is&nbsp;captured.&nbsp;Example:&nbsp;"background=#CCFFDD".&nbsp;This&nbsp;may&nbsp;be&nbsp;useful&nbsp;to&nbsp;set&nbsp;for&nbsp;capturing&nbsp;screenshots&nbsp;of&nbsp;less-than-ideal&nbsp;layouts,&nbsp;for&nbsp;example&nbsp;where&nbsp;absolute&nbsp;positioning&nbsp;causes&nbsp;the&nbsp;calculation&nbsp;of&nbsp;the&nbsp;canvas&nbsp;dimension&nbsp;to&nbsp;fail&nbsp;and&nbsp;a&nbsp;black&nbsp;background&nbsp;is&nbsp;exposed&nbsp;&nbsp;(possibly&nbsp;obscuring&nbsp;black&nbsp;text).</tt></dd></dl>
+
+<dl><dt><a name="selenium-capture_network_traffic"><strong>capture_network_traffic</strong></a>(self, type)</dt></dl>
 
 <dl><dt><a name="selenium-capture_screenshot"><strong>capture_screenshot</strong></a>(self, filename)</dt><dd><tt>Captures&nbsp;a&nbsp;PNG&nbsp;screenshot&nbsp;to&nbsp;the&nbsp;specified&nbsp;file.<br>
 &nbsp;<br>
@@ -520,6 +528,11 @@ OK.</tt></dd></dl>
 &nbsp;<br>
 'name'&nbsp;is&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;cookie</tt></dd></dl>
 
+<dl><dt><a name="selenium-get_css_count"><strong>get_css_count</strong></a>(self, css)</dt><dd><tt>Returns&nbsp;the&nbsp;number&nbsp;of&nbsp;nodes&nbsp;that&nbsp;match&nbsp;the&nbsp;specified&nbsp;css&nbsp;selector,&nbsp;eg.&nbsp;"css=table"&nbsp;would&nbsp;give<br>
+the&nbsp;number&nbsp;of&nbsp;tables.<br>
+&nbsp;<br>
+'css'&nbsp;is&nbsp;the&nbsp;css&nbsp;selector&nbsp;to&nbsp;evaluate.&nbsp;do&nbsp;NOT&nbsp;wrap&nbsp;this&nbsp;expression&nbsp;in&nbsp;a&nbsp;'count()'&nbsp;function;&nbsp;we&nbsp;will&nbsp;do&nbsp;that&nbsp;for&nbsp;you.</tt></dd></dl>
+
 <dl><dt><a name="selenium-get_cursor_position"><strong>get_cursor_position</strong></a>(self, locator)</dt><dd><tt>Retrieves&nbsp;the&nbsp;text&nbsp;cursor&nbsp;position&nbsp;in&nbsp;the&nbsp;given&nbsp;input&nbsp;element&nbsp;or&nbsp;textarea;&nbsp;beware,&nbsp;this&nbsp;may&nbsp;not&nbsp;work&nbsp;perfectly&nbsp;on&nbsp;all&nbsp;browsers.<br>
 &nbsp;<br>
 &nbsp;<br>
@@ -556,7 +569,7 @@ have&nbsp;multiple&nbsp;lines,&nbsp;but&nbsp;only&nbsp;the&nbsp;result&nbsp;of&n
 &nbsp;<br>
 &nbsp;<br>
 Note&nbsp;that,&nbsp;by&nbsp;default,&nbsp;the&nbsp;snippet&nbsp;will&nbsp;run&nbsp;in&nbsp;the&nbsp;context&nbsp;of&nbsp;the&nbsp;"<a href="#selenium">selenium</a>"<br>
-object&nbsp;itself,&nbsp;so&nbsp;``this``&nbsp;will&nbsp;refer&nbsp;to&nbsp;the&nbsp;Selenium&nbsp;object.&nbsp;&nbsp;Use&nbsp;``window``&nbsp;to<br>
+<a href="__builtin__.html#object">object</a>&nbsp;itself,&nbsp;so&nbsp;``this``&nbsp;will&nbsp;refer&nbsp;to&nbsp;the&nbsp;Selenium&nbsp;<a href="__builtin__.html#object">object</a>.&nbsp;&nbsp;Use&nbsp;``window``&nbsp;to<br>
 refer&nbsp;to&nbsp;the&nbsp;window&nbsp;of&nbsp;your&nbsp;application,&nbsp;e.g.&nbsp;``window.document.getElementById('foo')``<br>
 &nbsp;<br>
 If&nbsp;you&nbsp;need&nbsp;to&nbsp;use<br>
@@ -579,6 +592,8 @@ It&nbsp;is&nbsp;used&nbsp;to&nbsp;generate&nbsp;commands&nbsp;like&nbsp;assertEx
 closing&nbsp;"html"&nbsp;tags.</tt></dd></dl>
 
 <dl><dt><a name="selenium-get_location"><strong>get_location</strong></a>(self)</dt><dd><tt>Gets&nbsp;the&nbsp;absolute&nbsp;URL&nbsp;of&nbsp;the&nbsp;current&nbsp;page.</tt></dd></dl>
+
+<dl><dt><a name="selenium-get_log"><strong>get_log</strong></a>(self)</dt><dd><tt>Get&nbsp;RC&nbsp;logs&nbsp;associated&nbsp;with&nbsp;current&nbsp;session.</tt></dd></dl>
 
 <dl><dt><a name="selenium-get_mouse_speed"><strong>get_mouse_speed</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;number&nbsp;of&nbsp;pixels&nbsp;between&nbsp;"mousemove"&nbsp;events&nbsp;during&nbsp;dragAndDrop&nbsp;commands&nbsp;(default=10).</tt></dd></dl>
 
@@ -878,7 +893,7 @@ holding&nbsp;the&nbsp;button&nbsp;down)&nbsp;at&nbsp;the&nbsp;specified&nbsp;loc
 'locator'&nbsp;is&nbsp;an&nbsp;element&nbsp;locator<br>
 'coordString'&nbsp;is&nbsp;specifies&nbsp;the&nbsp;x,y&nbsp;position&nbsp;(i.e.&nbsp;-&nbsp;10,20)&nbsp;of&nbsp;the&nbsp;mouse&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;event&nbsp;relative&nbsp;to&nbsp;the&nbsp;element&nbsp;returned&nbsp;by&nbsp;the&nbsp;locator.</tt></dd></dl>
 
-<dl><dt><a name="selenium-open"><strong>open</strong></a>(self, url)</dt><dd><tt>Opens&nbsp;an&nbsp;URL&nbsp;in&nbsp;the&nbsp;test&nbsp;frame.&nbsp;This&nbsp;accepts&nbsp;both&nbsp;relative&nbsp;and&nbsp;absolute<br>
+<dl><dt><a name="selenium-open"><strong>open</strong></a>(self, url, ignoreResponseCode<font color="#909090">=True</font>)</dt><dd><tt>Opens&nbsp;an&nbsp;URL&nbsp;in&nbsp;the&nbsp;test&nbsp;frame.&nbsp;This&nbsp;accepts&nbsp;both&nbsp;relative&nbsp;and&nbsp;absolute<br>
 URLs.<br>
 &nbsp;<br>
 The&nbsp;"open"&nbsp;command&nbsp;waits&nbsp;for&nbsp;the&nbsp;page&nbsp;to&nbsp;load&nbsp;before&nbsp;proceeding,<br>
@@ -889,7 +904,8 @@ due&nbsp;to&nbsp;security&nbsp;restrictions&nbsp;in&nbsp;the&nbsp;browser&nbsp;(
 need&nbsp;to&nbsp;open&nbsp;an&nbsp;URL&nbsp;on&nbsp;another&nbsp;domain,&nbsp;use&nbsp;the&nbsp;Selenium&nbsp;Server&nbsp;to&nbsp;start&nbsp;a<br>
 new&nbsp;browser&nbsp;session&nbsp;on&nbsp;that&nbsp;domain.<br>
 &nbsp;<br>
-'url'&nbsp;is&nbsp;the&nbsp;URL&nbsp;to&nbsp;open;&nbsp;may&nbsp;be&nbsp;relative&nbsp;or&nbsp;absolute</tt></dd></dl>
+'url'&nbsp;is&nbsp;the&nbsp;URL&nbsp;to&nbsp;open;&nbsp;may&nbsp;be&nbsp;relative&nbsp;or&nbsp;absolute<br>
+'ignoreResponseCode'&nbsp;if&nbsp;set&nbsp;to&nbsp;true:&nbsp;doesnt&nbsp;send&nbsp;ajax&nbsp;HEAD/GET&nbsp;request;&nbsp;if&nbsp;set&nbsp;to&nbsp;false:&nbsp;sends&nbsp;ajax&nbsp;HEAD/GET&nbsp;request&nbsp;to&nbsp;the&nbsp;url&nbsp;and&nbsp;reports&nbsp;error&nbsp;code&nbsp;if&nbsp;any&nbsp;as&nbsp;response&nbsp;to&nbsp;open.</tt></dd></dl>
 
 <dl><dt><a name="selenium-open_window"><strong>open_window</strong></a>(self, url, windowID)</dt><dd><tt>Opens&nbsp;a&nbsp;popup&nbsp;window&nbsp;(if&nbsp;a&nbsp;window&nbsp;with&nbsp;that&nbsp;ID&nbsp;isn't&nbsp;already&nbsp;open).<br>
 After&nbsp;opening&nbsp;the&nbsp;window,&nbsp;you'll&nbsp;need&nbsp;to&nbsp;select&nbsp;it&nbsp;using&nbsp;the&nbsp;selectWindow<br>
@@ -1029,7 +1045,7 @@ as&nbsp;the&nbsp;target.<br>
 &nbsp;<br>
 &nbsp;<br>
 &nbsp;<br>
-Window&nbsp;locators&nbsp;provide&nbsp;different&nbsp;ways&nbsp;of&nbsp;specifying&nbsp;the&nbsp;window&nbsp;object:<br>
+Window&nbsp;locators&nbsp;provide&nbsp;different&nbsp;ways&nbsp;of&nbsp;specifying&nbsp;the&nbsp;window&nbsp;<a href="__builtin__.html#object">object</a>:<br>
 by&nbsp;title,&nbsp;by&nbsp;internal&nbsp;JavaScript&nbsp;"name,"&nbsp;or&nbsp;by&nbsp;JavaScript&nbsp;variable.<br>
 &nbsp;<br>
 &nbsp;<br>
@@ -1131,7 +1147,7 @@ commands&nbsp;to&nbsp;the&nbsp;server;&nbsp;you&nbsp;can't&nbsp;remotely&nbsp;st
 you&nbsp;should&nbsp;prefer&nbsp;to&nbsp;run&nbsp;the&nbsp;"stop"&nbsp;command,&nbsp;which&nbsp;terminates&nbsp;the&nbsp;current&nbsp;browser&nbsp;session,&nbsp;rather&nbsp;than&nbsp;<br>
 shutting&nbsp;down&nbsp;the&nbsp;entire&nbsp;server.</tt></dd></dl>
 
-<dl><dt><a name="selenium-start"><strong>start</strong></a>(self)</dt></dl>
+<dl><dt><a name="selenium-start"><strong>start</strong></a>(self, browserConfigurationOptions<font color="#909090">=None</font>)</dt></dl>
 
 <dl><dt><a name="selenium-stop"><strong>stop</strong></a>(self)</dt></dl>
 
@@ -1230,6 +1246,14 @@ wait&nbsp;immediately&nbsp;after&nbsp;a&nbsp;Selenium&nbsp;command&nbsp;that&nbs
 
 <dl><dt><a name="selenium-window_maximize"><strong>window_maximize</strong></a>(self)</dt><dd><tt>Resize&nbsp;currently&nbsp;selected&nbsp;window&nbsp;to&nbsp;take&nbsp;up&nbsp;the&nbsp;entire&nbsp;screen</tt></dd></dl>
 
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">
