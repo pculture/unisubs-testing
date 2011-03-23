@@ -90,6 +90,8 @@ class Test_HTMLTestRunner(unittest.TestCase):
             runner = unittest.TextTestRunner(stream=res)
             runner.run(mytest)
             res.close()
+            q.task_done()
+            
             # get the result and send it to litmus
             logs = file(tname,"r")
             byte_output = logs.read()
@@ -100,7 +102,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
             finally:
                 #clean up the buffer 
                 os.remove(tname)
-            q.task_done()
+                
 
         def set_test_id(test_id):
             
@@ -156,7 +158,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
         # Post the output directly to Litmus
         if testlitmus == True:
             if testsauce == True:
-                num_worker_threads = 8
+                num_worker_threads = 5
             elif testfast == True:
                 num_worker_threads = 3
             else:
@@ -169,7 +171,8 @@ class Test_HTMLTestRunner(unittest.TestCase):
             for x in self.suite:
                 q.put(x)
 
-            q.join(600.0)
+            q.join()
+            print q
 
 
         else:   # Post results to HTML page
