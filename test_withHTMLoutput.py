@@ -168,11 +168,11 @@ class Test_HTMLTestRunner(unittest.TestCase):
                 t = Thread(target=runtests)
                 t.daemon = True
                 t.start()
+                
             for x in self.suite:
-                q.put(x)
+                q.put(x,False)
 
             q.join()
-            print q
 
 
         else:   # Post results to HTML page
