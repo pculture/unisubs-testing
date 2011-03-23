@@ -169,7 +169,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
             for x in self.suite:
                 q.put(x)
 
-            q.join()
+            q.join(600.0)
 
 
         else:   # Post results to HTML page
