@@ -61,10 +61,7 @@ testfast = options.fast
 testsite = options.site
 testbuildid = options.buildid
 testlitmus = options.litmus
-                  
-
-          
-
+      
 
 class Test_HTMLTestRunner(unittest.TestCase):
 
@@ -83,25 +80,26 @@ class Test_HTMLTestRunner(unittest.TestCase):
     def test_main(self):
 
         def runtests():
-            mytest = q.get()
-            tid = set_test_id(str(mytest))
-            tname = "Thread_"+tid+"_"+time.strftime("%M%S", time.gmtime())+".log"
-            res = open(tname,"w")
-            runner = unittest.TextTestRunner(stream=res)
-            runner.run(mytest)
-            res.close()
-            q.task_done()
-            
-            # get the result and send it to litmus
-            logs = file(tname,"r")
-            byte_output = logs.read()
-            id_string = str(mytest)
-            stat = byte_output[0]
-            try:
+            while True:
+                mytest = q.get()
+                tid = set_test_id(str(mytest))
+                tname = "Thread_"+tid+"_"+time.strftime("%M%S", time.gmtime())+".log"
+                res = open(tname,"w")
+                runner = unittest.TextTestRunner(stream=res)
+                runner.run(mytest)
+                res.close()
+                
+                
+                # get the result and send it to litmus
+                logs = file(tname,"r")
+                byte_output = logs.read()
+                id_string = str(mytest)
+                stat = byte_output[0]
+                logs.close()
                 litmusresult.write_log(id_string,stat,testbuildid,byte_output)
-            finally:
-                #clean up the buffer 
                 os.remove(tname)
+                q.task_done()
+                
                 
 
         def set_test_id(test_id):
@@ -163,16 +161,17 @@ class Test_HTMLTestRunner(unittest.TestCase):
                 num_worker_threads = 3
             else:
                 num_worker_threads = 1
+            
             q = Queue()
             for i in range(num_worker_threads):  
                 t = Thread(target=runtests)
                 t.daemon = True
-                t.start()
-                
+                t.start()    
             for x in self.suite:
-                q.put(x,False)
-
+                q.put(x)
             q.join()
+
+           
 
 
         else:   # Post results to HTML page
@@ -195,7 +194,6 @@ class Test_HTMLTestRunner(unittest.TestCase):
             #copy the results to a file called last_run.html
             lastrun = os.path.join(results_path, 'last_run.html')
             shutil.copyfile(filename,lastrun)
-
 
 
 
