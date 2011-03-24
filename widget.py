@@ -89,8 +89,11 @@ def select_video_language(self,sel,vid_lang="English",sub_lang="English"):
     time.sleep(5)
     if sel.is_element_present(testvars.WidgetUI["Select_language"]):
         sel.select_frame("relative=top")
-        mslib.wait_for_element_present(self,sel,"css=div p span:contains('video is')")
-        sel.select("css=div p span:contains('video is') + select", "label="+vid_lang)
+        mslib.wait_for_element_present(self,sel,"css=div p span:contains('Subtitle into')")
+        if sel.is_element_present("css=div p span:contains('video is')"):
+            sel.select("css=div p span:contains('video is') + select", "label="+vid_lang)
+        elif sel.is_element_present("css=div p span:contains('Translate from')"):
+            sel.select("css=div p span:contains('Translate from') + span select", "label="+vid_lang)           
         time.sleep(1)
         sel.select("css=div p span:contains('Subtitle into') + select", "label="+sub_lang)
         sel.click("link=Continue")

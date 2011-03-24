@@ -85,7 +85,8 @@ def start_demo(self,sel):
 
     Post-condition: /demo page is opened, usually next step is start_sub_widget
     """
-    sel.open("/demo/")
+#    sel.open("/demo/")
+    sel.open("/")
 #    sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
 
 def submit_video(self,sel,url):
