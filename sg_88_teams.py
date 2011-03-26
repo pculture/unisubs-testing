@@ -161,7 +161,7 @@ class subgroup_88(unittest.TestCase):
         website.search_teams(self,sel,team)
         self.assertTrue(sel.is_element_present("css=a[href*='/teams/"+team.lower()+"']"))
         # reset setting
-        sel.open("teams/"+team.lower)
+        sel.open("teams/"+team.lower())
         sel.click(testvars.manage_team)
         sel.wait_for_page_to_load(testvars.timeout)
         if sel.get_value("id_is_visible") == "off":
