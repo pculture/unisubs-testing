@@ -85,17 +85,19 @@ def site_login_auth(self,sel):
     time.sleep(10)
 
 
-def select_video_language(self,sel,vid_lang="English",sub_lang="English"):
+def select_video_language(self,sel,vid_lang="en",sub_lang="en"):
     time.sleep(5)
     if sel.is_element_present(testvars.WidgetUI["Select_language"]):
         sel.select_frame("relative=top")
-        mslib.wait_for_element_present(self,sel,"css=div p span:contains('Subtitle into')")
+        mslib.wait_for_text_present(self,sel,"Subtitle into")
         if sel.is_element_present("css=div p span:contains('video is')"):
-            sel.select("css=div p span:contains('video is') + select", "label="+vid_lang)
-        elif sel.is_element_present("css=div p span:contains('Translate from')"):
-            sel.select("css=div p span:contains('Translate from') + span select", "label="+vid_lang)           
+            sel.select("css=div p span:contains('video is') + select", "value="+vid_lang)
+        if sel.is_text_present("Subtitle into"):
+            sel.select("css=div p span:contains('Subtitle into') + select", "value="+sub_lang)
+        if sel.is_text_present("Translate from"):
+            sel.select("css=div p span:contains('Translate from') + span select", "value="+vid_lang)           
         time.sleep(1)
-        sel.select("css=div p span:contains('Subtitle into') + select", "label="+sub_lang)
+        
         sel.click("link=Continue")
     else:
         print "no language selection box"
