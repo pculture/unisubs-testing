@@ -86,7 +86,7 @@ def start_demo(self,sel):
     Post-condition: /demo page is opened, usually next step is start_sub_widget
     """
 #    sel.open("/demo/")
-    sel.open("/")
+    local_url = submit_random_youtube(self,sel)
 #    sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
 
 def submit_video(self,sel,url):
@@ -535,7 +535,7 @@ def search_teams(self,sel,team):
 
 
 def handle_error_page(self,sel,test_id):
-    sel.select_frame("relative=top")
+    time.sleep(5)
     if sel.is_element_present("css=h2:contains('when you encountered this error.')") or sel.is_element_present("css=h2:contains('Sorry')"):
         sel.type("feedback_email", testvars.gmail)
         feedback_math = sel.get_text("css=form p + p label")

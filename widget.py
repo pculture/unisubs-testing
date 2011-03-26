@@ -200,7 +200,7 @@ def restart_step(self,sel):
         if sel.is_element_present("css=.mirosubs-activestep:contains('2')"):
             self.assertTrue(re.search(r"^Are you sure you want to start over[\s\S] All timestamps will be deleted\.$", sel.get_confirmation()))
         if sel.is_element_present("css=.mirosubs-activestep:contains('1')"):
-            self.assertTrue(re.search(r"^Are you sure you want to start over[\s\S] All subtitles will be deleted\.$", sel.get_confirmation()))
+            self.assertTrue("Are you sure you want to start over? All subtitles will be deleted.", sel.get_confirmation())
 
 def back_step(self,sel):
     """
