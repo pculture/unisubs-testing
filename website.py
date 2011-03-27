@@ -86,7 +86,6 @@ def start_demo(self,sel):
     Post-condition: /demo page is opened, usually next step is start_sub_widget
     """
 #    sel.open("/demo/")
-    local_url = submit_random_youtube(self,sel)
     if "iexplore" in selvars.set_browser():
         submit_video(self,sel,"http://www.youtube.com/watch?v=Q1kAhWZ1hiA")
     else:
