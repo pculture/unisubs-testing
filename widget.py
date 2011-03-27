@@ -85,7 +85,7 @@ def site_login_auth(self,sel):
     time.sleep(10)
 
 
-def select_video_language(self,sel,vid_lang="en",sub_lang="en"):
+def select_video_language(self,sel,vid_lang="en",sub_lang="en-gb",from_lang='forkk'):
     time.sleep(5)
     if sel.is_element_present(testvars.WidgetUI["Select_language"]):
         sel.select_frame("relative=top")
@@ -95,7 +95,7 @@ def select_video_language(self,sel,vid_lang="en",sub_lang="en"):
         if sel.is_text_present("Subtitle into"):
             sel.select("css=div p span:contains('Subtitle into') + select", "value="+sub_lang)
         if sel.is_text_present("Translate from"):
-            sel.select("css=div p span:contains('Translate from') + span select", "value="+vid_lang)           
+            sel.select("css=div p span:contains('Translate from') + span select", "value="+from_lang)           
         time.sleep(1)
         
         sel.click("link=Continue")
