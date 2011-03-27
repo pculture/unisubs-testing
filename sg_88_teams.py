@@ -102,11 +102,9 @@ class subgroup_88(unittest.TestCase):
         sel.click("css=li a:contains('"+team+"')")
         sel.wait_for_page_to_load(testvars.timeout)
         print "verifying the inital add page"
-        try:
-            self.assertEqual(selvars.set_site()+test_video_url, sel.get_value("css=input#id_video_url"))
-            team_vid_title = sel.get_value("css=input#id_title")
-            self.assertEqual(vid_title[0:10], team_vid_title[0:10])
-        except AssertionError, e: self.verificationErrors.append("error verify video add page:"+str(e))
+        self.assertEqual(selvars.set_site()+test_video_url, sel.get_value("css=input#id_video_url"))
+        team_vid_title = sel.get_value("css=input#id_title")
+        self.assertEqual(vid_title[0:10], team_vid_title[0:10])
         if sel.is_element_present("css=.errorlist:contains('Team has this')"):
             print "video already part of team"
         else:
@@ -117,10 +115,8 @@ class subgroup_88(unittest.TestCase):
         sel.click(testvars.teams_video_tab)
         sel.wait_for_page_to_load(testvars.timeout)
         print "verifying team videos list"
-        try:
-            self.assertTrue(sel.is_element_present("css=tr.video-container td a[href*='"+test_video_url+"info/']"),"test_video_url error")
-            self.assertTrue(sel.is_element_present("css=tr.video-container td:contains('"+vid_title[0:10]+"')"),"vid_title error")
-        except AssertionError, e: self.verificationErrors.append(str(e))
+        self.assertTrue(sel.is_element_present("css=tr.video-container td a[href*='"+test_video_url+"info/']"),"test_video_url error")
+        self.assertTrue(sel.is_element_present("css=tr.video-container td:contains('"+vid_title[0:10]+"')"),"vid_title error")
         # delete the video from the team
         sel.click("css=td:contains('"+vid_title[0:10]+"') > div a.remove-video")
         try:
