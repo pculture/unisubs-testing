@@ -115,7 +115,7 @@ def front_page_submit(self,sel,url):
     sel.wait_for_page_to_load(testvars.timeout)
 
 
-def start_sub_widget(self,sel,wig_menu=testvars.WebsiteUI["SubtitleMe_menu"],skip="True",vid_lang="en",sub_lang="en"):
+def start_sub_widget(self,sel,wig_menu=testvars.WebsiteUI["SubtitleMe_menu"],skip="True",vid_lang="en",sub_lang="en-gb"):
     """Start the Subtitle Widget using the Subtitle Me menu.
 
     This will handle the language choice for demo or submitted videos.
