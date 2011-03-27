@@ -87,7 +87,10 @@ def start_demo(self,sel):
     """
 #    sel.open("/demo/")
     local_url = submit_random_youtube(self,sel)
-#    sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+    if "iexplore" in selvars.set_browser():
+        submit_video(self,sel,"http://www.youtube.com/watch?v=Q1kAhWZ1hiA")
+    else:
+        submit_video(self,sel,"http://videos.mozilla.org/firefox/3.5/switch/switch.ogv")
 
 def submit_video(self,sel,url):
     """
