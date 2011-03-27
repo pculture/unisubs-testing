@@ -198,9 +198,16 @@ def restart_step(self,sel):
     if sel.is_element_present("css=.mirosubs-restart"):
         sel.click("link=Restart this Step")
         if sel.is_element_present("css=.mirosubs-activestep:contains('2')"):
-            self.assertTrue(re.search(r"^Are you sure you want to start over[\s\S] All timestamps will be deleted\.$", sel.get_confirmation()))
+            try:
+                self.assertTrue(re.search(r"^Are you sure you want to start over[\s\S] All timestamps will be deleted\.$", sel.get_confirmation()))
+            except:
+                sel.key_press_native('10') #workaround for FF 4 selenium confirmation bug
+                
         if sel.is_element_present("css=.mirosubs-activestep:contains('1')"):
-            self.assertTrue("Are you sure you want to start over? All subtitles will be deleted.", sel.get_confirmation())
+            try:
+                self.assertTrue("Are you sure you want to start over? All subtitles will be deleted.", sel.get_confirmation())
+            except:
+                sel.key_press_native('10') #workaround for FF 4 selenium confirmation bug
 
 def back_step(self,sel):
     """

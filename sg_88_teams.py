@@ -123,7 +123,11 @@ class subgroup_88(unittest.TestCase):
         except AssertionError, e: self.verificationErrors.append(str(e))
         # delete the video from the team
         sel.click("css=td:contains('"+vid_title[0:10]+"') > div a.remove-video")
-        self.failUnless("Remove this video", sel.get_confirmation())
+        try:
+            self.failUnless("Remove this video", sel.get_confirmation())
+        except:
+            print "no confirmation - hitting enter"
+            sel.key_press_native('10') #workaround for FF 4 selenium confirmation bug
 
 
         # logout
