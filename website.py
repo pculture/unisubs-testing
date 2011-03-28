@@ -85,11 +85,12 @@ def start_demo(self,sel):
 
     Post-condition: /demo page is opened, usually next step is start_sub_widget
     """
-#    sel.open("/demo/")
-    if "iexplore" in selvars.set_browser():
-        submit_video(self,sel,"http://www.youtube.com/watch?v=Q1kAhWZ1hiA")
-    else:
-        submit_video(self,sel,"http://videos.mozilla.org/firefox/3.5/switch/switch.ogv")
+    sel.open("/demo/")
+#   Workaround if demo page breaks
+##    if "iexplore" in selvars.set_browser():
+##        submit_video(self,sel,"http://www.youtube.com/watch?v=Q1kAhWZ1hiA")
+##    else:
+##        submit_video(self,sel,"http://videos.mozilla.org/firefox/3.5/switch/switch.ogv")
 
 def submit_video(self,sel,url):
     """
