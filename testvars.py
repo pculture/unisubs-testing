@@ -96,7 +96,8 @@ openid_username = "Subwriter"
 gmailuser = "pcf.subwriter"
 passw = "sub.writer"
 gmail = "pcf.subwriter@gmail.com"
-
+ad_usr = "amFuZXRQQ0Y="
+del_pw = "bG92ZXMudW5pc3Vicw=="
 eels_fr = u'Mon a\u00E9roglisseur est plein d\'anguilles'
 eels_jp = u'\u79C1\u306E\u30DB\u30D0\u30FC\u30AF\u30E9\u30D5\u30C8\u306F\u9C3B\u3067'
 
