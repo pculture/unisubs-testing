@@ -93,8 +93,10 @@ def start_demo(self,sel):
 ##        submit_video(self,sel,"http://videos.mozilla.org/firefox/3.5/switch/switch.ogv")
 
 def submit_video(self,sel,url):
-    """
-    Description: Submit a video using the site button
+    """Description: Submit a video using the site button.
+
+    After the video is submitted, check if it is already in the db, and if so, delete and resubmit to assure
+    a fresh state for testing.
 
     Pre-condition: site page is opened
 
@@ -108,6 +110,16 @@ def submit_video(self,sel,url):
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     sel.type("video_url", url)
     sel.click(testvars.WebsiteUI["Video_Submit_Button"])
+    mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+    if str(sel.get_text(testvars.WebsiteUI["SubtitleMe_menu"])) != "Subtitle Me":
+        ## Delete and resubmit the video
+        curr_url = sel.get_eval("window.location")
+        admin_delete_video(self,sel,curr_url)
+        sel.open("/videos/create")
+        sel.type("video_url", url)
+        sel.click(testvars.WebsiteUI["Video_Submit_Button"])
+            
+
     
 def front_page_submit(self,sel,url):
     sel.open("/")
@@ -116,23 +128,25 @@ def front_page_submit(self,sel,url):
     sel.wait_for_page_to_load(testvars.timeout)
 
 
-def start_sub_widget(self,sel,wig_menu=testvars.WebsiteUI["SubtitleMe_menu"],skip="True",vid_lang="en",sub_lang="en-gb"):
+def start_sub_widget(self,sel,skip="True",vid_lang="en",sub_lang="en-gb",orig_lang='en',login=True):
     """Start the Subtitle Widget using the Subtitle Me menu.
 
     This will handle the language choice for demo or submitted videos.
     skip is set to true by default and gets passed to widget.close_howto_video
     to prevent further how-to video displays.
 
-    Pre-condition: On a page where Subtitle Me menu is present. Video with no subs.
+    Pre-condition: On a page where the widget is present. Video with or without subs.
 
     Post-condition: the widget is launched and you will be on step 1 or Edit step
     """
+    if login==True:
+        SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
     sel.window_maximize()
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
     sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
     time.sleep(5)
     if sel.is_element_present(testvars.WidgetUI["Select_language"]):
-        widget.select_video_language(self,sel,vid_lang,sub_lang)
+        widget.select_video_language(self,sel,vid_lang,sub_lang=orig_lang)
         time.sleep(15)
         widget.close_howto_video(self,sel)
     elif sel.is_element_present(testvars.WebsiteUI["AddSubtitles_menuitem"]):
@@ -538,7 +552,19 @@ def search_teams(self,sel,team):
     sel.open("/teams/?q="+team)
     
     
+def admin_delete_video(self,sel,curr_url):
+    """Completely delete a video from the site.
 
+    """
+    
+    vid_id = curr_url.split('/videos/')[1]
+    sel.open("/videos/"+vid_id+"staff/delete")
+    sel.type("id_username", "janetPCF")
+    sel.type("id_password", "loves.unisubs")
+    sel.click("//input[@value='Log in']")
+    sel.wait_for_page_to_load(testvars.timeout)
+    sel.open("/admin/logout")
+    
 
 def handle_error_page(self,sel,test_id):
     time.sleep(5)

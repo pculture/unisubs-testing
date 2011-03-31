@@ -76,6 +76,7 @@ def site_login_auth(self,sel):
 
     Post-condition: user logged in and returned to widget page.
     """
+    time.sleep(5)
     sel.select_pop_up("null")
     mslib.wait_for_element_present(self,sel,"id_username")
     sel.type("id_username", testvars.siteuser)
@@ -85,13 +86,15 @@ def site_login_auth(self,sel):
     time.sleep(10)
 
 
-def select_video_language(self,sel,vid_lang="en",sub_lang="en-gb",from_lang='forkk'):
+def select_video_language(self,sel,vid_lang="en",sub_lang="en-gb",from_lang='forkk',sub_def="en"):
     time.sleep(5)
     if sel.is_element_present(testvars.WidgetUI["Select_language"]):
         sel.select_frame("relative=top")
         mslib.wait_for_text_present(self,sel,"Subtitle into")
         if sel.is_element_present("css=div p span:contains('video is')"):
             sel.select("css=div p span:contains('video is') + select", "value=regexp:^"+vid_lang)
+            if sel.is_text_present("Subtitle into"):
+                sel.select("css=div p span:contains('Subtitle into') + select", "value=regexp:^"+sub_def)
         if sel.is_text_present("Subtitle into"):
             sel.select("css=div p span:contains('Subtitle into') + select", "value=regexp:^"+sub_lang)
         if sel.is_text_present("Translate from"):
@@ -142,7 +145,7 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="ye
     """
     print ("Transcribing the video")
     sel.select_window("null")
-    restart_step(self,sel)
+#    restart_step(self,sel)
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-speedmode")
     try:
         if mode == "Recommended":
@@ -157,11 +160,8 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="ye
     except:
         print ("trouble selecting element (safari issue?) - going with default value")
         
-    # give time to buffer
-#    mslib.wait_for_video_to_buffer(self,sel)
-    #start playback
+
     sel.click(testvars.WidgetUI["Play_pause"])
-#    sel.type_keys("css=.mirosubs-play",u'\u0009')
     for i,line in enumerate(codecs.open(sub_file,encoding='utf-8')):
         x=i+1
         sel.focus("css=input[class*=trans]")
@@ -201,13 +201,13 @@ def restart_step(self,sel):
             try:
                 self.assertTrue(re.search(r"^Are you sure you want to start over[\s\S] All timestamps will be deleted\.$", sel.get_confirmation()))
             except:
-                sel.key_press_native('10') #workaround for FF 4 selenium confirmation bug
+                sel.key_press("css=div", "13") #workaround for FF 4 selenium confirmation bug
                 
         if sel.is_element_present("css=.mirosubs-activestep:contains('1')"):
             try:
                 self.assertTrue("Are you sure you want to start over? All subtitles will be deleted.", sel.get_confirmation())
             except:
-                sel.key_press_native('10') #workaround for FF 4 selenium confirmation bug
+                sel.key_press("css=div", "13") #workaround for FF 4 selenium confirmation bug
 
 def back_step(self,sel):
     """
@@ -553,9 +553,9 @@ def wait_for_offsite_login(self,sel):
         time.sleep(1)
 
 def set_subs_complete(self,sel,done=True):
-    sel.select_window("null")
-    time.sleep(3)
-    if sel.is_text_present("Entire video"):
+    time.sleep(5)
+    sel.select_frame("relative=top")
+    if sel.is_text_present("Entire video completed?") == True:
         if done==True:
             if sel.is_element_present("css=.goog-checkbox-unchecked"):
                 sel.click("css=.goog-checkbox-unchecked")

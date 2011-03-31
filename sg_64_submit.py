@@ -165,7 +165,6 @@ class subgroup_64(unittest.TestCase):
         vid_url = offsite.get_youtube_video_url(self)
         # Submit Video
         print ("logging in and submitting video")
-        website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         website.submit_video(self,sel,vid_url)
         # Verify embed and player
         print ("verifying embed")
@@ -229,10 +228,9 @@ class subgroup_64(unittest.TestCase):
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         website.SiteLogout(self,sel)
-        vid_url = offsite.get_youtube_video_url(self)
         # Submit Video
-        website.submit_video(self,sel,vid_url)
-        website.start_sub_widget(self,sel)        
+        website.submit_video(self,sel,"http://www.youtube.com/watch?v=KakZkh9Iu7U&feature=")
+        website.start_sub_widget(self,sel,login=False)        
         # Check message in transcribe step
         widget.verify_login_message(self,sel)
         widget.transcribe_video(self,sel,subtextfile)
@@ -249,9 +247,12 @@ class subgroup_64(unittest.TestCase):
         #Login
         widget.site_login_auth(self,sel)
         sel.select_window("null")
+        time.sleep(3)
+        if sel.is_element_present(testvars.WidgetUI["Must_Login"]):
+            self.fail("User not correctly logged in.")
         self.assertTrue(sel.is_element_present(testvars.WidgetUI["Next_step"]),"Done button not found, maybe widget not redisplayed after login")
         sel.click(testvars.WidgetUI["Next_step"])
-        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+        widget.set_subs_complete(self,sel)
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"]) 
         print "logging out from site"
         website.SiteLogout(self,sel)

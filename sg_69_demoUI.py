@@ -114,7 +114,7 @@ class subgroup_69(unittest.TestCase):
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
+        website.start_sub_widget(self,sel,login=False)
         widget.transcribe_video(self,sel,subtextfile)
         # verify subs present on next screen                    
         
@@ -132,7 +132,7 @@ class subgroup_69(unittest.TestCase):
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
+        website.start_sub_widget(self,sel,login=False)
         #Type sub-text in the video, then wait stay on Step-1 screen
         widget.transcribe_video(self,sel,subtextfile,mode="Beginner", step="Stop", buffer="yes")
         # wait for play button to indicate playback was paused, then start playback and see if it auto-stops
@@ -164,7 +164,7 @@ class subgroup_69(unittest.TestCase):
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
+        website.start_sub_widget(self,sel,login=False)
         #Type sub-text in the video, then wait stay on Step-1 screen
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
         mode_label = sel.get_text("css=.mirosubs-speedmode option:contains('Recommended')")
@@ -203,7 +203,7 @@ class subgroup_69(unittest.TestCase):
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
+        website.start_sub_widget(self,sel,login=False)
         #Type sub-text in the video, then wait stay on Step-1 screen
         widget.transcribe_video(self, sel, subtextfile, step="Stop",buffer="yes")
         #verify that playback continues to the end
@@ -226,7 +226,7 @@ class subgroup_69(unittest.TestCase):
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
+        website.start_sub_widget(self,sel,login=False)
         # wait for video to load
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_play_button"])
         # set expert mode
@@ -271,7 +271,7 @@ class subgroup_69(unittest.TestCase):
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
+        website.start_sub_widget(self,sel,login=False)
         widget.transcribe_video(self, sel, subtextfile)
 
         #on Step 2 test play-pause button
@@ -314,7 +314,7 @@ class subgroup_69(unittest.TestCase):
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
+        website.start_sub_widget(self,sel,login=False)
         widget.transcribe_video(self, sel, subtextfile)
         widget.sync_video(self,sel,subtextfile)
 
@@ -359,7 +359,7 @@ class subgroup_69(unittest.TestCase):
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
+        website.start_sub_widget(self,sel,login=False)
         #set mode to expert and wait for video to load
         mode_label = sel.get_text("css=.mirosubs-speedmode option:contains('Expert')")
         sel.select("//select", "label=" +mode_label)
@@ -411,7 +411,7 @@ class subgroup_69(unittest.TestCase):
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
+        website.start_sub_widget(self,sel,login=False)
         #step 1 type the subs
         widget.transcribe_video(self, sel, subtextfile,buffer="yes")
         # on step 2 test skip back
@@ -456,7 +456,7 @@ class subgroup_69(unittest.TestCase):
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
         #start sub widget
-        website.start_sub_widget(self,sel)
+        website.start_sub_widget(self,sel,login=False)
         #complete step 1 typing
         widget.transcribe_video(self, sel, subtextfile, buffer="yes")
         #complete step 2 syncing
@@ -504,7 +504,7 @@ class subgroup_69(unittest.TestCase):
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
+        website.start_sub_widget(self,sel,login=False)
         widget.transcribe_video(self, sel, subtextfile, step="Stop")
         widget.restart_step(self,sel)
         self.failIf(sel.is_element_present("css=.mirosubs-title-notime"))
@@ -523,8 +523,9 @@ class subgroup_69(unittest.TestCase):
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
+        website.start_sub_widget(self,sel,login=False)
         widget.transcribe_video(self, sel, subtextfile, step="Stop")
+        time.sleep(15)  #waiting for the autosave to kick in
         widget.site_login_from_widget_link(self,sel)
         #verify subs still present
         print "verifying subtitles are still present"
@@ -545,9 +546,10 @@ class subgroup_69(unittest.TestCase):
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
+        website.start_sub_widget(self,sel,login=False)
         widget.transcribe_video(self, sel, subtextfile)
         widget.sync_video(self, sel, subtextfile, step="Stop")
+        time.sleep(15)  #waiting for the autosave to kick in
         widget.site_login_from_widget_link(self,sel)
         #verify subs still present
         print "verifying subtitles are still present"
@@ -569,7 +571,7 @@ class subgroup_69(unittest.TestCase):
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
+        website.start_sub_widget(self,sel,login=False)
         widget.transcribe_video(self, sel, subtextfile)
         widget.sync_video(self, sel, subtextfile)
         widget.site_login_from_widget_link(self,sel)
@@ -592,7 +594,7 @@ class subgroup_69(unittest.TestCase):
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
+        website.start_sub_widget(self,sel,login=False)
         widget.transcribe_video(self, sel, subtextfile)
         widget.sync_video(self,sel,subtextfile,step="Stop")                
             
@@ -611,7 +613,7 @@ class subgroup_69(unittest.TestCase):
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
+        website.start_sub_widget(self,sel,login=False)
         widget.transcribe_video(self, sel, subtextfile)
         widget.sync_video(self,sel,subtextfile,step="Stop")
                        
@@ -638,7 +640,7 @@ class subgroup_69(unittest.TestCase):
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
+        website.start_sub_widget(self,sel,login=False)
         widget.transcribe_video(self, sel, subtextfile)
         widget.sync_video(self,sel,subtextfile)                
         #edit subtitles
@@ -666,7 +668,7 @@ class subgroup_69(unittest.TestCase):
         website.SiteLogout(self,sel)
         # start demo and proceed to step 2 and sync subs
         website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
+        website.start_sub_widget(self,sel,login=False)
         widget.transcribe_video(self, sel, subtextfile)
         widget.sync_video(self,sel,subtextfile,step="Stop")
         # go back to typing step
@@ -689,7 +691,7 @@ class subgroup_69(unittest.TestCase):
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
+        website.start_sub_widget(self,sel,login=False)
         widget.transcribe_video(self, sel, subtextfile)
         widget.sync_video(self,sel,subtextfile)
         #on Step 3 resync video times
@@ -709,7 +711,7 @@ class subgroup_69(unittest.TestCase):
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
+        website.start_sub_widget(self,sel,login=False)
         widget.transcribe_video(self, sel, subtextfile)
         widget.sync_video(self,sel,subtextfile,start_delay=1, sub_int=1)
         #on Step 3 resync video times
@@ -729,7 +731,7 @@ class subgroup_69(unittest.TestCase):
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
+        website.start_sub_widget(self,sel,login=False)
         widget.transcribe_video(self, sel, subtextfile)
         widget.sync_video(self,sel,subtextfile)
         #on Step 3 resync video times
@@ -748,7 +750,7 @@ class subgroup_69(unittest.TestCase):
         # be sure logged out
         website.SiteLogout(self,sel)
         website.start_demo(self,sel)
-        website.start_sub_widget(self,sel)
+        website.start_sub_widget(self,sel,login=False)
         widget.transcribe_video(self, sel, subtextfile,buffer="yes")
         widget.sync_video(self,sel,subtextfile,start_delay=5, sub_int=2)
         #on Step 3 resync video times
