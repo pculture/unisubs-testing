@@ -88,22 +88,21 @@ def site_login_auth(self,sel):
 
 def select_video_language(self,sel,vid_lang="en",sub_lang="en-gb",from_lang='forkk',sub_def="en"):
     time.sleep(5)
-    if sel.is_element_present(testvars.WidgetUI["Select_language"]):
-        sel.select_frame("relative=top")
-        mslib.wait_for_text_present(self,sel,"Subtitle into")
-        if sel.is_element_present("css=div p span:contains('video is')"):
-            sel.select("css=div p span:contains('video is') + select", "value=regexp:^"+vid_lang)
-            if sel.is_text_present("Subtitle into"):
-                sel.select("css=div p span:contains('Subtitle into') + select", "value=regexp:^"+sub_def)
+    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
+    sel.select_frame("relative=top")
+    mslib.wait_for_text_present(self,sel,"Subtitle into")
+    
+    if sel.is_element_present("css=div p span:contains('video is')"):
+        sel.select("css=div p span:contains('video is') + select", "value=regexp:^"+vid_lang)
         if sel.is_text_present("Subtitle into"):
-            sel.select("css=div p span:contains('Subtitle into') + select", "value=regexp:^"+sub_lang)
-        if sel.is_text_present("Translate from"):
-            sel.select("css=div p span:contains('Translate from') + span select", "value=regexp:^"+from_lang)           
-        time.sleep(1)
-        
-        sel.click("link=Continue")
-    else:
-        print "no language selection box"
+            sel.select("css=div p span:contains('Subtitle into') + select", "value=regexp:^"+sub_def)
+    if sel.is_text_present("Subtitle into"):
+        sel.select("css=div p span:contains('Subtitle into') + select", "value=regexp:^"+sub_lang)
+    if sel.is_text_present("Translate from"):
+        sel.select("css=div p span:contains('Translate from') + span select", "value=regexp:^"+from_lang)           
+    time.sleep(1)
+    sel.click("link=Continue")
+
         
 def close_howto_video(self,sel,skip=True):
     """

@@ -4,7 +4,7 @@ import platform
 
 preE=" --- ERROR: "
 
-timeout = 90000
+timeout = 120000
 MSTestVariables = {"DataDirectory": os.path.join(os.getcwd(), "TestInput"), \
                    "TimeOut":timeout, \
                   }

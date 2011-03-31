@@ -11,6 +11,7 @@ import selvars
 import testvars
 import widget
 import offsite
+import base64
 
 
 #Login as a user
@@ -155,7 +156,9 @@ def start_sub_widget(self,sel,skip="True",vid_lang="en",sub_lang="en-gb",orig_la
         widget.close_howto_video(self,sel)
     else:
         self.fail("wtf - no widget, no sub menu")
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
+    mslib.wait_for_element_present(self,sel,"css=.mirosubs-help-heading")
+
+
 
 def verify_login(self,sel,username="sub_writer"):
     """
@@ -559,8 +562,8 @@ def admin_delete_video(self,sel,curr_url):
     
     vid_id = curr_url.split('/videos/')[1]
     sel.open("/videos/"+vid_id+"staff/delete")
-    sel.type("id_username", "janetPCF")
-    sel.type("id_password", "loves.unisubs")
+    sel.type("id_username", base64.standard_b64decode(testvars.ad_usr))
+    sel.type("id_password", base64.standard_b64decode(testvars.del_pw))
     sel.click("//input[@value='Log in']")
     sel.wait_for_page_to_load(testvars.timeout)
     sel.open("/admin/logout")

@@ -92,9 +92,9 @@ class subgroup_88(unittest.TestCase):
         team = website.get_own_team(self,sel)
         
         #submit video
-        test_video_url = website.get_video_no_translations(self,sel)
+        test_video_url = website.submit_random_youtube(self,sel)
         print test_video_url
-        sel.open(test_video_url)
+        vid_title = sel.get_text("css=.title-container")
         self.assertTrue(sel.is_element_present("css=strong:contains('Add video to team')"))
         vid_title = sel.get_text("css=.main-title a")
         #add video to team and verify values
@@ -102,9 +102,7 @@ class subgroup_88(unittest.TestCase):
         sel.click("css=li a:contains('"+team+"')")
         sel.wait_for_page_to_load(testvars.timeout)
         print "verifying the inital add page"
-        self.assertEqual(selvars.set_site()+test_video_url, sel.get_value("css=input#id_video_url"))
-        team_vid_title = sel.get_value("css=input#id_title")
-        self.assertEqual(vid_title[0:10], team_vid_title[0:10])
+
         if sel.is_element_present("css=.errorlist:contains('Team has this')"):
             print "video already part of team"
         else:
@@ -148,8 +146,9 @@ class subgroup_88(unittest.TestCase):
         sel.open("teams/"+team)
         sel.click(testvars.manage_team)
         sel.wait_for_page_to_load(testvars.timeout)
-        if sel.get_value("id_is_visible") == "on":
+        if sel.get_value("id_is_visible") == "off":
             sel.click("id_is_visible")
+        self.failIf(sel.get_value("id_is_visible") == "off","id_is_visible not set to off")
         website.save_team_settings(self,sel)
         # logout and verify team no longer displayed
         sel.click(testvars.WebsiteUI["Logout_Button"])
@@ -196,6 +195,58 @@ class subgroup_88(unittest.TestCase):
         self.assertTrue(sel.is_text_present(new_text))
 
 
+    def test_693(self):
+        """Launch widget from Teams page.
+
+        Currently testing on al-jazeera teams page.
+
+        """
+        sel = self.selenium
+        sel.set_timeout(testvars.timeout)
+        
+        #login
+        website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
+        team = "al-jazeera"
+
+
+        #Edit original language
+        sel.open("teams/"+team)
+        sel.wait_for_page_to_load(testvars.timeout)        
+        sel.click("css=a.blue-button:contains('Add Subtitles')")
+        vid_lang_str = sel.get_text("css=h3:contains('Create subtitles') + div p")
+        vid_lang = vid_lang_str.split("in ")[1]
+        orig_lang_edit(self,sel,vid_lang)
+        submit_lang_choices(self,sel)
+        widget.submit_sub_edits(self,sel)
+
+        #Edit translation
+        vid_lang_str = sel.get_text("css=h3:contains('Create subtitles') + div p")
+        vid_lang = vid_lang_str.split("in ")[1]
+        sel.open("teams/"+team)
+        sel.wait_for_page_to_load(testvars.timeout)        
+        sel.click("css=a.blue-button:contains('Add Subtitles')")
+        translate_orig(self,sel)
+        submit_lang_choices(self,sel)
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
+        widget.edit_translation(self,sel,subtextfile)
+
+        #New fork
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
+        sel.open("teams/"+team)
+        sel.wait_for_page_to_load(testvars.timeout)        
+        sel.click("css=a.blue-button:contains('Add Subtitles')")
+        new_fork(self,sel)
+        submit_lang_choices(self,sel)
+        print "transcribing video"
+        widget.transcribe_video(self,sel,subtextfile)
+        # Sync
+        print "syncing video"
+        widget.sync_video(self,sel,subtextfile,3,4)
+        # Review
+        print "review step - just submitting video"
+        widget.submit_sub_edits(self,sel)
+        
+         
         # Close the browser, log errors, perform cleanup
     def tearDown(self):
         """
@@ -213,6 +264,37 @@ class subgroup_88(unittest.TestCase):
             output = StringIO.StringIO()
             output.write("sauce job result: http://saucelabs.com/jobs/"+str(self.session))
 
+
+def orig_lang_edit(self,sel,orig_lang):
+    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
+    sel.select_frame("relative=top")
+    sel.select("css=div p span:contains('Subtitle into') + select", "label=regexp:^"+orig_lang)
+    if sel_is_element_present("css=div p span:contains('Translate from')"):
+        sel.select("css=div p span:contains('Translate from') + span select", "value=regexp:^"+orig_lang)
+   
+                              
+def translate_orig(self,sel,orig_lang,new_trans="English"):
+    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
+    sel.select_frame("relative=top")
+    sel.select("css=div p span:contains('Subtitle into') + select", "label=regexp:^"+new_trans)
+    if sel_is_element_present("css=div p span:contains('Translate from')"):                         
+        sel.select("css=div p span:contains('Translate from') + span select", "value=regexp:^"+orig_lang)
+ 
+                              
+def new_fork(self,sel,new_trans="English"):
+    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
+    sel.select_frame("relative=top")
+    sel.select("css=div p span:contains('Subtitle into') + select", "label=regexp:^"+new_trans)
+    if sel_is_element_present("css=div p span:contains('Translate from')"):                           
+        sel.select("css=div p span:contains('Translate from') + span select", "value=regexp:^Direct from video")
+
+
+def submit_lang_choices(self,sel):
+    sel.click("link=Continue")
+    widget.close_howto_video(self,sel)
+    mslib.wait_for_element_present(self,sel,"css=.mirosubs-help-heading")
+                              
+                              
 
 class subgroup_88_special(unittest.TestCase):
     """
