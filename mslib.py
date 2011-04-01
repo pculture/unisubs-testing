@@ -23,18 +23,18 @@ def wait_for_element_present(self,sel,input_field):
     Description: Waits 60 seconds for element to present itself.
     Requires: valid element identifier, can be css, xpath
     """
+    
+    s = """\
     for i in range(30):
-        s = """\
         try:
             if sel.is_element_present(input_field): break
         except: pass
         time.sleep(1)
-        """
-        t = timeit.Timer(stmt=s)
-        print "%.2f usec/pass" % (1000000 * t.timeit(number=100000)/100000)
     else:
         self.fail("time out waiting 30s for element " +input_field)
-
+    """
+    t = timeit.Timer(stmt=s)
+    print "%.2f usec/pass" % (1000000 * t.timeit(number=100000)/100000)
 
 def wait_for_text_present(self,sel,ttext):
     """
