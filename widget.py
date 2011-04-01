@@ -112,7 +112,7 @@ def starter_dialog_edit_orig(self,sel):
         select_video_language(self,sel,vid_lang=lang_code,sub_lang=lang_code)
     time.sleep(5)
     close_howto_video(self,sel)
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
+    mslib.wait_for_element_present(self,sel,"mirosubs-help-heading")
     return orig_lang
 
 
@@ -134,7 +134,7 @@ def starter_dialog_translate_from_orig(self,sel,to_lang='hr'):
         select_video_language(self,sel,sub_lang=to_lang,from_lang=lang_code)
         time.sleep(5)
         close_howto_video(self,sel)
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-help-heading")
+        mslib.wait_for_element_present(self,sel,"css=div.mirosubs-help-heading")
         return orig_lang
 
 def starter_dialog_translate_from_not_orig(self,sel,from_lang,to_lang='hr'):
@@ -194,12 +194,16 @@ def select_video_language(self,sel,vid_lang="en",sub_lang="en-gb",from_lang='for
         sel.select(testvars.create_lang_unknown +"+ select", "value=regexp:^"+vid_lang)
         if sel.is_element_present(testvars.create_subtitle_into):
             sel.select(testvars.create_subtitle_into +"+ select", "value=regexp:^"+sub_lang)
-    if sel.is_element_present(testvars.create_subtitle_into):  # Videos original lang is set, so choose trans lang and from lang
+    else:
+        mslib.wait_for_element_present(testvars.create_lang_known) 
+        if vid_lang == sub_lang: # editing original subs only 1 select dialog
+            sel.select(testvars.create_subtitle_into +"+ select", "value=regexp:^"+sub_lang)
+        else:
         sel.select(testvars.create_subtitle_into +"+ select", "value=regexp:^"+sub_lang)
-    if sel.is_element_present(testvars.create_translate_from):
         sel.select(testvars.create_subtitle_into+" + span select", "value=regexp:^"+from_lang)           
     time.sleep(1)
     sel.click("link=Continue")
+    print "selected video language, from: "+str(from_lang)+"to: "+str(sub_lang)
 
         
 def close_howto_video(self,sel,skip=True):

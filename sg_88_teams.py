@@ -95,10 +95,10 @@ class subgroup_88(unittest.TestCase):
         sel.window_maximize()
         test_video_url = website.submit_random_youtube(self,sel)
         print test_video_url
-        self.assertTrue(sel.is_element_present("css=strong:contains('Add video to team')"))
+        mslib.wait_for_element_present(self,sel,"css=span.sort_label strong:contains('Add video')")
         vid_title = sel.get_text(testvars.vid_title)
         #add video to team and verify values
-        sel.click_at("css=strong:contains('Add video to team')","")
+        sel.click_at("css=span.sort_label strong:contains('Add video')","")
         sel.click("css=li a:contains('"+team+"')")
         sel.wait_for_page_to_load(testvars.timeout)
         print "verifying the inital add page"
@@ -251,6 +251,7 @@ class subgroup_88(unittest.TestCase):
         for x in range(1,5):
             try:
                 sel.open("/teams/al-jazeera")
+                sel.wait_for_page_to_load(testvars.timeout)
                 mslib.wait_for_text_present(self,sel,"What language do you speak")
                 sel.click("//button[@type='submit']")
                 mslib.wait_for_text_not_present(self,sel,"What languages do you speak")                    
