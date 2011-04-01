@@ -63,6 +63,7 @@ def site_login_from_widget_link(self,sel):
         # log in from widget
         sel.click("link=LOGIN")
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-modal-login")
+        time.sleep(2)
         sel.click("css=.mirosubs-log")
         site_login_auth(self,sel)
     else:
@@ -86,17 +87,117 @@ def site_login_auth(self,sel):
     time.sleep(10)
 
 
-def select_video_language(self,sel,vid_lang="en",sub_lang="en-gb",from_lang='forkk',sub_def="en"):
+
+def starter_dialog_edit_orig(self,sel):
+    """Choose the current lang to edit.
+    Return orig_lang
+
+    Gets the videos orig lang to edit the original subs - or sets it to English if none set.
+
+    Post-condition: the widget is launched and you will be on step 1.
+    """
+    sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])        
+    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
+    #Figure our the original lang or choose your own
+    if sel.is_element_present("css=div p span:contains('This video is in:')"): # No lang set, going to use English
+        orig_lang = "English"
+        select_video_language(self,sel,vid_lang='en',sub_lang='en')
+    else:        
+        ol = sel.get_text("css=div p:contains('video is')")
+        orig_lang = ol.split("in ")[1]
+        lang_code = sel.get_value("css=p select option:contains('"+orig_lang+" ')")
+        select_video_language(self,sel,vid_lang=lang_code,sub_lang=lang_code)
+    time.sleep(5)
+    close_howto_video(self,sel)
+    mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
+    return orig_lang
+
+
+def starter_dialog_translate_from_orig(self,sel,to_lang='hr'):
+    """Choose the a new translation and translate from original lang
+    Return orig_lang
+
+    This assumes you know the original language and want to edit the original subs.
+
+    Post-condition: the widget is launched and you will be on step 1 or Edit step
+    """
+    sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])        
+    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
+    #Figure out orig lang fail is there isn't a set lang already
+    if sel.is_element_present("css=div p span:contains('This video is in:')"):
+        self.fail("can't make a new translation when video has no orig lang set - test is invalid")
+    else:
+        ol = sel.get_text("css=div p span:contains('This video is in ')")
+        orig_lang = ol.split("in ")[1]
+        lang_code = sel.get_value("css=p select option:contains('"+orig_lang+" ')")
+        select_video_language(self,sel,sub_lang=to_lang,from_lang=lang_code)
+        time.sleep(5)
+        close_howto_video(self,sel)
+        mslib.wait_for_element_present(self,sel,"css=.mirosubs-help-heading")
+        return orig_lang
+
+def starter_dialog_translate_from_not_orig(self,sel,from_lang,to_lang='hr'):
+    """Choose the a new translation and translate from a sub that is not the orig lang.
+    Return from_lang
+
+    This assumes you know the original language and want to edit the original subs.
+
+    Post-condition: the widget is launched and you will be on step 1 or Edit step
+    """
+    sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])        
+    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
+    #Figure out orig lang fail is there isn't a set lang already
+    if sel.is_element_present("css=div p span:contains('This video is in:')"):
+        self.fail("can't make a new translation when video has no orig lang set - test is invalid")
+    else:
+        ol = sel.get_text("css=div p span:contains('This video is in ')")
+        orig_lang = ol.split("in ")[1]
+        lang_code = sel.get_value("css=p select option:contains('"+orig_lang+" ')")
+    if lang_code == from_lang:
+        self.fail("invalid test - from lang "+str(from_lang)+" is the same as the origi lang"+str(orig_lang))
+        
+    select_video_language(self,sel,sub_lang=to_lang,from_lang=from_lang)
+    time.sleep(5)
+    close_howto_video(self,sel)
+    mslib.wait_for_element_present(self,sel,"css=.mirosubs-help-heading")
+    return from_lang
+
+
+
+def starter_dialog_fork(self,sel,to_lang='hr'):
+    """Choose the a new translation and translate from original lang
+    Return orig_lang
+
+    This assumes you know the original language and want to edit the original subs.
+
+    Post-condition: the widget is launched and you will be on step 1 or Edit step
+    """
+    sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])        
+    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
+    #Figure out orig lang fail is there isn't a set lang already
+    if sel.is_element_present("css=div p span:contains('This video is in:')"):
+        self.fail("can't make a new translation when video has no orig lang set - test is invalid")
+    else:
+        ol = sel.get_text("css=div p span:contains('This video is in ')")
+        orig_lang = ol.split("in ")[1]
+        select_video_language(self,sel,sub_lang=to_lang,from_lang='forkk')
+        time.sleep(5)
+        close_howto_video(self,sel)
+        mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
+        return orig_lang
+
+
+def select_video_language(self,sel,vid_lang="en",sub_lang="en-gb",from_lang='forkk'):
     time.sleep(5)
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
     sel.select_frame("relative=top")
     mslib.wait_for_text_present(self,sel,"Subtitle into")
     
-    if sel.is_element_present("css=div p span:contains('video is')"):
+    if sel.is_element_present("css=div p span:contains('video is')"): # Don't know the video lang so choose for 1st time subs.
         sel.select("css=div p span:contains('video is') + select", "value=regexp:^"+vid_lang)
         if sel.is_text_present("Subtitle into"):
-            sel.select("css=div p span:contains('Subtitle into') + select", "value=regexp:^"+sub_def)
-    if sel.is_text_present("Subtitle into"):
+            sel.select("css=div p span:contains('Subtitle into') + select", "value=regexp:^"+sub_lang)
+    if sel.is_text_present("Subtitle into"):  # Videos original lang is set, so choose trans lang and from lang
         sel.select("css=div p span:contains('Subtitle into') + select", "value=regexp:^"+sub_lang)
     if sel.is_text_present("Translate from"):
         sel.select("css=div p span:contains('Translate from') + span select", "value=regexp:^"+from_lang)           
@@ -580,7 +681,7 @@ def submit_sub_edits(self,sel,offsite=False):
 
 def goto_step(self,sel,step="3"):
     
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
+    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Next_step"])
     sel.click("css=.mirosubs-help-heading li a:contains('"+step+"')")
     self.assertTrue(sel.get_text("css=li a.mirosubs-activestep:contains('"+step+"')"))
 

@@ -74,8 +74,7 @@ class subgroup_78_pagedemo(unittest.TestCase):
         sel.open(testpage)
         sel.wait_for_page_to_load(testvars.timeout)
         sel.window_maximize()
-        sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
-#        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].click()') should be this when implemented to be sure correct video
+        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].openMenu()') 
         sel.click("css=div.mirosubs-dropdown div ul li:contains('100%')")
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')       
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-captionSpan")
@@ -100,9 +99,8 @@ class subgroup_78_pagedemo(unittest.TestCase):
         sel.wait_for_page_to_load(testvars.timeout)
         sel.window_maximize()
         sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
-        sel.click(testvars.WebsiteUI['AddSubtitles_menuitem'])
-#        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].click()') should be this when implemented to be sure correct video
-        edit_original_subs(self,sel)
+        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].openMenu()')
+        widget.starter_dialog_edit_orig(self,sel)
         widget.goto_step(self,sel,step="2")
         widget.resync_video(self,sel,subtextfile)
         widget.submit_sub_edits(self,sel,offsite=True)
@@ -120,9 +118,8 @@ class subgroup_78_pagedemo(unittest.TestCase):
         sel.wait_for_page_to_load(testvars.timeout)
         sel.window_maximize()
         sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
-        sel.click(testvars.WebsiteUI['AddSubtitles_menuitem'])
-#        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].click()') should be this when implemented to be sure correct video
-        translate_original(self,sel) # selects Croatian as the new language by default
+        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()') 
+        widget.starter_dialog_translate_from_orig(self,sel,to_lang='pl')
         widget.edit_translation(self,sel,subtextfile)
         widget.submit_sub_edits(self,sel,offsite=True)
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
@@ -134,7 +131,7 @@ class subgroup_78_pagedemo(unittest.TestCase):
         
 
     def test_691(self):
-        """Pagedemo New York Times video 1 - forked the subs.
+        """Pagedemo New York Times video 1 - forked the subs and create a fresh set of captions in hr lang.
         
         http://litmus.pculture.org/show_test.cgi?id=691
         """
@@ -146,9 +143,8 @@ class subgroup_78_pagedemo(unittest.TestCase):
         sel.wait_for_page_to_load(testvars.timeout)
         sel.window_maximize()
         sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
-        sel.click(testvars.WebsiteUI['AddSubtitles_menuitem'])
-#        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].click()') should be this when implemented to be sure correct video
-        new_fork(self,sel)
+        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].openMenu()')
+        widget.starter_dialog_fork(self,sel,to_lang='hr')
         widget.transcribe_video(self, sel, subtextfile)
         widget.sync_video(self, sel, subtextfile)
         widget.site_login_from_widget_link(self,sel)
@@ -201,7 +197,7 @@ class subgroup_78_pagedemo(unittest.TestCase):
         verify_caption_position(self,sel,caption_position)
 
     def test_687(self):
-        """Pagedemo Gapminder - sub position on playback.
+        """Pagedemo Khan Widgetizer - sub position on playback.
         
         http://litmus.pculture.org/show_test.cgi?id=687
         """
@@ -218,39 +214,6 @@ class subgroup_78_pagedemo(unittest.TestCase):
         caption_position =  sel.get_element_height("css=.mirosubs-captionSpan")
         verify_caption_position(self,sel,caption_position)
 
-
-          
-##
-##        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].play()')
-##        mslib.wait_for_element_present(self,sel,"css=.mirosubs-captionSpan")
-##        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].pause()')
-##        print "widget 1"
-##        print sel.get_element_position_top("css=.mirosubs-captionSpan")
-##        print sel.get_element_height("css=.mirosubs-captionSpan")
-
-        
-##        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getWidgetByURL("http://www.youtube.com/watch?v=O6ZFFDmeqZ8").play()')
-##        mslib.wait_for_element_present(self,sel,"css=.mirosubs-captionSpan")
-##        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getWidgetByURL("http://www.youtube.com/watch?v=O6ZFFDmeqZ8").pause()')
-##        print sel.get_element_position_top("css=.mirosubs-captionSpan")
-##        print sel.get_element_height("css=.mirosubs-captionSpan")
-
-            #            if int(sel.get_element_position_top("css=.mirosubs-captionSpan")) > 300
-
-
-
-
-        
-##        widget = sel.get_eval("this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()")
-##        time.sleep(10)
-##        sel.get_eval("this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].play()")
-##        time.sleep(10)
-##        sel.get_eval("this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].pause()")
-##        widget = sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getWidgetByURL("").play()')
-##        widget = sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getWidgetByURL("http://www.youtube.com/watch?v=O6ZFFDmeqZ8").click()')
-                     
-  
-        
     
 
 # Close the browser, log errors, perform cleanup 
@@ -262,52 +225,6 @@ class subgroup_78_pagedemo(unittest.TestCase):
         self.selenium.stop()
         #Log any errors
         self.assertEqual([], self.verificationErrors)
-
-
-def edit_original_subs(self,sel):
-    """Start the Subtitle Widget using the Subtitle Me menu.
-
-    This will handle the language choice for demo or submitted videos.
-    skip is set to true by default and gets passed to widget.close_howto_video
-    to prevent further how-to video displays.
-
-    Pre-condition: On a page where the widget is present. Video with or without subs.
-
-    Post-condition: the widget is launched and you will be on step 1 or Edit step
-    """
-    sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])        
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
-    widget.select_video_language(self,sel,vid_lang='en',sub_lang='en')
-    time.sleep(5)
-    widget.close_howto_video(self,sel)
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
-
-def translate_original(self,sel):
-    """Start the Subtitle Widget using the Subtitle Me menu.
-
-    This will handle the language choice for demo or submitted videos.
-    skip is set to true by default and gets passed to widget.close_howto_video
-    to prevent further how-to video displays.
-
-    Pre-condition: On a page where the widget is present. Video with or without subs.
-
-    Post-condition: the widget is launched and you will be on step 1 or Edit step
-    """
-    sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])        
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
-    widget.select_video_language(self,sel,vid_lang='en',sub_lang='hr')
-    time.sleep(5)
-    widget.close_howto_video(self,sel)
-    mslib.wait_for_element_present(self,sel,"css=h2:contains('Editing Translation')")
-
-def new_fork(self,sel):
-    sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])        
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
-    widget.select_video_language(self,sel,sub_lang='hr',from_lang='forkk')
-    time.sleep(5)
-    widget.close_howto_video(self,sel)
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
-
 
 def verify_caption_position(self,sel,caption_position):
     if int(caption_position) > 80:
@@ -330,42 +247,7 @@ def make_new_subs(self,sel,vid_pos):
     widget.edit_text(self,sel,subtextfile)
 
 
-def edit_subs_and_revert(self,sel,test_page,vid_pos,vid_title):
-        print "video has subs - going to editing then revert"
-        sel.click(vid_pos)
-        sel.click(testvars.WebsiteUI["Subhomepage_menuitem"])
-        sel.wait_for_page_to_load(testvars.timeout)
-        website.store_subs(self,sel,modify=True)
-        orig_rev = website.get_current_rev(self,sel)
-        print "starting revision is: "+str(orig_rev)
-        subtextfile = "subs.txt"
-        sel.open(test_page)
-        mslib.wait_for_element_present(self,sel,vid_pos)
-        website.start_sub_widget(self,sel,vid_pos)
-        widget.goto_step(self,sel,"3")
-        widget.edit_text(self,sel,subtextfile)
-        widget.site_login_from_widget_link(self,sel)
-        widget.submit_sub_edits(self,sel,offsite=True)
-        mslib.wait_for_element_present(self,sel,testvars.offsite_goto_subs)
-        sel.click(testvars.offsite_goto_subs)
-        sel.wait_for_page_to_load(testvars.timeout)
-        print " * verify edits"
-        mslib.wait_for_element_present(self,sel,testvars.video_video_info)
-        self.assertEqual("sub_writer edited English subtitles for "+vid_title, sel.get_text("css=tr td:nth-child(1)"))
-        sel.click("css=tr td:nth-child(1) > a:contains('English subtitles')")
-        sel.wait_for_page_to_load(testvars.timeout)
-        sel.click(testvars.history_tab)
-        mslib.wait_for_element_present(self,sel,testvars.video_compare_revisions)
 
-        rev_num = orig_rev.lstrip('#')
-        website.check_the_box(self,sel,2) #check the box
-        new_rev = int(rev_num) + 1
-        sel.click(testvars.video_compare_revisions)
-        sel.wait_for_page_to_load(testvars.timeout)
-        print " * comparing revisions and rolling back to original"
-        website.verify_compare_revisions(self,sel,str(rev_num),str(new_rev),rollback=True)
-        sel.click(testvars.transcripts_tab)
-        website.verify_subs(self,sel,"subs.txt")   
 
 if __name__ == "__main__":
     unittest.main()
