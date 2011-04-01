@@ -146,9 +146,9 @@ class subgroup_88(unittest.TestCase):
         sel.open("teams/"+team)
         sel.click(testvars.manage_team)
         sel.wait_for_page_to_load(testvars.timeout)
-        if sel.get_value("id_is_visible") == "off":
-            sel.click("id_is_visible")
-        self.failIf(sel.get_value("id_is_visible") == "off","id_is_visible not set to off")
+        if str(sel.get_value("is_visible")) == "on":
+            sel.click("is_visible")
+        self.failIf(str(sel.get_value("is_visible")) == "off","id_is_visible not set to off")
         website.save_team_settings(self,sel)
         # logout and verify team no longer displayed
         sel.click(testvars.WebsiteUI["Logout_Button"])
@@ -212,7 +212,7 @@ class subgroup_88(unittest.TestCase):
         #Edit original language
         sel.open("teams/"+team)
         sel.wait_for_page_to_load(testvars.timeout)        
-        sel.click("css=a.blue-button:contains('Add Subtitles')")
+        sel.click("css=a:contains('Add Subtitles')")
         vid_lang_str = sel.get_text("css=h3:contains('Create subtitles') + div p")
         vid_lang = vid_lang_str.split("in ")[1]
         orig_lang_edit(self,sel,vid_lang)

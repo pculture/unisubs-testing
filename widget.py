@@ -144,7 +144,7 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="ye
     """
     print ("Transcribing the video")
     sel.select_window("null")
-#    restart_step(self,sel)
+    restart_step(self,sel)
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-speedmode")
     try:
         if mode == "Recommended":

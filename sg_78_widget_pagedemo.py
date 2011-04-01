@@ -105,7 +105,7 @@ class subgroup_78_pagedemo(unittest.TestCase):
         edit_original_subs(self,sel)
         widget.goto_step(self,sel,step="2")
         widget.resync_video(self,sel,subtextfile)
-        widget.submit_sub_edits(self,sel)
+        widget.submit_sub_edits(self,sel,offsite=True)
 
     def test_690(self):
         """Pagedemo New York Times video 1 - translate original
@@ -124,6 +124,7 @@ class subgroup_78_pagedemo(unittest.TestCase):
 #        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].click()') should be this when implemented to be sure correct video
         translate_original(self,sel) # selects Croatian as the new language by default
         widget.edit_translation(self,sel,subtextfile)
+        widget.submit_sub_edits(self,sel,offsite=True)
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
         sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
         
@@ -156,7 +157,7 @@ class subgroup_78_pagedemo(unittest.TestCase):
         sel.select_window("null")
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
         widget.verify_sub_text(self,sel,subtextfile)
-        widget.submit_sub_edits(self,sel)
+        widget.submit_sub_edits(self,sel,offsite=True)
         
         
         
