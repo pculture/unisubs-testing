@@ -73,6 +73,23 @@ def wait_for_text_present(self,sel,ttext):
     if ct > 2:
         print ct
 
+def wait_for_text_not_present(self,sel,ttext):
+    """
+    Description: Waits 60 seconds for element to present itself.
+    Requires: valid element identifier, can be css, xpath
+    """
+    ct = 1
+    for i in range(30):
+        try:
+            if sel.is_text_present(ttext) == False: break
+        except: pass
+        time.sleep(1)
+        ct += ct
+    else:
+        self.fail("time out waiting 30s for text " +ttext)
+    if ct > 2:
+        print ct
+
 def wait_for_video_to_buffer(self,sel):
     """
     Description: Waits for the video in the frame to buffer to 30%.

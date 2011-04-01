@@ -86,7 +86,10 @@ def site_login_auth(self,sel):
     #wait for the login to complete
     time.sleep(10)
 
-
+def open_starter_dialog(self,sel):
+    sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])        
+    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
+    
 
 def starter_dialog_edit_orig(self,sel):
     """Choose the current lang to edit.
@@ -96,8 +99,7 @@ def starter_dialog_edit_orig(self,sel):
 
     Post-condition: the widget is launched and you will be on step 1.
     """
-    sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])        
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
+    
     #Figure our the original lang or choose your own
     if sel.is_element_present(testvars.create_lang_unknown): # No lang set, going to use English
         orig_lang = "English"
@@ -121,8 +123,6 @@ def starter_dialog_translate_from_orig(self,sel,to_lang='hr'):
 
     Post-condition: the widget is launched and you will be on step 1 or Edit step
     """
-    sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])        
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
     #Figure out orig lang fail is there isn't a set lang already
     if sel.is_element_present(testvars.create_lang_unknown):
         self.fail("can't make a new translation when video has no orig lang set - test is invalid")
@@ -144,8 +144,6 @@ def starter_dialog_translate_from_not_orig(self,sel,from_lang,to_lang='hr'):
 
     Post-condition: the widget is launched and you will be on step 1 or Edit step
     """
-    sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])        
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
     #Figure out orig lang fail is there isn't a set lang already
     if sel.is_element_present(testvars.create_lang_unknown):
         self.fail("can't make a new translation when video has no orig lang set - test is invalid")
@@ -172,8 +170,6 @@ def starter_dialog_fork(self,sel,to_lang='hr'):
 
     Post-condition: the widget is launched and you will be on step 1 or Edit step
     """
-    sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])        
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
     #Figure out orig lang fail is there isn't a set lang already
     if sel.is_element_present(testvars.create_lang_unknown):
         self.fail("can't make a new translation when video has no orig lang set - test is invalid")

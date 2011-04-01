@@ -129,7 +129,7 @@ class subgroup_78_subtesting(unittest.TestCase):
             sel.open(test_page)
             sel.wait_for_page_to_load(testvars.timeout)
             sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
-            sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])           
+            widget.open_starter_dialog(self,sel)
             orig_lang = widget.starter_dialog_edit_orig(self,sel)
             edit_subs(self,sel,orig_rev,orig_lang,subtextfile)          
         else:
@@ -157,7 +157,7 @@ class subgroup_78_subtesting(unittest.TestCase):
             sel.open(test_page)
             sel.wait_for_page_to_load(testvars.timeout)
             sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
-            sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])           
+            widget.open_starter_dialog(self,sel)
             orig_lang = widget.starter_dialog_edit_orig(self,sel)
             edit_subs(self,sel,orig_rev,orig_lang,subtextfile)          
         else:
@@ -245,7 +245,7 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
             sel.open(test_page)
             sel.wait_for_page_to_load(testvars.timeout)
             sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
-            sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])           
+            widget.open_starter_dialog(self,sel)
             orig_lang = widget.starter_dialog_edit_orig(self,sel)
             edit_subs(self,sel,orig_rev,orig_lang,subtextfile)          
         else:

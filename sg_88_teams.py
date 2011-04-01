@@ -255,9 +255,9 @@ class subgroup_88(unittest.TestCase):
         for x in range(1,5):
             try:
                 sel.open("/teams/al-jazeera")
-                if (sel.is_element_present("css=.language_modal")):
-                    sel.click("css=button.green_button.small")
-                    mslib.wait_for_element_not_present(self,sel,"css=h2:contains('What languages do you speak')")                    
+                mslib.wait_for_text_present(self,sel,"What language do you speak")
+                sel.click("css=button.green_button.small")
+                mslib.wait_for_text_not_present(self,sel,"What languages do you speak")                    
             except:
                 print "got an error on run#:" +str(x)
                 errors.append(str(x))
