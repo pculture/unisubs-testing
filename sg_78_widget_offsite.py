@@ -120,7 +120,7 @@ class subgroup_78_subtesting(unittest.TestCase):
         test_page = (selvars.set_subtesting_wordpress_page(self,test_id))
         sel.open(test_page)
         sel.wait_for_page_to_load(testvars.timeout)
-        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getWidgetByURL("http://www.youtube.com/watch?v=HfuwNU0jsk0").openMenu()')
+        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
         time.sleep(1)
         if sel.is_element_present(testvars.WebsiteUI["AddSubtitles_menuitem"]) == True:
             print "has subtitles - edit and revert"
@@ -128,7 +128,7 @@ class subgroup_78_subtesting(unittest.TestCase):
             orig_rev = store_subs(self,sel)
             sel.open(test_page)
             sel.wait_for_page_to_load(testvars.timeout)
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getWidgetByURL("http://www.youtube.com/watch?v=HfuwNU0jsk0").openMenu()')
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
             sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])           
             orig_lang = widget.starter_dialog_edit_orig(self,sel)
             edit_subs(self,sel,orig_rev,orig_lang,subtextfile)          
@@ -148,7 +148,7 @@ class subgroup_78_subtesting(unittest.TestCase):
         test_page = (selvars.set_subtesting_wordpress_page(self,test_id))
         sel.open(test_page)
         sel.wait_for_page_to_load(testvars.timeout)
-        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getWidgetByURL("http://www.youtube.com/watch?v=HfuwNU0jsk0").openMenu()')
+        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
         time.sleep(1)
         if sel.is_element_present(testvars.WebsiteUI["AddSubtitles_menuitem"]) == True:
             print "has subtitles - edit and revert"
@@ -156,7 +156,7 @@ class subgroup_78_subtesting(unittest.TestCase):
             orig_rev = store_subs(self,sel)
             sel.open(test_page)
             sel.wait_for_page_to_load(testvars.timeout)
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getWidgetByURL("http://www.youtube.com/watch?v=HfuwNU0jsk0").openMenu()')
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
             sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])           
             orig_lang = widget.starter_dialog_edit_orig(self,sel)
             edit_subs(self,sel,orig_rev,orig_lang,subtextfile)          
@@ -179,9 +179,9 @@ class subgroup_78_subtesting(unittest.TestCase):
         sel.open(testpage)
         sel.wait_for_page_to_load(testvars.timeout)
         sel.window_maximize()
-        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getWidgetByURL("http://www.youtube.com/watch?v=HfuwNU0jsk0").play()')
+        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-captionSpan")
-        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getWidgetByURL("http://www.youtube.com/watch?v=HfuwNU0jsk0").pause()')
+        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
         caption_position =  sel.get_element_height("css=.mirosubs-captionSpan")
         verify_caption_position(self,sel,caption_position)
 
@@ -236,7 +236,7 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         test_page = selvars.set_unisubs_mc_page(self,test_id)
         sel.open(test_page)
         sel.wait_for_page_to_load(testvars.timeout)
-        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getWidgetByURL("http://www.youtube.com/watch?v=FNEImAIM4L4").openMenu()')
+        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
         time.sleep(1)
         if sel.is_element_present(testvars.WebsiteUI["AddSubtitles_menuitem"]) == True:
             print "has subtitles - edit and revert"
@@ -244,7 +244,7 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
             orig_rev = store_subs(self,sel)
             sel.open(test_page)
             sel.wait_for_page_to_load(testvars.timeout)
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getWidgetByURL("http://www.youtube.com/watch?v=FNEImAIM4L4").openMenu()')
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
             sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])           
             orig_lang = widget.starter_dialog_edit_orig(self,sel)
             edit_subs(self,sel,orig_rev,orig_lang,subtextfile)          
