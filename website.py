@@ -241,7 +241,7 @@ def get_video_with_translations(self,sel):
         SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         submit_video(self,sel,vid_url)
         sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_en_subs.ssa")
-        website.upload_subtitles(self,sel,sub_file)
+        upload_subtitles(self,sel,sub_file)
         local_url = sel.get_attribute(testvars.video_original +" > a@href")
         SiteLogout(self,sel)
     return local_url
@@ -303,6 +303,7 @@ def upload_subtitles(self,sel,sub_file,lang="en"):
     sel.select_frame("relative=top")
     mslib.wait_for_element_present(self,sel,testvars.video_upload_subtitles)
     sel.click(testvars.video_upload_subtitles)
+    mslib.wait_for_element_present(self,sel,"css=form[id='upload-subtitles-form'] select")
     sel.select("css=form[id='upload-subtitles-form'] select", "value="+lang)
     sel.type("subtitles-file-field",sub_file)
 
