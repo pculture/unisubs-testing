@@ -94,9 +94,8 @@ class subgroup_88(unittest.TestCase):
         #submit video
         test_video_url = website.submit_random_youtube(self,sel)
         print test_video_url
-        vid_title = sel.get_text("css=.title-container")
         self.assertTrue(sel.is_element_present("css=strong:contains('Add video to team')"))
-        vid_title = sel.get_text("css=.main-title a")
+        vid_title = sel.get_text(testvars.vid_title)
         #add video to team and verify values
         sel.click_at("css=strong:contains('Add video to team')","")
         sel.click("css=li a:contains('"+team+"')")
@@ -148,7 +147,8 @@ class subgroup_88(unittest.TestCase):
         sel.wait_for_page_to_load(testvars.timeout)
         if str(sel.get_value("is_visible")) == "on":
             sel.click("is_visible")
-        self.failIf(str(sel.get_value("is_visible")) == "off","id_is_visible not set to off")
+            time.sleep(1)
+        self.failIf(str(sel.get_value("is_visible")) == "on","is_visible not set to off")
         website.save_team_settings(self,sel)
         # logout and verify team no longer displayed
         sel.click(testvars.WebsiteUI["Logout_Button"])
@@ -212,7 +212,7 @@ class subgroup_88(unittest.TestCase):
         #Edit original language
         sel.open("teams/"+team)
         sel.wait_for_page_to_load(testvars.timeout)        
-        sel.click("css=a:contains('Add Subtitles')")
+        sel.click(testvars.vid_add_subs_button)
         vid_lang_str = sel.get_text("css=h3:contains('Create subtitles') + div p")
         vid_lang = vid_lang_str.split("in ")[1]
         orig_lang_edit(self,sel,vid_lang)
@@ -223,8 +223,8 @@ class subgroup_88(unittest.TestCase):
         vid_lang_str = sel.get_text("css=h3:contains('Create subtitles') + div p")
         vid_lang = vid_lang_str.split("in ")[1]
         sel.open("teams/"+team)
-        sel.wait_for_page_to_load(testvars.timeout)        
-        sel.click("css=a.blue-button:contains('Add Subtitles')")
+        sel.wait_for_page_to_load(testvars.timeout)
+        sel.click(testvars.vid_add_subs_button)
         translate_orig(self,sel)
         submit_lang_choices(self,sel)
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
@@ -234,7 +234,7 @@ class subgroup_88(unittest.TestCase):
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         sel.open("teams/"+team)
         sel.wait_for_page_to_load(testvars.timeout)        
-        sel.click("css=a.blue-button:contains('Add Subtitles')")
+        sel.click(testvars.vid_add_subs_button)
         new_fork(self,sel)
         submit_lang_choices(self,sel)
         print "transcribing video"

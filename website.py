@@ -503,9 +503,8 @@ def rollback_revision(self,sel):
 
 def create_team(self,sel,team,team_logo):
     sel.type_keys("id_name", team+" ")
-#    sel.type_keys("id_slug", team)
     sel.type("id_description", "Team "+team+ " - for test purposes only.")
-#    sel.type("id_logo", team_logo)
+    sel.type("id_logo", team_logo)
     if "iexplore" in selvars.set_browser():
         vid_url = "http://blip.tv/file/1077145/"
     else:
@@ -515,15 +514,13 @@ def create_team(self,sel,team,team_logo):
     sel.wait_for_page_to_load(testvars.timeout)
     # Verify team creation parameters
     current_video = vid_url.split('/')[-1]
-    try:
-        if team == "":
-            self.assertTrue(sel.is_element_present("css=ul.errorlist li:contains('This field is required')"))
-        else:
-            self.assertEqual(str(team), str(sel.get_value("id_name")))
-            self.assertEqual("Team "+str(team)+" - for test purposes only.", str(sel.get_value("id_description")))
-#            self.failUnless(sel.is_element_present("css=.avatar-container img[src*='png_100x100']")) comment out until png bug fixed
-            self.failUnless(sel.is_element_present("css=p:contains(\"Current video:\") > a:contains("+current_video+")"))       
-    except AssertionError, e: self.verificationErrors.append(str(e))
+    if team == "":
+        self.assertTrue(sel.is_element_present("css=ul.errorlist li:contains('This field is required')"))
+    else:
+        self.assertEqual(str(team), str(sel.get_value("id_name")))
+        self.assertEqual("Team "+str(team)+" - for test purposes only.", str(sel.get_value("id_description")))
+        self.failUnless(sel.is_element_present("css=.avatar-container img[src*='png_100x100']")) 
+        self.failUnless(sel.is_element_present("css=p:contains(\"Current video:\") > a:contains("+current_video+")"))       
 
 def get_own_team(self,sel):
     open_teams_page(self,sel)
@@ -568,6 +565,7 @@ def admin_delete_video(self,sel,curr_url):
     sel.click("//input[@value='Log in']")
     sel.wait_for_page_to_load(testvars.timeout)
     sel.open("/admin/logout")
+    sel.open("/")
     
 
 def handle_error_page(self,sel,test_id):
