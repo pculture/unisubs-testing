@@ -89,7 +89,12 @@ class subgroup_88(unittest.TestCase):
         #login
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         #create team
-        team = website.get_own_team(self,sel)
+        team = "miro"+time.strftime("%m%d%H%M%S", time.gmtime())
+        team_logo_path = os.path.join(testvars.MSTestVariables["DataDirectory"],"sheep.png")
+        website.open_teams_page(self,sel)
+        sel.click(testvars.start_team)
+        sel.wait_for_page_to_load(testvars.timeout)
+        website.create_team(self,sel,team,team_logo_path)
         
         #submit video
         sel.window_maximize()
@@ -103,8 +108,9 @@ class subgroup_88(unittest.TestCase):
         sel.wait_for_page_to_load(testvars.timeout)
         print "verifying the inital add page"
 
-        if sel.is_element_present("css=.errorlist:contains('Team has this')"):
-            print "video already part of team"
+        if sel.is_element_present("css=.errorlist")== True:
+            print "error adding video to team"
+            self.fail()
         else:
             mslib.wait_for_element_present(self,sel,"css=p label[for=id_language]")
             sel.select("id_language", "label=English (English)")

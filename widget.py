@@ -195,7 +195,7 @@ def select_video_language(self,sel,vid_lang="en",sub_lang="en-gb",from_lang='for
         if sel.is_element_present(testvars.create_subtitle_into):
             sel.select(testvars.create_subtitle_into +"+ select", "value=regexp:^"+sub_lang)
     else:
-        mslib.wait_for_element_present(testvars.create_lang_known) 
+        mslib.wait_for_element_present(self,sel,testvars.create_lang_known) 
         if vid_lang == sub_lang: # editing original subs only 1 select dialog
             sel.select(testvars.create_subtitle_into +"+ select", "value=regexp:^"+sub_lang)
         else:
