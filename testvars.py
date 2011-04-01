@@ -49,7 +49,7 @@ rev_rollback = "css=a.roll_back"
 
 
 teams_link = "css=a span:contains('Teams')"
-start_team = "css=a[href*='teams/create']"
+start_team = "css=a.green_button.big.start_team"
 manage_team = "css=a:contains('Settings')"
 ## teams page
 teams_video_tab ="css=ul.inline_tabs li a[href*='videos']"

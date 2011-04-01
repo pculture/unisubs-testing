@@ -215,18 +215,14 @@ class subgroup_88(unittest.TestCase):
         sel.open("teams/"+team)
         sel.wait_for_page_to_load(testvars.timeout)        
         sel.click(testvars.vid_add_subs_button)
-        vid_lang_str = sel.get_text("css=h3:contains('Create subtitles') + div p")
-        vid_lang = vid_lang_str.split("in ")[1]
         widget.starter_dialog_edit_orig(self,sel)
         widget.submit_sub_edits(self,sel)
 
         #Edit translation
-        vid_lang_str = sel.get_text("css=h3:contains('Create subtitles') + div p")
-        vid_lang = vid_lang_str.split("in ")[1]
         sel.open("teams/"+team)
         sel.wait_for_page_to_load(testvars.timeout)
         sel.click(testvars.vid_add_subs_button)
-        starter_dialog_translate_from_orig(self,sel,to_lang='hr')
+        widget.starter_dialog_translate_from_orig(self,sel,to_lang='hr')
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         widget.edit_translation(self,sel,subtextfile)
 
@@ -235,7 +231,7 @@ class subgroup_88(unittest.TestCase):
         sel.open("teams/"+team)
         sel.wait_for_page_to_load(testvars.timeout)        
         sel.click(testvars.vid_add_subs_button)
-        starter_dialog_fork(self,sel,to_lang='hr')
+        widget.starter_dialog_fork(self,sel,to_lang='hr')
         print "transcribing video"
         widget.transcribe_video(self,sel,subtextfile)
         # Sync
@@ -256,7 +252,7 @@ class subgroup_88(unittest.TestCase):
             try:
                 sel.open("/teams/al-jazeera")
                 mslib.wait_for_text_present(self,sel,"What language do you speak")
-                sel.click("css=button.green_button.small")
+                sel.click("//button[@type='submit']")
                 mslib.wait_for_text_not_present(self,sel,"What languages do you speak")                    
             except:
                 print "got an error on run#:" +str(x)
