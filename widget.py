@@ -12,6 +12,7 @@ import codecs
 import mslib
 import testvars
 import selvars
+import re
 
 
 
@@ -130,7 +131,8 @@ def starter_dialog_translate_from_orig(self,sel,to_lang='hr'):
     else:
         ol = sel.get_text(testvars.create_lang_known)
         orig_lang = ol.split("in ")[1]
-        lang_code = sel.get_value("css=p select option:contains('"+orig_lang+" ')")
+        lc = sel.get_value("css=p select option:contains('"+orig_lang+" ')")
+        lang_code = re.sub("\d+$","",lc)
         select_video_language(self,sel,sub_lang=to_lang,from_lang=lang_code)
         time.sleep(5)
         close_howto_video(self,sel)
@@ -151,7 +153,8 @@ def starter_dialog_translate_from_not_orig(self,sel,from_lang,to_lang='hr'):
     else:
         ol = sel.get_text(testvars.create_lang_known)
         orig_lang = ol.split("in ")[1]
-        lang_code = sel.get_value("css=p select option:contains('"+orig_lang+" ')")
+        lc = sel.get_value("css=p select option:contains('"+orig_lang+" ')")
+        lang_code = re.sub("\d+$","",lc)
     if lang_code == from_lang:
         self.fail("invalid test - from lang "+str(from_lang)+" is the same as the origi lang"+str(orig_lang))
         
