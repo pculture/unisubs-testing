@@ -242,7 +242,7 @@ class subgroup_88(unittest.TestCase):
         widget.submit_sub_edits(self,sel)
 
 
-    def test_697(self):
+    def stest_697(self):
         """Open Al Jazeera team page and see if Language Dialog goes away after lang selected.
 
         http://litmus.pculture.org/show_test.cgi?id=---.      

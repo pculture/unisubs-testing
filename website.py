@@ -119,6 +119,7 @@ def submit_video(self,sel,url):
         sel.open("/videos/create")
         sel.type("video_url", url)
         sel.click(testvars.WebsiteUI["Video_Submit_Button"])
+        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
             
 
     

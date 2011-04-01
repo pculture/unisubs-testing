@@ -107,6 +107,7 @@ def starter_dialog_edit_orig(self,sel):
     else:        
         ol = sel.get_text(testvars.create_lang_known)
         orig_lang = ol.split("in ")[1]
+        print orig_lang
         lang_code = sel.get_value("css=p select option:contains('"+orig_lang+" ')")
         select_video_language(self,sel,vid_lang=lang_code,sub_lang=lang_code)
     time.sleep(5)
