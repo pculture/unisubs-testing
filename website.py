@@ -111,7 +111,7 @@ def submit_video(self,sel,url):
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     sel.type("video_url", url)
     sel.click(testvars.WebsiteUI["Video_Submit_Button"])
-    mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+    sel.wait_for_page_to_load(testvars.timeout)
     if str(sel.get_text(testvars.WebsiteUI["SubtitleMe_menu"])) != "Subtitle Me":
         ## Delete and resubmit the video
         curr_url = sel.get_eval("window.location")
@@ -119,7 +119,7 @@ def submit_video(self,sel,url):
         sel.open("/videos/create")
         sel.type("video_url", url)
         sel.click(testvars.WebsiteUI["Video_Submit_Button"])
-        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+        sel.wait_for_page_to_load(testvars.timeout)
             
 
     
