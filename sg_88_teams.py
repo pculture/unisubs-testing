@@ -269,7 +269,7 @@ def orig_lang_edit(self,sel,orig_lang):
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
     sel.select_frame("relative=top")
     sel.select("css=div p span:contains('Subtitle into') + select", "label=regexp:^"+orig_lang)
-    if sel_is_element_present("css=div p span:contains('Translate from')"):
+    if sel.is_element_present("css=div p span:contains('Translate from')"):
         sel.select("css=div p span:contains('Translate from') + span select", "value=regexp:^"+orig_lang)
    
                               
@@ -277,7 +277,7 @@ def translate_orig(self,sel,orig_lang,new_trans="English"):
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
     sel.select_frame("relative=top")
     sel.select("css=div p span:contains('Subtitle into') + select", "label=regexp:^"+new_trans)
-    if sel_is_element_present("css=div p span:contains('Translate from')"):                         
+    if sel.is_element_present("css=div p span:contains('Translate from')"):                         
         sel.select("css=div p span:contains('Translate from') + span select", "value=regexp:^"+orig_lang)
  
                               
@@ -285,7 +285,7 @@ def new_fork(self,sel,new_trans="English"):
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
     sel.select_frame("relative=top")
     sel.select("css=div p span:contains('Subtitle into') + select", "label=regexp:^"+new_trans)
-    if sel_is_element_present("css=div p span:contains('Translate from')"):                           
+    if sel.is_element_present("css=div p span:contains('Translate from')"):                           
         sel.select("css=div p span:contains('Translate from') + span select", "value=regexp:^Direct from video")
 
 
