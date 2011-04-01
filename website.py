@@ -513,14 +513,13 @@ def create_team(self,sel,team,team_logo):
     sel.click("css=.green_button.big:contains('Create Team')")
     sel.wait_for_page_to_load(testvars.timeout)
     # Verify team creation parameters
-    current_video = vid_url.split('/')[-1]
     if team == "":
         self.assertTrue(sel.is_element_present("css=ul.errorlist li:contains('This field is required')"))
     else:
         self.assertEqual(str(team), str(sel.get_value("id_name")))
         self.assertEqual("Team "+str(team)+" - for test purposes only.", str(sel.get_value("id_description")))
         self.failUnless(sel.is_element_present("css=.avatar-container img[src*='png_100x100']")) 
-        self.failUnless(sel.is_element_present("css=p:contains(\"Current video:\") > a:contains("+current_video+")"))       
+        self.failUnless(sel.is_element_present(css=p:contains('Current video') > a:contains("blip")))    
 
 def get_own_team(self,sel):
     open_teams_page(self,sel)

@@ -92,6 +92,7 @@ class subgroup_88(unittest.TestCase):
         team = website.get_own_team(self,sel)
         
         #submit video
+        sel.window_maximize()
         test_video_url = website.submit_random_youtube(self,sel)
         print test_video_url
         self.assertTrue(sel.is_element_present("css=strong:contains('Add video to team')"))
@@ -105,6 +106,7 @@ class subgroup_88(unittest.TestCase):
         if sel.is_element_present("css=.errorlist:contains('Team has this')"):
             print "video already part of team"
         else:
+            mslib.wait_for_element_present(self,sel,"css=p label[for=id_language]")
             sel.select("id_language", "label=English (English)")
             sel.click("css=.green_button.small:contains('Save')")
             sel.wait_for_page_to_load(testvars.timeout)
@@ -215,8 +217,7 @@ class subgroup_88(unittest.TestCase):
         sel.click(testvars.vid_add_subs_button)
         vid_lang_str = sel.get_text("css=h3:contains('Create subtitles') + div p")
         vid_lang = vid_lang_str.split("in ")[1]
-        orig_lang_edit(self,sel,vid_lang)
-        submit_lang_choices(self,sel)
+        widget.starter_dialog_edit_orig(self,sel)
         widget.submit_sub_edits(self,sel)
 
         #Edit translation
@@ -225,8 +226,7 @@ class subgroup_88(unittest.TestCase):
         sel.open("teams/"+team)
         sel.wait_for_page_to_load(testvars.timeout)
         sel.click(testvars.vid_add_subs_button)
-        translate_orig(self,sel)
-        submit_lang_choices(self,sel)
+        starter_dialog_translate_from_orig(self,sel,to_lang='hr')
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         widget.edit_translation(self,sel,subtextfile)
 
@@ -235,8 +235,7 @@ class subgroup_88(unittest.TestCase):
         sel.open("teams/"+team)
         sel.wait_for_page_to_load(testvars.timeout)        
         sel.click(testvars.vid_add_subs_button)
-        new_fork(self,sel)
-        submit_lang_choices(self,sel)
+        starter_dialog_fork(self,sel,to_lang='hr')
         print "transcribing video"
         widget.transcribe_video(self,sel,subtextfile)
         # Sync
@@ -245,9 +244,26 @@ class subgroup_88(unittest.TestCase):
         # Review
         print "review step - just submitting video"
         widget.submit_sub_edits(self,sel)
-        
+
+
+    def test_697(self):
+        """Open Al Jazeera team page and see if Language Dialog goes away after lang selected.
+
+        http://litmus.pculture.org/show_test.cgi?id=---.      
+        """
+        errors = []
+        for x in range(1,5):
+            try:
+                sel.open("/teams/al-jazeera")
+                if (sel.is_element_present("css=.language_modal")):
+                    sel.click("css=button.green_button.small")
+                    mslib.wait_for_element_not_present(self,sel,"css=h2:contains('What languages do you speak')")                    
+            except:
+                print "got an error on run#:" +str(x)
+                errors.append(str(x))
+        self.assertEqual([], errors)
          
-        # Close the browser, log errors, perform cleanup
+
     def tearDown(self):
         """
         Closes the browser test window and logs errors
@@ -263,91 +279,7 @@ class subgroup_88(unittest.TestCase):
         if selvars.set_sauce() == True:
             output = StringIO.StringIO()
             output.write("sauce job result: http://saucelabs.com/jobs/"+str(self.session))
-
-
-def orig_lang_edit(self,sel,orig_lang):
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
-    sel.select_frame("relative=top")
-    sel.select("css=div p span:contains('Subtitle into') + select", "label=regexp:^"+orig_lang)
-    if sel.is_element_present("css=div p span:contains('Translate from')"):
-        sel.select("css=div p span:contains('Translate from') + span select", "value=regexp:^"+orig_lang)
-   
-                              
-def translate_orig(self,sel,orig_lang,new_trans="English"):
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
-    sel.select_frame("relative=top")
-    sel.select("css=div p span:contains('Subtitle into') + select", "label=regexp:^"+new_trans)
-    if sel.is_element_present("css=div p span:contains('Translate from')"):                         
-        sel.select("css=div p span:contains('Translate from') + span select", "value=regexp:^"+orig_lang)
- 
-                              
-def new_fork(self,sel,new_trans="English"):
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
-    sel.select_frame("relative=top")
-    sel.select("css=div p span:contains('Subtitle into') + select", "label=regexp:^"+new_trans)
-    if sel.is_element_present("css=div p span:contains('Translate from')"):                           
-        sel.select("css=div p span:contains('Translate from') + span select", "value=regexp:^Direct from video")
-
-
-def submit_lang_choices(self,sel):
-    sel.click("link=Continue")
-    widget.close_howto_video(self,sel)
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-help-heading")
-                              
-                              
-
-class subgroup_88_special(unittest.TestCase):
-    """
-    Litmus Subgroup  - Teams Tests
-    Special test designed to catch the lang dialog popup when opening al jazeera teams page
-    """
-    
-    # Open the desired browser and set up the test
-    def setUp(self):
-        """
-        Sets up run envirnment for selenium server
-        """
-        self.verificationErrors = []
-        self.selenium = selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), "http://universalsubtitles.org")
-        
-    # The tests in the subgroup
-    def test_60x(self):
-        """Open Al Jazeera team page and see if Language Dialog goes away after lang selected.
-
-        http://litmus.pculture.org/show_test.cgi?id=---.      
-        """
-        for x in range(1,5):
-            try:
-                self.selenium.start()
-                sel= self.selenium
-                sel.set_timeout(testvars.timeout)
-                sel.open("s")
-                if (sel.is_element_present("css=.language_modal")):
-                    sel.click("css=button.green_button.small")
-                    sel.wait_for_page_to_load(testvars.timeout)
-                    time.sleep(2)
-                    self.assertFalse(sel.is_element_present("css=.language_modal"))
-            except:
-                print "got an error on run#:" +str(x)
-            finally:
-                self.selenium.stop()
        
-        
-
-        
-# Close the browser, log errors, perform cleanup
-    def tearDown(self):
-        """
-        Closes the browser test window and logs errors
-        """
-        #Check for an error page, then close the browser
-        self.selenium.stop()
-        #Log any errors
-        self.assertEqual([], self.verificationErrors)
-        if selvars.set_sauce() == True:
-            output = StringIO.StringIO()
-            output.write("sauce job result: http://saucelabs.com/jobs/"+str(self.session))
-
 if __name__ == "__main__":
     unittest.main()
 
