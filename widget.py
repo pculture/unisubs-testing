@@ -99,11 +99,11 @@ def starter_dialog_edit_orig(self,sel):
     sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])        
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
     #Figure our the original lang or choose your own
-    if sel.is_element_present("css=div p span:contains('This video is in:')"): # No lang set, going to use English
+    if sel.is_element_present(testvars.create_lang_unknown): # No lang set, going to use English
         orig_lang = "English"
         select_video_language(self,sel,vid_lang='en',sub_lang='en')
     else:        
-        ol = sel.get_text("css=div p:contains('video is')")
+        ol = sel.get_text(testvars.create_lang_known)
         orig_lang = ol.split("in ")[1]
         lang_code = sel.get_value("css=p select option:contains('"+orig_lang+" ')")
         select_video_language(self,sel,vid_lang=lang_code,sub_lang=lang_code)
@@ -124,10 +124,10 @@ def starter_dialog_translate_from_orig(self,sel,to_lang='hr'):
     sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])        
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
     #Figure out orig lang fail is there isn't a set lang already
-    if sel.is_element_present("css=div p span:contains('This video is in:')"):
+    if sel.is_element_present(testvars.create_lang_unknown):
         self.fail("can't make a new translation when video has no orig lang set - test is invalid")
     else:
-        ol = sel.get_text("css=div p span:contains('This video is in ')")
+        ol = sel.get_text(testvars.create_lang_known)
         orig_lang = ol.split("in ")[1]
         lang_code = sel.get_value("css=p select option:contains('"+orig_lang+" ')")
         select_video_language(self,sel,sub_lang=to_lang,from_lang=lang_code)
@@ -147,10 +147,10 @@ def starter_dialog_translate_from_not_orig(self,sel,from_lang,to_lang='hr'):
     sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])        
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
     #Figure out orig lang fail is there isn't a set lang already
-    if sel.is_element_present("css=div p span:contains('This video is in:')"):
+    if sel.is_element_present(testvars.create_lang_unknown):
         self.fail("can't make a new translation when video has no orig lang set - test is invalid")
     else:
-        ol = sel.get_text("css=div p span:contains('This video is in ')")
+        ol = sel.get_text(testvars.create_lang_known)
         orig_lang = ol.split("in ")[1]
         lang_code = sel.get_value("css=p select option:contains('"+orig_lang+" ')")
     if lang_code == from_lang:
@@ -175,10 +175,10 @@ def starter_dialog_fork(self,sel,to_lang='hr'):
     sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])        
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
     #Figure out orig lang fail is there isn't a set lang already
-    if sel.is_element_present("css=div p span:contains('This video is in:')"):
+    if sel.is_element_present(testvars.create_lang_unknown):
         self.fail("can't make a new translation when video has no orig lang set - test is invalid")
     else:
-        ol = sel.get_text("css=div p span:contains('This video is in ')")
+        ol = sel.get_text(testvars.create_lang_known)
         orig_lang = ol.split("in ")[1]
         select_video_language(self,sel,sub_lang=to_lang,from_lang='forkk')
         time.sleep(5)
@@ -193,14 +193,14 @@ def select_video_language(self,sel,vid_lang="en",sub_lang="en-gb",from_lang='for
     sel.select_frame("relative=top")
     mslib.wait_for_text_present(self,sel,"Subtitle into")
     
-    if sel.is_element_present("css=div p span:contains('video is')"): # Don't know the video lang so choose for 1st time subs.
-        sel.select("css=div p span:contains('video is') + select", "value=regexp:^"+vid_lang)
-        if sel.is_text_present("Subtitle into"):
-            sel.select("css=div p span:contains('Subtitle into') + select", "value=regexp:^"+sub_lang)
-    if sel.is_text_present("Subtitle into"):  # Videos original lang is set, so choose trans lang and from lang
-        sel.select("css=div p span:contains('Subtitle into') + select", "value=regexp:^"+sub_lang)
-    if sel.is_text_present("Translate from"):
-        sel.select("css=div p span:contains('Translate from') + span select", "value=regexp:^"+from_lang)           
+    if sel.is_element_present(testvars.create_lang_unknown): # Don't know the video lang so choose for 1st time subs.
+        sel.select(testvars.create_lang_unknown +"+ select", "value=regexp:^"+vid_lang)
+        if sel.is_element_present(testvars.create_subtitle_into):
+            sel.select(testvars.create_subtitle_into +"+ select", "value=regexp:^"+sub_lang)
+    if sel.is_element_present(testvars.create_subtitle_into):  # Videos original lang is set, so choose trans lang and from lang
+        sel.select(testvars.create_subtitle_into +"+ select", "value=regexp:^"+sub_lang)
+    if sel.is_element_present(testvars.create_translate_from):
+        sel.select(testvars.create_subtitle_into+" + span select", "value=regexp:^"+from_lang)           
     time.sleep(1)
     sel.click("link=Continue")
 

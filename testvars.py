@@ -87,6 +87,10 @@ widget_step3 = "css=.mirosubs-help-heading li a:contains('3')"
 widget_step2 = "css=.mirosubs-help-heading li a:contains('2')"
 widget_step1 = "css=.mirosubs-help-heading li a:contains('1')"
 
+create_lang_unknown = "css=div p span:contains('This video is in:')"
+create_lang_known = "css=div p:contains('This video is in ')"
+create_subtitle_into = "div p span:contains('Subtitle into')"
+create_translate_from = "div p span:contains('Translate from')"
 
 #offsite option
 offsite_goto_subs = "css=.mirosubs-goBack"
