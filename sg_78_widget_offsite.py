@@ -162,6 +162,30 @@ class subgroup_78_subtesting(unittest.TestCase):
             edit_subs(self,sel,orig_rev,orig_lang,subtextfile)          
         else:
             make_new_subs(self,sel)
+
+
+    def test_696(self):
+        """Subtesting widget - sub position on playback.
+        Open the testpage
+        Start Playback
+        Verify subs are in the correct position on the video.
+        
+        http://litmus.pculture.org/show_test.cgi?id=696
+        """
+        sel = self.selenium
+
+        #test 1st video on the page
+        testpage = (selvars.set_subtesting_wordpress_page(self,601)) #same subtesting page as test test_601
+        sel.open(testpage)
+        sel.wait_for_page_to_load(testvars.timeout)
+        sel.window_maximize()
+        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getWidgetByURL("http://www.youtube.com/watch?v=HfuwNU0jsk0").play()')
+        mslib.wait_for_element_present(self,sel,"css=.mirosubs-captionSpan")
+        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getWidgetByURL("http://www.youtube.com/watch?v=HfuwNU0jsk0").pause()')
+        caption_position =  sel.get_element_height("css=.mirosubs-captionSpan")
+        verify_caption_position(self,sel,caption_position)
+
+
             
 # Close the browser, log errors, perform cleanup 
     def tearDown(self):
