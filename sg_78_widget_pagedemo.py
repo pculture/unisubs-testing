@@ -46,6 +46,8 @@ class subgroup_78_pagedemo(unittest.TestCase):
         sel.open(testpage)
         sel.wait_for_page_to_load(testvars.timeout)
         sel.window_maximize()
+        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+        time.sleep(3)
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-captionSpan")
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
@@ -57,6 +59,8 @@ class subgroup_78_pagedemo(unittest.TestCase):
         sel.open(testpage)
         sel.wait_for_page_to_load(testvars.timeout)
         sel.window_maximize()
+        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+        time.sleep(3)
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].play()')
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-captionSpan")
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].pause()')
@@ -74,8 +78,12 @@ class subgroup_78_pagedemo(unittest.TestCase):
         sel.open(testpage)
         sel.wait_for_page_to_load(testvars.timeout)
         sel.window_maximize()
-        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].openMenu()') 
+        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+        time.sleep(3)
+        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()') 
         sel.click("css=div.mirosubs-dropdown div ul li:contains('100%')")
+        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+        time.sleep(3)
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')       
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-captionSpan")
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
@@ -98,6 +106,8 @@ class subgroup_78_pagedemo(unittest.TestCase):
         sel.open(testpage)
         sel.wait_for_page_to_load(testvars.timeout)
         sel.window_maximize()
+        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+        time.sleep(3)
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].openMenu()')
         widget.open_starter_dialog(self,sel)
         widget.starter_dialog_edit_orig(self,sel)
@@ -117,6 +127,8 @@ class subgroup_78_pagedemo(unittest.TestCase):
         sel.open(testpage)
         sel.wait_for_page_to_load(testvars.timeout)
         sel.window_maximize()
+        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+        time.sleep(3)
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
         widget.open_starter_dialog(self,sel)
         widget.starter_dialog_translate_from_orig(self,sel,to_lang='pl')
@@ -142,8 +154,9 @@ class subgroup_78_pagedemo(unittest.TestCase):
         sel.open(testpage)
         sel.wait_for_page_to_load(testvars.timeout)
         sel.window_maximize()
-        sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
-        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].openMenu()')
+        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+        time.sleep(3)
+        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
         widget.open_starter_dialog(self,sel)
         widget.starter_dialog_fork(self,sel,to_lang='hr')
         widget.transcribe_video(self, sel, subtextfile)
@@ -170,7 +183,8 @@ class subgroup_78_pagedemo(unittest.TestCase):
         sel.open(testpage)
         sel.wait_for_page_to_load(testvars.timeout)
         sel.window_maximize()
-
+        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+        time.sleep(3)
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-captionSpan")
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
@@ -190,7 +204,8 @@ class subgroup_78_pagedemo(unittest.TestCase):
         sel.open(testpage)
         sel.wait_for_page_to_load(testvars.timeout)
         sel.window_maximize()
-
+        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+        time.sleep(3)
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-captionSpan")
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
@@ -208,7 +223,8 @@ class subgroup_78_pagedemo(unittest.TestCase):
         sel.open(testpage)
         sel.wait_for_page_to_load(testvars.timeout)
         sel.window_maximize()
-
+        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+        time.sleep(3)
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-captionSpan")
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
@@ -234,21 +250,6 @@ def verify_caption_position(self,sel,caption_position):
             self.fail("captions are too lown on the video")
 
       
-
-def make_new_subs(self,sel,vid_pos):
-
-    print  ("no subs yet - making new ones")
-    subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
-    website.start_sub_widget(self,sel,vid_pos)
-    # Transcribe
-    widget.transcribe_video(self,sel,subtextfile)
-    # Sync
-    widget.sync_video(self,sel,subtextfile,6,8)
-    # Review
-    widget.edit_text(self,sel,subtextfile)
-
-
-
 
 if __name__ == "__main__":
     unittest.main()
