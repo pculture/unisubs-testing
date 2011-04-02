@@ -248,19 +248,25 @@ class subgroup_88(unittest.TestCase):
         widget.submit_sub_edits(self,sel)
 
 
-    def stest_697(self):
+    def test_697(self):
         """Open Al Jazeera team page and see if Language Dialog goes away after lang selected.
 
-        http://litmus.pculture.org/show_test.cgi?id=---.      
+        http://litmus.pculture.org/show_test.cgi?id=697      
         """
+        
         errors = []
         for x in range(1,5):
             try:
+                self.selenium.stop()
+                self.selenium.start()
+                sel = self.selenium
+                sel.set_timeout(testvars.timeout)
                 sel.open("/teams/al-jazeera")
                 sel.wait_for_page_to_load(testvars.timeout)
-                mslib.wait_for_text_present(self,sel,"What language do you speak")
+                mslib.wait_for_text_present(self,sel,"What languages do you speak")
                 sel.click("//button[@type='submit']")
-                mslib.wait_for_text_not_present(self,sel,"What languages do you speak")                    
+                mslib.wait_for_text_not_present(self,sel,"What languages do you speak")
+                
             except:
                 print "got an error on run#:" +str(x)
                 errors.append(str(x))
