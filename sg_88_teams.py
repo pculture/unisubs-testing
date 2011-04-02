@@ -221,6 +221,7 @@ class subgroup_88(unittest.TestCase):
         print "testing edit original lang"
         sel.open("/teams/"+team)
         sel.wait_for_page_to_load(testvars.timeout)
+        teampage_lang_select(self,sel)
         mslib.wait_for_element_present(self,sel,testvars.vid_add_subs_button)
         sel.click(testvars.vid_add_subs_button)
         widget.starter_dialog_edit_orig(self,sel)
@@ -230,6 +231,7 @@ class subgroup_88(unittest.TestCase):
         print "testing edit translation"
         sel.open("/teams/"+team)
         sel.wait_for_page_to_load(testvars.timeout)
+        teampage_lang_select(self,sel)
         mslib.wait_for_element_present(self,sel,testvars.vid_add_subs_button)
         sel.click(testvars.vid_add_subs_button)
         widget.starter_dialog_translate_from_orig(self,sel,to_lang='hr')
@@ -241,6 +243,7 @@ class subgroup_88(unittest.TestCase):
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         sel.open("teams/"+team)
         sel.wait_for_page_to_load(testvars.timeout)
+        teampage_lang_select(self,sel)
         mslib.wait_for_element_present(self,sel,testvars.vid_add_subs_button)
         sel.click(testvars.vid_add_subs_button)
         widget.starter_dialog_fork(self,sel,to_lang='hr')
@@ -270,9 +273,7 @@ class subgroup_88(unittest.TestCase):
                 sel.set_timeout(testvars.timeout)
                 sel.open("/teams/al-jazeera")
                 sel.wait_for_page_to_load(testvars.timeout)
-                mslib.wait_for_text_present(self,sel,"What languages do you speak")
-                sel.click("//button[@type='submit']")
-                mslib.wait_for_text_not_present(self,sel,"What languages do you speak")
+                teampage_lang_select(self,sel)
                 
             except:
                 print "got an error on run#:" +str(x)

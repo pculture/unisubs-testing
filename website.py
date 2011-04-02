@@ -273,7 +273,6 @@ def get_video_no_translations(self,sel):
 def submit_random_youtube(self,sel):
     vid_url = offsite.get_youtube_video_url(self)
     submit_video(self,sel,vid_url)
-    sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     local_url = sel.get_attribute(testvars.video_original +"@href")
     return local_url
 
@@ -538,6 +537,12 @@ def get_own_team(self,sel):
         sel.wait_for_page_to_load(testvars.timeout)
         create_team(self,sel,team,team_logo_path)
     return team
+
+def teampage_lang_select(self,sel):
+    time.sleep(3)
+    if sel.is_text_present("What languages do you speak") == True:
+        sel.click("//button[@type='submit']")
+        mslib.wait_for_text_not_present(self,sel,"What languages do you speak")
 
 def save_team_settings(self,sel):
     sel.click("css=.green_button.small:contains('Save')")
