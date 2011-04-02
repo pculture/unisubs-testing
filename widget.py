@@ -133,8 +133,9 @@ def starter_dialog_translate_from_orig(self,sel,to_lang='hr'):
         ol = sel.get_text(testvars.create_lang_known)
         orig_lang = ol.split("in ")[1]
         lc = sel.get_value("css=p select option:contains('"+orig_lang+" ')")
-        lang_code = re.sub("\d+$","",lc)
-        select_video_language(self,sel,sub_lang=to_lang,from_lang=lang_code)
+        lang_code = re.sub("\d+$","",lc) #gives only the letters of the value field.
+        from_code = re.sub("\D","",lc)  #gives only the number - used in from pulldown.
+        select_video_language(self,sel,sub_lang=to_lang,from_lang=from_code)
         time.sleep(5)
         close_howto_video(self,sel)
         mslib.wait_for_element_present(self,sel,"css=div.mirosubs-help-heading")
