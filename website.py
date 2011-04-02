@@ -93,7 +93,7 @@ def start_demo(self,sel):
 ##    else:
 ##        submit_video(self,sel,"http://videos.mozilla.org/firefox/3.5/switch/switch.ogv")
 
-def submit_video(self,sel,url):
+def submit_video(self,sel,url,login=True):
     """Description: Submit a video using the site button.
 
     After the video is submitted, check if it is already in the db, and if so, delete and resubmit to assure
@@ -116,6 +116,8 @@ def submit_video(self,sel,url):
         ## Delete and resubmit the video
         curr_url = sel.get_eval("window.location")
         admin_delete_video(self,sel,curr_url)
+        if login==True:
+            SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         sel.open("/videos/create")
         sel.type("video_url", url)
         sel.click(testvars.WebsiteUI["Video_Submit_Button"])
@@ -130,33 +132,42 @@ def front_page_submit(self,sel,url):
     sel.wait_for_page_to_load(testvars.timeout)
 
 
-def start_sub_widget(self,sel,skip="True",vid_lang="en",sub_lang="en-gb",orig_lang='en',login=True):
+def start_sub_widget(self,sel,skip="True",edit_type='orig',sec_lang=None,login=False):
     """Start the Subtitle Widget using the Subtitle Me menu.
 
     This will handle the language choice for demo or submitted videos.
     skip is set to true by default and gets passed to widget.close_howto_video
     to prevent further how-to video displays.
 
+    Choice for edit_type: orig, trans_orig, trans_other (requires sec_lang), forkit.
+
     Pre-condition: On a page where the widget is present. Video with or without subs.
 
     Post-condition: the widget is launched and you will be on step 1 or Edit step
     """
-    if login==True:
-        SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
     sel.window_maximize()
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
     sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
     time.sleep(5)
-    if sel.is_element_present(testvars.WidgetUI["Select_language"]):
-        widget.select_video_language(self,sel,vid_lang,sub_lang=orig_lang)
-        time.sleep(15)
-        widget.close_howto_video(self,sel)
-    elif sel.is_element_present(testvars.WebsiteUI["AddSubtitles_menuitem"]):
+    if sel.is_element_present(testvars.WidgetUI["Select_language"]) == False:
         sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])
-        widget.select_video_language(self,sel,vid_lang,sub_lang)    
-        widget.close_howto_video(self,sel)
+        time.sleep(3)
+    if sel.is_element_present(testvars.WidgetUI["Select_language"]):
+        if edit_type == 'orig':
+            widget.starter_dialog_edit_orig(self,sel)
+        elif edit_type == 'trans_orig':
+            widget.starter_dialog_translate_from_orig(self,sel)
+        elif edit_type == 'trans_other':
+            if sec_lang == None:
+                self.fail("must provide from lang code in sec_lang")
+            else:
+                widget.starter_dialog_translate_from_not_orig(self,sel,from_lang=sec_lang)
+        elif edit_type == 'forkit':
+            widget.starter_dialog_fork(self,sel)
+        else:
+            print "not sure what I'm doing in started dialog"
     else:
-        self.fail("wtf - no widget, no sub menu")
+        print "widget opened immediately"
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-help-heading")
 
 
@@ -192,7 +203,6 @@ def verify_submitted_video(self,sel,vid_url,embed_type=""):
     Returns: url of the video on the universalsubtitles site.
     """
     print " * verify submitted video, embed type"
-    sel.wait_for_page_to_load(testvars.timeout)
     vid_embed = None
     vid_span_css = "css=div[id=widget_div] span object"
     vid_div_css = "css=div[id=widget_div] div object"
