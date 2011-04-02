@@ -214,28 +214,34 @@ class subgroup_88(unittest.TestCase):
         
         #login
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
-        team = "al-jazeera"
+        team = "unisubs-test-team"
 
 
         #Edit original language
-        sel.open("teams/"+team)
-        sel.wait_for_page_to_load(testvars.timeout)        
+        print "testing edit original lang"
+        sel.open("/teams/"+team)
+        sel.wait_for_page_to_load(testvars.timeout)
+        mslib.wait_for_element_present(self,sel,testvars.vid_add_subs_button)
         sel.click(testvars.vid_add_subs_button)
         widget.starter_dialog_edit_orig(self,sel)
         widget.submit_sub_edits(self,sel)
 
         #Edit translation
-        sel.open("teams/"+team)
+        print "testing edit translation"
+        sel.open("/teams/"+team)
         sel.wait_for_page_to_load(testvars.timeout)
+        mslib.wait_for_element_present(self,sel,testvars.vid_add_subs_button)
         sel.click(testvars.vid_add_subs_button)
         widget.starter_dialog_translate_from_orig(self,sel,to_lang='hr')
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         widget.edit_translation(self,sel,subtextfile)
 
         #New fork
+        print "testing new fork"
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         sel.open("teams/"+team)
-        sel.wait_for_page_to_load(testvars.timeout)        
+        sel.wait_for_page_to_load(testvars.timeout)
+        mslib.wait_for_element_present(self,sel,testvars.vid_add_subs_button)
         sel.click(testvars.vid_add_subs_button)
         widget.starter_dialog_fork(self,sel,to_lang='hr')
         print "transcribing video"
@@ -259,6 +265,7 @@ class subgroup_88(unittest.TestCase):
             try:
                 self.selenium.stop()
                 self.selenium.start()
+                self.session = self.selenium.sessionId
                 sel = self.selenium
                 sel.set_timeout(testvars.timeout)
                 sel.open("/teams/al-jazeera")

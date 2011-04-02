@@ -60,7 +60,7 @@ comments_tab = "css=span.inline_text:contains('Comments')"
 transcripts_tab = "css=.inline_text:contains('Subtitles')"
 
 #teams pages
-vid_add_subs_button = "css=div.info a.blue_button.add_subtitles_bt"
+vid_add_subs_button = "css=div.info div a.blue_button.add_subtitles_bt"
 
 # Widget Vars
 
