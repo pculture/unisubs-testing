@@ -50,9 +50,9 @@ class subgroup_78_pagedemo(unittest.TestCase):
         time.sleep(5)
         print "testing playback on 1st video on page"
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-captionSpan")
+        mslib.wait_for_element_present(self,sel,"css=span.mirosubs-captionSpan")
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
-        caption_position =  sel.get_element_height("css=.mirosubs-captionSpan")
+        caption_position =  sel.get_element_height("css=span.mirosubs-captionSpan")
         verify_caption_position(self,sel,caption_position)
         
 
@@ -64,9 +64,9 @@ class subgroup_78_pagedemo(unittest.TestCase):
         time.sleep(5)
         print "testing playback on second video on page"
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].play()')
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-captionSpan")
+        mslib.wait_for_element_present(self,sel,"css=span.mirosubs-captionSpan")
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].pause()')
-        caption_position =  sel.get_element_height("css=.mirosubs-captionSpan")
+        caption_position =  sel.get_element_height("css=span.mirosubs-captionSpan")
         verify_caption_position(self,sel,caption_position)
 
     def test_688(self):
@@ -88,9 +88,9 @@ class subgroup_78_pagedemo(unittest.TestCase):
         time.sleep(10)
         print "testing playback on translated lang"
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')       
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-captionSpan")
+        mslib.wait_for_element_present(self,sel,"css=span.mirosubs-captionSpan")
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
-        caption_position =  sel.get_element_height("css=.mirosubs-captionSpan")
+        caption_position =  sel.get_element_height("css=span.mirosubs-captionSpan")
         verify_caption_position(self,sel,caption_position)
 
 
@@ -137,12 +137,7 @@ class subgroup_78_pagedemo(unittest.TestCase):
         widget.starter_dialog_translate_from_orig(self,sel,to_lang='pl')
         widget.edit_translation(self,sel,subtextfile)
         widget.submit_sub_edits(self,sel,offsite=True)
-        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
-        sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
         
-        sel.click("css=div.mirosubs-dropdown div ul li:contains('Croatian')")
-        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')       
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-captionSpan")
         
 
     def test_691(self):
@@ -182,11 +177,10 @@ class subgroup_78_pagedemo(unittest.TestCase):
         """
         test_id = 685
         sel = self.selenium
-        testpage = "/pagedemo/pagedemo/blog_youtube_embed"
+        testpage = "/pagedemo/blog_youtube_embed"
         sel.open(testpage)
         sel.wait_for_page_to_load(testvars.timeout)
         sel.window_maximize()
-        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
         time.sleep(5)
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-captionSpan")

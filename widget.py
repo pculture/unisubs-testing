@@ -188,6 +188,16 @@ def starter_dialog_fork(self,sel,to_lang='hr'):
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
         return orig_lang
 
+def get_lang_cc(self,sel,language):
+    """Gives back the lang code for Subtitle Into language.
+
+     Precondition: starter dialog must be open.
+     
+
+    """
+    lc = sel.get_value("css=p select option:contains('"+language+" ')")
+    lang_code = re.sub("\d+$","",lc) #gives only the letters of the value field.
+    return lang_code
 
 def select_video_language(self,sel,vid_lang="en",sub_lang="en-gb",from_lang='forkk'):
     time.sleep(5)

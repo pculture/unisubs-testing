@@ -68,8 +68,6 @@ class subgroup_70(unittest.TestCase):
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         website.verify_subs(self,sel,subtextfile)
         # Click History tab
-        sel.click(testvars.video_original)
-        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         sel.click(testvars.history_tab)
         sel.wait_for_page_to_load(testvars.timeout)
         rev_num = website.get_current_rev(self,sel)
@@ -113,7 +111,7 @@ class subgroup_70(unittest.TestCase):
         # Verify subtitles
         website.verify_subs(self,sel,subtextfile)
         sel.click(testvars.video_edit_subtitles)
-        widget.close_howto_video(self,sel)
+        widget.starter_dialog_edit_orig(self,sel)
         widget.goto_step(self,sel,"2")
         widget.resync_video(self,sel,subtextfile)
         widget.submit_sub_edits(self,sel)
@@ -163,7 +161,7 @@ class subgroup_70(unittest.TestCase):
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         #Edit subtitles
         sel.click(testvars.video_edit_subtitles)
-        widget.close_howto_video(self,sel)
+        widget.starter_dialog_edit_orig(self,sel)
         widget.goto_step(self,sel,"3")
         widget.edit_text(self,sel,subtextfile)
         widget.submit_sub_edits(self,sel)
@@ -205,6 +203,9 @@ class subgroup_70(unittest.TestCase):
         if int(rev_num) < 2:
             print "only 1 rev - editing text first"
             sel.click(testvars.video_edit_subtitles)
+            if sel.is_text_present("Create Subtitles"):
+                to_lang = website.get_lang_cc(self,sel,language)
+                widget.starter_dialog_translate_from_orig(self,sel,to_lang=to_lang)
             widget.edit_translation(self,sel,subtextfile)
             
         sel.select_frame("relative=top")  

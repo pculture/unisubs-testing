@@ -237,7 +237,7 @@ def get_video_with_translations(self,sel):
     """
     sel.open("videos/")
  #   sort_videos_table(self,sel,"Subtitles and Translations","desc") 
-    row_no = random.randint(1,6)
+    row_no = random.randint(1,3)
     local_url = "none"    
     while sel.is_element_present("css=tr:nth-child("+str(row_no)+") > "+testvars.videos_trans_td):
         num_trans = sel.get_text("css=tr:nth-child("+str(row_no)+") > "+testvars.videos_trans_td)
