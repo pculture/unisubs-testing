@@ -131,12 +131,11 @@ class subgroup_78_pagedemo(unittest.TestCase):
         sel.wait_for_page_to_load(testvars.timeout)
         sel.window_maximize()
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
-        time.sleep(5)
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
+        time.sleep(5)
         widget.open_starter_dialog(self,sel)
         widget.starter_dialog_translate_from_orig(self,sel,to_lang='pl')
         widget.edit_translation(self,sel,subtextfile)
-        widget.submit_sub_edits(self,sel,offsite=True)
         
         
 

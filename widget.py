@@ -393,8 +393,8 @@ def edit_text(self,sel,subtextfile,new_text=""):
     """
     print ("Editing the sub text in the widget")
     sel.select_window("null")
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
-    sel.click("css=.mirosubs-activestep")
+##    mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
+##    sel.click("css=.mirosubs-activestep")
     mslib.wait_for_video_to_buffer(self,sel)
    
     for i,line in enumerate(open(subtextfile)):
