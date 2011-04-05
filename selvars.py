@@ -123,11 +123,28 @@ def set_browser(testid="none",testdesc="none"):
                         "public": "true", \
                         "job-name": testid +': '+ testdesc \
                     }
+
+
+        elif controller.testbrowser == "iexplore9":
+            sbrowser = {\
+                        "username": sauce_auth.sauce_user,\
+                        "access-key": sauce_auth.sauce_key,\
+                        "os": "Windows 2008",\
+                        "browser": "iexplore",\
+                        "browser-version": "9" , \
+                        "max-duration": 480, \
+                        "idle-timeout": 120, \
+                        "public": "true", \
+                        "job-name": testid +': '+ testdesc \
+                    }
+
+
+        
         elif controller.testbrowser == "opera":
             sbrowser = {\
                         "username": sauce_auth.sauce_user,\
                         "access-key": sauce_auth.sauce_key,\
-                        "os": "Windows 2003",\
+                        "os": "Windows 2008",\
                         "browser": "opera",\
                         "browser-version": "10" , \
                         "max-duration": 480, \
@@ -160,7 +177,18 @@ def set_browser(testid="none",testdesc="none"):
                         "public": "true", \
                         "job-name": testid +': '+ testdesc \
                     }
-
+        elif controller.testbrowser == "firefox4":
+             sbrowser= { \
+                        "username": sauce_auth.sauce_user,
+                        "access-key": sauce_auth.sauce_key,\
+                        "os": "Windows 2008",\
+                        "browser": "firefox",\
+                        "browser-version": "4", \
+                        "max-duration": 480, \
+                        "idle-timeout": 120, \
+                        "public": "true", \
+                        "job-name": testid +': '+ testdesc \
+                    }
             
         else:
             sbrowser= { \
@@ -178,7 +206,13 @@ def set_browser(testid="none",testdesc="none"):
         browser = json.dumps(sbrowser, indent=4)
     else:
         #use default browser
-        browser = "*"+controller.testbrowser
+        if controller.testbrowser == "iexplore9":
+            browser = "*iexplore"
+        elif controller.testbrowser == "firefox4":
+            browser = "*firefox"
+            
+        else:
+            browser = "*"+controller.testbrowser
 
     return browser
 
