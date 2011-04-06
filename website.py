@@ -112,6 +112,10 @@ def submit_video(self,sel,url,login=True):
     sel.type("video_url", url)
     sel.click(testvars.WebsiteUI["Video_Submit_Button"])
     sel.wait_for_page_to_load(testvars.timeout)
+    if sel.is_text_present("broken link") == True:
+        submitted == False
+    else:
+        submitted == True
     if str(sel.get_text(testvars.WebsiteUI["SubtitleMe_menu"])) != "Subtitle Me":
         ## Delete and resubmit the video
         curr_url = sel.get_eval("window.location")
@@ -122,7 +126,7 @@ def submit_video(self,sel,url,login=True):
         sel.type("video_url", url)
         sel.click(testvars.WebsiteUI["Video_Submit_Button"])
         sel.wait_for_page_to_load(testvars.timeout)
-            
+    return submitted      
 
     
 def front_page_submit(self,sel,url):
@@ -281,9 +285,11 @@ def get_video_no_translations(self,sel):
     return local_url
 
 def submit_random_youtube(self,sel):
-    vid_url = offsite.get_youtube_video_url(self)
-    submit_video(self,sel,vid_url)
-    local_url = sel.get_attribute(testvars.video_original +"@href")
+    submitted = False
+    while submitted == False:
+        vid_url = offsite.get_youtube_video_url(self)
+        submitted = submit_video(self,sel,vid_url)
+        local_url = sel.get_attribute(testvars.video_original +"@href")
     return local_url
 
 def get_translated_lang(self,sel):
