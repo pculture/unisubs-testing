@@ -399,7 +399,7 @@ def edit_text(self,sel,subtextfile,new_text=""):
    
     for i,line in enumerate(open(subtextfile)):
         x = i+1
-        sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(x)+") "       
+        sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(x)+")"       
         if sel.is_element_present(sub_cell) == False:
             break
         textarea = sub_cell +" > span + span textarea"
@@ -409,7 +409,7 @@ def edit_text(self,sel,subtextfile,new_text=""):
             ed_text = str(line).rstrip().upper()
         else:
             ed_text = new_text
-        sel.click(textspan)
+        sel.double_click(textspan)
         time.sleep(1)
         print "typing" +str(ed_text)
         sel.type(textarea,ed_text) # trying this now"css=span.mirosubs-title textarea", ed_text)
