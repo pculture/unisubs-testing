@@ -168,30 +168,6 @@ class subgroup_78_subtesting(unittest.TestCase):
             make_new_subs(self,sel)
 
 
-    def test_696(self):
-        """Subtesting widget - sub position on playback.
-        Open the testpage
-        Start Playback
-        Verify subs are in the correct position on the video.
-        
-        http://litmus.pculture.org/show_test.cgi?id=696
-        """
-        sel = self.selenium
-
-        #test 1st video on the page
-        testpage = (selvars.set_subtesting_wordpress_page(self,601)) #same subtesting page as test test_601
-        sel.open(testpage)
-        sel.wait_for_page_to_load(testvars.timeout)
-        sel.window_maximize()
-        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
-        time.sleep(3)
-        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-captionSpan")
-        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
-        caption_position =  sel.get_element_height("css=.mirosubs-captionSpan")
-        verify_caption_position(self,sel,caption_position)
-
-
             
 # Close the browser, log errors, perform cleanup 
     def tearDown(self):
@@ -294,7 +270,7 @@ def make_new_subs(self,sel,vid_pos):
     mslib.wait_for_element_present(self,sel,testvars.offsite_goto_subs)
     sel.click(testvars.offsite_goto_subs)
     sel.wait_for_page_to_load(testvars.timeout)
-    vid_title = sel.get_text(testvars.vid_title)
+    vid_title = sel.get_text("css=.main_title")
     print "subs edited for "+vid_title
 
 

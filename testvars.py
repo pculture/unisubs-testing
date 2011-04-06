@@ -33,7 +33,7 @@ WebsiteUI = {"Home":"css=a:contains('Miro Subs Alpha')", \
           }
 
 # Website Videos page
-vid_title = "css=.main-title a"
+vid_title = "css=.main-title"
 videos_url_td = "td:nth-child(1)"
 videos_trans_td = "td:nth-child(4)"
 videos_subtitled_td = "td:nth-child(5)"
