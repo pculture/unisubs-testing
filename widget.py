@@ -410,13 +410,8 @@ def edit_text(self,sel,subtextfile,new_text=""):
         else:
             ed_text = new_text
         sel.click(textspan)
-        time.sleep(.5)
-        if sel.is_element_present(textarea) == False:
-            sel.click(textspan) #try again just to see
-            time.sleep(.5)
-            self.assertTrue(sel.is_element_present(textarea))
-
         time.sleep(1)
+        print "typing" +str(ed_text)
         sel.type(textarea,ed_text) # trying this now"css=span.mirosubs-title textarea", ed_text)
         if "firefox" in selvars.set_browser():
             sel.key_press(textarea,"13") #trying this now"("css=span.mirosubs-title textarea", "13")            
@@ -425,8 +420,9 @@ def edit_text(self,sel,subtextfile,new_text=""):
             sel.key_press_native('10')
      #   sel.key_press("css=span.mirosubs-title textarea", "\\13")
         time.sleep(.25)
-        self.assertTrue(sel.is_element_present(textspan))
+#        self.assertTrue(sel.is_element_present(textspan))
         sub_cell_text=sel.get_text(textspan)
+        print sub_cell_text
         self.assertEqual(sub_cell_text.rstrip(),ed_text.rstrip())
         time.sleep(.5)
         
