@@ -113,9 +113,9 @@ def submit_video(self,sel,url,login=True):
     sel.click(testvars.WebsiteUI["Video_Submit_Button"])
     sel.wait_for_page_to_load(testvars.timeout)
     if sel.is_text_present("broken link") == True:
-        submitted == False
+        submitted = False
     else:
-        submitted == True
+        submitted = True
     if str(sel.get_text(testvars.WebsiteUI["SubtitleMe_menu"])) != "Subtitle Me":
         ## Delete and resubmit the video
         curr_url = sel.get_eval("window.location")
