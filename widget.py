@@ -402,18 +402,21 @@ def edit_text(self,sel,subtextfile,new_text=""):
         sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(x)+")"       
         if sel.is_element_present(sub_cell) == False:
             break
-        textarea = sub_cell +" > span + span textarea"
         textspan = sub_cell +" > span + span"
+        textarea = sub_cell +" > span + span textarea"
+        
         
         if new_text == "":
             ed_text = str(line).rstrip().upper()
         else:
             ed_text = new_text
-        sel.double_click(textspan)
+        sel.click_at(textspan, "")
+        time.sleep(.5)
+        print ed_text
+        sel.type(textarea, ed_text)
+        sel.click_at(sub_cell, "")
         time.sleep(1)
-        print "typing" +str(ed_text)
-        sel.type(textarea,ed_text) # trying this now"css=span.mirosubs-title textarea", ed_text)
-        sel.click(sub_cell)
+
 ##        if "firefox" in selvars.set_browser():
 ##            sel.key_press(textarea,"13") #trying this now"("css=span.mirosubs-title textarea", "13")            
 ##        else:
