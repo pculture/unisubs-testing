@@ -119,26 +119,26 @@ class Test_HTMLTestRunner(unittest.TestCase):
         ## Run a smaller group of tests when using sauce
         if testsauce == True:
             self.suite.addTests([
-##                unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_414'),
-##                unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_538'),
-##                unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_534'),
-##                unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_533'),
-##                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_subtesting.test_601'),
-##                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_subtesting.test_622'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_414'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_538'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_534'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_533'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_subtesting.test_601'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_subtesting.test_622'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_unisubs_mc.test_623'),
-##                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_684'),
-##                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_688'),
-##                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_685'),
-##                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_686'),
-##                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_687'),
-##                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_subtesting_playback.test_696'),
-##                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_pagedemo.subgroup_78_pagedemo.test_689'),
-##                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_pagedemo.subgroup_78_pagedemo.test_690'),
-##                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_pagedemo.subgroup_78_pagedemo.test_691'),
-##                unittest.defaultTestLoader.loadTestsFromName('sg_80_comments.subgroup_80.test_536'),
-##                unittest.defaultTestLoader.loadTestsFromName('sg_88_teams.subgroup_88.test_603'),
-##                unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_379'),
-##                unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_378')
+                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_684'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_688'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_685'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_686'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_687'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_subtesting_playback.test_696'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_pagedemo.subgroup_78_pagedemo.test_689'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_pagedemo.subgroup_78_pagedemo.test_690'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_pagedemo.subgroup_78_pagedemo.test_691'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_80_comments.subgroup_80.test_536'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_88_teams.subgroup_88.test_603'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_379'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_378')
             ])
             
         ## Running on pcf server or local, run all the tests
