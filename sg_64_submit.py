@@ -162,6 +162,7 @@ class subgroup_64(unittest.TestCase):
         sel.open("/")
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         print "submitting a youtube video"
+        website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         vid_url = offsite.get_youtube_video_url(self)
         # Submit Video
         print ("logging in and submitting video")
@@ -193,8 +194,8 @@ class subgroup_64(unittest.TestCase):
         sel.open("/")
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         print "submitting a dailymotion video."
-#        vid_url = offsite.get_dailymotion_video_url(self) - using a fixed video to make test more reliable.
-        vid_url = "http://www.dailymotion.com/video/xhwbnv_jeep_auto"
+        vid_url = offsite.get_dailymotion_video_url(self) - using a fixed video to make test more reliable.
+#        vid_url = "http://www.dailymotion.com/video/xhwbnv_jeep_auto"
         # Submit Video
         print "logging in and submitting video"
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)

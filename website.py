@@ -116,7 +116,7 @@ def submit_video(self,sel,url,login=True):
         ## Delete and resubmit the video
         curr_url = sel.get_eval("window.location")
         admin_delete_video(self,sel,curr_url)
-        if login==True:
+        if login == True:
             SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         sel.open("/videos/create")
         sel.type("video_url", url)
