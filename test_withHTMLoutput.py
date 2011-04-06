@@ -31,7 +31,7 @@ parser.add_option("-s", "--sauce", action="store_true", dest="sauce", default=Fa
 parser.add_option("-b", "--browser", action="store",
                   choices=('firefox','chrome','opera', 'safari', 'iexplore', 'googlechrome', 'lin_ff','firefox4','iexplore9'),
                   type="choice",
-                  dest="browser", default="safari",
+                  dest="browser", default="firefox",
                   help='Possible browser choices: firefox,chrome,opera, safari, iexplore, googlechrome, lin_ff, firefox4, iexplore9)'
                   )
 
