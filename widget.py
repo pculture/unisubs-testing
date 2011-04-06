@@ -402,8 +402,8 @@ def edit_text(self,sel,subtextfile,new_text=""):
         sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(x)+") "       
         if sel.is_element_present(sub_cell) == False:
             break
-        textarea = sub_cell + " > span + span textarea"
-        textspan = sub_cell + " > span + span"
+        textarea = sub_cell +" > span + span textarea"
+        textspan = sub_cell +" > span + span"
         
         if new_text == "":
             ed_text = str(line).rstrip().upper()
@@ -413,14 +413,15 @@ def edit_text(self,sel,subtextfile,new_text=""):
         time.sleep(1)
         print "typing" +str(ed_text)
         sel.type(textarea,ed_text) # trying this now"css=span.mirosubs-title textarea", ed_text)
-        if "firefox" in selvars.set_browser():
-            sel.key_press(textarea,"13") #trying this now"("css=span.mirosubs-title textarea", "13")            
-        else:
-            sel.focus(sub_cell)# trying this now: "css=span.mirosubs-title textarea")
-            sel.key_press_native('10')
-     #   sel.key_press("css=span.mirosubs-title textarea", "\\13")
-        time.sleep(.25)
-#        self.assertTrue(sel.is_element_present(textspan))
+        sel.click(sub_cell)
+##        if "firefox" in selvars.set_browser():
+##            sel.key_press(textarea,"13") #trying this now"("css=span.mirosubs-title textarea", "13")            
+##        else:
+##            sel.focus(sub_cell)# trying this now: "css=span.mirosubs-title textarea")
+##            sel.key_press_native('10')
+##     #   sel.key_press("css=span.mirosubs-title textarea", "\\13")
+##        time.sleep(.25)
+###        self.assertTrue(sel.is_element_present(textspan))
         sub_cell_text=sel.get_text(textspan)
         print sub_cell_text
         self.assertEqual(sub_cell_text.rstrip(),ed_text.rstrip())
