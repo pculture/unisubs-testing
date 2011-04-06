@@ -112,8 +112,8 @@ class subgroup_88(unittest.TestCase):
             print "error adding video to team"
             self.fail()
         else:
-            mslib.wait_for_element_present(self,sel,"css=p label[for=id_language]")
-            sel.select("id_language", "label=English (English)")
+            mslib.wait_for_text_present(self,sel,"Video language")
+            sel.select("id_language", "value=en")
             sel.click("css=.green_button.small:contains('Save')")
             sel.wait_for_page_to_load(testvars.timeout)
         self.assertTrue(sel.is_element_present("css=li.active a:contains('"+team+"')"))
