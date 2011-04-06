@@ -69,7 +69,7 @@ class subgroup_70(unittest.TestCase):
         website.verify_subs(self,sel,subtextfile)
         # Click History tab
         sel.click(testvars.history_tab)
-        sel.wait_for_page_to_load(testvars.timeout)
+        time.sleep(2)
         rev_num = website.get_current_rev(self,sel)
         website.verify_latest_history(self,sel,rev="#"+str(rev_num),user="sub_writer",time="100%",text="100%")
 
