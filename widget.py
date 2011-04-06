@@ -402,8 +402,8 @@ def edit_text(self,sel,subtextfile,new_text=""):
         sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(x)+") "       
         if sel.is_element_present(sub_cell) == False:
             break
-        textarea = sub_cell + " > span.mirosubs-title textarea"
-        textspan = sub_cell + " > span.mirosubs-title span"
+        textarea = sub_cell + " > span + span.mirosubs-title textarea"
+        textspan = sub_cell + " > span + span.mirosubs-title span"
         
         if new_text == "":
             ed_text = str(line).rstrip().upper()
