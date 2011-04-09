@@ -104,7 +104,7 @@ class subgroup_88(unittest.TestCase):
         vid_title = sel.get_text(testvars.vid_title)
         #add video to team and verify values
         sel.click_at("css=span.sort_label strong:contains('Add video')","")
-        sel.click("css=li a:contains('"+team+"')")
+        sel.click_at("css=li a:contains('"+team+"')","")
         sel.wait_for_page_to_load(testvars.timeout)
         print "verifying the inital add page"
 
@@ -214,7 +214,7 @@ class subgroup_88(unittest.TestCase):
         
         #login
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
-        team = "unisubs-test-team"
+        team = "al-jazeera"
 
 
         #Edit original language

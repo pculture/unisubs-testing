@@ -54,7 +54,7 @@ def wait_for_element_not_present(self,sel,input_field):
 def wait_for_text_present(self,sel,ttext):
     """
     Description: Waits 60 seconds for element to present itself.
-    Requires: valid element identifier, can be css, xpath
+    Requires: text expected
     """
     for i in range(30):
         try:
@@ -63,6 +63,8 @@ def wait_for_text_present(self,sel,ttext):
         time.sleep(1)
     else:
         self.fail("time out waiting 30s for text " +ttext)
+
+
 
 def wait_for_text_not_present(self,sel,ttext):
     """
