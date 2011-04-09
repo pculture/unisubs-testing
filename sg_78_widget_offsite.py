@@ -297,6 +297,9 @@ def edit_subs(self,sel,orig_rev,orig_lang,subtextfile):
         vid_title = sel.get_text(testvars.vid_title)
         print " * verify edits"
         mslib.wait_for_element_present(self,sel,testvars.video_video_info)
+        time.sleep(10)
+        sel.refresh()
+        mslib.wait_for_element_present(self,sel,testvars.video_video_info)
         self.assertEqual("sub_writer edited "+orig_lang+" subtitles for "+vid_title, sel.get_text("css=tr td:nth-child(1)"))
         sel.click("css=tr td:nth-child(1) > a:contains('English subtitles')")
         sel.wait_for_page_to_load(testvars.timeout)
