@@ -225,6 +225,8 @@ class subgroup_88(unittest.TestCase):
         mslib.wait_for_element_present(self,sel,testvars.vid_add_subs_button)
         sel.click(testvars.vid_add_subs_button)
         widget.starter_dialog_edit_orig(self,sel)
+        widget.goto_step(self,sel,step="2")
+        widget.resync_video(self,sel,subtextfile)
         widget.submit_sub_edits(self,sel)
 
         #Edit translation
@@ -237,6 +239,7 @@ class subgroup_88(unittest.TestCase):
         widget.starter_dialog_translate_from_orig(self,sel,to_lang='hr')
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         widget.edit_translation(self,sel,subtextfile)
+        widget.submit_sub_edits(self,sel)
 
         #New fork
         print "testing new fork"
