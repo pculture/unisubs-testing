@@ -360,12 +360,14 @@ def store_subs(self,sel,modify=False,limit=True):
     """
     f = codecs.open("subs.txt", "w",encoding='utf-8')
     sub_td = 1
-    while sel.is_element_present("css=tr:nth-child("+str(sub_td)+")"):
+    while sel.is_element_present("css=tr:nth-child("+str(sub_td) +" > td div.sub_content"):
         subline = sel.get_text("css=tr:nth-child("+str(sub_td)+") > td div.sub_content")
         if modify==True:
             subline=subline.upper()
         f.write(subline+ "\n")
         sub_td = sub_td + 1
+        if limit == True and sub_td == 10:
+            break
     f.close
 
 def translate_video(self,sel,url=None,lang=None):
