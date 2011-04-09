@@ -459,8 +459,8 @@ def get_current_rev(self,sel):
 
 def verify_latest_history(self,sel,rev=None,user=None,time=None,text=None):
     print "verifying history tab contents"
-    mslib.wait_for_element_present(self,sel,testvars.history_tab)
-    sel.click(testvars.history_tab)
+    if sel.is_text_present("Most Recent") == False:
+        sel.click(testvars.history_tab)
     mslib.wait_for_element_present(self,sel,"css=div[id=revisions-tab] tr:nth-child(1) > td:nth-child(1) > a")
     if rev:
         self.assertTrue(sel.is_element_present("css=div[id=revisions-tab] tr:nth-child(1) > td:nth-child(1) > a:contains('"+rev+"')"))

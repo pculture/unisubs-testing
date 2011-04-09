@@ -110,7 +110,7 @@ class subgroup_70(unittest.TestCase):
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         # Verify subtitles
         website.verify_subs(self,sel,subtextfile)
-        sel.click(testvars.video_edit_subtitles)
+        sel.click(testvars.video_add_translation)
         widget.starter_dialog_edit_orig(self,sel)
         widget.goto_step(self,sel,"2")
         widget.resync_video(self,sel,subtextfile)
@@ -160,7 +160,7 @@ class subgroup_70(unittest.TestCase):
         website.verify_subs(self,sel,subtextfile)
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         #Edit subtitles
-        sel.click(testvars.video_edit_subtitles)
+        sel.click(testvars.video_add_translation)
         widget.starter_dialog_edit_orig(self,sel)
         widget.goto_step(self,sel,"3")
         widget.edit_text(self,sel,subtextfile)
@@ -195,14 +195,13 @@ class subgroup_70(unittest.TestCase):
         sel.wait_for_page_to_load(testvars.timeout)
         website.store_subs(self,sel)
         sel.click(testvars.history_tab)
-        sel.wait_for_page_to_load(testvars.timeout)
         orig_rev = website.get_current_rev(self,sel)
         rev_num = orig_rev.lstrip('#')
         subtextfile = "subs.txt"
         #If there is only 1 revision - edit the subs to make a new revision
         if int(rev_num) < 2:
             print "only 1 rev - editing text first"
-            sel.click(testvars.video_edit_subtitles)
+            sel.click(testvars.video_add_translation)
             if sel.is_text_present("Create Subtitles"):
                 to_lang = website.get_lang_cc(self,sel,language)
                 widget.starter_dialog_translate_from_orig(self,sel,to_lang=to_lang)
