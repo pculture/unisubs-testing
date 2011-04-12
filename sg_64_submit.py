@@ -231,7 +231,8 @@ class subgroup_64(unittest.TestCase):
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         website.SiteLogout(self,sel)
         # Submit Video
-        website.submit_video(self,sel,"http://www.youtube.com/watch?v=KakZkh9Iu7U&feature=",login=False)
+        vid_url = offsite.get_youtube_video_url(self)
+        website.submit_video(self,sel,vid_url,login=False)
         website.start_sub_widget(self,sel)        
         # Check message in transcribe step
         widget.verify_login_message(self,sel)
