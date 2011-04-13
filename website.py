@@ -492,10 +492,11 @@ def verify_compare_revisions(self,sel,older_rev, newer_rev,rollback=False):
 
     """
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+    print sel.get_eval("window.location")
     print "older_rev: "+str(older_rev)+" newer_rev: "+str(newer_rev)
     #Verify the heading
-    self.assertTrue(sel.is_text_present("#"+str(older_rev)))
-    self.assertTrue(sel.is_text_present("#"+str(newer_rev)))
+#    self.assertTrue(sel.is_text_present("#"+str(older_rev)))
+#    self.assertTrue(sel.is_text_present("#"+str(newer_rev)))
     #Verify left column - older
     self.assertTrue(sel.is_element_present("css=div.left_column h3.diff_title:contains('Revision #"+str(older_rev)+"')"))
     self.assertTrue(sel.is_element_present("css=div.left_column div.revision_buttons a.new_edit:contains('Submit a new edit based on this version (#"+str(older_rev)+")')"))
