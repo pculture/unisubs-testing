@@ -63,6 +63,7 @@ class subgroup_70(unittest.TestCase):
         widget.sync_video(self,sel,subtextfile)
         # Review
         widget.submit_sub_edits(self,sel)
+        time.sleep(5)
         sel.select_frame("relative=top")
         sel.click(testvars.video_original)
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
