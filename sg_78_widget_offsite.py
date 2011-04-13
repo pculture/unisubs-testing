@@ -309,7 +309,6 @@ def edit_subs(self,sel,orig_rev,orig_lang,subtextfile):
         website.check_the_box(self,sel,2) #check the box
         new_rev = int(rev_num) + 1
         sel.click(testvars.video_compare_revisions)
-        sel.wait_for_page_to_load(testvars.timeout)
         print " * comparing revisions and rolling back to original"
         website.verify_compare_revisions(self,sel,str(rev_num),str(new_rev),rollback=True)
         sel.click(testvars.transcripts_tab)

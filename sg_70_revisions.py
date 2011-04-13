@@ -71,7 +71,7 @@ class subgroup_70(unittest.TestCase):
         sel.click(testvars.history_tab)
         time.sleep(2)
         rev_num = website.get_current_rev(self,sel)
-        website.verify_latest_history(self,sel,rev="#"+str(rev_num),user="sub_writer",time="100%",text="100%")
+        website.verify_latest_history(self,sel,rev=str(rev_num),user="sub_writer",time="100%",text="100%")
 
 
     def test_486(self):
@@ -122,7 +122,7 @@ class subgroup_70(unittest.TestCase):
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         sel.click(testvars.history_tab)
         rev_num = website.get_current_rev(self,sel)
-        website.verify_latest_history(self,sel,rev="#"+str(rev_num),user="sub_writer",time="100%",text="0%")
+        website.verify_latest_history(self,sel,rev=str(rev_num),user="sub_writer",time="100%",text="0%")
                 
     def test_602(self):
         """Revisions - edit subtitles text and verify in history table.
@@ -173,7 +173,7 @@ class subgroup_70(unittest.TestCase):
         sel.wait_for_page_to_load(testvars.timeout)
         sel.click(testvars.history_tab)
         rev_num = website.get_current_rev(self,sel)      
-        website.verify_latest_history(self,sel,rev="#"+str(rev_num),user="sub_writer",time="0%",text="100%")
+        website.verify_latest_history(self,sel,rev=str(rev_num),user="sub_writer",time="0%",text="100%")
 
 
 
@@ -199,10 +199,12 @@ class subgroup_70(unittest.TestCase):
         rev_num = orig_rev.lstrip('#')
         subtextfile = "subs.txt"
         #If there is only 1 revision - edit the subs to make a new revision
-        if int(rev_num) < 2:
+        if int(rev_num) < 1:
             print "only 1 rev - editing text first"
             sel.click(testvars.video_add_translation)
+            time.sleep(3)
             if sel.is_text_present("Create Subtitles"):
+                mslib.wait_for_text_present(self,sel,"This video")
                 to_lang = website.get_lang_cc(self,sel,language)
                 widget.starter_dialog_translate_from_orig(self,sel,to_lang=to_lang)
             widget.edit_translation(self,sel,subtextfile)
