@@ -360,7 +360,7 @@ def store_subs(self,sel,modify=False,limit=True):
     """
     f = codecs.open("subs.txt", "w",encoding='utf-8')
     sub_td = 1
-    while sel.is_element_present("css=tr:nth-child("+str(sub_td) +" > td div.sub_content"):
+    while sel.is_element_present("css=tr:nth-child("+str(sub_td)+") > td div.sub_content"):
         subline = sel.get_text("css=tr:nth-child("+str(sub_td)+") > td div.sub_content")
         if modify==True:
             subline=subline.upper()

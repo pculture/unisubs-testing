@@ -418,18 +418,13 @@ def edit_text(self,sel,subtextfile,new_text=""):
         sel.click_at(textspan, "")
         time.sleep(.5)
         print ed_text
-        sel.type(textarea, new_text)
-        sel.click_at(sub_cell, "")
+        sel.type(textarea, ed_text)
+        if "firefox" in selvars.set_browser():
+            sel.key_press(textarea,"13") #trying this now"("css=span.mirosubs-title textarea", "13")            
+        else:
+            sel.click_at(sub_cell, "")
         time.sleep(1)
-
-##        if "firefox" in selvars.set_browser():
-##            sel.key_press(textarea,"13") #trying this now"("css=span.mirosubs-title textarea", "13")            
-##        else:
-##            sel.focus(sub_cell)# trying this now: "css=span.mirosubs-title textarea")
-##            sel.key_press_native('10')
-##     #   sel.key_press("css=span.mirosubs-title textarea", "\\13")
-##        time.sleep(.25)
-###        self.assertTrue(sel.is_element_present(textspan))
+#        self.assertTrue(sel.is_element_present(textspan))
         sub_cell_text=sel.get_text(textspan)
         print sub_cell_text
         self.assertEqual(sub_cell_text.rstrip(),ed_text.rstrip())

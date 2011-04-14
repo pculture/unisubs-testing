@@ -281,7 +281,7 @@ def store_subs(self,sel):
         print "video has subs"
         sel.click(testvars.WebsiteUI["Subhomepage_menuitem"])
         sel.wait_for_page_to_load(testvars.timeout)
-        website.store_subs(self,sel,modify=True)
+        website.store_subs(self,sel,modify=True,limit=True)
         orig_rev = website.get_current_rev(self,sel)
         print "starting revision is: "+str(orig_rev)
         return orig_rev
