@@ -418,7 +418,7 @@ def edit_text(self,sel,subtextfile,new_text=""):
         sel.click_at(textspan, "")
         time.sleep(.5)
         print ed_text
-        sel.type(textarea, ed_text)
+        sel.type(textarea, new_text)
         sel.click_at(sub_cell, "")
         time.sleep(1)
 
