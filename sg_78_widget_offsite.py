@@ -287,8 +287,9 @@ def store_subs(self,sel):
         return orig_rev
 
 def edit_subs(self,sel,orig_rev,orig_lang,subtextfile):
-        widget.goto_step(self,sel,"3")
-        widget.edit_text(self,sel,subtextfile)
+#        widget.goto_step(self,sel,"3")
+#        widget.edit_text(self,sel,subtextfile)
+        widget.resync_video(self,sel,subtextfile)
         widget.site_login_from_widget_link(self,sel)
         widget.submit_sub_edits(self,sel,offsite=True)
         mslib.wait_for_element_present(self,sel,testvars.offsite_goto_subs)
@@ -300,7 +301,12 @@ def edit_subs(self,sel,orig_rev,orig_lang,subtextfile):
         time.sleep(10)
         sel.refresh()
         mslib.wait_for_element_present(self,sel,testvars.video_video_info)
-        self.assertEqual("sub_writer edited "+orig_lang+" subtitles for "+vid_title, sel.get_text("css=tr td:nth-child(1)"))
+        self.assertTrue("sub_writer edited" is in sel.get_text("css=tr td:nth-child(1)"))
+        self.assertTrue(orig_lang is in sel.get_text("css=tr td:nth-child(1)"))
+        self.assertTrue(vid_title is in sel.get_text("css=tr td:nth-child(1)"))
+
+        
+#        self.assertEqual("sub_writer edited "+orig_lang+" subtitles for "+vid_title, sel.get_text("css=tr td:nth-child(1)"))
         sel.click("css=tr td:nth-child(1) > a:contains('English subtitles')")
         sel.wait_for_page_to_load(testvars.timeout)
         sel.click(testvars.history_tab)
