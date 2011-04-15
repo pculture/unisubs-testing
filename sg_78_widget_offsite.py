@@ -304,8 +304,8 @@ def edit_subs(self,sel,orig_rev,orig_lang,subtextfile):
         history_text = sel.get_text("css=tr td:nth-child(1)")
         print history_text
         self.failUnless("sub_writer edited" in history_text)
-        self.assertTrue(orig_lang in history_text))
-        self.assertTrue(vid_title in history_text))
+        self.assertTrue(orig_lang in history_text)
+        self.assertTrue(vid_title in history_text)
 
         
 #        self.assertEqual("sub_writer edited "+orig_lang+" subtitles for "+vid_title, sel.get_text("css=tr td:nth-child(1)"))
