@@ -232,7 +232,7 @@ class subgroup_64(unittest.TestCase):
         website.SiteLogout(self,sel)
         # Submit Video
         vid_url = offsite.get_youtube_video_url(self)
-        website.submit_video(self,sel,vid_url,login=False)
+        website.front_page_submit(self,sel,vid_url)
         website.start_sub_widget(self,sel)        
         # Check message in transcribe step
         widget.verify_login_message(self,sel)

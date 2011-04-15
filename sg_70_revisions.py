@@ -89,7 +89,7 @@ class subgroup_70(unittest.TestCase):
         # Submit Video
         print "logging in and submitting video"
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
-        website.front_page_submit(self,sel,vid_url)
+        website.submit_video(self,sel,vid_url)
         # Verify embed and player
         print "verifying embed"
         website.verify_submitted_video(self,sel,vid_url,embed_type="youtube")
@@ -139,7 +139,8 @@ class subgroup_70(unittest.TestCase):
         # Submit Video
         print "logging in and submitting video"
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
-        website.front_page_submit(self,sel,vid_url)
+        website.submit_video(self,sel,vid_url)
+        
         # Verify embed and player
         print "verifying embed"
         website.verify_submitted_video(self,sel,vid_url,embed_type="youtube")
