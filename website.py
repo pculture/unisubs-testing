@@ -63,11 +63,11 @@ def Login(self,sel,auth_type):
     """
     # auth_type can be either ".twitter", ".open-id", "google"
     if auth_type == "twitter":
-        auth_link = "css=a[href*='twitter']"
+        auth_link = "css=div.left_column a[href*='twitter']"
     elif auth_type == "open-id":
-        auth_link = "css=a[href*='openid']"
+        auth_link = "css=div.left_column a[href*='openid']"
     elif auth_type == "google":
-        auth_link = "css=a[href*='gmail']"
+        auth_link = "css=div.left_column a[href*='gmail']"
     else:
         self.fail("unrecognized auth type")
     sel.select_window("null")
