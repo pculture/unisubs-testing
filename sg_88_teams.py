@@ -230,7 +230,7 @@ class subgroup_88(unittest.TestCase):
         time.sleep(5)
         widget.starter_dialog_edit_orig(self,sel)
         widget.goto_step(self,sel,step="2")
-#        widget.resync_video(self,sel,subtextfile)
+        widget.resync_video(self,sel,subtextfile)
         widget.submit_sub_edits(self,sel,offsite=True)
 
         #Edit translation

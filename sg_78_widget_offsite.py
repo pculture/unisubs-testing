@@ -287,7 +287,7 @@ def store_subs(self,sel):
         return orig_rev
 
 def edit_subs(self,sel,orig_rev,orig_lang,subtextfile):
-#        widget.goto_step(self,sel,"3")
+        widget.goto_step(self,sel,"2")
 #        widget.edit_text(self,sel,subtextfile)
         widget.resync_video(self,sel,subtextfile)
         widget.site_login_from_widget_link(self,sel)
@@ -297,9 +297,6 @@ def edit_subs(self,sel,orig_rev,orig_lang,subtextfile):
         sel.wait_for_page_to_load(testvars.timeout)
         vid_title = sel.get_text(testvars.vid_title)
         print " * verify edits"
-        mslib.wait_for_element_present(self,sel,testvars.video_video_info)
-        time.sleep(10)
-        sel.refresh()
         mslib.wait_for_element_present(self,sel,testvars.video_video_info)
         history_text = sel.get_text("css=tr td:nth-child(1)")
         print history_text

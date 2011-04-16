@@ -329,7 +329,7 @@ def verify_sub_upload(self,sel,sub_file,lang=""):
     """Verifies the uploaded subtitle text matches the text of a corresponing test file.
 
     """
-    sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+    mslib.wait_for_element_present(self,sel,"css=tr")
     sub_td = 1
     for line in codecs.open(sub_file,encoding='utf-8'):
         subline = line.split(',')
