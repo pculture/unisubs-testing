@@ -231,7 +231,7 @@ class subgroup_88(unittest.TestCase):
         widget.starter_dialog_edit_orig(self,sel)
         widget.goto_step(self,sel,step="2")
 #        widget.resync_video(self,sel,subtextfile)
-        widget.submit_sub_edits(self,sel)
+        widget.submit_sub_edits(self,sel,offsite=True)
 
         #Edit translation
         print "testing edit translation"
@@ -243,7 +243,7 @@ class subgroup_88(unittest.TestCase):
         time.sleep(5)
         widget.starter_dialog_translate_from_orig(self,sel,to_lang='hr')
         widget.edit_translation(self,sel,subtextfile)
-        widget.submit_sub_edits(self,sel)
+        widget.submit_sub_edits(self,sel,offsite=True)
 
         #New fork
         print "testing new fork"
@@ -261,7 +261,7 @@ class subgroup_88(unittest.TestCase):
         widget.sync_video(self,sel,subtextfile,3,4)
         # Review
         print "review step - just submitting video"
-        widget.submit_sub_edits(self,sel)
+        widget.submit_sub_edits(self,sel,offsite=True)
 
 
     def test_697(self):
