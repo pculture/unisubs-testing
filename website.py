@@ -300,7 +300,7 @@ def get_translated_lang(self,sel):
     #get the original language
     original_lang = sel.get_text(testvars.video_original)
     tab_no = 1
-    tab_li = "csss=ul.left_nav li:nth-child("+str(tab_no)+") > a "
+    tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+") > a "
     skip_list = [original_lang, "Video Info", "Metadata: Twitter", "Metadata: Geo", "Metadata: Wikipedia"]
     while sel.is_element_present(tab_li):        
         if sel.get_text(tab_li) not in skip_list:
