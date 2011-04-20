@@ -329,6 +329,7 @@ def verify_sub_upload(self,sel,sub_file,lang=""):
     """Verifies the uploaded subtitle text matches the text of a corresponing test file.
 
     """
+    handle_lang_select(self,sel)
     mslib.wait_for_element_present(self,sel,"css=tr")
     sub_td = 1
     for line in codecs.open(sub_file,encoding='utf-8'):
@@ -338,7 +339,7 @@ def verify_sub_upload(self,sel,sub_file,lang=""):
         sub_td = sub_td + 1
     if lang == "":
         sublang = (sel.get_text("css=li.full.active a").split('(')) # split off the number of lines
-        self.assertEqual(sublang[0].rstrip(),"English")
+        self.assertEqual(sublang[0].rstrip(),"Original")
     else:
         sublang = (sel.get_text("css=li.full.active a").split('(')) # split off the number of lines
         self.assertEqual(sublang[0].rstrip(),lang)
@@ -560,6 +561,12 @@ def get_own_team(self,sel):
     return team
 
 def teampage_lang_select(self,sel):
+    time.sleep(3)
+    if sel.is_text_present("What languages do you speak") == True:
+        sel.click("//button[@type='submit']")
+        mslib.wait_for_text_not_present(self,sel,"What languages do you speak")
+
+def handle_lang_select(self,sel):
     time.sleep(3)
     if sel.is_text_present("What languages do you speak") == True:
         sel.click("//button[@type='submit']")
