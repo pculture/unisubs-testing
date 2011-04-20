@@ -220,7 +220,7 @@ def select_video_language(self,sel,vid_lang="en",sub_lang="en-gb",from_lang='for
         
         sel.select(testvars.create_subtitle_into +" + select", "value=regexp:^"+str(sub_lang))
         print "subbing into: "+str(sub_lang)
-        time.sleep(1)
+        time.sleep(2)
         if sel.is_text_present("Translate from") == True:
             sel.select(testvars.create_translate_from+" + span select", "value=regexp:^"+str(from_lang))
             print "selected video language, from: "+str(from_lang)
