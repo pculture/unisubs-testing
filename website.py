@@ -586,10 +586,11 @@ def admin_delete_video(self,sel,curr_url):
     
     vid_id = curr_url.split('/videos/')[1]
     sel.open("/videos/"+vid_id+"staff/delete")
-    sel.type("id_username", base64.standard_b64decode(testvars.ad_usr))
-    sel.type("id_password", base64.standard_b64decode(testvars.del_pw))
-    sel.click("//input[@value='Log in']")
-    sel.wait_for_page_to_load(testvars.timeout)
+    if sel.is_element_present("id_username"):
+        sel.type("id_username", base64.standard_b64decode(testvars.ad_usr))
+        sel.type("id_password", base64.standard_b64decode(testvars.del_pw))
+        sel.click("//input[@value='Log in']")
+        sel.wait_for_page_to_load(testvars.timeout)
     sel.open("/admin/logout")
     sel.open("/")
     

@@ -131,9 +131,8 @@ class subgroup_78_subtesting(unittest.TestCase):
             mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
             time.sleep(3)
             sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
-            widget.open_starter_dialog(self,sel)
-            orig_lang = widget.starter_dialog_edit_orig(self,sel)
-            edit_subs(self,sel,orig_rev,orig_lang,subtextfile)          
+            widget.starter_dialog_edit_orig(self,sel)
+            edit_subs(self,sel,orig_rev,subtextfile)          
         else:
             make_new_subs(self,sel)
 
@@ -161,9 +160,8 @@ class subgroup_78_subtesting(unittest.TestCase):
             mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
             time.sleep(3)
             sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
-            widget.open_starter_dialog(self,sel)
-            orig_lang = widget.starter_dialog_edit_orig(self,sel)
-            edit_subs(self,sel,orig_rev,orig_lang,subtextfile)          
+            widget.starter_dialog_edit_orig(self,sel)
+            edit_subs(self,sel,orig_rev,subtextfile)          
         else:
             make_new_subs(self,sel)
 
@@ -231,9 +229,8 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
             mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
             time.sleep(3)
             sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
-            widget.open_starter_dialog(self,sel)
-            orig_lang = widget.starter_dialog_edit_orig(self,sel)
-            edit_subs(self,sel,orig_rev,orig_lang,subtextfile)          
+            widget.starter_dialog_edit_orig(self,sel)
+            edit_subs(self,sel,orig_rev,subtextfile)          
         else:
             make_new_subs(self,sel)
        
@@ -286,7 +283,7 @@ def store_subs(self,sel):
         print "starting revision is: "+str(orig_rev)
         return orig_rev
 
-def edit_subs(self,sel,orig_rev,orig_lang,subtextfile):
+def edit_subs(self,sel,orig_rev,subtextfile):
         widget.goto_step(self,sel,"2")
 #        widget.edit_text(self,sel,subtextfile)
         widget.resync_video(self,sel,subtextfile)
@@ -296,6 +293,8 @@ def edit_subs(self,sel,orig_rev,orig_lang,subtextfile):
         sel.click(testvars.offsite_goto_subs)
         sel.wait_for_page_to_load(testvars.timeout)
         vid_title = sel.get_text(testvars.vid_title)
+        ol = sel.get_text(testvars.video_original)
+        orig_lang = ol.split("(")[0].rstrip()
         print " * verify edits"
         mslib.wait_for_element_present(self,sel,testvars.video_video_info)
         history_text = sel.get_text("css=tr td:nth-child(1)")

@@ -88,7 +88,7 @@ def site_login_auth(self,sel):
     time.sleep(10)
 
 def open_starter_dialog(self,sel):
-    sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])        
+    sel.click(testvars.WebsiteUI["NewTranslation_menuitem"])        
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
     mslib.wait_for_text_present(self,sel,"This video")
     
@@ -103,11 +103,12 @@ def starter_dialog_edit_orig(self,sel):
     """
     
     #Figure our the original lang or choose your own
-    mslib.wait_for_text_present(self,sel,"This video")
+    sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])
+    time.sleep(5)
     if sel.is_element_present(testvars.create_lang_unknown): # No lang set, going to use English
         orig_lang = "English"
         select_video_language(self,sel,vid_lang='en',sub_lang='en')
-    else:        
+    elif sel.is_element_present(testvars.create_lang_known):        
         ol = sel.get_text(testvars.create_lang_known)
         orig_lang = ol.split("in ")[1]
         print orig_lang
