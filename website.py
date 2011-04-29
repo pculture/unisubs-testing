@@ -300,7 +300,7 @@ def get_translated_lang(self,sel):
     #get the original language
     original_lang = sel.get_text(testvars.video_original)
     tab_no = 1
-    tab_li = "csss=ul.left_nav li:nth-child("+str(tab_no)+") > a "
+    tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+") > a "
     skip_list = [original_lang, "Video Info", "Metadata: Twitter", "Metadata: Geo", "Metadata: Wikipedia"]
     while sel.is_element_present(tab_li):        
         if sel.get_text(tab_li) not in skip_list:
@@ -317,6 +317,7 @@ def upload_subtitles(self,sel,sub_file,lang="en"):
 
     """
     sel.select_frame("relative=top")
+    handle_lang_select(self,sel)
     mslib.wait_for_element_present(self,sel,testvars.video_upload_subtitles)
     sel.click(testvars.video_upload_subtitles)
     mslib.wait_for_element_present(self,sel,"css=form[id='upload-subtitles-form'] select")
@@ -329,6 +330,7 @@ def verify_sub_upload(self,sel,sub_file,lang=""):
     """Verifies the uploaded subtitle text matches the text of a corresponing test file.
 
     """
+    handle_lang_select(self,sel)
     mslib.wait_for_element_present(self,sel,"css=tr")
     sub_td = 1
     for line in codecs.open(sub_file,encoding='utf-8'):
@@ -338,11 +340,12 @@ def verify_sub_upload(self,sel,sub_file,lang=""):
         sub_td = sub_td + 1
     if lang == "":
         sublang = (sel.get_text("css=li.full.active a").split('(')) # split off the number of lines
-        self.assertEqual(sublang[0].rstrip(),"English")
+        self.assertEqual(sublang[0].rstrip(),"Original")
     else:
         sublang = (sel.get_text("css=li.full.active a").split('(')) # split off the number of lines
         self.assertEqual(sublang[0].rstrip(),lang)
-
+    handle_lang_select(self,sel)
+    
 def verify_subs(self,sel,sub_file):
     """Compares the displayed text for subtitles in the to the input file.
 
@@ -563,7 +566,13 @@ def teampage_lang_select(self,sel):
     time.sleep(3)
     if sel.is_text_present("What languages do you speak") == True:
         sel.click("//button[@type='submit']")
-        mslib.wait_for_text_not_present(self,sel,"What languages do you speak")
+        mslib.wait_for_text_not_present(self,sel,"Saving")
+
+def handle_lang_select(self,sel):
+    time.sleep(3)
+    if sel.is_text_present("What languages do you speak") == True:
+        sel.click("//button[@type='submit']")
+        mslib.wait_for_text_not_present(self,sel,"Saving")
 
 def save_team_settings(self,sel):
     sel.click("css=.green_button.small:contains('Save')")
