@@ -103,6 +103,7 @@ def starter_dialog_edit_orig(self,sel):
     """
     
     #Figure our the original lang or choose your own
+    orig_lang = "Original"
     sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])
     time.sleep(5)
     if sel.is_element_present(testvars.create_lang_unknown): # No lang set, going to use English

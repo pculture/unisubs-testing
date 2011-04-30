@@ -569,9 +569,10 @@ def teampage_lang_select(self,sel):
         mslib.wait_for_text_not_present(self,sel,"Saving")
 
 def handle_lang_select(self,sel):
-    time.sleep(3)
+    time.sleep(5)
     if sel.is_text_present("What languages do you speak") == True:
         sel.click("//button[@type='submit']")
+        time.sleep(2)
         mslib.wait_for_text_not_present(self,sel,"Saving")
 
 def save_team_settings(self,sel):
