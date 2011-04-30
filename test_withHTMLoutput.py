@@ -44,7 +44,7 @@ parser.add_option("-p", "--port", action="store", type="int", dest="port", defau
 
 parser.add_option("-u", "--siteurl", action="store",
                   choices=('dev', 'staging'),type="choice",
-                  dest="site", default='dev',
+                  dest="site", default='staging',
                   help="""dev for: http://dev.universalsubtitles.org,
                         staging for: http://staging.universalsubtitles.org""")
 
@@ -123,8 +123,8 @@ class Test_HTMLTestRunner(unittest.TestCase):
                 unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_538'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_534'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_533'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_subtesting.test_601'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_subtesting.test_622'),
+              #  unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_subtesting.test_601'),
+              #  unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_subtesting.test_622'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_unisubs_mc.test_623'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_684'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_688'),
@@ -136,7 +136,8 @@ class Test_HTMLTestRunner(unittest.TestCase):
                 unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_pagedemo.subgroup_78_pagedemo.test_690'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_pagedemo.subgroup_78_pagedemo.test_691'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_80_comments.subgroup_80.test_536'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_88_teams.subgroup_88.test_603'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_88_teams.subgroup_88.test_613'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_88_teams.subgroup_88.test_693'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_379'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_378')
             ])
@@ -151,7 +152,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
                 ['sg_65_login.subgroup_65',unittest.getTestCaseNames(sg_65_login.subgroup_65,'test')], \
                 ['sg_78_widget_offsite.subgroup_78_unisubs_mc',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78_unisubs_mc,'test')], \
                 ['sg_78_widget_offsite.subgroup_78_pculture',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78_pculture,'test')], \
-                ['sg_78_widget_offsite.subgroup_78_subtesting',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78_subtesting,'test')], \
+          #      ['sg_78_widget_offsite.subgroup_78_subtesting',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78_subtesting,'test')], \
                 ['sg_78_widget_pagedemo.subgroup_78_pagedemo',unittest.getTestCaseNames(sg_78_widget_pagedemo.subgroup_78_pagedemo,'test')],
                 ['sg_70_revisions.subgroup_70',unittest.getTestCaseNames(sg_70_revisions.subgroup_70,'test')], \
                 ['sg_88_teams.subgroup_88',unittest.getTestCaseNames(sg_88_teams.subgroup_88,'test')], \
