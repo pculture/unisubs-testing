@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 from selenium import selenium
 #import system modules
@@ -44,7 +43,7 @@ parser.add_option("-p", "--port", action="store", type="int", dest="port", defau
 
 parser.add_option("-u", "--siteurl", action="store",
                   choices=('dev', 'staging'),type="choice",
-                  dest="site", default='staging',
+                  dest="site", default='dev',
                   help="""dev for: http://dev.universalsubtitles.org,
                         staging for: http://staging.universalsubtitles.org""")
 
