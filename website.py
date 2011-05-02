@@ -323,14 +323,14 @@ def upload_subtitles(self,sel,sub_file,lang="en"):
     mslib.wait_for_element_present(self,sel,"css=form[id='upload-subtitles-form'] select")
     sel.select("css=form[id='upload-subtitles-form'] select", "value="+lang)
     sel.type("subtitles-file-field",sub_file)
-    sel.click("css=.green_button.small")
+    sel.click("css=form#upload-subtitles-form .green_button.small")
+  
 
 
 def verify_sub_upload(self,sel,sub_file,lang=""):
     """Verifies the uploaded subtitle text matches the text of a corresponing test file.
 
     """
-    handle_lang_select(self,sel)
     mslib.wait_for_element_present(self,sel,"css=tr")
     sub_td = 1
     for line in codecs.open(sub_file,encoding='utf-8'):
@@ -344,7 +344,7 @@ def verify_sub_upload(self,sel,sub_file,lang=""):
     else:
         sublang = (sel.get_text("css=li.full.active a").split('(')) # split off the number of lines
         self.assertEqual(sublang[0].rstrip(),lang)
-    handle_lang_select(self,sel)
+   
     
 def verify_subs(self,sel,sub_file):
     """Compares the displayed text for subtitles in the to the input file.
