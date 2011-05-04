@@ -321,7 +321,7 @@ def upload_subtitles(self,sel,sub_file,lang="en"):
     mslib.wait_for_element_present(self,sel,testvars.video_upload_subtitles)
     sel.click(testvars.video_upload_subtitles)
     mslib.wait_for_element_present(self,sel,"css=form[id='upload-subtitles-form'] select")
-    sel.select("css=form[id='upload-subtitles-form'] select", "value="+lang)
+    sel.select("css=form[id='upload-subtitles-form'] select[id='id_language']", "value="+lang)
     sel.type("subtitles-file-field",sub_file)
     sel.click("css=form#upload-subtitles-form .green_button.small")
   
@@ -339,10 +339,10 @@ def verify_sub_upload(self,sel,sub_file,lang=""):
         self.assertTrue("css=tr:nth-child("+str(sub_td)+") > td.last:contains("+sub+")")
         sub_td = sub_td + 1
     if lang == "":
-        sublang = (sel.get_text("css=li.full.active a").split('(')) # split off the number of lines
+        sublang = (sel.get_text("css=ul.left_nav li.full.active a").split('(')) # split off the number of lines
         self.assertEqual(sublang[0].rstrip(),"Original")
     else:
-        sublang = (sel.get_text("css=li.full.active a").split('(')) # split off the number of lines
+        sublang = (sel.get_text("css=ul.left_nav li.full.active a").split('(')) # split off the number of lines
         self.assertEqual(sublang[0].rstrip(),lang)
    
     
