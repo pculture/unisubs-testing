@@ -123,15 +123,17 @@ class Test_HTMLTestRunner(unittest.TestCase):
                 unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_538'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_534'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_533'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_subtesting.test_601'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_subtesting.test_622'),
+##                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_subtesting.test_601'),
+##                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_subtesting.test_622'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_unisubs_mc.test_623'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_684'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_688'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_685'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_686'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_687'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_subtesting_playback.test_696'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_701'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_702'),                
+##                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_subtesting_playback.test_696'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_pagedemo.subgroup_78_pagedemo.test_689'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_pagedemo.subgroup_78_pagedemo.test_690'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_pagedemo.subgroup_78_pagedemo.test_691'),
@@ -151,7 +153,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
                 ['sg_65_login.subgroup_65',unittest.getTestCaseNames(sg_65_login.subgroup_65,'test')], \
                 ['sg_78_widget_offsite.subgroup_78_unisubs_mc',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78_unisubs_mc,'test')], \
                 ['sg_78_widget_offsite.subgroup_78_pculture',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78_pculture,'test')], \
-                ['sg_78_widget_offsite.subgroup_78_subtesting',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78_subtesting,'test')], \
+##                ['sg_78_widget_offsite.subgroup_78_subtesting',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78_subtesting,'test')], \
                 ['sg_78_widget_pagedemo.subgroup_78_pagedemo',unittest.getTestCaseNames(sg_78_widget_pagedemo.subgroup_78_pagedemo,'test')],
                 ['sg_70_revisions.subgroup_70',unittest.getTestCaseNames(sg_70_revisions.subgroup_70,'test')], \
                 ['sg_88_teams.subgroup_88',unittest.getTestCaseNames(sg_88_teams.subgroup_88,'test')], \

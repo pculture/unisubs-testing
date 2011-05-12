@@ -54,6 +54,8 @@ class subgroup_78_playback(unittest.TestCase):
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
         caption_position =  sel.get_element_height("css=span.mirosubs-captionSpan")
         verify_caption_position(self,sel,caption_position)
+        verify_submenu_present(self,sel)
+        
         
 
         #test 2nd video on the page
@@ -92,6 +94,7 @@ class subgroup_78_playback(unittest.TestCase):
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
         caption_position =  sel.get_element_height("css=span.mirosubs-captionSpan")
         verify_caption_position(self,sel,caption_position)
+        verify_submenu_present(self,sel)
         
         
 
@@ -133,6 +136,7 @@ class subgroup_78_playback(unittest.TestCase):
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
         caption_position =  sel.get_element_height("css=.mirosubs-captionSpan")
         verify_caption_position(self,sel,caption_position)
+        verify_submenu_present(self,sel)
 
     def test_687(self):
         """Pagedemo Khan Widgetizer - sub position on playback.
@@ -152,9 +156,51 @@ class subgroup_78_playback(unittest.TestCase):
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
         caption_position =  sel.get_element_height("css=.mirosubs-captionSpan")
         verify_caption_position(self,sel,caption_position)
+        verify_submenu_present(self,sel)
+
+    def test_701(self):
+        """Pagedemo Khan Widgetizer async - sub position on playback.
+        
+        http://litmus.pculture.org/show_test.cgi?id=687
+        """
+        test_id = 701
+        sel = self.selenium
+        testpage = "/pagedemo/async_widgetizer"
+        sel.open(testpage)
+        sel.wait_for_page_to_load(testvars.timeout)
+        sel.window_maximize()
+        sel.click("link=Widgetize it!")
+        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+        time.sleep(5)
+        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')
+        mslib.wait_for_element_present(self,sel,"css=.mirosubs-captionSpan")
+        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
+        caption_position =  sel.get_element_height("css=.mirosubs-captionSpan")
+        verify_caption_position(self,sel,caption_position)
+        verify_submenu_present(self,sel)
 
     
+    def test_702(self):
+        """Pagedemo JW Player - sub position on playback.
+        
+        http://litmus.pculture.org/show_test.cgi?id=687b
+        """
+        test_id = 702
+        sel = self.selenium
+        testpage = "/widget/widgetize_demo/jwplayer"
+        sel.open(testpage)
+        sel.wait_for_page_to_load(testvars.timeout)
+        sel.window_maximize()
+        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+        time.sleep(5)
+        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')
+        mslib.wait_for_element_present(self,sel,"css=.mirosubs-captionSpan")
+        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
+        caption_position =  sel.get_element_height("css=.mirosubs-captionSpan")
+        verify_caption_position(self,sel,caption_position)
+        verify_submenu_present(self,sel)
 
+        
 # Close the browser, log errors, perform cleanup 
     def tearDown(self):
         """
@@ -215,6 +261,7 @@ class subgroup_78_subtesting_playback(unittest.TestCase):
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
         caption_position =  sel.get_element_height("css=.mirosubs-captionSpan")
         verify_caption_position(self,sel,caption_position)
+        verify_submenu_present(self,sel)
 
 
 # Close the browser, log errors, perform cleanup 
@@ -229,7 +276,10 @@ class subgroup_78_subtesting_playback(unittest.TestCase):
 
 
 
-
+def verify_submenu_present(self,sel):
+    sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
+    time.sleep(2)
+    self.failUnless(sel.is_element_present(testvars.WebsiteUI["Subhomepage_menuitem"]))
 
 
 def verify_caption_position(self,sel,caption_position):
