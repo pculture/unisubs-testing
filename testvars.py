@@ -25,6 +25,7 @@ WebsiteUI = {"Home":"css=a:contains('Miro Subs Alpha')", \
              "SubtitleMe_menu":"css=.mirosubs-tabTextchoose", \
              "SubMe_menuitems":"css=.mirosubs-langmenuitem-content", \
              "AddSubtitles_menuitem":"css=.mirosubs-improveSubtitles" ,\
+             "NewTranslation_menuitem":"css=.mirosubs-addTranslation" ,\
              "Subhomepage_menuitem":"css=.mirosubs-subtitleHomepage" ,\
              "Login_menuitem":"css=.mirosubs-createAccount" ,\
              "Logout_menuitem":"css=.mirosubs-langmenuitem-content:contains('Logout')" , \
@@ -43,7 +44,7 @@ video_video_info = "css=li a:contains('Video Info')"
 ## action links
 video_upload_subtitles = "css=a[id=upload-subtitles-link]"
 video_edit_subtitles = "css=a[id=edit_subtitles]"
-video_add_translation = "css=a[id=add_translation]"
+video_add_translation = "css=a[id*='add_translation']"
 video_compare_revisions = "css=button span:contains('Compare Revisions')"
 rev_rollback = "css=a.roll_back"
 

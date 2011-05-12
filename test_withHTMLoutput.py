@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 from selenium import selenium
 #import system modules
@@ -138,7 +137,8 @@ class Test_HTMLTestRunner(unittest.TestCase):
                 unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_pagedemo.subgroup_78_pagedemo.test_690'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_pagedemo.subgroup_78_pagedemo.test_691'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_80_comments.subgroup_80.test_536'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_88_teams.subgroup_88.test_603'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_88_teams.subgroup_88.test_613'),
+                unittest.defaultTestLoader.loadTestsFromName('sg_88_teams.subgroup_88.test_693'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_379'),
                 unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_378')
             ])

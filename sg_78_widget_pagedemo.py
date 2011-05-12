@@ -45,7 +45,6 @@ class subgroup_78_pagedemo(unittest.TestCase):
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
         time.sleep(5)
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
-        widget.open_starter_dialog(self,sel)
         widget.starter_dialog_edit_orig(self,sel)
         widget.goto_step(self,sel,step="2")
         widget.resync_video(self,sel,subtextfile)

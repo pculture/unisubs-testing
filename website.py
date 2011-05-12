@@ -307,7 +307,7 @@ def get_translated_lang(self,sel):
     #get the original language
     original_lang = sel.get_text(testvars.video_original)
     tab_no = 1
-    tab_li = "csss=ul.left_nav li:nth-child("+str(tab_no)+") > a "
+    tab_li = "css=ul.left_nav li:nth-child("+str(tab_no)+") > a "
     skip_list = [original_lang, "Video Info", "Metadata: Twitter", "Metadata: Geo", "Metadata: Wikipedia"]
     while sel.is_element_present(tab_li):        
         if sel.get_text(tab_li) not in skip_list:
@@ -327,10 +327,11 @@ def upload_subtitles(self,sel,sub_file,lang="en"):
     mslib.wait_for_element_present(self,sel,testvars.video_upload_subtitles)
     sel.click(testvars.video_upload_subtitles)
     mslib.wait_for_element_present(self,sel,"css=form[id='upload-subtitles-form'] select")
-    sel.select("css=form[id='upload-subtitles-form'] select", "value="+lang)
+    sel.select("css=form[id='upload-subtitles-form'] select[id='id_language']", "value="+lang)
     sel.type("subtitles-file-field",sub_file)
-    sel.click("css=.green_button.small")
-    time.sleep(10)
+    sel.click("css=form#upload-subtitles-form .green_button.small")
+    time.sleep(3)
+  
 
 
 def verify_sub_upload(self,sel,sub_file,lang=""):
@@ -352,7 +353,8 @@ def verify_sub_upload(self,sel,sub_file,lang=""):
     else:
         sublang = (sel.get_text("css=li.full.active a").split('(')) # split off the number of lines
         self.assertEqual(sublang[0].rstrip(),lang)
-
+   
+    
 def verify_subs(self,sel,sub_file):
     """Compares the displayed text for subtitles in the to the input file.
 
@@ -579,7 +581,14 @@ def teampage_lang_select(self,sel):
     time.sleep(3)
     if sel.is_text_present("What languages do you speak") == True:
         sel.click("//button[@type='submit']")
-        mslib.wait_for_text_not_present(self,sel,"What languages do you speak")
+        mslib.wait_for_text_not_present(self,sel,"Saving")
+
+def handle_lang_select(self,sel):
+    time.sleep(5)
+    if sel.is_text_present("What languages do you speak") == True:
+        sel.click("//button[@type='submit']")
+        time.sleep(2)
+        mslib.wait_for_text_not_present(self,sel,"Saving")
 
 def save_team_settings(self,sel):
     sel.click("css=.green_button.small:contains('Save')")
@@ -602,10 +611,11 @@ def admin_delete_video(self,sel,curr_url):
     
     vid_id = curr_url.split('/videos/')[1]
     sel.open("/videos/"+vid_id+"staff/delete")
-    sel.type("id_username", base64.standard_b64decode(testvars.ad_usr))
-    sel.type("id_password", base64.standard_b64decode(testvars.del_pw))
-    sel.click("//input[@value='Log in']")
-    sel.wait_for_page_to_load(testvars.timeout)
+    if sel.is_element_present("id_username"):
+        sel.type("id_username", base64.standard_b64decode(testvars.ad_usr))
+        sel.type("id_password", base64.standard_b64decode(testvars.del_pw))
+        sel.click("//input[@value='Log in']")
+        sel.wait_for_page_to_load(testvars.timeout)
     sel.open("/admin/logout")
     sel.open("/")
     

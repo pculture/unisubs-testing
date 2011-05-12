@@ -131,9 +131,8 @@ class subgroup_78_subtesting(unittest.TestCase):
             mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
             time.sleep(3)
             sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
-            widget.open_starter_dialog(self,sel)
-            orig_lang = widget.starter_dialog_edit_orig(self,sel)
-            edit_subs(self,sel,orig_rev,orig_lang,subtextfile)          
+            widget.starter_dialog_edit_orig(self,sel)
+            edit_subs(self,sel,orig_rev,subtextfile)          
         else:
             make_new_subs(self,sel)
 
@@ -161,9 +160,8 @@ class subgroup_78_subtesting(unittest.TestCase):
             mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
             time.sleep(3)
             sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
-            widget.open_starter_dialog(self,sel)
-            orig_lang = widget.starter_dialog_edit_orig(self,sel)
-            edit_subs(self,sel,orig_rev,orig_lang,subtextfile)          
+            widget.starter_dialog_edit_orig(self,sel)
+            edit_subs(self,sel,orig_rev,subtextfile)          
         else:
             make_new_subs(self,sel)
 
@@ -231,9 +229,8 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
             mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
             time.sleep(3)
             sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
-            widget.open_starter_dialog(self,sel)
-            orig_lang = widget.starter_dialog_edit_orig(self,sel)
-            edit_subs(self,sel,orig_rev,orig_lang,subtextfile)          
+            widget.starter_dialog_edit_orig(self,sel)
+            edit_subs(self,sel,orig_rev,subtextfile)          
         else:
             make_new_subs(self,sel)
        
@@ -286,38 +283,38 @@ def store_subs(self,sel):
         print "starting revision is: "+str(orig_rev)
         return orig_rev
 
-def edit_subs(self,sel,orig_rev,orig_lang,subtextfile):
+def edit_subs(self,sel,orig_rev,subtextfile):
         widget.goto_step(self,sel,"2")
-#        widget.edit_text(self,sel,subtextfile)
-        widget.resync_video(self,sel,subtextfile)
+        widget.edit_text(self,sel,subtextfile)
+#        widget.resync_video(self,sel,subtextfile)
         widget.site_login_from_widget_link(self,sel)
         widget.submit_sub_edits(self,sel,offsite=True)
         mslib.wait_for_element_present(self,sel,testvars.offsite_goto_subs)
         sel.click(testvars.offsite_goto_subs)
-        sel.wait_for_page_to_load(testvars.timeout)
-        vid_title = sel.get_text(testvars.vid_title)
-        print " * verify edits"
-        mslib.wait_for_element_present(self,sel,testvars.video_video_info)
-        history_text = sel.get_text("css=tr td:nth-child(1)")
-        print history_text
-        self.failUnless("sub_writer edited" in history_text)
-        self.assertTrue(orig_lang in history_text)
-        self.assertTrue(vid_title in history_text)
-
-        
-#        self.assertEqual("sub_writer edited "+orig_lang+" subtitles for "+vid_title, sel.get_text("css=tr td:nth-child(1)"))
-        sel.click("css=tr td:nth-child(1) > a:contains('English subtitles')")
-        sel.wait_for_page_to_load(testvars.timeout)
-        sel.click(testvars.history_tab)
-        mslib.wait_for_element_present(self,sel,testvars.video_compare_revisions)
-        rev_num = orig_rev.lstrip('#')
-        website.check_the_box(self,sel,2) #check the box
-        new_rev = int(rev_num) + 1
-        sel.click(testvars.video_compare_revisions)
-        print " * comparing revisions and rolling back to original"
-        website.verify_compare_revisions(self,sel,str(rev_num),str(new_rev),rollback=True)
-        sel.click(testvars.transcripts_tab)
-        website.verify_subs(self,sel,subtextfile)   
+##        sel.wait_for_page_to_load(testvars.timeout)
+##        vid_title = sel.get_text(testvars.vid_title)
+##        print " * verify edits"
+##        mslib.wait_for_element_present(self,sel,testvars.video_video_info)
+##        history_text = sel.get_text("css=tr td:nth-child(1)")
+##        print history_text
+##        self.failUnless("sub_writer edited" in history_text)
+##        self.assertTrue(orig_lang in history_text)
+##        self.assertTrue(vid_title in history_text)
+##
+##        
+###        self.assertEqual("sub_writer edited "+orig_lang+" subtitles for "+vid_title, sel.get_text("css=tr td:nth-child(1)"))
+##        sel.click("css=tr td:nth-child(1) > a:contains('English subtitles')")
+##        sel.wait_for_page_to_load(testvars.timeout)
+##        sel.click(testvars.history_tab)
+##        mslib.wait_for_element_present(self,sel,testvars.video_compare_revisions)
+##        rev_num = orig_rev.lstrip('#')
+##        website.check_the_box(self,sel,2) #check the box
+##        new_rev = int(rev_num) + 1
+##        sel.click(testvars.video_compare_revisions)
+##        print " * comparing revisions and rolling back to original"
+##        website.verify_compare_revisions(self,sel,str(rev_num),str(new_rev),rollback=True)
+##        sel.click(testvars.transcripts_tab)
+##        website.verify_subs(self,sel,subtextfile)   
 
 if __name__ == "__main__":
     unittest.main()
