@@ -154,8 +154,14 @@ def start_sub_widget(self,sel,skip="True",edit_type='orig',sec_lang=None,login=F
     sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
     time.sleep(5)
     if sel.is_element_present(testvars.WidgetUI["Select_language"]) == False:
-        sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])
-        time.sleep(3)
+        if sel.is_element_present(testvars.WebsiteUI["AddSubtitles_menuitem"]):
+            sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])
+            time.sleep(3)
+        else:
+            print "widget opened"
+            widget.close_howto_video(self,sel)
+            mslib.wait_for_element_present(self,sel,"css=.mirosubs-help-heading")
+
     if sel.is_element_present(testvars.WidgetUI["Select_language"]):
         if edit_type == 'orig':
             widget.starter_dialog_edit_orig(self,sel)
@@ -172,7 +178,8 @@ def start_sub_widget(self,sel,skip="True",edit_type='orig',sec_lang=None,login=F
             print "not sure what I'm doing in started dialog"
     else:
         print "widget opened immediately"
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-help-heading")
+        widget.close_howto_video(self,sel)
+        mslib.wait_for_element_present(self,sel,"css=.mirosubs-help-heading")
 
 
 
@@ -323,12 +330,15 @@ def upload_subtitles(self,sel,sub_file,lang="en"):
     sel.select("css=form[id='upload-subtitles-form'] select", "value="+lang)
     sel.type("subtitles-file-field",sub_file)
     sel.click("css=.green_button.small")
+    time.sleep(10)
 
 
 def verify_sub_upload(self,sel,sub_file,lang=""):
     """Verifies the uploaded subtitle text matches the text of a corresponing test file.
 
     """
+    sel.refresh()
+    sel.wait_for_page_to_load(testvars.timeout)
     mslib.wait_for_element_present(self,sel,"css=tr")
     sub_td = 1
     for line in codecs.open(sub_file,encoding='utf-8'):
@@ -411,6 +421,9 @@ def enter_comment_text(self,sel,comment):
     self.assertTrue(sel.is_element_present("css=li.active a span:contains('Comments')"))
     sel.type("css=textarea#id_comment_form_content", comment)
     sel.click("css=button:contains('Comment')")
+    time.sleep(10)
+    sel.refresh()
+    sel.wait_for_page_to_load(testvars.timeout)
 
 def verify_comment_text(self,sel,comment,result="posted",reply_text=None):
     """After comment text is entered in enter_comment_text, verify correct post behavior
@@ -461,6 +474,9 @@ def get_current_rev(self,sel):
 def verify_latest_history(self,sel,rev=None,user=None,time=None,text=None):
     print "verifying history tab contents"
     print rev
+    time.sleep(10)
+    sel.refresh()
+    sel.wait_for_page_to_load(testvars.timeout)
     if sel.is_text_present("Most Recent") == False:
         sel.click(testvars.history_tab)
     mslib.wait_for_element_present(self,sel,"css=div[id=revisions-tab] tr:nth-child(1) > td:nth-child(1) > a")

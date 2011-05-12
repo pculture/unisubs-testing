@@ -697,6 +697,9 @@ def submit_sub_edits(self,sel,offsite=False):
     set_subs_complete(self,sel,done=True)
     if offsite==False:
         mslib.wait_for_element_present(self,sel,testvars.video_video_info)
+    time.sleep(10)
+    sel.refresh()
+    sel.wait_for_page_to_load(testvars.timeout)
 
 def goto_step(self,sel,step="3"):
     
