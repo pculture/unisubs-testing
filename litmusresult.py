@@ -114,7 +114,7 @@ FOOTER = """</testresults>
 """
 
 def write_log(testid,stat,buildid,error_info=""):
-    logname = set_test_id(testid)+"_"+time.strftime("%H%M%s", time.gmtime())+"log.xml"
+    logname = set_test_id(testid)+"_"+time.strftime("%H%M%S", time.gmtime())+"log.xml"
     logfile = os.path.join(os.getcwd(),logname)
     f = open(logfile, "w")
     test_log = []
