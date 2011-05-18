@@ -30,6 +30,10 @@ parser.add_option(
     help='Runs the test on saucelabs.com using specified browser')
 
 parser.add_option(
+    "-m", "--minimal", action="store_true", dest="minimal", default=False,
+    help='Runs the minimal pagedemo tests')
+
+parser.add_option(
     "-b", "--browser", action="store",
     choices=('firefox','chrome','opera', 'safari', 'iexplore', 'googlechrome', 
              'lin_ff','firefox4','iexplore9'),
@@ -65,7 +69,7 @@ testfast = options.fast
 testsite = options.site
 testbuildid = options.buildid
 testlitmus = options.litmus
-      
+minimal = options.minimal      
 
 class Test_HTMLTestRunner(unittest.TestCase):
     SAUCE_MINIMAL_PAGEDEMOS = [
@@ -137,9 +141,10 @@ class Test_HTMLTestRunner(unittest.TestCase):
             q.task_done()
 
     def _add_smaller_group_for_sauce(self):
+        tests = self.SAUCE_MINIMAL_PAGEDEMOS if minimal else self.SAUCE_TESTS
         self.suite.addTests([
                 unittest.defaultTestLoader.loadTestsFromName(t) 
-                for t in self.SAUCE_TESTS])
+                for t in tests])
 
     def _add_all_tests(self):
         suite_list = [[t, unittest.getTestCaseNames(eval(t), 'test')] 
@@ -195,14 +200,14 @@ class Test_HTMLTestRunner(unittest.TestCase):
 
         self.suite = unittest.TestSuite()
 
-        if testsauce == True:
+        if testsauce:
             self._add_smaller_group_for_sauce()
         else: # pcf server or local
             self._add_all_tests()           
 
         # Invoke TestRunner
 
-        if testlitmus == True:
+        if testlitmus:
             self._post_output_to_litmus()
         else:
             self._post_results_to_html_page()
