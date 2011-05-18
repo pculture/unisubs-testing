@@ -15,6 +15,4 @@ log.xml
 # ignore temp file
 subs.txt
 curr_test.log
-
-
-
+*~

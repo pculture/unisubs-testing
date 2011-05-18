@@ -25,21 +25,24 @@ import sg_88_teams
 
 from optparse import OptionParser
 parser = OptionParser()
-parser.add_option("-s", "--sauce", action="store_true", dest="sauce", default=False,
-                  help='Runs the test on saucelabs.com using specified browser')
+parser.add_option(
+    "-s", "--sauce", action="store_true", dest="sauce", default=False,
+    help='Runs the test on saucelabs.com using specified browser')
 
-parser.add_option("-b", "--browser", action="store",
-                  choices=('firefox','chrome','opera', 'safari', 'iexplore', 'googlechrome', 'lin_ff','firefox4','iexplore9'),
-                  type="choice",
-                  dest="browser", default="firefox",
-                  help='Possible browser choices: firefox,chrome,opera, safari, iexplore, googlechrome, lin_ff, firefox4, iexplore9)'
-                  )
+parser.add_option(
+    "-b", "--browser", action="store",
+    choices=('firefox','chrome','opera', 'safari', 'iexplore', 'googlechrome', 
+             'lin_ff','firefox4','iexplore9'),
+    type="choice",
+    dest="browser", default="firefox",
+    help='Possible browser choices: firefox,chrome,opera, safari, iexplore, googlechrome, lin_ff, firefox4, iexplore9)')
 
-parser.add_option("-f", "--fast", action="store_true", dest="fast", default=False,
-                  help='run threaded - no responsibility for what this does to your machine - no limits'
-                  )
+parser.add_option(
+    "-f", "--fast", action="store_true", dest="fast", default=False,
+    help='run threaded - no responsibility for what this does to your machine - no limits')
 
-parser.add_option("-p", "--port", action="store", type="int", dest="port", default=4444)
+parser.add_option(
+    "-p", "--port", action="store", type="int", dest="port", default=4444)
 
 parser.add_option("-u", "--siteurl", action="store",
                   choices=('dev', 'staging'),type="choice",
@@ -202,7 +205,11 @@ class Test_HTMLTestRunner(unittest.TestCase):
             byte_output = buf.getvalue()
             # output the main test results
             results_path = os.path.join(os.getcwd(), "Results")
-            filename = os.path.join(results_path, 'unisubs_' + str(testbrowser) +'_'+time.strftime("%Y%m%d_%H%M", time.gmtime())+'_GMT.html')
+            filename = os.path.join(
+                results_path, 
+                'unisubs_{0}_{1}_GMT.html'.format(
+                    str(testbrowser), 
+                    time.strftime("%Y%m%d_%H%M", time.gmtime())))
             f = open(filename, 'w')
             f.write(byte_output)
             f.close()
