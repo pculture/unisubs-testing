@@ -92,6 +92,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
         'sg_88_teams.subgroup_88.test_693',
         'sg_65_login.subgroup_65.test_379',
         'sg_65_login.subgroup_65.test_378' ]
+
     ALL_TESTS = [
         'sg_64_submit.subgroup_64',
         'sg_81_ul_dl.subgroup_81',
@@ -144,6 +145,47 @@ class Test_HTMLTestRunner(unittest.TestCase):
                 self.suite.addTests([
                         unittest.defaultTestLoader.loadTestsFromName(sg[0]+"."+tc)])
 
+    def _post_output_to_litmus(self):
+        if testsauce == True:
+            num_worker_threads = 5
+        elif testfast == True:
+            num_worker_threads = 3
+        else:
+            num_worker_threads = 1
+
+        q = Queue()
+        for i in range(num_worker_threads):  
+            t = Thread(target=lambda: self._runtests())
+            t.daemon = True
+            t.start()    
+        for x in self.suite:
+            q.put(x)
+        q.join()
+
+    def _post_results_to_html_page(self):
+        buf = StringIO.StringIO()
+        runner = HTMLTestRunner.HTMLTestRunner(
+            stream=buf,
+            title='Univeral Subtitles Testing',
+            description='Results')
+        runner.run(self.suite)
+
+        # check out the output
+        byte_output = buf.getvalue()
+        # output the main test results
+        results_path = os.path.join(os.getcwd(), "Results")
+        filename = os.path.join(
+            results_path, 
+            'unisubs_{0}_{1}_GMT.html'.format(
+                str(testbrowser), 
+                time.strftime("%Y%m%d_%H%M", time.gmtime())))
+        f = open(filename, 'w')
+        f.write(byte_output)
+        f.close()
+        # copy the results to a file called last_run.html
+        lastrun = os.path.join(results_path, 'last_run.html')
+        shutil.copyfile(filename,lastrun)
+
     def test_main(self):                
         """ Run HTMLTestRunner. """
 
@@ -152,53 +194,14 @@ class Test_HTMLTestRunner(unittest.TestCase):
         if testsauce == True:
             self._add_smaller_group_for_sauce()
         else: # pcf server or local
-            self._add_all_tests()
-            
+            self._add_all_tests()           
 
         # Invoke TestRunner
 
-        # Post the output directly to Litmus
         if testlitmus == True:
-            if testsauce == True:
-                num_worker_threads = 5
-            elif testfast == True:
-                num_worker_threads = 3
-            else:
-                num_worker_threads = 1
-            
-            q = Queue()
-            for i in range(num_worker_threads):  
-                t = Thread(target=lambda: self._runtests())
-                t.daemon = True
-                t.start()    
-            for x in self.suite:
-                q.put(x)
-            q.join()
-        else:   # Post results to HTML page
-            buf = StringIO.StringIO()
-            runner = HTMLTestRunner.HTMLTestRunner(
-                        stream=buf,
-                        title='Univeral Subtitles Testing',
-                        description='Results'
-                        )
-            runner.run(self.suite)
-
-            # check out the output
-            byte_output = buf.getvalue()
-            # output the main test results
-            results_path = os.path.join(os.getcwd(), "Results")
-            filename = os.path.join(
-                results_path, 
-                'unisubs_{0}_{1}_GMT.html'.format(
-                    str(testbrowser), 
-                    time.strftime("%Y%m%d_%H%M", time.gmtime())))
-            f = open(filename, 'w')
-            f.write(byte_output)
-            f.close()
-            #copy the results to a file called last_run.html
-            lastrun = os.path.join(results_path, 'last_run.html')
-            shutil.copyfile(filename,lastrun)
-
+            self._post_output_to_litmus()
+        else:
+            self._post_results_to_html_page()
 
 
 ##############################################################################
