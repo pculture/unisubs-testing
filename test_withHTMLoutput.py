@@ -120,7 +120,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
         testid = L.pop()
         return testid
 
-    def _runtests(self):
+    def _runtests(self,q):
         while True:
             mytest = q.get()
             tid = self._set_test_id(str(mytest))
@@ -164,7 +164,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
 
         q = Queue()
         for i in range(num_worker_threads):  
-            t = Thread(target=lambda: self._runtests())
+            t = Thread(target=lambda: self._runtests(q))
             t.daemon = True
             t.start()    
         for x in self.suite:
