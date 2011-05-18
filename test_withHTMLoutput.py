@@ -131,25 +131,28 @@ class Test_HTMLTestRunner(unittest.TestCase):
             os.remove(tname)
             q.task_done()
 
-    def test_main(self):                
-        """ Run HTMLTestRunner. """
-        # suite of TestCases
-        self.suite = unittest.TestSuite()
-
-        ## Run a smaller group of tests when using sauce
-        if testsauce == True:
-            self.suite.addTests([
+    def _add_smaller_group_for_sauce(self):
+        self.suite.addTests([
                 unittest.defaultTestLoader.loadTestsFromName(t) 
                 for t in self.SAUCE_TESTS])
-        ## Running on pcf server or local, run all the tests
-        else:
-            suite_list = [[t, unittest.getTestCaseNames(eval(t), 'test')] 
-                          for t in self.ALL_TESTS]
-            for sg in suite_list:
-                for tc in sg[1]:
-                    self.suite.addTests([
-                        unittest.defaultTestLoader.loadTestsFromName(sg[0]+"."+tc)                    
-                    ])
+
+    def _add_all_tests(self):
+        suite_list = [[t, unittest.getTestCaseNames(eval(t), 'test')] 
+                      for t in self.ALL_TESTS]
+        for sg in suite_list:
+            for tc in sg[1]:
+                self.suite.addTests([
+                        unittest.defaultTestLoader.loadTestsFromName(sg[0]+"."+tc)])
+
+    def test_main(self):                
+        """ Run HTMLTestRunner. """
+
+        self.suite = unittest.TestSuite()
+
+        if testsauce == True:
+            self._add_smaller_group_for_sauce()
+        else: # pcf server or local
+            self._add_all_tests()
             
 
         # Invoke TestRunner
