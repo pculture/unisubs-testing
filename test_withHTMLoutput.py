@@ -68,7 +68,42 @@ testlitmus = options.litmus
       
 
 class Test_HTMLTestRunner(unittest.TestCase):
-
+    SAUCE_TESTS = [
+        'sg_69_demoUI.subgroup_69.test_414',
+        'sg_64_submit.subgroup_64.test_538',
+        'sg_64_submit.subgroup_64.test_534',
+        'sg_64_submit.subgroup_64.test_533',
+        ## 'sg_78_widget_offsite.subgroup_78_subtesting.test_601',
+        ## 'sg_78_widget_offsite.subgroup_78_subtesting.test_622',
+        'sg_78_widget_offsite.subgroup_78_unisubs_mc.test_623',
+        'sg_78_widget_playback.subgroup_78_playback.test_684',
+        'sg_78_widget_playback.subgroup_78_playback.test_688',
+        'sg_78_widget_playback.subgroup_78_playback.test_685',
+        'sg_78_widget_playback.subgroup_78_playback.test_686',
+        'sg_78_widget_playback.subgroup_78_playback.test_687',
+        'sg_78_widget_playback.subgroup_78_playback.test_701',
+        'sg_78_widget_playback.subgroup_78_playback.test_702',                
+        ## 'sg_78_widget_playback.subgroup_78_subtesting_playback.test_696',
+        'sg_78_widget_pagedemo.subgroup_78_pagedemo.test_689',
+        'sg_78_widget_pagedemo.subgroup_78_pagedemo.test_690',
+        'sg_78_widget_pagedemo.subgroup_78_pagedemo.test_691',
+        'sg_80_comments.subgroup_80.test_536',
+        'sg_88_teams.subgroup_88.test_613',
+        'sg_88_teams.subgroup_88.test_693',
+        'sg_65_login.subgroup_65.test_379',
+        'sg_65_login.subgroup_65.test_378' ]
+    ALL_TESTS = [
+        'sg_64_submit.subgroup_64',
+        'sg_81_ul_dl.subgroup_81',
+        'sg_69_demoUI.subgroup_69',
+        'sg_80_comments.subgroup_80',
+        'sg_65_login.subgroup_65',
+        'sg_78_widget_offsite.subgroup_78_unisubs_mc',
+        'sg_78_widget_offsite.subgroup_78_pculture',
+        ## 'sg_78_widget_offsite.subgroup_78_subtesting',
+        'sg_78_widget_pagedemo.subgroup_78_pagedemo',
+        'sg_70_revisions.subgroup_70',
+        'sg_88_teams.subgroup_88']
 
 
 # Open the desired browser and set up the test
@@ -121,46 +156,12 @@ class Test_HTMLTestRunner(unittest.TestCase):
         ## Run a smaller group of tests when using sauce
         if testsauce == True:
             self.suite.addTests([
-                unittest.defaultTestLoader.loadTestsFromName('sg_69_demoUI.subgroup_69.test_414'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_538'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_534'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_64_submit.subgroup_64.test_533'),
-##                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_subtesting.test_601'),
-##                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_subtesting.test_622'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_offsite.subgroup_78_unisubs_mc.test_623'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_684'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_688'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_685'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_686'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_687'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_701'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_playback.test_702'),                
-##                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_playback.subgroup_78_subtesting_playback.test_696'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_pagedemo.subgroup_78_pagedemo.test_689'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_pagedemo.subgroup_78_pagedemo.test_690'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_78_widget_pagedemo.subgroup_78_pagedemo.test_691'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_80_comments.subgroup_80.test_536'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_88_teams.subgroup_88.test_613'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_88_teams.subgroup_88.test_693'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_379'),
-                unittest.defaultTestLoader.loadTestsFromName('sg_65_login.subgroup_65.test_378')
-            ])
-            
+                unittest.defaultTestLoader.loadTestsFromName(t) 
+                for t in self.SAUCE_TESTS])
         ## Running on pcf server or local, run all the tests
         else:
-            suite_list = [
-                ['sg_64_submit.subgroup_64',unittest.getTestCaseNames(sg_64_submit.subgroup_64,'test')], \
-                ['sg_81_ul_dl.subgroup_81',unittest.getTestCaseNames(sg_81_ul_dl.subgroup_81,'test')], \
-                ['sg_69_demoUI.subgroup_69',unittest.getTestCaseNames(sg_69_demoUI.subgroup_69,'test')], \
-                ['sg_80_comments.subgroup_80',unittest.getTestCaseNames(sg_80_comments.subgroup_80,'test')],  \
-                ['sg_65_login.subgroup_65',unittest.getTestCaseNames(sg_65_login.subgroup_65,'test')], \
-                ['sg_78_widget_offsite.subgroup_78_unisubs_mc',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78_unisubs_mc,'test')], \
-                ['sg_78_widget_offsite.subgroup_78_pculture',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78_pculture,'test')], \
-##                ['sg_78_widget_offsite.subgroup_78_subtesting',unittest.getTestCaseNames(sg_78_widget_offsite.subgroup_78_subtesting,'test')], \
-                ['sg_78_widget_pagedemo.subgroup_78_pagedemo',unittest.getTestCaseNames(sg_78_widget_pagedemo.subgroup_78_pagedemo,'test')],
-                ['sg_70_revisions.subgroup_70',unittest.getTestCaseNames(sg_70_revisions.subgroup_70,'test')], \
-                ['sg_88_teams.subgroup_88',unittest.getTestCaseNames(sg_88_teams.subgroup_88,'test')], \
-                           ]
+            suite_list = [[t, unittest.getTestCaseNames(eval(t), 'test')] 
+                          for t in self.ALL_TESTS]
 
             for sg in suite_list:
                 for tc in sg[1]:
