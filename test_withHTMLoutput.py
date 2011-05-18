@@ -105,51 +105,34 @@ class Test_HTMLTestRunner(unittest.TestCase):
         'sg_70_revisions.subgroup_70',
         'sg_88_teams.subgroup_88']
 
+    def _set_test_id(self, test_id):
+        s = str(test_id).strip(">,<,[,]")
+        L = s.split('_')
+        testid = L.pop()
+        return testid
 
-# Open the desired browser and set up the test
+    def _runtests(self):
+        while True:
+            mytest = q.get()
+            tid = self._set_test_id(str(mytest))
+            tname = "Thread_"+tid+"_"+time.strftime("%M%S", time.gmtime())+".log"
+            res = open(tname,"w")
+            runner = unittest.TextTestRunner(stream=res)
+            runner.run(mytest)
+            res.close()
 
-##    def test0(self):
-##        self.suite = unittest.TestSuite()
-##        buf = StringIO.StringIO()
-##        runner = HTMLTestRunner.HTMLTestRunner(buf)
-##        runner.run(self.suite)
-##        # didn't blow up? ok.
-##        self.assert_('</html>' in buf.getvalue())
+            # get the result and send it to litmus
+            logs = file(tname,"r")
+            byte_output = logs.read()
+            id_string = str(mytest)
+            stat = byte_output[0]
+            logs.close()
+            litmusresult.write_log(id_string,stat,testbuildid,byte_output)
+            os.remove(tname)
+            q.task_done()
 
-    def test_main(self):
-
-        def runtests():
-            while True:
-                mytest = q.get()
-                tid = set_test_id(str(mytest))
-                tname = "Thread_"+tid+"_"+time.strftime("%M%S", time.gmtime())+".log"
-                res = open(tname,"w")
-                runner = unittest.TextTestRunner(stream=res)
-                runner.run(mytest)
-                res.close()
-                
-                
-                # get the result and send it to litmus
-                logs = file(tname,"r")
-                byte_output = logs.read()
-                id_string = str(mytest)
-                stat = byte_output[0]
-                logs.close()
-                litmusresult.write_log(id_string,stat,testbuildid,byte_output)
-                os.remove(tname)
-                q.task_done()
-                
-                
-
-        def set_test_id(test_id):
-            
-            s = str(test_id).strip(">,<,[,]")
-            L = s.split('_')
-            testid = L.pop()
-            return testid
-        
-        # Run HTMLTestRunner.
-
+    def test_main(self):                
+        """ Run HTMLTestRunner. """
         # suite of TestCases
         self.suite = unittest.TestSuite()
 
@@ -162,7 +145,6 @@ class Test_HTMLTestRunner(unittest.TestCase):
         else:
             suite_list = [[t, unittest.getTestCaseNames(eval(t), 'test')] 
                           for t in self.ALL_TESTS]
-
             for sg in suite_list:
                 for tc in sg[1]:
                     self.suite.addTests([
@@ -183,16 +165,12 @@ class Test_HTMLTestRunner(unittest.TestCase):
             
             q = Queue()
             for i in range(num_worker_threads):  
-                t = Thread(target=runtests)
+                t = Thread(target=lambda: self._runtests())
                 t.daemon = True
                 t.start()    
             for x in self.suite:
                 q.put(x)
             q.join()
-
-           
-
-
         else:   # Post results to HTML page
             buf = StringIO.StringIO()
             runner = HTMLTestRunner.HTMLTestRunner(
