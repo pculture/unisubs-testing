@@ -76,7 +76,6 @@ class subgroup_81(unittest.TestCase):
             #Original is the default tab when video opened.
             print "1. invalid ttml"
             sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_fakesub.xml")
-            sel.click(testvars.video_upload_subtitles)
             website.upload_subtitles(self,sel,sub_file)
             mslib.wait_for_element_present(self,sel,"css=p.error_list")
             self.assertTrue(sel.is_element_present("css=p.error_list:contains('Can not detect file encoding')"))
