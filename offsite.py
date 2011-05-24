@@ -103,7 +103,12 @@ def get_blip_video_url(self,file_type="flv"):
 ##    finally:
 ##        bsel.stop()
 ##    print blipURL
-    blipURL = "http://blip.tv/file/get/Wildcaster-ElephantCalfStrugglesToSwim947.mp4"
+    if file_type == "ogv":
+        blipURL = "http://blip.tv/file/get/Pycon-PyCon2011PythonTheSecretSauceInTheOpenCloud878.ogv"     
+    elif file_type == "mp4":
+        blipURL = "http://blip.tv/file/get/Wildcaster-ElephantCalfStrugglesToSwim947.mp4"
+    else:
+        blipURL = "http://blip.tv/file/get/JonHammond-LouisvilleKentuckyOneNightOnlyJonHammondQuartet855.flv"
     return blipURL
 
 
