@@ -102,18 +102,18 @@ class Test_HTMLTestRunner(unittest.TestCase):
     SAUCE_TESTS.extend(SAUCE_MINIMAL_PAGEDEMOS)
 
     ALL_TESTS = [
-##        'sg_64_submit.subgroup_64',
-##        'sg_81_ul_dl.subgroup_81',
-##        'sg_69_demoUI.subgroup_69',
-##        'sg_80_comments.subgroup_80',
-##        'sg_65_login.subgroup_65',
-##        'sg_78_widget_offsite.subgroup_78_unisubs_mc',
-##        'sg_78_widget_offsite.subgroup_78_pculture',
+        'sg_64_submit.subgroup_64',
+        'sg_81_ul_dl.subgroup_81',
+        'sg_69_demoUI.subgroup_69',
+        'sg_80_comments.subgroup_80',
+        'sg_65_login.subgroup_65',
+        'sg_78_widget_offsite.subgroup_78_unisubs_mc',
+        'sg_78_widget_offsite.subgroup_78_pculture',
 ##        ## 'sg_78_widget_offsite.subgroup_78_subtesting',
-##        'sg_78_widget_pagedemo.subgroup_78_pagedemo',
-##        'sg_70_revisions.subgroup_70',
+        'sg_78_widget_pagedemo.subgroup_78_pagedemo',
+        'sg_70_revisions.subgroup_70',
         'sg_78_widget_playback.subgroup_78_playback',
-##        'sg_88_teams.subgroup_88'
+        'sg_88_teams.subgroup_88'
         ]
 
     def _set_test_id(self, test_id):
