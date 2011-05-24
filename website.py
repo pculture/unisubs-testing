@@ -330,7 +330,6 @@ def upload_subtitles(self,sel,sub_file,lang="en"):
     sel.select("css=form[id='upload-subtitles-form'] select[id='id_language']", "value="+lang)
     sel.type("subtitles-file-field",sub_file)
     sel.click("css=form#upload-subtitles-form .green_button.small")
-    time.sleep(3)
   
 
 
@@ -338,6 +337,7 @@ def verify_sub_upload(self,sel,sub_file,lang=""):
     """Verifies the uploaded subtitle text matches the text of a corresponing test file.
 
     """
+    time.sleep(10)
     sel.refresh()
     sel.wait_for_page_to_load(testvars.timeout)
     mslib.wait_for_element_present(self,sel,"css=tr")
@@ -423,9 +423,7 @@ def enter_comment_text(self,sel,comment):
     self.assertTrue(sel.is_element_present("css=li.active a span:contains('Comments')"))
     sel.type("css=textarea#id_comment_form_content", comment)
     sel.click("css=button:contains('Comment')")
-    time.sleep(10)
-    sel.refresh()
-    sel.wait_for_page_to_load(testvars.timeout)
+    
 
 def verify_comment_text(self,sel,comment,result="posted",reply_text=None):
     """After comment text is entered in enter_comment_text, verify correct post behavior
@@ -439,7 +437,9 @@ def verify_comment_text(self,sel,comment,result="posted",reply_text=None):
     """
     #give it 3 seconds to post
     print "* Verify Comment"
-    time.sleep(5)
+    ttime.sleep(15)
+    sel.refresh()
+    sel.wait_for_page_to_load(testvars.timeout)
     if result == "posted":
         posted_text = sel.get_text("css=ul.comments.big_list li:nth-child(1) > div.info p")
         self.assertEqual(posted_text.strip(),comment.strip(),"posted text doesn't match expected text")
@@ -473,7 +473,7 @@ def get_current_rev(self,sel):
     revision = myval.split()[0]
     return revision
 
-def verify_latest_history(self,sel,rev=None,user=None,time=None,text=None):
+def verify_latest_history(self,sel,rev=None,user=None,tm=None,text=None):
     print "verifying history tab contents"
     print rev
     time.sleep(10)
@@ -487,7 +487,7 @@ def verify_latest_history(self,sel,rev=None,user=None,time=None,text=None):
     if user:
         self.assertTrue(sel.is_element_present("css=div[id=revisions-tab] tr:nth-child(1) > td:nth-child(2) > a:contains('"+user+"')"))
     if time:
-        self.assertTrue(sel.is_element_present("css=div[id=revisions-tab] tr:nth-child(1) > td:nth-child(4):contains('"+time+"')"))
+        self.assertTrue(sel.is_element_present("css=div[id=revisions-tab] tr:nth-child(1) > td:nth-child(4):contains('"+tm+"')"))
     if text:
         self.assertTrue(sel.is_element_present("css=div[id=revisions-tab] tr:nth-child(1) > td:nth-child(5):contains('"+text+"')"))
 
