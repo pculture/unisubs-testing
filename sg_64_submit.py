@@ -80,7 +80,7 @@ class subgroup_64(unittest.TestCase):
                 
         
                 
-    def test_532(self):
+    def skip_test_532(self):
         """Submit html5 videos from blip.tv.
 
         Tests submission of blip.tv video non-html5 subtitle and translation.
