@@ -437,7 +437,7 @@ def verify_comment_text(self,sel,comment,result="posted",reply_text=None):
     """
     #give it 3 seconds to post
     print "* Verify Comment"
-    ttime.sleep(15)
+    time.sleep(15)
     sel.refresh()
     sel.wait_for_page_to_load(testvars.timeout)
     if result == "posted":
