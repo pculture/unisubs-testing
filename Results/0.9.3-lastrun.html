@@ -1,0 +1,811 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Univeral Subtitles Testing</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    
+<style type="text/css" media="screen">
+body        { font-family: verdana, arial, helvetica, sans-serif; font-size: 80%; }
+table       { font-size: 100%; }
+pre         { }
+
+/* -- heading ---------------------------------------------------------------------- */
+h1 {
+}
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+
+.heading .attribute {
+    margin-top: 1ex;
+    margin-bottom: 0;
+}
+
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+
+/* -- report ------------------------------------------------------------------------ */
+#show_detail_line {
+    margin-top: 3ex;
+    margin-bottom: 1ex;
+}
+#result_table {
+    width: 80%;
+    border-collapse: collapse;
+    border: medium solid #777;
+}
+#header_row {
+    font-weight: bold;
+    color: white;
+    background-color: #777;
+}
+#result_table td {
+    border: thin solid #777;
+    padding: 2px;
+}
+#total_row  { font-weight: bold; }
+.passCase  { background-color: #6c6; }
+.failCase  { background-color: #c60; }
+.errorCase { background-color: #c00; }
+.passClass   { color: #6c6; }
+.failClass   { color: #c60; font-weight: bold; }
+.errorClass  { color: #c00; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+
+
+/* -- ending ---------------------------------------------------------------------- */
+#ending {
+}
+
+</style>
+
+</head>
+<body>
+<script language="javascript" type="text/javascript"><!--
+output_list = Array();
+
+/* level - 0:Summary; 1:Failed; 2:All */
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level < 1) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level > 1) {
+                tr.className = '';
+            }
+            else {
+                tr.className = 'hiddenRow';
+            }
+        }
+    }
+}
+
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        tid0 = 't' + cid.substr(1) + '.' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        if (toHide) {
+            document.getElementById(tid).className = 'hiddenRow';
+        }
+        else {
+            document.getElementById(tid).className = '';
+        }
+    }
+}
+
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+
+function showOutput(id, name) {
+    var w = window.open("", //url
+                    name,
+                    "resizable,scrollbars,status,width=800,height=450");
+    d = w.document;
+    d.write("<pre>");
+    d.write(html_escape(output_list[id]));
+    d.write("\n");
+    d.write("<a href='javascript:window.close()'>close</a>\n");
+    d.write("</pre>\n");
+    d.close();
+}
+--></script>
+
+<div class='heading'>
+<h1>Univeral Subtitles Testing</h1>
+<p class='attribute'><strong>Start Time:</strong> 2011-05-25 07:31:07</p>
+<p class='attribute'><strong>Duration:</strong> 1:49:18.883570</p>
+<p class='attribute'><strong>Status:</strong> Pass 61 Failure 10 Error 4</p>
+
+<p class='description'>Results</p>
+</div>
+
+
+
+<p id='show_detail_line'>Show
+<a href='javascript:showCase(0)'>Summary</a>
+<a href='javascript:showCase(1)'>Failed</a>
+<a href='javascript:showCase(2)'>All</a>
+</p>
+<table id='result_table'>
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row'>
+    <td>Test Group/Test case</td>
+    <td>Count</td>
+    <td>Pass</td>
+    <td>Fail</td>
+    <td>Error</td>
+    <td>View</td>
+</tr>
+
+<tr class='passClass'>
+    <td>sg_64_submit.subgroup_64</td>
+    <td>6</td>
+    <td>6</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c1',6)">Detail</a></td>
+</tr>
+
+<tr id='pt1.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_376: Widget requires login to submit subtitles.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt1.1', 'test_376: Widget requires login to submit subtitles.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt1.1'] = 'http://www.youtube.com/watch?v=JHx6kJmxEtk\nedit orig subs, orig: en to: en\nno how-to video\nTranscribing the video\nI\'d like to be under the sea\nIn an octopus\' garden in the shade\nHe\'d let us in, knows where we\'ve been\nSyncing the subs\n - waiting for video to buffer 32:24\n - done loading video\n - sub time: 3.91 - sub text: I\'d like to be under the sea\n - sub time: 9.25 - sub text: In an octopus\' garden in the shade\n - sub time: 13.97 - sub text: He\'d let us in, knows where we\'ve been\nlogging out from site\n';</script>
+</td>
+</tr>
+
+<tr id='pt1.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_469: Submit flowplayer embedded videos from blip.tv.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt1.2', 'test_469: Submit flowplayer embedded videos from blip.tv.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt1.2'] = 'starting 469 blip.tv submit embedded video\ngetting a video url from blip, format: flv\nsubmitting the video\n* Submit Video\nverifying embed and video player\n * verify submitted video, embed type\n\x3Cscript type=\"text/javascript\" src=\"http://s3.staging.universalsubtitles.org/embed.js\"\x3E ( {\"base_state\": {}, \"video_url\": \"http://blip.tv/file/get/JonHammond-LouisvilleKentuckyOneNightOnlyJonHammondQuartet855.flv\"} ) \x3C/script\x3E\nstarting sub widget\nedit orig subs, orig: en to: en\nno how-to video\nstarting transcribe\nTranscribing the video\nI\'d like to be under the sea\nIn an octopus\' garden in the shade\nHe\'d let us in, knows where we\'ve been\nstarting sync\nSyncing the subs\n - waiting for video to buffer 35:11\n - video buffered to 50% 35:11\n - done loading video\n - sub time: 4.87 - sub text: I\'d like to be under the sea\n - sub time: 11.55 - sub text: In an octopus\' garden in the shade\n - sub time: 18.72 - sub text: He\'d let us in, knows where we\'ve been\nstarting review\n * Submit subtitles\ngetting a video url from blip, format: mp4\nsubmitting the video\n* Submit Video\nverifying embed and video player\n * verify submitted video, embed type\n\x3Cscript type=\"text/javascript\" src=\"http://s3.staging.universalsubtitles.org/embed.js\"\x3E ( {\"base_state\": {}, \"video_url\": \"http://blip.tv/file/get/Wildcaster-ElephantCalfStrugglesToSwim947.mp4\"} ) \x3C/script\x3E\nstarting sub widget\nedit orig subs, orig: en to: en\nstarting transcribe\nTranscribing the video\nI\'d like to be under the sea\nIn an octopus\' garden in the shade\nHe\'d let us in, knows where we\'ve been\nstarting sync\nSyncing the subs\n - waiting for video to buffer 36:55\n - video buffered to 50% 36:55\n - done loading video\n - sub time: 0.00 - sub text: I\'d like to be under the sea\n - sub time: 0.50 - sub text: In an octopus\' garden in the shade\n - sub time: -1.00 - sub text: He\'d let us in, knows where we\'ve been\nstarting review\n * Submit subtitles\n';</script>
+</td>
+</tr>
+
+<tr id='pt1.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_532: Submit html5 videos from blip.tv.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt1.3', 'test_532: Submit html5 videos from blip.tv.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt1.3'] = 'starting 469 blip.tv submit html5 video\nsubmitting a blip video, format: ogv\n* Submit Video\nverifying embed and video player\n * verify submitted video, embed type\n\x3Cscript type=\"text/javascript\" src=\"http://s3.staging.universalsubtitles.org/embed.js\"\x3E ( {\"base_state\": {}, \"video_url\": \"http://blip.tv/file/get/Pycon-PyCon2011PythonTheSecretSauceInTheOpenCloud878.ogv\"} ) \x3C/script\x3E\nstarting sub widget\nedit orig subs, orig: en to: en\nno how-to video\nstarting transcribe\nTranscribing the video\nI\'d like to be under the sea\nIn an octopus\' garden in the shade\nHe\'d let us in, knows where we\'ve been\nstarting sync\nSyncing the subs\n - waiting for video to buffer 38:51\n - done loading video\n - sub time: 3.40 - sub text: I\'d like to be under the sea\n - sub time: 8.30 - sub text: In an octopus\' garden in the shade\n - sub time: 13.24 - sub text: He\'d let us in, knows where we\'ve been\nstarting review\n * Submit subtitles\n';</script>
+</td>
+</tr>
+
+<tr id='pt1.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_533: Submit and subtitle vimeo videos.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt1.4', 'test_533: Submit and subtitle vimeo videos.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt1.4'] = 'http://vimeo.com/17363035\nlogging in and submitting video\n* Submit Video\nverifying embed\n * verify submitted video, embed type\n\x3Cscript type=\"text/javascript\" src=\"http://s3.staging.universalsubtitles.org/embed.js\"\x3E ( {\"base_state\": {}, \"video_url\": \"http://vimeo.com/17363035\"} ) \x3C/script\x3E\nstarting sub widget\nedit orig subs, orig: en to: en\nno how-to video\ntranscribing video\nTranscribing the video\nI\'d like to be under the sea\nIn an octopus\' garden in the shade\nHe\'d let us in, knows where we\'ve been\nsyncing video\nSyncing the subs\nautoplaying\n - done loading video\nvideo is playing\n - sub time: -1.00 - sub text: I\'d like to be under the sea\n - sub time: -1.00 - sub text: In an octopus\' garden in the shade\n - sub time: -1.00 - sub text: He\'d let us in, knows where we\'ve been\nreview step - just submitting video\n * Submit subtitles\n';</script>
+</td>
+</tr>
+
+<tr id='pt1.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_534: Submit and subtitle youtube videos.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt1.5', 'test_534: Submit and subtitle youtube videos.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt1.5'] = 'submitting a youtube video\nhttp://www.youtube.com/watch?v=iP3-W1JbsGc\nlogging in and submitting video\n* Submit Video\nverifying embed\n * verify submitted video, embed type\n\x3Cscript type=\"text/javascript\" src=\"http://s3.staging.universalsubtitles.org/embed.js\"\x3E ( {\"base_state\": {}, \"video_url\": \"http://www.youtube.com/watch?v=iP3-W1JbsGc\"} ) \x3C/script\x3E\nstarting sub widget\nedit orig subs, orig: en to: en\nno how-to video\ntranscribing video\nTranscribing the video\nI\'d like to be under the sea\nIn an octopus\' garden in the shade\nHe\'d let us in, knows where we\'ve been\nsyncing video\nSyncing the subs\n - waiting for video to buffer 43:41\n - done loading video\n - sub time: 4.54 - sub text: I\'d like to be under the sea\n - sub time: 10.93 - sub text: In an octopus\' garden in the shade\n - sub time: 18.52 - sub text: He\'d let us in, knows where we\'ve been\nreview step - just submitting video\n * Submit subtitles\n';</script>
+</td>
+</tr>
+
+<tr id='pt1.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_538: Submit and subtitle dailymotion videos.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt1.6', 'test_538: Submit and subtitle dailymotion videos.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt1.6'] = 'submitting a dailymotion video.\nhttp://www.dailymotion.com/video/xiw9pv_la-finance-pour-tous-l-argent-de-poche_lifestyle\nlogging in and submitting video\n* Submit Video\nverifying embed\n * verify submitted video, embed type\n\x3Cscript type=\"text/javascript\" src=\"http://s3.staging.universalsubtitles.org/embed.js\"\x3E ( {\"base_state\": {}, \"video_url\": \"http://dailymotion.com/video/xiw9pv\"} ) \x3C/script\x3E\nstarting sub widget\nedit orig subs, orig: en to: en\nno how-to video\ntranscribing video\nTranscribing the video\nI\'d like to be under the sea\nIn an octopus\' garden in the shade\nHe\'d let us in, knows where we\'ve been\nsyncing video\nSyncing the subs\nautoplaying\n - done loading video\nvideo is playing\n - sub time: -1.00 - sub text: I\'d like to be under the sea\n - sub time: -1.00 - sub text: In an octopus\' garden in the shade\n - sub time: -1.00 - sub text: He\'d let us in, knows where we\'ve been\nreview step - just submitting video\n * Submit subtitles\n';</script>
+</td>
+</tr>
+
+<tr class='failClass'>
+    <td>sg_81_ul_dl.subgroup_81</td>
+    <td>6</td>
+    <td>5</td>
+    <td>1</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c2',6)">Detail</a></td>
+</tr>
+
+<tr id='pt2.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_505: Upload subtitle files srt format.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt2.1', 'test_505: Upload subtitle files srt format.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt2.1'] = 'starting testcase sg_81_ul_dl.subgroup_81.test_505: Upload subtitle files srt format.\nhttp://www.youtube.com/watch?v=E6xYTXQMKME\n* Submit Video\n/en/videos/mBdcssFGssik/\n1. english srt upload\n2. polish srt upload\n3. arabic srt upload\n4. macedonian srt upload\n';</script>
+</td>
+</tr>
+
+<tr id='pt2.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_506: Upload subtitle files sbv format.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt2.2', 'test_506: Upload subtitle files sbv format.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt2.2'] = 'starting testcase sg_81_ul_dl.subgroup_81.test_506: Upload subtitle files sbv format.\nhttp://www.youtube.com/watch?v=CVxkioXgBFM\n* Submit Video\n/en/videos/pVQ3aKUaLlrW/\n1. english sbv upload\n2. polish sbv upload\n3. arabic sbv upload\n4. macedonian sbv upload\n';</script>
+</td>
+</tr>
+
+<tr id='ft2.3' class='none'>
+    <td class='failCase'><div class='testcase'>test_507: Invalid or unsupported formats</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('ft2.3', 'test_507: Invalid or unsupported formats')">fail</a>
+<script language="javascript" type="text/javascript">output_list['ft2.3'] = 'starting testcase sg_81_ul_dl.subgroup_81.test_507: Invalid or unsupported formats\nhttp://www.youtube.com/watch?v=iP3-W1JbsGc\n* Submit Video\n/en/videos/504klAnkxEki/\n1. invalid ttml\nTraceback (most recent call last):\n  File \"/home/jed/RC-testing/universal-subtitles/sg_81_ul_dl.py\", line 79, in test_507\n    website.upload_subtitles(self,sel,sub_file)\n  File \"/home/jed/RC-testing/universal-subtitles/website.py\", line 329, in upload_subtitles\n    mslib.wait_for_element_present(self,sel,\"css=form[id=\'upload-subtitles-form\'] select\")\n  File \"/home/jed/RC-testing/universal-subtitles/mslib.py\", line 34, in wait_for_element_present\n    self.fail(\"time out waiting 30s for element \" +input_field)\nAssertionError: time out waiting 30s for element css=form[id=\'upload-subtitles-form\'] select\n';</script>
+</td>
+</tr>
+
+<tr id='pt2.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_508: Must login to upload subs</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt2.4', 'test_508: Must login to upload subs')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt2.4'] = 'starting testcase sg_81_ul_dl.subgroup_81.test_508: Must login to upload subs\nhttp://www.youtube.com/watch?v=JHx6kJmxEtk\n* Submit Video\n/en/videos/iTH1MREY8b0s/\n';</script>
+</td>
+</tr>
+
+<tr id='pt2.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_509: Upload subtitle files ssa format.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt2.5', 'test_509: Upload subtitle files ssa format.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt2.5'] = 'starting testcase sg_81_ul_dl.subgroup_81.test_509: Upload subtitle files ssa format.\nhttp://www.youtube.com/watch?v=coiTJbr9m04\n* Submit Video\n/en/videos/3pBFbjdvetBC/\n1. english ssa upload\n2. polish ssa upload\n3. arabic ssa upload\n4. macedonian ssa upload\n';</script>
+</td>
+</tr>
+
+<tr id='pt2.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_510: Upload subtitle files ttml format.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt2.6', 'test_510: Upload subtitle files ttml format.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt2.6'] = 'starting testcase sg_81_ul_dl.subgroup_81.test_510: Upload subtitle files ttml format.\nhttp://www.youtube.com/watch?v=pnVAE91E7kM\n* Submit Video\n/en/videos/EBCazDxSfvW5/\n1. english ttml upload\n2. polish ttml upload\n3. arabic ttml upload\n4. macedonian ttml upload\n';</script>
+</td>
+</tr>
+
+<tr class='failClass'>
+    <td>sg_69_demoUI.subgroup_69: Widget UI tests.</td>
+    <td>24</td>
+    <td>23</td>
+    <td>1</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c3',24)">Detail</a></td>
+</tr>
+
+<tr id='pt3.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_373: Widget Step 1, typing the subtitles.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt3.1', 'test_373: Widget Step 1, typing the subtitles.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt3.1'] = 'starting testcase 373\nEnglish\nsubbing into: en\nno how-to video\nTranscribing the video\nHi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\nJust go to getfirefox.com on you browser and click the green download button on the website\nto save the firefox setup file to your desktop\nClose the browser window and double-click the firefox setup icon to start the install\nThen follow the simple steps on screen and firefox will be installed on your computer\n';</script>
+</td>
+</tr>
+
+<tr id='pt3.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_388: Widget Step 2, edit subtitle text from step 1.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt3.2', 'test_388: Widget Step 2, edit subtitle text from step 1.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt3.2'] = 'starting testcase 388\nEnglish\nsubbing into: en\nno how-to video\nTranscribing the video\nHi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\nJust go to getfirefox.com on you browser and click the green download button on the website\nto save the firefox setup file to your desktop\nClose the browser window and double-click the firefox setup icon to start the install\nThen follow the simple steps on screen and firefox will be installed on your computer\nSyncing the subs\n - waiting for video to buffer 57:39\n - video buffered to 50% 57:39\n - done loading video\n - sub time: 3.26 - sub text: Hi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\n - sub time: 6.63 - sub text: Just go to getfirefox.com on you browser and click the green download button on the website\n - sub time: 10.07 - sub text: to save the firefox setup file to your desktop\n - sub time: 13.07 - sub text: Close the browser window and double-click the firefox setup icon to start the install\n - sub time: 16.38 - sub text: Then follow the simple steps on screen and firefox will be installed on your computer\nverifying subtitles are still present\nEditing the sub text in the widget\nautoplaying\n - waiting for video to buffer 58:06\n - video buffered to 50% 58:06\n - done loading video\nHI, I\'M ASA DOTZLER FROM MOZILLA AND I\'M HERE TO TELL YOU HOW SIMPLE IT IS TO SWITCH TO FIREFOX\nHI, I\'M ASA DOTZLER FROM MOZILLA AND I\'M HERE TO TELL YOU HOW SIMPLE IT IS TO SWITCH TO FIREFOX\nJUST GO TO GETFIREFOX.COM ON YOU BROWSER AND CLICK THE GREEN DOWNLOAD BUTTON ON THE WEBSITE\nJUST GO TO GETFIREFOX.COM ON YOU BROWSER AND CLICK THE GREEN DOWNLOAD BUTTON ON THE WEBSITE\nTO SAVE THE FIREFOX SETUP FILE TO YOUR DESKTOP\nTO SAVE THE FIREFOX SETUP FILE TO YOUR DESKTOP\nCLOSE THE BROWSER WINDOW AND DOUBLE-CLICK THE FIREFOX SETUP ICON TO START THE INSTALL\nCLOSE THE BROWSER WINDOW AND DOUBLE-CLICK THE FIREFOX SETUP ICON TO START THE INSTALL\nTHEN FOLLOW THE SIMPLE STEPS ON SCREEN AND FIREFOX WILL BE INSTALLED ON YOUR COMPUTER\nTHEN FOLLOW THE SIMPLE STEPS ON SCREEN AND FIREFOX WILL BE INSTALLED ON YOUR COMPUTER\nEditing the sub text in the widget\n - waiting for video to buffer 58:19\n - video buffered to 50% 58:19\n - done loading video\nMon aéroglisseur est plein d\'anguilles\nMon aéroglisseur est plein d\'anguilles\nMon aéroglisseur est plein d\'anguilles\nMon aéroglisseur est plein d\'anguilles\nMon aéroglisseur est plein d\'anguilles\nMon aéroglisseur est plein d\'anguilles\nMon aéroglisseur est plein d\'anguilles\nMon aéroglisseur est plein d\'anguilles\nMon aéroglisseur est plein d\'anguilles\nMon aéroglisseur est plein d\'anguilles\nEditing the sub text in the widget\n - waiting for video to buffer 58:32\n - video buffered to 50% 58:32\n - done loading video\n私のホバークラフトは鰻で\n私のホバークラフトは鰻で\n私のホバークラフトは鰻で\n私のホバークラフトは鰻で\n私のホバークラフトは鰻で\n私のホバークラフトは鰻で\n私のホバークラフトは鰻で\n私のホバークラフトは鰻で\n私のホバークラフトは鰻で\n私のホバークラフトは鰻で\n';</script>
+</td>
+</tr>
+
+<tr id='pt3.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_389: How-to video display, and continue button.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt3.3', 'test_389: How-to video display, and continue button.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt3.3'] = 'starting testcase 389\nEnglish\nsubbing into: en\nno how-to video\n';</script>
+</td>
+</tr>
+
+<tr id='pt3.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_395: How-to video display and skip setting.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt3.4', 'test_395: How-to video display and skip setting.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt3.4'] = 'starting testcase 395\nEnglish\nsubbing into: en\nno how-to video\n';</script>
+</td>
+</tr>
+
+<tr id='pt3.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_397: Widget Step 1, beginner mode setting.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt3.5', 'test_397: Widget Step 1, beginner mode setting.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt3.5'] = 'starting testcase 397\nEnglish\nsubbing into: en\nno how-to video\nTranscribing the video\nHi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\nJust go to getfirefox.com on you browser and click the green download button on the website\nto save the firefox setup file to your desktop\nClose the browser window and double-click the firefox setup icon to start the install\nThen follow the simple steps on screen and firefox will be installed on your computer\nverifying sub text\n';</script>
+</td>
+</tr>
+
+<tr id='pt3.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_398: Widget Step 1, expert mode setting.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt3.6', 'test_398: Widget Step 1, expert mode setting.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt3.6'] = 'starting testcase 398\nEnglish\nsubbing into: en\nno how-to video\nTranscribing the video\nHi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\nJust go to getfirefox.com on you browser and click the green download button on the website\nto save the firefox setup file to your desktop\nClose the browser window and double-click the firefox setup icon to start the install\nThen follow the simple steps on screen and firefox will be installed on your computer\n';</script>
+</td>
+</tr>
+
+<tr id='pt3.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_399: Widget Step 1, play-pause functionality.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt3.7', 'test_399: Widget Step 1, play-pause functionality.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt3.7'] = 'starting testcase 399\nEnglish\nsubbing into: en\nno how-to video\nplay-pause with screen button\nplay-pause with keyboard\nplay-pause with on-video button\n';</script>
+</td>
+</tr>
+
+<tr id='ft3.8' class='none'>
+    <td class='failCase'><div class='testcase'>test_400: Widget Step 1, Skip-back functionality</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('ft3.8', 'test_400: Widget Step 1, Skip-back functionality')">fail</a>
+<script language="javascript" type="text/javascript">output_list['ft3.8'] = 'starting testcase 400 - shift-tab to skip back on step 1\nknown bug: http://bugzilla.pculture.org/show_bug.cgi?id=14292\nEnglish\nsubbing into: en\nno how-to video\n - waiting for video to buffer 05:49\n - video buffered to 50% 05:49\n - done loading video\nTraceback (most recent call last):\n  File \"/home/jed/RC-testing/universal-subtitles/sg_69_demoUI.py\", line 381, in test_400\n    self.failUnless(diff_time \x3E 5)\nAssertionError\n';</script>
+</td>
+</tr>
+
+<tr id='pt3.9' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_401: Widget Step 1, login link functionality.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt3.9', 'test_401: Widget Step 1, login link functionality.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt3.9'] = 'starting testcase 401\nEnglish\nsubbing into: en\nno how-to video\nTranscribing the video\nHi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\nJust go to getfirefox.com on you browser and click the green download button on the website\nto save the firefox setup file to your desktop\nClose the browser window and double-click the firefox setup icon to start the install\nThen follow the simple steps on screen and firefox will be installed on your computer\nverifying subtitles are still present\nverifying sub text\n';</script>
+</td>
+</tr>
+
+<tr id='pt3.10' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_402: Widget Step 3, resync subtitles.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt3.10', 'test_402: Widget Step 3, resync subtitles.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt3.10'] = 'starting testcase 402\nEnglish\nsubbing into: en\nno how-to video\nTranscribing the video\nHi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\nJust go to getfirefox.com on you browser and click the green download button on the website\nto save the firefox setup file to your desktop\nClose the browser window and double-click the firefox setup icon to start the install\nThen follow the simple steps on screen and firefox will be installed on your computer\nSyncing the subs\n - waiting for video to buffer 09:05\n - video buffered to 50% 09:05\n - done loading video\n - sub time: 3.26 - sub text: Hi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\n - sub time: 6.97 - sub text: Just go to getfirefox.com on you browser and click the green download button on the website\n - sub time: 10.77 - sub text: to save the firefox setup file to your desktop\n - sub time: 13.77 - sub text: Close the browser window and double-click the firefox setup icon to start the install\n - sub time: 17.11 - sub text: Then follow the simple steps on screen and firefox will be installed on your computer\n * Resync subs - shorter interval\n - waiting for video to buffer 09:29\n - video buffered to 50% 09:29\n - done loading video\n';</script>
+</td>
+</tr>
+
+<tr id='pt3.11' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_403: Widget Step 2, play-pause functionality.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt3.11', 'test_403: Widget Step 2, play-pause functionality.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt3.11'] = 'starting testcase 403\nEnglish\nsubbing into: en\nno how-to video\nTranscribing the video\nHi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\nJust go to getfirefox.com on you browser and click the green download button on the website\nto save the firefox setup file to your desktop\nClose the browser window and double-click the firefox setup icon to start the install\nThen follow the simple steps on screen and firefox will be installed on your computer\nplay-pause with screen button\nplay-pause with keyboard\nplay-pause with on-video button\n';</script>
+</td>
+</tr>
+
+<tr id='pt3.12' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_404: Widget Step 3, play-pause functionality.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt3.12', 'test_404: Widget Step 3, play-pause functionality.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt3.12'] = 'starting testcase 404\nEnglish\nsubbing into: en\nno how-to video\nTranscribing the video\nHi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\nJust go to getfirefox.com on you browser and click the green download button on the website\nto save the firefox setup file to your desktop\nClose the browser window and double-click the firefox setup icon to start the install\nThen follow the simple steps on screen and firefox will be installed on your computer\nSyncing the subs\n - waiting for video to buffer 12:28\n - video buffered to 50% 12:28\n - done loading video\n - sub time: 3.33 - sub text: Hi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\n - sub time: 6.53 - sub text: Just go to getfirefox.com on you browser and click the green download button on the website\n - sub time: 9.94 - sub text: to save the firefox setup file to your desktop\n - sub time: 12.97 - sub text: Close the browser window and double-click the firefox setup icon to start the install\n - sub time: 16.28 - sub text: Then follow the simple steps on screen and firefox will be installed on your computer\nplay-pause with screen button\nplay-pause with keyboard\nplay-pause with on-video button\n';</script>
+</td>
+</tr>
+
+<tr id='pt3.13' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_405: Widget Step 2, login link functionality.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt3.13', 'test_405: Widget Step 2, login link functionality.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt3.13'] = 'starting testcase 405\nEnglish\nsubbing into: en\nno how-to video\nTranscribing the video\nHi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\nJust go to getfirefox.com on you browser and click the green download button on the website\nto save the firefox setup file to your desktop\nClose the browser window and double-click the firefox setup icon to start the install\nThen follow the simple steps on screen and firefox will be installed on your computer\nSyncing the subs\n - waiting for video to buffer 14:19\n - video buffered to 50% 14:19\n - done loading video\n - sub time: 3.26 - sub text: Hi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\n - sub time: 6.67 - sub text: Just go to getfirefox.com on you browser and click the green download button on the website\n - sub time: 9.97 - sub text: to save the firefox setup file to your desktop\n - sub time: 12.94 - sub text: Close the browser window and double-click the firefox setup icon to start the install\n - sub time: 16.18 - sub text: Then follow the simple steps on screen and firefox will be installed on your computer\nverifying subtitles are still present\nverifying sub text\n';</script>
+</td>
+</tr>
+
+<tr id='pt3.14' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_406: Widget Step 1, restart typing link.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt3.14', 'test_406: Widget Step 1, restart typing link.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt3.14'] = 'starting testcase 406\nEnglish\nsubbing into: en\nno how-to video\nTranscribing the video\nHi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\nJust go to getfirefox.com on you browser and click the green download button on the website\nto save the firefox setup file to your desktop\nClose the browser window and double-click the firefox setup icon to start the install\nThen follow the simple steps on screen and firefox will be installed on your computer\n';</script>
+</td>
+</tr>
+
+<tr id='pt3.15' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_408: Widget Step 2, back to typing link.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt3.15', 'test_408: Widget Step 2, back to typing link.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt3.15'] = 'starting testcase 408\nEnglish\nsubbing into: en\nno how-to video\nTranscribing the video\nHi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\nJust go to getfirefox.com on you browser and click the green download button on the website\nto save the firefox setup file to your desktop\nClose the browser window and double-click the firefox setup icon to start the install\nThen follow the simple steps on screen and firefox will be installed on your computer\nSyncing the subs\n - waiting for video to buffer 17:46\n - video buffered to 50% 17:46\n - done loading video\n - sub time: 3.40 - sub text: Hi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\n - sub time: 6.90 - sub text: Just go to getfirefox.com on you browser and click the green download button on the website\n - sub time: 10.24 - sub text: to save the firefox setup file to your desktop\n - sub time: 13.34 - sub text: Close the browser window and double-click the firefox setup icon to start the install\n - sub time: 16.68 - sub text: Then follow the simple steps on screen and firefox will be installed on your computer\nverifying sub text\n';</script>
+</td>
+</tr>
+
+<tr id='pt3.16' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_409: Widget Step 2, skip-back functionality.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt3.16', 'test_409: Widget Step 2, skip-back functionality.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt3.16'] = 'starting testcase 409 shift-tab to sktip back step 2\nknown bug: http://bugzilla.pculture.org/show_bug.cgi?id=14292\nEnglish\nsubbing into: en\nno how-to video\nTranscribing the video\nHi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\nJust go to getfirefox.com on you browser and click the green download button on the website\nto save the firefox setup file to your desktop\nClose the browser window and double-click the firefox setup icon to start the install\nThen follow the simple steps on screen and firefox will be installed on your computer\n1. screen button skip back\n2. key cmd skip back\n';</script>
+</td>
+</tr>
+
+<tr id='pt3.17' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_410: Widget Step 3, skip-back functionality.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt3.17', 'test_410: Widget Step 3, skip-back functionality.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt3.17'] = 'starting testcase 410\nEnglish\nsubbing into: en\nno how-to video\nTranscribing the video\nHi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\nJust go to getfirefox.com on you browser and click the green download button on the website\nto save the firefox setup file to your desktop\nClose the browser window and double-click the firefox setup icon to start the install\nThen follow the simple steps on screen and firefox will be installed on your computer\nSyncing the subs\n - waiting for video to buffer 21:20\n - video buffered to 50% 21:20\n - done loading video\n - sub time: 3.30 - sub text: Hi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\n - sub time: 6.77 - sub text: Just go to getfirefox.com on you browser and click the green download button on the website\n - sub time: 10.21 - sub text: to save the firefox setup file to your desktop\n - sub time: 13.07 - sub text: Close the browser window and double-click the firefox setup icon to start the install\n - sub time: 16.28 - sub text: Then follow the simple steps on screen and firefox will be installed on your computer\n1. screen button skip back\n2. key button skip back\n7\n';</script>
+</td>
+</tr>
+
+<tr id='pt3.18' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_411: Widget Step 2, subtitle syncing.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt3.18', 'test_411: Widget Step 2, subtitle syncing.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt3.18'] = 'starting testcase 411\nEnglish\nsubbing into: en\nno how-to video\nTranscribing the video\nHi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\nJust go to getfirefox.com on you browser and click the green download button on the website\nto save the firefox setup file to your desktop\nClose the browser window and double-click the firefox setup icon to start the install\nThen follow the simple steps on screen and firefox will be installed on your computer\nSyncing the subs\n - waiting for video to buffer 23:47\n - video buffered to 50% 23:47\n - done loading video\n - sub time: 3.40 - sub text: Hi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\n - sub time: 6.77 - sub text: Just go to getfirefox.com on you browser and click the green download button on the website\n - sub time: 10.34 - sub text: to save the firefox setup file to your desktop\n - sub time: 13.51 - sub text: Close the browser window and double-click the firefox setup icon to start the install\n - sub time: 17.08 - sub text: Then follow the simple steps on screen and firefox will be installed on your computer\n';</script>
+</td>
+</tr>
+
+<tr id='pt3.19' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_412: Widget Step 3, press and hold down arrow time-shift.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt3.19', 'test_412: Widget Step 3, press and hold down arrow time-shift.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt3.19'] = 'starting testcase 412\nEnglish\nsubbing into: en\nno how-to video\nTranscribing the video\nHi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\nJust go to getfirefox.com on you browser and click the green download button on the website\nto save the firefox setup file to your desktop\nClose the browser window and double-click the firefox setup icon to start the install\nThen follow the simple steps on screen and firefox will be installed on your computer\nSyncing the subs\n - waiting for video to buffer 25:22\n - video buffered to 50% 25:22\n - done loading video\n - sub time: 5.37 - sub text: Hi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\n - sub time: 8.80 - sub text: Just go to getfirefox.com on you browser and click the green download button on the website\n - sub time: 12.24 - sub text: to save the firefox setup file to your desktop\n - sub time: 15.21 - sub text: Close the browser window and double-click the firefox setup icon to start the install\n - sub time: 18.48 - sub text: Then follow the simple steps on screen and firefox will be installed on your computer\n * Resync subs: hold down key\n';</script>
+</td>
+</tr>
+
+<tr id='pt3.20' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_413: Widget Step 3, drag time bubbles.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt3.20', 'test_413: Widget Step 3, drag time bubbles.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt3.20'] = 'starting testcase 413\nEnglish\nsubbing into: en\nno how-to video\nTranscribing the video\nHi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\nJust go to getfirefox.com on you browser and click the green download button on the website\nto save the firefox setup file to your desktop\nClose the browser window and double-click the firefox setup icon to start the install\nThen follow the simple steps on screen and firefox will be installed on your computer\nSyncing the subs\n - waiting for video to buffer 27:19\n - video buffered to 50% 27:19\n - done loading video\n - sub time: 1.43 - sub text: Hi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\n - sub time: 3.83 - sub text: Just go to getfirefox.com on you browser and click the green download button on the website\n - sub time: 6.37 - sub text: to save the firefox setup file to your desktop\n - sub time: 8.87 - sub text: Close the browser window and double-click the firefox setup icon to start the install\n - sub time: 11.64 - sub text: Then follow the simple steps on screen and firefox will be installed on your computer\nsub start time: 1.43\n - new sub time: 2.35\n';</script>
+</td>
+</tr>
+
+<tr id='pt3.21' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_414: Widget Step 3, click time arrows to modify time.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt3.21', 'test_414: Widget Step 3, click time arrows to modify time.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt3.21'] = 'starting testcase 414\nEnglish\nsubbing into: en\nno how-to video\nTranscribing the video\nHi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\nJust go to getfirefox.com on you browser and click the green download button on the website\nto save the firefox setup file to your desktop\nClose the browser window and double-click the firefox setup icon to start the install\nThen follow the simple steps on screen and firefox will be installed on your computer\nSyncing the subs\n - waiting for video to buffer 28:51\n - video buffered to 50% 28:51\n - done loading video\n - sub time: 3.26 - sub text: Hi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\n - sub time: 6.97 - sub text: Just go to getfirefox.com on you browser and click the green download button on the website\n - sub time: 10.31 - sub text: to save the firefox setup file to your desktop\n - sub time: 13.24 - sub text: Close the browser window and double-click the firefox setup icon to start the install\n - sub time: 16.64 - sub text: Then follow the simple steps on screen and firefox will be installed on your computer\n3.31\n3.26\n3.36\n3.31\n3.41\n3.36\n3.41\n3.36\n3.36\n3.31\n3.31\n3.26\n';</script>
+</td>
+</tr>
+
+<tr id='pt3.22' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_415: Widget Step 3, edit subtitle text.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt3.22', 'test_415: Widget Step 3, edit subtitle text.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt3.22'] = 'starting testcase 415\nEnglish\nsubbing into: en\nno how-to video\nTranscribing the video\nHi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\nJust go to getfirefox.com on you browser and click the green download button on the website\nto save the firefox setup file to your desktop\nClose the browser window and double-click the firefox setup icon to start the install\nThen follow the simple steps on screen and firefox will be installed on your computer\nSyncing the subs\n - waiting for video to buffer 30:30\n - video buffered to 50% 30:30\n - done loading video\n - sub time: 3.43 - sub text: Hi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\n - sub time: 6.67 - sub text: Just go to getfirefox.com on you browser and click the green download button on the website\n - sub time: 10.07 - sub text: to save the firefox setup file to your desktop\n - sub time: 13.01 - sub text: Close the browser window and double-click the firefox setup icon to start the install\n - sub time: 16.31 - sub text: Then follow the simple steps on screen and firefox will be installed on your computer\nediting subtitles\nEditing the sub text in the widget\n - waiting for video to buffer 30:53\n - video buffered to 50% 30:53\n - done loading video\nHI, I\'M ASA DOTZLER FROM MOZILLA AND I\'M HERE TO TELL YOU HOW SIMPLE IT IS TO SWITCH TO FIREFOX\nHI, I\'M ASA DOTZLER FROM MOZILLA AND I\'M HERE TO TELL YOU HOW SIMPLE IT IS TO SWITCH TO FIREFOX\nJUST GO TO GETFIREFOX.COM ON YOU BROWSER AND CLICK THE GREEN DOWNLOAD BUTTON ON THE WEBSITE\nJUST GO TO GETFIREFOX.COM ON YOU BROWSER AND CLICK THE GREEN DOWNLOAD BUTTON ON THE WEBSITE\nTO SAVE THE FIREFOX SETUP FILE TO YOUR DESKTOP\nTO SAVE THE FIREFOX SETUP FILE TO YOUR DESKTOP\nCLOSE THE BROWSER WINDOW AND DOUBLE-CLICK THE FIREFOX SETUP ICON TO START THE INSTALL\nCLOSE THE BROWSER WINDOW AND DOUBLE-CLICK THE FIREFOX SETUP ICON TO START THE INSTALL\nTHEN FOLLOW THE SIMPLE STEPS ON SCREEN AND FIREFOX WILL BE INSTALLED ON YOUR COMPUTER\nTHEN FOLLOW THE SIMPLE STEPS ON SCREEN AND FIREFOX WILL BE INSTALLED ON YOUR COMPUTER\nfrench\nEditing the sub text in the widget\n - waiting for video to buffer 31:06\n - video buffered to 50% 31:06\n - done loading video\nMon aéroglisseur est plein d\'anguilles\nMon aéroglisseur est plein d\'anguilles\nMon aéroglisseur est plein d\'anguilles\nMon aéroglisseur est plein d\'anguilles\nMon aéroglisseur est plein d\'anguilles\nMon aéroglisseur est plein d\'anguilles\nMon aéroglisseur est plein d\'anguilles\nMon aéroglisseur est plein d\'anguilles\nMon aéroglisseur est plein d\'anguilles\nMon aéroglisseur est plein d\'anguilles\njapanese\nEditing the sub text in the widget\n - waiting for video to buffer 31:19\n - video buffered to 50% 31:19\n - done loading video\n私のホバークラフトは鰻で\n私のホバークラフトは鰻で\n私のホバークラフトは鰻で\n私のホバークラフトは鰻で\n私のホバークラフトは鰻で\n私のホバークラフトは鰻で\n私のホバークラフトは鰻で\n私のホバークラフトは鰻で\n私のホバークラフトは鰻で\n私のホバークラフトは鰻で\n';</script>
+</td>
+</tr>
+
+<tr id='pt3.23' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_416: Widget Step 3, login link functionality.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt3.23', 'test_416: Widget Step 3, login link functionality.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt3.23'] = 'starting testcase 416\nEnglish\nsubbing into: en\nno how-to video\nTranscribing the video\nHi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\nJust go to getfirefox.com on you browser and click the green download button on the website\nto save the firefox setup file to your desktop\nClose the browser window and double-click the firefox setup icon to start the install\nThen follow the simple steps on screen and firefox will be installed on your computer\nSyncing the subs\n - waiting for video to buffer 32:45\n - video buffered to 50% 32:45\n - done loading video\n - sub time: 3.26 - sub text: Hi, I\'m Asa Dotzler from Mozilla and I\'m here to tell you how simple it is to switch to firefox\n - sub time: 6.43 - sub text: Just go to getfirefox.com on you browser and click the green download button on the website\n - sub time: 10.21 - sub text: to save the firefox setup file to your desktop\n - sub time: 13.44 - sub text: Close the browser window and double-click the firefox setup icon to start the install\n - sub time: 16.78 - sub text: Then follow the simple steps on screen and firefox will be installed on your computer\nverifying subtitles are still present\nverifying sub text\n';</script>
+</td>
+</tr>
+
+<tr id='pt3.24' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_470: Widget Step 1, advanced (recommended) mode setting.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt3.24', 'test_470: Widget Step 1, advanced (recommended) mode setting.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt3.24'] = 'starting testcase 470\nEnglish\nsubbing into: en\nno how-to video\n - waiting for video to buffer 34:18\n - video buffered to 50% 34:18\n - done loading video\n';</script>
+</td>
+</tr>
+
+<tr class='failClass'>
+    <td>sg_80_comments.subgroup_80: Comments tests.</td>
+    <td>4</td>
+    <td>1</td>
+    <td>3</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c4',4)">Detail</a></td>
+</tr>
+
+<tr id='ft4.1' class='none'>
+    <td class='failCase'><div class='testcase'>test_487: Add comments on original language</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('ft4.1', 'test_487: Add comments on original language')">fail</a>
+<script language="javascript" type="text/javascript">output_list['ft4.1'] = 'starting testcase sg_80_comments.subgroup_80.test_487: Add comments on original language\n53\n/en/videos/NmkV5cbiCqUU/\n1. trying to enter a comment when not logged in\n* Verify Comment\n2. entering a 1-char comment on original\n* Verify Comment\n3. entering a normal comment on original\n* Verify Comment\n4. entering a too-long comment on original\n* Verify Comment\nTraceback (most recent call last):\n  File \"/home/jed/RC-testing/universal-subtitles/sg_80_comments.py\", line 74, in test_487\n    website.verify_comment_text(self,sel,comments_text.normal_comment_text, result=\"too long\")\n  File \"/home/jed/RC-testing/universal-subtitles/website.py\", line 448, in verify_comment_text\n    \"too long message not found\")\nAssertionError: too long message not found\n';</script>
+</td>
+</tr>
+
+<tr id='ft4.2' class='none'>
+    <td class='failCase'><div class='testcase'>test_488: Add comments on a translation</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('ft4.2', 'test_488: Add comments on a translation')">fail</a>
+<script language="javascript" type="text/javascript">output_list['ft4.2'] = 'starting testcase sg_80_comments.subgroup_80.test_488: Add comments on a translation\n13\n/en/videos/CoY1ZIdfHE7r/\nChinese, Traditional\n1. trying to enter a comment when not logged in\n* Verify Comment\n2. entering a 1-char comment on Video Info\n* Verify Comment\n3. entering a normal comment on Video Info\n* Verify Comment\n4. entering a too-long comment on Video Info\n* Verify Comment\nTraceback (most recent call last):\n  File \"/home/jed/RC-testing/universal-subtitles/sg_80_comments.py\", line 166, in test_488\n    website.verify_comment_text(self,sel,comments_text.normal_comment_text, result=\"too long\")\n  File \"/home/jed/RC-testing/universal-subtitles/website.py\", line 448, in verify_comment_text\n    \"too long message not found\")\nAssertionError: too long message not found\n';</script>
+</td>
+</tr>
+
+<tr id='ft4.3' class='none'>
+    <td class='failCase'><div class='testcase'>test_536: Add comments on Video Info tab</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('ft4.3', 'test_536: Add comments on Video Info tab')">fail</a>
+<script language="javascript" type="text/javascript">output_list['ft4.3'] = 'starting testcase sg_80_comments.subgroup_80.test_536: Add comments on Video Info tab\n19\n/en/videos/MNx9rvIyWiEw/\n1. trying to enter a comment when not logged in\n* Verify Comment\n2. entering a 1-char comment on Video Info\n* Verify Comment\n3. entering a normal comment on Video Info\n* Verify Comment\n4. entering a too-long comment on Video Info\n* Verify Comment\nTraceback (most recent call last):\n  File \"/home/jed/RC-testing/universal-subtitles/sg_80_comments.py\", line 116, in test_536\n    website.verify_comment_text(self,sel,comments_text.normal_comment_text, result=\"too long\")\n  File \"/home/jed/RC-testing/universal-subtitles/website.py\", line 448, in verify_comment_text\n    \"too long message not found\")\nAssertionError: too long message not found\n';</script>
+</td>
+</tr>
+
+<tr id='pt4.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_537: Add comments on a translation using non-ascii characters</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt4.4', 'test_537: Add comments on a translation using non-ascii characters')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt4.4'] = 'starting testcase sg_80_comments.subgroup_80.test_537: Add comments on a translation using non-ascii characters\n53\n/en/videos/NmkV5cbiCqUU/\nAlbanian\n1. entering croatian comment text\n* Verify Comment\n2. entering japanese comment text\n* Verify Comment\n3. entering russian comment text\n* Verify Comment\n';</script>
+</td>
+</tr>
+
+<tr class='passClass'>
+    <td>sg_65_login.subgroup_65</td>
+    <td>8</td>
+    <td>8</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c5',8)">Detail</a></td>
+</tr>
+
+<tr id='pt5.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_378: Site login using site account.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt5.1', 'test_378: Site login using site account.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt5.1'] = 'logged in as: sub_writer\n';</script>
+</td>
+</tr>
+
+<tr id='pt5.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_379: Site login using twitter account.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt5.2', 'test_379: Site login using twitter account.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt5.2'] = 'twitter auth: pcfsubwriter:\nlogged in as: PCF Sub-writer\n';</script>
+</td>
+</tr>
+
+<tr id='pt5.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_380: Site login from open id account.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt5.3', 'test_380: Site login from open id account.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt5.3'] = 'this test will likely fail until bug #13688 (http://bugzilla.pculture.org/show_bug.cgi?id=13688) gets fixed\nopen id auth: http://pcf-sub-writer.myopenid.com\nlogged in as: Subwriter\n';</script>
+</td>
+</tr>
+
+<tr id='pt5.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_381: Site login using gmail account.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt5.4', 'test_381: Site login using gmail account.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt5.4'] = 'gmail auth: pcf.subwriter\nlogged in as: pcf.subwriter2\n';</script>
+</td>
+</tr>
+
+<tr id='pt5.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_382: Login from widget using gmail account.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt5.5', 'test_382: Login from widget using gmail account.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt5.5'] = 'logging in using google account\nsubbing into: en-gb\nno how-to video\ngmail auth: pcf.subwriter\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nlogged in as: pcf.subwriter2\n';</script>
+</td>
+</tr>
+
+<tr id='pt5.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_383: Login from widget using twitter account</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt5.6', 'test_383: Login from widget using twitter account')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt5.6'] = 'logging in using twitter account\nsubbing into: en-gb\nno how-to video\ntwitter auth: pcfsubwriter:\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nlogged in as: PCF Sub-writer\n';</script>
+</td>
+</tr>
+
+<tr id='pt5.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_384: Login from widget using site account.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt5.7', 'test_384: Login from widget using site account.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt5.7'] = 'logged in as: sub_writer\n';</script>
+</td>
+</tr>
+
+<tr id='pt5.8' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_385: Login from widget using openid account.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt5.8', 'test_385: Login from widget using openid account.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt5.8'] = 'this test will likely fail until bug #13688 (http://bugzilla.pculture.org/show_bug.cgi?id=13688) gets fixed\nlogging in using openid account\nsubbing into: en-gb\nno how-to video\nopen id auth: http://pcf-sub-writer.myopenid.com\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nwait for spinner to stop and login complete.\nlogged in as: Subwriter\n';</script>
+</td>
+</tr>
+
+<tr class='errorClass'>
+    <td>sg_78_widget_offsite.subgroup_78_unisubs_mc: offsite widget on MC site.</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>1</td>
+    <td><a href="javascript:showClassDetail('c6',1)">Detail</a></td>
+</tr>
+
+<tr id='ft6.1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_623: offsite widget on MC site.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('ft6.1', 'test_623: offsite widget on MC site.')">error</a>
+<script language="javascript" type="text/javascript">output_list['ft6.1'] = 'offsite widget on MC site.\nhas subtitles - edit and revert\nvideo has subs\nstarting revision is: #4\nno how-to video\nEditing the sub text in the widget\n - done loading video\nHUNTER IS THE BEST,\nTraceback (most recent call last):\n  File \"/home/jed/RC-testing/universal-subtitles/sg_78_widget_offsite.py\", line 233, in test_623\n    edit_subs(self,sel,orig_rev,subtextfile)\n  File \"/home/jed/RC-testing/universal-subtitles/sg_78_widget_offsite.py\", line 288, in edit_subs\n    widget.edit_text(self,sel,subtextfile)\n  File \"/home/jed/RC-testing/universal-subtitles/widget.py\", line 423, in edit_text\n    sel.type(textarea, ed_text)\n  File \"/home/jed/RC-testing/universal-subtitles/selenium.py\", line 596, in type\n    self.do_command(\"type\", [locator,value,])\n  File \"/home/jed/RC-testing/universal-subtitles/selenium.py\", line 217, in do_command\n    raise Exception, data\nException: ERROR: Element css=.mirosubs-titlesList li:nth-child(1) \x3E span + span textarea not found\n';</script>
+</td>
+</tr>
+
+<tr class='passClass'>
+    <td>sg_78_widget_offsite.subgroup_78_pculture</td>
+    <td>2</td>
+    <td>2</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c7',2)">Detail</a></td>
+</tr>
+
+<tr id='pt7.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_369: Subtitle Youtube video in offsite embed.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt7.1', 'test_369: Subtitle Youtube video in offsite embed.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt7.1'] = 'starting 369 youtube widget test\nEnglish\nsubbing into: en\nno how-to video\nTranscribing the video\nI\'d like to be under the sea\nIn an octopus\' garden in the shade\nHe\'d let us in, knows where we\'ve been\nSyncing the subs\n - waiting for video to buffer 51:34\n - done loading video\n - sub time: 8.14 - sub text: I\'d like to be under the sea\n - sub time: 18.65 - sub text: In an octopus\' garden in the shade\n - sub time: 29.46 - sub text: He\'d let us in, knows where we\'ve been\n';</script>
+</td>
+</tr>
+
+<tr id='pt7.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_370: Subtitle ogg video in offsite embed.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt7.2', 'test_370: Subtitle ogg video in offsite embed.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt7.2'] = 'starting 370 - ogg widget test\nEnglish\nsubbing into: en\nno how-to video\nTranscribing the video\nI\'d like to be under the sea\nIn an octopus\' garden in the shade\nHe\'d let us in, knows where we\'ve been\nSyncing the subs\n - waiting for video to buffer 53:58\n - done loading video\n - sub time: 6.80 - sub text: I\'d like to be under the sea\n - sub time: 14.01 - sub text: In an octopus\' garden in the shade\n - sub time: 21.42 - sub text: He\'d let us in, knows where we\'ve been\n';</script>
+</td>
+</tr>
+
+<tr class='passClass'>
+    <td>sg_78_widget_pagedemo.subgroup_78_pagedemo: offsite widget on MC site.</td>
+    <td>3</td>
+    <td>3</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c8',3)">Detail</a></td>
+</tr>
+
+<tr id='pt8.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_689: Pagedemo New York Times video 1 - edit original subs</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt8.1', 'test_689: Pagedemo New York Times video 1 - edit original subs')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt8.1'] = 'no how-to video\n * Resync subs - shorter interval\n - waiting for video to buffer 55:47\n - done loading video\n * Submit subtitles\n';</script>
+</td>
+</tr>
+
+<tr id='pt8.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_690: Pagedemo New York Times video 1 - translate original</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt8.2', 'test_690: Pagedemo New York Times video 1 - translate original')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt8.2'] = 'subbing into: pl\nselected video language, from: 16113\nEditing the translation\n';</script>
+</td>
+</tr>
+
+<tr id='pt8.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_691: Pagedemo New York Times video 1 - forked the subs and create a fresh set of captions in hr lang.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt8.3', 'test_691: Pagedemo New York Times video 1 - forked the subs and create a fresh set of captions in hr lang.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt8.3'] = 'subbing into: hr\nselected video language, from: forkk\nno how-to video\nTranscribing the video\nI\'d like to be under the sea\nIn an octopus\' garden in the shade\nHe\'d let us in, knows where we\'ve been\nSyncing the subs\n - waiting for video to buffer 58:30\n - done loading video\n - sub time: 4.23 - sub text: I\'d like to be under the sea\n - sub time: 8.47 - sub text: In an octopus\' garden in the shade\n - sub time: 12.74 - sub text: He\'d let us in, knows where we\'ve been\nverifying subtitles are still present\nverifying sub text\n * Submit subtitles\n';</script>
+</td>
+</tr>
+
+<tr class='passClass'>
+    <td>sg_70_revisions.subgroup_70</td>
+    <td>7</td>
+    <td>7</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c9',7)">Detail</a></td>
+</tr>
+
+<tr id='pt9.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_485: Revisions - display history info for original subtitle language.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt9.1', 'test_485: Revisions - display history info for original subtitle language.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt9.1'] = 'submitting a youtube video, format: \nhttp://www.youtube.com/watch?v=b0yOSSDOolo\nlogging in and submitting video\nverifying embed\n * verify submitted video, embed type\n\x3Cscript type=\"text/javascript\" src=\"http://s3.staging.universalsubtitles.org/embed.js\"\x3E ( {\"base_state\": {}, \"video_url\": \"http://www.youtube.com/watch?v=b0yOSSDOolo\"} ) \x3C/script\x3E\nstarting sub widget\nedit orig subs, orig: en to: en\nno how-to video\ntranscribing video\nTranscribing the video\nI\'d like to be under the sea\nIn an octopus\' garden in the shade\nHe\'d let us in, knows where we\'ve been\nsyncing video\nSyncing the subs\n - waiting for video to buffer 01:23\n - video buffered to 50% 01:23\n - done loading video\n - sub time: 4.33 - sub text: I\'d like to be under the sea\n - sub time: 7.79 - sub text: In an octopus\' garden in the shade\n - sub time: 12.04 - sub text: He\'d let us in, knows where we\'ve been\n * Submit subtitles\n * verifying subtitle text\nverifying history tab contents\n#0\n';</script>
+</td>
+</tr>
+
+<tr id='pt9.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_486: Revisions - edit subtitles timing and verify in history table.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt9.2', 'test_486: Revisions - edit subtitles timing and verify in history table.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt9.2'] = 'submitting a youtube video, format: \nhttp://www.youtube.com/watch?v=JHx6kJmxEtk\nlogging in and submitting video\n* Submit Video\nverifying embed\n * verify submitted video, embed type\n\x3Cscript type=\"text/javascript\" src=\"http://s3.staging.universalsubtitles.org/embed.js\"\x3E ( {\"base_state\": {}, \"video_url\": \"http://www.youtube.com/watch?v=JHx6kJmxEtk\"} ) \x3C/script\x3E\nstarting sub widget\nedit orig subs, orig: en to: en\nno how-to video\ntranscribing video\nTranscribing the video\nI\'d like to be under the sea\nIn an octopus\' garden in the shade\nHe\'d let us in, knows where we\'ve been\nsyncing video\nSyncing the subs\n - waiting for video to buffer 04:00\n - done loading video\n - sub time: 4.24 - sub text: I\'d like to be under the sea\n - sub time: 8.99 - sub text: In an octopus\' garden in the shade\n - sub time: 14.20 - sub text: He\'d let us in, knows where we\'ve been\nreview step - just submitting video\n * Submit subtitles\n * verifying subtitle text\n * Resync subs - shorter interval\n - waiting for video to buffer 05:36\n - done loading video\n * Submit subtitles\nverifying history tab contents\n#1\n';</script>
+</td>
+</tr>
+
+<tr id='pt9.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_492: Revisions - compare translation revisions.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt9.3', 'test_492: Revisions - compare translation revisions.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt9.3'] = '19\n/en/videos/MNx9rvIyWiEw/\nArabic\nhttp://staging.universalsubtitles.org/en/videos/diffing/112/111/\nolder_rev: 5 newer_rev: 6\nhttp://staging.universalsubtitles.org/en/videos/diffing/112/110/\nolder_rev: 4 newer_rev: 6\n';</script>
+</td>
+</tr>
+
+<tr id='pt9.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_493: Revisions - original - invalid comparison selection</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt9.4', 'test_493: Revisions - original - invalid comparison selection')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt9.4'] = '53\n/en/videos/NmkV5cbiCqUU/\nopen original lang\ngo to history tab\nverifing invalid message when 1 box checked\n';</script>
+</td>
+</tr>
+
+<tr id='pt9.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_494: Revisions - translation - invalid comparison selection</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt9.5', 'test_494: Revisions - translation - invalid comparison selection')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt9.5'] = '19\n/en/videos/MNx9rvIyWiEw/\nArabic\n';</script>
+</td>
+</tr>
+
+<tr id='pt9.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_495: Revisions - original - history diffs</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt9.6', 'test_495: Revisions - original - history diffs')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt9.6'] = '19\n/en/videos/MNx9rvIyWiEw/\nhttp://staging.universalsubtitles.org/en/videos/diffing/21142/9668/\nolder_rev: 9 newer_rev: 10\nhttp://staging.universalsubtitles.org/en/videos/diffing/21142/5685/\nolder_rev: 8 newer_rev: 10\n';</script>
+</td>
+</tr>
+
+<tr id='pt9.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_602: Revisions - edit subtitles text and verify in history table.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt9.7', 'test_602: Revisions - edit subtitles text and verify in history table.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt9.7'] = 'submitting a youtube video, format: \nhttp://www.youtube.com/watch?v=CVxkioXgBFM\nlogging in and submitting video\n* Submit Video\nverifying embed\n * verify submitted video, embed type\n\x3Cscript type=\"text/javascript\" src=\"http://s3.staging.universalsubtitles.org/embed.js\"\x3E ( {\"base_state\": {}, \"video_url\": \"http://www.youtube.com/watch?v=CVxkioXgBFM\"} ) \x3C/script\x3E\nstarting sub widget\nedit orig subs, orig: en to: en\nno how-to video\ntranscribing video\nTranscribing the video\nI\'d like to be under the sea\nIn an octopus\' garden in the shade\nHe\'d let us in, knows where we\'ve been\nsyncing video\nSyncing the subs\n - waiting for video to buffer 10:08\n - done loading video\n - sub time: 5.04 - sub text: I\'d like to be under the sea\n - sub time: 10.79 - sub text: In an octopus\' garden in the shade\n - sub time: 18.15 - sub text: He\'d let us in, knows where we\'ve been\nreview step - just submitting video\n * Submit subtitles\n * verifying subtitle text\nEditing the sub text in the widget\n - waiting for video to buffer 11:47\n - done loading video\nI\'D LIKE TO BE UNDER THE SEA\nI\'D LIKE TO BE UNDER THE SEA\nIN AN OCTOPUS\' GARDEN IN THE SHADE\nIN AN OCTOPUS\' GARDEN IN THE SHADE\nHE\'D LET US IN, KNOWS WHERE WE\'VE BEEN\nHE\'D LET US IN, KNOWS WHERE WE\'VE BEEN\n * Submit subtitles\nverifying history tab contents\n#1\n';</script>
+</td>
+</tr>
+
+<tr class='errorClass'>
+    <td>sg_78_widget_playback.subgroup_78_playback: offsite widget on MC site.</td>
+    <td>7</td>
+    <td>2</td>
+    <td>3</td>
+    <td>2</td>
+    <td><a href="javascript:showClassDetail('c10',7)">Detail</a></td>
+</tr>
+
+<tr id='pt10.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_684: Pagedemo New York Times video 1 - sub position on playback.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt10.1', 'test_684: Pagedemo New York Times video 1 - sub position on playback.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt10.1'] = 'testing playback on 1st video on page\ntesting playback on second video on page\n';</script>
+</td>
+</tr>
+
+<tr id='ft10.2' class='none'>
+    <td class='failCase'><div class='testcase'>test_685: Pagedemo Blog Youtube Embed - sub position on playback.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('ft10.2', 'test_685: Pagedemo Blog Youtube Embed - sub position on playback.')">fail</a>
+<script language="javascript" type="text/javascript">output_list['ft10.2'] = 'Traceback (most recent call last):\n  File \"/home/jed/RC-testing/universal-subtitles/sg_78_widget_playback.py\", line 114, in test_685\n    mslib.wait_for_element_present(self,sel,\"css=.mirosubs-captionSpan\")\n  File \"/home/jed/RC-testing/universal-subtitles/mslib.py\", line 34, in wait_for_element_present\n    self.fail(\"time out waiting 30s for element \" +input_field)\nAssertionError: time out waiting 30s for element css=.mirosubs-captionSpan\n';</script>
+</td>
+</tr>
+
+<tr id='ft10.3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_686: Pagedemo Gapminder - sub position on playback.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('ft10.3', 'test_686: Pagedemo Gapminder - sub position on playback.')">error</a>
+<script language="javascript" type="text/javascript">output_list['ft10.3'] = 'Traceback (most recent call last):\n  File \"/home/jed/RC-testing/universal-subtitles/sg_78_widget_playback.py\", line 134, in test_686\n    sel.get_eval(\'this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()\')\n  File \"/home/jed/RC-testing/universal-subtitles/selenium.py\", line 1231, in get_eval\n    return self.get_string(\"getEval\", [script,])\n  File \"/home/jed/RC-testing/universal-subtitles/selenium.py\", line 223, in get_string\n    result = self.do_command(verb, args)\n  File \"/home/jed/RC-testing/universal-subtitles/selenium.py\", line 217, in do_command\n    raise Exception, data\nException: ERROR: Threw an exception: Error calling method on NPObject!\n';</script>
+</td>
+</tr>
+
+<tr id='ft10.4' class='none'>
+    <td class='failCase'><div class='testcase'>test_687: Pagedemo Khan Widgetizer - sub position on playback.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('ft10.4', 'test_687: Pagedemo Khan Widgetizer - sub position on playback.')">fail</a>
+<script language="javascript" type="text/javascript">output_list['ft10.4'] = 'Traceback (most recent call last):\n  File \"/home/jed/RC-testing/universal-subtitles/sg_78_widget_playback.py\", line 155, in test_687\n    mslib.wait_for_element_present(self,sel,\"css=.mirosubs-captionSpan\")\n  File \"/home/jed/RC-testing/universal-subtitles/mslib.py\", line 34, in wait_for_element_present\n    self.fail(\"time out waiting 30s for element \" +input_field)\nAssertionError: time out waiting 30s for element css=.mirosubs-captionSpan\n';</script>
+</td>
+</tr>
+
+<tr id='ft10.5' class='none'>
+    <td class='failCase'><div class='testcase'>test_688: Pagedemo New York Times video 1 - translation playback</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('ft10.5', 'test_688: Pagedemo New York Times video 1 - translation playback')">fail</a>
+<script language="javascript" type="text/javascript">output_list['ft10.5'] = 'testing playback on translated lang\nTraceback (most recent call last):\n  File \"/home/jed/RC-testing/universal-subtitles/sg_78_widget_playback.py\", line 93, in test_688\n    mslib.wait_for_element_present(self,sel,\"css=span.mirosubs-captionSpan\")\n  File \"/home/jed/RC-testing/universal-subtitles/mslib.py\", line 34, in wait_for_element_present\n    self.fail(\"time out waiting 30s for element \" +input_field)\nAssertionError: time out waiting 30s for element css=span.mirosubs-captionSpan\n';</script>
+</td>
+</tr>
+
+<tr id='pt10.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_701: Pagedemo Khan Widgetizer async - sub position on playback.</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='ft10.7' class='none'>
+    <td class='errorCase'><div class='testcase'>test_702: Pagedemo JW Player - sub position on playback.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('ft10.7', 'test_702: Pagedemo JW Player - sub position on playback.')">error</a>
+<script language="javascript" type="text/javascript">output_list['ft10.7'] = 'Traceback (most recent call last):\n  File \"/home/jed/RC-testing/universal-subtitles/sg_78_widget_playback.py\", line 196, in test_702\n    sel.get_eval(\'this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()\')\n  File \"/home/jed/RC-testing/universal-subtitles/selenium.py\", line 1231, in get_eval\n    return self.get_string(\"getEval\", [script,])\n  File \"/home/jed/RC-testing/universal-subtitles/selenium.py\", line 223, in get_string\n    result = self.do_command(verb, args)\n  File \"/home/jed/RC-testing/universal-subtitles/selenium.py\", line 217, in do_command\n    raise Exception, data\nException: ERROR: Threw an exception: Error calling method on NPObject!\n';</script>
+</td>
+</tr>
+
+<tr class='errorClass'>
+    <td>sg_88_teams.subgroup_88</td>
+    <td>7</td>
+    <td>4</td>
+    <td>2</td>
+    <td>1</td>
+    <td><a href="javascript:showClassDetail('c11',7)">Detail</a></td>
+</tr>
+
+<tr id='ft11.1' class='none'>
+    <td class='failCase'><div class='testcase'>test_603: Create a new team - open membership.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('ft11.1', 'test_603: Create a new team - open membership.')">fail</a>
+<script language="javascript" type="text/javascript">output_list['ft11.1'] = 'Traceback (most recent call last):\n  File \"/home/jed/RC-testing/universal-subtitles/sg_88_teams.py\", line 51, in test_603\n    website.create_team(self,sel,team,team_logo_path)\n  File \"/home/jed/RC-testing/universal-subtitles/website.py\", line 561, in create_team\n    self.failUnless(sel.is_element_present(\"css=p:contains(\'Current video\') \x3E a:contains(\'blip\')\"))\nAssertionError\n';</script>
+</td>
+</tr>
+
+<tr id='pt11.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_604: Create a new team - required fields.</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt11.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_605: Team Edit Description</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt11.3', 'test_605: Team Edit Description')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt11.3'] = 'using existing team\ntesting team: miro0430111408\n0525131759\n';</script>
+</td>
+</tr>
+
+<tr id='pt11.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_609: Team Privacy Settings.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('pt11.4', 'test_609: Team Privacy Settings.')">pass</a>
+<script language="javascript" type="text/javascript">output_list['pt11.4'] = 'using existing team\ntesting with team: miro0430111408\n';</script>
+</td>
+</tr>
+
+<tr id='ft11.5' class='none'>
+    <td class='failCase'><div class='testcase'>test_613: Submit a video and add to team.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('ft11.5', 'test_613: Submit a video and add to team.')">fail</a>
+<script language="javascript" type="text/javascript">output_list['ft11.5'] = 'Traceback (most recent call last):\n  File \"/home/jed/RC-testing/universal-subtitles/sg_88_teams.py\", line 97, in test_613\n    website.create_team(self,sel,team,team_logo_path)\n  File \"/home/jed/RC-testing/universal-subtitles/website.py\", line 561, in create_team\n    self.failUnless(sel.is_element_present(\"css=p:contains(\'Current video\') \x3E a:contains(\'blip\')\"))\nAssertionError\n';</script>
+</td>
+</tr>
+
+<tr id='ft11.6' class='none'>
+    <td class='errorCase'><div class='testcase'>test_693: Launch widget from Teams page.</div></td>
+    <td colspan='5' align='center'><a href="javascript:showOutput('ft11.6', 'test_693: Launch widget from Teams page.')">error</a>
+<script language="javascript" type="text/javascript">output_list['ft11.6'] = 'testing edit original lang\nTraceback (most recent call last):\n  File \"/home/jed/RC-testing/universal-subtitles/sg_88_teams.py\", line 231, in test_693\n    widget.starter_dialog_edit_orig(self,sel)\n  File \"/home/jed/RC-testing/universal-subtitles/widget.py\", line 107, in starter_dialog_edit_orig\n    sel.click(testvars.WebsiteUI[\"AddSubtitles_menuitem\"])\n  File \"/home/jed/RC-testing/universal-subtitles/selenium.py\", line 290, in click\n    self.do_command(\"click\", [locator,])\n  File \"/home/jed/RC-testing/universal-subtitles/selenium.py\", line 217, in do_command\n    raise Exception, data\nException: ERROR: Element css=.mirosubs-improveSubtitles not found\n';</script>
+</td>
+</tr>
+
+<tr id='pt11.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_697: Open Al Jazeera team page and see if Language Dialog goes away after lang selected.</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='total_row'>
+    <td>Total</td>
+    <td>75</td>
+    <td>61</td>
+    <td>10</td>
+    <td>4</td>
+    <td>&nbsp;</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+
+</body>
+</html>
