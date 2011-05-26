@@ -191,14 +191,14 @@ def verify_login(self,sel,username="sub_writer"):
 
     Pre-Condition: must be logged into site.
 
-    Post-Condition: will be on the /demo page
     """
-    mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Logout_Button"])
-    self.failUnless(sel.is_element_present("css=.user_panel"),\
+    mslib.wait_for_element_present(self,sel,"css=li[id=me_menu]")
+    self.failUnless(sel.is_element_present("css=div[id=menu_name]:contains('Me')"),\
                     "user not logged in, user_panel not displayed")
-    print "logged in as: " + sel.get_text("css=.user_panel a")
-    self.failUnless(sel.is_element_present("css=.user_panel a:contains("+username+")"),\
-                    "username: "+username+ " not found. Got "+ sel.get_text("css=.user_panel a"))
+## Commented this out - post 0.9.3 not showing name of logged in user
+##    print "logged in as: " + sel.get_text("css=.user_panel a")
+##    self.failUnless(sel.is_element_present("css=.user_panel a:contains("+username+")"),\
+##                    "username: "+username+ " not found. Got "+ sel.get_text("css=.user_panel a"))
 
 
 
