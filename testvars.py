@@ -12,8 +12,8 @@ MSTestVariables = {"DataDirectory": os.path.join(os.getcwd(), "TestInput"), \
 # Mapping to the MiroSubs website UI navigations buttons and links
 
 WebsiteUI = {"Home":"css=a:contains('Miro Subs Alpha')", \
-             "Login_Button":"css=a span:contains('login')", \
-             "Logout_Button":"css=li a:contains('Logout')", \
+             "Login_Button":"css=li a span:contains('Sign In')", \
+             "Logout_Button":"css=li a:contains('Sign Out')", \
              "SiteLogoutUrl": "en/logout/?next=/",\
              "Subtitle_Button":"css=a[href*=/videos/create/]", \
              "All_Videos_Button":"css=a:contains('All Videos')", \
