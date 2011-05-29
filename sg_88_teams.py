@@ -125,12 +125,14 @@ class subgroup_88(unittest.TestCase):
         self.assertTrue(sel.is_element_present("css=tr.video-container td a[href*='"+test_video_url+"info/']"),"test_video_url error")
 #        self.assertTrue(sel.is_element_present("css=tr.video-container td:contains('"+vid_title[0:10]+"')"),"vid_title error")
         # delete the video from the team
-        sel.click("css=td:contains('"+vid_title[0:10]+"') > div a.remove-video")
+        sel.click("css=td a:contains('"+vid_title[0:10]+"') +div +div +div.small.grey a.remove-video")
         try:
-            self.failUnless("Remove this video", sel.get_confirmation())
-        except:
-            print "no confirmation - hitting enter"
-            sel.key_press_native('10') #workaround for FF 4 selenium confirmation bug
+                self.assertEqual("Select two revisions for compare, please", sel.get_alert())
+            except:
+                if "4.0" in (sel.get_eval("navigator.appVersion")):
+                    sel.key_press("css=div", "13") #workaround for FF 4 selenium confirmation bug
+                else:
+                    self.fail("no confirmation")
 
 
         # logout
@@ -229,8 +231,8 @@ class subgroup_88(unittest.TestCase):
         sel.click(testvars.vid_add_subs_button)
         time.sleep(5)
         widget.starter_dialog_edit_orig(self,sel)
-        widget.goto_step(self,sel,step="2")
-        widget.resync_video(self,sel,subtextfile)
+        widget.transcribe_video(self,sel,subtextfile)
+        widget.goto_step(self,sel,step="3")
         widget.submit_sub_edits(self,sel,offsite=True)
 
         #Edit translation

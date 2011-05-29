@@ -203,13 +203,10 @@ class subgroup_70(unittest.TestCase):
         #If there is only 1 revision - edit the subs to make a new revision
         if int(rev_num) < 1:
             print "only 1 rev - editing text first"
-            sel.click(testvars.video_add_translation)
-            time.sleep(3)
-            if sel.is_text_present("Create Subtitles"):
-                mslib.wait_for_text_present(self,sel,"This video")
-                to_lang = website.get_lang_cc(self,sel,language)
-                widget.starter_dialog_translate_from_orig(self,sel,to_lang=to_lang)
-            widget.edit_translation(self,sel,subtextfile)
+            sel.click(testvars.video_edit_subtitles)
+            widget.goto_step(self,sel,step="3")
+            widget.edit_text(self,sel,subtextfile)
+            submit_sub_edits(self,sel)
             
         sel.select_frame("relative=top")  
         sel.click(testvars.history_tab)
@@ -277,14 +274,37 @@ class subgroup_70(unittest.TestCase):
         language = website.get_translated_lang(self,sel)
         mslib.wait_for_element_present(self,sel,"css=a:contains('"+language+"')")
         sel.click("css=a:contains('"+language+"')")
-        sel.click(testvars.history_tab)
+        sel.wait_for_page_to_load(testvars.timeout)
+        ## if not enough revisions for comparison, edit the sub text.
+        rev_num = int(sel.get_text("css=a[href*=revisions-tab] span.badgy_out span.badgy"))
+        print rev_num
+        while rev_num < 3:
+            print "only 2 or less revs - editing text first"
+            #edit text
+            sel.click(testvars.video_edit_subtitles)
+            mslib.wait_for_element_present(self,sel,"css=div.mirosubs-help-heading")
+            if sel.is_element_present("css=h2:contains('Editing Translation')"):
+                widget.edit_translations(self,sel,subtextfile)
+            else:
+                widget.goto_step(self,sel,step="3")
+                widget.edit_text(self,sel,subtextfile)
+
+            submit_sub_edits(self,sel)
+            rev_num = int(sel.get_text("css=a[href*=revisions-tab] span.badgy_out span.badgy"))
         
+        sel.click(testvars.history_tab)
         row_num = 1
         website.check_the_box(self,sel,row_num) #uncheck the box to start
         while sel.is_element_present("//div[@id='revisions-tab']/table/tbody/tr["+str(row_num)+"]"):
             website.check_the_box(self,sel,row_num)                
             sel.click(testvars.video_compare_revisions)
-            self.assertEqual("Select two revisions for compare, please", sel.get_alert())
+            try:
+                self.assertEqual("Select two revisions for compare, please", sel.get_alert())
+            except:
+                if "4.0" in (sel.get_eval("navigator.appVersion")):
+                    sel.key_press("css=div", "13") #workaround for FF 4 selenium confirmation bug
+                else:
+                    self.fail("no confirmation")
             website.check_the_box(self,sel,row_num) #uncheck the box
             row_num += 1
             if row_num == 3:

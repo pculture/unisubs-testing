@@ -247,7 +247,7 @@ def get_video_with_translations(self,sel):
     Returns: video_url
     """
     sel.open("videos/")
- #   sort_videos_table(self,sel,"Subtitles and Translations","desc") 
+    sort_videos_table(self,sel,"Subtitles and Translations","desc") 
     row_no = random.randint(1,3)
     local_url = "none"    
     while sel.is_element_present("css=tr:nth-child("+str(row_no)+") > "+testvars.videos_trans_td):
@@ -404,15 +404,18 @@ def sort_videos_table(self,sel,column,order):
     Order can be 'asc' or 'desc'
 
     """
-    sel.click("link="+column)
+    mslib.wait_for_element_present(self,sel,"css=th a:contains('"+column+"')")
+    sel.click("css=th a:contains('"+column+"')")
     sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
     if sel.is_element_present("css=a."+order+":contains("+column+")"):
-        sel.click("link="+column)
+        print "already sorted: ",order
+    else:
+        sel.click("css=th a:contains('"+column+"')")
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-    if order == "asc":
-        self.assertTrue(sel.is_element_present("css=a.desc:contains("+column+")"),"sort not correct")
     if order == "desc":
-        self.assertTrue(sel.is_element_present("css=a.asc:contains("+column+")"),"sorted by desc")
+        self.assertTrue(sel.is_element_present("css=a.desc:contains("+column+")"))
+    if order == "asc":
+        self.assertTrue(sel.is_element_present("css=a.asc:contains("+column+")"))
 
 
 def enter_comment_text(self,sel,comment):
@@ -437,10 +440,11 @@ def verify_comment_text(self,sel,comment,result="posted",reply_text=None):
     """
     #give it 3 seconds to post
     print "* Verify Comment"
-    time.sleep(15)
-    sel.refresh()
-    sel.wait_for_page_to_load(testvars.timeout)
+    time.sleep(5)
     if result == "posted":
+        time.sleep(10)
+        sel.refresh()
+        sel.wait_for_page_to_load(testvars.timeout)
         posted_text = sel.get_text("css=ul.comments.big_list li:nth-child(1) > div.info p")
         self.assertEqual(posted_text.strip(),comment.strip(),"posted text doesn't match expected text")
     elif result == "too long":

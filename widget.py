@@ -104,8 +104,9 @@ def starter_dialog_edit_orig(self,sel):
     
     #Figure our the original lang or choose your own
     orig_lang = "Original"
-    sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])
-    time.sleep(5)
+    if sel.is_element_present(testvars.WebsiteUI["AddSubtitles_menuitem"]):
+        sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])
+        time.sleep(5)
     if sel.is_element_present(testvars.create_lang_unknown): # No lang set, going to use English
         orig_lang = "English"
         select_video_language(self,sel,vid_lang='en',sub_lang='en')
@@ -327,13 +328,15 @@ def restart_step(self,sel):
             try:
                 self.assertTrue(re.search(r"^Are you sure you want to start over[\s\S] All timestamps will be deleted\.$", sel.get_confirmation()))
             except:
-                sel.key_press("css=div", "13") #workaround for FF 4 selenium confirmation bug
+                if "4.0" in (sel.get_eval("navigator.appVersion")):
+                    sel.key_press("css=div", "13") #workaround for FF 4 selenium confirmation bug
                 
         if sel.is_element_present("css=.mirosubs-activestep:contains('1')"):
             try:
                 self.assertTrue("Are you sure you want to start over? All subtitles will be deleted.", sel.get_confirmation())
             except:
-                sel.key_press("css=div", "13") #workaround for FF 4 selenium confirmation bug
+                if "4.0" in (sel.get_eval("navigator.appVersion")):
+                    sel.key_press("css=div", "13") #workaround for FF 4 selenium confirmation bug
 
 def back_step(self,sel):
     """
@@ -409,8 +412,8 @@ def edit_text(self,sel,subtextfile,new_text=""):
         sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(x)+")"       
         if sel.is_element_present(sub_cell) == False:
             break
-        textspan = sub_cell +" > span + span"
-        textarea = sub_cell +" > span + span textarea"
+        textspan = sub_cell +" > span.mirosubs-title + span"
+        textarea = sub_cell +" > span.mirosubs-title + textarea"
         
         
         if new_text == "":

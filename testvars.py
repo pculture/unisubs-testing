@@ -43,7 +43,7 @@ video_metadata = "css=ul.left_nav li a[href:contains('meta-')]"
 video_video_info = "css=li a:contains('Video Info')"
 ## action links
 video_upload_subtitles = "css=a[id=upload-subtitles-link]"
-video_edit_subtitles = "css=a[id=edit_subtitles]"
+video_edit_subtitles = "css=div a:contains('Edit Subtitles')"
 video_add_translation = "css=a[id*='add_translation']"
 video_compare_revisions = "css=button span:contains('Compare Revisions')"
 rev_rollback = "css=a.roll_back"
