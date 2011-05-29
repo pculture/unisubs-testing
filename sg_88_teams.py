@@ -127,12 +127,12 @@ class subgroup_88(unittest.TestCase):
         # delete the video from the team
         sel.click("css=td a:contains('"+vid_title[0:10]+"') +div +div +div.small.grey a.remove-video")
         try:
-                self.assertEqual("Select two revisions for compare, please", sel.get_alert())
-            except:
-                if "4.0" in (sel.get_eval("navigator.appVersion")):
-                    sel.key_press("css=div", "13") #workaround for FF 4 selenium confirmation bug
-                else:
-                    self.fail("no confirmation")
+            self.assertEqual("Select two revisions for compare, please", sel.get_alert())
+        except:
+            if "4.0" in (sel.get_eval("navigator.appVersion")):
+                sel.key_press("css=div", "13") #workaround for FF 4 selenium confirmation bug
+            else:
+                self.fail("no confirmation")
 
 
         # logout
