@@ -284,7 +284,7 @@ class subgroup_70(unittest.TestCase):
             sel.click(testvars.video_edit_subtitles)
             mslib.wait_for_element_present(self,sel,"css=div.mirosubs-help-heading")
             if sel.is_element_present("css=h2:contains('Editing Translation')"):
-                widget.edit_translations(self,sel,subtextfile)
+                widget.edit_translation(self,sel,subtextfile)
             else:
                 widget.goto_step(self,sel,step="3")
                 widget.edit_text(self,sel,subtextfile)
