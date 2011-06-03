@@ -83,6 +83,7 @@ class subgroup_81(unittest.TestCase):
             print "2. invalid srt"
             sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_invalid.srt")
             sel.type("subtitles-file-field",sub_file)
+            sel.click(testvars.video_upload_subtitles)
             time.sleep(5)
             mslib.wait_for_element_present(self,sel,"css=p.error_list")
             self.assertTrue(sel.is_element_present("css=p.error_list:contains('Incorrect subtitles format')"))
@@ -91,6 +92,7 @@ class subgroup_81(unittest.TestCase):
             print "3. unsupported format"
             sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_text.txt")
             sel.type("subtitles-file-field",sub_file)
+            sel.click(testvars.video_upload_subtitles)
             time.sleep(5)
             mslib.wait_for_element_present(self,sel,"css=p.error_list")
             self.assertTrue(sel.is_element_present("css=p.error_list:contains('Incorrect format.')"))
