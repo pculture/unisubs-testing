@@ -362,6 +362,7 @@ def sync_video(self,sel,sub_file,start_delay=3,sub_int=2,step="Continue"):
     print ("Syncing the subs")
     sel.select_window("null")
     mslib.wait_for_video_to_buffer(self,sel)
+    mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
     #start playback
 #    sel.type_keys("css=.mirosubs-play",u'\u0009')
     if sel.is_element_present(testvars.WidgetUI["Video_pause_button"]):
@@ -482,6 +483,7 @@ def drag_time_bubbles(self,sel,subtextfile):
     """
     sel.select_window("null")
     mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep:contains('3')")
+    mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
            
     sub_cell_start_time = "css=li:nth-child(1) > .mirosubs-timestamp span span.mirosubs-timestamp-time"
     # drag bubble to the left and verify time change
