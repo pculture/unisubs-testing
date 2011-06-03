@@ -50,9 +50,9 @@ class subgroup_78_playback(unittest.TestCase):
         time.sleep(5)
         print "testing playback on 1st video on page"
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')
-        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_offsite"])
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
-        caption_position =  sel.get_element_height(testvars.WidgetUI["Current_playing_sub"])
+        caption_position =  sel.get_element_height(testvars.WidgetUI["Current_playing_offsite"])
         verify_caption_position(self,sel,caption_position)
         verify_submenu_present(self,sel)
         
@@ -66,9 +66,9 @@ class subgroup_78_playback(unittest.TestCase):
         time.sleep(5)
         print "testing playback on second video on page"
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].play()')
-        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_offsite"])
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].pause()')
-        caption_position =  sel.get_element_height(testvars.WidgetUI["Current_playing_sub"])
+        caption_position =  sel.get_element_height(testvars.WidgetUI["Current_playing_offsite"])
         verify_caption_position(self,sel,caption_position)
 
     def test_688(self):
@@ -90,9 +90,9 @@ class subgroup_78_playback(unittest.TestCase):
         time.sleep(10)
         print "testing playback on translated lang"
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')       
-        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_offsite"])
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
-        caption_position =  sel.get_element_height(testvars.WidgetUI["Current_playing_sub"])
+        caption_position =  sel.get_element_height(testvars.WidgetUI["Current_playing_offsite"])
         verify_caption_position(self,sel,caption_position)
         verify_submenu_present(self,sel)
         
@@ -111,9 +111,9 @@ class subgroup_78_playback(unittest.TestCase):
         sel.window_maximize()
         time.sleep(5)
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')
-        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_offsite"])
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
-        caption_position =  sel.get_element_height(testvars.WidgetUI["Current_playing_sub"])
+        caption_position =  sel.get_element_height(testvars.WidgetUI["Current_playing_offsite"])
         verify_caption_position(self,sel,caption_position)
 
 
@@ -132,9 +132,9 @@ class subgroup_78_playback(unittest.TestCase):
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
         time.sleep(5)
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')
-        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_offsite"])
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
-        caption_position =  sel.get_element_height(testvars.WidgetUI["Current_playing_sub"])
+        caption_position =  sel.get_element_height(testvars.WidgetUI["Current_playing_offsite"])
         verify_caption_position(self,sel,caption_position)
         verify_submenu_present(self,sel)
 
@@ -152,9 +152,9 @@ class subgroup_78_playback(unittest.TestCase):
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
         time.sleep(5)
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')
-        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_offsite"])
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
-        caption_position =  sel.get_element_height(testvars.WidgetUI["Current_playing_sub"])
+        caption_position =  sel.get_element_height(testvars.WidgetUI["Current_playing_offsite"])
         verify_caption_position(self,sel,caption_position)
         verify_submenu_present(self,sel)
 
@@ -173,9 +173,9 @@ class subgroup_78_playback(unittest.TestCase):
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
         time.sleep(5)
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')
-        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_offsite"])
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
-        caption_position =  sel.get_element_height(testvars.WidgetUI["Current_playing_sub"])
+        caption_position =  sel.get_element_height(testvars.WidgetUI["Current_playing_offsite"])
         verify_caption_position(self,sel,caption_position)
         verify_submenu_present(self,sel)
 
@@ -194,9 +194,9 @@ class subgroup_78_playback(unittest.TestCase):
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
         time.sleep(5)
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')
-        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_offsite"])
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
-        caption_position =  sel.get_element_height(testvars.WidgetUI["Current_playing_sub"])
+        caption_position =  sel.get_element_height(testvars.WidgetUI["Current_playing_offsite"])
         verify_caption_position(self,sel,caption_position)
         verify_submenu_present(self,sel)
 
@@ -257,9 +257,9 @@ class subgroup_78_subtesting_playback(unittest.TestCase):
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
         time.sleep(3)
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')
-        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_offsite"])
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
-        caption_position =  sel.get_element_height(testvars.WidgetUI["Current_playing_sub"])
+        caption_position =  sel.get_element_height(testvars.WidgetUI["Current_playing_offsite"])
         verify_caption_position(self,sel,caption_position)
         verify_submenu_present(self,sel)
 
