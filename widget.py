@@ -294,8 +294,8 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="ye
         sel.focus("css=input[class*=trans]")
         sel.type("css=input[class*=trans]",line)
         sel.type_keys("css=input[class*=trans]",' ')
-        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_sub"])
-        current_sub = sel.get_text(testvars.WidgetUI["Current_playing_sub"])
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Transcribed_text"])
+        current_sub = sel.get_text(testvars.WidgetUI["Transcribed_text"])
         print current_sub
         # compare input text
         self.assertEqual(line.rstrip(),current_sub.rstrip(),\

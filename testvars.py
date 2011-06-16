@@ -70,6 +70,7 @@ WidgetUI = {"Video_playPause":"css=.mirosubs-playPause", \
             "Video_pause_button":"css=.mirosubs-playPause.pause", \
             "Video_elapsed_time":"css=.mirosubs-timeElapsed", \
             "Current_playing_sub":"css=div.mirosubs-subtext", \
+            "Transcribed_text":"css=.mirosubs-captionSpan", \
             "Current_playing_offsite":"css=div.mirosubs-videoTab-container span.mirosubs-captionSpan", \
             "Next_step":"css=.mirosubs-done span", \
             "Translate_now_button":"css=a#add_translation"
