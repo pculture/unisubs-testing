@@ -342,7 +342,7 @@ def verify_sub_upload(self,sel,sub_file,lang=""):
     time.sleep(10)
     sel.refresh()
     sel.wait_for_page_to_load(testvars.timeout)
-    sel.click("css=ul.left_nav li a span:contains(+"lang"+)")
+    sel.click("css=ul.left_nav li a span:contains("+lang+")")
     sel.wait_for_page_to_load(testvars.timeout)
     sub_td = 1
     for line in codecs.open(sub_file,encoding='utf-8'):
