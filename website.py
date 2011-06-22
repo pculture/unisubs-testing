@@ -330,7 +330,8 @@ def upload_subtitles(self,sel,sub_file,lang="en"):
     sel.select("css=form[id='upload-subtitles-form'] select[id='id_language']", "value="+lang)
     sel.type("subtitles-file-field",sub_file)
     sel.click("css=form#upload-subtitles-form .green_button.small")
-  
+    mslib.wait_for_element_present(self,sel,'css=p.feedback-message:contains("Thank you for uploading")')
+    sel.click("css=a.close")  
 
 
 def verify_sub_upload(self,sel,sub_file,lang=""):
