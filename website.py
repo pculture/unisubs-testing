@@ -333,30 +333,30 @@ def upload_subtitles(self,sel,sub_file,lang="en"):
     
 
 
-def verify_sub_upload(self,sel,sub_file,lang="English"):
+def verify_sub_upload(self,sel,sub_file,lang=""):
     """Verifies the uploaded subtitle text matches the text of a corresponing test file.
 
     """
     mslib.wait_for_element_present(self,sel,'css=p.feedback-message:contains("Thank you for uploading")')
     sel.click("css=a.close")  
-    time.sleep(10)
+    time.sleep(15)
     sel.refresh()
     sel.wait_for_page_to_load(testvars.timeout)
-    sel.click("css=ul.left_nav li a span:contains('"+lang+"')")
-    sel.wait_for_page_to_load(testvars.timeout)
     sub_td = 1
+    
+    if lang == "":
+        sublang = (sel.get_text("css=li.full.active a").split('(')) # split off the number of lines
+        self.assertEqual(sublang[0].rstrip(),"English")
+    else:
+        sel.click("css=ul.left_nav li a span:contains('"+lang+"')")
+        sel.wait_for_page_to_load(testvars.timeout)
+        sublang = (sel.get_text("css=li.full.active a").split('(')) # split off the number of lines
+        self.assertEqual(sublang[0].rstrip(),lang)
     for line in codecs.open(sub_file,encoding='utf-8'):
         subline = line.split(',')
         sub = subline[0].rstrip()
         self.assertTrue("css=tr:nth-child("+str(sub_td)+") > td.last:contains("+sub+")")
         sub_td = sub_td + 1
-    if lang == "":
-        sublang = (sel.get_text("css=li.full.active a").split('(')) # split off the number of lines
-        self.assertEqual(sublang[0].rstrip(),"English")
-    else:
-        sublang = (sel.get_text("css=li.full.active a").split('(')) # split off the number of lines
-        self.assertEqual(sublang[0].rstrip(),lang)
-   
     
 def verify_subs(self,sel,sub_file):
     """Compares the displayed text for subtitles in the to the input file.
