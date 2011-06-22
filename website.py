@@ -348,7 +348,7 @@ def verify_sub_upload(self,sel,sub_file,lang=""):
         sublang = (sel.get_text("css=li.full.active a").split('(')) # split off the number of lines
         self.assertEqual(sublang[0].rstrip(),"English")
     else:
-        sel.click("css=ul.left_nav li a span:contains('"+lang+"')")
+        sel.click("css=ul.left_nav li a:contains('"+lang+"')")
         sel.wait_for_page_to_load(testvars.timeout)
         sublang = (sel.get_text("css=li.full.active a").split('(')) # split off the number of lines
         self.assertEqual(sublang[0].rstrip(),lang)
