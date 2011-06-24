@@ -86,23 +86,7 @@ def handle_warning_popup(self,sel):
 
 def get_blip_video_url(self,file_type="flv"):
     
-##    self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("blip"," get video url"), "http://blip.tv/"))
-##    self.selenium.start()
-##    bsel= self.selenium
-##    try:
-##        bsel.set_timeout(testvars.MSTestVariables["TimeOut"])
-##        random_url = "posts?sort=random&file_type="+file_type+"&page=1&view=list"
-##        bsel.open(random_url)
-##        print "opening: "+random_url
-##        mslib.wait_for_element_present(self,bsel,"css=.EpisodeListThumb img")
-##        bsel.click("css=.EpisodeListThumb img")
-##        time.sleep(5)
-##        blipURL = bsel.get_eval("window.location")
-##    except:
-##        print "error getting video, type:" +file_type
-##    finally:
-##        bsel.stop()
-##    print blipURL
+
     if file_type == "ogv":
         blipURL = "http://blip.tv/file/get/Pycon-PyCon2011PythonTheSecretSauceInTheOpenCloud878.ogv"     
     elif file_type == "mp4":
