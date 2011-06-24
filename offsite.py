@@ -98,7 +98,7 @@ def get_blip_video_url(self,file_type="flv"):
 
 def get_vimeo_video_url(self):
 
-    if firefox not in selvars.set_browser:
+    if "firefox" not in selvars.set_browser():
         vimeoURL = "http://vimeo.com/25378567"
     else:
         self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("vimeo"," get video url"), "http://vimeo.com/"))
@@ -126,7 +126,7 @@ def get_vimeo_video_url(self):
 
         
 def get_youtube_video_url(self,vid_format="embed"):
-    if firefox not in selvars.set_browser:
+    if "firefox" not in selvars.set_browser():
         youtubeURL = "http://www.youtube.com/watch?v=3Xx53Q7pJuA"
     else:
         cat_num = random.randint(1,26)
@@ -159,7 +159,7 @@ def get_youtube_video_url(self,vid_format="embed"):
     return youtubeURL
 
 def get_dailymotion_video_url(self):
-    if firefox not in selvars.set_browser:
+    if "firefox" not in selvars.set_browser():
         dailymotionURL = "http://www.dailymotion.com/video/xjhmjf_souviens-toi-tafit-mag-seance-studio-d-enregistrement-ade-mougins_music"
     else:
         self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("dailymotion"," get video url"), "http://dailymotion.com/"))
