@@ -98,78 +98,83 @@ def get_blip_video_url(self,file_type="flv"):
 
 def get_vimeo_video_url(self):
 
-    self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("vimeo"," get video url"), "http://vimeo.com/"))
-    self.selenium.start()
-    vsel= self.selenium
-    try:
-        vsel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        vsel.open("groups/all/sort:recent")
-        vsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        vsel.click("css=.detail_format a.thumbnail")
-        mslib.wait_for_element_present(self,vsel,"css=div.tabmain a:contains('Videos')")
-        vsel.click("css=div.tabmain a:contains('Videos')")
-        mslib.wait_for_element_present(self,vsel,"css=div#vimeo_dropdown_2")
-        vsel.click_at("css=div#vimeo_dropdown_2", "")
-        vsel.click_at("css=li#detail", "")
-        mslib.wait_for_element_present(self,vsel,"css=.thumbnail_box a.thumbnail")
-        vsel.click("css=.thumbnail_box a.thumbnail")
-        mslib.wait_for_element_present(self, vsel,"css=input#clip_id")
-        urlid = vsel.get_value("css=input#clip_id")
-        vimeoURL = "http://vimeo.com/"+urlid
-        print vimeoURL
-       
-
-    finally:
-        vsel.stop()
+    if firefox not in selvars.set_browser:
+        vimeoURL = "http://vimeo.com/25378567"
+    else:
+        self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("vimeo"," get video url"), "http://vimeo.com/"))
+        self.selenium.start()
+        vsel= self.selenium
+        try:
+            vsel.set_timeout(testvars.MSTestVariables["TimeOut"])
+            vsel.open("groups/all/sort:recent")
+            vsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+            vsel.click("css=.detail_format a.thumbnail")
+            mslib.wait_for_element_present(self,vsel,"css=div.tabmain a:contains('Videos')")
+            vsel.click("css=div.tabmain a:contains('Videos')")
+            mslib.wait_for_element_present(self,vsel,"css=div#vimeo_dropdown_2")
+            vsel.click_at("css=div#vimeo_dropdown_2", "")
+            vsel.click_at("css=li#detail", "")
+            mslib.wait_for_element_present(self,vsel,"css=.thumbnail_box a.thumbnail")
+            vsel.click("css=.thumbnail_box a.thumbnail")
+            mslib.wait_for_element_present(self, vsel,"css=input#clip_id")
+            urlid = vsel.get_value("css=input#clip_id")
+            vimeoURL = "http://vimeo.com/"+urlid
+            print vimeoURL
+        finally:
+            vsel.stop()
     return vimeoURL
 
         
 def get_youtube_video_url(self,vid_format="embed"):
-    
-    cat_num = random.randint(1,26)
-    self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("youtube"," get video url"), "http://youtube.com/"))
-    self.selenium.start()
-    vsel= self.selenium
-    vsel.set_timeout(testvars.timeout)
-    try:       
-        if vid_format == "webm":
-            vsel.open("results?uploaded=w&search_query=crazy&search_duration=short&webm=1&search_type=videos&uni=3&search_sort=video_date_uploaded")
-        else:
-            vsel.open("videos?s=mr&c="+str(cat_num))
-        vsel.wait_for_page_to_load(testvars.timeout)
-
-        for x in range(0,5):
-            time.sleep(2)
-            if vsel.is_element_present("css=div.video-title"): break
-            cat_num = random.randint(1,26)
-            vsel.open("videos?s=mr&c="+str(cat_num))
+    if firefox not in selvars.set_browser:
+        youtubeURL = "http://www.youtube.com/watch?v=3Xx53Q7pJuA"
+    else:
+        cat_num = random.randint(1,26)
+        self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("youtube"," get video url"), "http://youtube.com/"))
+        self.selenium.start()
+        vsel= self.selenium
+        vsel.set_timeout(testvars.timeout)
+        try:       
+            if vid_format == "webm":
+                vsel.open("results?uploaded=w&search_query=crazy&search_duration=short&webm=1&search_type=videos&uni=3&search_sort=video_date_uploaded")
+            else:
+                vsel.open("videos?s=mr&c="+str(cat_num))
             vsel.wait_for_page_to_load(testvars.timeout)
-            if x == 4:
-                self.fail("can't get youtube video url")
-        vsel.click("css=div.video-title a")         
-        vsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        youtubeURL = vsel.get_eval("window.location")
-        print youtubeURL      
 
-    finally:
-        vsel.stop()
+            for x in range(0,5):
+                time.sleep(2)
+                if vsel.is_element_present("css=div.video-title"): break
+                cat_num = random.randint(1,26)
+                vsel.open("videos?s=mr&c="+str(cat_num))
+                vsel.wait_for_page_to_load(testvars.timeout)
+                if x == 4:
+                    self.fail("can't get youtube video url")
+            vsel.click("css=div.video-title a")         
+            vsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+            youtubeURL = vsel.get_eval("window.location")
+            print youtubeURL      
+
+        finally:
+            vsel.stop()
     return youtubeURL
 
 def get_dailymotion_video_url(self):
+    if firefox not in selvars.set_browser:
+        dailymotionURL = "http://www.dailymotion.com/video/xjhmjf_souviens-toi-tafit-mag-seance-studio-d-enregistrement-ade-mougins_music"
+    else:
+        self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("dailymotion"," get video url"), "http://dailymotion.com/"))
+        self.selenium.start()
+        vsel= self.selenium
+        try:
+            vsel.set_timeout(testvars.MSTestVariables["TimeOut"])
+            # open most recent cc licensed videos
+            vsel.open("/en/creative/1")
+            vsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+            vsel.click("css=h3 a.dmco_simplelink")
+            vsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+            dailymotionURL = vsel.get_eval("window.location")
+            print dailymotionURL      
 
-    self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("dailymotion"," get video url"), "http://dailymotion.com/"))
-    self.selenium.start()
-    vsel= self.selenium
-    try:
-        vsel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        # open most recent cc licensed videos
-        vsel.open("/en/creative/1")
-        vsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        vsel.click("css=h3 a.dmco_simplelink")
-        vsel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        dailymotionURL = vsel.get_eval("window.location")
-        print dailymotionURL      
-
-    finally:
-        vsel.stop()
+        finally:
+            vsel.stop()
     return dailymotionURL
