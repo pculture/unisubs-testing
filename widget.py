@@ -304,10 +304,10 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="ye
         # compare input text
 ##        self.assertEqual(line.rstrip(),current_sub.rstrip(),\
 ##        "sub text mismatch - expected: "+line.rstrip()+" found: "+current_sub.rstrip())
-        if "firefox" in selvars.set_browser() or "iexplore" in selvars.set_browser():
-            sel.key_press("css=.trans", "13")
-        else:
-            sel.get_eval("this.browserbot.getUserWindow().mirosubs.widget.fireKeySequence(this.browserbot.getUserWindow().document.getElementsByClassName('trans')[0], 13,13);")    
+##        if "firefox" in selvars.set_browser() or "iexplore" in selvars.set_browser():
+##            sel.key_press("css=.trans", "13")
+##        else:
+        sel.get_eval("this.browserbot.getUserWindow().mirosubs.widget.fireKeySequence(this.browserbot.getUserWindow().document.getElementsByClassName('trans')[0], 13,13);")    
         
     if step == "Continue":
         sel.click_at(testvars.WidgetUI["Next_step"],"")
@@ -380,7 +380,8 @@ def sync_video(self,sel,sub_file,start_delay=3,sub_int=2,step="Continue"):
         sub_cell_start_time = "css=li:nth-child("+str(x)+") > span.mirosubs-timestamp span span.mirosubs-timestamp-time"
         sub_cell_text = "css=li:nth-child("+str(x)+") > span.mirosubs-title span"
         start_time=sel.get_text(sub_cell_start_time)
-        print " - sub time: " '%.2f' % float(start_time) + " - sub text: "+ sel.get_text(sub_cell_text)
+        print start_time
+        print sel.get_text(sub_cell_text)
         time.sleep(sub_int)
     # finish sync of the last sub
     sel.focus(testvars.WidgetUI["Sync_sub"])
@@ -404,7 +405,7 @@ def edit_text(self,sel,subtextfile,new_text=""):
     print ("Editing the sub text in the widget")
     sel.select_window("null")
     mslib.wait_for_element_present(self,sel,"css=ul.mirosubs-titlesList")
-##  sel.click("css=.mirosubs-activestep"
+    sel.click("css=.mirosubs-activestep") #reset the list to the top of the page
     mslib.wait_for_video_to_buffer(self,sel)
    
     for i,line in enumerate(open(subtextfile)):
@@ -412,20 +413,19 @@ def edit_text(self,sel,subtextfile,new_text=""):
         sub_cell = "css=ul.mirosubs-titlesList li:nth-child("+str(x)+")"       
         if sel.is_element_present(sub_cell) == False:
             break
-        textspan = sub_cell +" > span.mirosubs-title span"
-        thetextarea = "css=span.mirosubs-title textarea"
-        
+        textspan = sub_cell +" > .mirosubs-title span"
+        thetextarea = "css=span.mirosubs-title textarea"     
         
         if new_text == "":
             ed_text = str(line).rstrip().upper()
         else:
             ed_text = new_text
-        sel.click_at(textspan, "")
+        sel.click(textspan)
         time.sleep(.5)
         print ed_text
         sel.type(thetextarea, ed_text)
         if "firefox" in selvars.set_browser():
-            sel.key_press(thetextarea,"13") #trying this now"("css=span.mirosubs-title textarea", "13")            
+            sel.get_eval("this.browserbot.getUserWindow().mirosubs.widget.fireKeySequence(this.browserbot.getUserWindow().document.getElementsByTagName('textarea')[0], 13,13);")   
         else:
             sel.get_eval("this.browserbot.getUserWindow().mirosubs.widget.fireKeySequence(this.browserbot.getUserWindow().document.getElementsByTagName('textarea')[1], 13,13);") 
         time.sleep(1)
@@ -454,19 +454,18 @@ def edit_translation(self,sel,subtextfile,new_text=""):
         sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(x)+")"
         if sel.is_element_present(sub_cell) == False:
             break
-        textarea = sub_cell+ " > textarea"
+        thetextarea = "css=textarea"
         if new_text == "":
             ed_text = str(line).upper()
         else:
             ed_text = new_text
         sel.click(sub_cell)
-        sel.type(textarea, u'ed_text')
+        sel.type(thetextarea, u'ed_text')
         if "firefox" in selvars.set_browser():
-            sel.key_press(textarea, "13")            
+            sel.get_eval("this.browserbot.getUserWindow().mirosubs.widget.fireKeySequence(this.browserbot.getUserWindow().document.getElementsByTagName('textarea')[0], 13,13);")   
         else:
-            sel.focus(textarea)
-            sel.key_press_native('10')
-
+            sel.get_eval("this.browserbot.getUserWindow().mirosubs.widget.fireKeySequence(this.browserbot.getUserWindow().document.getElementsByTagName('textarea')[1], 13,13);") 
+        time.sleep(1)
     sel.click(testvars.WidgetUI["Next_step"])
         
 def drag_time_bubbles(self,sel,subtextfile):
