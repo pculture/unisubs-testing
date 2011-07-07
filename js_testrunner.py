@@ -22,7 +22,6 @@ parser.add_option("-p", "--port", action="store", type="int", dest="port", defau
 
 (options, args) = parser.parse_args()
 testsauce = options.sauce
-print "js_testrunner test sauce"
 testsite = options.site
 testport = options.port
 

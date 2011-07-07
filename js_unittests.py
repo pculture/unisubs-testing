@@ -24,12 +24,13 @@ class js_unittest(unittest.TestCase):
 # The test cases of the subgroup.
 
 
-    def test_videourlparse(self):
+    def test_parallel_js_tests(self):
         print "running the test"
         sel = self.selenium
         if js_runvars.set_sauce() == True:
             print "running on sauce"
-            browser_list = ("firefox", "iexplore", "safari", "opera")
+            browser_list = ("firefox","iexplore", "safari", "opera"
+                            )
             for x in browser_list:
                 print x
                 self.selenium = selenium(js_runvars.set_localhost(), js_runvars.set_port(), js_runvars.set_browser(x), js_runvars.set_site())
