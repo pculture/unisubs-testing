@@ -266,6 +266,7 @@ class subgroup_70(unittest.TestCase):
         """
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         website.SiteLogIn(self,sel,testvars.siteuser, testvars.passw)
         #get a video and open page    
         test_video_url = website.get_video_with_translations(self,sel)
