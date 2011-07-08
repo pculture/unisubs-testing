@@ -15,4 +15,7 @@ log.xml
 # ignore temp file
 subs.txt
 curr_test.log
+#ignore the sauce-auth file
+sauce-auth.py
+
 *~
