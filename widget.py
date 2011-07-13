@@ -119,6 +119,8 @@ def starter_dialog_edit_orig(self,sel):
         lc = sel.get_value("css=p select option:contains('"+orig_lang+"')")
         lang_code = re.sub("\d+$","",lc)
         select_video_language(self,sel,vid_lang=lang_code,sub_lang=lang_code)
+    else:
+        print "video opened directly - no lang select dialogs"
     time.sleep(5)
     close_howto_video(self,sel)
     mslib.wait_for_element_present(self,sel,"css=div.mirosubs-help-heading")
@@ -254,8 +256,8 @@ def close_howto_video(self,sel,skip=True):
         time.sleep(3)
         if sel.is_element_present("css=.mirosubs-done:contains('Continue')"):
             sel.click("css=.mirosubs-done:contains('Continue')")
-        else:
-            print "no how-to video"
+    else:
+        print "no how-to video"
             
 
 
