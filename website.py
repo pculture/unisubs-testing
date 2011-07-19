@@ -151,8 +151,9 @@ def start_sub_widget(self,sel,skip="True",edit_type='orig',sec_lang=None,login=F
     """
     sel.window_maximize()
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
-    sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
     time.sleep(5)
+    sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
+    time.sleep(3)
     if sel.is_element_present(testvars.WidgetUI["Select_language"]) == False:
         if sel.is_element_present(testvars.WebsiteUI["AddSubtitles_menuitem"]):
             sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])
@@ -161,7 +162,7 @@ def start_sub_widget(self,sel,skip="True",edit_type='orig',sec_lang=None,login=F
             print "widget opened"
             widget.close_howto_video(self,sel)
             mslib.wait_for_element_present(self,sel,"css=.mirosubs-help-heading")
-
+    time.sleep(5)
     if sel.is_element_present(testvars.WidgetUI["Select_language"]):
         if edit_type == 'orig':
             widget.starter_dialog_edit_orig(self,sel)
@@ -624,6 +625,7 @@ def admin_delete_video(self,sel,curr_url):
         sel.click("//input[@value='Log in']")
         sel.wait_for_page_to_load(testvars.timeout)
     sel.open("/admin/logout")
+    time.sleep(5)
     sel.open("/")
     
 

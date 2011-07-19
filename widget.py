@@ -416,7 +416,7 @@ def edit_text(self,sel,subtextfile,new_text=""):
         if sel.is_element_present(sub_cell) == False:
             break
         textspan = sub_cell +" > .mirosubs-title span"
-        thetextarea = "css=span.mirosubs-title textarea"     
+        thetextarea = "css=.mirosubs-subedit"     
         
         if new_text == "":
             ed_text = str(line).rstrip().upper()
@@ -426,10 +426,8 @@ def edit_text(self,sel,subtextfile,new_text=""):
         time.sleep(.5)
         print ed_text
         sel.type(thetextarea, ed_text)
-        if "firefox" in selvars.set_browser():
-            sel.get_eval("this.browserbot.getUserWindow().mirosubs.widget.fireKeySequence(this.browserbot.getUserWindow().document.getElementsByTagName('textarea')[0], 13,13);")   
-        else:
-            sel.get_eval("this.browserbot.getUserWindow().mirosubs.widget.fireKeySequence(this.browserbot.getUserWindow().document.getElementsByTagName('textarea')[1], 13,13);") 
+        sel.get_eval("this.browserbot.getUserWindow().mirosubs.widget.fireKeySequence(this.browserbot.getUserWindow().document.getElementsByClassName('mirosubs-subedit')[0], 13,13);")   
+      
         time.sleep(1)
 #        self.assertTrue(sel.is_element_present(textspan))
         sub_cell_text=sel.get_text(textspan)
@@ -463,10 +461,7 @@ def edit_translation(self,sel,subtextfile,new_text=""):
             ed_text = new_text
         sel.click(sub_cell)
         sel.type(thetextarea, u'ed_text')
-        if "firefox" in selvars.set_browser():
-            sel.get_eval("this.browserbot.getUserWindow().mirosubs.widget.fireKeySequence(this.browserbot.getUserWindow().document.getElementsByTagName('textarea')[0], 13,13);")   
-        else:
-            sel.get_eval("this.browserbot.getUserWindow().mirosubs.widget.fireKeySequence(this.browserbot.getUserWindow().document.getElementsByTagName('textarea')[1], 13,13);") 
+        get_eval("this.browserbot.getUserWindow().mirosubs.widget.fireKeySequence(this.browserbot.getUserWindow().document.getElementsByClassName('mirosubs-subedit')[0], 13,13);") 
         time.sleep(1)
     sel.click(testvars.WidgetUI["Next_step"])
         
