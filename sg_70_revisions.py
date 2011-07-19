@@ -149,6 +149,7 @@ class subgroup_70(unittest.TestCase):
         website.verify_submitted_video(self,sel,vid_url,embed_type="youtube")
         # Start sub widget
         print "starting sub widget"
+        time.sleep(5)
         website.start_sub_widget(self,sel)
         # Transcribe
         print "transcribing video"
@@ -305,10 +306,10 @@ class subgroup_70(unittest.TestCase):
             try:
                 self.assertEqual("Select two revisions for compare, please", sel.get_alert())
             except:
-                if "4.0" in (sel.get_eval("navigator.appVersion")):
+                if selvars.set_browser() == "*firefox" and "5." in (sel.get_eval("navigator.appVersion")):
                     sel.key_press("css=div", "13") #workaround for FF 4 selenium confirmation bug
                 else:
-                    self.fail("no confirmation")
+                    self.fail("something failed with confirmation")
             website.check_the_box(self,sel,row_num) #uncheck the box
             row_num += 1
             if row_num == 3:

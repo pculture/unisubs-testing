@@ -329,14 +329,14 @@ def restart_step(self,sel):
             try:
                 self.assertTrue(re.search(r"^Are you sure you want to start over[\s\S] All timestamps will be deleted\.$", sel.get_confirmation()))
             except:
-                if "4.0" in (sel.get_eval("navigator.appVersion")):
+                if "5." in (sel.get_eval("navigator.appVersion")):
                     sel.key_press("css=div", "13") #workaround for FF 4 selenium confirmation bug
                 
         if sel.is_element_present("css=.mirosubs-activestep:contains('1')"):
             try:
                 self.assertTrue("Are you sure you want to start over? All subtitles will be deleted.", sel.get_confirmation())
             except:
-                if "4.0" in (sel.get_eval("navigator.appVersion")):
+                if "5." in (sel.get_eval("navigator.appVersion")):
                     sel.key_press("css=div", "13") #workaround for FF 4 selenium confirmation bug
 
 def back_step(self,sel):
@@ -461,7 +461,7 @@ def edit_translation(self,sel,subtextfile,new_text=""):
             ed_text = new_text
         sel.click(sub_cell)
         sel.type(thetextarea, u'ed_text')
-        get_eval("this.browserbot.getUserWindow().mirosubs.widget.fireKeySequence(this.browserbot.getUserWindow().document.getElementsByClassName('mirosubs-subedit')[0], 13,13);") 
+        sel.get_eval("this.browserbot.getUserWindow().mirosubs.widget.fireKeySequence(this.browserbot.getUserWindow().document.getElementsByClassName('mirosubs-subedit')[0], 13,13);") 
         time.sleep(1)
     sel.click(testvars.WidgetUI["Next_step"])
         
