@@ -206,7 +206,7 @@ class subgroup_70(unittest.TestCase):
             sel.click(testvars.video_edit_subtitles)
             widget.goto_step(self,sel,step="3")
             widget.edit_text(self,sel,subtextfile)
-            submit_sub_edits(self,sel)
+            widget.submit_sub_edits(self,sel)
             
         sel.select_frame("relative=top")  
         sel.click(testvars.history_tab)
