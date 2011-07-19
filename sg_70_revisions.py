@@ -51,7 +51,7 @@ class subgroup_70(unittest.TestCase):
         website.front_page_submit(self,sel,vid_url)
         # Verify embed and player
         print "verifying embed"
-        website.verify_submitted_video(self,sel,vid_url,embed_type="youtube")
+        unisubs_url = website.verify_submitted_video(self,sel,vid_url,embed_type="youtube")
         # Start sub widget
         print "starting sub widget"
         website.start_sub_widget(self,sel)
@@ -73,6 +73,8 @@ class subgroup_70(unittest.TestCase):
         time.sleep(2)
         rev_num = website.get_current_rev(self,sel)
         website.verify_latest_history(self,sel,rev=str(rev_num),user="sub_writer",tm="100%",text="100%")
+        #cleanup
+        website.admin_delete_video(self,sel,unisubs_url)
 
 
     def test_486(self):
@@ -92,7 +94,7 @@ class subgroup_70(unittest.TestCase):
         website.submit_video(self,sel,vid_url)
         # Verify embed and player
         print "verifying embed"
-        website.verify_submitted_video(self,sel,vid_url,embed_type="youtube")
+        unisubs_url = website.verify_submitted_video(self,sel,vid_url,embed_type="youtube")
         # Start sub widget
         print "starting sub widget"
         website.start_sub_widget(self,sel)
@@ -124,6 +126,7 @@ class subgroup_70(unittest.TestCase):
         sel.click(testvars.history_tab)
         rev_num = website.get_current_rev(self,sel)
         website.verify_latest_history(self,sel,rev=str(rev_num),user="sub_writer",tm="100%",text="0%")
+        website.admin_delete_video(self,sel,unisubs_url)
                 
     def test_602(self):
         """Revisions - edit subtitles text and verify in history table.

@@ -108,7 +108,7 @@ def starter_dialog_edit_orig(self,sel):
     orig_lang = "Original"
     if sel.is_element_present(testvars.WebsiteUI["AddSubtitles_menuitem"]):
         sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])
-        time.sleep(5)
+    time.sleep(5)
     if sel.is_element_present(testvars.create_lang_unknown): # No lang set, going to use English
         orig_lang = "English"
         select_video_language(self,sel,vid_lang='en',sub_lang='en')
