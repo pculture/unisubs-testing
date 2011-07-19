@@ -239,7 +239,7 @@ class subgroup_78_subtesting_playback(unittest.TestCase):
 
 
 
-    def test_696(self):
+    def skiptest_696(self):
         """Subtesting widget - sub position on playback.
         Open the testpage
         Start Playback
