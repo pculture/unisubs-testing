@@ -106,9 +106,10 @@ def starter_dialog_edit_orig(self,sel):
     
     #Figure our the original lang or choose your own
     orig_lang = "Original"
+    time.sleep(5)
     if sel.is_element_present(testvars.WebsiteUI["AddSubtitles_menuitem"]):
         sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])
-    time.sleep(5)
+    time.sleep(15)
     if sel.is_element_present(testvars.create_lang_unknown): # No lang set, going to use English
         orig_lang = "English"
         select_video_language(self,sel,vid_lang='en',sub_lang='en')
@@ -121,7 +122,7 @@ def starter_dialog_edit_orig(self,sel):
         select_video_language(self,sel,vid_lang=lang_code,sub_lang=lang_code)
     else:
         print "video opened directly - no lang select dialogs"
-    time.sleep(5)
+    time.sleep(10)
     close_howto_video(self,sel)
     mslib.wait_for_element_present(self,sel,"css=div.mirosubs-help-heading")
     return orig_lang
