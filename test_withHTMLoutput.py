@@ -34,6 +34,10 @@ parser.add_option(
     help='Runs the minimal pagedemo tests')
 
 parser.add_option(
+    "-j", "--jenkins", action="store_true", dest="jenkins", default=False,
+    help='limited test suite for jenkins ci testing')
+
+parser.add_option(
     "-b", "--browser", action="store",
     choices=('firefox','chrome','opera', 'safari', 'iexplore', 'googlechrome', 
              'lin_ff','firefox4','iexplore9'),
@@ -69,7 +73,8 @@ testfast = options.fast
 testsite = options.site
 testbuildid = options.buildid
 testlitmus = options.litmus
-minimal = options.minimal      
+minimal = options.minimal
+jenkins = options.jenkins
 
 class Test_HTMLTestRunner(unittest.TestCase):
     SAUCE_MINIMAL_PAGEDEMOS = [
@@ -101,6 +106,12 @@ class Test_HTMLTestRunner(unittest.TestCase):
 
     SAUCE_TESTS.extend(SAUCE_MINIMAL_PAGEDEMOS)
 
+
+    JENKINS_TESTS = [
+        'sg_64_submit.subgroup_64.test_533',
+        'sg_69_demoUI.subgroup_69.test_414'
+        ]
+    
     ALL_TESTS = [
         'sg_64_submit.subgroup_64',
         'sg_81_ul_dl.subgroup_81',
@@ -147,6 +158,13 @@ class Test_HTMLTestRunner(unittest.TestCase):
         self.suite.addTests([
                 unittest.defaultTestLoader.loadTestsFromName(t) 
                 for t in tests])
+
+    def _add_jenkins_tests(self):
+        tests = self.JENKINS_TESTS
+        self.suite.addTests([
+                unittest.defaultTestLoader.loadTestsFromName(t) 
+                for t in tests])
+        
 
     def _add_all_tests(self):
         suite_list = [[t, unittest.getTestCaseNames(eval(t), 'test')] 
@@ -203,7 +221,9 @@ class Test_HTMLTestRunner(unittest.TestCase):
         self.suite = unittest.TestSuite()
 
         if testsauce:
-            self._add_smaller_group_for_sauce()
+            self.add_smaller_group_for_sauce()
+        elif jenkins:
+            self._add_jenkins_tests()
         else: # pcf server or local
             self._add_all_tests()           
 
