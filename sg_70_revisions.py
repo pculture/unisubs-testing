@@ -294,7 +294,7 @@ class subgroup_70(unittest.TestCase):
                 widget.goto_step(self,sel,step="3")
                 widget.edit_text(self,sel,subtextfile)
 
-            submit_sub_edits(self,sel)
+            widget.submit_sub_edits(self,sel)
             rev_num = int(sel.get_text("css=a[href*=revisions-tab] span.badgy_out span.badgy"))
         
         sel.click(testvars.history_tab)

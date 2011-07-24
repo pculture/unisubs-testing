@@ -105,30 +105,33 @@ def submit_video(self,sel,url,login=True):
     You'll need to deal with the help video, see widget.close_howto_video
     """
     print "* Submit Video"
-    sel.open("/")
-    sel.click(testvars.WebsiteUI["Subtitle_Button"])
-    sel.window_maximize()
-    sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-    sel.type("video_url", url)
-    sel.click(testvars.WebsiteUI["Video_Submit_Button"])
-    sel.wait_for_page_to_load(testvars.timeout)
-    if sel.is_text_present("broken link") == True:
-        submitted = False
-    elif sel.is_text_present("Enter a valid URL") == True:
-        print "got an invalid url"
+    if "verify_age" in url:
         submitted = False
     else:
-        submitted = True
-    if str(sel.get_text(testvars.WebsiteUI["SubtitleMe_menu"])) != "Subtitle Me":
-        ## Delete and resubmit the video
-        curr_url = sel.get_eval("window.location")
-        admin_delete_video(self,sel,curr_url)
-        if login == True:
-            SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
-        sel.open("/videos/create")
+        sel.open("/")
+        sel.click(testvars.WebsiteUI["Subtitle_Button"])
+        sel.window_maximize()
+        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         sel.type("video_url", url)
         sel.click(testvars.WebsiteUI["Video_Submit_Button"])
         sel.wait_for_page_to_load(testvars.timeout)
+        if sel.is_text_present("broken link") == True:
+            submitted = False
+        elif sel.is_text_present("Enter a valid URL") == True:
+            print "got an invalid url"
+            submitted = False
+        else:
+            submitted = True
+            if str(sel.get_text(testvars.WebsiteUI["SubtitleMe_menu"])) != "Subtitle Me":
+                ## Delete and resubmit the video
+                curr_url = sel.get_eval("window.location")
+                admin_delete_video(self,sel,curr_url)
+                if login == True:
+                    SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
+                sel.open("/videos/create")
+                sel.type("video_url", url)
+                sel.click(testvars.WebsiteUI["Video_Submit_Button"])
+                sel.wait_for_page_to_load(testvars.timeout)
     return submitted      
 
     
