@@ -205,14 +205,16 @@ class Test_HTMLTestRunner(unittest.TestCase):
         results_path = os.path.join(os.getcwd(), "Results")
         filename = os.path.join(
             results_path, 
-            'unisubs_{0}_{1}_GMT.html'.format(
+            'unisubs_{0}_{1}_{2}_GMT.html'.format(
+                str(testsite),
                 str(testbrowser), 
                 time.strftime("%Y%m%d_%H%M", time.gmtime())))
         f = open(filename, 'w')
         f.write(byte_output)
         f.close()
         # copy the results to a file called last_run.html
-        lastrun = os.path.join(results_path, 'last_run.html')
+        
+        lastrun = os.path.join(results_path, testsite+'_lastrun.html')
         shutil.copyfile(filename,lastrun)
 
     def test_main(self):                

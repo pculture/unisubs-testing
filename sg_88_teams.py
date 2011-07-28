@@ -129,11 +129,8 @@ class subgroup_88(unittest.TestCase):
         try:
             self.assertEqual("Select two revisions for compare, please", sel.get_alert())
         except:
-            if "4.0" in (sel.get_eval("navigator.appVersion")):
+            if "5." in (sel.get_eval("navigator.appVersion")):
                 sel.key_press("css=div", "13") #workaround for FF 4 selenium confirmation bug
-            else:
-                self.fail("no confirmation")
-
 
         # logout
         sel.click(testvars.WebsiteUI["Logout_Button"])
