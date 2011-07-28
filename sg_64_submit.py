@@ -16,8 +16,9 @@ class subgroup_64(unittest.TestCase):
         Tests designed to exercise the subtitle widget embedded
         in sites external to universalsubtitles.org (live, dev or staging)  
     """
+
     
-# Open the desired browser and set up the test
+    ##Open the desired browser and set up the test
     def setUp(self):
         """
         Sets up run envirnment for selenium server
@@ -32,7 +33,7 @@ class subgroup_64(unittest.TestCase):
             
 
 
-## The test cases of the subgroup.
+    ## The test cases of the subgroup.
 
 
     def test_469(self):

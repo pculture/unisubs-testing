@@ -1,7 +1,6 @@
 import unittest
 import time
-#import js_runvars
-import mslib
+import subprocess
 
 from selenium import selenium
 
@@ -15,9 +14,9 @@ class js_unittest(unittest.TestCase):
         """
         Sets up run envirnment for selenium server
         """
-        print "in setup"
+       
         self.verificationErrors = []
-        self.selenium = selenium("localhost",4444,"firefox","http://staging.universalsubtitles.org")
+        self.selenium = selenium("localhost",4444,"firefox","http://dev.universalsubtitles.org")
         self.selenium.start()
         self.selenium.set_timeout(10000)
    
@@ -25,9 +24,17 @@ class js_unittest(unittest.TestCase):
 
 
     def test_parallel_js_tests(self):
-        print "running the test"
         sel = self.selenium
         run_jsunittests(self,sel)
+
+    def test_functional_quicktests(self):
+        sel = self.selenium
+        t = 'sg_64_submit.subgroup_64.test_534'
+        t_cmd = ['python','-m','unittest',t]
+        p = subprocess.call(t_cmd)
+        if p == 1:
+            self.fail("test failed")
+        
 
 
 # Close the browser, log errors, perform cleanup 
