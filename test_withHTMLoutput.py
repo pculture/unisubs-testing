@@ -213,7 +213,8 @@ class Test_HTMLTestRunner(unittest.TestCase):
         f.write(byte_output)
         f.close()
         # copy the results to a file called last_run.html
-        lastrun = os.path.join(results_path, testsite,'_last_run.html')
+        
+        lastrun = os.path.join(results_path, testsite+'_lastrun.html')
         shutil.copyfile(filename,lastrun)
 
     def test_main(self):                
