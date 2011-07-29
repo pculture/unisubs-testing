@@ -684,6 +684,8 @@ def submit_sub_edits(self,sel,offsite=False):
     #Go to step 3 before submit
     if not sel.get_text("css=li a.mirosubs-activestep") == "3":
         sel.click("css=.mirosubs-help-heading li a:contains('3')")
+        mslib.wait_for_element_present(self,sel,testvars.widget_step3)
+        
     sel.click(testvars.WidgetUI["Next_step"])
     set_subs_complete(self,sel,done=True)
     if offsite==False:
@@ -709,12 +711,17 @@ def close_widget(self,sel,submit="Discard"):
     Post Conditions: Returned to originating site.
     """
     sel.select_frame("relative=top")
-    mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Close_widget"])
-    self.assertTrue(sel.is_element_present(testvars.WidgetUI["Close_widget"]),"no close button found")
+
+    #check for widget menu first
+    if sel.is_element_present("css=.mirosubs-modal-widget-title-close"):
+        sel.click("css=.mirosubs-modal-widget-title-close")
+        time.sleep(3)
+        if submit == "Discard":
+            sel.click("css=a.mirosubs-link:contains('Discard')")
+        else:
+            sel.click("css=a.mirosubs-link:contains('Submit')")
+        time.sleep(3)
+    # this is the lang chooser dialog
+    elif sel.is_element_present(testvars.WidgetUI["Close_widget"]):
+        sel.click(testvars.WidgetUI["Close_widget"])
     time.sleep(3)
-    sel.click(testvars.WidgetUI["Close_widget"])
-    time.sleep(3)
-    # if it doesn't close - just open the page again.
-    if sel.is_element_present(testvars.WidgetUI["Close_widget"]):
-        print "widget didn't close the way I want it too"
-        sel.open()
