@@ -303,13 +303,7 @@ class subgroup_70(unittest.TestCase):
         while sel.is_element_present("//div[@id='revisions-tab']/table/tbody/tr["+str(row_num)+"]"):
             website.check_the_box(self,sel,row_num)                
             sel.click(testvars.video_compare_revisions)
-            try:
-                self.assertEqual("Select two revisions for compare, please", sel.get_alert())
-            except:
-                if selvars.set_browser() == "*firefox" and "5." in (sel.get_eval("navigator.appVersion")):
-                    sel.key_press("css=div", "13") #workaround for FF 4 selenium confirmation bug
-                else:
-                    self.fail("something failed with confirmation")
+            self.assertEqual("Select two revisions for compare, please", sel.get_alert())
             website.check_the_box(self,sel,row_num) #uncheck the box
             row_num += 1
             if row_num == 3:
