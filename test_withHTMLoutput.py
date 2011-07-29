@@ -54,7 +54,7 @@ parser.add_option(
 
 parser.add_option("-u", "--siteurl", action="store",
                   choices=('dev', 'staging'),type="choice",
-                  dest="site", default='dev',
+                  dest="site", default='staging',
                   help="""dev for: http://dev.universalsubtitles.org,
                         staging for: http://staging.universalsubtitles.org""")
 
