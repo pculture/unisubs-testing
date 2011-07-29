@@ -86,9 +86,10 @@ class Test_HTMLTestRunner(unittest.TestCase):
         'sg_78_widget_playback.subgroup_78_playback.test_687',
         'sg_78_widget_playback.subgroup_78_playback.test_701',
         'sg_78_widget_playback.subgroup_78_playback.test_702',                
-        'sg_78_widget_pagedemo.subgroup_78_pagedemo.test_689',
-        'sg_78_widget_pagedemo.subgroup_78_pagedemo.test_690',
-        'sg_78_widget_pagedemo.subgroup_78_pagedemo.test_691']
+#        'sg_78_widget_pagedemo.subgroup_78_pagedemo.test_689',
+#        'sg_78_widget_pagedemo.subgroup_78_pagedemo.test_690',
+#        'sg_78_widget_pagedemo.subgroup_78_pagedemo.test_691'
+        ]
 
     SAUCE_TESTS = [
         'sg_69_demoUI.subgroup_69.test_414',
@@ -223,7 +224,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
         self.suite = unittest.TestSuite()
 
         if testsauce:
-            self.add_smaller_group_for_sauce()
+            self._add_smaller_group_for_sauce()
         elif jenkins:
             self._add_jenkins_tests()
         else: # pcf server or local
