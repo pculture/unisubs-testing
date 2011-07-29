@@ -547,10 +547,7 @@ def verify_compare_revisions(self,sel,older_rev, newer_rev,rollback=False):
 def rollback_revision(self,sel):
     mslib.wait_for_element_present(self,sel,testvars.rev_rollback)
     sel.click(testvars.rev_rollback)
-    try:
-        self.assertEqual("Subtitles will be rolled back to a previous version", sel.get_confirmation())
-    except:
-        sel.key_press_native('10') # lame workaround for FF 4 selenium bug
+    self.assertEqual("Subtitles will be rolled back to a previous version", sel.get_confirmation())
     sel.wait_for_page_to_load(testvars.timeout)
 
 

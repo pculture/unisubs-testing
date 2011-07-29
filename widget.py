@@ -316,10 +316,6 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="ye
         sel.click_at(testvars.WidgetUI["Next_step"],"")
         mslib.wait_for_element_present(self,sel,"css=.mirosubs-done span:contains('Reviewing')")
 
-
- 
-
-
 def restart_step(self,sel):
     """
     Description: Clicks the 'Restart this Step' link, and handle the confirmation dialog.
@@ -327,18 +323,10 @@ def restart_step(self,sel):
     if sel.is_element_present("css=.mirosubs-restart"):
         sel.click("link=Restart this Step")
         if sel.is_element_present("css=.mirosubs-activestep:contains('2')"):
-            try:
-                self.assertTrue(re.search(r"^Are you sure you want to start over[\s\S] All timestamps will be deleted\.$", sel.get_confirmation()))
-            except:
-                if "5." in (sel.get_eval("navigator.appVersion")):
-                    sel.key_press("css=div", "13") #workaround for FF 4 selenium confirmation bug
-                
+            self.assertTrue(re.search(r"^Are you sure you want to start over[\s\S] All timestamps will be deleted\.$", sel.get_confirmation()))                
         if sel.is_element_present("css=.mirosubs-activestep:contains('1')"):
-            try:
-                self.assertTrue("Are you sure you want to start over? All subtitles will be deleted.", sel.get_confirmation())
-            except:
-                if "5." in (sel.get_eval("navigator.appVersion")):
-                    sel.key_press("css=div", "13") #workaround for FF 4 selenium confirmation bug
+            self.assertTrue("Are you sure you want to start over? All subtitles will be deleted.", sel.get_confirmation())
+          
 
 def back_step(self,sel):
     """
