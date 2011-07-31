@@ -699,8 +699,23 @@ def goto_step(self,sel,step="3"):
     sel.click("css=.mirosubs-help-heading li a:contains('"+step+"')")
     self.assertTrue(sel.get_text("css=li a.mirosubs-activestep:contains('"+step+"')"))
 
+def close_sub_widget(self,sel,submit="Discard"):
+    """Close the subtitle widget.
 
-def close_widget(self,sel,submit="Discard"):
+    """
+    sel.select_frame("relative=top")
+    if sel.is_element_present("css=.mirosubs-modal-widget-title-close"):
+    sel.click("css=.mirosubs-modal-widget-title-close")
+    time.sleep(3)
+    if submit == "Discard":
+        sel.click("css=a.mirosubs-link:contains('Discard')")
+    else:
+        sel.click("css=a.mirosubs-link:contains('Submit')")
+    time.sleep(3)
+    
+
+
+def close_widget(self,sel):
     """
     Description: uses the red close x to close out the widget.
 
@@ -712,16 +727,9 @@ def close_widget(self,sel,submit="Discard"):
     """
     sel.select_frame("relative=top")
 
-    #check for widget menu first
-    if sel.is_element_present("css=.mirosubs-modal-widget-title-close"):
+    # 
+    if sel.is_element_present(testvars.WidgetUI["Close_widget"]):
         sel.click("css=.mirosubs-modal-widget-title-close")
-        time.sleep(3)
-        if submit == "Discard":
-            sel.click("css=a.mirosubs-link:contains('Discard')")
-        else:
-            sel.click("css=a.mirosubs-link:contains('Submit')")
-        time.sleep(3)
-    # this is the lang chooser dialog
-    elif sel.is_element_present(testvars.WidgetUI["Close_widget"]):
+    elif sel.is_element_present("css=.mirosubs-modal-widget-title-close"):
         sel.click(testvars.WidgetUI["Close_widget"])
     time.sleep(3)

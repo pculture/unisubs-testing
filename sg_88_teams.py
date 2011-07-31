@@ -224,7 +224,7 @@ class subgroup_88(unittest.TestCase):
         time.sleep(5)
         widget.starter_dialog_edit_orig(self,sel)
         widget.transcribe_video(self,sel,subtextfile)
-        widget.close_widget(self,sel)        
+        widget.close_sub_widget(self,sel)        
 
         #Edit translation
         print "testing edit translation"
@@ -236,7 +236,7 @@ class subgroup_88(unittest.TestCase):
         time.sleep(5)
         widget.starter_dialog_translate_from_orig(self,sel,to_lang='hr')
         widget.edit_translation(self,sel,subtextfile)
-        widget.close_widget(self,sel)
+        widget.close_sub_widget(self,sel)
 
         #New fork
         print "testing new fork"
