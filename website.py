@@ -117,6 +117,8 @@ def submit_video(self,sel,url,login=True):
         sel.wait_for_page_to_load(testvars.timeout)
         if sel.is_text_present("broken link") == True:
             submitted = False
+        elif sel.is_text_present("Please try again") == True:
+            submitted = False
         elif sel.is_text_present("Enter a valid URL") == True:
             print "got an invalid url"
             submitted = False
