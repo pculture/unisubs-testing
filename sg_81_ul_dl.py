@@ -42,23 +42,21 @@ class subgroup_81(unittest.TestCase):
         
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-        try:
+       
             #get a video and open page
             
-            test_video_url = website.submit_random_youtube(self,sel)
-            print test_video_url
-            sel.open("en/logout/?next=/") #verify logged out.
-            sel.open(test_video_url)
-            #Original is the default tab when video opened.
-            sel.click(testvars.video_upload_subtitles)
-            time.sleep(2)
-            self.assertTrue(sel.is_element_present("css=a[href*=/auth/login]"))
-            self.assertTrue(sel.is_element_present("css=a[href*=videos]"))
-            sel.click("css=a.close")
-        finally:
-            # check for Site Error notification and submit
-            website.handle_error_page(self,sel,self.id())
-
+        test_video_url = website.submit_random_youtube(self,sel)
+        print test_video_url
+        vid = test_video_url.split("/")[-2]
+        sel.open("en/logout/?next=/") #verify logged out.
+        sel.open(test_video_url)
+        #Original is the default tab when video opened.
+        sel.click(testvars.video_upload_subtitles)
+        time.sleep(3)
+        self.assertTrue(sel.is_element_present("css=div.msg_modal a:contains('Login')"))
+        self.assertTrue(sel.is_element_present("css=div.msg_modal a[href*="+vid+"]"))
+        sel.click("css=div[id='upload_subs-div'] a.close")
+  
     def test_507(self):
         """Invalid or unsupported formats
         
