@@ -3,6 +3,7 @@ import unittest
 import time
 import os
 import StringIO
+import re
 import mslib
 import website
 import widget
