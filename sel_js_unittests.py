@@ -4,7 +4,7 @@ import subprocess
 
 from selenium import selenium
 
-class js_unittest(unittest.TestCase):
+class JavascriptUnitTests(unittest.TestCase):
     """
     run the js unittests
     """
@@ -25,17 +25,7 @@ class js_unittest(unittest.TestCase):
 
     def test_parallel_js_tests(self):
         sel = self.selenium
-        run_jsunittests(self,sel)
-
-    def test_functional_quicktests(self):
-        sel = self.selenium
-        t = 'sg_64_submit.subgroup_64.test_534'
-        t_cmd = ['python','-m','unittest',t]
-        p = subprocess.call(t_cmd)
-        if p == 1:
-            self.fail("test failed")
-        
-
+        run_jsunittests(self, sel)
 
 # Close the browser, log errors, perform cleanup 
     def tearDown(self):
@@ -47,7 +37,7 @@ class js_unittest(unittest.TestCase):
         self.assertEqual([], self.verificationErrors)
 
 
-def run_jsunittests(self,sel):
+def run_jsunittests(self, sel):
     sel.open("/en/jstest/alltests/")
     sel.click("parallel")
     sel.click("css=button:contains('Start')")

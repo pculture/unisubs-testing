@@ -5,7 +5,10 @@ testvars uses these values if they exist, they get set at the commandline
 by test_withHTMLoutput.py
 
 """
-import test_withHTMLoutput as controller
+try:
+    import settings as controller
+except ImportError:
+    import test_withHTMLoutput as controller
 import sauce_auth
 import json
 
@@ -76,7 +79,7 @@ def set_subtesting_wordpress_page(self,test_id):
     else:
         self.fail("not a valid test case")
 
-def set_unisubs_mc_page(self,test_id):
+def set_unisubs_mc_page(self, test_id):
     """
     sets the wordpress page to use for testing, if not set, defaults to dev
     """
