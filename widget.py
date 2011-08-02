@@ -709,11 +709,12 @@ def close_sub_widget(self,sel,submit="Discard"):
     sel.select_frame("relative=top")
     if sel.is_element_present("css=.mirosubs-modal-widget-title-close"):
         sel.click("css=.mirosubs-modal-widget-title-close")
-        time.sleep(3)
-        if submit == "Discard":
-            sel.click("css=a.mirosubs-link:contains('Discard')")
-        else:
-            sel.click("css=a.mirosubs-link:contains('Submit')")
+        time.sleep(5)
+        if sel.is_element_present("css=div.mirosubs-warning div.mirosubs-buttons a.mirosubs-link"):
+            if submit == "Discard":
+                sel.click("css=a.mirosubs-link:contains('Discard')")
+            else:
+                sel.click("css=a.mirosubs-link:contains('Submit')")
         time.sleep(3)
     
 
