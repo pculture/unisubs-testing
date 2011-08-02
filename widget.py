@@ -688,6 +688,9 @@ def submit_sub_edits(self,sel,offsite=False):
         
     sel.click(testvars.WidgetUI["Next_step"])
     set_subs_complete(self,sel,done=True)
+    time.sleep(3)
+    if sel.is_element_present("css=div.mirosubs-modal-completed a.mirosubs-green-button"):
+        sel.click("css=div.mirosubs-modal-completed a.mirosubs-green-button")
     if offsite==False:
         mslib.wait_for_element_present(self,sel,testvars.video_video_info)
     time.sleep(10)
