@@ -47,35 +47,32 @@ class subgroup_64(unittest.TestCase):
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         sel.open("/")
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
-        ext_list = ("flv","mp4")
+        ext_list = ("flv",)
         vid_url = None
         for x in ext_list:
-            try:
-                print "getting a video url from blip, format: "+ x
-                vid_url = offsite.get_blip_video_url(self,file_type=x)
-                # Submit Video
-                print "submitting the video"
-                website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
-                website.submit_video(self,sel,vid_url)
-                # Verify embed and player
-                print "verifying embed and video player"
-                website.verify_submitted_video(self,sel,vid_url,embed_type="flow")
-                # Start sub widget
-                print "starting sub widget"
-                website.start_sub_widget(self,sel)
-                # Transcribe
-                print "starting transcribe"
-                widget.transcribe_video(self,sel,subtextfile)
-                # Sync
-                print "starting sync"
-                widget.sync_video(self,sel,subtextfile,3,4)
-                # Review
-                print "starting review"
-  #              widget.edit_text(self,sel,subtextfile)
-                widget.submit_sub_edits(self,sel)
-            except:
-                self.verificationErrors.append("error submitting "+ str(x)+ " video: "+str(vid_url))
-                # check for Site Error notification and submit
+            print "getting a video url from blip, format: "+ x
+            vid_url = offsite.get_blip_video_url(self,file_type=x)
+            # Submit Video
+            print "submitting the video"
+            website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
+            website.submit_video(self,sel,vid_url)
+            # Verify embed and player
+            print "verifying embed and video player"
+            website.verify_submitted_video(self,sel,vid_url,embed_type="flow")
+            # Start sub widget
+            print "starting sub widget"
+            website.start_sub_widget(self,sel)
+            # Transcribe
+            print "starting transcribe"
+            widget.transcribe_video(self,sel,subtextfile)
+            # Sync
+            print "starting sync"
+            widget.sync_video(self,sel,subtextfile,3,4)
+            # Review
+            print "starting review"
+#              widget.edit_text(self,sel,subtextfile)
+            widget.submit_sub_edits(self,sel)
+
                 
         
                 
