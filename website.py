@@ -115,12 +115,7 @@ def submit_video(self,sel,url,login=True):
         sel.type("video_url", url)
         sel.click(testvars.WebsiteUI["Video_Submit_Button"])
         sel.wait_for_page_to_load(testvars.timeout)
-        if sel.is_text_present("broken link") == True:
-            submitted = False
-        elif sel.is_text_present("Please try again") == True:
-            submitted = False
-        elif sel.is_text_present("Enter a valid URL") == True:
-            print "got an invalid url"
+        if sel.is_element_present("css=ul.errorlist"):
             submitted = False
         else:
             submitted = True

@@ -162,7 +162,11 @@ class subgroup_64(unittest.TestCase):
         vid_url = offsite.get_youtube_video_url(self)
         # Submit Video
         print ("logging in and submitting video")
-        website.submit_video(self,sel,vid_url)
+        valid_url = website.submit_video(self,sel,vid_url)
+        if valid_url == False:
+            print 'random vid submit failed, trying known good url'
+            vid_url = 'http://www.youtube.com/watch?v=3Xx53Q7pJuA'
+            website.submit_video(self,sel,vid_url)
         # Verify embed and player
         print ("verifying embed")
         website.verify_submitted_video(self,sel,vid_url,embed_type="youtube")
