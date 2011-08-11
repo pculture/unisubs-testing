@@ -226,7 +226,7 @@ def verify_submitted_video(self,sel,vid_url,embed_type=""):
     if embed_type == "flow":
         self.assertTrue(sel.is_element_present("css=object[data*='flowplayer']"))
     elif embed_type == "youtube":
-        self.assertTrue(sel.is_element_present(vid_span_css+"[data*='youtube.com']"))
+        self.assertTrue(sel.is_element_present("css=div[id=widget_div] iframe[src*='youtube.com']"))
     elif embed_type == 'vimeo':      
         self.assertTrue(sel.is_element_present(vid_span_css+"[data*='moogaloop.swf']"))
     elif embed_type == 'dailymotion':      
