@@ -685,15 +685,19 @@ def submit_sub_edits(self,sel,offsite=False):
     if not sel.get_text("css=li a.mirosubs-activestep") == "3":
         sel.click("css=.mirosubs-help-heading li a:contains('3')")
         mslib.wait_for_element_present(self,sel,testvars.widget_step3)
-        
+    submit_thanks(self,sel)
     sel.click(testvars.WidgetUI["Next_step"])
     set_subs_complete(self,sel,done=True)
-    time.sleep(3)
-    if sel.is_element_present("css=div.mirosubs-modal-completed a.mirosubs-green-button"):
-        sel.click("css=div.mirosubs-modal-completed a.mirosubs-green-button")
+ 
     if offsite==False:
         mslib.wait_for_element_present(self,sel,testvars.video_video_info)
     time.sleep(10)
+
+
+def submit_thanks(self,sel):
+    time.sleep(3)
+    if sel.is_element_present("css=div.mirosubs-modal-completed a.mirosubs-green-button"):
+        sel.click("css=div.mirosubs-modal-completed a.mirosubs-green-button")
     
 
 def goto_step(self,sel,step="3"):

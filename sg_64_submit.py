@@ -263,6 +263,96 @@ class subgroup_64(unittest.TestCase):
 
 
 
+    def test_730(self):
+        """Set Subs Complete Dialog.
+
+        http://litmus.pculture.org/show_test.cgi?id=730
+        """
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        sel.open("/")
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
+        print "submitting a youtube video"
+        website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
+        vid_url = offsite.get_youtube_video_url(self)
+        # Submit Video
+        print ("logging in and submitting video")
+        valid_url = website.submit_video(self,sel,vid_url)
+        if valid_url == False:
+            print 'random vid submit failed, trying known good url'
+            vid_url = 'http://www.youtube.com/watch?v=5sz0Uz7Bkck'
+            website.submit_video(self,sel,vid_url)
+        # Verify embed and player
+        print ("verifying embed")
+        website.verify_submitted_video(self,sel,vid_url,embed_type="youtube")
+        # Start sub widget
+        print ("starting sub widget")
+        website.start_sub_widget(self,sel)
+        # Transcribe
+        print ("transcribing video")
+        widget.transcribe_video(self,sel,subtextfile)
+        # Sync
+        print ("syncing video")
+        widget.sync_video(self,sel,subtextfile,3,4)
+        # Review
+        print ("review step - just submitting video")
+        time.sleep(2)
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Next_step"])           
+        sel.click(testvars.WidgetUI["Next_step"])
+        time.sleep(5)
+        if sel.is_text_present("Entire video completed?") == False:
+            self.fail("Sub complete dialog is not displayed")       
+        set_subs_complete(self,sel,done=True)
+        widget.submit_thanks(self,sel)
+        mslib.wait_for_element_present(self,sel,testvars.video_video_info)
+        self.assertTrue(sel.is_element_present("css=ul.left_nav li:nth-child(2) > a span.done_percentage:contains('100')"))
+ 
+    def test_731(self):
+        """Set Subs Incomplete Dialog.
+
+        http://litmus.pculture.org/show_test.cgi?id=731
+        """
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        sel.open("/")
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
+        print "submitting a youtube video"
+        website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
+        vid_url = offsite.get_youtube_video_url(self)
+        # Submit Video
+        print ("logging in and submitting video")
+        valid_url = website.submit_video(self,sel,vid_url)
+        if valid_url == False:
+            print 'random vid submit failed, trying known good url'
+            vid_url = 'http://www.youtube.com/watch?v=5sz0Uz7Bkck'
+            website.submit_video(self,sel,vid_url)
+        # Verify embed and player
+        print ("verifying embed")
+        website.verify_submitted_video(self,sel,vid_url,embed_type="youtube")
+        # Start sub widget
+        print ("starting sub widget")
+        website.start_sub_widget(self,sel)
+        # Transcribe
+        print ("transcribing video")
+        widget.transcribe_video(self,sel,subtextfile)
+        # Sync
+        print ("syncing video")
+        widget.sync_video(self,sel,subtextfile,3,4)
+        # Review
+        print ("review step - just submitting video")
+        time.sleep(2)
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Next_step"])           
+        sel.click(testvars.WidgetUI["Next_step"])
+        time.sleep(5)
+        if sel.is_text_present("Entire video completed?") == False:
+            self.fail("Sub complete dialog is not displayed")       
+        set_subs_complete(self,sel,done=False)
+        widget.submit_thanks(self,sel)
+        mslib.wait_for_element_present(self,sel,testvars.video_video_info)
+        self.assertTrue(sel.is_element_present("css=ul.left_nav li:nth-child(2) > a span.done_percentage:contains('Lines')"))
+
+
+
 # Close the browser, log errors, perform cleanup
     def tearDown(self):
         """
