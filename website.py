@@ -344,19 +344,17 @@ def verify_sub_upload(self,sel,sub_file,lang=""):
     """
     mslib.wait_for_element_present(self,sel,'css=p.feedback-message:contains("Thank you for uploading")')
     sel.click("css=a.close")  
-    time.sleep(15)
-    sel.refresh()
-    sel.wait_for_page_to_load(testvars.timeout)
+    time.sleep(5)
     sub_td = 1
     
     if lang == "":
-        sublang = (sel.get_text("css=li.full.active a").split('(')) # split off the number of lines
-        self.assertEqual(sublang[0].rstrip(),"English")
+        #assuming original lang if no lang specified.
+        sel.click("css=ul.left_nav li:nth-child(2) a")
+        sel.wait_for_page_to_load(testvars.timeout)
     else:
         sel.click("css=ul.left_nav li a:contains('"+lang+"')")
         sel.wait_for_page_to_load(testvars.timeout)
-        sublang = (sel.get_text("css=li.full.active a").split('(')) # split off the number of lines
-        self.assertEqual(sublang[0].rstrip(),lang)
+ 
     for line in codecs.open(sub_file,encoding='utf-8'):
         subline = line.split(',')
         sub = subline[0].rstrip()
