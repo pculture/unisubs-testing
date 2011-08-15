@@ -344,7 +344,10 @@ def verify_sub_upload(self,sel,sub_file,lang=""):
     """
     mslib.wait_for_element_present(self,sel,'css=p.feedback-message:contains("Thank you for uploading")')
     sel.click("css=a.close")  
-    time.sleep(5)
+    time.sleep(15)
+    sel.refresh()
+    sel.wait_for_page_to_load(testvars.timeout)
+    
     sub_td = 1
     
     if lang == "":
