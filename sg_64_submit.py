@@ -302,7 +302,7 @@ class subgroup_64(unittest.TestCase):
         time.sleep(5)
         if sel.is_text_present("Entire video completed?") == False:
             self.fail("Sub complete dialog is not displayed")       
-        set_subs_complete(self,sel,done=True)
+        widget.set_subs_complete(self,sel,done=True)
         widget.submit_thanks(self,sel)
         mslib.wait_for_element_present(self,sel,testvars.video_video_info)
         self.assertTrue(sel.is_element_present("css=ul.left_nav li:nth-child(2) > a span.done_percentage:contains('100')"))
@@ -346,7 +346,7 @@ class subgroup_64(unittest.TestCase):
         time.sleep(5)
         if sel.is_text_present("Entire video completed?") == False:
             self.fail("Sub complete dialog is not displayed")       
-        set_subs_complete(self,sel,done=False)
+        widget.set_subs_complete(self,sel,done=False)
         widget.submit_thanks(self,sel)
         mslib.wait_for_element_present(self,sel,testvars.video_video_info)
         self.assertTrue(sel.is_element_present("css=ul.left_nav li:nth-child(2) > a span.done_percentage:contains('Lines')"))
