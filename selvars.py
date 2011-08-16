@@ -88,9 +88,14 @@ def set_unisubs_mc_page(self, test_id):
             page = "/hunter-staging/"
         else:
             page = "/hunter/"
-        return page
+    elif test_id == 732: #offsite widget dev embed tests
+        if controller.testsite == "staging":
+            page = "/staging-embed-test/"
+        else:
+            page = "/dev-embed-tests/"
     else:
         self.fail("not a valid test case")
+    return page
 
 
 def set_browser(testid="none",testdesc="none"):

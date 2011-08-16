@@ -232,10 +232,52 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
             widget.starter_dialog_edit_orig(self,sel)
             edit_subs(self,sel,orig_rev,subtextfile)          
         else:
-            make_new_subs(self,sel)
+            make_new_subs(self,sel,subtextfile)
        
             
-
+    def test_732(self):
+        """offsite widget on MC site.
+ 
+        http://litmus.pculture.org/show_test.cgi?id=732
+        Vimeo Video with widget embedded on Miro Community test page.
+        """
+        test_id = 732
+        vid_title = "The Sandwich Movie"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"732_vimeo.txt")
+        sub_trans_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"732_vimeo_es.srt")
+        print self.shortDescription()
+        sel = self.selenium
+        test_page = selvars.set_unisubs_mc_page(self,test_id)
+        sel.open(test_page)
+        sel.wait_for_page_to_load(testvars.timeout)
+        time.sleep(5)
+        if sel.is_element_present("css=p.vimeo_new div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')"):
+            sel.click("css=p.vimeo_new div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')")
+        else:
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')          
+        make_new_subs(self,sel,subtextfile)
+        #Playback Subs
+        time.sleep(5)
+        try:
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')
+            mslib.wait_for_element_present(self,sel,"css=p.vimeo_new span.mirosubs-captionSpan")
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
+            caption_position =  sel.get_element_height("css=p.vimeo_new span.mirosubs-captionSpan")
+            verify_caption_position(self,sel,caption_position)
+        except:
+            print "sub position playback failed"
+            self.verificationErrors.append("sub playback / position test failed")
+        sel.refresh()
+        sel.wait_for_page_to_load(testvars.timeout)
+##        time.sleep(15)
+##        #Add New Translation
+##        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
+##        time.sleep(2)
+##        widget.open_starter_dialog(self,sel)
+##        widget.starter_dialog_translate_from_orig(self,sel,to_lang='es')
+##        widget.translate(self,sel,sub_trans_file)
+        
+        
        
 
 
@@ -250,25 +292,35 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         #Log any errors
         self.assertEqual([], self.verificationErrors)
 
+     
 
-      
-
-def make_new_subs(self,sel,vid_pos):
-
-    print  ("no subs yet - making new ones")
-    subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
+def make_new_subs(self,sel,subtextfile):
+    print "make new subs"
+    time.sleep(5)
     widget.starter_dialog_edit_orig(self,sel)
     # Transcribe
     widget.transcribe_video(self,sel,subtextfile)
     # Sync
-    widget.sync_video(self,sel,subtextfile,6,8)
+    widget.sync_video(self,sel,subtextfile,2,3)
+    #Login
+    time.sleep(3)
+    sel.click("css=div.mirosubs-needLogin a")
+    sel.click("css=.mirosubs-log")
+    widget.site_login_auth(self,sel)
+    sel.select_window("null")
     # Review
     widget.submit_sub_edits(self,sel,offsite=True)
     mslib.wait_for_element_present(self,sel,testvars.offsite_goto_subs)
-    sel.click(testvars.offsite_goto_subs)
+    sel.click(testvars.offsite_goto_site)
     sel.wait_for_page_to_load(testvars.timeout)
-    vid_title = sel.get_text("css=.main_title")
-    print "subs edited for "+vid_title
+
+
+def verify_caption_position(self,sel,caption_position):
+    if int(caption_position) > 80:
+            self.fail("captions are too high on the video")
+    if int(caption_position) < 10:
+            self.fail("captions are too lown on the video")
+
 
 
 def store_subs(self,sel):

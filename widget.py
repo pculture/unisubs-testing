@@ -93,6 +93,7 @@ def open_starter_dialog(self,sel):
     sel.click(testvars.WebsiteUI["NewTranslation_menuitem"])        
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Select_language"])
     mslib.wait_for_text_present(self,sel,"This video")
+    time.sleep(10)
     
 
 def starter_dialog_edit_orig(self,sel):
@@ -138,12 +139,14 @@ def starter_dialog_translate_from_orig(self,sel,to_lang='hr'):
     """
     #Figure out orig lang fail is there isn't a set lang already
     mslib.wait_for_text_present(self,sel,"This video")
+    sel.select_frame("relative=top")
     if sel.is_element_present(testvars.create_lang_unknown):
         self.fail("can't make a new translation when video has no orig lang set - test is invalid")
     else:
+        time.sleep(5)
         ol = sel.get_text(testvars.create_lang_known)
         orig_lang = ol.split("in ")[1]
-        lc = sel.get_value("css=p select option:contains('"+orig_lang+" ')")
+        lc = sel.get_value("css=div.mirosubs-modal-lang div p + p select option:contains('"+orig_lang+" ')")
         lang_code = re.sub("\d+$","",lc) #gives only the letters of the value field.
         from_code = re.sub("\D","",lc)  #gives only the number - used in from pulldown.
         select_video_language(self,sel,sub_lang=to_lang,from_lang=from_code)
@@ -367,7 +370,7 @@ def sync_video(self,sel,sub_file,start_delay=3,sub_int=2,step="Continue"):
         x=i+1
         sel.focus(testvars.WidgetUI["Sync_sub"])
         sel.click_at(testvars.WidgetUI["Sync_sub"],"")
-        time.sleep(.5)
+        time.sleep(.1)
         sub_cell_start_time = "css=li:nth-child("+str(x)+") > span.mirosubs-timestamp span span.mirosubs-timestamp-time"
         sub_cell_text = "css=li:nth-child("+str(x)+") > span.mirosubs-title span"
         start_time=sel.get_text(sub_cell_start_time)
@@ -450,6 +453,29 @@ def edit_translation(self,sel,subtextfile,new_text=""):
             ed_text = new_text
         sel.click(sub_cell)
         sel.type(thetextarea, u'ed_text')
+        sel.get_eval("this.browserbot.getUserWindow().mirosubs.widget.fireKeySequence(this.browserbot.getUserWindow().document.getElementsByClassName('mirosubs-subedit')[0], 13,13);") 
+        time.sleep(1)
+    sel.click(testvars.WidgetUI["Next_step"])
+
+
+
+def translate(self,sel,subtextfile):
+    """
+    Description: Create a new translation
+
+
+    Pre-condition - New Translation dialog opened.
+    """
+    print ("Translating")
+    sel.select_window("null")
+    mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
+    for i,line in enumerate(codecs.open(subtextfile)):
+        x = i+1
+        sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(x)+") > textarea.mirosubs-translateField"
+        if sel.is_element_present(sub_cell) == False:
+            break
+        sel.click(sub_cell)
+        sel.type(sub_cell, u'line')
         sel.get_eval("this.browserbot.getUserWindow().mirosubs.widget.fireKeySequence(this.browserbot.getUserWindow().document.getElementsByClassName('mirosubs-subedit')[0], 13,13);") 
         time.sleep(1)
     sel.click(testvars.WidgetUI["Next_step"])
