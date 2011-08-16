@@ -134,8 +134,9 @@ def write_log(testid,stat,buildid,error_info=""):
     try:
         send_result(logfile)
     finally:
-        if os.path.isfile(logfile):
-            os.remove(logfile)
+        print "log send complete"
+##        if os.path.isfile(logfile):
+##            os.remove(logfile)
     
     
 

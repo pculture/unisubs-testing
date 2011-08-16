@@ -109,8 +109,9 @@ class Test_HTMLTestRunner(unittest.TestCase):
 
 
     JENKINS_TESTS = [
-        'sg_64_submit.subgroup_64.test_533',
-        'sg_69_demoUI.subgroup_69.test_414'
+#        'sg_64_submit.subgroup_64.test_533',
+#        'sg_69_demoUI.subgroup_69.test_414'
+        'sg_78_widget_playback.subgroup_78_playback.test_686',
         ]
     
     ALL_TESTS = [
@@ -151,7 +152,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
             stat = byte_output[0]
             logs.close()
             litmusresult.write_log(id_string,stat,testbuildid,byte_output)
-            os.remove(tname)
+#            os.remove(tname)
             q.task_done()
 
     def _add_smaller_group_for_sauce(self):
