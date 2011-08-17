@@ -219,7 +219,7 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
         time.sleep(3)
         sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
-        time.sleep(1)
+        time.sleep(2)
         if sel.is_element_present(testvars.WebsiteUI["AddSubtitles_menuitem"]) == True:
             print "has subtitles - edit and revert"
             subtextfile = "subs.txt"

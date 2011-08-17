@@ -24,9 +24,9 @@ WebsiteUI = {"Home":"css=a:contains('Miro Subs Alpha')", \
              #widget menu displayed on website
              "SubtitleMe_menu":"css=.mirosubs-tabTextchoose", \
              "SubMe_menuitems":"css=.mirosubs-langmenuitem-content", \
-             "AddSubtitles_menuitem":"css=.mirosubs-improveSubtitles" ,\
-             "NewTranslation_menuitem":"css=.mirosubs-addTranslation" ,\
-             "Subhomepage_menuitem":"css=.mirosubs-subtitleHomepage" ,\
+             "AddSubtitles_menuitem":"css=div.mirosubs-dropdown div.mirosubs-actions ul li.mirosubs-improveSubtitles a", \
+             "NewTranslation_menuitem":"css=div.mirosubs-dropdown div.mirosubs-actions ul li.mirosubs-addTranslation a" ,\
+             "Subhomepage_menuitem":"css=div.mirosubs-dropdown div.mirosubs-actions ul li.mirosubs-subtitleHomepage a" ,\
              "Login_menuitem":"css=.mirosubs-createAccount" ,\
              "Logout_menuitem":"css=.mirosubs-langmenuitem-content:contains('Logout')" , \
              "ChooseLanguage_menu":"css=.mirosubs-tabText:contains('Choose language')" ,
