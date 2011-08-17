@@ -85,85 +85,85 @@ class subgroup_78_pculture(unittest.TestCase):
         self.assertEqual([], self.verificationErrors)
 
 
-class subgroup_78_subtesting(unittest.TestCase):
-    """
-    Litmus Subgroup 78 - offsite subwidget:
-        Tests designed to exercise the subtitle widget embedded
-        in sites external to universalsubtitles.org (live, dev or staging)  
-    """
-    
-# Open the desired browser and set up the test
-    def setUp(self):
-        """
-        Sets up run envirnment for selenium server
-        """
-        self.verificationErrors = []
-        self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), "http://subtesting.com/"))
-        self.selenium.start()
-        self.session = self.selenium.sessionId
-        self.selenium.set_timeout(testvars.timeout)
-        
-   
-# The test cases of the subgroup.
-
-
-    def test_601(self):
-        """test 601 Widgetizer offsite on wordpress with youtube video.
-        
-        http://litmus.pculture.org/show_test.cgi?id=601
-
-        We are explicitly testing the Right-Wing Radio http://www.youtube.com/watch?v=HfuwNU0jsk0 on the page
-        """
-        test_id = 601
-        print self.shortDescription()
-        sel = self.selenium
-        test_page = (selvars.set_subtesting_wordpress_page(self,test_id))
-        sel.open(test_page)
-        sel.wait_for_page_to_load(testvars.timeout)
-        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
-        time.sleep(1)
-        if sel.is_element_present(testvars.WebsiteUI["AddSubtitles_menuitem"]) == True:
-            print "has subtitles - edit and revert"
-            subtextfile = "subs.txt"
-            orig_rev = store_subs(self,sel)
-            sel.open(test_page)
-            sel.wait_for_page_to_load(testvars.timeout)
-            mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
-            time.sleep(3)
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
-            widget.starter_dialog_edit_orig(self,sel)
-            edit_subs(self,sel,orig_rev,subtextfile)          
-        else:
-            make_new_subs(self,sel)
-
-    def test_622(self):
-        """test 622 widgetizer offsite wordpress in-page script element youtube
-        
-        http://litmus.pculture.org/show_test.cgi?id=622
-
-        We are explicitly testing the Right-Wing Radio Duck http://www.youtube.com/watch?v=HfuwNU0jsk0 on the page
-        """
-        test_id = 622
-        print self.shortDescription()
-        sel = self.selenium
-        test_page = (selvars.set_subtesting_wordpress_page(self,test_id))
-        sel.open(test_page)
-        sel.wait_for_page_to_load(testvars.timeout)
-        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
-        time.sleep(1)
-        if sel.is_element_present(testvars.WebsiteUI["AddSubtitles_menuitem"]) == True:
-            print "has subtitles - edit and revert"
-            subtextfile = "subs.txt"
-            orig_rev = store_subs(self,sel)
-            sel.open(test_page)
-            sel.wait_for_page_to_load(testvars.timeout)
-            mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
-            time.sleep(3)
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
-            widget.starter_dialog_edit_orig(self,sel)
-            edit_subs(self,sel,orig_rev,subtextfile)          
-        else:
-            make_new_subs(self,sel)
+##class subgroup_78_subtesting(unittest.TestCase):
+##    """
+##    Litmus Subgroup 78 - offsite subwidget:
+##        Tests designed to exercise the subtitle widget embedded
+##        in sites external to universalsubtitles.org (live, dev or staging)  
+##    """
+##    
+### Open the desired browser and set up the test
+##    def setUp(self):
+##        """
+##        Sets up run envirnment for selenium server
+##        """
+##        self.verificationErrors = []
+##        self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser(self.id(),self.shortDescription()), "http://subtesting.com/"))
+##        self.selenium.start()
+##        self.session = self.selenium.sessionId
+##        self.selenium.set_timeout(testvars.timeout)
+##        
+##   
+### The test cases of the subgroup.
+##
+##
+##    def test_601(self):
+##        """test 601 Widgetizer offsite on wordpress with youtube video.
+##        
+##        http://litmus.pculture.org/show_test.cgi?id=601
+##
+##        We are explicitly testing the Right-Wing Radio http://www.youtube.com/watch?v=HfuwNU0jsk0 on the page
+##        """
+##        test_id = 601
+##        print self.shortDescription()
+##        sel = self.selenium
+##        test_page = (selvars.set_subtesting_wordpress_page(self,test_id))
+##        sel.open(test_page)
+##        sel.wait_for_page_to_load(testvars.timeout)
+##        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
+##        time.sleep(1)
+##        if sel.is_element_present(testvars.WebsiteUI["AddSubtitles_menuitem"]) == True:
+##            print "has subtitles - edit and revert"
+##            subtextfile = "subs.txt"
+##            orig_rev = store_subs(self,sel)
+##            sel.open(test_page)
+##            sel.wait_for_page_to_load(testvars.timeout)
+##            mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+##            time.sleep(3)
+##            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
+##            widget.starter_dialog_edit_orig(self,sel)
+##            edit_subs(self,sel,orig_rev,subtextfile)          
+##        else:
+##            make_new_subs(self,sel)
+##
+##    def test_622(self):
+##        """test 622 widgetizer offsite wordpress in-page script element youtube
+##        
+##        http://litmus.pculture.org/show_test.cgi?id=622
+##
+##        We are explicitly testing the Right-Wing Radio Duck http://www.youtube.com/watch?v=HfuwNU0jsk0 on the page
+##        """
+##        test_id = 622
+##        print self.shortDescription()
+##        sel = self.selenium
+##        test_page = (selvars.set_subtesting_wordpress_page(self,test_id))
+##        sel.open(test_page)
+##        sel.wait_for_page_to_load(testvars.timeout)
+##        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
+##        time.sleep(1)
+##        if sel.is_element_present(testvars.WebsiteUI["AddSubtitles_menuitem"]) == True:
+##            print "has subtitles - edit and revert"
+##            subtextfile = "subs.txt"
+##            orig_rev = store_subs(self,sel)
+##            sel.open(test_page)
+##            sel.wait_for_page_to_load(testvars.timeout)
+##            mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+##            time.sleep(3)
+##            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
+##            widget.starter_dialog_edit_orig(self,sel)
+##            edit_subs(self,sel,orig_rev,subtextfile)          
+##        else:
+##            make_new_subs(self,sel)
 
 
             
