@@ -236,7 +236,7 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
        
             
     def test_732(self):
-        """offsite widget on MC site.
+        """vimeo offsite widget on MC site.
  
         http://litmus.pculture.org/show_test.cgi?id=732
         Vimeo Video with widget embedded on Miro Community test page.
@@ -266,8 +266,7 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         except:
             print "sub position playback failed"
             self.verificationErrors.append("sub playback / position test failed")
-        sel.refresh()
-        sel.wait_for_page_to_load(testvars.timeout)
+  
       
         
        
@@ -302,8 +301,7 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         except:
             print "sub position playback failed"
             self.verificationErrors.append("sub playback / position test failed")
-        sel.refresh()
-        sel.wait_for_page_to_load(testvars.timeout)
+  
 
 
     def test_734(self):
@@ -337,8 +335,7 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         except:
             print "sub position playback failed"
             self.verificationErrors.append("sub playback / position test failed")
-        sel.refresh()
-        sel.wait_for_page_to_load(testvars.timeout)
+    
 
     def test_735(self):
         """blip ogg embed - subtitle and playback
@@ -371,8 +368,7 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         except:
             print "sub position playback failed"
             self.verificationErrors.append("sub playback / position test failed")
-        sel.refresh()
-        sel.wait_for_page_to_load(testvars.timeout)
+  
 
     def test_736(self):
         """blip flowplayer offsite embed - subtitle and playback
@@ -405,8 +401,7 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         except:
             print "sub position playback failed"
             self.verificationErrors.append("sub playback / position test failed")
-        sel.refresh()
-        sel.wait_for_page_to_load(testvars.timeout)
+    
 
 
     def test_737(self):
@@ -440,8 +435,7 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         except:
             print "sub position playback failed"
             self.verificationErrors.append("sub playback / position test failed")
-        sel.refresh()
-        sel.wait_for_page_to_load(testvars.timeout)
+   
 
 
 
@@ -459,7 +453,7 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
 
 def make_new_subs(self,sel,subtextfile):
     print "make new subs"
-    time.sleep(5)
+    time.sleep(3)
     widget.starter_dialog_edit_orig(self,sel)
     # Transcribe
     widget.transcribe_video(self,sel,subtextfile)
