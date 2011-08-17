@@ -289,7 +289,7 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         if sel.is_element_present("css=p.youtube_subtitled div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')"):
             sel.click("css=p.youtube_subtitled div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')")
         else:
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')          
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].openMenu()')          
         make_new_subs(self,sel,subtextfile)
         #Playback Subs
         time.sleep(5)
@@ -324,14 +324,14 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         if sel.is_element_present("css=p.dailymotion div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')"):
             sel.click("css=p.dailymotion div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')")
         else:
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')          
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[2].openMenu()')          
         make_new_subs(self,sel,subtextfile)
         #Playback Subs
         time.sleep(5)
         try:
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].play()')
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[2].play()')
             mslib.wait_for_element_present(self,sel,"css=p.dailymotion span.mirosubs-captionSpan")
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].pause()')
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[2].pause()')
             caption_position =  sel.get_element_height("css=p.dailymotion span.mirosubs-captionSpan")
             verify_caption_position(self,sel,caption_position)
         except:
@@ -358,14 +358,14 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         if sel.is_element_present("css=p.ogg div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')"):
             sel.click("css=p.ogg div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')")
         else:
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')          
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[3].openMenu()')          
         make_new_subs(self,sel,subtextfile)
         #Playback Subs
         time.sleep(5)
         try:
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].play()')
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[3].play()')
             mslib.wait_for_element_present(self,sel,"css=p.ogg span.mirosubs-captionSpan")
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].pause()')
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[3].pause()')
             caption_position =  sel.get_element_height("css=p.ogg span.mirosubs-captionSpan")
             verify_caption_position(self,sel,caption_position)
         except:
@@ -392,14 +392,14 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         if sel.is_element_present("css=p.blip-flow div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')"):
             sel.click("css=p.blip-flow div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')")
         else:
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')          
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[4].openMenu()')          
         make_new_subs(self,sel,subtextfile)
         #Playback Subs
         time.sleep(5)
         try:
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].play()')
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[4].play()')
             mslib.wait_for_element_present(self,sel,"css=p.blip-flow span.mirosubs-captionSpan")
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].pause()')
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[4].pause()')
             caption_position =  sel.get_element_height("css=p.blip-flow span.mirosubs-captionSpan")
             verify_caption_position(self,sel,caption_position)
         except:
@@ -427,14 +427,14 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         if sel.is_element_present("css=p.other-flow div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')"):
             sel.click("css=p.other-flow div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')")
         else:
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')          
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[5].openMenu()')          
         make_new_subs(self,sel,subtextfile)
         #Playback Subs
         time.sleep(5)
         try:
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].play()')
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[5].play()')
             mslib.wait_for_element_present(self,sel,"css=p.other-flow span.mirosubs-captionSpan")
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].pause()')
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[5].pause()')
             caption_position =  sel.get_element_height("css=p.other-flow span.mirosubs-captionSpan")
             verify_caption_position(self,sel,caption_position)
         except:
