@@ -83,12 +83,12 @@ def set_unisubs_mc_page(self, test_id):
     """
     sets the wordpress page to use for testing, if not set, defaults to dev
     """
-    if test_id == 623: #offsite widget embedded in <p> element for youtube video
+    if test_id == "hunter": #offsite widget embedded in <p> element for youtube video
         if controller.testsite == "staging":
             page = "/hunter-staging/"
         else:
             page = "/hunter/"
-    elif test_id == 732: #offsite widget dev embed tests
+    elif test_id == "embed_tests": #offsite widget dev embed tests
         if controller.testsite == "staging":
             page = "/staging-embed-test/"
         else:

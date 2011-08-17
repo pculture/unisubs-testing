@@ -208,12 +208,12 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         http://litmus.pculture.org/show_test.cgi?id=623
         Video with widget embedded on Miro Community test page.
         """
-        test_id = 623
+        mc_page = "hunter"
         vid_pos = "css=p.pElementTest span span.mirosubs-widget div.mirosubs-videoTab a span.mirosubs-tabTextchoose"
         vid_title = "hunter.s.thompson.avi"
         print self.shortDescription()
         sel = self.selenium
-        test_page = selvars.set_unisubs_mc_page(self,test_id)
+        test_page = selvars.set_unisubs_mc_page(self,mc_page)
         sel.open(test_page)
         sel.wait_for_page_to_load(testvars.timeout)
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
@@ -241,13 +241,12 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         http://litmus.pculture.org/show_test.cgi?id=732
         Vimeo Video with widget embedded on Miro Community test page.
         """
-        test_id = 732
+        mc_page = "embed_tests"
         vid_title = "The Sandwich Movie"
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"732_vimeo.txt")
-        sub_trans_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"732_vimeo_es.srt")
         print self.shortDescription()
         sel = self.selenium
-        test_page = selvars.set_unisubs_mc_page(self,test_id)
+        test_page = selvars.set_unisubs_mc_page(self,mc_page)
         sel.open(test_page)
         sel.wait_for_page_to_load(testvars.timeout)
         time.sleep(5)
@@ -269,16 +268,180 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
             self.verificationErrors.append("sub playback / position test failed")
         sel.refresh()
         sel.wait_for_page_to_load(testvars.timeout)
-##        time.sleep(15)
-##        #Add New Translation
-##        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
-##        time.sleep(2)
-##        widget.open_starter_dialog(self,sel)
-##        widget.starter_dialog_translate_from_orig(self,sel,to_lang='es')
-##        widget.translate(self,sel,sub_trans_file)
-        
+      
         
        
+    def test_733(self):
+        """youtube offsite embed - subtitle and playback
+ 
+        http://litmus.pculture.org/show_test.cgi?id=733
+        Vimeo Video with widget embedded on Miro Community test page.
+        """
+        mc_page = "embed_tests"
+        vid_title = "Girl wakes up"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"733_youtube.txt")
+        print self.shortDescription()
+        sel = self.selenium
+        test_page = selvars.set_unisubs_mc_page(self,mc_page)
+        sel.open(test_page)
+        sel.wait_for_page_to_load(testvars.timeout)
+        time.sleep(5)
+        if sel.is_element_present("css=p.youtube_subtitled div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')"):
+            sel.click("css=p.youtube_subtitled div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')")
+        else:
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')          
+        make_new_subs(self,sel,subtextfile)
+        #Playback Subs
+        time.sleep(5)
+        try:
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].play()')
+            mslib.wait_for_element_present(self,sel,"css=p.youtube_subtitled span.mirosubs-captionSpan")
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].pause()')
+            caption_position =  sel.get_element_height("css=p.youtube_subtitled span.mirosubs-captionSpan")
+            verify_caption_position(self,sel,caption_position)
+        except:
+            print "sub position playback failed"
+            self.verificationErrors.append("sub playback / position test failed")
+        sel.refresh()
+        sel.wait_for_page_to_load(testvars.timeout)
+
+
+    def test_734(self):
+        """dailymotion offsite embed - subtitle and playback
+ 
+        http://litmus.pculture.org/show_test.cgi?id=734
+        Vimeo Video with widget embedded on Miro Community test page.
+        """
+        mc_page = "embed_tests"
+        vid_title = "Ordaemonium"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"734_dm.txt")
+        print self.shortDescription()
+        sel = self.selenium
+        test_page = selvars.set_unisubs_mc_page(self,mc_page)
+        sel.open(test_page)
+        sel.wait_for_page_to_load(testvars.timeout)
+        time.sleep(5)
+        if sel.is_element_present("css=p.dailymotion div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')"):
+            sel.click("css=p.dailymotion div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')")
+        else:
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')          
+        make_new_subs(self,sel,subtextfile)
+        #Playback Subs
+        time.sleep(5)
+        try:
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].play()')
+            mslib.wait_for_element_present(self,sel,"css=p.dailymotion span.mirosubs-captionSpan")
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].pause()')
+            caption_position =  sel.get_element_height("css=p.dailymotion span.mirosubs-captionSpan")
+            verify_caption_position(self,sel,caption_position)
+        except:
+            print "sub position playback failed"
+            self.verificationErrors.append("sub playback / position test failed")
+        sel.refresh()
+        sel.wait_for_page_to_load(testvars.timeout)
+
+    def test_735(self):
+        """blip ogg embed - subtitle and playback
+ 
+        http://litmus.pculture.org/show_test.cgi?id=735
+        Blip ogg video with widget embedded on Miro Community test page.
+        """
+        mc_page = "embed_tests"
+        vid_title = "Girl wakes up"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"735_blip.txt")
+        print self.shortDescription()
+        sel = self.selenium
+        test_page = selvars.set_unisubs_mc_page(self,mc_page)
+        sel.open(test_page)
+        sel.wait_for_page_to_load(testvars.timeout)
+        time.sleep(5)
+        if sel.is_element_present("css=p.ogg div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')"):
+            sel.click("css=p.ogg div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')")
+        else:
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')          
+        make_new_subs(self,sel,subtextfile)
+        #Playback Subs
+        time.sleep(5)
+        try:
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].play()')
+            mslib.wait_for_element_present(self,sel,"css=p.ogg span.mirosubs-captionSpan")
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].pause()')
+            caption_position =  sel.get_element_height("css=p.ogg span.mirosubs-captionSpan")
+            verify_caption_position(self,sel,caption_position)
+        except:
+            print "sub position playback failed"
+            self.verificationErrors.append("sub playback / position test failed")
+        sel.refresh()
+        sel.wait_for_page_to_load(testvars.timeout)
+
+    def test_736(self):
+        """blip flowplayer offsite embed - subtitle and playback
+ 
+        http://litmus.pculture.org/show_test.cgi?id=736
+        Blip Flowplayer Video with widget embedded on Miro Community test page.
+        """
+        mc_page = "embed_tests"
+        vid_title = "Girl wakes up"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"736_blipflow.txt")
+        print self.shortDescription()
+        sel = self.selenium
+        test_page = selvars.set_unisubs_mc_page(self,mc_page)
+        sel.open(test_page)
+        sel.wait_for_page_to_load(testvars.timeout)
+        time.sleep(5)
+        if sel.is_element_present("css=p.blip-flow div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')"):
+            sel.click("css=p.blip-flow div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')")
+        else:
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')          
+        make_new_subs(self,sel,subtextfile)
+        #Playback Subs
+        time.sleep(5)
+        try:
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].play()')
+            mslib.wait_for_element_present(self,sel,"css=p.blip-flow span.mirosubs-captionSpan")
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].pause()')
+            caption_position =  sel.get_element_height("css=p.blip-flow span.mirosubs-captionSpan")
+            verify_caption_position(self,sel,caption_position)
+        except:
+            print "sub position playback failed"
+            self.verificationErrors.append("sub playback / position test failed")
+        sel.refresh()
+        sel.wait_for_page_to_load(testvars.timeout)
+
+
+    def test_737(self):
+        """youtube offsite embed - subtitle and playback
+ 
+        http://litmus.pculture.org/show_test.cgi?id=733
+        Flowplayer with widget embedded on Miro Community test page.
+        """
+        mc_page = "embed_tests"
+        vid_title = "Girl wakes up"
+        subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"737_flow.txt")
+        print self.shortDescription()
+        sel = self.selenium
+        test_page = selvars.set_unisubs_mc_page(self,mc_page)
+        sel.open(test_page)
+        sel.wait_for_page_to_load(testvars.timeout)
+        time.sleep(5)
+        if sel.is_element_present("css=p.other-flow div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')"):
+            sel.click("css=p.other-flow div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')")
+        else:
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')          
+        make_new_subs(self,sel,subtextfile)
+        #Playback Subs
+        time.sleep(5)
+        try:
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].play()')
+            mslib.wait_for_element_present(self,sel,"css=p.other-flow span.mirosubs-captionSpan")
+            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].pause()')
+            caption_position =  sel.get_element_height("css=p.other-flow span.mirosubs-captionSpan")
+            verify_caption_position(self,sel,caption_position)
+        except:
+            print "sub position playback failed"
+            self.verificationErrors.append("sub playback / position test failed")
+        sel.refresh()
+        sel.wait_for_page_to_load(testvars.timeout)
 
 
 
@@ -354,14 +517,7 @@ def edit_subs(self,sel,orig_rev,subtextfile):
         mslib.wait_for_element_present(self,sel,testvars.history_tab)
         sel.click(testvars.history_tab)
         mslib.wait_for_element_present(self,sel,testvars.video_compare_revisions)
-##        rev_num = orig_rev.lstrip('#')
-##        website.check_the_box(self,sel,2) #check the box
-##        new_rev = int(rev_num) + 1
-##        sel.click(testvars.video_compare_revisions)
-##        print " * comparing revisions and rolling back to original"
-##        website.verify_compare_revisions(self,sel,str(rev_num),str(new_rev),rollback=True)
-##        sel.click(testvars.transcripts_tab)
-##        website.verify_subs(self,sel,subtextfile)   
+
 
 if __name__ == "__main__":
     unittest.main()
