@@ -134,8 +134,8 @@ def submit_video(self,sel,url,login=True):
     
 def front_page_submit(self,sel,url):
     sel.open("/")
-    sel.type("css=div#subtitle.clearfix form input", url)
-    sel.click("css=div#subtitle.clearfix form button.button")
+    sel.type("css=div#subtitle form input", url)
+    sel.click("css=div#subtitle button.button:contains('Subtitle')")
     sel.wait_for_page_to_load(testvars.timeout)
 
 
@@ -156,11 +156,12 @@ def start_sub_widget(self,sel,skip="True",edit_type='orig',sec_lang=None,login=F
     mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
     time.sleep(5)
     sel.click(testvars.WebsiteUI["SubtitleMe_menu"])
-    time.sleep(3)
+    time.sleep(5)
     if sel.is_element_present(testvars.WidgetUI["Select_language"]) == False:
         if sel.is_element_present(testvars.WebsiteUI["AddSubtitles_menuitem"]):
             sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])
-            time.sleep(3)
+        elif sel.is_element_present(testvars.WebsiteUI['NewTranslation_menuitem']):
+            sel.click(testvars.WebsiteUI["AddSubtitles_menuitem"])
         else:
             print "widget opened"
             widget.close_howto_video(self,sel)
