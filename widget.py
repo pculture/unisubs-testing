@@ -236,7 +236,7 @@ def select_video_language(self,sel,vid_lang="en",sub_lang="en-gb",from_lang='for
             sel.select(testvars.create_translate_from+" + span select", "value=regexp:^"+str(from_lang))
             print "selected video language, from: "+str(from_lang)
     time.sleep(1)
-    sel.click("link=Continue")
+    sel.click("css=div.mirosubs-modal-lang div a.mirosubs-green-button:contains('Continue')")
    
 
         
@@ -251,15 +251,11 @@ def close_howto_video(self,sel,skip=True):
     """
     time.sleep(10)
     sel.select_frame("relative=top")
-    if sel.is_element_present("css=.mirosubs-howtopanel"):
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-done:contains('Continue')")
-        mslib.wait_for_element_present(self,sel,"css=.goog-checkbox-unchecked")
+    if sel.is_element_present("css=div.mirosubs-howtopanel div div.mirosubs-howto-videocontainer"):
+        mslib.wait_for_element_present(self,sel,"css=div.mirosubs-howtopanel div span.goog-checkbox-unchecked")
         if skip==True:
-            sel.click("css=.goog-checkbox-unchecked")
+            sel.click("css=div.mirosubs-howtopanel div span.goog-checkbox-unchecked")
         sel.click("css=.mirosubs-done:contains('Continue')")
-        time.sleep(3)
-        if sel.is_element_present("css=.mirosubs-done:contains('Continue')"):
-            sel.click("css=.mirosubs-done:contains('Continue')")
     else:
         print "no how-to video"
             
