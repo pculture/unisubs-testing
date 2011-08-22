@@ -78,13 +78,13 @@ jenkins = options.jenkins
 
 class Test_HTMLTestRunner(unittest.TestCase):
     SAUCE_MINIMAL_PAGEDEMOS = [
-        'sg_78_widget_offsite.subgroup_78_unisubs_mc.test_623',
-        'sg_78_widget_playback.subgroup_78_playback.test_684',
-        'sg_78_widget_playback.subgroup_78_playback.test_688',
-        'sg_78_widget_playback.subgroup_78_playback.test_685',
-        'sg_78_widget_playback.subgroup_78_playback.test_686',
-        'sg_78_widget_playback.subgroup_78_playback.test_687',
-        'sg_78_widget_playback.subgroup_78_playback.test_701',
+##        'sg_78_widget_offsite.subgroup_78_unisubs_mc.test_623',
+##        'sg_78_widget_playback.subgroup_78_playback.test_684',
+##        'sg_78_widget_playback.subgroup_78_playback.test_688',
+##        'sg_78_widget_playback.subgroup_78_playback.test_685',
+##        'sg_78_widget_playback.subgroup_78_playback.test_686',
+##        'sg_78_widget_playback.subgroup_78_playback.test_687',
+##        'sg_78_widget_playback.subgroup_78_playback.test_701',
         'sg_78_widget_playback.subgroup_78_playback.test_702',                
 #        'sg_78_widget_pagedemo.subgroup_78_pagedemo.test_689',
 #        'sg_78_widget_pagedemo.subgroup_78_pagedemo.test_690',
@@ -92,18 +92,20 @@ class Test_HTMLTestRunner(unittest.TestCase):
         ]
 
     SAUCE_TESTS = [
-        'sg_69_demoUI.subgroup_69.test_414',
-        'sg_64_submit.subgroup_64.test_538',
-        'sg_64_submit.subgroup_64.test_534',
-        'sg_64_submit.subgroup_64.test_533',
-        ## 'sg_78_widget_offsite.subgroup_78_subtesting.test_601',
-        ## 'sg_78_widget_offsite.subgroup_78_subtesting.test_622',
-        ## 'sg_78_widget_playback.subgroup_78_subtesting_playback.test_696',
-        'sg_80_comments.subgroup_80.test_536',
-        'sg_88_teams.subgroup_88.test_613',
-        'sg_88_teams.subgroup_88.test_693',
-        'sg_65_login.subgroup_65.test_379',
-        'sg_65_login.subgroup_65.test_378' ]
+        'sg_69_demoUI.subgroup_69.test_373',
+##        'sg_69_demoUI.subgroup_69.test_414',
+##        'sg_64_submit.subgroup_64.test_538',
+##        'sg_64_submit.subgroup_64.test_534',
+##        'sg_64_submit.subgroup_64.test_533',
+##        ## 'sg_78_widget_offsite.subgroup_78_subtesting.test_601',
+##        ## 'sg_78_widget_offsite.subgroup_78_subtesting.test_622',
+##        ## 'sg_78_widget_playback.subgroup_78_subtesting_playback.test_696',
+##        'sg_80_comments.subgroup_80.test_536',
+##        'sg_88_teams.subgroup_88.test_613',
+##        'sg_88_teams.subgroup_88.test_693',
+##        'sg_65_login.subgroup_65.test_379',
+##        'sg_65_login.subgroup_65.test_378'
+        ]
 
     SAUCE_TESTS.extend(SAUCE_MINIMAL_PAGEDEMOS)
 
