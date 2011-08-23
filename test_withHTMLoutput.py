@@ -21,6 +21,8 @@ import sg_78_widget_playback
 import sg_80_comments
 import sg_81_ul_dl
 import sg_88_teams
+import sg_94_widgetizer
+import sg_95_watchpage
 
 
 from optparse import OptionParser
@@ -34,8 +36,8 @@ parser.add_option(
     help='Runs the minimal pagedemo tests')
 
 parser.add_option(
-    "-j", "--jenkins", action="store_true", dest="jenkins", default=False,
-    help='limited test suite for jenkins ci testing')
+    "-c", "--custom", action="store_true", dest="custom", default=False,
+    help='custom test suite, user defined in CUSTOM_TESTS')
 
 parser.add_option(
     "-b", "--browser", action="store",
@@ -74,49 +76,48 @@ testsite = options.site
 testbuildid = options.buildid
 testlitmus = options.litmus
 minimal = options.minimal
-jenkins = options.jenkins
+custom = options.custom
 
 class Test_HTMLTestRunner(unittest.TestCase):
     SAUCE_MINIMAL_PAGEDEMOS = [
-##        'sg_78_widget_offsite.subgroup_78_unisubs_mc.test_623',
-##        'sg_78_widget_playback.subgroup_78_playback.test_684',
-##        'sg_78_widget_playback.subgroup_78_playback.test_688',
-##        'sg_78_widget_playback.subgroup_78_playback.test_685',
-##        'sg_78_widget_playback.subgroup_78_playback.test_686',
-##        'sg_78_widget_playback.subgroup_78_playback.test_687',
-##        'sg_78_widget_playback.subgroup_78_playback.test_701',
+        'sg_78_widget_offsite.subgroup_78_unisubs_mc.test_623',
+        'sg_78_widget_playback.subgroup_78_playback.test_684',
+        'sg_78_widget_playback.subgroup_78_playback.test_688',
+        'sg_78_widget_playback.subgroup_78_playback.test_685',
+        'sg_78_widget_playback.subgroup_78_playback.test_686',
+        'sg_94_widgetizer.subgroup_94.test_687',
+        'sg_94_widgetizer.subgroup_94.test_701',
+        'sg_94_widgetizer.subgroup_94.test_739',
         'sg_78_widget_playback.subgroup_78_playback.test_702',                
-#        'sg_78_widget_pagedemo.subgroup_78_pagedemo.test_689',
-#        'sg_78_widget_pagedemo.subgroup_78_pagedemo.test_690',
-#        'sg_78_widget_pagedemo.subgroup_78_pagedemo.test_691'
         ]
 
     SAUCE_TESTS = [
         'sg_69_demoUI.subgroup_69.test_373',
-##        'sg_69_demoUI.subgroup_69.test_414',
-##        'sg_64_submit.subgroup_64.test_538',
-##        'sg_64_submit.subgroup_64.test_534',
-##        'sg_64_submit.subgroup_64.test_533',
-##        ## 'sg_78_widget_offsite.subgroup_78_subtesting.test_601',
-##        ## 'sg_78_widget_offsite.subgroup_78_subtesting.test_622',
-##        ## 'sg_78_widget_playback.subgroup_78_subtesting_playback.test_696',
-##        'sg_80_comments.subgroup_80.test_536',
-##        'sg_88_teams.subgroup_88.test_613',
-##        'sg_88_teams.subgroup_88.test_693',
-##        'sg_65_login.subgroup_65.test_379',
-##        'sg_65_login.subgroup_65.test_378'
+        'sg_69_demoUI.subgroup_69.test_414',
+        'sg_64_submit.subgroup_64.test_538',
+        'sg_64_submit.subgroup_64.test_534',
+        'sg_64_submit.subgroup_64.test_533',
+        'sg_80_comments.subgroup_80.test_536',
+        'sg_88_teams.subgroup_88.test_613',
+        'sg_88_teams.subgroup_88.test_693',
+        'sg_65_login.subgroup_65.test_379',
+        'sg_65_login.subgroup_65.test_378'
         ]
 
     SAUCE_TESTS.extend(SAUCE_MINIMAL_PAGEDEMOS)
 
 
-    JENKINS_TESTS = [
+# Create a custom test run, and execute with the --custom flag
+    CUSTOM_TESTS = [
+        
         'sg_64_submit.subgroup_64.test_533',
         'sg_69_demoUI.subgroup_69.test_414'
         ]
     
     ALL_TESTS = [
         'sg_64_submit.subgroup_64',
+        'sg_94_widgetizer.subgroup_94',
+        'sg_95_watchpage.subgroup_95',
         'sg_81_ul_dl.subgroup_81',
         'sg_69_demoUI.subgroup_69',
         'sg_80_comments.subgroup_80',
@@ -162,8 +163,8 @@ class Test_HTMLTestRunner(unittest.TestCase):
                 unittest.defaultTestLoader.loadTestsFromName(t) 
                 for t in tests])
 
-    def _add_jenkins_tests(self):
-        tests = self.JENKINS_TESTS
+    def _add_custom_tests(self):
+        tests = self.CUSTOM_TESTS
         self.suite.addTests([
                 unittest.defaultTestLoader.loadTestsFromName(t) 
                 for t in tests])
