@@ -127,7 +127,7 @@ def get_vimeo_video_url(self):
         
 def get_youtube_video_url(self,vid_format="embed"):
     if "firefox" not in selvars.set_browser():
-        youtubeURL = "http://www.youtube.com/watch?v=5sz0Uz7Bkck"
+        youtubeURL = "http://www.youtube.com/watch?v=lVJVRywgmYM"
     else:
         cat_num = random.randint(1,26)
         self.selenium = (selenium(selvars.set_localhost(), selvars.set_port(), selvars.set_browser("youtube"," get video url"), "http://youtube.com/"))

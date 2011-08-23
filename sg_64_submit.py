@@ -159,15 +159,15 @@ class subgroup_64(unittest.TestCase):
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         print "submitting a youtube video"
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
-        vid_url = offsite.get_youtube_video_url(self)
-#        vid_url = "http://www.youtube.com/watch?v=0KwiI7cmwv8"
+#        vid_url = offsite.get_youtube_video_url(self)
+        vid_url = "http://www.youtube.com/watch?v=lVJVRywgmYM"
         # Submit Video
         print ("logging in and submitting video")
         valid_url = website.submit_video(self,sel,vid_url)
-        if valid_url == False:
-            print 'random vid submit failed, trying known good url'
-            vid_url = 'http://www.youtube.com/watch?v=5sz0Uz7Bkck'
-            website.submit_video(self,sel,vid_url)
+##        if valid_url == False:
+##            print 'random vid submit failed, trying known good url'
+##            vid_url = 'http://www.youtube.com/watch?v=5sz0Uz7Bkck'
+        website.submit_video(self,sel,vid_url)
         # Verify embed and player
         print ("verifying embed")
         website.verify_submitted_video(self,sel,vid_url,embed_type="youtube")
@@ -179,7 +179,7 @@ class subgroup_64(unittest.TestCase):
         widget.transcribe_video(self,sel,subtextfile)
         # Sync
         print ("syncing video")
-        widget.sync_video(self,sel,subtextfile,3,4)
+        widget.sync_video(self,sel,subtextfile,1,3)
         # Review
         print ("review step - just submitting video")
         widget.submit_sub_edits(self,sel)
