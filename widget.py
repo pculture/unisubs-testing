@@ -720,6 +720,8 @@ def submit_thanks(self,sel):
     time.sleep(3)
     if sel.is_element_present("css=div.mirosubs-modal-completed a.mirosubs-green-button"):
         sel.click("css=div.mirosubs-modal-completed a.mirosubs-green-button")
+    else:
+        self.verificationErrors.append("Subtitles saved dialog not displayed on sub submit")
     
 
 def goto_step(self,sel,step="3"):
