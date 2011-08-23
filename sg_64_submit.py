@@ -131,6 +131,11 @@ class subgroup_64(unittest.TestCase):
         # Submit Video
         print "logging in and submitting video"
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
+        valid_url = website.submit_video(self,sel,vid_url)
+        if valid_url == False:
+            print 'random vid submit failed, trying known good url'
+            vid_url = 'http://vimeo.com/27709878'
+            website.submit_video(self,sel,vid_url)
         website.submit_video(self,sel,vid_url)
         # Verify embed and player
         print "verifying embed"
