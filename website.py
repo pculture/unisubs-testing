@@ -614,8 +614,24 @@ def search_teams(self,sel,team):
     Assumes using the url query string
     """
     sel.open("/teams/?q="+team)
-    
-    
+
+
+def feature_video(self,sel,action='Feature'):
+    """As an admin user, Feature or Unfeature a video.
+
+    Assumes logged in as an admin user.
+    Action can be 'Feature' or 'Unfeature'
+    """
+    mslib.wait_for_element_present(self,sel,"css=div.content a.green_button:contains('eature')")
+    if not sel.is_element_present("css=div.content a.green_button:contains('"+action+"')"):
+        print "video already",action
+    else:
+        sel.click("css=div.content a.green_button:contains('eature')")
+        mslib.wait_for_element_present(self,sel,"css=div.content a.green_button:contains('eature')")
+    vid_url = sel.get_attribute("css=ul.left_nav li:nth-child(1) >  a@href")
+    return vid_url
+
+
 def admin_delete_video(self,sel,curr_url):
     """Completely delete a video from the site.
 
