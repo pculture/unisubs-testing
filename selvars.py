@@ -93,6 +93,11 @@ def set_unisubs_mc_page(self, test_id):
             page = "/staging-embed-test/"
         else:
             page = "/dev-embed-tests/"
+    elif test_id == "widgetizer_tests": #offsite widget dev embed tests
+        if controller.testsite == "staging":
+            page = "/staging-widgetizer/"
+        else:
+            page = "/dev-widgetizer/"
     else:
         self.fail("not a valid test case")
     return page
