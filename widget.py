@@ -39,18 +39,18 @@ def Login(self,sel,auth_type):
     select_video_language(self,sel)
     close_howto_video(self,sel)
             
-    if sel.is_element_present("css=.mirosubs-modal-widget"):
+    if sel.is_element_present("css=.unisubs-modal-widget"):
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Must_Login"])
         sel.click(testvars.WidgetUI["Must_Login"])
         
     else:
-        if sel.is_element_present("css=.mirosubs-uniLogo"):
+        if sel.is_element_present("css=.unisubs-uniLogo"):
             mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["Login_menuitem"])
             sel.click(testvars.WebsiteUI["Login_menuitem"])
 
  #   sel.select_frame("relative=top")
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-modal-login-content")
-    sel.click("css=a.mirosubs-" +auth_type)
+    mslib.wait_for_element_present(self,sel,"css=.unisubs-modal-login-content")
+    sel.click("css=a.unisubs-" +auth_type)
     
         
 
@@ -65,9 +65,9 @@ def site_login_from_widget_link(self,sel):
     if sel.is_element_present(testvars.WidgetUI["Must_Login"]):   
         # log in from widget
         sel.click("link=LOGIN")
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-modal-login")
+        mslib.wait_for_element_present(self,sel,"css=.unisubs-modal-login")
         time.sleep(2)
-        sel.click("css=.mirosubs-log")
+        sel.click("css=.unisubs-log")
         site_login_auth(self,sel)
     else:
         print "User is already logged into site"
@@ -125,7 +125,7 @@ def starter_dialog_edit_orig(self,sel):
         print "video opened directly - no lang select dialogs"
     time.sleep(10)
     close_howto_video(self,sel)
-    mslib.wait_for_element_present(self,sel,"css=div.mirosubs-help-heading")
+    mslib.wait_for_element_present(self,sel,"css=div.unisubs-help-heading")
     return orig_lang
 
 
@@ -146,13 +146,13 @@ def starter_dialog_translate_from_orig(self,sel,to_lang='hr'):
         time.sleep(5)
         ol = sel.get_text(testvars.create_lang_known)
         orig_lang = ol.split("in ")[1]
-        lc = sel.get_value("css=div.mirosubs-modal-lang div p + p select option:contains('"+orig_lang+" ')")
+        lc = sel.get_value("css=div.unisubs-modal-lang div p + p select option:contains('"+orig_lang+" ')")
         lang_code = re.sub("\d+$","",lc) #gives only the letters of the value field.
         from_code = re.sub("\D","",lc)  #gives only the number - used in from pulldown.
         select_video_language(self,sel,sub_lang=to_lang,from_lang=from_code)
         time.sleep(5)
         close_howto_video(self,sel)
-        mslib.wait_for_element_present(self,sel,"css=div.mirosubs-help-heading")
+        mslib.wait_for_element_present(self,sel,"css=div.unisubs-help-heading")
         return orig_lang
 
 def starter_dialog_translate_from_not_orig(self,sel,from_lang,to_lang='hr'):
@@ -178,7 +178,7 @@ def starter_dialog_translate_from_not_orig(self,sel,from_lang,to_lang='hr'):
     select_video_language(self,sel,sub_lang=to_lang,from_lang=from_lang)
     time.sleep(5)
     close_howto_video(self,sel)
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-help-heading")
+    mslib.wait_for_element_present(self,sel,"css=.unisubs-help-heading")
     return from_lang
 
 
@@ -201,7 +201,7 @@ def starter_dialog_fork(self,sel,to_lang='hr'):
         select_video_language(self,sel,sub_lang=to_lang,from_lang='forkk')
         time.sleep(5)
         close_howto_video(self,sel)
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
+        mslib.wait_for_element_present(self,sel,"css=.unisubs-activestep")
         return orig_lang
 
 def get_lang_cc(self,sel,language):
@@ -236,7 +236,7 @@ def select_video_language(self,sel,vid_lang="en",sub_lang="en-gb",from_lang='for
             sel.select(testvars.create_translate_from+" + span select", "value=regexp:^"+str(from_lang))
             print "selected video language, from: "+str(from_lang)
     time.sleep(1)
-    sel.click("css=div.mirosubs-modal-lang div a.mirosubs-green-button:contains('Continue')")
+    sel.click("css=div.unisubs-modal-lang div a.unisubs-green-button:contains('Continue')")
    
 
         
@@ -251,11 +251,11 @@ def close_howto_video(self,sel,skip=True):
     """
     time.sleep(10)
     sel.select_frame("relative=top")
-    if sel.is_element_present("css=div.mirosubs-howtopanel div div.mirosubs-howto-videocontainer"):
-        mslib.wait_for_element_present(self,sel,"css=div.mirosubs-howtopanel div span.goog-checkbox-unchecked")
+    if sel.is_element_present("css=div.unisubs-howtopanel div div.unisubs-howto-videocontainer"):
+        mslib.wait_for_element_present(self,sel,"css=div.unisubs-howtopanel div span.goog-checkbox-unchecked")
         if skip==True:
-            sel.click("css=div.mirosubs-howtopanel div span.goog-checkbox-unchecked")
-        sel.click("css=.mirosubs-done:contains('Continue')")
+            sel.click("css=div.unisubs-howtopanel div span.goog-checkbox-unchecked")
+        sel.click("css=.unisubs-done:contains('Continue')")
     else:
         print "no how-to video"
             
@@ -277,17 +277,17 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="ye
     print ("Transcribing the video")
     sel.select_window("null")
     restart_step(self,sel)
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-speedmode")
+    mslib.wait_for_element_present(self,sel,"css=.unisubs-speedmode")
     try:
         if mode == "Recommended":
         # Recommended mode
-            sel.select("css=.mirosubs-speedmode select", "value=au")
+            sel.select("css=.unisubs-speedmode select", "value=au")
         elif mode == "Beginner":
         # Beginner mode
-            sel.select("css=.mirosubs-speedmode select", "value=pl")
+            sel.select("css=.unisubs-speedmode select", "value=pl")
         # Expert mode
         elif mode == "Expert":
-            sel.select("css=.mirosubs-speedmode select", "value=no")
+            sel.select("css=.unisubs-speedmode select", "value=no")
     except:
         print ("trouble selecting element (safari issue?) - going with default value")
         
@@ -309,21 +309,21 @@ def transcribe_video(self,sel,sub_file,mode="Expert",step="Continue", buffer="ye
 ##        if "firefox" in selvars.set_browser() or "iexplore" in selvars.set_browser():
 ##            sel.key_press("css=.trans", "13")
 ##        else:
-        sel.get_eval("this.browserbot.getUserWindow().mirosubs.widget.fireKeySequence(this.browserbot.getUserWindow().document.getElementsByClassName('trans')[0], 13,13);")    
+        sel.get_eval("this.browserbot.getUserWindow().unisubs.widget.fireKeySequence(this.browserbot.getUserWindow().document.getElementsByClassName('trans')[0], 13,13);")    
         
     if step == "Continue":
         sel.click_at(testvars.WidgetUI["Next_step"],"")
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-done span:contains('Reviewing')")
+        mslib.wait_for_element_present(self,sel,"css=.unisubs-done span:contains('Reviewing')")
 
 def restart_step(self,sel):
     """
     Description: Clicks the 'Restart this Step' link, and handle the confirmation dialog.
     """
-    if sel.is_element_present("css=.mirosubs-restart"):
+    if sel.is_element_present("css=.unisubs-restart"):
         sel.click("link=Restart this Step")
-        if sel.is_element_present("css=.mirosubs-activestep:contains('2')"):
+        if sel.is_element_present("css=.unisubs-activestep:contains('2')"):
             self.assertTrue(re.search(r"^Are you sure you want to start over[\s\S] All timestamps will be deleted\.$", sel.get_confirmation()))                
-        if sel.is_element_present("css=.mirosubs-activestep:contains('1')"):
+        if sel.is_element_present("css=.unisubs-activestep:contains('1')"):
             self.assertTrue("Are you sure you want to start over? All subtitles will be deleted.", sel.get_confirmation())
           
 
@@ -333,7 +333,7 @@ def back_step(self,sel):
     """
     while sel.is_text_present("Back to Typing"):
         sel.click("link=Back to Typing")
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep")
+        mslib.wait_for_element_present(self,sel,"css=.unisubs-activestep")
 
 def sync_video(self,sel,sub_file,start_delay=3,sub_int=2,step="Continue"):
     """
@@ -351,9 +351,9 @@ def sync_video(self,sel,sub_file,start_delay=3,sub_int=2,step="Continue"):
     print ("Syncing the subs")
     sel.select_window("null")
     mslib.wait_for_video_to_buffer(self,sel)
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
+    mslib.wait_for_element_present(self,sel,"css=.unisubs-titlesList")
     #start playback
-#    sel.type_keys("css=.mirosubs-play",u'\u0009')
+#    sel.type_keys("css=.unisubs-play",u'\u0009')
     if sel.is_element_present(testvars.WidgetUI["Video_pause_button"]):
         print "video is playing"
     else:
@@ -367,8 +367,8 @@ def sync_video(self,sel,sub_file,start_delay=3,sub_int=2,step="Continue"):
         sel.focus(testvars.WidgetUI["Sync_sub"])
         sel.click_at(testvars.WidgetUI["Sync_sub"],"")
         time.sleep(.1)
-        sub_cell_start_time = "css=li:nth-child("+str(x)+") > span.mirosubs-timestamp span span.mirosubs-timestamp-time"
-        sub_cell_text = "css=li:nth-child("+str(x)+") > span.mirosubs-title span"
+        sub_cell_start_time = "css=li:nth-child("+str(x)+") > span.unisubs-timestamp span span.unisubs-timestamp-time"
+        sub_cell_text = "css=li:nth-child("+str(x)+") > span.unisubs-title span"
         start_time=sel.get_text(sub_cell_start_time)
         print start_time
         print sel.get_text(sub_cell_text)
@@ -394,17 +394,17 @@ def edit_text(self,sel,subtextfile,new_text=""):
     """
     print ("Editing the sub text in the widget")
     sel.select_window("null")
-    mslib.wait_for_element_present(self,sel,"css=ul.mirosubs-titlesList")
-    sel.click("css=.mirosubs-activestep") #reset the list to the top of the page
+    mslib.wait_for_element_present(self,sel,"css=ul.unisubs-titlesList")
+    sel.click("css=.unisubs-activestep") #reset the list to the top of the page
     mslib.wait_for_video_to_buffer(self,sel)
    
     for i,line in enumerate(open(subtextfile)):
         x = i+1
-        sub_cell = "css=ul.mirosubs-titlesList li:nth-child("+str(x)+")"       
+        sub_cell = "css=ul.unisubs-titlesList li:nth-child("+str(x)+")"       
         if sel.is_element_present(sub_cell) == False:
             break
-        textspan = sub_cell +" > .mirosubs-title span"
-        thetextarea = "css=.mirosubs-subedit"     
+        textspan = sub_cell +" > .unisubs-title span"
+        thetextarea = "css=.unisubs-subedit"     
         
         if new_text == "":
             ed_text = str(line).rstrip().upper()
@@ -414,7 +414,7 @@ def edit_text(self,sel,subtextfile,new_text=""):
         time.sleep(.5)
         print ed_text
         sel.type(thetextarea, ed_text)
-        sel.get_eval("this.browserbot.getUserWindow().mirosubs.widget.fireKeySequence(this.browserbot.getUserWindow().document.getElementsByClassName('mirosubs-subedit')[0], 13,13);")   
+        sel.get_eval("this.browserbot.getUserWindow().unisubs.widget.fireKeySequence(this.browserbot.getUserWindow().document.getElementsByClassName('unisubs-subedit')[0], 13,13);")   
       
         time.sleep(1)
 #        self.assertTrue(sel.is_element_present(textspan))
@@ -436,10 +436,10 @@ def edit_translation(self,sel,subtextfile,new_text=""):
     """
     print ("Editing the translation")
     sel.select_window("null")
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
+    mslib.wait_for_element_present(self,sel,"css=.unisubs-titlesList")
     for i,line in enumerate(codecs.open(subtextfile)):
         x = i+1
-        sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(x)+")"
+        sub_cell = "css=.unisubs-titlesList li:nth-child("+str(x)+")"
         if sel.is_element_present(sub_cell) == False:
             break
         thetextarea = "css=textarea"
@@ -449,7 +449,7 @@ def edit_translation(self,sel,subtextfile,new_text=""):
             ed_text = new_text
         sel.click(sub_cell)
         sel.type(thetextarea, u'ed_text')
-        sel.get_eval("this.browserbot.getUserWindow().mirosubs.widget.fireKeySequence(this.browserbot.getUserWindow().document.getElementsByClassName('mirosubs-subedit')[0], 13,13);") 
+        sel.get_eval("this.browserbot.getUserWindow().unisubs.widget.fireKeySequence(this.browserbot.getUserWindow().document.getElementsByClassName('unisubs-subedit')[0], 13,13);") 
         time.sleep(1)
     sel.click(testvars.WidgetUI["Next_step"])
 
@@ -464,15 +464,15 @@ def translate(self,sel,subtextfile):
     """
     print ("Translating")
     sel.select_window("null")
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
+    mslib.wait_for_element_present(self,sel,"css=.unisubs-titlesList")
     for i,line in enumerate(codecs.open(subtextfile)):
         x = i+1
-        sub_cell = "css=.mirosubs-titlesList li:nth-child("+str(x)+") > textarea.mirosubs-translateField"
+        sub_cell = "css=.unisubs-titlesList li:nth-child("+str(x)+") > textarea.unisubs-translateField"
         if sel.is_element_present(sub_cell) == False:
             break
         sel.click(sub_cell)
         sel.type(sub_cell, u'line')
-        sel.get_eval("this.browserbot.getUserWindow().mirosubs.widget.fireKeySequence(this.browserbot.getUserWindow().document.getElementsByClassName('mirosubs-subedit')[0], 13,13);") 
+        sel.get_eval("this.browserbot.getUserWindow().unisubs.widget.fireKeySequence(this.browserbot.getUserWindow().document.getElementsByClassName('unisubs-subedit')[0], 13,13);") 
         time.sleep(1)
     sel.click(testvars.WidgetUI["Next_step"])
         
@@ -488,10 +488,10 @@ def drag_time_bubbles(self,sel,subtextfile):
     Pre-condition - use must be on Step 3 or Review with known text data.
     """
     sel.select_window("null")
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep:contains('3')")
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
+    mslib.wait_for_element_present(self,sel,"css=.unisubs-activestep:contains('3')")
+    mslib.wait_for_element_present(self,sel,"css=.unisubs-titlesList")
            
-    sub_cell_start_time = "css=li:nth-child(1) > .mirosubs-timestamp span span.mirosubs-timestamp-time"
+    sub_cell_start_time = "css=li:nth-child(1) > .unisubs-timestamp span span.unisubs-timestamp-time"
     # drag bubble to the left and verify time change
     start_time = sel.get_text(sub_cell_start_time)
     print "sub start time: " '%.2f' % float(start_time)
@@ -512,13 +512,13 @@ def drag_it(self,sel,side,move_pixels):
         move_pixels - number of pixels to move bubble { + | - }
     """
     if side == "left":
-        sel.focus("css=.mirosubs-timeline-sub .mirosubs-grabber.mirosubs-leftGrabber")
-        sel.drag_and_drop("css=.mirosubs-timeline-sub .mirosubs-grabber.mirosubs-leftGrabber", move_pixels+",0")
+        sel.focus("css=.unisubs-timeline-sub .unisubs-grabber.unisubs-leftGrabber")
+        sel.drag_and_drop("css=.unisubs-timeline-sub .unisubs-grabber.unisubs-leftGrabber", move_pixels+",0")
 
 
     if side == "right":
-        sel.focus("css=.mirosubs-timeline-sub .mirosubs-grabber.mirosubs-rightGrabber")
-        sel.drag_and_drop("css=.mirosubs-timeline-sub .mirosubs-grabber.mirosubs-rightGrabber", move_pixels+",0")
+        sel.focus("css=.unisubs-timeline-sub .unisubs-grabber.unisubs-rightGrabber")
+        sel.drag_and_drop("css=.unisubs-timeline-sub .unisubs-grabber.unisubs-rightGrabber", move_pixels+",0")
 
 
 def click_time_shift_arrows(self,sel,subtextfile):
@@ -532,11 +532,11 @@ def click_time_shift_arrows(self,sel,subtextfile):
     """
     sub_li = 1
     sel.select_window("null")
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep:contains('3')")
+    mslib.wait_for_element_present(self,sel,"css=.unisubs-activestep:contains('3')")
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Sync_sub"])
-    sub_cell_start_time = "css=li:nth-child("+str(sub_li)+") > .mirosubs-timestamp span span.mirosubs-timestamp-time"
-    up_arrow = "css=li:nth-child("+str(sub_li)+") > .mirosubs-timestamp span .mirosubs-changeTime .mirosubs-up"
-    down_arrow = "css=li:nth-child("+str(sub_li)+") > .mirosubs-timestamp span .mirosubs-changeTime .mirosubs-down"
+    sub_cell_start_time = "css=li:nth-child("+str(sub_li)+") > .unisubs-timestamp span span.unisubs-timestamp-time"
+    up_arrow = "css=li:nth-child("+str(sub_li)+") > .unisubs-timestamp span .unisubs-changeTime .unisubs-up"
+    down_arrow = "css=li:nth-child("+str(sub_li)+") > .unisubs-timestamp span .unisubs-changeTime .unisubs-down"
     for x in range(0,3):  
         #Click up (right) and verify time jump of .05 seconds
         start_time = sel.get_text(sub_cell_start_time)
@@ -570,7 +570,7 @@ def hold_down_delay_sub(self,sel,sub_file,delay_time=2,hold_time=.75, sync_time=
     Post-condition - still on same step in widget, with new times.
     """
     sel.select_window("null")
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep:contains('3')")
+    mslib.wait_for_element_present(self,sel,"css=.unisubs-activestep:contains('3')")
     print " * Resync subs: hold down key"
     sel.select_frame("relative=top")
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
@@ -579,13 +579,13 @@ def hold_down_delay_sub(self,sel,sub_file,delay_time=2,hold_time=.75, sync_time=
   
     sub_li = 1
     for line in open(sub_file):
-        sub_cell_start_time = "css=li:nth-child("+str(sub_li)+") > .mirosubs-timestamp span span.mirosubs-timestamp-time"
+        sub_cell_start_time = "css=li:nth-child("+str(sub_li)+") > .unisubs-timestamp span span.unisubs-timestamp-time"
         old_time = sel.get_text(sub_cell_start_time)
         # 40 is the key code for down arrow key
-        sel.focus("css=.mirosubs-down")
-        sel.key_down("css=.mirosubs-down","\\40")
+        sel.focus("css=.unisubs-down")
+        sel.key_down("css=.unisubs-down","\\40")
         time.sleep(hold_time)
-        sel.key_up("css=.mirosubs-down","\\40")
+        sel.key_up("css=.unisubs-down","\\40")
         new_time = sel.get_text(sub_cell_start_time)
         self.assertNotEqual(float(new_time),float(old_time), \
                         "no time change: "+'%.2f' % float(new_time) +"="+ '%.2f' % float(old_time))
@@ -607,7 +607,7 @@ def resync_video (self,sel,subtextfile,start_delay=1,sub_int=1, step="Stop"):
     """
     print " * Resync subs - shorter interval"
 
-    if sel.is_element_present("css=.mirosubs-activestep:contains('1')"):
+    if sel.is_element_present("css=.unisubs-activestep:contains('1')"):
         goto_step(self,sel,"2")
     mslib.wait_for_video_to_buffer(self,sel)
     sel.click(testvars.WidgetUI["Video_playPause"])
@@ -617,7 +617,7 @@ def resync_video (self,sel,subtextfile,start_delay=1,sub_int=1, step="Stop"):
        
     for i,line in enumerate(codecs.open(subtextfile,encoding='utf-8')):
         x = i+1
-        sub_cell_start_time = "css=li:nth-child("+str(x)+") > .mirosubs-timestamp span span.mirosubs-timestamp-time"
+        sub_cell_start_time = "css=li:nth-child("+str(x)+") > .unisubs-timestamp span span.unisubs-timestamp-time"
         start_time=sel.get_text(sub_cell_start_time)
         sel.focus(testvars.WidgetUI["Sync_sub"])
         sel.click_at(testvars.WidgetUI["Sync_sub"],"")
@@ -644,17 +644,17 @@ def steps_display(self,sel,step_num):
     """
     Description: verifies text contents of Steps.  
     """
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-activestep:contains('"+str(step_num)+"')")
-    self.assertTrue(str(step_num) == sel.get_text("css=.mirosubs-activestep"),"active step is not: "+str(step_num))
-    self.assertTrue("tab" == sel.get_text("css=.mirosubs-tab"),"tab not in help text")
+    mslib.wait_for_element_present(self,sel,"css=.unisubs-activestep:contains('"+str(step_num)+"')")
+    self.assertTrue(str(step_num) == sel.get_text("css=.unisubs-activestep"),"active step is not: "+str(step_num))
+    self.assertTrue("tab" == sel.get_text("css=.unisubs-tab"),"tab not in help text")
     if step_num == "1":
         self.assertTrue("Typing" == sel.get_text("css=h2"), "heading is not Typing")
-        self.assertEqual("Play next 8 seconds", sel.get_text("css=.mirosubs-tab + span"))
+        self.assertEqual("Play next 8 seconds", sel.get_text("css=.unisubs-tab + span"))
     else:
-        self.assertEqual("Play/Pause", sel.get_text("css=.mirosubs-tab + span"))
-    self.assertEqual("shift\n+\ntab", sel.get_text("css=.mirosubs-control"))
-    self.assertEqual("Skip Back 8 Seconds", sel.get_text("css=.mirosubs-control + span"))
-    self.assertEqual("Speed Mode", sel.get_text("css=.mirosubs-speedmode h4"))
+        self.assertEqual("Play/Pause", sel.get_text("css=.unisubs-tab + span"))
+    self.assertEqual("shift\n+\ntab", sel.get_text("css=.unisubs-control"))
+    self.assertEqual("Skip Back 8 Seconds", sel.get_text("css=.unisubs-control + span"))
+    self.assertEqual("Speed Mode", sel.get_text("css=.unisubs-speedmode h4"))
 
 def verify_sub_text(self,sel,subtextfile):
     """
@@ -665,10 +665,10 @@ def verify_sub_text(self,sel,subtextfile):
     """
     print "verifying sub text"
     sel.select_window("null")
-    mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
+    mslib.wait_for_element_present(self,sel,"css=.unisubs-titlesList")
     sub_li=1
     for line in codecs.open(subtextfile,encoding='utf-8'):
-        sub_cell_text = "css=li:nth-child("+str(sub_li)+") > .mirosubs-title"
+        sub_cell_text = "css=li:nth-child("+str(sub_li)+") > .unisubs-title"
         self.assertEqual(line.rstrip(), sel.get_text(sub_cell_text).rstrip())
         sub_li = sub_li + 1
         
@@ -678,7 +678,7 @@ def wait_for_offsite_login(self,sel):
         try:
             sel.select_window("null")
             print "wait for spinner to stop and login complete."
-            if sel.is_element_present("css=.mirosubs-widget"):
+            if sel.is_element_present("css=.unisubs-widget"):
                 if not sel.is_element_present("css=.big_spinner"):break
                 
         except: pass
@@ -694,7 +694,7 @@ def set_subs_complete(self,sel,done=True):
         elif done==False:
             if sel.is_element_present("css=.goog-checkbox-checked"):
                 sel.click("css=.goog-checkbox-checked")
-        sel.click("css=.mirosubs-green-button.mirosubs-big")
+        sel.click("css=.unisubs-green-button.unisubs-big")
         time.sleep(3)
 
         
@@ -704,8 +704,8 @@ def submit_sub_edits(self,sel,offsite=False):
     #give video a chance to load
     mslib.wait_for_element_present(self,sel,testvars.widget_steps)
     #Go to step 3 before submit
-    if not sel.get_text("css=li a.mirosubs-activestep") == "3":
-        sel.click("css=.mirosubs-help-heading li a:contains('3')")
+    if not sel.get_text("css=li a.unisubs-activestep") == "3":
+        sel.click("css=.unisubs-help-heading li a:contains('3')")
         mslib.wait_for_element_present(self,sel,testvars.widget_step3)
  
     sel.click(testvars.WidgetUI["Next_step"])
@@ -718,8 +718,8 @@ def submit_sub_edits(self,sel,offsite=False):
 
 def submit_thanks(self,sel):
     time.sleep(3)
-    if sel.is_element_present("css=div.mirosubs-modal-completed a.mirosubs-green-button"):
-        sel.click("css=div.mirosubs-modal-completed a.mirosubs-green-button")
+    if sel.is_element_present("css=div.unisubs-modal-completed a.unisubs-green-button"):
+        sel.click("css=div.unisubs-modal-completed a.unisubs-green-button")
     else:
         self.verificationErrors.append("Subtitles saved dialog not displayed on sub submit")
     
@@ -727,22 +727,22 @@ def submit_thanks(self,sel):
 def goto_step(self,sel,step="3"):
     
     mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Next_step"])
-    sel.click("css=.mirosubs-help-heading li a:contains('"+step+"')")
-    self.assertTrue(sel.get_text("css=li a.mirosubs-activestep:contains('"+step+"')"))
+    sel.click("css=.unisubs-help-heading li a:contains('"+step+"')")
+    self.assertTrue(sel.get_text("css=li a.unisubs-activestep:contains('"+step+"')"))
 
 def close_sub_widget(self,sel,submit="Discard"):
     """Close the subtitle widget.
 
     """
     sel.select_frame("relative=top")
-    if sel.is_element_present("css=.mirosubs-modal-widget-title-close"):
-        sel.click("css=.mirosubs-modal-widget-title-close")
+    if sel.is_element_present("css=.unisubs-modal-widget-title-close"):
+        sel.click("css=.unisubs-modal-widget-title-close")
         time.sleep(5)
-        if sel.is_element_present("css=div.mirosubs-warning div.mirosubs-buttons a.mirosubs-link"):
+        if sel.is_element_present("css=div.unisubs-warning div.unisubs-buttons a.unisubs-link"):
             if submit == "Discard":
-                sel.click("css=a.mirosubs-link:contains('Discard')")
+                sel.click("css=a.unisubs-link:contains('Discard')")
             else:
-                sel.click("css=a.mirosubs-link:contains('Submit')")
+                sel.click("css=a.unisubs-link:contains('Submit')")
         time.sleep(3)
     
 
@@ -761,7 +761,7 @@ def close_widget(self,sel):
 
     # 
     if sel.is_element_present(testvars.WidgetUI["Close_widget"]):
-        sel.click("css=.mirosubs-modal-widget-title-close")
-    elif sel.is_element_present("css=.mirosubs-modal-widget-title-close"):
+        sel.click("css=.unisubs-modal-widget-title-close")
+    elif sel.is_element_present("css=.unisubs-modal-widget-title-close"):
         sel.click(testvars.WidgetUI["Close_widget"])
     time.sleep(3)

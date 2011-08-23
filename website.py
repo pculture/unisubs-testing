@@ -165,7 +165,7 @@ def start_sub_widget(self,sel,skip="True",edit_type='orig',sec_lang=None,login=F
         else:
             print "widget opened"
             widget.close_howto_video(self,sel)
-            mslib.wait_for_element_present(self,sel,"css=.mirosubs-help-heading")
+            mslib.wait_for_element_present(self,sel,"css=.unisubs-help-heading")
     time.sleep(5)
     if sel.is_element_present(testvars.WidgetUI["Select_language"]):
         if edit_type == 'orig':
@@ -184,7 +184,7 @@ def start_sub_widget(self,sel,skip="True",edit_type='orig',sec_lang=None,login=F
     else:
         print "widget opened immediately"
         widget.close_howto_video(self,sel)
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-help-heading")
+        mslib.wait_for_element_present(self,sel,"css=.unisubs-help-heading")
 
 
 
@@ -228,7 +228,7 @@ def verify_submitted_video(self,sel,vid_url,embed_type=""):
         self.assertTrue(sel.is_element_present("css=object[data*='flowplayer']"))
     elif embed_type == "youtube":
         self.assertTrue((sel.is_element_present(vid_span_css+"[data*='youtube.com']")) or \
-                        sel.is_element_present("css=div.mirosubs-widget iframe[src*='youtube.com']"))
+                        sel.is_element_present("css=div.unisubs-widget iframe[src*='youtube.com']"))
     elif embed_type == 'vimeo':      
         self.assertTrue(sel.is_element_present(vid_span_css+"[data*='moogaloop.swf']"))
     elif embed_type == 'dailymotion':      
@@ -241,10 +241,10 @@ def verify_submitted_video(self,sel,vid_url,embed_type=""):
         self.assertTrue(vid_embed,"video not embedded in site: "+str(vid_url))
         
    
-    self.assertTrue(sel.is_element_present("css=.mirosubs-embed"),\
+    self.assertTrue(sel.is_element_present("css=.unisubs-embed"),\
                     "no embed code present")
-    unisubs_link = sel.get_text("css=.mirosubs-permalink[href]")
-    print sel.get_text("css=.mirosubs-embed")
+    unisubs_link = sel.get_text("css=.unisubs-permalink[href]")
+    print sel.get_text("css=.unisubs-embed")
     return unisubs_link
 
 def get_video_with_translations(self,sel):

@@ -251,8 +251,8 @@ class subgroup_64(unittest.TestCase):
         # Check message in review step and click done
         widget.verify_login_message(self,sel)
         sel.click(testvars.WidgetUI["Next_step"])
-        self.failUnless(sel.is_element_present("css=.mirosubs-modal-login"))
-        sel.click("css=.mirosubs-log")
+        self.failUnless(sel.is_element_present("css=.unisubs-modal-login"))
+        sel.click("css=.unisubs-log")
         #Login
         widget.site_login_auth(self,sel)
         sel.select_window("null")

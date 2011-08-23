@@ -287,7 +287,7 @@ class subgroup_70(unittest.TestCase):
             print "only 2 or less revs - editing text first"
             #edit text
             sel.click(testvars.video_edit_subtitles)
-            mslib.wait_for_element_present(self,sel,"css=div.mirosubs-help-heading")
+            mslib.wait_for_element_present(self,sel,"css=div.unisubs-help-heading")
             if sel.is_element_present("css=h2:contains('Editing Translation')"):
                 widget.edit_translation(self,sel,subtextfile)
             else:

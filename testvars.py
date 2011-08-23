@@ -22,14 +22,14 @@ WebsiteUI = {"Home":"css=a:contains('Miro Subs Alpha')", \
              "Search_Button":"css=a:contains('Search')", \
              "Video_Submit_Button":"//button[@value='Begin']", \
              #widget menu displayed on website
-             "SubtitleMe_menu":"css=.mirosubs-tabTextchoose", \
-             "SubMe_menuitems":"css=.mirosubs-langmenuitem-content", \
+             "SubtitleMe_menu":"css=.unisubs-tabTextchoose", \
+             "SubMe_menuitems":"css=.unisubs-langmenuitem-content", \
              "AddSubtitles_menuitem":"css=a:contains('Improve These Subtitles')", \
              "NewTranslation_menuitem":"css=a:contains('Add New Translation')" ,\
              "Subhomepage_menuitem":"css=a:contains('Subtitle Homepage')" ,\
-             "Login_menuitem":"css=.mirosubs-createAccount" ,\
-             "Logout_menuitem":"css=.mirosubs-langmenuitem-content:contains('Logout')" , \
-             "ChooseLanguage_menu":"css=.mirosubs-tabText:contains('Choose language')" ,
+             "Login_menuitem":"css=.unisubs-createAccount" ,\
+             "Logout_menuitem":"css=.unisubs-langmenuitem-content:contains('Logout')" , \
+             "ChooseLanguage_menu":"css=.unisubs-tabText:contains('Choose language')" ,
              
           }
 
@@ -65,39 +65,39 @@ vid_add_subs_button = "css=a:contains('Add Subtitles')"
 
 # Widget Vars
 
-WidgetUI = {"Video_playPause":"css=.mirosubs-playPause", \
-            "Video_play_button":"css=.mirosubs-playPause.play", \
-            "Video_pause_button":"css=.mirosubs-playPause.pause", \
-            "Video_elapsed_time":"css=.mirosubs-timeElapsed", \
-            "Current_playing_sub":"css=div.mirosubs-subtext", \
-            "Transcribed_text":"css=div span.mirosubs-captionSpan", \
-            "Current_playing_offsite":"css=span.mirosubs-captionSpan", \
-            "Next_step":"css=.mirosubs-done span", \
+WidgetUI = {"Video_playPause":"css=.unisubs-playPause", \
+            "Video_play_button":"css=.unisubs-playPause.play", \
+            "Video_pause_button":"css=.unisubs-playPause.pause", \
+            "Video_elapsed_time":"css=.unisubs-timeElapsed", \
+            "Current_playing_sub":"css=div.unisubs-subtext", \
+            "Transcribed_text":"css=div span.unisubs-captionSpan", \
+            "Current_playing_offsite":"css=span.unisubs-captionSpan", \
+            "Next_step":"css=.unisubs-done span", \
             "Translate_now_button":"css=a#add_translation"
 , \
-            "Play_pause":"css=div.mirosubs-play span.mirosubs-tab",\
-            "Sync_sub":"css=div.mirosubs-begin span.mirosubs-down",\
+            "Play_pause":"css=div.unisubs-play span.unisubs-tab",\
+            "Sync_sub":"css=div.unisubs-begin span.unisubs-down",\
           #  "Sync_sub":"css=span:contains('Tap when next subtitle')",\
-            "Skip_back":"css=.mirosubs-control:contains('shift')",\
-            "Active_subtime":"css=li.active span.mirosubs-timestamp-time",\
-            "Active_subtext":"css=li.active span.mirosubs-title",\
-            "Must_Login":"css=.mirosubs-needLogin a", \
+            "Skip_back":"css=.unisubs-control:contains('shift')",\
+            "Active_subtime":"css=li.active span.unisubs-timestamp-time",\
+            "Active_subtext":"css=li.active span.unisubs-title",\
+            "Must_Login":"css=.unisubs-needLogin a", \
             "Select_language":"css=h3:contains('Create')", \
-            "Close_widget":"css=span[class=mirosubs-modal-widget-title-close]"    
+            "Close_widget":"css=span[class=unisubs-modal-widget-title-close]"    
         }
-widget_steps = "css=.mirosubs-help-heading li a"
-widget_step3 = "css=.mirosubs-help-heading li a:contains('3')"
-widget_step2 = "css=.mirosubs-help-heading li a:contains('2')"
-widget_step1 = "css=.mirosubs-help-heading li a:contains('1')"
+widget_steps = "css=.unisubs-help-heading li a"
+widget_step3 = "css=.unisubs-help-heading li a:contains('3')"
+widget_step2 = "css=.unisubs-help-heading li a:contains('2')"
+widget_step1 = "css=.unisubs-help-heading li a:contains('1')"
 
-create_lang_unknown = "css=div.mirosubs-modal-lang div p span:contains('This video is in:')"
+create_lang_unknown = "css=div.unisubs-modal-lang div p span:contains('This video is in:')"
 create_lang_known = "css=div p:contains('This video is in ')"
 create_subtitle_into = "css=span:contains('Subtitle into')"
 create_translate_from = "css=span:contains('Translate from')"
 
 #offsite option
-offsite_goto_subs = "css=.mirosubs-goBack"
-offsite_goto_site = "css=.mirosubs-otherClose"
+offsite_goto_subs = "css=.unisubs-goBack"
+offsite_goto_site = "css=.unisubs-otherClose"
 
 # TestData
 

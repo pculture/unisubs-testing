@@ -44,7 +44,7 @@ class subgroup_78_pagedemo(unittest.TestCase):
         sel.window_maximize()
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
         time.sleep(5)
-        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
+        sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].openMenu()')
         widget.starter_dialog_edit_orig(self,sel)
         widget.goto_step(self,sel,step="2")
         widget.resync_video(self,sel,subtextfile)
@@ -63,7 +63,7 @@ class subgroup_78_pagedemo(unittest.TestCase):
         sel.wait_for_page_to_load(testvars.timeout)
         sel.window_maximize()
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
-        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
+        sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].openMenu()')
         time.sleep(5)
         widget.open_starter_dialog(self,sel)
         widget.starter_dialog_translate_from_orig(self,sel,to_lang='pl')
@@ -85,7 +85,7 @@ class subgroup_78_pagedemo(unittest.TestCase):
         sel.window_maximize()
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
         time.sleep(5)
-        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
+        sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].openMenu()')
         widget.open_starter_dialog(self,sel)
         widget.starter_dialog_fork(self,sel,to_lang='hr')
         widget.transcribe_video(self, sel, subtextfile)
@@ -94,7 +94,7 @@ class subgroup_78_pagedemo(unittest.TestCase):
         #verify subs still present
         print "verifying subtitles are still present"
         sel.select_window("null")
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
+        mslib.wait_for_element_present(self,sel,"css=.unisubs-titlesList")
         widget.verify_sub_text(self,sel,subtextfile)
         widget.submit_sub_edits(self,sel,offsite=True)
         

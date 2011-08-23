@@ -94,11 +94,11 @@ def wait_for_video_to_buffer(self,sel):
             sel.focus(testvars.WidgetUI["Play_pause"])
             sel.click_at(testvars.WidgetUI["Play_pause"],"")
             time.sleep(5)
-        if sel.is_element_present("css=.mirosubs-buffered"):
+        if sel.is_element_present("css=.unisubs-buffered"):
             print " - waiting for video to buffer " +time.strftime("%M:%S", time.gmtime())
             for i in range(30):
                 try:
-                    if int(sel.get_element_width("css=.mirosubs-buffered")) >= 125:
+                    if int(sel.get_element_width("css=.unisubs-buffered")) >= 125:
                         print " - video buffered to 50% " +time.strftime("%M:%S", time.gmtime())
                         break
                 except: pass

@@ -167,7 +167,7 @@ class subgroup_69(unittest.TestCase):
         website.start_sub_widget(self,sel,login=False)
         #Type sub-text in the video, then wait stay on Step-1 screen
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Play_pause"])
-        mode_label = sel.get_text("css=.mirosubs-speedmode option:contains('Recommended')")
+        mode_label = sel.get_text("css=.unisubs-speedmode option:contains('Recommended')")
         sel.select("//select", "label=" +mode_label)
         mslib.wait_for_video_to_buffer(self,sel)
         sel.click(testvars.WidgetUI["Play_pause"])
@@ -207,7 +207,7 @@ class subgroup_69(unittest.TestCase):
         #Type sub-text in the video, then wait stay on Step-1 screen
         widget.transcribe_video(self, sel, subtextfile, step="Stop",buffer="yes")
         #verify that playback continues to the end
-        while int(sel.get_element_width("css=.mirosubs-played")) != 250:
+        while int(sel.get_element_width("css=.unisubs-played")) != 250:
             self.failIf(sel.is_element_present(testvars.WidgetUI["Video_play_button"]))
             time.sleep(2)
 
@@ -230,7 +230,7 @@ class subgroup_69(unittest.TestCase):
         # wait for video to load
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_play_button"])
         # set expert mode
-        mode_label = sel.get_text("css=.mirosubs-speedmode option:contains('Expert')")
+        mode_label = sel.get_text("css=.unisubs-speedmode option:contains('Expert')")
         sel.select("//select", "label=" +mode_label)
         #play-pause with screen button
         print "play-pause with screen button"
@@ -242,10 +242,10 @@ class subgroup_69(unittest.TestCase):
         time.sleep(3)
         #play-pause with unicode tab char
         print "play-pause with keyboard"
-        sel.type_keys("css=.mirosubs-play",u'\u0009')
+        sel.type_keys("css=.unisubs-play",u'\u0009')
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
         time.sleep(3)
-        sel.type_keys("css=.mirosubs-play",u'\u0009')
+        sel.type_keys("css=.unisubs-play",u'\u0009')
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_play_button"])
         time.sleep(3)
         #play-pause with Video play-pause button
@@ -286,10 +286,10 @@ class subgroup_69(unittest.TestCase):
         time.sleep(3)
         #play-pause with unicode tab char
         print "play-pause with keyboard"
-        sel.type_keys("css=.mirosubs-play",u'\u0009')
+        sel.type_keys("css=.unisubs-play",u'\u0009')
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
         time.sleep(3)
-        sel.type_keys("css=.mirosubs-play",u'\u0009')
+        sel.type_keys("css=.unisubs-play",u'\u0009')
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_play_button"])
         time.sleep(3)
         #play-pause with Video play-pause button
@@ -330,10 +330,10 @@ class subgroup_69(unittest.TestCase):
         time.sleep(3)
         #play-pause with unicode tab char
         print "play-pause with keyboard"
-        sel.type_keys("css=.mirosubs-play",u'\u0009')
+        sel.type_keys("css=.unisubs-play",u'\u0009')
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_pause_button"])
         time.sleep(3)
-        sel.type_keys("css=.mirosubs-play",u'\u0009')
+        sel.type_keys("css=.unisubs-play",u'\u0009')
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Video_play_button"])
         time.sleep(3)
         #play-pause with Video play-pause button
@@ -361,7 +361,7 @@ class subgroup_69(unittest.TestCase):
         website.start_demo(self,sel)
         website.start_sub_widget(self,sel,login=False)
         #set mode to expert and wait for video to load
-        mode_label = sel.get_text("css=.mirosubs-speedmode option:contains('Expert')")
+        mode_label = sel.get_text("css=.unisubs-speedmode option:contains('Expert')")
         sel.select("//select", "label=" +mode_label)
         mslib.wait_for_video_to_buffer(self,sel)
         # start playback
@@ -385,7 +385,7 @@ class subgroup_69(unittest.TestCase):
         # get the time, skip back and get the time again
         start_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
         sel.shift_key_down()
-        sel.type_keys("css=.mirosubs-play",u'\u0009')
+        sel.type_keys("css=.unisubs-play",u'\u0009')
         sel.shift_key_up()
         sel.click(testvars.WidgetUI["Play_pause"])
         time.sleep(.50)
@@ -434,7 +434,7 @@ class subgroup_69(unittest.TestCase):
         print "2. key cmd skip back"
         start_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
         sel.shift_key_down()
-        sel.type_keys("css=.mirosubs-right",u'\u0009')
+        sel.type_keys("css=.unisubs-right",u'\u0009')
         sel.shift_key_up()
         time.sleep(1)
         stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
@@ -483,7 +483,7 @@ class subgroup_69(unittest.TestCase):
         start_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
         print "2. key button skip back"
         sel.shift_key_down()
-        sel.type_keys("css=.mirosubs-right",u'\u0009')
+        sel.type_keys("css=.unisubs-right",u'\u0009')
         sel.shift_key_up()
         time.sleep(1)
         stop_time = sel.get_text(testvars.WidgetUI["Video_elapsed_time"])
@@ -507,7 +507,7 @@ class subgroup_69(unittest.TestCase):
         website.start_sub_widget(self,sel,login=False)
         widget.transcribe_video(self, sel, subtextfile, step="Stop")
         widget.restart_step(self,sel)
-        self.failIf(sel.is_element_present("css=.mirosubs-title-notime"))
+        self.failIf(sel.is_element_present("css=.unisubs-title-notime"))
                 
 
        
@@ -530,7 +530,7 @@ class subgroup_69(unittest.TestCase):
         #verify subs still present
         print "verifying subtitles are still present"
         sel.select_window("null")
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
+        mslib.wait_for_element_present(self,sel,"css=.unisubs-titlesList")
         widget.verify_sub_text(self,sel,subtextfile)
 
 
@@ -554,7 +554,7 @@ class subgroup_69(unittest.TestCase):
         #verify subs still present
         print "verifying subtitles are still present"
         sel.select_window("null")
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
+        mslib.wait_for_element_present(self,sel,"css=.unisubs-titlesList")
         widget.verify_sub_text(self,sel,subtextfile)
 
 
@@ -578,7 +578,7 @@ class subgroup_69(unittest.TestCase):
         #verify subs still present
         print "verifying subtitles are still present"
         sel.select_window("null")
-        mslib.wait_for_element_present(self,sel,"css=.mirosubs-titlesList")
+        mslib.wait_for_element_present(self,sel,"css=.unisubs-titlesList")
         widget.verify_sub_text(self,sel,subtextfile)
 
 

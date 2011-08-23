@@ -46,9 +46,9 @@ class subgroup_94_pagedemo(unittest.TestCase):
         sel.window_maximize()
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
         time.sleep(5)
-        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')
+        sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].play()')
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_offsite"])
-        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
+        sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].pause()')
         caption_position =  sel.get_element_height(testvars.WidgetUI["Current_playing_offsite"])
         verify_caption_position(self,sel,caption_position)
         verify_submenu_present(self,sel)
@@ -67,9 +67,9 @@ class subgroup_94_pagedemo(unittest.TestCase):
         sel.click("link=Widgetize it!")
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
         time.sleep(5)
-        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')
+        sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].play()')
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_offsite"])
-        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
+        sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].pause()')
         caption_position =  sel.get_element_height(testvars.WidgetUI["Current_playing_offsite"])
         verify_caption_position(self,sel,caption_position)
         verify_submenu_present(self,sel)
@@ -88,9 +88,9 @@ class subgroup_94_pagedemo(unittest.TestCase):
         sel.window_maximize()
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
         time.sleep(5)
-        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[2].play()')
+        sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[2].play()')
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_offsite"])
-        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[2].pause()')
+        sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[2].pause()')
         caption_position =  sel.get_element_height(testvars.WidgetUI["Current_playing_offsite"])
         verify_caption_position(self,sel,caption_position)
         verify_submenu_present(self,sel)
@@ -142,7 +142,7 @@ class subgroup_94_mcsite(unittest.TestCase):
         sel.wait_for_page_to_load(testvars.timeout)
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
         time.sleep(3)
-        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
+        sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].openMenu()')
         time.sleep(2)
         if sel.is_element_present(testvars.WebsiteUI["AddSubtitles_menuitem"]) == True:
             print "has subtitles - edit and revert"
@@ -152,7 +152,7 @@ class subgroup_94_mcsite(unittest.TestCase):
             sel.wait_for_page_to_load(testvars.timeout)
             mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
             time.sleep(3)
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
+            sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].openMenu()')
             widget.starter_dialog_edit_orig(self,sel)
             edit_subs(self,sel,orig_rev,subtextfile)          
         else:
@@ -172,7 +172,7 @@ class subgroup_94_mcsite(unittest.TestCase):
         sel.wait_for_page_to_load(testvars.timeout)
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
         time.sleep(3)
-        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].openMenu()')
+        sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[1].openMenu()')
         time.sleep(2)
         if sel.is_element_present(testvars.WebsiteUI["AddSubtitles_menuitem"]) == True:
             print "has subtitles - edit and revert"
@@ -182,7 +182,7 @@ class subgroup_94_mcsite(unittest.TestCase):
             sel.wait_for_page_to_load(testvars.timeout)
             mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
             time.sleep(3)
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].openMenu()')
+            sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[1].openMenu()')
             widget.starter_dialog_edit_orig(self,sel)
             edit_subs(self,sel,orig_rev,subtextfile)          
         else:
@@ -210,8 +210,8 @@ def make_new_subs(self,sel,subtextfile):
     widget.sync_video(self,sel,subtextfile,2,3)
     #Login
     time.sleep(3)
-    sel.click("css=div.mirosubs-needLogin a")
-    sel.click("css=.mirosubs-log")
+    sel.click("css=div.unisubs-needLogin a")
+    sel.click("css=.unisubs-log")
     widget.site_login_auth(self,sel)
     sel.select_window("null")
     # Review
@@ -263,7 +263,7 @@ def edit_subs(self,sel,orig_rev,subtextfile):
 
 
 def verify_submenu_present(self,sel):
-    sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
+    sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].openMenu()')
     time.sleep(2)
     self.failUnless(sel.is_element_present(testvars.WebsiteUI["Subhomepage_menuitem"]))
 

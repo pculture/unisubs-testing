@@ -42,8 +42,8 @@ class subgroup_78_pculture(unittest.TestCase):
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         sel.open(selvars.set_widget_null_page())
-        mslib.wait_for_element_present(self,sel,"css=.left_column span.mirosubs-tabTextchoose")
-        website.start_sub_widget(self,sel,"css=.left_column span.mirosubs-tabTextchoose")
+        mslib.wait_for_element_present(self,sel,"css=.left_column span.unisubs-tabTextchoose")
+        website.start_sub_widget(self,sel,"css=.left_column span.unisubs-tabTextchoose")
         # Transcribe
         widget.transcribe_video(self,sel,subtextfile)
         # Sync
@@ -63,8 +63,8 @@ class subgroup_78_pculture(unittest.TestCase):
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"OctopusGarden.txt")
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         sel.open(selvars.set_widget_null_page())
-        mslib.wait_for_element_present(self,sel,"css=.left_column span.mirosubs-tabTextchoose")
-        website.start_sub_widget(self,sel,"css=.left_column span.mirosubs-tabTextchoose")
+        mslib.wait_for_element_present(self,sel,"css=.left_column span.unisubs-tabTextchoose")
+        website.start_sub_widget(self,sel,"css=.left_column span.unisubs-tabTextchoose")
 
         # Transcribe
         widget.transcribe_video(self,sel,subtextfile)
@@ -120,7 +120,7 @@ class subgroup_78_pculture(unittest.TestCase):
 ##        test_page = (selvars.set_subtesting_wordpress_page(self,test_id))
 ##        sel.open(test_page)
 ##        sel.wait_for_page_to_load(testvars.timeout)
-##        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
+##        sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].openMenu()')
 ##        time.sleep(1)
 ##        if sel.is_element_present(testvars.WebsiteUI["AddSubtitles_menuitem"]) == True:
 ##            print "has subtitles - edit and revert"
@@ -130,7 +130,7 @@ class subgroup_78_pculture(unittest.TestCase):
 ##            sel.wait_for_page_to_load(testvars.timeout)
 ##            mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
 ##            time.sleep(3)
-##            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
+##            sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].openMenu()')
 ##            widget.starter_dialog_edit_orig(self,sel)
 ##            edit_subs(self,sel,orig_rev,subtextfile)          
 ##        else:
@@ -149,7 +149,7 @@ class subgroup_78_pculture(unittest.TestCase):
 ##        test_page = (selvars.set_subtesting_wordpress_page(self,test_id))
 ##        sel.open(test_page)
 ##        sel.wait_for_page_to_load(testvars.timeout)
-##        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
+##        sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].openMenu()')
 ##        time.sleep(1)
 ##        if sel.is_element_present(testvars.WebsiteUI["AddSubtitles_menuitem"]) == True:
 ##            print "has subtitles - edit and revert"
@@ -159,7 +159,7 @@ class subgroup_78_pculture(unittest.TestCase):
 ##            sel.wait_for_page_to_load(testvars.timeout)
 ##            mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
 ##            time.sleep(3)
-##            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
+##            sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].openMenu()')
 ##            widget.starter_dialog_edit_orig(self,sel)
 ##            edit_subs(self,sel,orig_rev,subtextfile)          
 ##        else:
@@ -209,7 +209,7 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         Video with widget embedded on Miro Community test page.
         """
         mc_page = "hunter"
-        vid_pos = "css=p.pElementTest span span.mirosubs-widget div.mirosubs-videoTab a span.mirosubs-tabTextchoose"
+        vid_pos = "css=p.pElementTest span span.unisubs-widget div.unisubs-videoTab a span.unisubs-tabTextchoose"
         vid_title = "hunter.s.thompson.avi"
         print self.shortDescription()
         sel = self.selenium
@@ -218,7 +218,7 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         sel.wait_for_page_to_load(testvars.timeout)
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
         time.sleep(3)
-        sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
+        sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].openMenu()')
         time.sleep(2)
         if sel.is_element_present(testvars.WebsiteUI["AddSubtitles_menuitem"]) == True:
             print "has subtitles - edit and revert"
@@ -228,7 +228,7 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
             sel.wait_for_page_to_load(testvars.timeout)
             mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
             time.sleep(3)
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')
+            sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].openMenu()')
             widget.starter_dialog_edit_orig(self,sel)
             edit_subs(self,sel,orig_rev,subtextfile)          
         else:
@@ -250,18 +250,18 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         sel.open(test_page)
         sel.wait_for_page_to_load(testvars.timeout)
         time.sleep(5)
-        if sel.is_element_present("css=p.vimeo_new div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')"):
-            sel.click("css=p.vimeo_new div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')")
+        if sel.is_element_present("css=p.vimeo_new div.unisubs-videoTab a.unisubs-subtitleMeLink span.unisubs-tabTextchoose:contains('Subtitle Me')"):
+            sel.click("css=p.vimeo_new div.unisubs-videoTab a.unisubs-subtitleMeLink span.unisubs-tabTextchoose:contains('Subtitle Me')")
         else:
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].openMenu()')          
+            sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].openMenu()')          
         make_new_subs(self,sel,subtextfile)
         #Playback Subs
         time.sleep(5)
         try:
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].play()')
-            mslib.wait_for_element_present(self,sel,"css=p.vimeo_new span.mirosubs-captionSpan")
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[0].pause()')
-            caption_position =  sel.get_element_height("css=p.vimeo_new span.mirosubs-captionSpan")
+            sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].play()')
+            mslib.wait_for_element_present(self,sel,"css=p.vimeo_new span.unisubs-captionSpan")
+            sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].pause()')
+            caption_position =  sel.get_element_height("css=p.vimeo_new span.unisubs-captionSpan")
             verify_caption_position(self,sel,caption_position)
         except:
             print "sub position playback failed"
@@ -285,18 +285,18 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         sel.open(test_page)
         sel.wait_for_page_to_load(testvars.timeout)
         time.sleep(5)
-        if sel.is_element_present("css=p.youtube_subtitled div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')"):
-            sel.click("css=p.youtube_subtitled div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')")
+        if sel.is_element_present("css=p.youtube_subtitled div.unisubs-videoTab a.unisubs-subtitleMeLink span.unisubs-tabTextchoose:contains('Subtitle Me')"):
+            sel.click("css=p.youtube_subtitled div.unisubs-videoTab a.unisubs-subtitleMeLink span.unisubs-tabTextchoose:contains('Subtitle Me')")
         else:
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].openMenu()')          
+            sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[1].openMenu()')          
         make_new_subs(self,sel,subtextfile)
         #Playback Subs
         time.sleep(5)
         try:
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].play()')
-            mslib.wait_for_element_present(self,sel,"css=p.youtube_subtitled span.mirosubs-captionSpan")
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[1].pause()')
-            caption_position =  sel.get_element_height("css=p.youtube_subtitled span.mirosubs-captionSpan")
+            sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[1].play()')
+            mslib.wait_for_element_present(self,sel,"css=p.youtube_subtitled span.unisubs-captionSpan")
+            sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[1].pause()')
+            caption_position =  sel.get_element_height("css=p.youtube_subtitled span.unisubs-captionSpan")
             verify_caption_position(self,sel,caption_position)
         except:
             print "sub position playback failed"
@@ -319,18 +319,18 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         sel.open(test_page)
         sel.wait_for_page_to_load(testvars.timeout)
         time.sleep(5)
-        if sel.is_element_present("css=p.dailymotion div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')"):
-            sel.click("css=p.dailymotion div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')")
+        if sel.is_element_present("css=p.dailymotion div.unisubs-videoTab a.unisubs-subtitleMeLink span.unisubs-tabTextchoose:contains('Subtitle Me')"):
+            sel.click("css=p.dailymotion div.unisubs-videoTab a.unisubs-subtitleMeLink span.unisubs-tabTextchoose:contains('Subtitle Me')")
         else:
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[2].openMenu()')          
+            sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[2].openMenu()')          
         make_new_subs(self,sel,subtextfile)
         #Playback Subs
         time.sleep(5)
         try:
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[2].play()')
-            mslib.wait_for_element_present(self,sel,"css=p.dailymotion span.mirosubs-captionSpan")
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[2].pause()')
-            caption_position =  sel.get_element_height("css=p.dailymotion span.mirosubs-captionSpan")
+            sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[2].play()')
+            mslib.wait_for_element_present(self,sel,"css=p.dailymotion span.unisubs-captionSpan")
+            sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[2].pause()')
+            caption_position =  sel.get_element_height("css=p.dailymotion span.unisubs-captionSpan")
             verify_caption_position(self,sel,caption_position)
         except:
             print "sub position playback failed"
@@ -352,18 +352,18 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         sel.open(test_page)
         sel.wait_for_page_to_load(testvars.timeout)
         time.sleep(5)
-        if sel.is_element_present("css=p.ogg div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')"):
-            sel.click("css=p.ogg div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')")
+        if sel.is_element_present("css=p.ogg div.unisubs-videoTab a.unisubs-subtitleMeLink span.unisubs-tabTextchoose:contains('Subtitle Me')"):
+            sel.click("css=p.ogg div.unisubs-videoTab a.unisubs-subtitleMeLink span.unisubs-tabTextchoose:contains('Subtitle Me')")
         else:
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[3].openMenu()')          
+            sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[3].openMenu()')          
         make_new_subs(self,sel,subtextfile)
         #Playback Subs
         time.sleep(5)
         try:
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[3].play()')
-            mslib.wait_for_element_present(self,sel,"css=p.ogg span.mirosubs-captionSpan")
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[3].pause()')
-            caption_position =  sel.get_element_height("css=p.ogg span.mirosubs-captionSpan")
+            sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[3].play()')
+            mslib.wait_for_element_present(self,sel,"css=p.ogg span.unisubs-captionSpan")
+            sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[3].pause()')
+            caption_position =  sel.get_element_height("css=p.ogg span.unisubs-captionSpan")
             verify_caption_position(self,sel,caption_position)
         except:
             print "sub position playback failed"
@@ -385,18 +385,18 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         sel.open(test_page)
         sel.wait_for_page_to_load(testvars.timeout)
         time.sleep(5)
-        if sel.is_element_present("css=p.blip-flow div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')"):
-            sel.click("css=p.blip-flow div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')")
+        if sel.is_element_present("css=p.blip-flow div.unisubs-videoTab a.unisubs-subtitleMeLink span.unisubs-tabTextchoose:contains('Subtitle Me')"):
+            sel.click("css=p.blip-flow div.unisubs-videoTab a.unisubs-subtitleMeLink span.unisubs-tabTextchoose:contains('Subtitle Me')")
         else:
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[4].openMenu()')          
+            sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[4].openMenu()')          
         make_new_subs(self,sel,subtextfile)
         #Playback Subs
         time.sleep(5)
         try:
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[4].play()')
-            mslib.wait_for_element_present(self,sel,"css=p.blip-flow span.mirosubs-captionSpan")
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[4].pause()')
-            caption_position =  sel.get_element_height("css=p.blip-flow span.mirosubs-captionSpan")
+            sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[4].play()')
+            mslib.wait_for_element_present(self,sel,"css=p.blip-flow span.unisubs-captionSpan")
+            sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[4].pause()')
+            caption_position =  sel.get_element_height("css=p.blip-flow span.unisubs-captionSpan")
             verify_caption_position(self,sel,caption_position)
         except:
             print "sub position playback failed"
@@ -419,18 +419,18 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
         sel.open(test_page)
         sel.wait_for_page_to_load(testvars.timeout)
         time.sleep(5)
-        if sel.is_element_present("css=p.other-flow div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')"):
-            sel.click("css=p.other-flow div.mirosubs-videoTab a.mirosubs-subtitleMeLink span.mirosubs-tabTextchoose:contains('Subtitle Me')")
+        if sel.is_element_present("css=p.other-flow div.unisubs-videoTab a.unisubs-subtitleMeLink span.unisubs-tabTextchoose:contains('Subtitle Me')"):
+            sel.click("css=p.other-flow div.unisubs-videoTab a.unisubs-subtitleMeLink span.unisubs-tabTextchoose:contains('Subtitle Me')")
         else:
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[5].openMenu()')          
+            sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[5].openMenu()')          
         make_new_subs(self,sel,subtextfile)
         #Playback Subs
         time.sleep(5)
         try:
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[5].play()')
-            mslib.wait_for_element_present(self,sel,"css=p.other-flow span.mirosubs-captionSpan")
-            sel.get_eval('this.browserbot.getUserWindow().mirosubs.widget.Widget.getAllWidgets()[5].pause()')
-            caption_position =  sel.get_element_height("css=p.other-flow span.mirosubs-captionSpan")
+            sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[5].play()')
+            mslib.wait_for_element_present(self,sel,"css=p.other-flow span.unisubs-captionSpan")
+            sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[5].pause()')
+            caption_position =  sel.get_element_height("css=p.other-flow span.unisubs-captionSpan")
             verify_caption_position(self,sel,caption_position)
         except:
             print "sub position playback failed"
@@ -461,8 +461,8 @@ def make_new_subs(self,sel,subtextfile):
     widget.sync_video(self,sel,subtextfile,2,3)
     #Login
     time.sleep(3)
-    sel.click("css=div.mirosubs-needLogin a")
-    sel.click("css=.mirosubs-log")
+    sel.click("css=div.unisubs-needLogin a")
+    sel.click("css=.unisubs-log")
     widget.site_login_auth(self,sel)
     sel.select_window("null")
     # Review

@@ -55,9 +55,9 @@ def set_widget_null_page():
     sets the dev-null test page to use for testing (staging or dev), if not set, defaults to dev
     """   
     if controller.testsite:
-        page = "mirosubs_tests/"+controller.testsite+"-widget-null.html"
+        page = "unisubs_tests/"+controller.testsite+"-widget-null.html"
     else:
-        page = "mirosubs_tests/dev-widget-null.html"
+        page = "unisubs_tests/dev-widget-null.html"
     return page
 
 def set_subtesting_wordpress_page(self,test_id):

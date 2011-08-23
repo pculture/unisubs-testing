@@ -74,11 +74,11 @@ def handle_warning_popup(self,sel):
 
     """
     sel.select_pop_up("null")
-    if sel.is_element_present("css=.mirosubs-warning"):
+    if sel.is_element_present("css=.unisubs-warning"):
         sel.click("link=Continue")
         for i in range(60):
             try:
-                if not sel.is_element_present("css=.mirosubs-warning"): break
+                if not sel.is_element_present("css=.unisubs-warning"): break
             except: pass
             time.sleep(1)
         else: self.fail("time out")
