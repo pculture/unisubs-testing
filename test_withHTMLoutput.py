@@ -85,9 +85,9 @@ class Test_HTMLTestRunner(unittest.TestCase):
         'sg_78_widget_playback.subgroup_78_playback.test_688',
         'sg_78_widget_playback.subgroup_78_playback.test_685',
         'sg_78_widget_playback.subgroup_78_playback.test_686',
-        'sg_94_widgetizer.subgroup_94.test_687',
-        'sg_94_widgetizer.subgroup_94.test_701',
-        'sg_94_widgetizer.subgroup_94.test_739',
+        'sg_94_widgetizer.subgroup_94_pagedemo.test_687',
+        'sg_94_widgetizer.subgroup_94_pagedemo.test_701',
+        'sg_94_widgetizer.subgroup_94_pagedemo.test_739',
         'sg_78_widget_playback.subgroup_78_playback.test_702',                
         ]
 
@@ -116,7 +116,8 @@ class Test_HTMLTestRunner(unittest.TestCase):
     
     ALL_TESTS = [
         'sg_64_submit.subgroup_64',
-        'sg_94_widgetizer.subgroup_94',
+        'sg_94_widgetizer.subgroup_94_pagedemo',
+        'sg_94_widgetizer.subgroup_94_mcsite',
         'sg_95_watchpage.subgroup_95',
         'sg_81_ul_dl.subgroup_81',
         'sg_69_demoUI.subgroup_69',
