@@ -228,8 +228,8 @@ class Test_HTMLTestRunner(unittest.TestCase):
 
         if testsauce:
             self._add_smaller_group_for_sauce()
-        elif jenkins:
-            self._add_jenkins_tests()
+        elif custom:
+            self._add_custom_tests()
         else: # pcf server or local
             self._add_all_tests()           
 
