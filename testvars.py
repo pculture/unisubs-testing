@@ -2,7 +2,6 @@
 import os
 import platform
 
-preE=" --- ERROR: "
 
 timeout = 120000
 MSTestVariables = {"DataDirectory": os.path.join(os.getcwd(), "TestInput"), \
@@ -38,14 +37,14 @@ vid_title = "css=.main-title"
 videos_url_td = "td:nth-child(1)"
 videos_trans_td = "td:nth-child(4)"
 videos_subtitled_td = "td:nth-child(5)"
-video_original = "css=ul.left_nav li:nth-child(2) > a"
-video_metadata = "css=ul.left_nav li a[href:contains('meta-')]"
-video_video_info = "css=li a:contains('Video Info')"
+video_original = "css=ul#subtitles-menu.left_nav li:nth-child(1) > a"
+video_metadata = "css=ul.#subtitles-menu.left_nav li a[href:contains('meta-')]"
+video_video_info = "css=ul#video-menu.left_nav li a:contains('Info')"
 ## action links
 video_upload_subtitles = "css=a[id=upload-subtitles-link]"
-video_edit_subtitles = "css=div a:contains('Edit Subtitles')"
-video_add_translation = "css=a[id*='add_translation']"
-video_compare_revisions = "css=button span:contains('Compare Revisions')"
+video_edit_subtitles = "css=div#transcripts-tab div.actions a#edit_subtitles_button"
+video_add_translation = "css=li.contribute a#add_translation"
+video_compare_revisions = "css=div#revisions-tab.action_buttons button.compare_versions_button"
 rev_rollback = "css=a.roll_back"
 
 
