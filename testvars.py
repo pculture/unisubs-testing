@@ -38,12 +38,15 @@ videos_url_td = "td:nth-child(1)"
 videos_trans_td = "td:nth-child(4)"
 videos_subtitled_td = "td:nth-child(5)"
 video_original = "css=ul#subtitles-menu.left_nav li:nth-child(1) > a"
+video_lang = "css=ul#subtitles-menu.left_nav li a"
+video_lang_hd = "css=div#languages-tab div.hd h2"
 video_metadata = "css=ul.#subtitles-menu.left_nav li a[href:contains('meta-')]"
 video_video_info = "css=ul#video-menu.left_nav li a:contains('Info')"
 ## action links
-video_upload_subtitles = "css=a[id=upload-subtitles-link]"
+video_upload_subtitles = "css=ul#video-menu.left_nav li.contribute a#upload-subtitles-link"
+video_add_to_team = "css=ul#video-menu.left_nav li.contribute a:contains('team')" #just a guess here.
 video_edit_subtitles = "css=div#transcripts-tab div.actions a#edit_subtitles_button"
-video_add_translation = "css=li.contribute a#add_translation"
+video_add_translation = "css=ul#video-menu.left_nav li.contribute a#add_translation"
 video_compare_revisions = "css=div#revisions-tab.action_buttons button.compare_versions_button"
 rev_rollback = "css=a.roll_back"
 
@@ -55,12 +58,13 @@ manage_team = "css=a:contains('Settings')"
 teams_video_tab ="css=ul.inline_tabs li a[href*='videos']"
 
 
-history_tab = "css=span.inline_text:contains('History')"
-comments_tab = "css=span.inline_text:contains('Comments')"
-transcripts_tab = "css=.inline_text:contains('Subtitles')"
+history_tab = "css=div#languages-tab span.inline_text:contains('History')"
+comments_tab = "css=div#languages-tab span.inline_text:contains('Comments')"
+transcripts_tab = "div#languages-tab css=.inline_text:contains('Subtitles')"
 
 #teams pages
 vid_add_subs_button = "css=a:contains('Add Subtitles')"
+teams_save = "css=button span:contains('Save Changes')"
 
 # Widget Vars
 

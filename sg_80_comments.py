@@ -90,8 +90,9 @@ class subgroup_80(unittest.TestCase):
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         sel.click(testvars.comments_tab)
         #Open the Original tab / then comments tab
-        self.assertTrue(sel.get_text("css=li.active:contains('Video Info')"),"Video Info is not the active tab")
+
         #Not logged in, enter a comment
+
         print "1. trying to enter a comment when not logged in"
         ctext = "this comment should never post"
         website.enter_comment_text(self,sel,ctext)
@@ -133,10 +134,10 @@ class subgroup_80(unittest.TestCase):
         language = website.get_translated_lang(self,sel)
         
         #Open the Language tab / then the comments
-        mslib.wait_for_element_present(self,sel,"css=a:contains('"+language+"')")
-        sel.click("css=a:contains('"+language+"')")
+        mslib.wait_for_element_present(self,sel,testvars.video_lang+":contains('"+language+"')")
+        sel.click(testvars.video_lang+":contains('"+language+"')")
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        self.failUnless(sel.is_element_present("css=span.inline_text:contains("+language+")"))
+        self.failUnless(sel.is_element_present(testvars.video_lang_hd+":contains('"+language+"')"))
         sel.click(testvars.comments_tab) 
 
         #Not logged in, enter a comment
@@ -144,12 +145,14 @@ class subgroup_80(unittest.TestCase):
         ctext = "this comment should never post"
         website.enter_comment_text(self,sel,ctext)
         website.verify_comment_text(self,sel,ctext, result="login")
+        
         #Login and go to language comments page
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         sel.open(test_video_url)
-        sel.click("css=a:contains('"+language+"')")
+        mslib.wait_for_element_present(self,sel,testvars.video_lang+":contains('"+language+"')")
+        sel.click(testvars.video_lang+":contains('"+language+"')")
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        self.failUnless(sel.is_element_present("css=span.inline_text:contains("+language+")"))
+        self.failUnless(sel.is_element_present(testvars.video_lang_hd+":contains('"+language+"')"))
         sel.click(testvars.comments_tab) 
 
         #Enter a 1-char comment
@@ -185,10 +188,10 @@ class subgroup_80(unittest.TestCase):
         #Login and go to language comments page
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         sel.open(test_video_url)
-        mslib.wait_for_element_present(self,sel,"css=a:contains('"+language+"')")
-        sel.click("css=a:contains('"+language+"')")
+        mslib.wait_for_element_present(self,sel,testvars.video_lang+":contains('"+language+"')")
+        sel.click(testvars.video_lang+":contains('"+language+"')")
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        self.assertTrue(sel.is_element_present("css=span.inline_text:contains("+language+")"))
+        self.failUnless(sel.is_element_present(testvars.video_lang_hd+":contains('"+language+"')"))
         sel.click(testvars.comments_tab) 
 
         #Enter some non-ascii comments

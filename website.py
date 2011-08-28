@@ -329,7 +329,6 @@ def upload_subtitles(self,sel,sub_file,lang="en"):
     """Uploads subtitles for the specified language."
 
     """
-    sel.select_frame("relative=top")
     mslib.wait_for_element_present(self,sel,testvars.video_upload_subtitles)
     sel.click(testvars.video_upload_subtitles)
     mslib.wait_for_element_present(self,sel,"css=form[id='upload-subtitles-form'] select")
@@ -347,16 +346,15 @@ def verify_sub_upload(self,sel,sub_file,lang=""):
     sel.click("css=a.close")  
     time.sleep(15)
     sel.refresh()
-    sel.wait_for_page_to_load(testvars.timeout)
-    
+    time.sleep(3)
+    mslib.wait_for_element_present(self,sel,testvars.video_original)
     sub_td = 1
-    
     if lang == "":
         #assuming original lang if no lang specified.
-        sel.click("css=ul.left_nav li:nth-child(2) a")
+        sel.click(testvars.video_original)
         sel.wait_for_page_to_load(testvars.timeout)
     else:
-        sel.click("css=ul.left_nav li a:contains('"+lang+"')")
+        sel.click(testvars.video_lang+":contains('"+lang+"')")
         sel.wait_for_page_to_load(testvars.timeout)
  
     for line in codecs.open(sub_file,encoding='utf-8'):
@@ -428,6 +426,17 @@ def sort_videos_table(self,sel,column,order):
         self.assertTrue(sel.is_element_present("css=a.asc:contains("+column+")"))
 
 
+def click_lang_tab(self,sel,language):
+    """Click on a lanugage tab.
+
+    Assumes you are on the videos tab and know the lang you want.
+    """
+    mslib.wait_for_element_present(self,sel,testvars.video_lang+":contains('"+language+"')")
+    sel.click(testvars.video_lang+":contains('"+language+"')")
+    sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+    self.failUnless(sel.is_element_present(testvars.video_lang_hd+":contains('"+language+"')"))
+
+
 def enter_comment_text(self,sel,comment):
     """Enter text in the Comments box and submit
 
@@ -480,11 +489,10 @@ def check_the_box(self,sel,row_num):
 def get_current_rev(self,sel):
     """Returns the most current revision number for a videos subtitles or translation.
     
-    Assumes you have the video's page open and are on the history tab.
+    Assumes you have the video's page open, does not require history tab open.
     """
-    myval = sel.get_text("//div[@id='revisions-tab']/table/tbody/tr[1]/td[1]")
-    
-    revision = myval.split()[0]
+    myval = sel.get_text("css=div#languages-tab div.hd ul.inline_tabs li a[href=#revisions-tab] span.badgy_out span.badgy")
+    revision = int(myval)-1
     return revision
 
 def verify_latest_history(self,sel,rev=None,user=None,tm=None,text=None):
@@ -603,7 +611,7 @@ def handle_lang_select(self,sel):
         mslib.wait_for_text_not_present(self,sel,"Saving")
 
 def save_team_settings(self,sel):
-    sel.click("css=.green_button.small:contains('Save')")
+    sel.click(testvars.teams_save)
 
 def open_teams_page(self,sel):
     sel.open("teams")
@@ -622,13 +630,13 @@ def feature_video(self,sel,action='Feature'):
     Assumes logged in as an admin user.
     Action can be 'Feature' or 'Unfeature'
     """
-    mslib.wait_for_element_present(self,sel,"css=div.content a.green_button:contains('eature')")
-    if not sel.is_element_present("css=div.content a.green_button:contains('"+action+"')"):
+    mslib.wait_for_element_present(self,sel,"css=ul#admin-menu.left_nav li a:contains('eature')")
+    if not sel.is_element_present("css=ul#admin-menu.left_nav li a:contains('"+action+"')"):
         print "video already",action
     else:
-        sel.click("css=div.content a.green_button:contains('eature')")
-        mslib.wait_for_element_present(self,sel,"css=div.content a.green_button:contains('eature')")
-    vid_url = sel.get_attribute("css=ul.left_nav li:nth-child(1) >  a@href")
+        sel.click("css=ul#admin-menu.left_nav li a:contains('eature')")
+        mslib.wait_for_element_present(self,sel,"css=ul#admin-menu.left_nav li a:contains('eature')")
+    vid_url = sel.get_attribute("css=ul#video-menu.left_nav li:nth-child(1) >  a@href7")
     return vid_url
 
 

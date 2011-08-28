@@ -196,13 +196,10 @@ class subgroup_70(unittest.TestCase):
         print test_video_url
         sel.open(test_video_url)
         language = website.get_translated_lang(self,sel)
-        mslib.wait_for_element_present(self,sel,"css=a:contains('"+language+"')")
-        sel.click("css=a:contains('"+language+"')")
-        sel.wait_for_page_to_load(testvars.timeout)
+        website.click_lang_tab(self,sel,language)
+               
         website.store_subs(self,sel)
-        sel.click(testvars.history_tab)
-        orig_rev = website.get_current_rev(self,sel)
-        rev_num = orig_rev.lstrip('#')
+        rev_num = website.get_current_rev(self,sel)
         subtextfile = "subs.txt"
         #If there is only 1 revision - edit the subs to make a new revision
         if int(rev_num) < 1:
@@ -211,8 +208,9 @@ class subgroup_70(unittest.TestCase):
             widget.goto_step(self,sel,step="3")
             widget.edit_text(self,sel,subtextfile)
             widget.submit_sub_edits(self,sel)
-            
-        sel.select_frame("relative=top")  
+            website.click_lang_tab(self,sel,language)
+            sel.select_frame("relative=top")  
+
         sel.click(testvars.history_tab)
         mslib.wait_for_element_present(self,sel,testvars.video_compare_revisions)
         #get the checkbox value for comparing
@@ -277,13 +275,13 @@ class subgroup_70(unittest.TestCase):
         print test_video_url
         sel.open(test_video_url)
         language = website.get_translated_lang(self,sel)
-        mslib.wait_for_element_present(self,sel,"css=a:contains('"+language+"')")
-        sel.click("css=a:contains('"+language+"')")
-        sel.wait_for_page_to_load(testvars.timeout)
+        website.click_lang_tab(self,sel,language)
+
+        
         ## if not enough revisions for comparison, edit the sub text.
-        rev_num = int(sel.get_text("css=a[href*=revisions-tab] span.badgy_out span.badgy"))
+        rev_num = website.get_current_rev(self,sel)
         print rev_num
-        while rev_num < 3:
+        while rev_num < 2:
             print "only 2 or less revs - editing text first"
             #edit text
             sel.click(testvars.video_edit_subtitles)
@@ -295,7 +293,7 @@ class subgroup_70(unittest.TestCase):
                 widget.edit_text(self,sel,subtextfile)
 
             widget.submit_sub_edits(self,sel)
-            rev_num = int(sel.get_text("css=a[href*=revisions-tab] span.badgy_out span.badgy"))
+            rev_num = website.get_current_rev(self,sel)
         
         sel.click(testvars.history_tab)
         row_num = 1
@@ -326,14 +324,13 @@ class subgroup_70(unittest.TestCase):
         sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
 
         sel.click(testvars.history_tab)
-        orig_rev = website.get_current_rev(self,sel)
-        rev_num = orig_rev.lstrip('#')
+        rev_num = website.get_current_rev(self,sel)
         row_num = 2
         
                 
         while sel.is_element_present("//div[@id='revisions-tab']/table/tbody/tr["+str(row_num)+"]"):
             website.check_the_box(self,sel,row_num) #check the box
-            old_rev = int(rev_num) - (int(row_num) -1)
+            old_rev = rev_num - 1
             sel.click(testvars.video_compare_revisions)
             website.verify_compare_revisions(self,sel,str(old_rev),str(rev_num))
             row_num += 1

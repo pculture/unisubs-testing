@@ -262,6 +262,7 @@ class subgroup_64(unittest.TestCase):
         self.assertTrue(sel.is_element_present(testvars.WidgetUI["Next_step"]),"Done button not found, maybe widget not redisplayed after login")
         sel.click(testvars.WidgetUI["Next_step"])
         widget.set_subs_complete(self,sel)
+        widget.submit_thanks(self,sel)
         mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"]) 
         print "logging out from site"
         website.SiteLogout(self,sel)
@@ -310,7 +311,9 @@ class subgroup_64(unittest.TestCase):
         widget.set_subs_complete(self,sel,done=True)
         widget.submit_thanks(self,sel)
         mslib.wait_for_element_present(self,sel,testvars.video_video_info)
-        self.assertTrue(sel.is_element_present("css=ul.left_nav li:nth-child(2) > a span.done_percentage:contains('100')"))
+        self.assertTrue(sel.is_element_present("css=ul#subtitles-menu li a:contains('English') > span.done_percentage:contains('100')"))
+       
+      
  
     def test_731(self):
         """Set Subs Incomplete Dialog.
@@ -354,9 +357,8 @@ class subgroup_64(unittest.TestCase):
         widget.set_subs_complete(self,sel,done=False)
         widget.submit_thanks(self,sel)
         mslib.wait_for_element_present(self,sel,testvars.video_video_info)
-        self.assertTrue(sel.is_element_present("css=ul.left_nav li:nth-child(2) > a span.done_percentage:contains('Lines')"))
-
-
+        self.assertTrue(sel.is_element_present("css=ul#subtitles-menu li a:contains('English') > span.done_percentage:contains('Lines')"))
+                        
 
 # Close the browser, log errors, perform cleanup
     def tearDown(self):

@@ -53,6 +53,7 @@ class subgroup_95(unittest.TestCase):
        # Verify embed and player
        print ("verifying embed")
        website.verify_submitted_video(self,sel,vid_url,embed_type="youtube")
+       mslib.wait_for_element_present(self,sel,"css=h2.main-title span.title-container")
        title = sel.get_text("css=h2.main-title span.title-container")
        website.feature_video(self,sel,action='Feature')
        sel.open("/videos/watch/featured")

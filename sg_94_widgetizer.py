@@ -11,7 +11,7 @@ import testvars
 import selvars
 
 class subgroup_94_pagedemo(unittest.TestCase):
-    """offsite widget on MC site.
+    """offsite widget on unisubs page demo pages site.
     Litmus Subgroup 78 - offsite subwidget embedded in mc:
         Tests designed to exercise the subtitle widget embedded
         in sites external to universalsubtitles.org (live, dev or staging)  
@@ -44,7 +44,7 @@ class subgroup_94_pagedemo(unittest.TestCase):
         sel.open(testpage)
         sel.wait_for_page_to_load(testvars.timeout)
         sel.window_maximize()
-        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+        mslib.wait_for_element_present(self,sel,"div.unisubs-videoTab a.unisubs-subtitleMeLink")
         time.sleep(5)
         sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].play()')
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_offsite"])
@@ -65,8 +65,9 @@ class subgroup_94_pagedemo(unittest.TestCase):
         sel.wait_for_page_to_load(testvars.timeout)
         sel.window_maximize()
         sel.click("link=Widgetize it!")
-        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+        mslib.wait_for_element_present(self,sel,"div.unisubs-videoTab a.unisubs-subtitleMeLink")
         time.sleep(5)
+        sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].pause()')
         sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].play()')
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_offsite"])
         sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].pause()')
@@ -86,7 +87,7 @@ class subgroup_94_pagedemo(unittest.TestCase):
         sel.open(testpage)
         sel.wait_for_page_to_load(testvars.timeout)
         sel.window_maximize()
-        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+        mslib.wait_for_element_present(self,sel,"css=div.unisubs-videoTab:nth-child(3) > a.unisubs-subtitleMeLink")
         time.sleep(5)
         sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[2].play()')
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_offsite"])
@@ -95,6 +96,27 @@ class subgroup_94_pagedemo(unittest.TestCase):
         verify_caption_position(self,sel,caption_position)
         verify_submenu_present(self,sel)
 
+
+
+    def test_702(self):
+        """Pagedemo JW Player - sub position on playback.
+        
+        http://litmus.pculture.org/show_test.cgi?id=687b
+        """
+        test_id = 702
+        sel = self.selenium
+        testpage = "/widget/widgetize_demo/jwplayer"
+        sel.open(testpage)
+        sel.wait_for_page_to_load(testvars.timeout)
+        sel.window_maximize()
+        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+        time.sleep(5)
+        sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].play()')
+        mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_offsite"])
+        sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].pause()')
+        caption_position =  sel.get_element_height(testvars.WidgetUI["Current_playing_offsite"])
+        verify_caption_position(self,sel,caption_position)
+        verify_submenu_present(self,sel)
   
         
 # Close the browser, log errors, perform cleanup 

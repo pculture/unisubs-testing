@@ -86,7 +86,7 @@ class subgroup_88(unittest.TestCase):
         sel = self.selenium
         sel.set_timeout(testvars.timeout)
         #test data
-                
+        self.fail("this test fails until add to team buttons added to video page")
         #login
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         #create team
@@ -105,8 +105,13 @@ class subgroup_88(unittest.TestCase):
         vid_title = sel.get_text(testvars.vid_title)
         #add video to team and verify values
         teamli = "add/video/"+team
-        sel.click_at("css=span.sort_label strong:contains('Add video')","")
-        sel.click_at("css=a[href*='"+teamli+"']","")
+
+#### Fix when Add to Team back on teams page ####
+
+                  
+##        sel.click(testvars.video_add_to_team)
+##        sel.click_at("css=span.sort_label strong:contains('Add video')","")
+##        sel.click_at("css=a[href*='"+teamli+"']","")
         
         sel.wait_for_page_to_load(testvars.timeout)
         print "verifying the inital add page"
@@ -117,7 +122,7 @@ class subgroup_88(unittest.TestCase):
         else:
             mslib.wait_for_text_present(self,sel,"Video language")
             sel.select("id_language", "value=en")
-            sel.click("css=.green_button.small:contains('Save')")
+            sel.click(testvars.teams_save)
             sel.wait_for_page_to_load(testvars.timeout)
         self.assertTrue(sel.is_element_present("css=li.active a:contains('"+team+"')"))
         sel.click(testvars.teams_video_tab)

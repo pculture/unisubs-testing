@@ -88,7 +88,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
         'sg_94_widgetizer.subgroup_94_pagedemo.test_687',
         'sg_94_widgetizer.subgroup_94_pagedemo.test_701',
         'sg_94_widgetizer.subgroup_94_pagedemo.test_739',
-        'sg_78_widget_playback.subgroup_78_playback.test_702',                
+        'sg_94_widgetizer.subgroup_94_pagedemo.test_702',                
         ]
 
     SAUCE_TESTS = [
