@@ -405,13 +405,13 @@ class subgroup_78_unisubs_mc(unittest.TestCase):
 
 
     def test_737(self):
-        """youtube offsite embed - subtitle and playback
+        """flowplayer offsite embed - subtitle and playback
  
-        http://litmus.pculture.org/show_test.cgi?id=733
+        http://litmus.pculture.org/show_test.cgi?id=737
         Flowplayer with widget embedded on Miro Community test page.
         """
         mc_page = "embed_tests"
-        vid_title = "Girl wakes up"
+        vid_title = "flow player test"
         subtextfile = os.path.join(testvars.MSTestVariables["DataDirectory"],"737_flow.txt")
         print self.shortDescription()
         sel = self.selenium
