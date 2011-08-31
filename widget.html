@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>widget</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/janetPCF/RC-testing/universal-subtitles/widget.py">/Users/janetPCF/RC-testing/universal-subtitles/widget.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Volumes/janet-pcf/Users/janetPCF/RC-testing/universal-subtitles/widget.py">/Volumes/janet-pcf/Users/janetPCF/RC-testing/universal-subtitles/widget.py</a></font></td></tr></table>
     <p><tt>widget.py<br>
 Description:&nbsp;handles&nbsp;actions&nbsp;that&nbsp;are&nbsp;performed&nbsp;within&nbsp;the&nbsp;widget.</tt></p>
 <p>
@@ -54,7 +54,8 @@ Default&nbsp;is&nbsp;set&nbsp;to&nbsp;"True",&nbsp;to&nbsp;skip&nbsp;the&nbsp;vi
 Pre-condition:&nbsp;widget&nbsp;has&nbsp;been&nbsp;launched.<br>
 &nbsp;<br>
 Post-condition:&nbsp;help&nbsp;video&nbsp;is&nbsp;closed&nbsp;and&nbsp;returned&nbsp;to&nbsp;previous&nbsp;widget&nbsp;page.</tt></dd></dl>
- <dl><dt><a name="-close_widget"><strong>close_widget</strong></a>(self, sel, submit<font color="#909090">='Discard'</font>)</dt><dd><tt>Description:&nbsp;uses&nbsp;the&nbsp;red&nbsp;close&nbsp;x&nbsp;to&nbsp;close&nbsp;out&nbsp;the&nbsp;widget.<br>
+ <dl><dt><a name="-close_sub_widget"><strong>close_sub_widget</strong></a>(self, sel, submit<font color="#909090">='Discard'</font>)</dt><dd><tt>Close&nbsp;the&nbsp;subtitle&nbsp;widget.</tt></dd></dl>
+ <dl><dt><a name="-close_widget"><strong>close_widget</strong></a>(self, sel)</dt><dd><tt>Description:&nbsp;uses&nbsp;the&nbsp;red&nbsp;close&nbsp;x&nbsp;to&nbsp;close&nbsp;out&nbsp;the&nbsp;widget.<br>
 &nbsp;<br>
 Options:&nbsp;"Submit"&nbsp;or&nbsp;"Discard"&nbsp;{default}&nbsp;subtitles.<br>
 &nbsp;<br>
@@ -88,6 +89,9 @@ Options:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;new_text&nbsp;-&nbsp;text&nbsp;string<br>
 &nbsp;<br>
 Pre-condition&nbsp;-&nbsp;Editing&nbsp;Translation&nbsp;Widget&nbsp;opened</tt></dd></dl>
+ <dl><dt><a name="-get_lang_cc"><strong>get_lang_cc</strong></a>(self, sel, language)</dt><dd><tt>Gives&nbsp;back&nbsp;the&nbsp;lang&nbsp;code&nbsp;for&nbsp;Subtitle&nbsp;Into&nbsp;language.<br>
+&nbsp;<br>
+Precondition:&nbsp;starter&nbsp;dialog&nbsp;must&nbsp;be&nbsp;open.</tt></dd></dl>
  <dl><dt><a name="-goto_step"><strong>goto_step</strong></a>(self, sel, step<font color="#909090">='3'</font>)</dt></dl>
  <dl><dt><a name="-hold_down_delay_sub"><strong>hold_down_delay_sub</strong></a>(self, sel, sub_file, delay_time<font color="#909090">=2</font>, hold_time<font color="#909090">=0.75</font>, sync_time<font color="#909090">=1</font>)</dt><dd><tt>Description:&nbsp;tests&nbsp;the&nbsp;time&nbsp;shift&nbsp;of&nbsp;subs&nbsp;when&nbsp;holding&nbsp;then&nbsp;releasing&nbsp;the&nbsp;down&nbsp;key.<br>
 Verifies&nbsp;that&nbsp;the&nbsp;time&nbsp;has&nbsp;been&nbsp;shifted.<br>
@@ -101,6 +105,7 @@ Pre-conditions:&nbsp;must&nbsp;coordinate&nbsp;this&nbsp;with&nbsp;the&nbsp;time
 comparision&nbsp;may&nbsp;fail.<br>
 &nbsp;<br>
 Post-condition&nbsp;-&nbsp;still&nbsp;on&nbsp;same&nbsp;step&nbsp;in&nbsp;widget,&nbsp;with&nbsp;new&nbsp;times.</tt></dd></dl>
+ <dl><dt><a name="-open_starter_dialog"><strong>open_starter_dialog</strong></a>(self, sel)</dt></dl>
  <dl><dt><a name="-restart_step"><strong>restart_step</strong></a>(self, sel)</dt><dd><tt>Description:&nbsp;Clicks&nbsp;the&nbsp;'Restart&nbsp;this&nbsp;Step'&nbsp;link,&nbsp;and&nbsp;handle&nbsp;the&nbsp;confirmation&nbsp;dialog.</tt></dd></dl>
  <dl><dt><a name="-resync_video"><strong>resync_video</strong></a>(self, sel, subtextfile, start_delay<font color="#909090">=1</font>, sub_int<font color="#909090">=1</font>, step<font color="#909090">='Stop'</font>)</dt><dd><tt>Description:&nbsp;tests&nbsp;the&nbsp;time&nbsp;shift&nbsp;of&nbsp;subs&nbsp;when&nbsp;using&nbsp;down&nbsp;key&nbsp;to&nbsp;resyncronize.<br>
 Verifies&nbsp;time&nbsp;stamp&nbsp;has&nbsp;changed.<br>
@@ -112,7 +117,7 @@ Options:<br>
 &nbsp;<br>
 Pre-conditions:&nbsp;must&nbsp;coordinate&nbsp;this&nbsp;with&nbsp;the&nbsp;times&nbsp;used&nbsp;in&nbsp;sync_video&nbsp;or&nbsp;the&nbsp;time&nbsp;shift<br>
 comparision&nbsp;may&nbsp;fail.</tt></dd></dl>
- <dl><dt><a name="-select_video_language"><strong>select_video_language</strong></a>(self, sel, vid_lang<font color="#909090">='English'</font>, sub_lang<font color="#909090">='English'</font>)</dt></dl>
+ <dl><dt><a name="-select_video_language"><strong>select_video_language</strong></a>(self, sel, vid_lang<font color="#909090">='en'</font>, sub_lang<font color="#909090">='en-gb'</font>, from_lang<font color="#909090">='forkk'</font>)</dt></dl>
  <dl><dt><a name="-set_subs_complete"><strong>set_subs_complete</strong></a>(self, sel, done<font color="#909090">=True</font>)</dt></dl>
  <dl><dt><a name="-site_login_auth"><strong>site_login_auth</strong></a>(self, sel)</dt><dd><tt>Description:&nbsp;specifically&nbsp;logs&nbsp;in&nbsp;as&nbsp;the&nbsp;site&nbsp;user&nbsp;defined&nbsp;in&nbsp;&lt;a&nbsp;href="testvars.html"&gt;testvars&lt;/a&gt;<br>
 &nbsp;<br>
@@ -124,8 +129,33 @@ Post-condition:&nbsp;user&nbsp;logged&nbsp;in&nbsp;and&nbsp;returned&nbsp;to&nbs
 Pre-condition:&nbsp;widget&nbsp;is&nbsp;opened&nbsp;and&nbsp;user&nbsp;is&nbsp;not&nbsp;logged&nbsp;in.<br>
 &nbsp;<br>
 Post-condition:&nbsp;user&nbsp;is&nbsp;returned&nbsp;to&nbsp;starting&nbsp;widget&nbsp;page.</tt></dd></dl>
+ <dl><dt><a name="-starter_dialog_edit_orig"><strong>starter_dialog_edit_orig</strong></a>(self, sel)</dt><dd><tt>Choose&nbsp;the&nbsp;current&nbsp;lang&nbsp;to&nbsp;edit.<br>
+Return&nbsp;orig_lang<br>
+&nbsp;<br>
+Gets&nbsp;the&nbsp;videos&nbsp;orig&nbsp;lang&nbsp;to&nbsp;edit&nbsp;the&nbsp;original&nbsp;subs&nbsp;-&nbsp;or&nbsp;sets&nbsp;it&nbsp;to&nbsp;English&nbsp;if&nbsp;none&nbsp;set.<br>
+&nbsp;<br>
+Post-condition:&nbsp;the&nbsp;widget&nbsp;is&nbsp;launched&nbsp;and&nbsp;you&nbsp;will&nbsp;be&nbsp;on&nbsp;step&nbsp;1.</tt></dd></dl>
+ <dl><dt><a name="-starter_dialog_fork"><strong>starter_dialog_fork</strong></a>(self, sel, to_lang<font color="#909090">='hr'</font>)</dt><dd><tt>Choose&nbsp;the&nbsp;a&nbsp;new&nbsp;translation&nbsp;and&nbsp;translate&nbsp;from&nbsp;original&nbsp;lang<br>
+Return&nbsp;orig_lang<br>
+&nbsp;<br>
+This&nbsp;assumes&nbsp;you&nbsp;know&nbsp;the&nbsp;original&nbsp;language&nbsp;and&nbsp;want&nbsp;to&nbsp;edit&nbsp;the&nbsp;original&nbsp;subs.<br>
+&nbsp;<br>
+Post-condition:&nbsp;the&nbsp;widget&nbsp;is&nbsp;launched&nbsp;and&nbsp;you&nbsp;will&nbsp;be&nbsp;on&nbsp;step&nbsp;1&nbsp;or&nbsp;Edit&nbsp;step</tt></dd></dl>
+ <dl><dt><a name="-starter_dialog_translate_from_not_orig"><strong>starter_dialog_translate_from_not_orig</strong></a>(self, sel, from_lang, to_lang<font color="#909090">='hr'</font>)</dt><dd><tt>Choose&nbsp;the&nbsp;a&nbsp;new&nbsp;translation&nbsp;and&nbsp;translate&nbsp;from&nbsp;a&nbsp;sub&nbsp;that&nbsp;is&nbsp;not&nbsp;the&nbsp;orig&nbsp;lang.<br>
+Return&nbsp;from_lang<br>
+&nbsp;<br>
+This&nbsp;assumes&nbsp;you&nbsp;know&nbsp;the&nbsp;original&nbsp;language&nbsp;and&nbsp;want&nbsp;to&nbsp;edit&nbsp;the&nbsp;original&nbsp;subs.<br>
+&nbsp;<br>
+Post-condition:&nbsp;the&nbsp;widget&nbsp;is&nbsp;launched&nbsp;and&nbsp;you&nbsp;will&nbsp;be&nbsp;on&nbsp;step&nbsp;1&nbsp;or&nbsp;Edit&nbsp;step</tt></dd></dl>
+ <dl><dt><a name="-starter_dialog_translate_from_orig"><strong>starter_dialog_translate_from_orig</strong></a>(self, sel, to_lang<font color="#909090">='hr'</font>)</dt><dd><tt>Choose&nbsp;the&nbsp;a&nbsp;new&nbsp;translation&nbsp;and&nbsp;translate&nbsp;from&nbsp;original&nbsp;lang<br>
+Return&nbsp;orig_lang<br>
+&nbsp;<br>
+This&nbsp;assumes&nbsp;you&nbsp;know&nbsp;the&nbsp;original&nbsp;language&nbsp;and&nbsp;want&nbsp;to&nbsp;edit&nbsp;the&nbsp;original&nbsp;subs.<br>
+&nbsp;<br>
+Post-condition:&nbsp;the&nbsp;widget&nbsp;is&nbsp;launched&nbsp;and&nbsp;you&nbsp;will&nbsp;be&nbsp;on&nbsp;step&nbsp;1&nbsp;or&nbsp;Edit&nbsp;step</tt></dd></dl>
  <dl><dt><a name="-steps_display"><strong>steps_display</strong></a>(self, sel, step_num)</dt><dd><tt>Description:&nbsp;verifies&nbsp;text&nbsp;contents&nbsp;of&nbsp;Steps.</tt></dd></dl>
  <dl><dt><a name="-submit_sub_edits"><strong>submit_sub_edits</strong></a>(self, sel, offsite<font color="#909090">=False</font>)</dt></dl>
+ <dl><dt><a name="-submit_thanks"><strong>submit_thanks</strong></a>(self, sel)</dt></dl>
  <dl><dt><a name="-sync_video"><strong>sync_video</strong></a>(self, sel, sub_file, start_delay<font color="#909090">=3</font>, sub_int<font color="#909090">=2</font>, step<font color="#909090">='Continue'</font>)</dt><dd><tt>Description:&nbsp;Use&nbsp;the&nbsp;defined&nbsp;sync&nbsp;button&nbsp;to&nbsp;sync&nbsp;the&nbsp;subtitles.&nbsp;&nbsp;Waits&nbsp;for<br>
 text&nbsp;present&nbsp;on&nbsp;the&nbsp;video&nbsp;and&nbsp;prints&nbsp;the&nbsp;subtime.<br>
 &nbsp;<br>
@@ -146,6 +176,10 @@ Options:&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;proceeding.&nbsp;see&nbsp;wait_for_video_to_buffer<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;returns&nbsp;line_count&nbsp;-&nbsp;the&nbsp;number&nbsp;of&nbsp;text&nbsp;lines&nbsp;input&nbsp;for&nbsp;the&nbsp;translation</tt></dd></dl>
+ <dl><dt><a name="-translate"><strong>translate</strong></a>(self, sel, subtextfile)</dt><dd><tt>Description:&nbsp;Create&nbsp;a&nbsp;new&nbsp;translation<br>
+&nbsp;<br>
+&nbsp;<br>
+Pre-condition&nbsp;-&nbsp;New&nbsp;Translation&nbsp;dialog&nbsp;opened.</tt></dd></dl>
  <dl><dt><a name="-verify_login_message"><strong>verify_login_message</strong></a>(self, sel)</dt><dd><tt>Description:&nbsp;verifies&nbsp;the&nbsp;widget&nbsp;must&nbsp;login&nbsp;message&nbsp;is&nbsp;displayed&nbsp;when&nbsp;a&nbsp;user&nbsp;is&nbsp;not&nbsp;logged&nbsp;in.</tt></dd></dl>
  <dl><dt><a name="-verify_sub_text"><strong>verify_sub_text</strong></a>(self, sel, subtextfile)</dt><dd><tt>Description:&nbsp;Compares&nbsp;the&nbsp;current&nbsp;text&nbsp;in&nbsp;the&nbsp;text&nbsp;box&nbsp;with&nbsp;the&nbsp;text&nbsp;in&nbsp;the&nbsp;input&nbsp;subtextfile.<br>
 &nbsp;<br>
