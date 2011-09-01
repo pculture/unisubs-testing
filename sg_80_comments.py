@@ -87,7 +87,7 @@ class subgroup_80(unittest.TestCase):
         print test_video_url
         sel.open(test_video_url)
         sel.click(testvars.video_video_info)
-        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+        mslib.wait_for_element_present(self,sel,testvars.comments_tab)
         sel.click(testvars.comments_tab)
         #Open the Original tab / then comments tab
 
@@ -101,7 +101,7 @@ class subgroup_80(unittest.TestCase):
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         sel.open(test_video_url)
         sel.click(testvars.video_video_info)
-        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
+        mslib.wait_for_element_present(self,sel,testvars.comments_tab)
         sel.click(testvars.comments_tab)
         #Enter a 1-char comment
         print "2. entering a 1-char comment on Video Info"
@@ -136,8 +136,7 @@ class subgroup_80(unittest.TestCase):
         #Open the Language tab / then the comments
         mslib.wait_for_element_present(self,sel,testvars.video_lang+":contains('"+language+"')")
         sel.click(testvars.video_lang+":contains('"+language+"')")
-        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        self.failUnless(sel.is_element_present(testvars.video_lang_hd+":contains('"+language+"')"))
+        mslib.wait_for_element_present(self,sel,testvars.video_lang_hd+":contains('"+language+"')")
         sel.click(testvars.comments_tab) 
 
         #Not logged in, enter a comment
@@ -151,8 +150,7 @@ class subgroup_80(unittest.TestCase):
         sel.open(test_video_url)
         mslib.wait_for_element_present(self,sel,testvars.video_lang+":contains('"+language+"')")
         sel.click(testvars.video_lang+":contains('"+language+"')")
-        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        self.failUnless(sel.is_element_present(testvars.video_lang_hd+":contains('"+language+"')"))
+        mslib.wait_for_element_present(self,sel,testvars.video_lang_hd+":contains('"+language+"')")
         sel.click(testvars.comments_tab) 
 
         #Enter a 1-char comment
@@ -190,8 +188,7 @@ class subgroup_80(unittest.TestCase):
         sel.open(test_video_url)
         mslib.wait_for_element_present(self,sel,testvars.video_lang+":contains('"+language+"')")
         sel.click(testvars.video_lang+":contains('"+language+"')")
-        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-        self.failUnless(sel.is_element_present(testvars.video_lang_hd+":contains('"+language+"')"))
+        mslib.wait_for_element_present(self,sel,testvars.video_lang_hd+":contains('"+language+"')")
         sel.click(testvars.comments_tab) 
 
         #Enter some non-ascii comments
