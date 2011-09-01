@@ -254,7 +254,7 @@ class subgroup_70(unittest.TestCase):
         while sel.is_element_present("//div[@id='revisions-tab']/table/tbody/tr["+str(row_num)+"]"):
             website.check_the_box(self,sel,row_num)   
             sel.click(testvars.video_compare_revisions)
-            self.assertEqual("Select two revisions for compare, please", sel.get_alert())
+            self.assertEqual("Select two revisions to compare, please", sel.get_alert())
             website.check_the_box(self,sel,row_num)    #uncheck the box
             row_num += 1
             if row_num == 3:
@@ -301,7 +301,7 @@ class subgroup_70(unittest.TestCase):
         while sel.is_element_present("//div[@id='revisions-tab']/table/tbody/tr["+str(row_num)+"]"):
             website.check_the_box(self,sel,row_num)                
             sel.click(testvars.video_compare_revisions)
-            self.assertEqual("Select two revisions for compare, please", sel.get_alert())
+            self.assertEqual("Select two revisions to compare, please", sel.get_alert())
             website.check_the_box(self,sel,row_num) #uncheck the box
             row_num += 1
             if row_num == 3:
