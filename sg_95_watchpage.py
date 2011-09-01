@@ -53,8 +53,8 @@ class subgroup_95(unittest.TestCase):
        # Verify embed and player
        print ("verifying embed")
        website.verify_submitted_video(self,sel,vid_url,embed_type="youtube")
-       mslib.wait_for_element_present(self,sel,"css=h2.main-title span.title-container")
-       title = sel.get_text("css=h2.main-title span.title-container")
+       mslib.wait_for_element_present(self,sel,"css=h2.main-title a.title-container")
+       title = sel.get_text("css=h2.main-title a.title-container")
        website.feature_video(self,sel,action='Feature')
        sel.open("/videos/watch/featured")
        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
@@ -95,7 +95,7 @@ class subgroup_95(unittest.TestCase):
        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
        sel.click(testvars.video_video_info)
        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
-       title = sel.get_text("css=h2.main-title span.title-container")
+       title = sel.get_text("css=h2.main-title a.title-container")
        website.feature_video(self,sel,action='Feature')
        print "Verifying featured"
        sel.open("/videos/watch/featured/")
