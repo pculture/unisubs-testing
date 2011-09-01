@@ -3,7 +3,7 @@ import os
 import platform
 
 
-timeout = 120000
+timeout = 20000
 MSTestVariables = {"DataDirectory": os.path.join(os.getcwd(), "TestInput"), \
                    "TimeOut":timeout, \
                   }
@@ -37,10 +37,10 @@ vid_title = "css=.main-title"
 videos_url_td = "td:nth-child(1)"
 videos_trans_td = "td:nth-child(4)"
 videos_subtitled_td = "td:nth-child(5)"
-video_original = "css=ul#subtitles-menu.left_nav li:nth-child(1) > a"
-video_lang = "css=ul#subtitles-menu.left_nav li a"
+video_original = "css=ul#video-menu.left_nav li:nth-child(1) > a"
+video_lang = "css=ul#video-menu.left_nav li a"
 video_lang_hd = "css=div#languages-tab div.hd h2"
-video_metadata = "css=ul.#subtitles-menu.left_nav li a[href:contains('meta-')]"
+video_metadata = "css=ul.#video-menu.left_nav li a[href:contains('meta-')]"
 video_video_info = "css=ul#video-menu.left_nav li a:contains('Info')"
 ## action links
 video_upload_subtitles = "css=ul#video-menu.left_nav li.contribute a#upload-subtitles-link"
