@@ -42,10 +42,10 @@ parser.add_option(
 parser.add_option(
     "-b", "--browser", action="store",
     choices=('firefox','chrome','opera', 'safari', 'iexplore', 'googlechrome', 
-             'lin_ff','firefox4','iexplore9'),
+             'lin_ff','firefox5','iexplore9'),
     type="choice",
     dest="browser", default="firefox",
-    help='Possible browser choices: firefox,chrome,opera, safari, iexplore, googlechrome, lin_ff, firefox4, iexplore9)')
+    help='Possible browser choices: firefox,chrome,opera, safari, iexplore, googlechrome, lin_ff, firefox3, iexplore9)')
 
 parser.add_option(
     "-f", "--fast", action="store_true", dest="fast", default=False,

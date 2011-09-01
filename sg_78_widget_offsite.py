@@ -459,12 +459,12 @@ def make_new_subs(self,sel,subtextfile):
     widget.transcribe_video(self,sel,subtextfile)
     # Sync
     widget.sync_video(self,sel,subtextfile,2,3)
-    #Login
     time.sleep(3)
-    sel.click("css=div.unisubs-needLogin a")
-    sel.click("css=.unisubs-log")
-    widget.site_login_auth(self,sel)
-    sel.select_window("null")
+    #Login
+    if sel.is_element_present("css=.unisubs-modal-login"): #Login
+        sel.click("css=.unisubs-log")
+        widget.site_login_auth(self,sel)
+        sel.select_window("null")
     # Review
     widget.submit_sub_edits(self,sel,offsite=True)
     mslib.wait_for_element_present(self,sel,testvars.offsite_goto_subs)

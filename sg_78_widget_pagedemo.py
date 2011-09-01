@@ -48,6 +48,10 @@ class subgroup_78_pagedemo(unittest.TestCase):
         widget.starter_dialog_edit_orig(self,sel)
         widget.goto_step(self,sel,step="2")
         widget.resync_video(self,sel,subtextfile)
+        if sel.is_element_present("css=.unisubs-modal-login"): #Login
+            sel.click("css=.unisubs-log")
+            widget.site_login_auth(self,sel)
+            sel.select_window("null")
         widget.submit_sub_edits(self,sel,offsite=True)
 
     def test_690(self):
@@ -96,6 +100,10 @@ class subgroup_78_pagedemo(unittest.TestCase):
         sel.select_window("null")
         mslib.wait_for_element_present(self,sel,"css=.unisubs-titlesList")
         widget.verify_sub_text(self,sel,subtextfile)
+        if sel.is_element_present("css=.unisubs-modal-login"): #Login
+            sel.click("css=.unisubs-log")
+            widget.site_login_auth(self,sel)
+            sel.select_window("null")
         widget.submit_sub_edits(self,sel,offsite=True)
         
 

@@ -190,13 +190,13 @@ def set_browser(testid="none",testdesc="none"):
                         "public": "true", \
                         "job-name": testid +': '+ testdesc \
                     }
-        elif controller.testbrowser == "firefox4":
+        elif controller.testbrowser == "firefox3":
              sbrowser= { \
                         "username": sauce_auth.sauce_user,
                         "access-key": sauce_auth.sauce_key,\
-                        "os": "Windows 2008",\
+                        "os": "Windows 2003",\
                         "browser": "firefox",\
-                        "browser-version": "4", \
+                        "browser-version": "3", \
                         "max-duration": 480, \
                         "idle-timeout": 120, \
                         "public": "true", \
@@ -209,7 +209,7 @@ def set_browser(testid="none",testdesc="none"):
                         "access-key": sauce_auth.sauce_key,\
                         "os": "Windows 2003",\
                         "browser": "firefox",\
-                        "browser-version": "3.6", \
+                        "browser-version": "5", \
                         "max-duration": 480, \
                         "idle-timeout": 120, \
                         "public": "true", \
