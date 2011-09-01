@@ -112,7 +112,6 @@ def submit_video(self,sel,url,login=True):
         sel.click(testvars.WebsiteUI["Subtitle_Button"])
         sel.window_maximize()
         mslib.wait_for_element_present(self,sel,"css=form.main_video_form input#submit_video_field.main_video_form_field")
-        sel.wait_for_page_to_load(testvars.MSTestVariables["TimeOut"])
         sel.type("video_url", url)
         sel.click(testvars.WebsiteUI["Video_Submit_Button"])
         sel.wait_for_page_to_load(testvars.timeout)
