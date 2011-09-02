@@ -185,7 +185,7 @@ def set_browser(testid="none",testdesc="none"):
                         "os": "Linux",\
                         "browser": "firefox",\
                         "browser-version": "3.6", \
-                        "max-duration": 480, \
+                        "max-duration": 600, \
                         "idle-timeout": 120, \
                         "public": "true", \
                         "job-name": testid +': '+ testdesc \
