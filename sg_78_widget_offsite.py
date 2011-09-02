@@ -461,7 +461,9 @@ def make_new_subs(self,sel,subtextfile):
     widget.sync_video(self,sel,subtextfile,1,2)
     time.sleep(3)
     #Login
-    if sel.is_element_present("css=.unisubs-modal-login"): #Login
+    if sel.is_element_present("css=div div.unisubs-needLogin a"):
+        sel.click("css=div div.unisubs-needLogin a")
+        mslib.wait_for_element_present(self,sel,"css=.unisubs-modal-login")
         sel.click("css=.unisubs-log")
         widget.site_login_auth(self,sel)
         sel.select_window("null")
