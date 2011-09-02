@@ -87,8 +87,8 @@ class subgroup_80(unittest.TestCase):
         print test_video_url
         sel.open(test_video_url)
         sel.click(testvars.video_video_info)
-        mslib.wait_for_element_present(self,sel,testvars.comments_tab)
-        sel.click(testvars.comments_tab)
+        mslib.wait_for_element_present(self,sel,testvars.info_comments_tab)
+        sel.click(testvars.info_comments_tab)
         #Open the Original tab / then comments tab
 
         #Not logged in, enter a comment

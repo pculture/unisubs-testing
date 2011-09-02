@@ -60,6 +60,7 @@ teams_video_tab ="css=ul.inline_tabs li a[href*='videos']"
 
 history_tab = "css=div#languages-tab span.inline_text:contains('History')"
 comments_tab = "css=div#languages-tab span.inline_text:contains('Comments')"
+info_comments_tab = "css=div.hd ul.inline_tabs li a span.inline_text:contains('Comments')"
 transcripts_tab = "div#languages-tab css=.inline_text:contains('Subtitles')"
 
 #teams pages
