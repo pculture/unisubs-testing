@@ -49,10 +49,13 @@ class subgroup_78_pagedemo(unittest.TestCase):
         widget.goto_step(self,sel,step="2")
         widget.edit_text(self,sel,subtextfile)
         #Login
-        mslib.wait_for_element_present(self,sel,"css=.unisubs-modal-login")
-        sel.click("css=.unisubs-log")
-        widget.site_login_auth(self,sel)
-        sel.select_window("null")
+
+        if sel.is_element_present("css=div div.unisubs-needLogin a"):
+            sel.click("css=div div.unisubs-needLogin a")
+            mslib.wait_for_element_present(self,sel,"css=.unisubs-modal-login")
+            sel.click("css=.unisubs-log")
+            widget.site_login_auth(self,sel)
+            sel.select_window("null")
         widget.submit_sub_edits(self,sel,offsite=True)
 
     def test_690(self):
