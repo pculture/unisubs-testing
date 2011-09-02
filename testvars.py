@@ -29,6 +29,7 @@ WebsiteUI = {"Home":"css=a:contains('Miro Subs Alpha')", \
              "Login_menuitem":"css=.unisubs-createAccount" ,\
              "Logout_menuitem":"css=.unisubs-langmenuitem-content:contains('Logout')" , \
              "ChooseLanguage_menu":"css=.unisubs-tabText:contains('Choose language')" ,
+             "FeedBack_button": "css=.feedback_tab,"
              
           }
 
