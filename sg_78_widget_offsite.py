@@ -458,7 +458,7 @@ def make_new_subs(self,sel,subtextfile):
     # Transcribe
     widget.transcribe_video(self,sel,subtextfile)
     # Sync
-    widget.sync_video(self,sel,subtextfile,2,3)
+    widget.sync_video(self,sel,subtextfile,1,2)
     time.sleep(3)
     #Login
     if sel.is_element_present("css=.unisubs-modal-login"): #Login
