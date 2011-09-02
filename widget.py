@@ -695,7 +695,7 @@ def set_subs_complete(self,sel,done=True):
             if sel.is_element_present("css=.goog-checkbox-checked"):
                 sel.click("css=.goog-checkbox-checked")
         sel.click("css=.unisubs-green-button.unisubs-big")
-        time.sleep(3)
+        time.sleep(8)
 
         
 def submit_sub_edits(self,sel,offsite=False):
@@ -717,7 +717,6 @@ def submit_sub_edits(self,sel,offsite=False):
 
 
 def submit_thanks(self,sel):
-    time.sleep(3)
     if sel.is_element_present("css=div.unisubs-modal-completed a.unisubs-green-button"):
         sel.click("css=div.unisubs-modal-completed a.unisubs-green-button")
     else:

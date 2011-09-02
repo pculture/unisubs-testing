@@ -47,11 +47,12 @@ class subgroup_78_pagedemo(unittest.TestCase):
         sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].openMenu()')
         widget.starter_dialog_edit_orig(self,sel)
         widget.goto_step(self,sel,step="2")
-        widget.resync_video(self,sel,subtextfile)
-        if sel.is_element_present("css=.unisubs-modal-login"): #Login
-            sel.click("css=.unisubs-log")
-            widget.site_login_auth(self,sel)
-            sel.select_window("null")
+        widget.edit_text(self,sel,subtextfile)
+        #Login
+        mslib.wait_for_element_present(self,sel,"css=.unisubs-modal-login")
+        sel.click("css=.unisubs-log")
+        widget.site_login_auth(self,sel)
+        sel.select_window("null")
         widget.submit_sub_edits(self,sel,offsite=True)
 
     def test_690(self):
