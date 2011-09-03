@@ -311,7 +311,7 @@ class subgroup_64(unittest.TestCase):
         widget.set_subs_complete(self,sel,done=True)
         widget.submit_thanks(self,sel)
         mslib.wait_for_element_present(self,sel,testvars.video_video_info)
-        self.assertTrue(sel.is_element_present("css=ul#video-menu li a:contains('English') > span.done_percentage:contains('100')"))
+        self.assertTrue(sel.is_element_present("css=ul#subtitles-menu li a:contains('English') > span.done_percentage:contains('100')"))
        
       
  
@@ -357,7 +357,7 @@ class subgroup_64(unittest.TestCase):
         widget.set_subs_complete(self,sel,done=False)
         widget.submit_thanks(self,sel)
         mslib.wait_for_element_present(self,sel,testvars.video_video_info)
-        self.assertTrue(sel.is_element_present("css=ul#video-menu li a:contains('English') > span.done_percentage:contains('Lines')"))
+        self.assertTrue(sel.is_element_present("css=ul#subtitles-menu li a:contains('English') > span.done_percentage:contains('Lines')"))
                         
 
 # Close the browser, log errors, perform cleanup
