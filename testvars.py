@@ -3,7 +3,7 @@ import os
 import platform
 
 
-timeout = 20000
+timeout = 60000
 MSTestVariables = {"DataDirectory": os.path.join(os.getcwd(), "TestInput"), \
                    "TimeOut":timeout, \
                   }
