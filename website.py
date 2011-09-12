@@ -341,8 +341,8 @@ def verify_sub_upload(self,sel,sub_file,lang=""):
     """Verifies the uploaded subtitle text matches the text of a corresponing test file.
 
     """
-    mslib.wait_for_element_present(self,sel,'css=p.feedback-message:contains("Thank you for uploading")')
-    sel.click("css=a.close")  
+    mslib.wait_for_element_present(self,sel,"css=p.feedback-message:contains('Thank you')")
+    sel.click("css=div#upload_subs-div a.close")
     time.sleep(15)
     sel.refresh()
     time.sleep(3)

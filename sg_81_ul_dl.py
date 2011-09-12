@@ -42,9 +42,7 @@ class subgroup_81(unittest.TestCase):
         
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
-       
-            #get a video and open page
-            
+        #get a video and open page
         test_video_url = website.submit_random_youtube(self,sel)
         print test_video_url
         vid = test_video_url.split("/")[-2]
@@ -52,10 +50,9 @@ class subgroup_81(unittest.TestCase):
         sel.open(test_video_url)
         #Original is the default tab when video opened.
         sel.click(testvars.video_upload_subtitles)
-        time.sleep(3)
+        mslib.wait_for_element_present(self,sel,"css=div.msg_modal")
         self.assertTrue(sel.is_element_present("css=div.msg_modal a:contains('Login')"))
-        self.assertTrue(sel.is_element_present("css=div.msg_modal a[href*="+vid+"]"))
-        sel.click("css=div[id='upload_subs-div'] a.close")
+        sel.click("css=div#upload_subs-div a.close")
   
     def test_507(self):
         """Invalid or unsupported formats
