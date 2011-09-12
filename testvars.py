@@ -45,7 +45,7 @@ video_metadata = "css=ul.#video-menu.left_nav li a[href:contains('meta-')]"
 video_video_info = "css=ul#video-menu.left_nav li a:contains('Info')"
 ## action links
 video_upload_subtitles = "css=ul#video-menu.left_nav li.contribute a#upload-subtitles-link"
-video_add_to_team = "css=ul#video-menu.left_nav li.contribute a:contains('team')" #just a guess here.
+video_add_to_team = "css=ul#moderation-menu li div.sort_button span.sort_label:contains('Add video to team')"
 video_edit_subtitles = "css=div#transcripts-tab div.actions a#edit_subtitles_button"
 video_add_translation = "css=ul#video-menu.left_nav li.contribute a#add_translation"
 video_compare_revisions = "css=div#revisions-tab.action_buttons button.compare_versions_button"

@@ -85,8 +85,6 @@ class subgroup_88(unittest.TestCase):
         """
         sel = self.selenium
         sel.set_timeout(testvars.timeout)
-        #test data
-        self.fail("this test fails until add to team buttons added to video page")
         #login
         website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
         #create team
@@ -106,12 +104,12 @@ class subgroup_88(unittest.TestCase):
         #add video to team and verify values
         teamli = "add/video/"+team
 
-#### Fix when Add to Team back on teams page ####
+
 
                   
-##        sel.click(testvars.video_add_to_team)
+        sel.click(testvars.video_add_to_team)
 ##        sel.click_at("css=span.sort_label strong:contains('Add video')","")
-##        sel.click_at("css=a[href*='"+teamli+"']","")
+        sel.click_at("css=a[href*='"+teamli+"']","")
         
         sel.wait_for_page_to_load(testvars.timeout)
         print "verifying the inital add page"
