@@ -635,7 +635,7 @@ def feature_video(self,sel,action='Feature'):
     else:
         sel.click("css=ul#admin-menu.left_nav li a:contains('eature')")
         mslib.wait_for_element_present(self,sel,"css=ul#admin-menu.left_nav li a:contains('eature')")
-    vid_url = sel.get_attribute("css=ul#video-menu.left_nav li:nth-child(1) >  a@href7")
+    vid_url = sel.get_attribute("css=ul#video-menu.left_nav li:nth-child(1) >  a@href")
     return vid_url
 
 
