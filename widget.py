@@ -229,7 +229,7 @@ def select_video_language(self,sel,vid_lang="en",sub_lang="en-gb",from_lang='for
     else:
         mslib.wait_for_element_present(self,sel,testvars.create_lang_known) 
         
-        sel.select("select.to-language", "value=regexp:^"+str(sub_lang))
+        sel.select("css=select.to-language", "value=regexp:^"+str(sub_lang))
         print "subbing into: "+str(sub_lang)
         time.sleep(2)
         if sel.is_element_present("css=select.from-language") == True:
