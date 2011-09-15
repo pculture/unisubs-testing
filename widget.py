@@ -118,7 +118,7 @@ def starter_dialog_edit_orig(self,sel):
         ol = sel.get_text(testvars.create_lang_known)
         orig_lang = ol.split("in ")[1]
         print orig_lang
-        lc = sel.get_value("css=p select option:contains('"+orig_lang+"')")
+        lc = sel.get_value("css=select.to-language option:contains('"+orig_lang+"')")
         lang_code = re.sub("\d+$","",lc)
         select_video_language(self,sel,vid_lang=lang_code,sub_lang=lang_code)
     else:
@@ -170,7 +170,7 @@ def starter_dialog_translate_from_not_orig(self,sel,from_lang,to_lang='hr'):
     else:
         ol = sel.get_text(testvars.create_lang_known)
         orig_lang = ol.split("in ")[1]
-        lc = sel.get_value("css=p select option:contains('"+orig_lang+" ')")
+        lc = sel.get_value("css=select.to-language option:contains('"+orig_lang+" ')")
         lang_code = re.sub("\d+$","",lc)
     if lang_code == from_lang:
         self.fail("invalid test - from lang "+str(from_lang)+" is the same as the origi lang"+str(orig_lang))
@@ -211,7 +211,7 @@ def get_lang_cc(self,sel,language):
      
 
     """
-    lc = sel.get_value("css=p select option:contains('"+language+" ')")
+    lc = sel.get_value("css=select.to-language option:contains('"+language+" ')")
     lang_code = re.sub("\d+$","",lc) #gives only the letters of the value field.
     return lang_code
 
@@ -224,16 +224,16 @@ def select_video_language(self,sel,vid_lang="en",sub_lang="en-gb",from_lang='for
     if sel.is_element_present(testvars.create_lang_unknown): # Don't know the video lang so choose for 1st time subs.
         sel.select(testvars.create_lang_unknown +" + select", "value=regexp:^"+str(vid_lang))
         if sel.is_element_present(testvars.create_subtitle_into):
-            sel.select(testvars.create_subtitle_into +" + select", "value=regexp:^"+str(sub_lang))
+            sel.select("css=select.to-language", "value=regexp:^"+str(sub_lang))
         print "edit orig subs, orig: "+str(vid_lang)+" to: "+str(sub_lang)
     else:
         mslib.wait_for_element_present(self,sel,testvars.create_lang_known) 
         
-        sel.select(testvars.create_subtitle_into +" + select", "value=regexp:^"+str(sub_lang))
+        sel.select("select.to-language", "value=regexp:^"+str(sub_lang))
         print "subbing into: "+str(sub_lang)
         time.sleep(2)
-        if sel.is_element_present(testvars.create_translate_from+" + span select") == True:
-            sel.select(testvars.create_translate_from+" + span select", "value=regexp:^"+str(from_lang))
+        if sel.is_element_present("css=select.from-language") == True:
+            sel.select("css=select.translate-from", "value=regexp:^"+str(from_lang))
             print "selected video language, from: "+str(from_lang)
     time.sleep(1)
     sel.click("css=div.unisubs-modal-lang div a.unisubs-green-button:contains('Continue')")
