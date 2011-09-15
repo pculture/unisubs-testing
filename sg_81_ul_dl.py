@@ -272,6 +272,46 @@ class subgroup_81(unittest.TestCase):
             # check for Site Error notification and submit
             website.handle_error_page(self,sel,self.id())
 
+    def test_743(self):
+        """Upload subtitle files dxfp format.
+        
+        http://litmus.pculture.org/show_test.cgi?id=743
+        """
+        
+        sel = self.selenium
+        sel.set_timeout(testvars.MSTestVariables["TimeOut"])
+        
+        #get a video and open page
+        try:
+            website.SiteLogIn(self,sel,testvars.siteuser,testvars.passw)
+            test_video_url = website.submit_random_youtube(self,sel)
+            print test_video_url
+            sel.open(test_video_url)
+            
+            #Original is the default tab when video opened.
+            print "1. english dfxp upload"
+            sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_en_subs.dfxp")
+            sub_text = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_en_subs.txt")
+            website.upload_subtitles(self,sel,sub_file)
+            website.verify_sub_upload(self,sel,sub_text)
+
+            print "2. polish dfxp upload"
+            sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_pl_subs.dfxp")
+            sub_text = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_pl_subs.txt")
+            website.upload_subtitles(self,sel,sub_file,lang="pl")
+            website.verify_sub_upload(self,sel,sub_text, lang="Polish")
+
+            print "3. bengali dfxp upload"
+            sub_file = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_bn_subs.dfxp")
+            sub_text = os.path.join(testvars.MSTestVariables["DataDirectory"],"sg81_bn_subs.txt")
+            website.upload_subtitles(self,sel,sub_file,lang="bn")
+            website.verify_sub_upload(self,sel,sub_text, lang="Bengali")
+        finally:
+            # check for Site Error notification and submit
+            website.handle_error_page(self,sel,self.id())
+
+
+
 
 
 # Close the browser, log errors, perform cleanup 
