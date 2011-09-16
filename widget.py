@@ -233,7 +233,7 @@ def select_video_language(self,sel,vid_lang="en",sub_lang="en-gb",from_lang='for
         print "subbing into: "+str(sub_lang)
         time.sleep(2)
         if sel.is_element_present("css=select.from-language") == True:
-            sel.select("css=select.translate-from", "value=regexp:^"+str(from_lang))
+            sel.select("css=select.from-language", "value=regexp:^"+str(from_lang))
             print "selected video language, from: "+str(from_lang)
     time.sleep(1)
     sel.click("css=div.unisubs-modal-lang div a.unisubs-green-button:contains('Continue')")
