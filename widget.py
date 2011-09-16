@@ -146,7 +146,11 @@ def starter_dialog_translate_from_orig(self,sel,to_lang='hr'):
         time.sleep(5)
         ol = sel.get_text(testvars.create_lang_known)
         orig_lang = ol.split("in ")[1]
-        lc = sel.get_value("css=select.from-language option:contains('"+orig_lang+" ')")
+        if not sel.is_element_present("css=select.from-language option:contains('"+orig_lang+" ')"):
+            print "orig lang not transcribed - choosing other existing lang"
+            lc = sel.get_value("css=select.from-language option:nth:child(1)")
+        else:
+            lc = sel.get_value("css=select.from-language option:contains('"+orig_lang+" ')")
         lang_code = re.sub("\d+$","",lc) #gives only the letters of the value field.
         from_code = re.sub("\D","",lc)  #gives only the number - used in from pulldown.
         select_video_language(self,sel,sub_lang=to_lang,from_lang=from_code)
