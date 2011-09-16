@@ -65,7 +65,7 @@ info_comments_tab = "css=div.hd ul.inline_tabs li a span.inline_text:contains('C
 transcripts_tab = "div#languages-tab css=.inline_text:contains('Subtitles')"
 
 #teams pages
-vid_add_subs_button = "css=ul.big_list li:nth-child(1) > a:contains('Add Subtitles')"
+vid_add_subs_button = "css=ul.big_list li:nth-child(1) > div.info div.team-video-buttons-container a.blue_button"
 teams_save = "css=button span:contains('Save')"
 
 # Widget Vars
