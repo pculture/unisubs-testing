@@ -148,7 +148,7 @@ def starter_dialog_translate_from_orig(self,sel,to_lang='hr'):
         orig_lang = ol.split("in ")[1]
         if not sel.is_element_present("css=select.from-language option:contains('"+orig_lang+" ')"):
             print "orig lang not transcribed - choosing other existing lang"
-            lc = sel.get_value("css=select.from-language option:nth:child(1)")
+            lc = sel.get_value("css=select.from-language option")
         else:
             lc = sel.get_value("css=select.from-language option:contains('"+orig_lang+" ')")
         lang_code = re.sub("\d+$","",lc) #gives only the letters of the value field.
