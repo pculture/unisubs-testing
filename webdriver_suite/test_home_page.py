@@ -12,7 +12,7 @@ class TestHomePage(BaseTestCase):
     
     """
 
-    def test_feedback_tab(self):
+    def skiptest_feedback_tab(self):
         """Click feedback tab and verify tenderapp page displayed.
 
         For https://unisubs.sifterapp.com/projects/12298/issues/426162/comments
@@ -28,9 +28,12 @@ class TestHomePage(BaseTestCase):
         """Log in to site with admin site account.
         
         """
-        unisubs_page_obj = UnisubsPage(testsetup)
-        unisubs_page_obj.open_universal_subtitles()
-        unisubs_page_obj.log_in(testsetup.admin_user,testsetup.admin_pass)
+        try:
+            unisubs_pg = UnisubsPage(testsetup)
+            unisubs_pg.open_universal_subtitles()
+            unisubs_pg.log_in(testsetup.admin_user,testsetup.admin_pass)
+        except:
+            unisubs_pg.record_error()
         
 
         
