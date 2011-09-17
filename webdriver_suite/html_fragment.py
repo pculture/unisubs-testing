@@ -44,8 +44,11 @@ Created on Jun 21, 2010
 import re
 import time
 import base64
+from selenium.webdriver.support import ui
+from selenium.common.exceptions import NoSuchElementException
 
 http_regex = re.compile('https?://((\w+\.)+\w+\.\w+)')
+nums_regex = re.compile(r'(\D+)(\d+)')
 
 
 class HtmlFragment(object):
@@ -60,8 +63,8 @@ class HtmlFragment(object):
         self.base_url = testsetup.base_url
         self.browser = testsetup.browser
         self.timeout = testsetup.timeout
+        self.wait = ui.WebDriverWait(self.browser, self.timeout, poll_frequency=.5)
        
-    
 
     def click_by_css(self, element, wait_for_element=None):
         try:
@@ -77,7 +80,14 @@ class HtmlFragment(object):
     def type_by_css(self, element, text):
         elem = self.browser.find_element_by_css_selector(element)
         elem.send_keys(text)
-        
+
+    def get_text_by_css(self, element):
+        return self.browser.find_element_by_css_selector(element).text
+
+    def submit_form_text_by_css(self, element, text):
+        elem = self.browser.find_element_by_css_selector(element)
+        elem.send_keys(text)
+        elem.submit()    
 
     def is_element_present(self, element):
         elements_found = self.browser.find_elements_by_css_selector(element)
@@ -85,6 +95,42 @@ class HtmlFragment(object):
             return True
         else:
             return False
+
+    def is_element_visible(self, element):
+        if not self.is_element_present(element):
+            return False
+        else:
+            if element.is_displayed():
+                return True
+            else:
+                return False
+
+    def is_text_present(self, element, text):
+        try:
+            elements_found = self.browser.find_elements_by_css_selector(element)
+        except NoSuchElementException():
+            return False
+        if len(elements_found) > 1:
+            raise Exception(element +' exists on multiple places on the page, please be more specific')
+        else:
+            element_text = self.browser.find_element_by_css_selector(element).text
+            if str(element_text) == text:
+                return True
+            else:
+                return False
+
+    def verify_text_present(self, element, text):
+        elements_found = self.browser.find_elements_by_css_selector(element)
+        if len(elements_found) > 1:
+            raise Exception(element +' exists on multiple places on the page, please be more specific')
+        else:
+            element_text = self.browser.find_element_by_css_selector(element).text()
+            if str(element_text) == text:
+                return True
+            else:
+                self.record_error()
+                raise Exception('found:' +element_text+ 'but was expecting: '+text)
+                return False
                       
 
     def wait_for_element_present(self, element):
@@ -95,6 +141,41 @@ class HtmlFragment(object):
             if count == self.timeout / 1000:
                 self.record_error()
                 raise Exception(element + ' has not loaded')
+
+    def wait_for_element_not_present(self, element):
+        element_present = self.is_element_present
+        for i in range(60):
+            if element_present == True:
+                try:
+                    elem = self.browser.find_element_by_css_selector(element)
+                except NoSuchElementException():
+                    element_gone = True                
+            time.sleep(.5)
+       
+
+    def wait_for_element_not_visible(self,element):
+        for i in range(30):
+            try:
+                if not self.is_elment_visible(element): break
+            except: pass
+            time.sleep(1)
+        else:
+            self.record_error()
+            raise Exception(element + ' has not disappeared')
+
+
+    def get_absolute_url(self, url):
+        if url.startswith("http"):
+            full_url = url
+        else:
+            full_url = self.base_url + url
+        return full_url
+   
+    def open_page(self, url):
+        self.browser.get(self.get_absolute_url(url))
+        
+
+        
 ##
 ##    def wait_for_element_visible(self, element):
 ##        self.wait_for_element_present(element)
@@ -106,14 +187,7 @@ class HtmlFragment(object):
 ##                self.record_error()
 ##                raise Exception(element + " is not visible")
 ##
-##    def wait_for_element_not_visible(self, element):
-##        count = 0
-##        while self.is_element_visible(element):
-##            time.sleep(1)
-##            count += 1
-##            if count == self.timeout / 1000:
-##                self.record_error()
-##                raise Exception(element + " is still visible")
+
 
 
     def record_error(self):
@@ -126,7 +200,6 @@ class HtmlFragment(object):
 
         print '-------------------'
         print 'Error at ' + self.browser.current_url
-        print 'Page title ' + self.browser.title
         print '-------------------'
         filename = file_name + '_' + str(time.time()).split('.')[0] + '.png'
 
