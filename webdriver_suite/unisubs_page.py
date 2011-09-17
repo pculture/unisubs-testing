@@ -71,7 +71,7 @@ class UnisubsPage(HtmlFragment):
 
     def open_universal_subtitles(self):
         self.browser.get(self.base_url)
-    
+   
     def log_out(self):
         if self.is_element_present(self._LOGIN):
             print "already logged out"
