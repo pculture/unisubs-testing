@@ -1,8 +1,8 @@
 import unittest
 from base_test_case import BaseTestCase
 import testsetup
-from watch_page import WatchPage
-from search_results_page import SearchResultsPage
+from html.watch_page import WatchPage
+from html.search_results_page import SearchResultsPage
 
 
 class TestWatchPage(BaseTestCase):

@@ -3,7 +3,7 @@ from selenium.webdriver.common.keys import Keys
 import unittest
 from base_test_case import BaseTestCase
 import testsetup
-from unisubs_page import UnisubsPage
+from html.unisubs_page import UnisubsPage
 
 
 class TestHomePage(BaseTestCase):
