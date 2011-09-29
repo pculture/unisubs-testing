@@ -19,7 +19,6 @@ class TestNYTimesPagedemoPage(BaseTestCase):
         
         nyt_pg = OffsitePage()
         nyt_pg.open_page(self._URL)
-        nyt_pg.scroll_page_to_video(self._SUBS_WIDGET)
         nyt_pg.pause_playback_when_subs_appear(0)
         self.assertTrue(nyt_pg.displays_subs_in_correct_position)
         

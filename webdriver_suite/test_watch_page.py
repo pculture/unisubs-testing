@@ -20,12 +20,10 @@ class TestWatchPage(BaseTestCase):
         """
         watch_pg = WatchPage()
         results_pg = SearchResultsPage()
-        try:
-            watch_pg.open_watch_page()
-            watch_pg.basic_search(self._SIMPLE_SEARCH_TEXT)
-            self.assertTrue(results_pg.search_has_results())
-        except:
-            watch_pg.record_error()
+
+        watch_pg.open_watch_page()
+        watch_pg.basic_search(self._SIMPLE_SEARCH_TEXT)
+        self.assertTrue(results_pg.search_has_results())
             
 
     def test_watch_page_no_results(self):
