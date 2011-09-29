@@ -11,6 +11,4 @@ class BaseTestCase(unittest.TestCase):
       
     def tearDown(self):
         print " - completed: ",self.id()
-        testsetup.browser.quit()
-        
         
