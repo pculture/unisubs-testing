@@ -83,8 +83,8 @@ class UnisubsPage(HtmlFragment):
             self.logout
         
         self.click_by_css(self._LOGIN, self._SITE_LOGIN_USER_ID)
-        self.type_by_css(self._SITE_LOGIN_USER_ID, username)
-        self.type_by_css(self._SITE_LOGIN_USER_PW, password)
+        self.type_by_css(self._SITE_LOGIN_USER_ID, self.username)
+        self.type_by_css(self._SITE_LOGIN_USER_PW, self.password)
         self.click_by_css(self._SITE_LOGIN_SUBMIT, self._USER_MENU)
 
     def click_feeback(self):

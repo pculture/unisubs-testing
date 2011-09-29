@@ -17,7 +17,7 @@ class TestHomePage(BaseTestCase):
 
         For https://unisubs.sifterapp.com/projects/12298/issues/426162/comments
         """
-        unisubs_page_obj = UnisubsPage(testsetup)
+        unisubs_page_obj = UnisubsPage()
         unisubs_page_obj.open_universal_subtitles()
         unisubs_page_obj.log_out()
         unisubs_page_obj.click_feedback()
@@ -29,7 +29,7 @@ class TestHomePage(BaseTestCase):
         
         """
         try:
-            unisubs_pg = UnisubsPage(testsetup)
+            unisubs_pg = UnisubsPage()
             unisubs_pg.open_universal_subtitles()
             unisubs_pg.log_in(testsetup.admin_user,testsetup.admin_pass)
         except:

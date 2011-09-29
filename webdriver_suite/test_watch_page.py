@@ -18,8 +18,8 @@ class TestWatchPage(BaseTestCase):
         """Simple search from the Watch page.
         
         """
-        watch_pg = WatchPage(testsetup)
-        results_pg = SearchResultsPage(testsetup)
+        watch_pg = WatchPage()
+        results_pg = SearchResultsPage()
         try:
             watch_pg.open_watch_page()
             watch_pg.basic_search(self._SIMPLE_SEARCH_TEXT)
@@ -32,8 +32,8 @@ class TestWatchPage(BaseTestCase):
         """No results search from the Watch page.
         
         """
-        watch_pg = WatchPage(testsetup)
-        results_pg = SearchResultsPage(testsetup)
+        watch_pg = WatchPage()
+        results_pg = SearchResultsPage()
         try:
             watch_pg.open_watch_page()
             watch_pg.basic_search(self._NO_RESULTS_SEARCH_TEXT)
