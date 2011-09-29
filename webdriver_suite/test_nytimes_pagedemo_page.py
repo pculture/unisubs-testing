@@ -6,15 +6,14 @@ from html.offsite_page import OffsitePage
 
 
 class TestNYTimesPagedemoPage(BaseTestCase):
-    """
-    Tests for Unisubs home page basic layout and functionality.
+    """NY Times pagedemo page tests.
     
     """
     _URL = "pagedemo/nytimes_youtube_embed"
     _SUBS_WIDGET = "div.entry-content span.unisubs-widget"
 
     def test_nytimes_sub_playback_position(self):
-        """Log in to site with admin site account.
+        """Open NY Times page, start playback, pause when subs appear and verify correct position.
         
         """
         
