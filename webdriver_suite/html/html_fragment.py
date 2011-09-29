@@ -47,6 +47,8 @@ import base64
 from selenium.webdriver.support import ui
 from selenium.common.exceptions import NoSuchElementException
 
+import testsetup
+
 http_regex = re.compile('https?://((\w+\.)+\w+\.\w+)')
 nums_regex = re.compile(r'(\D+)(\d+)')
 
@@ -55,13 +57,14 @@ class HtmlFragment(object):
     """
     Base class for all Pages
     """
-    def __init__(self, testsetup):
+    def __init__(self):
         '''
     Constructor
     '''
-        self.testsetup = testsetup
         self.base_url = testsetup.base_url
         self.browser = testsetup.browser
+        self.username = testsetup.admin_user
+        self.password = testsetup.admin_pass
         self.timeout = testsetup.timeout
         self.wait = ui.WebDriverWait(self.browser, self.timeout, poll_frequency=.5)
        
@@ -84,13 +87,19 @@ class HtmlFragment(object):
     def get_text_by_css(self, element):
         return self.browser.find_element_by_css_selector(element).text
 
+    def get_size_by_css(self, element):
+        return self.browser.find_element_by_css_selector(element).size
+
     def submit_form_text_by_css(self, element, text):
         elem = self.browser.find_element_by_css_selector(element)
         elem.send_keys(text)
         elem.submit()    
 
     def is_element_present(self, element):
-        elements_found = self.browser.find_elements_by_css_selector(element)
+        try:
+            elements_found = self.browser.find_elements_by_css_selector(element)
+        except NoSuchElementException():
+            return False
         if len(elements_found) > 0:
             return True
         else:
@@ -131,17 +140,18 @@ class HtmlFragment(object):
                 self.record_error()
                 raise Exception('found:' +element_text+ 'but was expecting: '+text)
                 return False
-                      
+
 
     def wait_for_element_present(self, element):
-        count = 0
-        while not self.browser.find_element_by_css_selector(element):
-            time.sleep(1)
-            count += 1
-            if count == self.timeout / 1000:
-                self.record_error()
-                raise Exception(element + ' has not loaded')
+        for i in range(60):
+            try:
+                time.sleep(1)
+                if self.is_element_present(element): break
+            except: pass
+        else:
+            raise Exception("Element %s is not present." % element)                   
 
+  
     def wait_for_element_not_present(self, element):
         element_present = self.is_element_present
         for i in range(60):
@@ -173,22 +183,20 @@ class HtmlFragment(object):
    
     def open_page(self, url):
         self.browser.get(self.get_absolute_url(url))
-        
-
-        
-##
-##    def wait_for_element_visible(self, element):
-##        self.wait_for_element_present(element)
-##        count = 0
-##        while not self.is_element_visible(element):
-##            time.sleep(1)
-##            count += 1
-##            if count == self.timeout / 1000:
-##                self.record_error()
-##                raise Exception(element + " is not visible")
-##
 
 
+    def go_back(self):
+        self.browser.back()
+
+    def page_down(self, elements):
+        """elements are a list not a single element to try to page down.
+
+        """
+        for x in elements:
+            if self.is_element_present(x):
+                elem = self.browser.find_element_by_css_selector(x)
+                break        
+        elem.send_keys("PAGE_DOWN")
 
     def record_error(self):
         """
