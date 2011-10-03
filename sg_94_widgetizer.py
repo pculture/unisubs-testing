@@ -65,7 +65,7 @@ class subgroup_94_pagedemo(unittest.TestCase):
         sel.wait_for_page_to_load(testvars.timeout)
         sel.window_maximize()
         sel.click("link=Widgetize it!")
-        mslib.wait_for_element_present(self,sel,"div.unisubs-videoTab a.unisubs-subtitleMeLink")
+        mslib.wait_for_element_present(self, sel, "div.unisubs-videoTab a.unisubs-subtitleMeLink span.unisubs-tabTextchoose")
         time.sleep(5)
         sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].pause()')
         sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].play()')
@@ -83,11 +83,11 @@ class subgroup_94_pagedemo(unittest.TestCase):
         """
         test_id = 739
         sel = self.selenium
-        testpage = "/boingboing_widgetizer"
+        testpage = "/pagedemo/boingboing_widgetizer"
         sel.open(testpage)
         sel.wait_for_page_to_load(testvars.timeout)
         sel.window_maximize()
-        mslib.wait_for_element_present(self,sel,"css=div.unisubs-videoTab:nth-child(3) > a.unisubs-subtitleMeLink")
+        mslib.wait_for_element_present(self,sel,"css=body div.unisubs-videoTab:nth-child(3) > a.unisubs-subtitleMeLink span.unisubs-tabTextchoose")
         time.sleep(5)
         sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[2].play()')
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_offsite"])
@@ -109,7 +109,7 @@ class subgroup_94_pagedemo(unittest.TestCase):
         sel.open(testpage)
         sel.wait_for_page_to_load(testvars.timeout)
         sel.window_maximize()
-        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+        mslib.wait_for_element_present(self, sel, "div.unisubs-videoTab a.unisubs-subtitleMeLink span.unisubs-tabTextchoose")
         time.sleep(5)
         sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].play()')
         mslib.wait_for_element_present(self,sel,testvars.WidgetUI["Current_playing_offsite"])
@@ -162,7 +162,7 @@ class subgroup_94_mcsite(unittest.TestCase):
         test_page = selvars.set_unisubs_mc_page(self,mc_page)
         sel.open(test_page)
         sel.wait_for_page_to_load(testvars.timeout)
-        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+        mslib.wait_for_element_present(self,sel,"body#video_page div.unisubs-videoTab:nth-child(1) >  a.unisubs-subtitleMeLink span.unisubs-tabTextchoose")
         time.sleep(3)
         sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[0].openMenu()')
         time.sleep(2)
@@ -192,7 +192,7 @@ class subgroup_94_mcsite(unittest.TestCase):
         test_page = selvars.set_unisubs_mc_page(self,mc_page)
         sel.open(test_page)
         sel.wait_for_page_to_load(testvars.timeout)
-        mslib.wait_for_element_present(self,sel,testvars.WebsiteUI["SubtitleMe_menu"])
+        mslib.wait_for_element_present(self, sel,"body#video_page div.unisubs-videoTab:nth-child(2) >  a.unisubs-subtitleMeLink span.unisubs-tabTextchoose")
         time.sleep(3)
         sel.get_eval('this.browserbot.getUserWindow().unisubs.widget.Widget.getAllWidgets()[1].openMenu()')
         time.sleep(2)
