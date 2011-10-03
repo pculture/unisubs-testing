@@ -15,7 +15,7 @@ class SearchPage(UnisubsPage):
 
 
     def open_search_page(self):
-        self.open_unisubs_page(self._URL)
+        self.open_page(self._URL)
     
     def basic_search(self,search_term):
         self.submit_form_text_by_css(self._SEARCH, search_term)

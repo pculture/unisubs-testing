@@ -153,22 +153,21 @@ class HtmlFragment(object):
 
   
     def wait_for_element_not_present(self, element):
-        element_present = self.is_element_present
         for i in range(60):
-            if element_present == True:
-                try:
-                    elem = self.browser.find_element_by_css_selector(element)
-                except NoSuchElementException():
-                    element_gone = True                
-            time.sleep(.5)
+            try:
+                time.sleep(1)
+                if self.is_element_present(element) == False: break
+            except: pass
+        else:
+            raise "%s is still present" % element
        
 
     def wait_for_element_not_visible(self,element):
         for i in range(30):
             try:
-                if not self.is_elment_visible(element): break
-            except: pass
-            time.sleep(1)
+                time.sleep(1)
+                self.browser.find_elements_by_css_selector(element).is_displayed()
+            except: break
         else:
             self.record_error()
             raise Exception(element + ' has not disappeared')

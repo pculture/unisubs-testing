@@ -21,7 +21,7 @@ class SearchResultsPage(SearchPage):
     _VIEWS_MONTH_SORT = "div#sidebar ul li a[value=month_views]"
     _VIEWS_TOTAL_SORT = "div#sidebar ul li a[value=total_views]"
 
-    _ORIG_LANG_RESULTS_COUNT = "div#sidebar ul li:nth-child(%s) > a span"
+    FIRST_SEARCH_RESULT = "ul.video_list li a"
 
 
    
@@ -34,13 +34,9 @@ class SearchResultsPage(SearchPage):
         
     def search_has_results(self):
         self.wait_for_element_not_present(self._SEARCHING_INDICATOR)
-        lang = self.get_text_by_css(self._ORIG_LANG_RESULTS_COUNT % '5')
-        num_matches = self.nums_regex.match(lang)
-        num_langs = int(num_matches.group(2))
-        if num_langs > 0:
+        if self.is_element_present(self.FIRST_SEARCH_RESULT):
             return True
         
-
     def sort_results(self, sort_by):
         pass
 
