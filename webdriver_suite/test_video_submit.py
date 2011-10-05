@@ -50,6 +50,13 @@ class TestHomePage(BaseTestCase):
 
         """
         url = "http://www.dailymotion.com/video/xlh9h1_fim-syndicat-des-apiculteurs-de-metz-environs_news"
+
+
+    def test_submit_youtube_video(self):
+        """Submit a video from DailyMotion.
+
+        """
+        url = "www.youtube.com/watch?v=WqJineyEszo"
  
 
     def test_submit_vimeo_video(self):
