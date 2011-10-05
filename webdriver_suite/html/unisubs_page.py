@@ -100,7 +100,7 @@ class UnisubsPage(HtmlFragment):
             self.click_by_css(self._DJANGO_LOGIN_SUBMIT)
             
     def django_admin_logout(self):
-        self.open(self._DJANGO_ADMIN_LOGOUT)
+        self.open_page(self._DJANGO_ADMIN_LOGOUT)
         
 
     def click_feeback(self):
