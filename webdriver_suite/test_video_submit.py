@@ -1,8 +1,5 @@
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 import unittest
 from base_test_case import BaseTestCase
-import testsetup
 from html.create_page import CreatePage
 from html.video_page import VideoPage
 from html.shared_actions import SharedActions
@@ -50,6 +47,7 @@ class TestHomePage(BaseTestCase):
 
         """
         url = "http://www.dailymotion.com/video/xlh9h1_fim-syndicat-des-apiculteurs-de-metz-environs_news"
+        self.submit_and_verify_embed(url)
 
 
     def test_submit_youtube_video(self):
@@ -57,6 +55,7 @@ class TestHomePage(BaseTestCase):
 
         """
         url = "www.youtube.com/watch?v=WqJineyEszo"
+        self.submit_and_verify_embed(url)
  
 
     def test_submit_vimeo_video(self):

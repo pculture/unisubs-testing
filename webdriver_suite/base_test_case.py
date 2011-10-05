@@ -1,7 +1,5 @@
 import unittest
-import logging
-from selenium import webdriver
-import testsetup
+
 
 class BaseTestCase(unittest.TestCase):       
 
