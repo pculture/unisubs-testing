@@ -66,6 +66,10 @@ class VideoPage(UnisubsPage):
         url_parts = urlsplit(permalink).path
         urlfrag = url_parts.split('/')[3]
         return urlfrag
+
+    def video_embed_present(self):
+        if self.is_element_present(self._EMBEDDED_VIDEO):
+            return True
     
 
         
