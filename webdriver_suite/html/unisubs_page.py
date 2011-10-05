@@ -35,9 +35,9 @@
 #
 # ***** END LICENSE BLOCK *****
 
-from html_fragment import HtmlFragment
+from page import Page
 
-class UnisubsPage(HtmlFragment):
+class UnisubsPage(Page):
     """
      Unisubs page contains common web elements found across
      all Universal Subtitles pages. Every new page class is derived from
@@ -61,18 +61,6 @@ class UnisubsPage(HtmlFragment):
     _DJANGO_LOGIN_SUBMIT = "form#login-form div.submit-row input"
     _DJANGO_ADMIN_LOGOUT = "/admin/logout"
 
-
-    @property
-    def is_the_current_page(self):
-        page_title = self.browser.title()
-        if re.search(self._page_title, page_title) is None:
-            self.record_error()
-            try:
-                raise Exception("Expected page title to be: '" + self._page_title + "' but it was: '" + page_title + "'")
-            except Exception:
-                raise Exception('Expected page title does not match actual page title.')
-        else:
-            return True
 
     def open_universal_subtitles(self):
         self.browser.get(self.base_url)

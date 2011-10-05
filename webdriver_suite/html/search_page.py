@@ -19,8 +19,3 @@ class SearchPage(UnisubsPage):
     
     def basic_search(self,search_term):
         self.submit_form_text_by_css(self._SEARCH, search_term)
-            
-            
-        
-        
-    
