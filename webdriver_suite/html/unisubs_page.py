@@ -95,7 +95,6 @@ class UnisubsPage(HtmlFragment):
 
     def django_admin_login(self):
         if self.is_element_present(self._DJANGO_LOGIN_USER_ID):
-            self.click_by_css(self._DJANGO_LOGIN, self._DJANGO_LOGIN_USER_ID)
             self.type_by_css(self._DJANGO_LOGIN_USER_ID, self.username)
             self.type_by_css(self._DJANGO_LOGIN_USER_PW, self.password)
             self.click_by_css(self._DJANGO_LOGIN_SUBMIT)
