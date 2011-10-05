@@ -209,7 +209,7 @@ def verify_login(self,sel,username="sub_writer"):
 
 
 
-def verify_submitted_video(self,sel,vid_url,embed_type=""):
+def verify_submitted_video(self,sel,vid_url,embed_type=None):
     """
     Description: Verifies the contents of the main video page of a submitted video.
     Require's the original url and expected type of embed.  Assumes html5 video if not specified.
@@ -220,8 +220,8 @@ def verify_submitted_video(self,sel,vid_url,embed_type=""):
     """
     print " * verify submitted video, embed type"
     vid_embed = None
-    vid_span_css = "css=div[id=widget_div] span object"
-    vid_div_css = "css=div[id=widget_div] div object"
+    vid_span_css = "css=span.unisubs-videoplayer object"
+    vid_div_css = "css=span.unisubs- div object"
     html5_el = "css=div[id=widget_div] video"
     mslib.wait_for_element_present(self,sel,"css=div[id=widget_div]")
     if embed_type == "flow":
@@ -341,7 +341,7 @@ def verify_sub_upload(self,sel,sub_file,lang=""):
     """Verifies the uploaded subtitle text matches the text of a corresponing test file.
 
     """
-    mslib.wait_for_element_present(self,sel,"css=p.feedback-message:contains('Thank you')")
+    mslib.wait_for_element_present(self,sel,"css=p.feedback-message:contains('Your changes have been saved.')")
     sel.click("css=div#upload_subs-div a.close")
     time.sleep(15)
     sel.refresh()

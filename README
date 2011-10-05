@@ -1,3 +1,30 @@
 This the the testing repository for Universal Subtitles test automation with Selenium-RC.
 
 See http://develop.participatoryculture.org/index.php/UniversalSubtitlesQA#Automated_Testing for details
+
+
+To run the webdriver-based tests with virtual environment:
+
+1. Install virtualenv http://pypi.python.org/pypi/virtualenv
+
+2. (optional) download and download the virtualenv wrapper bash
+   functions http://www.doughellmann.com/projects/virtualenvwrapper/
+
+3. Create a virtual environment and activate it. Here is how to do it 
+   *without* the virtualenv wrapper. Run these commands from the parent 
+   of the unisubs directory created in #1:
+
+   $ virtualenv unisubsqa-env
+   $ source unisubsqa-env/bin/activate
+
+   If you're using the virtualenv wrapper (run from any directory):
+
+   $ mkvirtualenv unisubsqa
+   $ workon unisubsqa
+
+4. run:
+   $ easy_install -U setuptools
+   $ easy_install pip
+   $ cd deploy
+   # this is the unisubs directory you cloned from git, not the parent you created the virtualenv in.
+   $ pip install -r requirements.txt
