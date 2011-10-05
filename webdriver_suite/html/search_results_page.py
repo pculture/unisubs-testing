@@ -33,7 +33,7 @@ class SearchResultsPage(SearchPage):
             return False
         
     def search_has_results(self):
-        self.wait_for_element_not_present(self._SEARCHING_INDICATOR)
+        self.wait_for_element_not_visible(self._SEARCHING_INDICATOR)
         if self.is_element_present(self.FIRST_SEARCH_RESULT):
             return True
         
