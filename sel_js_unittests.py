@@ -2,7 +2,7 @@ import unittest
 import time
 import subprocess
 
-import selenium
+from selenium import selenium
 
 class JavascriptUnitTests(unittest.TestCase):
     """
