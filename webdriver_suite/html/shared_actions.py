@@ -12,9 +12,11 @@ class SharedActions(UnisubsPage):
     
 
     def delete_video(self, video_id):
-        self.open_page(self._ADMIN_DELETE_VID_URL % video_id)
-        self.django_admin_login()
-        self.django_admin_logout()       
+        unisubs_pg = UnisubsPage()
+        unisubs_pg.open_page(self._ADMIN_DELETE_VID_URL % video_id)
+        unisubs_pg.django_admin_login()
+        unisubs_pg.django_admin_logout()
+        del unisubs_pg
 
     def find_and_delete_existing_video(self, url):
         """Search for a video by url and delete via django admin ui.
