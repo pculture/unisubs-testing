@@ -159,7 +159,7 @@ class HtmlFragment(object):
                 if self.is_element_present(element) == False: break
             except: pass
         else:
-            raise "%s is still present" % element
+            raise Exception("%s is still present" % element)
        
 
     def wait_for_element_not_visible(self,element):
