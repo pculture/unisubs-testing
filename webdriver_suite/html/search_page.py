@@ -1,6 +1,8 @@
 #!/usr/bin/env python
+import time
 
 from unisubs_page import UnisubsPage
+from search_results_page import SearchResultsPage
 
 class SearchPage(UnisubsPage):
     """
@@ -18,4 +20,7 @@ class SearchPage(UnisubsPage):
         self.open_page(self._URL)
     
     def basic_search(self,search_term):
+        self.click_by_css(self._SEARCH)
+        time.sleep(1)
         self.submit_form_text_by_css(self._SEARCH, search_term)
+        return SearchResultsPage()

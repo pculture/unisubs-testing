@@ -1,8 +1,10 @@
 #!/usr/bin/env python
-from search_page import SearchPage
+
+from unisubs_page import UnisubsPage
+from video_page import VideoPage
 
 
-class SearchResultsPage(SearchPage):
+class SearchResultsPage(UnisubsPage):
     """
      Unisubs page contains common web elements found across
      all Universal Subtitles pages. Every new page class is derived from
@@ -21,7 +23,7 @@ class SearchResultsPage(SearchPage):
     _VIEWS_MONTH_SORT = "div#sidebar ul li a[value=month_views]"
     _VIEWS_TOTAL_SORT = "div#sidebar ul li a[value=total_views]"
 
-    FIRST_SEARCH_RESULT = "ul.video_list li a"
+    _FIRST_SEARCH_RESULT = "ul.video_list li a"
 
 
    
@@ -34,9 +36,18 @@ class SearchResultsPage(SearchPage):
         
     def search_has_results(self):
         self.wait_for_element_not_visible(self._SEARCHING_INDICATOR)
-        if self.is_element_present(self.FIRST_SEARCH_RESULT):
+        if self.is_element_present(self._FIRST_SEARCH_RESULT):
             return True
-        
+
+    def click_search_result(self, result_element):
+        self.click_by_css(result_element)
+        return VideoPage()
+
+    def click_first_search_result(self):
+        self.click_by_css(self._FIRST_SEARCH_RESULT)
+        return VideoPage()
+
+
     def sort_results(self, sort_by):
         pass
 
