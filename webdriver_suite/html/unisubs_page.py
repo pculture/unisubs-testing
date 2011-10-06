@@ -56,10 +56,7 @@ class UnisubsPage(Page):
     _SITE_LOGIN_USER_PW = "input#id_password"
     _SITE_LOGIN_SUBMIT  = "form button[value=login]"
 
-    _DJANGO_LOGIN_USER_ID = "input#id_username"
-    _DJANGO_LOGIN_USER_PW = "input#id_password"
-    _DJANGO_LOGIN_SUBMIT = "form#login-form div.submit-row input"
-    _DJANGO_ADMIN_LOGOUT = "/admin/logout"
+
 
 
     def open_universal_subtitles(self):
@@ -80,15 +77,6 @@ class UnisubsPage(Page):
         self.type_by_css(self._SITE_LOGIN_USER_PW, self.password)
         self.click_by_css(self._SITE_LOGIN_SUBMIT, self._USER_MENU)
 
-
-    def django_admin_login(self):
-        if self.is_element_present(self._DJANGO_LOGIN_USER_ID):
-            self.type_by_css(self._DJANGO_LOGIN_USER_ID, self.username)
-            self.type_by_css(self._DJANGO_LOGIN_USER_PW, self.password)
-            self.click_by_css(self._DJANGO_LOGIN_SUBMIT)
-            
-    def django_admin_logout(self):
-        self.open_page(self._DJANGO_ADMIN_LOGOUT)
         
 
     def click_feeback(self):
