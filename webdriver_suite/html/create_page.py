@@ -1,5 +1,7 @@
 #!/usr/bin/env python
+import time
 from unisubs_page import UnisubsPage
+from video_page import VideoPage
 
 
 class CreatePage(UnisubsPage):
@@ -10,13 +12,14 @@ class CreatePage(UnisubsPage):
  
     _URL = "videos/create" #%s is the unique onsite video id
 
-    _SINGLE_URL_ENTRY_BOX = "input#submit_video_field.main_video_form_field"
+    _SINGLE_URL_ENTRY_BOX = "input.main_video_form_field"
+    _INPUT_PREFOCUS = "input#submit_video_field.prefocus"
 
     _SUBMIT_BUTTON = "form.main_video_form button.green_button"
     _MULTI_SUBMIT_LINK = " div#submit_multiple_toggle a#btn_submit_multiple_toggle.toogle-create-form"
-    _YOUTUBE_USER_FIELD = "div#submit_multiple_videos form#bulk_create. ul li input#id_usernames"
-    _YOUTUBE_PAGE_FIELD = "div#submit_multiple_videos form#bulk_create. ul li input#id_youtube_user_url"
-    _FEED_URL = "div#submit_multiple_videos form#bulk_create. ul li input#id_feed_url"
+    _YOUTUBE_USER_FIELD = "div#submit_multiple_videos form#bulk_create ul li input#id_usernames"
+    _YOUTUBE_PAGE_FIELD = "div#submit_multiple_videos form#bulk_create ul li input#id_youtube_user_url"
+    _FEED_URL = "div#submit_multiple_videos form#bulk_create ul li input#id_feed_url"
     _SAVE_OPTION = "div#submit_multiple_videos form#bulk_create ul li input#id_save_feed"
     _SUBMIT_MULTI = "div#submit_multiple_videos form#bulk_create button.green_button"
 
@@ -25,11 +28,19 @@ class CreatePage(UnisubsPage):
 
 
     def open_create_page(self):
+        print self._URL
         self.open_page(self._URL)
 
     def submit_video(self, video_url):
+        self.wait_for_element_present(self._INPUT_PREFOCUS)
+        self.click_by_css("div h2.main_heading")
+        self.click_by_css(self._SINGLE_URL_ENTRY_BOX)
+        self.click_by_css(self._SINGLE_URL_ENTRY_BOX)
+        time.sleep(2)
+        print "Entering the url: %s" % self._URL
         self.type_by_css(self._SINGLE_URL_ENTRY_BOX, video_url)
         self.click_by_css(self._SUBMIT_BUTTON)
+        
 
     def submit_youtube_users_videos(self, youtube_usernames, save=False):
         """Submit 1 or several youtube user names.
@@ -45,7 +56,7 @@ class CreatePage(UnisubsPage):
         self.click_by_css(self._SUBMIT_MULTI)
 
     def submit_youtube_user_page(self, youtube_user_url, save=False):
-        """Submit videos from youtube user url.
+        """Submit videos from youtube user page url.
 
         Enter a youtube user's page url.
         """
@@ -69,7 +80,7 @@ class CreatePage(UnisubsPage):
 
     def multi_submit_successful(self, expected_error=False):
         if self.is_element_present(self._MULTI_SUBMIT_SUCCESS):
-            return True
+            return VideoPage()
         elif self.is_element_present(self._SUBMIT_ERROR):
                 error_msg = self.get_text_by_css(self._SUBMIT_ERROR)
                 if expected_error == True:
@@ -86,7 +97,7 @@ class CreatePage(UnisubsPage):
         elif expected_error == True and self.is_element_present(self._SUBMIT_ERROR):
             return error_msg
         else:
-            return True
+            return VideoPage()
 
     
         
