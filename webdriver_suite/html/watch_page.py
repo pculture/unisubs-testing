@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from unisubs_page import UnisubsPage
+from search_results_page import SearchResultsPage()
 
 class WatchPage(UnisubsPage):
     """
