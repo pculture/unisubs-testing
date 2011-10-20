@@ -148,6 +148,15 @@ class HtmlFragment(object):
         else:
             raise Exception("%s is still present" % text)
 
+    def wait_for_element_visible(self, element):
+        for i in range(60):
+            time.sleep(0.5)
+            if self.is_element_visible(element):
+                break
+        else:
+            self.record_error()
+            raise Exception(element + ' has not appeared')
+
     def wait_for_element_not_visible(self,element):
         for i in range(30):
             try:
