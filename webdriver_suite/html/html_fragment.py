@@ -2,7 +2,6 @@
 
 import re
 import time
-import base64
 from selenium.webdriver.support import ui
 from selenium.common.exceptions import NoSuchElementException
 
