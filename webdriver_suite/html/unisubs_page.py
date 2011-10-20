@@ -66,11 +66,12 @@ class UnisubsPage(Page):
         if self.is_element_present(self._LOGIN):
             print "already logged out"
         else:
-            self.click_by_css(self._LOGOUT, self._LOGIN)
+            logout_url = self.get_attr(self._LOGOUT, 'href')
+            self.open_page(logout_url)
 
     def log_in(self,username,password):
         if self.is_element_present(self._USER_MENU):
-            self.logout
+            self.log_out()
         
         self.click_by_css(self._LOGIN, self._SITE_LOGIN_USER_ID)
         self.type_by_css(self._SITE_LOGIN_USER_ID, self.username)
@@ -83,9 +84,3 @@ class UnisubsPage(Page):
         self.click_by_css(self._FEEDBACK_BUTTON)
 
 
-
-    
-            
-        
-        
-    
