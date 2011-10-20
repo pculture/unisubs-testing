@@ -45,7 +45,10 @@ def set_site():
     sets the value of test site if specified at the cmdline
     """   
     if controller.testsite:
-        site = "http://"+controller.testsite+".universalsubtitles.org"
+        if controller.testsite.startswith('http://'):
+            site = controller.testsite.rstrip('/')
+        else:
+            site = "http://"+controller.testsite+".universalsubtitles.org"
     else:
         site = "http://staging.universalsubtitles.org"
     return site
@@ -54,7 +57,7 @@ def set_widget_null_page():
     """
     sets the dev-null test page to use for testing (staging or dev), if not set, defaults to dev
     """   
-    if controller.testsite:
+    if controller.testsite and not controller.testsite.startswith('http://'):
         page = "unisubs_tests/"+controller.testsite+"-widget-null.html"
     else:
         page = "unisubs_tests/dev-widget-null.html"

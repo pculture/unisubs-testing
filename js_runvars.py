@@ -40,7 +40,10 @@ def set_site():
     sets the value of test site if specified at the cmdline
     """   
     if controller.testsite:
-        site = "http://"+controller.testsite+".universalsubtitles.org"
+        if controller.testsite.startswith('http://'):
+            site = controller.testsite.rstrip('/')
+        else:
+            site = "http://"+controller.testsite+".universalsubtitles.org"
     else:
         site = "http://staging.universalsubtitles.org"
     return site
