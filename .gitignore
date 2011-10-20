@@ -20,3 +20,6 @@ sauce-auth.py
 settings.py
 .DS_Store
 *~
+webdriver_suite/*.png
+selenium-server-standalone-*.jar
+testsetup_local.py
