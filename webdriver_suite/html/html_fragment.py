@@ -25,7 +25,7 @@ class HtmlFragment(object):
         self.password = testsetup.admin_pass
         self.timeout = testsetup.timeout
         self.wait = ui.WebDriverWait(self.browser, self.timeout, poll_frequency=.5)
-       
+
 
     def click_by_css(self, element, wait_for_element=None):
         try:
@@ -172,7 +172,20 @@ class HtmlFragment(object):
         else:
             full_url = self.base_url + url
         return full_url
-   
+
+
+    def get_attr(self, element, attr):
+        try:
+            elements_found = self.browser.find_elements_by_css_selector(element)
+        except NoSuchElementException:
+            raise Exception("%s does not exist on the page" % element)
+
+        if len(elements_found) > 1:
+            raise Exception(MULTIPLE_ELS % element)
+
+        return elements_found[0].get_attribute(attr)
+
+
     def open_page(self, url):
         self.browser.get(self.get_absolute_url(url))
 
@@ -189,7 +202,6 @@ class HtmlFragment(object):
                 elem = self.browser.find_element_by_css_selector(x)
                 break        
         elem.send_keys("PAGE_DOWN")
-
 
 
     def record_error(self):
