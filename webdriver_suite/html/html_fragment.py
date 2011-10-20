@@ -50,6 +50,16 @@ class HtmlFragment(object):
         if wait_for_element:
             self.wait_for_element_present(wait_for_element)
 
+    def click_link_partial_text(self, text, wait_for_element=None):
+        try:
+            elem = self.browser.find_element_by_partial_link_text(text)
+        except:
+            curr_page = self.record_error()
+            raise Exception(("partial link text: {0} not found on current page: {1}").format(str(text), str(curr_page)))
+        elem.click()
+        if wait_for_element:
+            self.wait_for_element_present(wait_for_element)
+
     def type_by_css(self, element, text):
         elem = self.browser.find_element_by_css_selector(element)
         elem.send_keys(text)
