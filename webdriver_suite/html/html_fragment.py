@@ -18,9 +18,7 @@ class HtmlFragment(object):
     Base class for all Pages
     """
     def __init__(self):
-        '''
-    Constructor
-    '''
+        '''Constructor'''
         self.base_url = testsetup.base_url
         self.browser = testsetup.browser
         self.username = testsetup.admin_user
