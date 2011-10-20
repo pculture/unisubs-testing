@@ -77,10 +77,8 @@ class HtmlFragment(object):
         if not self.is_element_present(element):
             return False
         else:
-            if element.is_displayed():
-                return True
-            else:
-                return False
+            return any([e.is_displayed() for e in
+                        self.browser.find_elements_by_css_selector(element)])
 
     def is_text_present(self, element, text):
         try:
