@@ -11,6 +11,8 @@ http_regex = re.compile('https?://((\w+\.)+\w+\.\w+)')
 nums_regex = re.compile(r'(\D+)(\d+)')
 
 
+MULTIPLE_ELS = '%s exists on multiple places on the page, please be more specific'
+
 class HtmlFragment(object):
     """
     Base class for all Pages
@@ -86,7 +88,7 @@ class HtmlFragment(object):
         except NoSuchElementException():
             return False
         if len(elements_found) > 1:
-            raise Exception(element +' exists on multiple places on the page, please be more specific')
+            raise Exception(MULTIPLE_ELS % element)
         else:
             element_text = self.browser.find_element_by_css_selector(element).text
             if str(element_text) == text:
@@ -97,7 +99,7 @@ class HtmlFragment(object):
     def verify_text_present(self, element, text):
         elements_found = self.browser.find_elements_by_css_selector(element)
         if len(elements_found) > 1:
-            raise Exception(element +' exists on multiple places on the page, please be more specific')
+            raise Exception(MULTIPLE_ELS % element)
         else:
             element_text = self.browser.find_element_by_css_selector(element).text()
             if str(element_text) == text:
