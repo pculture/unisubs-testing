@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-
 import re
 import time
+from selenium import webdriver
 from selenium.webdriver.support import ui
 from selenium.common.exceptions import NoSuchElementException
 
@@ -197,12 +197,16 @@ class HtmlFragment(object):
         """elements are a list not a single element to try to page down.
 
         """
-        for x in elements:
-            if self.is_element_present(x):
-                elem = self.browser.find_element_by_css_selector(x)
-                break        
+        if not isinstance(elements, basestring):
+            for x in elements:
+                if self.is_element_present(x):
+                    elem = self.browser.find_element_by_css_selector(x)
+                    break
+        else:
+            if self.is_element_present(elements):
+                elem = self.browser.find_element_by_css_selector(elements)
         elem.send_keys("PAGE_DOWN")
-
+       
 
     def record_error(self):
         """
