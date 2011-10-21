@@ -50,6 +50,7 @@ class CreatePage(UnisubsPage):
         
         self.click_by_css(self._MULTI_SUBMIT_LINK, self._YOUTUBE_USER_FIELD)
         self.page_down(self._HIDE_MULTI)
+        self.wait_for_element_visible(self._YOUTUBE_USER_FIELD)
         for name in youtube_usernames:
             self.type_by_css(self._YOUTUBE_USER_FIELD, name)
         if save == True:
@@ -64,6 +65,7 @@ class CreatePage(UnisubsPage):
         
         self.click_by_css(self._MULTI_SUBMIT_LINK, self._YOUTUBE_PAGE_FIELD)
         self.page_down(self._HIDE_MULTI)
+        self.wait_for_element_visible(self._YOUTUBE_PAGE_FIELD)
         self.type_by_css(self._YOUTUBE_PAGE_FIELD, name)
         if save == True:
             self.click_by_css(self._SAVE_OPTION)
@@ -75,6 +77,7 @@ class CreatePage(UnisubsPage):
         """       
         self.click_by_css(self._MULTI_SUBMIT_LINK, self._FEED_URL)
         self.page_down(self._HIDE_MULTI)
+        self.wait_for_element_visible(self._FEED_URL)
         self.type_by_css(self._FEED_URL, feed_url)
         if save == True:
             self.click_by_css(self._SAVE_OPTION)
