@@ -22,7 +22,7 @@ class CreatePage(UnisubsPage):
     _FEED_URL = "div#submit_multiple_videos form#bulk_create ul li input#id_feed_url"
     _SAVE_OPTION = "div#submit_multiple_videos form#bulk_create ul li input#id_save_feed"
     _SUBMIT_MULTI = "div#submit_multiple_videos form#bulk_create button.green_button"
-
+    _HIDE_MULTI = "div#submit_multiple_toggle"
     _SUBMIT_ERROR = "ul.errorlist li"
     _MULTI_SUBMIT_SUCCESS = "h2.success"
 
@@ -49,6 +49,7 @@ class CreatePage(UnisubsPage):
         """
         
         self.click_by_css(self._MULTI_SUBMIT_LINK, self._YOUTUBE_USER_FIELD)
+        self.page_down(self._HIDE_MULTI)
         for name in youtube_usernames:
             self.type_by_css(self._YOUTUBE_USER_FIELD, name)
         if save == True:
@@ -62,6 +63,7 @@ class CreatePage(UnisubsPage):
         """
         
         self.click_by_css(self._MULTI_SUBMIT_LINK, self._YOUTUBE_PAGE_FIELD)
+        self.page_down(self._HIDE_MULTI)
         self.type_by_css(self._YOUTUBE_PAGE_FIELD, name)
         if save == True:
             self.click_by_css(self._SAVE_OPTION)
@@ -72,6 +74,7 @@ class CreatePage(UnisubsPage):
 
         """       
         self.click_by_css(self._MULTI_SUBMIT_LINK, self._FEED_URL)
+        self.page_down(self._HIDE_MULTI)
         self.type_by_css(self._FEED_URL, feed_url)
         if save == True:
             self.click_by_css(self._SAVE_OPTION)
