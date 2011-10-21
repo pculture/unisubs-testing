@@ -1,4 +1,4 @@
 testsauce = False
 testport = None
-testsite = "dev"
+testsite = "staging"
 testbrowser = "firefox"
