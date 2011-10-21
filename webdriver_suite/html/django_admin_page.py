@@ -57,13 +57,13 @@ class DjangoAdminPage(UnisubsPage):
     def delete_video_feed(self, url):
         self.open_page(self._URL)
         self.django_admin_login()
-        self.page_down(self._VIDEOS_LINK)
+        self.page_down([self._VIDEOS_LINK])
         self.click_link_text("Video feeds")
         if self.is_text_present(url):
             self.click_link_text(url)
             self.click_link_text("Delete")
             self.click_by_css("form div input")
-            self.django_admin_logout
+            self.django_admin_logout()
         
         
             
