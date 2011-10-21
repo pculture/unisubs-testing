@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import re
 import time
+import selenium
 from selenium import webdriver
 from selenium.webdriver.support import ui
 from selenium.common.exceptions import NoSuchElementException
