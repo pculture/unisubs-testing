@@ -36,7 +36,7 @@ class TestHomePage(BaseTestCase):
         dj_admin.delete_video_feed(feedurl)       
         create_pg = CreatePage()
         create_pg.open_create_page()
-        create_pg.submit_youtube_users_videos(url, save=True)
+        create_pg.submit_youtube_users_videos(feedurl, save=True)
         self.assertTrue(create_pg.multi_submit_successful)
 
     def bulk_submit_videos_from_youtube_page(self, youtube_page_url):
@@ -46,7 +46,7 @@ class TestHomePage(BaseTestCase):
         dj_admin.delete_video_feed(feedurl)       
         create_pg = CreatePage()
         create_pg.open_create_page()
-        create_pg.submit_youtube_user_page(youtube_page_url, save=True)
+        create_pg.submit_youtube_user_page(feedurl, save=True)
         self.assertTrue(create_pg.multi_submit_successful)
         
 
@@ -136,7 +136,7 @@ class TestHomePage(BaseTestCase):
 
         """
         youtube_user = "croatiadivers"
-        self.bulk_submit_videos_by_feed(youtube_user)              
+        self.bulk_submit_videos_from_youtube_user(youtube_user)            
 
     def test_bulk_submit_large_dailymotion_feed(self):
         """Submit a very large DailyMotion Feed.

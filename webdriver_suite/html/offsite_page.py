@@ -5,8 +5,8 @@ class OffsitePage(UnisubsPage):
     """Main page for all offsite testing to drive playback and menus.
 
     """
-    _CAPTIONS = "span.unisubs-widget span.unisubs-captionSpan"
-    _WIDGET_MENU = "div.cleanslate span.unisubs-tabTextchoose"
+    _CAPTIONS = "span.unisubs-captionSpan"
+    _WIDGET_MENU = "span.unisubs-tabTextchoose"
     
     def start_playback(self, video_position):
         self.browser.execute_script("unisubs.widget.Widget.getAllWidgets()[%s].play()" % video_position)

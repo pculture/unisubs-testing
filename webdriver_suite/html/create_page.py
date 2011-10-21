@@ -66,7 +66,7 @@ class CreatePage(UnisubsPage):
         self.click_by_css(self._MULTI_SUBMIT_LINK, self._YOUTUBE_PAGE_FIELD)
         self.page_down(self._HIDE_MULTI)
         self.wait_for_element_visible(self._YOUTUBE_PAGE_FIELD)
-        self.type_by_css(self._YOUTUBE_PAGE_FIELD, name)
+        self.type_by_css(self._YOUTUBE_PAGE_FIELD, youtube_user_url)
         if save == True:
             self.click_by_css(self._SAVE_OPTION)
         self.click_by_css(self._SUBMIT_MULTI)
