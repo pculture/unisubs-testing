@@ -15,7 +15,7 @@ class SearchResultsPage(UnisubsPage):
 
     _PAGE_HEADING = "h2.search-header"
     _NO_RESULTS = "div#main_col ul.video_list h3"
-    _SEARCHING_INDICATOR = "div img[href*='ajax-loader']"
+    _SEARCHING_INDICATOR = "img.placeholder"
     _SORT_HEADING = "div#sidebar h2"
     _LANGUAGES_SORT = "div#sidebar ul li a[value=languages_count]"
     _VIEWS_TODAY_SORT = "div#sidebar ul li a[value=today_views]"
@@ -32,7 +32,7 @@ class SearchResultsPage(UnisubsPage):
             return False
         
     def search_has_results(self):
-        time.sleep(3)
+        time.sleep(2)
         self.wait_for_element_not_visible(self._SEARCHING_INDICATOR)
         if self.is_element_present(self._FIRST_SEARCH_RESULT):
             return True
