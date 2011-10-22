@@ -6,14 +6,14 @@ from html.offsite_page import OffsitePage
 
 
 class TestGapminderPage(BaseTestCase):
-    """NY Times pagedemo page tests.
+    """Gapminder pagedemo page tests.
     
     """
     _URL = "pagedemo/gapminder"
     _SUBS_WIDGET = "div.entry-content span.unisubs-widget"
 
     def test_gapminder_sub_playback_position(self):
-        """Open NY Times page, start playback, pause when subs appear and verify correct position.
+        """Open Gapminder page, start playback, pause when subs appear and verify correct position.
         
         """
         
