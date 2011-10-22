@@ -16,13 +16,10 @@ class TestBlogYouTubePage(BaseTestCase):
         """Open YouTube Blog Page, start playback, pause when subs appear and verify correct position.
         
         """
-        try:
-            yt_pg = OffsitePage()
-            yt_pg.open_page(self._URL)
-            yt_pg.pause_playback_when_subs_appear(0)
-            self.assertTrue(yt_pg.displays_subs_in_correct_position)
-        except:
-            yt_pg.record_error()
+        yt_pg = OffsitePage()
+        yt_pg.open_page(self._URL)
+        yt_pg.pause_playback_when_subs_appear(0)
+        self.assertTrue(yt_pg.displays_subs_in_correct_position)
         
 
 if __name__ == "__main__":
