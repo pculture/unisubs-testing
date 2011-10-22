@@ -5,7 +5,7 @@ from html.create_page import CreatePage
 from html.video_page import VideoPage
 from html.django_admin_page import DjangoAdminPage
 
-class TestHomePage(BaseTestCase):
+class TestSubmitVideoPage(BaseTestCase):
     """
     Tests for Unisubs home page basic layout and functionality.
     
