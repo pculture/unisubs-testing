@@ -366,7 +366,7 @@ def sync_video(self,sel,sub_file,start_delay=3,sub_int=2,step="Continue"):
     time.sleep(start_delay)
     #start syncing   
     
-    for i,line in enumerate(open(sub_file)):
+    for i,line in enumerate(codecs.open(sub_file)):
         x=i+1
         sel.focus(testvars.WidgetUI["Sync_sub"])
         sel.click_at(testvars.WidgetUI["Sync_sub"],"")
@@ -402,7 +402,7 @@ def edit_text(self,sel,subtextfile,new_text=""):
     sel.click("css=.unisubs-activestep") #reset the list to the top of the page
     mslib.wait_for_video_to_buffer(self,sel)
    
-    for i,line in enumerate(open(subtextfile)):
+    for i,line in enumerate(codecs.open(subtextfile)):
         x = i+1
         sub_cell = "css=ul.unisubs-titlesList li:nth-child("+str(x)+")"       
         if sel.is_element_present(sub_cell) == False:
@@ -582,7 +582,7 @@ def hold_down_delay_sub(self,sel,sub_file,delay_time=2,hold_time=.75, sync_time=
     time.sleep(delay_time)
   
     sub_li = 1
-    for line in open(sub_file):
+    for line in codecs.open(sub_file):
         sub_cell_start_time = "css=li:nth-child("+str(sub_li)+") > .unisubs-timestamp span span.unisubs-timestamp-time"
         old_time = sel.get_text(sub_cell_start_time)
         # 40 is the key code for down arrow key
