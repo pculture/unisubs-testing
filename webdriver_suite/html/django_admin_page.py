@@ -15,7 +15,7 @@ class DjangoAdminPage(UnisubsPage):
     _DJANGO_LOGIN_SUBMIT = "form#login-form div.submit-row input"
     _DJANGO_ADMIN_LOGOUT = "/admin/logout"
     _ADMIN_DELETE_VID_URL = "/videos/%s/staff/delete"
-    _VIDEOS_LINK = "th a[href*=/videos/video]"
+    _FOOTER = "div#footer"
     
 
     def open_django_admin_page_from_site_link(self):
@@ -57,9 +57,10 @@ class DjangoAdminPage(UnisubsPage):
     def delete_video_feed(self, url):
         self.open_page(self._URL)
         self.django_admin_login()
-        self.page_down([self._VIDEOS_LINK])
+        self.wait_for_element_present(self._FOOTER)
+        self.page_down(self._FOOTER)
         self.click_link_text("Video feeds")
-        if self.is_text_present(url):
+        if self.is_text_present("td", url):
             self.click_link_text(url)
             self.click_link_text("Delete")
             self.click_by_css("form div input")

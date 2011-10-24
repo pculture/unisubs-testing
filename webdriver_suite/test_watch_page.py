@@ -19,10 +19,8 @@ class TestWatchPage(BaseTestCase):
         
         """
         watch_pg = WatchPage()
-        results_pg = SearchResultsPage()
-
         watch_pg.open_watch_page()
-        watch_pg.basic_search(self._SIMPLE_SEARCH_TEXT)
+        results_pg = watch_pg.basic_search(self._SIMPLE_SEARCH_TEXT)
         self.assertTrue(results_pg.search_has_results())
             
 
@@ -31,13 +29,12 @@ class TestWatchPage(BaseTestCase):
         
         """
         watch_pg = WatchPage()
-        results_pg = SearchResultsPage()
         try:
             watch_pg.open_watch_page()
-            watch_pg.basic_search(self._NO_RESULTS_SEARCH_TEXT)
+            results_pg = watch_pg.basic_search(self._NO_RESULTS_SEARCH_TEXT)
             self.assertTrue(results_pg.search_has_no_results())
         except:
-            watch_pg.record_error()
+            results_pg.record_error()
         
 
 if __name__ == "__main__":

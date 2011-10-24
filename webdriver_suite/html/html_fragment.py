@@ -90,7 +90,7 @@ class HtmlFragment(object):
             return any([e.is_displayed() for e in
                         self.browser.find_elements_by_css_selector(element)])
 
-    def is_text_present(self, element, text):
+    def is_unique_text_present(self, element, text):
         try:
             elements_found = self.browser.find_elements_by_css_selector(element)
         except NoSuchElementException():
@@ -100,6 +100,17 @@ class HtmlFragment(object):
         else:
             element_text = self.browser.find_element_by_css_selector(element).text
             if str(element_text) == text:
+                return True
+            else:
+                return False
+            
+    def is_text_present(self, element, text):
+        try:
+            elements_found = self.browser.find_elements_by_css_selector(element)
+        except NoSuchElementException():
+            return False
+        for elem in elements_found:
+            if text == elem.text:
                 return True
             else:
                 return False

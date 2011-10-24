@@ -5,7 +5,8 @@ class OffsitePage(UnisubsPage):
     """Main page for all offsite testing to drive playback and menus.
 
     """
-    _CAPTIONS = "span.unisubs-widget span.unisubs-captionSpan"
+    _CAPTIONS = "span.unisubs-captionSpan"
+    _WIDGET_MENU = "span.unisubs-tabTextchoose"
     
     def start_playback(self, video_position):
         self.browser.execute_script("unisubs.widget.Widget.getAllWidgets()[%s].play()" % video_position)
@@ -26,15 +27,26 @@ class OffsitePage(UnisubsPage):
         height = size["height"]
         if 10 < height < 80:
             return True
+        else:
+            self.record_error()
 
     def pause_playback_when_subs_appear(self, video_position):
         self.start_playback(video_position)
-        self.wait_for_element_present(self._CAPTIONS)
+        self.scroll_to_video(video_position)
+        self.wait_for_element_visible(self._CAPTIONS)
         self.pause_playback(video_position)
 
-    def scroll_page_to_video(self, vid_element):
-        elements = [vid_element]
-        self.page_down(elements)
+    def scroll_to_video(self, video_position):
+        self.wait_for_element_present(self._WIDGET_MENU)
+        elements_found = self.browser.find_elements_by_css_selector(self._WIDGET_MENU)
+        elem = elements_found[video_position]
+        elem.send_keys("PAGE_DOWN")
+        
+        
+                       
+                       
+   
+       
         
 
 

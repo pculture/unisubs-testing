@@ -17,12 +17,12 @@ class CreatePage(UnisubsPage):
 
     _SUBMIT_BUTTON = "form.main_video_form button.green_button"
     _MULTI_SUBMIT_LINK = " div#submit_multiple_toggle a#btn_submit_multiple_toggle.toogle-create-form"
-    _YOUTUBE_USER_FIELD = "div#submit_multiple_videos form#bulk_create ul li input#id_usernames"
-    _YOUTUBE_PAGE_FIELD = "div#submit_multiple_videos form#bulk_create ul li input#id_youtube_user_url"
-    _FEED_URL = "div#submit_multiple_videos form#bulk_create ul li input#id_feed_url"
+    _YOUTUBE_USER_FIELD = "li input#id_usernames"
+    _YOUTUBE_PAGE_FIELD = "li input#id_youtube_user_url"
+    _FEED_URL = "li input#id_feed_url"
     _SAVE_OPTION = "div#submit_multiple_videos form#bulk_create ul li input#id_save_feed"
     _SUBMIT_MULTI = "div#submit_multiple_videos form#bulk_create button.green_button"
-
+    _HIDE_MULTI = "div#submit_multiple_toggle"
     _SUBMIT_ERROR = "ul.errorlist li"
     _MULTI_SUBMIT_SUCCESS = "h2.success"
 
@@ -36,7 +36,6 @@ class CreatePage(UnisubsPage):
         self.click_by_css("div h2.main_heading")
         self.click_by_css(self._SINGLE_URL_ENTRY_BOX)
         self.click_by_css(self._SINGLE_URL_ENTRY_BOX)
-        time.sleep(2)
         print "Entering the url: %s" % self._URL
         self.type_by_css(self._SINGLE_URL_ENTRY_BOX, video_url)
         self.click_by_css(self._SUBMIT_BUTTON)
@@ -48,7 +47,9 @@ class CreatePage(UnisubsPage):
 
         """
         
-        self.click_by_css(self._MULTI_SUBMIT_LINK, self._YOUTUBE_USER_FIELD)
+        self.click_by_css(self._MULTI_SUBMIT_LINK)
+        self.page_down(self._HIDE_MULTI)
+        self.wait_for_element_present(self._YOUTUBE_USER_FIELD)
         for name in youtube_usernames:
             self.type_by_css(self._YOUTUBE_USER_FIELD, name)
         if save == True:
@@ -62,7 +63,9 @@ class CreatePage(UnisubsPage):
         """
         
         self.click_by_css(self._MULTI_SUBMIT_LINK, self._YOUTUBE_PAGE_FIELD)
-        self.type_by_css(self._YOUTUBE_PAGE_FIELD, name)
+        self.page_down(self._HIDE_MULTI)
+        self.wait_for_element_present(self._YOUTUBE_PAGE_FIELD)
+        self.type_by_css(self._YOUTUBE_PAGE_FIELD, youtube_user_url)
         if save == True:
             self.click_by_css(self._SAVE_OPTION)
         self.click_by_css(self._SUBMIT_MULTI)
@@ -72,6 +75,8 @@ class CreatePage(UnisubsPage):
 
         """       
         self.click_by_css(self._MULTI_SUBMIT_LINK, self._FEED_URL)
+        self.page_down(self._HIDE_MULTI)
+        self.wait_for_element_present(self._FEED_URL)
         self.type_by_css(self._FEED_URL, feed_url)
         if save == True:
             self.click_by_css(self._SAVE_OPTION)
