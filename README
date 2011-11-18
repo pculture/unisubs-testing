@@ -14,7 +14,7 @@ To run the webdriver-based tests with virtual environment:
    *without* the virtualenv wrapper. Run these commands from the parent 
    of the unisubs directory created in #1:
 
-   $ virtualenv unisubsqa-env
+   $ virtualenv --no-site-packages unisubsqa-env
    $ source unisubsqa-env/bin/activate
 
    If you're using the virtualenv wrapper (run from any directory):
@@ -25,6 +25,8 @@ To run the webdriver-based tests with virtual environment:
 4. run:
    $ easy_install -U setuptools
    $ easy_install pip
+   $ pip install selenium
+   $ pip install nose
    $ cd deploy
    # this is the unisubs directory you cloned from git, not the parent you created the virtualenv in.
    $ pip install -r requirements.txt
