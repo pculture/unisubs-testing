@@ -25,6 +25,7 @@ class SearchResultsPage(UnisubsPage):
     _FIRST_SEARCH_RESULT = "ul.video_list li a"
    
     def search_has_no_results(self):
+        time.sleep(3)
         self.wait_for_element_not_visible(self._SEARCHING_INDICATOR)
         if self.is_text_present(self._NO_RESULTS, "No video found"):
             return True
@@ -32,10 +33,13 @@ class SearchResultsPage(UnisubsPage):
             return False
         
     def search_has_results(self):
-        time.sleep(2)
+        time.sleep(3)
         self.wait_for_element_not_visible(self._SEARCHING_INDICATOR)
         if self.is_element_present(self._FIRST_SEARCH_RESULT):
             return True
+        else:
+            return False
+        
 
     def click_search_result(self, result_element):
         self.click_by_css(result_element)

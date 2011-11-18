@@ -1,6 +1,5 @@
 import unittest
 from base_test_case import BaseTestCase
-import testsetup
 from html.watch_page import WatchPage
 from html.search_results_page import SearchResultsPage
 
@@ -20,22 +19,19 @@ class TestWatchPage(BaseTestCase):
         """
         watch_pg = WatchPage()
         watch_pg.open_watch_page()
-        results_pg = watch_pg.basic_search(self._SIMPLE_SEARCH_TEXT)
-        self.assertTrue(results_pg.search_has_results())
+        r = watch_pg.basic_search(self._SIMPLE_SEARCH_TEXT)
+        self.assertTrue(r.search_has_results())
             
 
     def test_watch_page_no_results(self):
         """No results search from the Watch page.
         
         """
-        watch_pg = WatchPage()
-        try:
-            watch_pg.open_watch_page()
-            results_pg = watch_pg.basic_search(self._NO_RESULTS_SEARCH_TEXT)
-            self.assertTrue(results_pg.search_has_no_results())
-        except:
-            results_pg.record_error()
-        
+        watch_pg = WatchPage()      
+        watch_pg.open_watch_page()
+        results_pg = watch_pg.basic_search(self._NO_RESULTS_SEARCH_TEXT)
+        self.assertTrue(results_pg.search_has_no_results())
+    
 
 if __name__ == "__main__":
     unittest.main()

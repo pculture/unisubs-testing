@@ -5,8 +5,6 @@ from selenium import webdriver
 from selenium.webdriver.support import ui
 from selenium.common.exceptions import NoSuchElementException
 
-import testsetup
-
 http_regex = re.compile('https?://((\w+\.)+\w+\.\w+)')
 nums_regex = re.compile(r'(\D+)(\d+)')
 
@@ -18,12 +16,13 @@ class HtmlFragment(object):
     Base class for all Pages
     """
     def __init__(self):
+        from .. import setup
         '''Constructor'''
-        self.base_url = testsetup.base_url
-        self.browser = testsetup.browser
-        self.username = testsetup.admin_user
-        self.password = testsetup.admin_pass
-        self.timeout = testsetup.timeout
+        self.base_url = setup.base_url
+        self.browser = setup.browser
+        self.username = setup.admin_user
+        self.password = setup.admin_pass
+        self.timeout = setup.timeout
         self.wait = ui.WebDriverWait(self.browser, self.timeout, poll_frequency=.5)
 
 
@@ -181,7 +180,7 @@ class HtmlFragment(object):
         if url.startswith("http"):
             full_url = url
         else:
-            full_url = self.base_url + url
+            full_url = self.base_url + '/' + url
         return full_url
 
 
@@ -237,3 +236,12 @@ class HtmlFragment(object):
         self.browser.get_screenshot_as_file(filename)
 #        f.close()
         return self.browser.current_url
+        
+    def close_window(self):
+        self.browser.close()
+
+
+    def quit_webdriver(self):
+        self.browser.quit()
+        
+        

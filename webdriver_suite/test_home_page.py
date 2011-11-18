@@ -1,8 +1,5 @@
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 import unittest
 from base_test_case import BaseTestCase
-import testsetup
 from html.unisubs_page import UnisubsPage
 
 
@@ -28,15 +25,9 @@ class TestHomePage(BaseTestCase):
         """Log in to site with admin site account.
         
         """
-        try:
-            unisubs_pg = UnisubsPage()
-            unisubs_pg.open_universal_subtitles()
-            unisubs_pg.log_in(testsetup.admin_user,testsetup.admin_pass)
-        except:
-            unisubs_pg.record_error()
-        
-
-        
+        unisubs_pg = UnisubsPage()
+        unisubs_pg.open_universal_subtitles()
+        unisubs_pg.log_in(unisubs_pg.username, unisubs_pg.password)           
 
 if __name__ == "__main__":
     unittest.main()
