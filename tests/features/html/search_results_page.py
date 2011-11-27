@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from lettuce import *
 import time
 from unisubs_page import UnisubsPage
 from video_page import VideoPage
@@ -14,7 +15,7 @@ class SearchResultsPage(UnisubsPage):
 
 
     _PAGE_HEADING = "h2.search-header"
-    _NO_RESULTS = "div#main_col ul.video_list h3"
+    _NO_RESULTS = "ul.video_list h3"
     _SEARCHING_INDICATOR = "img.placeholder"
     _SORT_HEADING = "div#sidebar h2"
     _LANGUAGES_SORT = "div#sidebar ul li a[value=languages_count]"
@@ -25,6 +26,7 @@ class SearchResultsPage(UnisubsPage):
     _FIRST_SEARCH_RESULT = "ul.video_list li a"
    
     def search_has_no_results(self):
+        time.sleep(3)
         self.wait_for_element_not_visible(self._SEARCHING_INDICATOR)
         if self.is_text_present(self._NO_RESULTS, "No video found"):
             return True
@@ -56,7 +58,14 @@ class SearchResultsPage(UnisubsPage):
         pass
 
 
-    
+    def page_heading_contains_search_term(self, search):
+        heading_text = "Search Results for %s" % search.strip()
+        self.wait_for_element_present(self._PAGE_HEADING)
+        print self.get_text_by_css(self._PAGE_HEADING)
+        if heading_text in self.get_text_by_css(self._PAGE_HEADING):
+            return True
+        
+        
     
         
         

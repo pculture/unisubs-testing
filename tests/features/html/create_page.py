@@ -36,8 +36,7 @@ class CreatePage(UnisubsPage):
     def submit_video(self, video_url):
         self.wait_for_element_present(self._INPUT_PREFOCUS)
         self.click_by_css("div h2.main_heading")
-        self.click_by_css(self._SINGLE_URL_ENTRY_BOX)
-        self.click_by_css(self._SINGLE_URL_ENTRY_BOX)
+        self.clear_text(self._SINGLE_URL_ENTRY_BOX)
         print "Entering the url: %s" % self._URL
         self.type_by_css(self._SINGLE_URL_ENTRY_BOX, video_url)
         self.click_by_css(self._SUBMIT_BUTTON)
@@ -104,7 +103,7 @@ class CreatePage(UnisubsPage):
         elif expected_error == True and self.is_element_present(self._SUBMIT_ERROR):
             return error_msg
         else:
-            return VideoPage()
+            return True
 
     
         

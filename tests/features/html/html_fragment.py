@@ -36,10 +36,17 @@ class HtmlFragment(object):
         except:
             self.record_error()
             raise Exception(elem + "not found")
-        
         elem.click()
         if wait_for_element:
             self.wait_for_element_present(wait_for_element)
+
+    def clear_text(self, element):
+        try:
+            elem = self.browser.find_element_by_css_selector(element)
+        except:
+            self.record_error()
+            raise Exception(elem + "not found")
+        elem.clear()
 
     def click_link_text(self, text, wait_for_element=None):
         try:
@@ -199,9 +206,9 @@ class HtmlFragment(object):
 
         return elements_found[0].get_attribute(attr)
 
-    @step('I am on the page "(.*?)"')
     def open_page(self, url):
-        world.browser.get(HtmlFragment().get_absolute_url(url))
+        self.browser.get(self.get_absolute_url(url))
+        #world.browser.get(HtmlFragment().get_absolute_url(url))
 
 
     def go_back(self):

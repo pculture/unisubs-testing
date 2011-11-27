@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+from lettuce import *
 from unisubs_page import UnisubsPage
 from search_results_page import SearchResultsPage
 
@@ -28,6 +28,7 @@ class WatchPage(UnisubsPage):
         self.open_page(self._URL)
 
     def basic_search(self,search_term):
+        self.clear_text(self._SEARCH)
         self.submit_form_text_by_css(self._SEARCH, search_term)
         return SearchResultsPage()
 
