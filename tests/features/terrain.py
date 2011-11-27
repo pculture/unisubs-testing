@@ -8,9 +8,6 @@ through-out all lettuce functional tests.
 from lettuce import before, after
 from lettuce import world
 from selenium import webdriver
-import lettuce_webdriver.webdriver
-
-
 
 
 #@before.each_feature
