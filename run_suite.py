@@ -2,8 +2,10 @@ import os
 import sys
 import nose
 import nose.config
+from lettuce import lettuce_cli
 
 from optparse import OptionParser
+
 parser = OptionParser()
 parser.add_option(
     "-s", "--sauce", action="store_true", dest="sauce", default=False,
@@ -15,7 +17,7 @@ parser.add_option(
              'lin_ff','firefox5','iexplore9'),
     type="choice",
     dest="browser", default="firefox",
-    help='Possible browser choices: firefox,chrome,opera, safari, iexplore, googlechrome, lin_ff, firefox3, iexplore9)')
+    help='Possible browser choices: firefox, chrome, opera, safari, iexplore, googlechrome, lin_ff, firefox3, iexplore9)')
 
 parser.add_option(
     "-p", "--port", action="store", type="int", dest="port", default=4444)
@@ -25,7 +27,7 @@ parser.add_option("-u", "--siteurl", action="store", dest="siteurl",
                   help="""The url to use for testing, default is dev.universalsubtitles.org""")
 
 parser.add_option("-t", "--testsuite", action="store",
-                  dest="suite", default='home_page.cfg',
+                  dest="suite", default='rc_only.cfg',
                   help="""Config file to speicfy which tests should be run, should be located in suite_config directory""")
 
 (options, args) = parser.parse_args()
@@ -46,11 +48,22 @@ class Configs():
         b.close()
          
 class RunTests():
-    def run_tests_with_nose(self, testsuite):
-        if not testsuite:
-            testsuite = 'home_page.cfg'
+
+    def cmd_line_args(self):
         args = sys.argv[1:]
         sys.argv = sys.argv[0:1]
+
+    def run_tests_with_lettuce(self):
+        curr_dir = os.getcwd()
+        try:
+            lettuce_dir = os.path.join(curr_dir, 'tests')
+            os.chdir(lettuce_dir)
+            lettuce_cli.main('--with-xunit')
+        finally:
+            os.chdir(curr_dir)
+    def run_tests_with_nose(self, testsuite):
+        if not testsuite:
+            testsuite = 'rc_only.cfg'
         BASE_CONFIG = os.path.join(os.getcwd(), "suite_config", "base_config.cfg")
         TEST_CONFIG = os.path.join(os.getcwd(), "suite_config", testsuite)
           
@@ -62,6 +75,8 @@ class RunTests():
         nose.run(testrun)
 
 if __name__ == "__main__":
-    Configs().setup()
+#    Configs().setup()
     t = RunTests()
-    t.run_tests_with_nose(testsuite)
+    t.cmd_line_args()
+    t.run_tests_with_lettuce()
+    t.run_tests_with_nose()
