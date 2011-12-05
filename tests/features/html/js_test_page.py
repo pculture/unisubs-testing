@@ -4,9 +4,10 @@ import time
 import re
 
 class JsTestPage(Page):
-    def open(self):
-        print("Opening /jstest/alltests")
-        self.open_page("jstest/alltests")
+    _URL = "/jstest/alltests"
+    
+    def open_js_page(self):
+        self.open_page(self._URL)
       
     def click_start(self):
         print("Waiting for Start button to appear")

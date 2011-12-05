@@ -3,7 +3,7 @@ from lettuce import *
 
 @step('I am on the javascript test page')
 def open_js_page(self):
-    world.javascript_pg.open() 
+    world.javascript_pg.open_js_page() 
 
 @step('When I start the tests')
 def start_tests(self):
