@@ -1,14 +1,14 @@
-import unittest
-from base_test_case import BaseTestCase
-from html.js_test_page import JsTestPage
+from lettuce import *
 
-class TestJavascript(BaseTestCase):
-    def test_javascript(self):
-        page = JsTestPage()
-        page.open()
-        page.click_start()
-        self.assertEquals(0, page.num_failed_tests())
+@step('I am on the javascript test page')
+def open_js_page(self):
+    world.javascript_pg.open() 
 
-
-if __name__ == "__main__":
-    unittest.main()
+@step('When I start the tests')
+def start_tests(self):
+    world.javascript_pg.click_start()
+    
+@step('Then they complete with no failures')
+def check_results(self):
+    assert(0 == world.javascript_pg.num_failed_tests())
+    

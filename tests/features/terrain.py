@@ -8,6 +8,14 @@ through-out all lettuce functional tests.
 from lettuce import before, after
 from lettuce import world
 from selenium import webdriver
+from html.watch_page import WatchPage
+from html.video_page import VideoPage
+from html.create_page import CreatePage
+from html.search_page import SearchPage
+from html.search_results_page import SearchResultsPage
+from html.django_admin_page import DjangoAdminPage
+from html.offsite_page import OffsitePage
+from html.js_test_page import JsTestPage
 
 
 #@before.each_feature
@@ -20,6 +28,17 @@ from selenium import webdriver
 def setup_browser():
     world.browser = webdriver.Firefox()
     #django.conf.settings.DEBUG = True
+
+@before.all
+def instantiate_pages():
+    world.watch_pg = WatchPage()
+    world.video_pg = VideoPage()
+    world.create_pg = CreatePage()
+    world.search_pg = SearchPage()
+    world.dj_admin = DjangoAdminPage()
+    world.results_pg = SearchResultsPage()
+    world.offsite_pg = OffsitePage()
+    world.javascript_pg = JsTestPage()
 
 @after.all
 def teardown_browser(total):
