@@ -1,4 +1,5 @@
 from page import Page
+from lettuce import *
 import time
 import re
 

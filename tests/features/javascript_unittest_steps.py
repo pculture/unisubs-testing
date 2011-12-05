@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from lettuce import *
 
 @step('I am on the javascript test page')
