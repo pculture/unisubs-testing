@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ignore pyc files
 *.pyc
 # ignore the testfile
@@ -23,3 +24,7 @@ settings.py
 webdriver_suite/*.png
 selenium-server-standalone-*.jar
 testsetup_local.py
+=======
+#ignore .pyc
+*.pyc
+>>>>>>> vegisubs
