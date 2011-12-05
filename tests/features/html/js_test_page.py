@@ -6,19 +6,15 @@ class JsTestPage(Page):
     def open(self):
         print("Opening /jstest/alltests")
         self.open_page("jstest/alltests")
-        self._start_clicked = False
-
+      
     def click_start(self):
         print("Waiting for Start button to appear")
         BUTTON_CSS = ".goog-testrunner-buttons button:first-child"
         self.wait_for_element_present(BUTTON_CSS)
         print("Clicking Start button")
         self.click_by_css(BUTTON_CSS)
-        self._start_clicked = True
 
     def num_failed_tests(self):
-        if not self._start_clicked:
-            raise Exception("Start has to be clicked before checking the page for failed tests.")
         PROG_CSS = ".goog-testrunner-progress-summary"
         print("Waiting for tests to finish running")
         self.wait_for_element_present(PROG_CSS)

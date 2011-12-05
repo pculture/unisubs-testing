@@ -7,8 +7,7 @@ Feature: Submit videos via the create page
     Scenario Outline: Submit an individual video from the create page
         Given the video is not in the unisubs db "<url>"
         When I submit a video "<url>"
-        Then the video is submitted
-        And I see the embedded video
+        Then I see the embedded video
 
     Examples:
         | url |

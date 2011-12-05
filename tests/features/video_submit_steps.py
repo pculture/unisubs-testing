@@ -14,7 +14,7 @@ def submit_and_verify_embed(self, url):
     assert world.create_pg.submit_success(), True
 
 @step('the feed is not in the unisubs db "(.*?)"')
-def delete_video_from_unisubs(step, url):
+def delete_video_from_unisubs(self, url):
     world.dj_admin.delete_video_feed(url)
     
 @step('I submit a feed "(.*?)"')     
@@ -23,7 +23,7 @@ def bulk_submit_videos_by_feed(self, url):
     world.create_pg.submit_feed_url(url)
 
 @step('I see the submit successful message')
-def create_page_successful_message(step):
+def create_page_successful_message(self):
     assert world.create_pg.multi_submit_successful(), True
 
 @step('I submit a youtube user feed "(.*?)"')
