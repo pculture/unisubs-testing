@@ -58,12 +58,10 @@ class RunTests():
         try:
             lettuce_dir = os.path.join(curr_dir, 'tests')
             os.chdir(lettuce_dir)
-            lettuce_cli.main('--with-xunit')
+            lettuce_cli.main('--verbosity=0 --with-xunit')
         finally:
             os.chdir(curr_dir)
-    def run_tests_with_nose(self, testsuite):
-        if not testsuite:
-            testsuite = 'rc_only.cfg'
+    def run_tests_with_nose(self):
         BASE_CONFIG = os.path.join(os.getcwd(), "suite_config", "base_config.cfg")
         TEST_CONFIG = os.path.join(os.getcwd(), "suite_config", testsuite)
           
