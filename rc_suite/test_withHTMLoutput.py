@@ -11,7 +11,6 @@ from Queue import Queue
 
 import HTMLTestRunner
 import litmusresult
-import sg_64_submit
 import sg_65_login 
 import sg_69_demoUI
 import sg_70_revisions
@@ -22,7 +21,6 @@ import sg_80_comments
 import sg_81_ul_dl
 import sg_88_teams
 import sg_94_widgetizer
-import sg_95_watchpage
 
 
 from optparse import OptionParser
@@ -95,8 +93,6 @@ class Test_HTMLTestRunner(unittest.TestCase):
         'sg_69_demoUI.subgroup_69.test_373',
         'sg_69_demoUI.subgroup_69.test_414',
         'sg_64_submit.subgroup_64.test_538',
-        'sg_64_submit.subgroup_64.test_534',
-        'sg_64_submit.subgroup_64.test_533',
         'sg_80_comments.subgroup_80.test_536',
         'sg_88_teams.subgroup_88.test_613',
         'sg_88_teams.subgroup_88.test_693',
@@ -110,15 +106,12 @@ class Test_HTMLTestRunner(unittest.TestCase):
 # Create a custom test run, and execute with the --custom flag
     CUSTOM_TESTS = [
         
-        'sg_64_submit.subgroup_64.test_533',
         'sg_69_demoUI.subgroup_69.test_414'
         ]
     
     ALL_TESTS = [
-        'sg_64_submit.subgroup_64',
         'sg_94_widgetizer.subgroup_94_pagedemo',
         'sg_94_widgetizer.subgroup_94_mcsite',
-        'sg_95_watchpage.subgroup_95',
         'sg_81_ul_dl.subgroup_81',
         'sg_69_demoUI.subgroup_69',
         'sg_80_comments.subgroup_80',
