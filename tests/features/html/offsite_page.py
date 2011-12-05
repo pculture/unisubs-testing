@@ -31,7 +31,6 @@ class OffsitePage(UnisubsPage):
             self.record_error()
 
     def pause_playback_when_subs_appear(self, video_position):
-        self.start_playback(video_position)
         self.scroll_to_video(video_position)
         self.wait_for_element_visible(self._CAPTIONS)
         self.pause_playback(video_position)
