@@ -4,7 +4,11 @@ Feature: Add a video
 	So that team contributors can add subtitles for it
 
 	Scenario: Submit valid URLs
-		Given I enter "<video_url>" into the url field
+		Given I enter "<Video URL>" into the url field
 		And I select "English" in the language field
 		When I click the save button
 		Then the video is saved and added to the team
+
+	Examples:
+		| Video URL |
+		| 
