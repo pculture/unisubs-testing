@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+import time
 from unisubs_page import UnisubsPage
 from search_page import SearchPage
 
@@ -15,8 +15,17 @@ class DjangoAdminPage(UnisubsPage):
     _DJANGO_LOGIN_SUBMIT = "form#login-form div.submit-row input"
     _DJANGO_ADMIN_LOGOUT = "/admin/logout"
     _ADMIN_DELETE_VID_URL = "/videos/%s/staff/delete"
-    _FOOTER = "div#footer"
+    _SEARCH = "input#searchbar"
+    _SEARCH_SUBMIT = "input[type=submit]"
+    _SELECT_ALL = "th.action-checkbox-column input"
+    _GO_BUTTON = "button[type=submit]"
+    _DJANGO_CONFIRM = "input[type=submit]"
     
+    _FOOTER = "div#footer"
+
+
+    def open_djadmin(self):
+        self.open_page(self._URL)
 
     def open_django_admin_page_from_site_link(self):
         if not self.is_element_present(self._ADMIN_LINK):
@@ -54,6 +63,23 @@ class DjangoAdminPage(UnisubsPage):
             self.delete_video(vid_id)
             self.django_admin_logout
 
+    def delete_user_from_all_teams(self, user):
+        username = self.USER_NAMES[user][0]
+        self.open_page('admin/teams/teammember')
+        time.sleep(3)
+        self.django_admin_login()
+        self.browser.find_element_by_id("searchbar").clear()
+        self.type_by_css(self._SEARCH, username)
+        self.click_by_css(self._SEARCH_SUBMIT)
+        if self.is_element_present(self._SELECT_ALL):
+            self.click_by_css(self._SELECT_ALL)
+            self.click_by_css("option[value=delete_selected]")
+            self.click_by_css(self._GO_BUTTON, self._DJANGO_CONFIRM)
+            self.click_by_css(self._DJANGO_CONFIRM)
+        self.django_admin_logout()
+        self.open_page("/")
+ 
+
     def delete_video_feed(self, url):
         self.open_page(self._URL)
         self.django_admin_login()
@@ -64,7 +90,7 @@ class DjangoAdminPage(UnisubsPage):
             self.click_link_text(url)
             self.click_link_text("Delete")
             self.click_by_css("form div input")
-            self.django_admin_logout()
+        self.django_admin_logout()
         
         
             

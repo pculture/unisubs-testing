@@ -208,7 +208,6 @@ class HtmlFragment(object):
 
     def open_page(self, url):
         self.browser.get(self.get_absolute_url(url))
-        #world.browser.get(HtmlFragment().get_absolute_url(url))
 
 
     def go_back(self):
