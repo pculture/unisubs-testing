@@ -17,17 +17,17 @@ def open_a_teams_page(self, team_type):
     """
     world.a_team_pg.open_a_team_page(team_type)
 
-@step('I (see|click) the join button')
-def join_button(self, action):
+@step('I (see|click) the (join|leave) button')
+def join_button(self, action, button):
     """Verify the presence or click the "Join" button.  
 
     Both 'click_join()' and 'join_exists()' verify the Button display the correct text based on when the user is 
     logged in or out of the site
     """ 
-    if action == "see":
+    if action == "see" and button == "join":
         assert world.a_team_pg.join_exists()
     elif action == "click":
-        world.a_team_pg.click_join()
+        world.a_team_pg.join_or_leave_team(button)
     else:
         raise Exception("Undefined action: %s" % action)
 
@@ -46,3 +46,36 @@ def is_a_team_member(self, action, team):
     else:
         assert not world.a_team_pg.is_member(team)
  
+
+@step('I (have|have not) joined the team "(.*?)"')
+def join_or_leave_team(self, action, team):
+    """Confirm team membership, or perform the action required to get to this state."""
+
+    if action == "have":
+        if not world.a_team_pg.is_member(team):
+	    world.a_team_pg.open_a_team_page(team)
+	    world.a_team_pg.join_or_leave_team("join")
+            world.html.handle_js_alert("accept")
+    if action == "have not":
+        if world.a_team_pg.is_member(team):
+            world.a_team_pg.join_or_leave_team("leave")
+            world.html.handle_js_alert("accept")
+    world.a_team_pg.open_a_team_page(team)
+
+@step('I visit a team owned by "(.*?)"')
+def open_a_users_team(self, user):
+    """Open a team page owned by the specefied user.
+
+    If that user is 'me' then open the team owned by the current looged in user.
+    """
+    if user == "me":
+        world.my_team_pg.open_my_team()
+    else:
+        try:
+            team = [v[0] for k, v in DEFAULT_TEAMS.iteritems() if v[1] == user][0]
+        except:
+            raise Exception("%user is not a member of the default teams list, \
+                            and there isn't a good way to find a team owner in ui yet." % user)
+
+
+

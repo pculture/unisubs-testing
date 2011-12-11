@@ -18,24 +18,26 @@ class UnisubsPage(Page):
     _CREATE_NAV = "li#nav_submit a"
     _FEEDBACK_BUTTON = ".feedback_tab"
 
-    _USER_TEAMS = "li#me_menu div#user_menu div#menu ul#dropdown li a"
-
+    _USER_TEAMS = "li#me_menu  div#user_menu div#menu ul#dropdown li[id^=team] a"
     _SITE_LOGIN_USER_ID = "input#id_username"
     _SITE_LOGIN_USER_PW = "input#id_password"
     _SITE_LOGIN_SUBMIT  = "form button[value=login]"
 
+    _ERROR_MESSAGE = "div#messages h2.error"
+
     USER_NAMES = {"normal": ["PollyGlott", "talks.alot"],
-                 "admin": ["sub_writer", "sub.writer"]
+                 "admin": ["sub_writer", "sub.writer"],
+                 "team-owning":["sub_writer", "sub.writer"],
                  }
+
+    def error_message_present(self, message):
+         if self.is_text_present(self._ERROR_MESSAGE, message): return True
 
     def open_universal_subtitles(self):
         self.browser.get(self.base_url)
 
     def logged_in(self):
-        if self.is_element_present(self._USER_MENU):
-            print "I am logged in"
-            return True
-
+        if self.is_element_present(self._USER_MENU): return True
    
     def log_out(self):
         if self.logged_in() == True:
@@ -60,16 +62,10 @@ class UnisubsPage(Page):
 
         """
         user_teams = []
-        not_teams = ['Dashboard', 'Profile', 'Messages', 'Logout']
         if self.logged_in() == True:
             elements = self.browser.find_elements_by_css_selector(self._USER_TEAMS)
             for e in elements:
-                print e.text
-                if e.text in not_teams:
-                    elements.pop(e)
-                    continue
-                else:
-                    user_teams.append(e.get_attribute('href'))
+                user_teams.append(e.get_attribute('href'))
         return user_teams
 
 

@@ -28,6 +28,12 @@ class HtmlFragment(object):
         self.timeout = testsetup.timeout
         self.wait = ui.WebDriverWait(self.browser, self.timeout, poll_frequency=.5)
 
+    def handle_js_alert(self, action):
+        a = self.browser.switch_to_alert()
+        if action == "accept":
+            a.accept()
+        elif action == "reject":
+            a.dismiss()
     
 
     def click_by_css(self, element, wait_for_element=None):

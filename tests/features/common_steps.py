@@ -9,11 +9,14 @@ def login(self):
  
 @step('(accept|reject) the confirmation alert')
 def confirmation_alert(self, action):
-    time.sleep(2)
-    a = world.browser.switch_to_alert()
     if action == "accept":
-        a.accept()
+        world.html.handle_js_alert("accept")
     elif action == "reject":
-        a.dismiss()
+        world.html.handle_js_alert("reject")
 
-    
+@step('I (see|do not see) the error message: "(.*?)"')
+def error_message(self, action, message):
+    if action == "see": assert world.unisubs_pg.error_message_present(message)
+    if action == "do not see": assert not world.unisubs_pg.error_message_present(message)
+
+
