@@ -11,9 +11,10 @@ def verify_team_video_subs(self, sub_dir):
         subtitles = world.data.pull_sub_strings_from_data(sub_file)
         world.video_pg.verify_sub_content(subtitles)
         world.browser.back()
-        world.page_up_to_orig_lang()    
+        world.video_pg.page_up_to_orig_lang()    
 
 @step('I search a team for the "(.*?)"')
 def team_search(self, search_term):
-    world.team_search_pg.team_search(search_term)
+    search = search_term.split('_')[0]
+    world.team_search_pg.team_search(search)
 
