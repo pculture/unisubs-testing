@@ -48,6 +48,7 @@ class UnisubsPage(Page):
         """Log in with the specified account type - default as a no-priv user.
 
         """
+        self.log_out()
         curr_page = self.browser.current_url
         print curr_page
         if "auth" not in curr_page and not self.logged_in():
