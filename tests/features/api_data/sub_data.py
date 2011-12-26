@@ -30,8 +30,8 @@ class SubData():
         data = json.load(json_data)
         for sub in data['captions']:
             sub_text = sub['content']
-            sub_time = int(sub['startTime'])/1000
-            lang_subs.append([str(sub_time)+'.0', sub_text])
+            print sub_text
+            lang_subs.append(sub_text)
         json_data.close()
         return lang_subs
 
