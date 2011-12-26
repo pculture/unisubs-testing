@@ -16,5 +16,6 @@ def verify_team_video_subs(self, sub_dir):
 @step('I search a team for the "(.*?)"')
 def team_search(self, search_term):
     search = search_term.split('_')[0]
+    print 'search for the team video: %s' % search
     world.team_search_pg.team_search(search)
 
