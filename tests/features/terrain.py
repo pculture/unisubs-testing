@@ -22,8 +22,8 @@ from html.teams_page import TeamsPage
 from html.a_team_page import ATeamPage
 from html.unisubs_page import UnisubsPage
 from html.my_teams import MyTeam
-
-
+from html.teams_search_page import TeamSearchPage
+from api_data.sub_data import SubData
 #@before.each_feature
 #@before.each_scenario
 
@@ -54,8 +54,10 @@ def instantiate_pages():
     world.a_team_pg = ATeamPage()
     world.teams_pg = TeamsPage()
     world.my_team_pg = MyTeam()
+    world.team_search_pg = TeamSearchPage()
     world.unisubs_pg = UnisubsPage()
     world.html = HtmlFragment()
+    world.data = SubData()
 
 
 @before.each_scenario
@@ -64,5 +66,5 @@ def logout_after_each_scenario(scenario):
 
 @after.all
 def teardown_browser(total):
+#    world.browser.quit()
     pass
-    #world.browser.quit()

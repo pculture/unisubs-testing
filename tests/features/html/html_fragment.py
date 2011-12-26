@@ -26,7 +26,6 @@ class HtmlFragment(object):
         self.username = testsetup.admin_user
         self.password = testsetup.admin_pass
         self.timeout = testsetup.timeout
-        self.wait = ui.WebDriverWait(self.browser, self.timeout, poll_frequency=.5)
 
     def handle_js_alert(self, action):
         a = self.browser.switch_to_alert()

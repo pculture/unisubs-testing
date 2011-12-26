@@ -78,4 +78,7 @@ def open_a_users_team(self, user):
                             and there isn't a good way to find a team owner in ui yet." % user)
 
 
+@step('I open the first returned result')
+def open_first_result(self):
+    world.team_search_pg.click_first_search_result()
 

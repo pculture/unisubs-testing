@@ -29,7 +29,7 @@ class VideoPage(UnisubsPage):
     _UPLOAD_SUBTITLES = "li.contribute a#upload-subtitles-link"
 
     #SUBTITLES_SIDE_SECTION
-    _VIDEO_ORIGINAL = ""
+    _VIDEO_ORIGINAL = "ul#subtitles-menu li a"
     _VIDEO_LANG = ""
 
     #TEAM_SIDE_SECTION
@@ -40,6 +40,12 @@ class VideoPage(UnisubsPage):
     #ADMIN_SIDE_SECTION
     _DEBUG_INFO = ""
     _EDIT = ""
+
+    #TRANSCRIPTS
+    _SUBTITLES = "div#transcripts-tab tr td"
+    _START_TIME_DATA = "span.time-span span.data"
+    _SUB_LINE = "div.sub_content"
+
    
 
     def open_video_page(self, video_id):
@@ -70,20 +76,32 @@ class VideoPage(UnisubsPage):
             return True
     
 
-        
-        
-        
+    def page_up_to_orig_lang(self):
+        self.wait_for_element_present(self._VIDEO_ORIGINAL)
+        elem = self.browser.find_element_by_css_selector(self._VIDEO_ORIGINAL)
+        elem.send_keys("PAGE_UP")         
 
-        
-    
+          
+    def open_original_lang(self):
+        self.wait_for_element_present(self._VIDEO_ORIGINAL)
+        elem = self.browser.find_element_by_css_selector(self._VIDEO_ORIGINAL)
+        elem.send_keys("PAGE_DOWN")         
+        elem.click()
 
-        
-        
+    def open_translation(self, lang):
+        print lang
+    #    vid_url = self.browser.current_url
+    #    lang_url = urlsplit(vid_url).path+lang_code
+        elem = self.browser.find_element_by_partial_link_text(lang)
+        elem.send_keys("PAGE_DOWN")  
+        elem.click()
 
-
-
-    
-            
+    def verify_sub_content(self, external_subs):
+        displayed_subs = {}
+        elems = self.browser.find_elements_by_css_selector(self._SUBTITLES)
+        for time, text in displayed_subs.iteritems():
+            print time, text 
+            if not self.is_text_present(text): 
+                print 'text: %s not found' % text
         
         
-    

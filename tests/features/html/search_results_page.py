@@ -44,6 +44,8 @@ class SearchResultsPage(UnisubsPage):
         return VideoPage()
 
     def click_first_search_result(self):
+        time.sleep(2)
+        self.wait_for_element_not_visible(self._SEARCHING_INDICATOR)
         self.click_by_css(self._FIRST_SEARCH_RESULT)
         return VideoPage()
 

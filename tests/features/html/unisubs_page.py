@@ -28,6 +28,7 @@ class UnisubsPage(Page):
     USER_NAMES = {"normal": ["PollyGlott", "talks.alot"],
                  "admin": ["sub_writer", "sub.writer"],
                  "team-owning":["sub_writer", "sub.writer"],
+                 "team": ["@PCFQA ", "pcf123"],
                  }
 
     def error_message_present(self, message):

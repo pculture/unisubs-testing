@@ -13,4 +13,7 @@ def search_results_displayed(self, expected_result):
 @step('the search term is displayed for the "(.*?)"')
 def search_text_displayed(self, search):
     assert world.results_pg.page_heading_contains_search_term(search), True    
+
+
+    
     
