@@ -25,14 +25,14 @@ class SubData():
         """create a list of the sub time and subtitle line pairs and return it.
 
         """
-        lang_subs = {} 
+        lang_subs = [] 
         json_data=open(os.path.join(self._DATA_DIR, json_file))
         data = json.load(json_data)
         for sub in data['captions']:
             sub_text = sub['content']
             sub_time = int(sub['startTime'])/1000
-            lang_subs[str(sub_time)+'.0'] =  sub_text
-        json_data.close()
+            lang_subs.append([str(sub_time)+'.0', sub_text])
+            json_data.close()
         return lang_subs
 
     def language_maps(self, code):

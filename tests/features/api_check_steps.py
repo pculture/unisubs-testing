@@ -6,6 +6,7 @@ def verify_team_video_subs(self, sub_dir):
     print 'checking the subs for this dir: % s' % sub_dir
     world.video_pg.open_original_lang()
     langs = world.data.list_of_translations(sub_dir)
+    print langs
     for sub_file, lang in langs:
         world.video_pg.open_translation(lang)
         print 'checking this lang %s' % lang

@@ -98,7 +98,7 @@ class VideoPage(UnisubsPage):
 
     def verify_sub_content(self, external_subs):
         elems = self.browser.find_elements_by_css_selector(self._SUBTITLES)
-        for time, text in external_subs.iteritems():
+        for time, text in external_subs:
             if self.is_text_present(text):
                 print text
             else:
