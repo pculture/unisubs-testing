@@ -32,7 +32,7 @@ class SubData():
             sub_text = sub['content']
             sub_time = int(sub['startTime'])/1000
             lang_subs.append([str(sub_time)+'.0', sub_text])
-            json_data.close()
+        json_data.close()
         return lang_subs
 
     def language_maps(self, code):
