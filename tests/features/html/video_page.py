@@ -95,9 +95,10 @@ class VideoPage(UnisubsPage):
         elem = self.browser.find_element_by_partial_link_text(lang)
         elem.send_keys("PAGE_DOWN")  
         elem.click()
+        time.sleep(5)
+        print self.browser.current_url
 
     def verify_sub_content(self, external_subs):
-        print self.browser.current_url
         for text in external_subs:
             print text
             pos = external_subs.index(text)
