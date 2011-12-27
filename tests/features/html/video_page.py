@@ -99,7 +99,8 @@ class VideoPage(UnisubsPage):
     def verify_sub_content(self, external_subs):
         for text in external_subs:
             print text
-            if not self.is_text_present(text):
+            t = text.split(',')[0]
+            if not self.is_text_present(t):
                 print 'text: %s not found' % text
         
         
