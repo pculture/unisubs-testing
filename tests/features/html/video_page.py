@@ -101,6 +101,6 @@ class VideoPage(UnisubsPage):
             print text
             t = text.split(',')[0]
             print t
-            assert self.is_text_present(self._SUBTITLES, t):
+            assert self.is_text_present(self._SUBTITLES, t)
         
         
