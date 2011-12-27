@@ -97,11 +97,9 @@ class VideoPage(UnisubsPage):
         elem.click()
 
     def verify_sub_content(self, external_subs):
-        elems = self.browser.find_elements_by_css_selector(self._SUBTITLES)
         for text in external_subs:
-            if self.is_text_present(text):
-                print text
-            else:
+            print text
+            if not self.is_text_present(text):
                 print 'text: %s not found' % text
         
         
