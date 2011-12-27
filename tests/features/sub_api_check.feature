@@ -12,7 +12,6 @@ Feature: Upload subs via the unisubs api
 
     Examples:
 | directory  | searchterm |
-| 1 | AlGore_2006 | 
 | 2 | AmySmith_2006 | 
 | 3 | AshrafGhani_2005G | 
 | 4 | BurtRutan_2006 | 
@@ -38,7 +37,6 @@ Feature: Upload subs via the unisubs api
 | 26 | Rives_IfIControlledtheInternet_2006S | 
 | 27 | RossLovegrove_2005 | 
 | 28 | SethGodin_2003 | 
-| 29 | StevenLevitt_2004 | 
 | 30 | StevenLevitt_2005G | 
 | 31 | ThomMayne_2005 | 
 | 32 | VikMuniz_2003 | 
