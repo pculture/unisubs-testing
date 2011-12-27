@@ -93,7 +93,6 @@ class VideoPage(UnisubsPage):
         print lang
         elem = self.click_link_text(lang)
         time.sleep(5)
-        print self.browser.current_url
 
     def verify_sub_content(self, external_subs):
         for text in external_subs:
