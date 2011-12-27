@@ -91,7 +91,8 @@ class VideoPage(UnisubsPage):
 
     def open_translation(self, lang):
         print lang
-        elem = self.click_link_text(lang)
+
+        elem = self.click_partial_link_text(lang)
         time.sleep(5)
 
     def verify_sub_content(self, external_subs):
