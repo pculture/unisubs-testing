@@ -97,6 +97,7 @@ class VideoPage(UnisubsPage):
         elem.click()
 
     def verify_sub_content(self, external_subs):
+        print self.browser.current_url
         for text in external_subs:
             print text
             pos = external_subs.index(text)
