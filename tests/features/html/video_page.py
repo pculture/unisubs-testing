@@ -100,7 +100,8 @@ class VideoPage(UnisubsPage):
         for text in external_subs:
             print text
             pos = external_subs.index(text)
-            elem = self.browser.find_element_by_css_selector("div#transcripts-tab tr:nth-child(%s) > td") % str(pos)
+            elems = self.browser.find_elements_by_css_selector(self._SUBTITLES)
+            elem = elems[pos]
             print elem.text
             assert text, elem.text 
         
