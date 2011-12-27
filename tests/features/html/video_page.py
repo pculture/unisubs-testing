@@ -91,7 +91,7 @@ class VideoPage(UnisubsPage):
 
     def open_translation(self, lang):
         print lang
-        elem = self.browser.find_element_by_partial_link_text(lang)
+        elem = self.browser.find_element_by_link_text(lang)
         elem.send_keys("PAGE_DOWN")  
         elem.click()
         time.sleep(5)
