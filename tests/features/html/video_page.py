@@ -100,7 +100,9 @@ class VideoPage(UnisubsPage):
         for text in external_subs:
             print text
             pos = external_subs.index(text)
+            print pos
             elems = self.browser.find_elements_by_css_selector(self._SUBTITLES)
+            print len(elems)
             elem = elems[pos]
             print elem.text
             assert text, elem.text 
