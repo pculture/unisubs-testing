@@ -102,7 +102,7 @@ class VideoPage(UnisubsPage):
             print text
             pos = external_subs.index(text)
             print pos
-            elems = self.browser.find_elements_by_css_selector(self._SUBTITLES)
+            elems = self.browser.find_elements_by_css_selector(self._SUB_LINE)
             print len(elems)
             elem = elems[pos]
             print elem.text
