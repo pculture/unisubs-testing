@@ -90,13 +90,9 @@ class VideoPage(UnisubsPage):
 
     def open_translation(self, lang):
         print lang
-    #    vid_url = self.browser.current_url
-    #    lang_url = urlsplit(vid_url).path+lang_code
         elem = self.browser.find_element_by_partial_link_text(lang)
         elem.send_keys("PAGE_DOWN")  
         elem.click()
-        time.sleep(5)
-        print self.browser.current_url
 
     def verify_sub_content(self, external_subs):
         for text in external_subs:
