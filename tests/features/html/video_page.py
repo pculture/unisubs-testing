@@ -3,6 +3,7 @@
 from lettuce import *
 from unisubs_page import UnisubsPage
 from urlparse import urlsplit
+import time
 
 class VideoPage(UnisubsPage):
     """
@@ -93,6 +94,8 @@ class VideoPage(UnisubsPage):
         elem = self.browser.find_element_by_partial_link_text(lang)
         elem.send_keys("PAGE_DOWN")  
         elem.click()
+        time.sleep(5)
+        print self.browser.current_url
 
     def verify_sub_content(self, external_subs):
         for text in external_subs:
