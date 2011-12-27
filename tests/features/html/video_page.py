@@ -99,8 +99,9 @@ class VideoPage(UnisubsPage):
     def verify_sub_content(self, external_subs):
         for text in external_subs:
             print text
-            t = text.split(',')[0]
-            print t
-            assert self.is_text_present(self._SUBTITLES, t)
+            pos = external_subs.index(text)
+            elem = self.browser.find_element_by_css_selector("div#transcripts-tab tr:nth-child(%s) > td" % str(pos)
+            print elem.text
+            assert text, elem.text 
         
         
