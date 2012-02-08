@@ -28,9 +28,9 @@ Feature: Submit videos via the create page
 	    | http://vimeo.com/jeroenhouben/videos/rss |
 	    | http://www.dailymotion.com/rss/user/WildFilmsIndia/1 |
 	    | http://blip.tv/weird-america/rss/flash |
-        | http://blip.tv/cord-cutters/cord-cutters-sync-mobile-media-with-miro-4-5280931?skin=RSS |
-        | http://gdata.youtube.com/feeds/api/users/katyperrymusic/uploads |
-        | http://www.dailymotion.com/rss/user/LocalNews-GrabNetworks/1 |
+            | http://blip.tv/cord-cutters/cord-cutters-sync-mobile-media-with-miro-4-5280931?skin=rss |
+            | http://gdata.youtube.com/feeds/api/users/katyperrymusic/uploads |
+            | http://www.dailymotion.com/rss/user/LocalNews-GrabNetworks/1 |
 
     Scenario Outline: Submit youtube user page videos
         Given the feed is not in the unisubs db "<db_url>"

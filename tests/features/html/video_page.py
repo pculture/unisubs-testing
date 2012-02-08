@@ -20,8 +20,7 @@ class VideoPage(UnisubsPage):
     _EMAIL_FRIENDS = "div.unisubs-share ul li.unisubs-friends a"
     _FOLLOW = "div#video_follow button"
     _EMBED_HELP = "div.unisubs-share h3 a.embed_options_link"
-    _EMBED_CODE = "div.unisubs-share p.unisubs-embed textarea"
-    _PERMALINK = "div.unisubs-share a.unisubs-permalink"
+    _EMBED_CODE = "div#embed-modal.modal div.modal-body form fieldset textarea"
 
     #VIDEO SIDE SECTION
     _INFO = "ul#video-menu.left_nav li:nth-child(1) > a"
@@ -59,9 +58,8 @@ class VideoPage(UnisubsPage):
         self.click_by_css(self._TEAM_LINK % team_name)
 
     def video_id(self):
-        self.wait_for_element_present(self._PERMALINK)
-        permalink = self.get_text_by_css(self._PERMALINK)
-        url_parts = urlsplit(permalink).path
+        page_url = self.browser.current_url 
+        url_parts = urlsplit(page_url).path
         urlfrag = url_parts.split('/')[3]
         return urlfrag
 
