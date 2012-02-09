@@ -37,7 +37,7 @@ class MyTeam(UnisubsPage):
             team = team_el.find_element_by_css_selector(self._TEAM_NAME)
             team.click()
                 
-    def leave_team(self, team)
+    def leave_team(self, team):
         if self._URL not in self.browser.current_url:
             self.open_my_teams_page()
         team_el = self._team_elem(team)
