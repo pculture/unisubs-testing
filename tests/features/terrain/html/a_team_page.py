@@ -7,7 +7,7 @@ class ATeamPage(UnisubsPage):
     """Defines the actions for specific teams pages like 'unisubs test team' (default) or others. 
     """
 
-    _JOIN_LEAVE = "div.controls a#%s"
+    _JOIN_TEAM = "div.join a#join"
     _JOIN_LOGGED_IN = "Join this team now!"
     _JOIN_NOT_LOGGED_IN = "Sign in to Join Team"
 
@@ -45,15 +45,14 @@ class ATeamPage(UnisubsPage):
         pass
 
     def join_exists(self):
-        button = self._JOIN_LEAVE % "join"
+        button = self._JOIN
         join_button = self.get_text_by_css(button)
         if self.logged_in(): 
            assert join_button == self._JOIN_LOGGED_IN
         else:
            assert join_button == self._JOIN_NOT_LOGGED_IN
 
-    def join_or_leave_team(self, action):
-        button = self._JOIN_LEAVE % action
-        print button
+    def join_team(self):
+        button = self._JOIN
         self.click_by_css(button)
     

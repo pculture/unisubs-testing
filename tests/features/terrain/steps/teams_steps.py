@@ -17,7 +17,7 @@ def open_a_teams_page(self, team_type):
     """
     world.a_team_pg.open_a_team_page(team_type)
 
-@step('I (see|click) the (join|leave) button')
+@step('I (see|click) the join button')
 def join_button(self, action, button):
     """Verify the presence or click the "Join" button.  
 
@@ -27,7 +27,7 @@ def join_button(self, action, button):
     if action == "see" and button == "join":
         assert world.a_team_pg.join_exists()
     elif action == "click":
-        world.a_team_pg.join_or_leave_team(button)
+        world.a_team_pg.join_team()
     else:
         raise Exception("Undefined action: %s" % action)
 
@@ -54,11 +54,11 @@ def join_or_leave_team(self, action, team):
     if action == "have":
         if not world.a_team_pg.is_member(team):
 	    world.a_team_pg.open_a_team_page(team)
-	    world.a_team_pg.join_or_leave_team("join")
+	    world.a_team_pg.join_team(team)
             world.html.handle_js_alert("accept")
     if action == "have not":
         if world.a_team_pg.is_member(team):
-            world.a_team_pg.join_or_leave_team("leave")
+            world.my_team_pg.leave_team(team)
             world.html.handle_js_alert("accept")
     world.a_team_pg.open_a_team_page(team)
 

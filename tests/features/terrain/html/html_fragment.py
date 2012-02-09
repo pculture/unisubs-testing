@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import re
 import time
+from urlparse import urlsplit
 from selenium import webdriver
 from selenium.webdriver.support import ui
 from selenium.common.exceptions import NoSuchElementException
@@ -238,9 +239,7 @@ class HtmlFragment(object):
         """
             Records an error. 
         """
-
-        http_matches = http_regex.match(self.base_url)
-        file_name = http_matches.group(1)
+        file_name = urlsplit(self.base_url).netloc.split('@')[-1]
 
         print '-------------------'
         print 'Error at ' + self.browser.current_url
@@ -248,7 +247,5 @@ class HtmlFragment(object):
         filename = file_name + '_' + str(time.time()).split('.')[0] + '.png'
 
         print 'Screenshot of error in file ' + filename
-#        f = open(filename, 'wb')
         self.browser.get_screenshot_as_file(filename)
-#        f.close()
         return self.browser.current_url

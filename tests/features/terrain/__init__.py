@@ -1,13 +1,11 @@
-"""
-Terrain file for Lettuce - documentation on how to use
-at http://lettuce.it/reference/terrain.html
+from steps import *
+from html import *
 
-Allows you to set some generic "world" components as globals
-through-out all lettuce functional tests.
-"""
 from lettuce import before, after
 from lettuce import world
 from selenium import webdriver
+
+
 import testsetup
 from html.html_fragment import HtmlFragment
 from html.watch_page import WatchPage
@@ -66,3 +64,4 @@ def logout_after_each_scenario(scenario):
 def teardown_browser(total):
     pass
     #world.browser.quit()
+
