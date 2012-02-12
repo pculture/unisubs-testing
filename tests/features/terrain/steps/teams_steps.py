@@ -18,13 +18,30 @@ def open_a_teams_page(self, team_type):
     world.a_team_pg.open_a_team_page(team_type)
 
 @step('I (see|click) the join button')
-def join_button(self, action, button):
+def join_button(self, action):
     """Verify the presence or click the "Join" button.  
-
     Both 'click_join()' and 'join_exists()' verify the Button display the correct text based on when the user is 
     logged in or out of the site
     """ 
-    if action == "see" and button == "join":
+    if action == "see": assert world.a_team_pg.join_exists()
+    if action == "click":  world.a_team_pg.join_team()
+
+@step('I (see|click) the apply button')
+def apply_button(self, action):
+    """Verify the presence or click the "Apply to Join" button.  
+    Both 'click_join()' and 'join_exists()' verify the Button display the correct text based on when the user is 
+    logged in or out of the site
+    """ 
+    if action == "see": assert world.a_team_pg.apply_exists()
+    if action == "click":  world.a_team_pg.join_team()
+
+
+@step('I (see|click) the apply button')
+def join_button(self, action):
+    """Verify the presence or click the apply button.  
+
+    """ 
+    if action == "see" and:
         assert world.a_team_pg.join_exists()
     elif action == "click":
         world.a_team_pg.join_team()

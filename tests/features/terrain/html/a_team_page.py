@@ -8,8 +8,14 @@ class ATeamPage(UnisubsPage):
     """
 
     _JOIN_TEAM = "div.join a#join"
+    _APPLY_TEAM = "div.join p a#apply"
+    _APPLY_BUTTON = "Apply to Join"
     _JOIN_LOGGED_IN = "Join this team now!"
     _JOIN_NOT_LOGGED_IN = "Sign in to Join Team"
+    _APPLICATION = "div#apply-modal"
+    _APPLICATION_TEXT = "div#apply-modal div.form textarea"
+    _SUBMIT_APPLICATION = "div#apply-modal 
+
 
 #   DEFAULT TEST TEAMS BY TYPE with [slug, owner]      
     DEFAULT_TEAMS = {"open": ["unisubs-test-team", "sub_writer"],
@@ -45,14 +51,31 @@ class ATeamPage(UnisubsPage):
         pass
 
     def join_exists(self):
-        button = self._JOIN
+        button = self._JOIN_TEAM
         join_button = self.get_text_by_css(button)
         if self.logged_in(): 
            assert join_button == self._JOIN_LOGGED_IN
         else:
            assert join_button == self._JOIN_NOT_LOGGED_IN
 
+    def apply_exists(self):
+        button = self._APPLY_TEAM
+        join_button = self.get_text_by_css(button)
+        if self.logged_in(): 
+           assert join_button == self._APPLY_BUTTON
+        else:
+           assert join_button == self._JOIN_NOT_LOGGED_IN
+
+    def application_displayed(self):
+        assert(self.is_element_present(self._APPLICATION)
+
+    def submit_application(self, text):
+        self.application_displayed()
+        self.type_by_css(self._APPLICATION_TEXT, text)
+        self.click_by_css(self._SUBMIT_APPLICATION)
+
     def join_team(self):
-        button = self._JOIN
-        self.click_by_css(button)
+        self.click_by_css(self._JOIN_TEAM)
     
+    def apply_team(self):
+        self.click_by_css(self._APPLY_TEAM) 

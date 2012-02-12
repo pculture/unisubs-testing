@@ -1,5 +1,5 @@
 Feature: Join a team
-    As a visitor
+    As a user 
     I want to join a team
     So that I can contribute subtitles
 
@@ -13,10 +13,18 @@ Feature: Join a team
             And accept the confirmation alert
         Then I am a member of the "open" team 
 
-    Scenario: A logged in, 'normal' (non-admin) user joins an open teamm
+    Scenario: A logged in, 'normal' (non-admin) user joins an open team
         Given "normal" user is not a member of any teams
             And I am logged in as a "normal" user
             And I visit an "open" team
         When I click the join button
             And accept the confirmation alert
         Then I am a member of the "open" team
+
+    Scenario: A logged in 'normal' user tries to join an application-only team
+        Given "normal" user is not a member of any teams
+            And I am logged in as a "normal" user
+            And I visit an "application-only" team
+        When I click the apply button
+            Then the application form is displayed
+
