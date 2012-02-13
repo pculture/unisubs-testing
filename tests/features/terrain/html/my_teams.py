@@ -32,7 +32,8 @@ class MyTeam(UnisubsPage):
             print self.browser.current_url
             self.open_my_teams_page()
         if not team: 
-            self.click_by_css(self._TEAM, self._TEAM_NAME)
+            first_team = self._TEAM, self._TEAM_NAME
+            self.click_by_css(first_team)
         else:
             team_el = self._team_elem(team)
             team = team_el.find_element_by_css_selector(self._TEAM_NAME)
