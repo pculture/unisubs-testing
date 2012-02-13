@@ -52,7 +52,7 @@ def join_or_leave_team(self, action, team):
     if action == "have":
         if not world.a_team_pg.is_member(team):
 	    world.a_team_pg.open_a_team_page(team)
-	    world.a_team_pg.join(team)
+	    world.a_team_pg.join()
             world.html.handle_js_alert("accept")
     if action == "have not":
         if world.a_team_pg.is_member(team):
