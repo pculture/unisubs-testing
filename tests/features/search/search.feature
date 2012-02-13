@@ -3,7 +3,7 @@ Feature: Watch Page Search
     I want to be able to find videos based on the title, subtitle text, url...
     So that I can view them on the site.
 
-    Scenario Outline: Perform a search that returns results
+    Scenario: Perform a search that returns results
         Given I am on the watch page
         When I enter a search for "<search>"
         Then search results are displayed for "<search>"
@@ -16,7 +16,7 @@ Feature: Watch Page Search
         | Selbst wenn du das letzte Herbstblatt bist, das vom Baum hängt |
         | 我们开始通用字幕，因为我们相信 |
  
-    Scenario Outline: Perform a search that returns no results
+    Scenario: Perform a search that returns no results
         Given I am on the watch page
         When I enter a search for "<search>"
         Then search results are not displayed for "<search>"

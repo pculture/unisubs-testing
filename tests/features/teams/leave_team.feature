@@ -10,7 +10,7 @@ Feature: Leave team
 ##                And accept the confirmation alert
 ##            Then I see the error message: "You are the last member of this team." 
 
-    Scenario Outline: Non-owner
+    Scenario: Non-owner
         Given I am logged in as the "normal" user
             And I have joined the team "<team>"
         When I click the leave button for the team "<team>"
