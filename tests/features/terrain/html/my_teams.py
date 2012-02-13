@@ -9,7 +9,8 @@ class MyTeam(UnisubsPage):
     _URL = "/teams/my/"
     _TEAM = "ul.listing li"
     _TEAM_NAME = "h3 a"
-    _LEAVE = "ul.admin_controls li a#leave"
+    _LEAVE = "ul.admin-controls li a#leave"
+
       
 
 
@@ -18,12 +19,15 @@ class MyTeam(UnisubsPage):
         """Given the team's text name, return the element.
 
         """
+        self.wait_for_element_present(self._TEAM +" " + self._TEAM_NAME)
         teams = self.browser.find_elements_by_css_selector(self._TEAM)
         for el in teams:
-            team_name = el.find_element_by_css_selector(self._TEAM_NAME).text
+            team_el = el.find_element_by_css_selector(self._TEAM_NAME)
+            team_name = team_el.text
             print team, team_name
             if team == team_name: return el        
-        
+    
+    
     def open_my_teams_page(self):
         self.open_page(self._URL)
 
@@ -39,14 +43,7 @@ class MyTeam(UnisubsPage):
             team = team_el.find_element_by_css_selector(self._TEAM_NAME)
             team.click()
                 
-    def leave_team(self, team):
-        if self._URL not in self.browser.current_url:
-            self.open_my_teams_page()
-        team_el = self._team_elem(team)
-        leave = team_el.find_element_by_css_selector(self._LEAVE)
-        leave.click()
+
             
 
 
-
-       

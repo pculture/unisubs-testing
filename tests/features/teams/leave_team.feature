@@ -1,20 +1,16 @@
 Feature: Leave team
-	As a team member
+	As a member of a team 
 	I want to leave the team
-	So that I am no longer a member
 
-##    Scenario: Team owner
-##        Given I am logged in as the "team-owning" user
-##            And I visit a team owned by "me"
-##            When I click the leave button
-##                And accept the confirmation alert
-##            Then I see the error message: "You are the last member of this team." 
+    Scenario: Team owner want to leave their team and is the sole admin
+        Given I am logged in as the "team-owning" user
+        When I leave the team "open" 
+        Then I see the error message: "You are the last admin of this team." 
 
-    Scenario: Non-owner
+    Scenario: Normal volunteer leaves the team
         Given I am logged in as the "normal" user
             And I have joined the team "<team>"
-        When I click the leave button for the team "<team>"
-            And accept the confirmation alert
+        When I leave the team "<team>"
         Then I am not a member of the "<team>" team
         Examples:
         | team |

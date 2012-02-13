@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import time
-
+from nose.tools import assert_equals
+from nose.tools import assert_true
 from unisubs_page import UnisubsPage
 
 class ATeamPage(UnisubsPage):
@@ -32,8 +33,7 @@ class ATeamPage(UnisubsPage):
         else:
             team_stub = team_type.replace(' ', '-')
             team_url = "/teams/%s" %team_stub
-        return team_url
-    
+        return team_url 
 
     def open_a_team_page(self, team_type=None):
         team_url = self._team_stub(team_type)        
@@ -55,20 +55,20 @@ class ATeamPage(UnisubsPage):
         button = self._JOIN_TEAM
         join_button = self.get_text_by_css(button)
         if self.logged_in(): 
-           assert join_button == self._JOIN_LOGGED_IN
+           assert_equals(join_button, self._JOIN_LOGGED_IN)
         else:
-           assert join_button == self._JOIN_NOT_LOGGED_IN
+           assert_equals(join_button, self._JOIN_NOT_LOGGED_IN)
 
     def apply_exists(self):
         button = self._APPLY_TEAM
         join_button = self.get_text_by_css(button)
         if self.logged_in(): 
-           assert join_button == self._APPLY_BUTTON
+           assert_equals(join_button, self._APPLY_BUTTON)
         else:
-           assert join_button == self._JOIN_NOT_LOGGED_IN
+           assert_equals(join_button, self._JOIN_NOT_LOGGED_IN)
 
     def application_displayed(self):
-        assert(self.is_element_present(self._APPLICATION))
+        assert_true(self.is_element_present(self._APPLICATION))
 
     def submit_application(self, text):
         self.application_displayed()
@@ -83,3 +83,9 @@ class ATeamPage(UnisubsPage):
  
     def apply(self):
         self.click_by_css(self._APPLY_TEAM) 
+
+    def leave_team(self, team):
+        team_url = self._team_stub(team)
+        team_stub = team_url.split('/')[-1]
+        leave_url = "teams/leave_team/%s/" % team_stub
+        self.open_page(leave_url)

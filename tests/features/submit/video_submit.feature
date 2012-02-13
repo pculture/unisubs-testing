@@ -1,11 +1,12 @@
+@submit
 Feature: Submit videos via the create page
-    In order to get a video subtitles
+    In order to get a video subtitled
     As a user
     I want to add it to the site
     
-    Scenario: Submit an individual video from the create page
+    Scenario: Submit an individual video from the create page, from one of the supported sites: youtube, blip, dailymotion, vimeo.
         Given the video is not in the unisubs db "<url>"
-        When I submit a video "<url>"
+        When I submit a unique video "<url>"
         Then I see the embedded video
 
     Examples:
@@ -17,9 +18,8 @@ Feature: Submit videos via the create page
 	    | http://vimeo.com/26487510 |
 
 
-    Scenario: Bulk Submit a video feed
-        Given the feed is not in the unisubs db "<url>"
-        When I submit a feed "<url>"
+    Scenario: Bulk Submit a video feed from a supported source, youtube, dailymotion, blip, vimeo...
+        When I submit a unique feed "<url>"
         Then I see the submit successful message
 
     Examples:
@@ -32,7 +32,6 @@ Feature: Submit videos via the create page
             | http://www.dailymotion.com/rss/user/LocalNews-GrabNetworks/1 |
 
     Scenario: Submit youtube user page videos
-        Given the feed is not in the unisubs db "<db_url>"
         When I submit a youtube user page "<url>"
         Then I see the submit successful message
 
@@ -41,8 +40,7 @@ Feature: Submit videos via the create page
         | https://gdata.youtube.com/feeds/api/users/SeveFanClub/uploads | http://www.youtube.com/user/SeveFanClub |
 
     Scenario: Submit youtube user feed videos
-        Given the feed is not in the unisubs db "<db_url>"
-        When I submit a youtube user feed "<username>"
+        When I submit a unique youtube user feed "<username>"
         Then I see the submit successful message
 
     Examples:

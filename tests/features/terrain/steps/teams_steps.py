@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 from lettuce import *
+from nose.tools import assert_true
+from nose.tools import assert_false
 
 
 @step('"(.*?)" user is not a member of any teams')
@@ -40,9 +42,9 @@ def is_a_team_member(self, action, team):
     To be more accurate: use the stub, like "unisubs-test-team"
     """
     if action == "am":
-        assert world.a_team_pg.is_member(team)
+        assert_true(world.a_team_pg.is_member(team))
     else:
-        assert not world.a_team_pg.is_member(team)
+        assert_false(world.a_team_pg.is_member(team))
  
 
 @step('I (have|have not) joined the team "(.*?)"')
@@ -58,7 +60,7 @@ def join_or_leave_team(self, action, team):
         if world.a_team_pg.is_member(team):
             world.my_team_pg.leave_team(team)
             world.html.handle_js_alert("accept")
-    world.a_team_pg.open_a_team_page(team)
+#    world.a_team_pg.open_a_team_page(team)
 
 @step('I visit a team owned by "(.*?)"')
 def open_a_users_team(self, user):
@@ -75,8 +77,10 @@ def open_a_users_team(self, user):
             raise Exception("%user is not a member of the default teams list, \
                             and there isn't a good way to find a team owner in ui yet." % user)
 
-@step('I click the leave button for the team "(.*?)"')
+@step('I leave the team "(.*?)"')
 def leave_a_team(self, team):
-    world.my_team_pg.leave_team(team)
+    world.a_team_pg.leave_team(team)
 
-
+@step('The application form is displayed')
+def application_displayed(self):
+    world.a_team_pg.application_displayed()

@@ -4,6 +4,7 @@ import time
 from urlparse import urlsplit
 from selenium import webdriver
 from selenium.webdriver.support import ui
+from selenium.webdriver.common import action_chains
 from selenium.common.exceptions import NoSuchElementException
 from lettuce import step
 from lettuce import world
@@ -28,6 +29,7 @@ class HtmlFragment(object):
         self.password = testsetup.admin_pass
         self.timeout = testsetup.timeout
         self.wait = ui.WebDriverWait(self.browser, self.timeout, poll_frequency=.5)
+        
 
     def handle_js_alert(self, action):
         a = self.browser.switch_to_alert()
@@ -35,8 +37,11 @@ class HtmlFragment(object):
             a.accept()
         elif action == "reject":
             a.dismiss()
-    
 
+    def hover_by_css(self, element):
+        mouse = webdriver.ActionChains(self.browser)
+        mouse.move_to_element(element).perform()
+        
     def click_by_css(self, element, wait_for_element=None):
         try:
             elem = self.browser.find_element_by_css_selector(element)
