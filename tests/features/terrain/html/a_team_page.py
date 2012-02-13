@@ -21,7 +21,7 @@ class ATeamPage(UnisubsPage):
 #   DEFAULT TEST TEAMS BY TYPE with [slug, owner]      
     DEFAULT_TEAMS = {"open": ["unisubs-test-team", "sub_writer"],
                    "private": ["arthur-top-secret", "arthur"],
-                   "application-only": ["by-application", "maggie_s"]
+                   "application-only": ["application", "maggie_s"]
                    }
 
     def _team_stub(self, team_type):

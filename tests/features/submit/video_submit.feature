@@ -1,9 +1,9 @@
-
 Feature: Submit videos via the create page
     In order to get a video subtitles
     As a user
     I want to add it to the site
-
+    
+    @webdriver
     Scenario Outline: Submit an individual video from the create page
         Given the video is not in the unisubs db "<url>"
         When I submit a video "<url>"

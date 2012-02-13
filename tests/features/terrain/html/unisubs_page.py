@@ -48,7 +48,6 @@ class UnisubsPage(Page):
 
         """
         curr_page = self.browser.current_url
-        print curr_page
         if "auth" not in curr_page and not self.logged_in():
             self.click_by_css(self._LOGIN)
         self.type_by_css(self._SITE_LOGIN_USER_ID, self.USER_NAMES[user][0])
