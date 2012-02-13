@@ -6,7 +6,7 @@ from unisubs_page import UnisubsPage
 class MyTeam(UnisubsPage):
     """Defines the actions for specific teams pages like 'unisubs test team' (default) or others. 
     """
-    _URL = "/teams/my"
+    _URL = "/teams/my/"
     _TEAM = "ul.listing li"
     _TEAM_NAME = "h3 a"
     _LEAVE = "ul.admin_controls li a#leave"
@@ -29,9 +29,10 @@ class MyTeam(UnisubsPage):
 
     def open_my_team(self, team=None):
         if self._URL not in self.browser.current_url:
+            print self.browser.current_url
             self.open_my_teams_page()
         if not team: 
-            self.click_by_css(self._TEAM)
+            self.click_by_css(self._TEAM, self._TEAM_NAME)
         else:
             team_el = self._team_elem(team)
             team = team_el.find_element_by_css_selector(self._TEAM_NAME)

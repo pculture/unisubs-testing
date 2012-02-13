@@ -75,5 +75,8 @@ def open_a_users_team(self, user):
             raise Exception("%user is not a member of the default teams list, \
                             and there isn't a good way to find a team owner in ui yet." % user)
 
+@step('I click the leave button for the team "(.*?)"')
+def leave_a_team(self, team):
+    world.my_team_pg.leave_team(team)
 
 
