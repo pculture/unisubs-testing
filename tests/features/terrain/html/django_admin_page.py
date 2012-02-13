@@ -68,6 +68,7 @@ class DjangoAdminPage(UnisubsPage):
         self.open_page('admin/teams/teammember')
         time.sleep(3)
         self.django_admin_login()
+        time.sleep(3)
         self.browser.find_element_by_id("searchbar").clear()
         self.type_by_css(self._SEARCH, username)
         self.click_by_css(self._SEARCH_SUBMIT)
