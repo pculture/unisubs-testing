@@ -20,7 +20,7 @@ class MyTeam(UnisubsPage):
         """
         teams = self.browser.find_elements_by_css_selector(self._TEAM)
         for el in teams:
-            team_name = el.find_element_by_css(self._TEAM_NAME).text
+            team_name = el.find_element_by_css_selector(self._TEAM_NAME).text
             print team, team_name
             if team == team_name: return el        
         
