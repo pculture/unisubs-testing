@@ -3,7 +3,7 @@ Feature: Watch Page Search
     I want to be able to find videos based on the title, subtitle text, url...
     So that I can view them on the site.
 
-
+    @tagtest
     Scenario: Perform a search that returns results
         Given I am on the watch page
         When I enter a search for "<search>"

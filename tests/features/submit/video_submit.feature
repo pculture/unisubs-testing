@@ -3,8 +3,8 @@ Feature: Submit videos via the create page
     As a user
     I want to add it to the site
     
-    @webdriver
-    Scenario Outline: Submit an individual video from the create page
+    @tagtest 
+    Scenario: Submit an individual video from the create page
         Given the video is not in the unisubs db "<url>"
         When I submit a video "<url>"
         Then I see the embedded video
@@ -18,7 +18,7 @@ Feature: Submit videos via the create page
 	    | http://vimeo.com/26487510 |
 
 
-    Scenario Outline: Bulk Submit a video feed
+    Scenario: Bulk Submit a video feed
         Given the feed is not in the unisubs db "<url>"
         When I submit a feed "<url>"
         Then I see the submit successful message
@@ -32,7 +32,7 @@ Feature: Submit videos via the create page
             | http://gdata.youtube.com/feeds/api/users/katyperrymusic/uploads |
             | http://www.dailymotion.com/rss/user/LocalNews-GrabNetworks/1 |
 
-    Scenario Outline: Submit youtube user page videos
+    Scenario: Submit youtube user page videos
         Given the feed is not in the unisubs db "<db_url>"
         When I submit a youtube user page "<url>"
         Then I see the submit successful message
@@ -41,14 +41,14 @@ Feature: Submit videos via the create page
         | db_url | url |
         | https://gdata.youtube.com/feeds/api/users/SeveFanClub/uploads | http://www.youtube.com/user/SeveFanClub |
 
-    Scenario Outline: Submit youtube user feed videos
+    Scenario: Submit youtube user feed videos
         Given the feed is not in the unisubs db "<db_url>"
         When I submit a youtube user feed "<username>"
         Then I see the submit successful message
 
     Examples:
         | db_url | username |
-	    | https://gdata.youtube.com/feeds/api/users/croatiadivers/uploads | croatiadivers |
+	| https://gdata.youtube.com/feeds/api/users/croatiadivers/uploads | croatiadivers |
 
 
 
