@@ -7,7 +7,7 @@ def delete_video_from_unisubs(self, url):
     world.dj_admin.find_and_delete_existing_video(url)
     
 
-@step('I submit (unique|duplicate) a video "(.*?)"')
+@step('I submit (unique|duplicate) video "(.*?)"')
 def submit_and_verify_embed(self, submission, url):
     if submission == 'unique': world.dj_admin.delete_video_feed(url)
     world.create_pg.open_create_page()
@@ -28,7 +28,7 @@ def bulk_submit_videos_by_feed(self, submission, url):
 def create_page_successful_message(self):
     assert_true(world.create_pg.multi_submit_successful())
 
-@step('I submit a unique youtube user feed "(.*?)"')
+@step('I submit a (unique|duplicate) youtube user feed "(.*?)"')
 def bulk_submit_videos_from_youtube_user(self, submission, youtube_user):
     if submission == 'unique': world.dj_admin.delete_video_feed(url)     
     world.create_pg.open_create_page()

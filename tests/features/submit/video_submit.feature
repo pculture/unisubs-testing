@@ -5,7 +5,6 @@ Feature: Submit videos via the create page
     I want to add it to the site
     
     Scenario: Submit an individual video from the create page, from one of the supported sites: youtube, blip, dailymotion, vimeo.
-        Given the video is not in the unisubs db "<url>"
         When I submit a unique video "<url>"
         Then I see the embedded video
 
