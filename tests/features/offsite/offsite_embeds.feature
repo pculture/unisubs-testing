@@ -1,3 +1,4 @@
+@jenkins_skip
 Feature: Playback of Videos with subtitles on pages with the univesal subtitles widget embedded.
     In order to share videos with subtitles around the world
     As a website owner
