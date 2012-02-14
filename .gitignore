@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # ignore pyc files
 *.pyc
 # ignore the testfile
@@ -13,18 +12,15 @@ Results/*.html
 log.xml
 *.log
 *.xml
+# ignore error screenshots and lettuce output results
+tests/*.png
+tests/lettucetests*
 # ignore temp file
 subs.txt
 curr_test.log
 #ignore the sauce-auth file
 sauce-auth.py
 settings.py
-.DS_Store
-*~
 webdriver_suite/*.png
 selenium-server-standalone-*.jar
 testsetup_local.py
-=======
-#ignore .pyc
-*.pyc
->>>>>>> vegisubs
