@@ -58,6 +58,7 @@ class UnisubsPage(Page):
         curr_page = self.browser.current_url
         if "login" not in curr_page and not self.logged_in() == True:
             self.click_by_css(self._LOGIN)
+        self.wait_for_element_present(self._SITE_LOGIN_USER_ID)
         self.type_by_css(self._SITE_LOGIN_USER_ID, self.USER_NAMES[user][0])
         self.type_by_css(self._SITE_LOGIN_USER_PW, self.USER_NAMES[user][1])
         self.click_by_css(self._SITE_LOGIN_SUBMIT)
