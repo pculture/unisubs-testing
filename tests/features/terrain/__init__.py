@@ -29,7 +29,6 @@ logout_url = testsetup.base_url+"""/logout/?next=/"""
 
 @before.each_step
 def show_step_name(step):
-    print "trying to see the step name..."
     world.curr_step = step.original_sentence.replace('"','_')
 
 

@@ -56,7 +56,7 @@ class UnisubsPage(Page):
 
         """
         curr_page = self.browser.current_url
-        if "auth" not in curr_page and not self.logged_in():
+        if "auth" not in curr_page and not self.logged_in() == True:
             self.click_by_css(self._LOGIN)
         self.type_by_css(self._SITE_LOGIN_USER_ID, self.USER_NAMES[user][0])
         self.type_by_css(self._SITE_LOGIN_USER_PW, self.USER_NAMES[user][1])
@@ -77,8 +77,11 @@ class UnisubsPage(Page):
 
 
     def close_modal(self):
-        if not self.is_element_visible(self._MODAL_DIALOG) == False:
-            self.click_by_css(self._MODAL_CLOSE)
+        try:
+            if not self.is_element_visible(self._MODAL_DIALOG) == False:
+                self.click_by_css(self._MODAL_CLOSE)
+        except:
+            pass
 
     def click_feeback(self):
         self.click_by_css(self._FEEDBACK_BUTTON)
