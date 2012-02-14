@@ -30,7 +30,7 @@ def create_page_successful_message(self):
 
 @step('I submit a (unique|duplicate) youtube user feed "(.*?)"')
 def bulk_submit_videos_from_youtube_user(self, submission, youtube_user):
-    if submission == 'unique': world.dj_admin.delete_video_feed(url)     
+    if submission == 'unique': world.dj_admin.delete_video_feed(youtube_user)     
     world.create_pg.open_create_page()
     world.create_pg.submit_youtube_users_videos(youtube_user, save=True)
 
