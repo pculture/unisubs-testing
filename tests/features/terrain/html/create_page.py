@@ -85,16 +85,17 @@ class CreatePage(UnisubsPage):
 
 
     def multi_submit_successful(self, expected_error=False):
-        if self.is_element_present(self._MULTI_SUBMIT_SUCCESS):
-            return True
-        elif self.is_element_present(self._SUBMIT_ERROR):
+        time.sleep(2)
+        if self.is_element_present(self._SUBMIT_ERROR):
                 error_msg = self.get_text_by_css(self._SUBMIT_ERROR)
                 if expected_error == True:
                     return error_msg
                 else:
                     raise Exception("Submit failed: site says %s" % error_msg)
+        elif self.is_element_present(self._MULTI_SUBMIT_SUCCESS):
+            return True
         else:
-            raise Exception("unexpected error encountered on multi video submit")
+            self.record_error()
 
     def submit_success(self, expected_error=False):
         if expected_error == False and self.is_element_present(self._SUBMIT_ERROR):
