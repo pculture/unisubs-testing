@@ -7,7 +7,7 @@ def delete_video_from_unisubs(self, url):
     world.dj_admin.find_and_delete_existing_video(url)
     
 
-@step('I submit (unique|duplicate) video "(.*?)"')
+@step('I submit a (unique|duplicate) video "(.*?)"')
 def submit_and_verify_embed(self, submission, url):
     if submission == 'unique': world.dj_admin.delete_video_feed(url)
     world.create_pg.open_create_page()
