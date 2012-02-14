@@ -24,6 +24,10 @@ class UnisubsPage(Page):
     _SITE_LOGIN_SUBMIT  = "form button[value=login]"
 
     _ERROR_MESSAGE = "div#messages h2.error"
+    _SUCCESS_MESSAGE = "div#messages h2.success"
+ 
+    _MODAL_DIALOG = "div.modal"
+    _MODAL_CLOSE = "div.modal-header a.close"
 
     USER_NAMES = {"normal": ["PollyGlott", "talks.alot"],
                  "admin": ["sub_writer", "sub.writer"],
@@ -32,6 +36,10 @@ class UnisubsPage(Page):
 
     def error_message_present(self, message):
          if self.is_text_present(self._ERROR_MESSAGE, message): return True
+
+    def success_message_present(self, message):
+         if self.is_text_present(self._SUCCESS_MESSAGE, message): return True
+
 
     def open_universal_subtitles(self):
         self.browser.get(self.base_url)
@@ -67,6 +75,10 @@ class UnisubsPage(Page):
                 user_teams.append(e.get_attribute('href'))
         return user_teams
 
+
+    def close_modal(self):
+        if not self.is_element_visible(self._MODAL_DIALOG) == False:
+            self.click_by_css(self._MODAL_CLOSE)
 
     def click_feeback(self):
         self.click_by_css(self._FEEDBACK_BUTTON)

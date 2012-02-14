@@ -244,12 +244,12 @@ class HtmlFragment(object):
         """
             Records an error. 
         """
-        file_name = urlsplit(self.base_url).netloc.split('@')[-1]
-
+        curr_url = self.browser.current_url.split('/')[-1]
+        filename = world.curr_step +"_"+curr_url+".png"
         print '-------------------'
-        print 'Error at ' + self.browser.current_url
+        print 'Error at ' + self.browser.current_url, world.curr_step
         print '-------------------'
-        filename = file_name + '_' + str(time.time()).split('.')[0] + '.png'
+#        filename = file_name + '_' + str(time.time()).split('.')[0] + '.png'
 
         print 'Screenshot of error in file ' + filename
         self.browser.get_screenshot_as_file(filename)

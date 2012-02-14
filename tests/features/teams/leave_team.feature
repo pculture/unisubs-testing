@@ -1,7 +1,6 @@
 Feature: Leave team
 	As a member of a team 
 	I want to leave the team
-
     Scenario: Team owner want to leave their team and is the sole admin
         Given I am logged in as the "team-owning" user
         When I leave the team "open" 
