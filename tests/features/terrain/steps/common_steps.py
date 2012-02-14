@@ -16,9 +16,10 @@ def confirmation_alert(self, action):
     elif action == "reject":
         world.html.handle_js_alert("reject")
 
-@step('I (see|do not see) the error message: "(.*?)"')
-def error_message(self, action, message):
-    if action == "see": assert_true(world.unisubs_pg.error_message_present(message))
-    if action == "do not see": assert_false(world.unisubs_pg.error_message_present(message))
+@step('I (see|do not see) the (error|success) message: "(.*?)"')
+def message_display(self, action, message_type, message):
+    message_check = message_type+"_message_present"
+    if action == "see": assert_true(getattr(world.unisubs_pg, message_check)(message))
+    if action == "do not see": assert_false(getattr(world.unisubs_pg, message_check)(message))
 
 
