@@ -30,10 +30,10 @@
 
 [create page]:http://www.universalsubtitles.org/en/videos/create
 
-[nav]:https://github.com/pculture/unisubs-testing/blob/master/tests/features/submit/submit/create.png?raw=true
+[nav]:https://github.com/pculture/unisubs-testing/blob/master/tests/features/submit/doc_images/create.png?raw=true
 
-[single_url]:https://github.com/pculture/unisubs-testing/blob/master/tests/features/submit/submit/single_video_form.png?raw=true
+[single_url]:https://github.com/pculture/unisubs-testing/blob/master/tests/features/submit/doc_images/single_video_form.png?raw=true
 
-[multi_url]:https://github.com/pculture/unisubs-testing/blob/master/tests/features/submit/submit/multi_submit_form.png?raw=true
+[multi_url]:https://github.com/pculture/unisubs-testing/blob/master/tests/features/submit/doc_images/multi_submit_form.png?raw=true
 
-[submit_multi]:https://github.com/pculture/unisubs-testing/blob/master/tests/features/submit/submit/multi_submit_button.png?raw=true
+[submit_multi]:https://github.com/pculture/unisubs-testing/blob/master/tests/features/submit/doc_images/multi_submit_button.png?raw=true
