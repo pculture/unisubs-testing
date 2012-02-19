@@ -6,7 +6,7 @@ Feature: Leave team
         When I leave the team "open" 
         Then I see the error message: "You are the last admin of this team." 
 
-    Scenario: Normal volunteer leaves the team
+    Scenario Outline: Normal volunteer leaves the team
         Given I am logged in as the "normal" user
             And I have joined the team "<team>"
         When I leave the team "<team>"

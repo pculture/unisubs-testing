@@ -8,7 +8,7 @@ Feature: Playback of Videos with subtitles on pages with the univesal subtitles 
     2. Youtube embed on a wordpress blog, http://dev.universalsubtitles.org/en/pagedemo/blog_youtube_embed
     3. Gapminder http://dev.universalsubtitles.org/en/pagedemo/gapminder 
 
-    Scenario: Display subtitles on the embedded video
+    Scenario Outline: Display subtitles on the embedded video
         Given I am on the site "<site>"
         When I start playback on the "<nth>" embedded video
         Then I see the subtitles for the "<nth>" embedded video

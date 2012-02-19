@@ -1,12 +1,8 @@
-Submit Videos
-=============
-
-
-> ![create nav][nav]
+![create nav][nav]
 
  - Navigate to the [create page] by clicking the create button
 
-> ![submit one vid][single_url]
+![submit one vid][single_url]
  
  - A single url may be submitted from one of the supported sites:
    - Youtube
@@ -18,12 +14,9 @@ Submit Videos
    - MP4
    - FLV
 
-
-
-> ![expand form][submit_multi]
+![expand form][submit_multi]
 
  - Expand the form to submit several videos.
-
 
 ![multi form][multi_url]
 
@@ -34,8 +27,6 @@ Submit Videos
    - Daily Motion feed
    - Youtube Username
    - Youtube Userpage 
-
-
 
 [create page]:http://www.universalsubtitles.org/en/videos/create
 
