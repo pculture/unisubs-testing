@@ -1,5 +1,5 @@
 @submit
-Feature:  Add videos for subtitling.
+Feature:  Add videos for subtitling
  - A single url may be submitted from one of the supported sites:
    - Youtube
    - Blip 

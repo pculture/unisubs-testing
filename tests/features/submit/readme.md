@@ -1,8 +1,8 @@
-![create nav][nav]
+Go to the [create page] by clicking the create button: 
 
- - Navigate to the [create page] by clicking the create button
+> ![create nav][nav]  
 
-![submit one vid][single_url]
+> ![submit one vid][single_url]
  
  - A single url may be submitted from one of the supported sites:
    - Youtube
@@ -14,11 +14,11 @@
    - MP4
    - FLV
 
-![expand form][submit_multi]
+Expand the form to submit several videos at once:
 
- - Expand the form to submit several videos.
+> ![expand form][submit_multi] 
 
-![multi form][multi_url]
+> ![multi form][multi_url]
 
  - Multiple videos in the form of an rss feed can also be submitted from the supported sites:
 
