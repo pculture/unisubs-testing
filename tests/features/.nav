@@ -1,0 +1,11 @@
+- submit
+  - video_submit.feature
+- search
+  - search.feature
+- teams
+  - leave_team.feature
+  - join_team.feature
+  - tasks 
+  - videos
+  - members
+
