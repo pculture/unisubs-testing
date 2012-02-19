@@ -6,10 +6,10 @@ Feature:  Add videos for subtitling.
    - Vimeo
    - Daily Motion
  - A single url can be submitted of one of the supported formats:
-  - ogg, ogv
-  - flv
-  - webm
-  - mp4
+   - ogg, ogv
+   - flv
+   - webm
+   - mp4
  - Multiple videos in the form of an rss feed can also be submitted from the supported sites:
    - Vimeo
    - Blip 
