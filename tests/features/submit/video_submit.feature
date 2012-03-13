@@ -17,12 +17,9 @@ Feature:  Add videos for subtitling
    - Youtube User feed
    - Youtube User page 
 
-Scenario Outline: Submit an individual video from one of the supported sites:
- - youtube
- - blip
- - dailymotion, vimeo.
- When I submit a unique video "<url>"
- Then I see the embedded video
+Scenario Outline: Submit an individual video from one of the supported sites.
+   When I submit a unique video "<url>"
+   Then I see the embedded video
 Examples:
     | url |
     | http://www.youtube.com/watch?v=WqJineyEszo |
