@@ -1,0 +1,13 @@
+Feature: Move video between teams
+    As a member of more than one team
+    I want to move a team video from one team to another
+    
+    Scenario: Multi-team member views a movable video
+        Given I am logged in as the "multi-team" user
+        When I view a video belonging to "team a"
+        Then I see the move video menu containing "team b" as an option
+
+    Scenario: Multi-team member attempts to move a movable video
+        Given I am logged in as the "multi-team" user
+        When I move a video belonging to "team a" into "team b"
+        Then the the video now belongs to "team b"
