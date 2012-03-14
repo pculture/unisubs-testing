@@ -1,5 +1,4 @@
-Move Video Feature
-==================
+# Move Video Feature
 
 - **multi-team user** needs to belong to **team a** and **team b**
 - **multi-team user** needs to have permission to remove videos from **team a**
