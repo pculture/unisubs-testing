@@ -302,6 +302,7 @@ def submit_random_youtube(self,sel):
     while submitted == False:
         vid_url = offsite.get_youtube_video_url(self)
         submitted = submit_video(self,sel,vid_url)
+        aaa = testvars.video_original +"@href"
         local_url = sel.get_attribute(testvars.video_original +"@href")
     return local_url
 
@@ -329,6 +330,13 @@ def upload_subtitles(self,sel,sub_file,lang="en"):
     """Uploads subtitles for the specified language."
 
     """
+    view_video_link = "css=div.content div.grid_4 h2.main-title a"
+#    if sel.is_element_present(view_video_link):    
+#        sel.click(view_video_link)
+#        time.sleep(15)
+    if sel.is_element_present(testvars.video_back_to_main_page):    
+        sel.click(testvars.video_back_to_main_page)
+        time.sleep(15)
     mslib.wait_for_element_present(self,sel,testvars.video_upload_subtitles)
     sel.click(testvars.video_upload_subtitles)
     mslib.wait_for_element_present(self,sel,"css=form[id='upload-subtitles-form'] select")
