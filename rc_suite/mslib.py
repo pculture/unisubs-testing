@@ -4,6 +4,7 @@ Help Modules specific to universal subtitles project
 """
 
 import re
+import os
 import time
 import datetime
 import testvars
@@ -121,4 +122,17 @@ def set_test_id(test_id):
     testid = L.pop()
     return testid
 
-
+def take_screenshot(self,sel):
+    current_page_url = sel.get_location()
+    #print current_page_url
+    url_stripped_of_protocol = current_page_url.split("://")[1]
+    #print url_stripped_of_protocol
+    trimmed_page_url = url_stripped_of_protocol.replace("/","_")
+    #print trimmed_page_url
+    results_path = os.path.join(os.getcwd(), "Results")
+    filename = os.path.join(
+        results_path, 
+        trimmed_page_url+"_"+time.strftime("%Y%m%d_%H%M", time.gmtime())+".png")
+    print "Saving the screenshot to "+filename    
+    sel.capture_entire_page_screenshot(filename,"")
+    
