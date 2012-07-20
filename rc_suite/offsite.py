@@ -47,12 +47,13 @@ def OpenIdAuth(self,sel,user,passw):
     print "open id auth: "+ user
     sel.select_pop_up("null")
     mslib.wait_for_element_present(self,sel,"openid_url")
-    sel.type("css=.openid", testvars.openiduser)
-    sel.click("css=.open-id")
-    mslib.wait_for_element_present(self,sel,"signin_button")
+    sel.type("css=input.openid", testvars.openiduser)
+    sel.click("css=button.green_button.big")
+    mslib.wait_for_element_present(self,sel,"id=signin_button")
     sel.type("password", testvars.passw)
-    sel.click("signin_button")
-    
+    sel.click("id=signin_button")
+    sel.wait_for_page_to_load(testvars.timeout)
+
 
 def GmailAuth(self,sel,user,passw):
     """
@@ -66,6 +67,7 @@ def GmailAuth(self,sel,user,passw):
     sel.type("Email", user)
     sel.type("Passwd", passw)
     sel.click("signIn")
+    sel.wait_for_page_to_load(testvars.timeout)
 
 
 def handle_warning_popup(self,sel):

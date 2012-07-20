@@ -63,11 +63,11 @@ def Login(self,sel,auth_type):
     """
     # auth_type can be either ".twitter", ".open-id", "google"
     if auth_type == "twitter":
-        auth_link = "css=div.left_column a[href*='twitter']"
+        auth_link = "css=a#twitter.provider"
     elif auth_type == "open-id":
-        auth_link = "css=div.left_column a[href*='openid']"
+        auth_link = "css=a#open-id.provider"
     elif auth_type == "google":
-        auth_link = "css=div.left_column a[href*='gmail']"
+        auth_link = "css=a#google.provider"
     else:
         self.fail("unrecognized auth type")
     sel.select_window("null")
@@ -198,7 +198,7 @@ def verify_login(self,sel,username="sub_writer"):
 
     """
     mslib.wait_for_element_present(self,sel,"css=li[id=me_menu]")
-    self.failUnless(sel.is_element_present("css=div[id=menu_name]:contains('Me')"),\
+    self.failUnless(sel.is_element_present("css=div[id=menu_name]:contains('"+username+"')"),\
                     "user not logged in, user_panel not displayed")
 ## Commented this out - post 0.9.3 not showing name of logged in user
 ##    print "logged in as: " + sel.get_text("css=.user_panel a")

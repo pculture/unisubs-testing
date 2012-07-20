@@ -36,7 +36,6 @@ class subgroup_65(unittest.TestCase):
 
         http://litmus.pculture.org/show_test.cgi?id=378.      
         """
-        
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login
@@ -61,7 +60,7 @@ class subgroup_65(unittest.TestCase):
         website.Login(self,sel,"twitter")
         offsite.TwitterAuth(self,sel,testvars.twitteruser, testvars.passw)
         # verify
-        website.verify_login(self,sel,username="PCF Sub-writer")
+        website.verify_login(self,sel,username="@pcfsubwriter")
         # logout
         website.SiteLogout(self,sel)
       
@@ -72,7 +71,7 @@ class subgroup_65(unittest.TestCase):
         
         http://litmus.pculture.org/show_test.cgi?id=380
         """
-        print "this test will likely fail until bug #13688 (http://bugzilla.pculture.org/show_bug.cgi?id=13688) gets fixed"
+#        print "this test will likely fail until bug #13688 (http://bugzilla.pculture.org/show_bug.cgi?id=13688) gets fixed"
         sel = self.selenium
         sel.set_timeout(testvars.MSTestVariables["TimeOut"])
         #login        
@@ -80,7 +79,7 @@ class subgroup_65(unittest.TestCase):
         website.Login(self,sel,"open-id")
         offsite.OpenIdAuth(self,sel,testvars.openiduser,testvars.passw)
         # verify
-        website.verify_login(self,sel,testvars.openid_username) #cheat for bug #13688
+        website.verify_login(self,sel,username="hcrjaanvsm") 
         # logout
         website.SiteLogout(self,sel)
        
@@ -102,6 +101,7 @@ class subgroup_65(unittest.TestCase):
         website.verify_login(self,sel,testvars.gmailuser)
         # logout
         website.SiteLogout(self,sel)
+
        
 
 

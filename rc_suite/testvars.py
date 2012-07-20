@@ -11,7 +11,7 @@ MSTestVariables = {"DataDirectory": os.path.join(os.getcwd(), "TestInput"), \
 # Mapping to the MiroSubs website UI navigations buttons and links
 
 WebsiteUI = {"Home":"css=a:contains('Miro Subs Alpha')", \
-             "Login_Button":"css=li a:contains('Sign In')", \
+             "Login_Button":"css=li a:contains('Sign in')", \
              "Logout_Button":"css=li a[href*=logout]", \
              "SiteLogoutUrl": "en/logout/?next=/",\
              "Subtitle_Button":"css=li[id='nav_submit'] a", \
@@ -48,7 +48,7 @@ video_video_info = "css=ul#video-menu.left_nav li a:contains('Info')"
 ## action links
 #video_upload_subtitles = "css=ul#video-menu.left_nav li.contribute a#upload-subtitles-link"
 video_upload_subtitles = "css=div#video-tab.tab > div.clearboth > div.video-tools > p > a#upload-subtitles-link"
-video_add_to_team = "css=ul#moderation-menu li div.sort_button span.sort_label:contains('Add video to team')"
+video_add_to_team = "css=div.video-tools div.sort_button span.sort_label:contains('Choose a team')"
 video_edit_subtitles = "css=div#transcripts-tab div.actions a#edit_subtitles_button"
 video_add_translation = "css=ul#video-menu.left_nav li.contribute a#add_translation"
 video_compare_revisions = "css=div#revisions-tab.action_buttons button.compare_versions_button"
